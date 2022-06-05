@@ -62,7 +62,23 @@ return [
                 PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
             ]) : [],
         ],
-
+        'mongodb' => [
+            'driver' => 'mongodb',
+            'host' => env('DB_HOST_SECOND', 'localhost'),
+            'port' => env('DB_PORT_SECOND', 27017),
+            'database' => env('DB_DATABASE_SECOND'),
+            'username' => env('DB_USERNAME_SECOND', 'brock'),
+            'password' => env('DB_PASSWORD_SECOND', 'secret'),
+            'options' => [
+                'database' => env('DB_AUTHENTICATION_DATABASE', 'admin'),
+                'authMechanism' => env('DB_AUTHENTICATION_MECHANISM'),
+                'authSource' => env('DB_AUTHENTICATION_DATABASE'),
+            ],
+            'gridfs' => [
+                'bucketName' => env('DB_GFS_BUCKET_NAME'),
+                'chunkSize' => env('DB_GFS_CHUNK_SIZE')
+            ]
+        ],
         'pgsql' => [
             'driver' => 'pgsql',
             'url' => env('DATABASE_URL'),

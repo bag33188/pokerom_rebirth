@@ -72,5 +72,6 @@ return [
     'links' => [
         public_path('storage') => storage_path('app/public'),
     ],
+    'server_rom_files_path' => env('SERVER_ROM_FILES_DIR')
 
 ];
