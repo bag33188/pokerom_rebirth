@@ -1,0 +1,13 @@
+PokeROM True Rebirth Log:
+
+6:32 AM 6/5/2022
+
+It's been a couple years since my last breakthrough on pokerom. I remember it fondly, I felt good, I look up upon those times (summer, 2019, ecuador, etc) even though I was somewhat struggling.
+
+Thus, I think I can do the same this summer.
+
+I am going to make a true rebirth of pokerom, but in laravel.
+
+tbh this is going to be hard. im not even sure if i still got it.
+
+let's just see what happens
