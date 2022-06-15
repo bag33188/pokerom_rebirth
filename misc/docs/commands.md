@@ -22,3 +22,4 @@
 `php artisan migrate:rollback`
 
 
+> press _`F5`_ to insert timestamp in windows `notepad.exe`
