@@ -10,7 +10,7 @@ return new class extends Migration {
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
         $db_file_id_comment = 'this unique constraint references a MongoDB GridFS file database which is binded at the API level.';
         $db_rom_size_comment = 'rom size value measured in kilobytes';

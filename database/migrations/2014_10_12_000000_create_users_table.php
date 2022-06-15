@@ -12,12 +12,13 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        $user_table_password_comment = '60 chars for bcrypt hashing specification';
+        Schema::create('users', function (Blueprint $table) use ($user_table_password_comment) {
             $table->id()->autoIncrement();
             $table->string('name', 45);
             $table->string('email', 35)->unique();
             $table->timestamp('email_verified_at')->nullable();
-            $table->char('password', 60);
+            $table->char('password', 60)->comment($user_table_password_comment);
             $table->enum('role', USER_ROLES)->default('user');
             $table->rememberToken();
             $table->foreignId('current_team_id')->nullable();
