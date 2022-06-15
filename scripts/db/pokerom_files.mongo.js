@@ -86,7 +86,7 @@ db.roms.chunks.createIndex({ files_id: 1, n: 1 }, { unique: true });
 
 /*! AGGREGATIONS */
 let aggregations = {
-    "Proper Sort": [
+    "Proper Files Sort": [
         {
             $addFields: {
                 field_length: {
@@ -104,7 +104,7 @@ let aggregations = {
             $unset: "field_length",
         },
     ],
-    "3DS ROMs": [
+    "Find 3DS ROMs": [
         {
             $sort: {
                 length: -1,
@@ -121,7 +121,7 @@ let aggregations = {
             },
         },
     ],
-    "Total File Size Bytes": [
+    "Calc Total File Size Bytes": [
         {
             $group: {
                 _id: null,
@@ -152,7 +152,7 @@ let aggregations = {
             $limit: 1,
         },
     ],
-    "Rom Sizes (KB)": [
+    "Show Rom Sizes (KB)": [
         {
             $addFields: {
                 rom_size: {
@@ -186,10 +186,10 @@ let aggregations = {
 };
 
 const pipeline = [
-    aggregations["Proper Sort"],
-    aggregations["Rom Sizes (KB)"],
-    aggregations["Total File Size Bytes"],
-    aggregations["3DS ROMs"],
+    aggregations["Proper Files Sort"],
+    aggregations["Show Rom Sizes (KB)"],
+    aggregations["Calc Total File Size Bytes"],
+    aggregations["Find 3DS ROMs"],
 ];
 
 db.roms.files.aggregate([...pipeline[0], ...pipeline[1]]);
