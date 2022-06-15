@@ -12,6 +12,7 @@ class File extends DocumentModel
 
     protected $connection = 'mongodb';
     protected $collection = 'roms.files';
+    protected $table = 'roms.files'; // use for eloquent helper code
     protected $primaryKey = '_id';
     protected $keyType = 'string';
     protected $casts = [
