@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\api;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Controller as ApiController;
 
-class RomController extends Controller
+class RomController extends ApiController
 {
     //
 }
