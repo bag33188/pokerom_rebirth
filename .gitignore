@@ -12,6 +12,7 @@ npm-debug.log
 yarn-error.log
 /.idea
 /.vscode
+misc/old
 
 ### Custom ###
 data/schemas/*.bkp
