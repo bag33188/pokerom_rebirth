@@ -17,3 +17,7 @@ let's just see what happens
 It's been over a week since I last made progress. back to work. I intend to get all the important stuff set up.
 
 Currently, migration code and database seeds/info.
+
+2:11 AM 6/15/2022
+
+progressing smoothly ...
