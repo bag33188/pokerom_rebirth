@@ -2,7 +2,7 @@
 
 namespace Modules;
 
-use Config;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Http\UploadedFile;
 
 class FileHandler extends GridFS

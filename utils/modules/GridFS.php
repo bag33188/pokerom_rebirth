@@ -2,7 +2,7 @@
 
 namespace Modules;
 
-use Config;
+use Illuminate\Support\Facades\Config;
 use MongoDB\BSON\ObjectId;
 use MongoDB\Client as MongoClient;
 use MongoDB\Database;
