@@ -22,8 +22,9 @@ class GameObserver
 
     public function created(Game $game): void
     {
-        // delete this functionality because trigger was added to db???
+        // todo: delete this functionality because trigger was added to db???
         $rom = $game->rom()->first();
+        // use attribute syntax for proper non-fillable updating
         $rom['has_game'] = true;
         $rom['game_id'] = $game->id;
         $rom->saveQuietly();
