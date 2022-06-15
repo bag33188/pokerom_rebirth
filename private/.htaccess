@@ -1,0 +1,8 @@
+# disable indexing (403)
+Options -Indexes
+
+# Deny access to .htaccess
+<Files .htaccess>
+    Order allow,deny
+    Deny from all
+</Files>
