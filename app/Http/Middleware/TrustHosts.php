@@ -11,10 +11,11 @@ class TrustHosts extends Middleware
      *
      * @return array<int, string|null>
      */
-    public function hosts()
+    public function hosts(): array
     {
         return [
             $this->allSubdomainsOfApplicationUrl(),
+            "^http:\/\/(localhost|(?:127\.0\.0\.1))\/(4200|5000|5500)"
         ];
     }
 }
