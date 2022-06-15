@@ -1,0 +1,30 @@
+<?php
+
+namespace App\Http\Livewire\Roms;
+
+use App\Models\Rom;
+use Illuminate\Support\Facades\DB;
+use Livewire\Component;
+
+class Index extends Component
+{
+    public $roms;
+    public $tblCols;
+
+    public function mount()
+    {
+        $this->tblCols = array('Rom Name', 'Rom Size', 'Rom Type', 'Game', 'Download');
+    }
+    public function render()
+    {
+        $this->roms = Rom::with(['game', 'file'])->get();
+        $sum_total_size = DB::selectOne(/** @lang MariaDB */ "CALL GetTotalSizeOfAllRoms;");
+        return view('livewire.roms.index', ['roms_total_size' => $sum_total_size->total_size]);
+    }
+    public function getRomReadableSize(int $size)
+    {
+        $sql = /** @lang MariaDB */
+            "SELECT CalcReadableRomSize(?) AS readable_size;";
+        return DB::selectOne($sql, [$size])->readable_size;
+    }
+}

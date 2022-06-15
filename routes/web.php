@@ -22,6 +22,6 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified'
 ])->group(function () {
-    Route::get('/roms', App\Http\Livewire\Roms\Show::class)->name('roms.show');
+    Route::get('/roms', App\Http\Livewire\Roms\Index::class)->name('roms.index');
     Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
 });
