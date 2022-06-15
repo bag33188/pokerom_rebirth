@@ -54,7 +54,7 @@ return [
     |
     */
 
-    'asset_url' => "http://pokerom_rebirth.test/public",
+    'asset_url' => env('ASSET_URL'),
 
     /*
     |--------------------------------------------------------------------------
@@ -68,7 +68,7 @@ return [
     |
     */
 
-    'app_url' => "http://pokerom_rebirth.test/public",
+    'app_url' => env('APP_URL'),
 
     /*
     |--------------------------------------------------------------------------
