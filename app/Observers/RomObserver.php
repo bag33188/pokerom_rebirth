@@ -13,7 +13,8 @@ class RomObserver
     {
         $file = $rom->checkMatchingFile()->first();
         if (isset($file)) {
-            DB::statement(/** @lang MariaDB */ "CALL LinkRomToFile(:fileId, :romSize, :romId);", [
+            DB::statement(/** @lang MariaDB */
+                "CALL LinkRomToFile(:fileId, :romSize, :romId);", [
                 'fileId' => $file['_id'],
                 'romSize' => $file->length,
                 'romId' => $rom->id

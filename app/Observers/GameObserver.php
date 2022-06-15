@@ -37,7 +37,7 @@ class GameObserver
 
     public function deleted(Game $game): void
     {
-        // delete this functionality because trigger was added to db???
+        // todo: delete this functionality because trigger was added to db???
         $rom = $game->rom()->first();
         $rom['game_id'] = null;
         $rom['has_game'] = false;
