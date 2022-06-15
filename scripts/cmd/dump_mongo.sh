@@ -24,7 +24,9 @@ dump_mongo() {
     if [[ "$current_folder" = "scripts" ]]; then
         cd ..
     fi
-
+    if [[ "$current_folder" = "cmd" ]]; then
+        cd ../..
+    fi
     database="pokerom_files"
     collection="roms.files"
 
