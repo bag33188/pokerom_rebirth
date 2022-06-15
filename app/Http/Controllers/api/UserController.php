@@ -103,6 +103,6 @@ class UserController extends ApiController
         $this->authorize('delete', $user);
         auth()->user()->tokens()->delete();
         $user->delete();
-        return response()->json(['message' => "user {$user->name} deleted!"]);
+        return response()->json(['message' => "user $user->name deleted!"]);
     }
 }
