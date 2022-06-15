@@ -21,11 +21,11 @@ class NotFoundException extends Exception
 
     public function render(Request $request): View|Factory|JsonResponse|Application
     {
+        $notFoundApiMessage = strlen($this->getMessage()) !== 0 ?
+            $this->getMessage() : "Error: requested endpoint not found.";
         if ($request->is('api/*')) {
             return response()
-                ->json([
-                    'message' => strlen($this->getMessage()) !== 0 ? $this->getMessage() : "Error: route not found."
-                ], $this->getCode());
+                ->json(['message' => $notFoundApiMessage], $this->getCode());
         } else {
             return view('errors.404', ['message' => $this->getMessage()]);
         }

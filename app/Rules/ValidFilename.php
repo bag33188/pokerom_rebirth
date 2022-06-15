@@ -3,7 +3,7 @@
 namespace App\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
-use Symfony\Component\HttpKernel\Exception\NotAcceptableHttpException;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class ValidFilename implements Rule
 {
@@ -30,7 +30,7 @@ class ValidFilename implements Rule
     public function passes($attribute, $value): bool
     {
         return preg_match(FILENAME_PATTERN, $this->filename ??
-            ($value ?: new NotAcceptableHttpException("ERR_CANNOT_GET_FILENAME")));
+            ($value ?: new BadRequestHttpException("ERR_CANNOT_GET_FILENAME")));
     }
 
     /**

@@ -4,14 +4,23 @@ namespace Modules;
 
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Config;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class FileHandler extends GridFS
 {
     private UploadedFile $file;
     private string $filename;
     private string $filepath;
+    private bool $checkValidFilename;
 
     private const SERVER_FILES_CONFIG_PATH = 'filesystems.server_rom_files_path';
+    protected final const VALID_FILENAME = "/^([\w\d\s\-_]{3,32})\.[\w\d]{1,3}$/i";
+
+    public function __construct($databaseName = null, $bucketName = null, $chunkSize = null, bool $checkFilenameFormatValidity = false)
+    {
+        $this->checkValidFilename = $checkFilenameFormatValidity;
+        parent::__construct($databaseName, $bucketName, $chunkSize);
+    }
 
     /**
      * @return string
@@ -36,8 +45,8 @@ class FileHandler extends GridFS
 
     private function createFileNameFromFile(): void
     {
-        $this->filename = self::normalizeFileName(
-            $this->file->getClientOriginalName());
+        $this->checkFormatOfFileNameIfRequested();
+        $this->filename = self::normalizeFileName($this->file->getClientOriginalName());
     }
 
     private function createUploadFilePathFromFile(): void
@@ -66,9 +75,21 @@ class FileHandler extends GridFS
         $this->gfsBucket->delete(parent::parseObjectId($fileId));
     }
 
+    private function checkFormatOfFileNameIfRequested()
+    {
+        if ($this->checkValidFilename === true) {
+            if (!preg_match(self::VALID_FILENAME, $this->filename)) {
+                $badRequestErrorMessage = 'Invalid filename detected.' . ' ' .
+                    'Matched against pattern: ' . '\`' . self::VALID_FILENAME . '\`';
+                throw new BadRequestHttpException($badRequestErrorMessage);
+            }
+        }
+    }
+
     private static function normalizeFileName(string $filename): string
     {
-        [$name, $ext] = explode('.', $filename);
+        // explode function's limit param can be used to check for single occurrence of the `.` (period) character
+        [$name, $ext] = explode('.', $filename, 2);
         $name = trim($name);
         $ext = strtolower($ext);
         return "$name.$ext";

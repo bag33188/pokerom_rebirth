@@ -11,7 +11,7 @@ use App\{Http\Controllers\Controller as ApiController,
     Models\Rom
 };
 use Illuminate\{Auth\Access\AuthorizationException, Http\JsonResponse};
-use Symfony\Component\HttpKernel\Exception\NotAcceptableHttpException;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class GameController extends ApiController
 {
@@ -48,7 +48,7 @@ class GameController extends ApiController
     public function store(StoreGameRequest $request): JsonResponse
     {
         $romId = $request->get('romId') ??
-            throw new NotAcceptableHttpException(message: 'No ROM ID was sent.');
+            throw new BadRequestHttpException(message: 'No ROM ID was sent.');
         // check if rom exists
         Rom::findOrFail($romId);
         $request['rom_id'] = $romId;

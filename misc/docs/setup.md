@@ -198,6 +198,10 @@ add this cookie to requests: `XDEBUG_SESSION=phpstorm; Path=/; Domain=pokerom_re
 
 [xdebug with postman](https://lukashajdu.com/post/usign-xdebug-with-postman/ "use xdebug with postman")
 
+### Other
+
+> https://httpd.apache.org/docs/2.4/howto/http2.html
+> https://www.mongodb.com/docs/drivers/php/
 
 ---------
 
