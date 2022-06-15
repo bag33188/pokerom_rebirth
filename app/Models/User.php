@@ -64,9 +64,10 @@ class User extends Authenticatable
     {
         return $this->attributes['role'] == 'admin';
     }
-    public function checkPassword(string $password): bool
+
+    public function checkPassword(string $currentPassword): bool
     {
-        return Hash::check($password, $this->attributes['password']);
+        return Hash::check($currentPassword, $this->attributes['password']);
     }
 
     public function setPasswordAttribute(string $value): void
