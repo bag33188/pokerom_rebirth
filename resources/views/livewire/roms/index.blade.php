@@ -1,37 +1,19 @@
 <div x-data="{ open: true }">
-    @php
-        $deleteBtnClasses = [
-            "inline-block", "px-6", "py-2.5", "bg-red-600", "text-white", "font-bold", "leading-tight",
-            "uppercase", "rounded", "shadow-md", "hover:bg-red-700", "hover:shadow-lg", "focus:bg-red-700",
-            "focus:shadow-lg", "focus:outline-none", "focus:ring-0", "active:bg-red-800", "active:shadow-lg",
-            "transition", "duration-150", "ease-in-out", "rounded"
-        ];
-        $downloadBtnClasses = [
-            "inline-flex", "items-center", "py-2", "px-4", "bg-blue-500", "hover:bg-blue-400",
-            "text-white", "font-bold", "p-0", "border-b-4", "border-blue-700", "hover:border-blue-500", "rounded",
-            "active:border-t-4", "active:border-b-0", "active:bg-blue-400"
-        ];
-        $toggleBtnClasses = [
-            "bg-emerald-500", "hover:bg-emerald-600", "text-white",
-            "font-bold", "py-2", "px-4", "my-4", "shadow", "rounded"
-        ];
-    @endphp
-
     <x-slot name="header">
         <h2 class="text-center text-lg">Pok&eacute;mon ROMs library</h2>
         <h6 class="text-center text-sm">Total ROMs: {{sizeof($roms)}}</h6>
         <h6 class="text-center text-sm">Total file size of all ROMs: {{$roms_total_size}}</h6>
     </x-slot>
     <div class="w-full flex justify-center">
-        <button type="button" @click="open = !open" class="{!! join(' ', $toggleBtnClasses) !!}">
+        <button type="button" @click="open = !open" class="bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-2 px-4 my-4 shadow rounded">
             @include("ui.show-hide", ['txt'=>'ROMs'])
         </button>
     </div>
     <table class="w-full text-sm text-left text-gray-500 light:text-gray-400" x-show="open">
         <thead class="bg-gray-50">
         <tr class="text-xs text-gray-700 uppercase light:bg-gray-700 light:text-gray-400">
-            @for($i = 0; $i < count($tblCols); $i++)
-                <th scope="col" class="px-6 py-3">{{$tblCols[$i]}}</th>
+            @for($i = 0; $i < count($romsTableColumns); $i++)
+                <th scope="col" class="px-6 py-3">{{$romsTableColumns[$i]}}</th>
             @endfor
         </tr>
         </thead>
@@ -45,7 +27,9 @@
                 <td class="px-6 py-4">{{$rom->has_game ? $rom->game->game_name : 'N/A'}}</td>
                 <td class="px-6 py-4">
                     @if($rom->has_file)
-                        <a class="{!! join(' ', $downloadBtnClasses) !!}"
+                        <a class="inline-flex items-center py-2 px-4 bg-blue-500 hover:bg-blue-400 text-white font-bold
+                                    p-0 border-b-4 border-blue-700 hover:border-blue-500 rounded active:border-t-4
+                                    active:border-b-0 active:bg-blue-400"
                            href="{{$this->getRomDownloadUrl($rom->file->_id, dev: true)}}"
                            target="_blank"
                            title="{{$rom->getRomFileName()}}">

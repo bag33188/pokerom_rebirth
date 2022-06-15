@@ -9,11 +9,11 @@ use Livewire\Component;
 class Index extends Component
 {
     public $roms;
-    public $tblCols;
+    public $romsTableColumns;
 
     public function mount()
     {
-        $this->tblCols = array('Rom Name', 'Rom Size', 'Rom Type', 'Game', 'Download');
+        $this->romsTableColumns = array('Rom Name', 'Rom Size', 'Rom Type', 'Game', 'Download');
     }
 
     public function render()
