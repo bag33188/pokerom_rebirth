@@ -55,6 +55,7 @@ class Handler extends ExceptionHandler
     public function register(): void
     {
         $this->reportable(function (Throwable $e) {
+            //
         });
 
         $this->renderable(fn(NotFoundHttpException $e) => throw new NotFoundException($e->getMessage()));
