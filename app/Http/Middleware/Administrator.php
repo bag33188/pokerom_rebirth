@@ -22,10 +22,9 @@ class Administrator
     {
         if ($request->user()->isAdmin()) {
             return $next($request);
+        } else if (!$request->expectsJson()) {
+            return response()->redirectTo(RouteServiceProvider::HOME);
         } else {
-            if (!$request->expectsJson()) {
-                return response()->redirectTo(RouteServiceProvider::HOME);
-            }
             throw new AccessDeniedHttpException("This action is unauthorized.");
         }
     }

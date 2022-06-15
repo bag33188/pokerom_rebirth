@@ -10,8 +10,8 @@ Listen 80
 
 LoadModule http2_module modules/mod_http2.so
 
-DocumentRoot "C:/Users/bglat/PhpstormProjects/pokerom_v3"
-<Directory "C:/Users/bglat/PhpstormProjects/pokerom_v3">
+DocumentRoot "C:/Users/bglat/PhpstormProjects/pokerom_rebirth"
+<Directory "C:/Users/bglat/PhpstormProjects/pokerom_rebirth">
     Options Indexes FollowSymLinks Includes ExecCGI
     AllowOverride All
     Require all granted
@@ -60,13 +60,13 @@ NameVirtualHost *:443
     SSLCertificateKeyFile "conf/ssl.key/server.key"
 </VirtualHost>
 <VirtualHost *:80>
-    DocumentRoot "C:/Users/bglat/PhpstormProjects/pokerom_v3"
-    ServerName pokerom_v3.test
+    DocumentRoot "C:/Users/bglat/PhpstormProjects/pokerom_rebirth"
+    ServerName pokerom_rebirth.test
 </VirtualHost>
 
 <VirtualHost *:443>
-    DocumentRoot "C:/Users/bglat/PhpstormProjects/pokerom_v3"
-    ServerName pokerom_v3.test
+    DocumentRoot "C:/Users/bglat/PhpstormProjects/pokerom_rebirth"
+    ServerName pokerom_rebirth.test
     SSLEngine on
     SSLCertificateFile "conf/ssl.crt/server.crt"
     SSLCertificateKeyFile "conf/ssl.key/server.key"
@@ -88,7 +88,7 @@ Protocols h2 h2c http/1.1
 
 127.0.0.1        localhost
 ::1              localhost
-127.0.0.1 pokerom_v3.test
+127.0.0.1 pokerom_rebirth.test
 ```
 
 ### PHP Config

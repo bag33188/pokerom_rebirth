@@ -2,7 +2,7 @@
 
 ## Angular New Project
 
-> `ng new pokerom_v3 --directory=client --routing --skip-git --style=scss --view-encapsulation=ShadowDom`
+> `ng new pokerom_rebirth --directory=client --routing --skip-git --style=scss --view-encapsulation=ShadowDom`
 
 ## db
 

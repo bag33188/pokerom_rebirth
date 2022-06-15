@@ -1,6 +1,6 @@
 "use strict";
 
-var apiUrl = "http://pokerom_v3.test/public/api/dev";
+var apiUrl = "http://pokerom_rebirth.test/public/api/dev";
 
 function loadRomsData() {
     var xhr = new XMLHttpRequest();
