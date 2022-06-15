@@ -3,61 +3,48 @@
 namespace App\Observers;
 
 use App\Models\Rom;
+use DB;
 
 class RomObserver
 {
-    /**
-     * Handle the Rom "created" event.
-     *
-     * @param  \App\Models\Rom  $rom
-     * @return void
-     */
-    public function created(Rom $rom)
+    public bool $afterCommit = false;
+
+    public function creating(Rom $rom): void
     {
-        //
+        $file = $rom->checkMatchingFile()->first();
+        if (isset($file)) {
+            DB::statement(/** @lang MariaDB */ "CALL LinkRomToFile(:fileId, :romSize, :romId);", [
+                'fileId' => $file['_id'],
+                'romSize' => $file->length,
+                'romId' => $rom->id
+            ]);
+            $rom->refresh();
+        }
     }
 
-    /**
-     * Handle the Rom "updated" event.
-     *
-     * @param  \App\Models\Rom  $rom
-     * @return void
-     */
-    public function updated(Rom $rom)
+    public function updating(Rom $rom): void
     {
-        //
+        if (!$rom->has_file || $rom->file_id == null) {
+            $file = $rom->checkMatchingFile()->first();
+            if (isset($file)) {
+                DB::statement(/** @lang MariaDB */ "CALL LinkRomToFile(:fileId, :romSize, :romId);", [
+                    'fileId' => $file['_id'],
+                    'romSize' => $file->length,
+                    'romId' => $rom->id
+                ]);
+                $rom->refresh();
+            }
+        }
     }
 
-    /**
-     * Handle the Rom "deleted" event.
-     *
-     * @param  \App\Models\Rom  $rom
-     * @return void
-     */
-    public function deleted(Rom $rom)
+    public function deleting(Rom $rom): void
     {
-        //
+        // for unique constraint purposes
+        $rom['file_id'] = null;
     }
 
-    /**
-     * Handle the Rom "restored" event.
-     *
-     * @param  \App\Models\Rom  $rom
-     * @return void
-     */
-    public function restored(Rom $rom)
+    public function deleted(Rom $rom): void
     {
-        //
-    }
-
-    /**
-     * Handle the Rom "force deleted" event.
-     *
-     * @param  \App\Models\Rom  $rom
-     * @return void
-     */
-    public function forceDeleted(Rom $rom)
-    {
-        //
+        $rom->game()->delete();
     }
 }
