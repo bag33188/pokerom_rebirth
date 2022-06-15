@@ -2,27 +2,38 @@
 
 namespace App\Exceptions;
 
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use MongoDB\Driver\Exception\BulkWriteException;
+use MongoDB\Driver\Exception\WriteException;
+use PDOException;
+use Psr\Log\LogLevel;
+use Symfony\Component\HttpKernel\Exception\HttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
+
 
 class Handler extends ExceptionHandler
 {
     /**
      * A list of exception types with their corresponding custom log levels.
      *
-     * @var array<class-string<\Throwable>, \Psr\Log\LogLevel::*>
+     * @var array<class-string<Throwable>, LogLevel::*>
      */
     protected $levels = [
-        //
+        PDOException::class => LogLevel::ERROR,
+        WriteException::class => LogLevel::ERROR,
     ];
 
     /**
      * A list of the exception types that are not reported.
      *
-     * @var array<int, class-string<\Throwable>>
+     * @var array<int, class-string<Throwable>>
      */
     protected $dontReport = [
-        //
+        HttpException::class,
+        ModelNotFoundException::class,
     ];
 
     /**
@@ -41,10 +52,13 @@ class Handler extends ExceptionHandler
      *
      * @return void
      */
-    public function register()
+    public function register(): void
     {
         $this->reportable(function (Throwable $e) {
-            //
         });
+
+        $this->renderable(fn(NotFoundHttpException $e) => throw new NotFoundException($e->getMessage()));
+        $this->renderable(fn(QueryException $e) => throw new SqlQueryException($e->getMessage()));
+        $this->renderable(fn(BulkWriteException $e) => throw new MongoBulkException($e->getMessage()));
     }
 }
