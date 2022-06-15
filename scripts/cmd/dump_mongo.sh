@@ -31,7 +31,7 @@ dump_mongo() {
     collection="roms.files"
 
     mongoexport -d $database -c $collection --jsonArray --pretty -o data/dump/roms.files.json
-    mongoexport --db=$database --collection=$collection --type=csv --fields=filename,length --out=data/dump/file_info.csv
+    # mongoexport --db=$database --collection=$collection --type=csv --fields=filename,length --out=data/dump/file_info.csv
 }
 
 dump_mongo
