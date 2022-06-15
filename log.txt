@@ -11,3 +11,9 @@ I am going to make a true rebirth of pokerom, but in laravel.
 tbh this is going to be hard. im not even sure if i still got it.
 
 let's just see what happens
+
+8:20 PM 6/14/2022
+
+It's been over a week since I last made progress. back to work. I intend to get all the important stuff set up.
+
+Currently, migration code and database seeds/info.
