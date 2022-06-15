@@ -1,8 +1,6 @@
 <div x-data="{ open: true }">
     <x-slot name="header">
         <h2 class="text-center text-lg">Pok&eacute;mon ROMs library</h2>
-        <h6 class="text-center text-sm">Total ROMs: {{sizeof($roms)}}</h6>
-        <h6 class="text-center text-sm">Total file size of all ROMs: {{$roms_total_size}}</h6>
     </x-slot>
     <div class="w-full flex justify-center">
         <button type="button" @click="open = !open" class="bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-2 px-4 my-4 shadow rounded">
@@ -42,5 +40,11 @@
             </tr>
         @endforeach
         </tbody>
+        <tfoot>
+            <tr class="text-xs text-gray-700 uppercase light:bg-gray-700 light:text-gray-400">
+                <td class="px-6 py-4">Total ROMs: {{sizeof($roms)}}</td>
+                <td class="px-6 py-4">Total file size of all ROMs: {{$roms_total_size}}</td>
+            </tr>
+        </tfoot>
     </table>
 </div>
