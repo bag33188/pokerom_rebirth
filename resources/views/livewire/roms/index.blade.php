@@ -41,9 +41,9 @@
         @endforeach
         </tbody>
         <tfoot>
-            <tr class="text-xs text-gray-700 uppercase light:bg-gray-700 light:text-gray-400">
-                <td class="px-6 py-4">Total ROMs: {{sizeof($roms)}}</td>
-                <td class="px-6 py-4">Total file size of all ROMs: {{$roms_total_size}}</td>
+            <tr class="text-sm text-gray-700 uppercase light:bg-gray-700 light:text-gray-400">
+                <td class="px-6 py-4 font-semibold">Total ROMs: {{sizeof($roms)}}</td>
+                <td class="px-6 py-4 font-semibold">Total file size of all ROMs: {{$roms_total_size}}</td>
             </tr>
         </tfoot>
     </table>
