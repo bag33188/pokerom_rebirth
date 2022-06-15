@@ -7,9 +7,7 @@ namespace Modules;
  */
 class FileDownloader
 {
-    /**
-     * @var resource
-     */
+    /** @var resource */
     private $fileStream;
     private int $readyBytesChunkSize;
 
