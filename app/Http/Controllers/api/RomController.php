@@ -9,7 +9,7 @@ use App\Http\Resources\GameResource;
 use App\Http\Resources\RomCollection;
 use App\Http\Resources\RomResource;
 use App\Models\Rom;
-use Gate;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;

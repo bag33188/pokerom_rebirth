@@ -194,7 +194,7 @@ Links and references
 
 ##### Postman
 
-add this cookie to requests: `XDEBUG_SESSION=phpstorm; Path=/; Domain=pokerom_v3.test; Expires=Tue, 19 Jan 2038 03:14:07 GMT;`
+add this cookie to requests: `XDEBUG_SESSION=phpstorm; Path=/; Domain=pokerom_rebirth.test; Expires=Tue, 19 Jan 2038 03:14:07 GMT;`
 
 [xdebug with postman](https://lukashajdu.com/post/usign-xdebug-with-postman/ "use xdebug with postman")
 
