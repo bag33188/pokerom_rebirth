@@ -1,11 +1,5 @@
 <div x-data="{ open: true }">
     @php
-        function getRomDownloadUrl(string $fileId, bool $dev = false): string {
-            $baseUrl = "files/$fileId/download";
-            if ($dev) return "/public/api/dev/$baseUrl";
-            return "/public/api/$baseUrl";
-        }
-
         $deleteBtnClasses = [
             "inline-block", "px-6", "py-2.5", "bg-red-600", "text-white", "font-bold", "leading-tight",
             "uppercase", "rounded", "shadow-md", "hover:bg-red-700", "hover:shadow-lg", "focus:bg-red-700",
@@ -52,7 +46,7 @@
                 <td class="px-6 py-4">
                     @if($rom->has_file)
                         <a class="{!! join(' ', $downloadBtnClasses) !!}"
-                           href="{{getRomDownloadUrl($rom->file->_id, dev: true)}}"
+                           href="{{$this->getRomDownloadUrl($rom->file->_id, dev: true)}}"
                            target="_blank"
                            title="{{$rom->getRomFileName()}}">
                             @include('ui.download-icon')
