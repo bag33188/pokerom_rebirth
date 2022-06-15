@@ -2,8 +2,8 @@
 
 namespace Modules;
 
-use Illuminate\Support\Facades\Config;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Config;
 
 class FileHandler extends GridFS
 {
@@ -69,6 +69,8 @@ class FileHandler extends GridFS
     private static function normalizeFileName(string $filename): string
     {
         [$name, $ext] = explode('.', $filename);
-        return sprintf('%s.%s', trim($name), strtolower($ext));
+        $name = trim($name);
+        $ext = strtolower($ext);
+        return "$name.$ext";
     }
 }
