@@ -45,8 +45,9 @@ class FileHandler extends GridFS
 
     private function createFileNameFromFile(): void
     {
+        $this->filename = $this->file->getClientOriginalName();
         $this->checkFormatOfFileNameIfRequested();
-        $this->filename = self::normalizeFileName($this->file->getClientOriginalName());
+        self::normalizeFileName($this->filename);
     }
 
     private function createUploadFilePathFromFile(): void
@@ -86,12 +87,12 @@ class FileHandler extends GridFS
         }
     }
 
-    private static function normalizeFileName(string $filename): string
+    private static function normalizeFileName(string &$filename): void
     {
         // explode function's limit param can be used to check for single occurrence of the `.` (period) character
         [$name, $ext] = explode('.', $filename, 2);
         $name = trim($name);
         $ext = strtolower($ext);
-        return "$name.$ext";
+        $filename = "$name.$ext";
     }
 }
