@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 15, 2022 at 06:39 AM
+-- Generation Time: Jun 15, 2022 at 10:20 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -179,7 +179,6 @@ TRUNCATE TABLE `failed_jobs`;
 -- Table structure for table `games`
 --
 -- Creation: Jun 15, 2022 at 04:16 AM
--- Last update: Jun 15, 2022 at 04:34 AM
 --
 
 DROP TABLE IF EXISTS `games`;
@@ -289,7 +288,6 @@ DELIMITER ;
 -- Table structure for table `migrations`
 --
 -- Creation: Jun 05, 2022 at 04:47 PM
--- Last update: Jun 15, 2022 at 04:16 AM
 --
 
 DROP TABLE IF EXISTS `migrations`;
@@ -334,7 +332,7 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 DROP TABLE IF EXISTS `password_resets`;
 CREATE TABLE `password_resets` (
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` char(60) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -353,7 +351,6 @@ TRUNCATE TABLE `password_resets`;
 -- Table structure for table `personal_access_tokens`
 --
 -- Creation: Jun 05, 2022 at 04:47 PM
--- Last update: Jun 15, 2022 at 04:38 AM
 --
 
 DROP TABLE IF EXISTS `personal_access_tokens`;
@@ -361,8 +358,8 @@ CREATE TABLE `personal_access_tokens` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `tokenable_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `tokenable_id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` char(64) COLLATE utf8mb4_unicode_ci NOT NULL,
   `abilities` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `last_used_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -383,7 +380,7 @@ TRUNCATE TABLE `personal_access_tokens`;
 --
 
 INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `name`, `token`, `abilities`, `last_used_at`, `created_at`, `updated_at`) VALUES
-(1, 'App\\Models\\User', 1, 'auth_token', '821595ea9a2f590b919b71833c717efcf992f13fe8f89d888f6b34874cd901bf', '[\"*\"]', '2022-06-15 11:38:59', '2022-06-15 11:38:03', '2022-06-15 11:38:59');
+(1, 'App\\Models\\User', 1, 'auth_token', '821595ea9a2f590b919b71833c717efcf992f13fe8f89d888f6b34874cd901bf', '[\"*\"]', '2022-06-15 11:50:03', '2022-06-15 11:38:03', '2022-06-15 11:50:03');
 
 -- --------------------------------------------------------
 
@@ -391,7 +388,6 @@ INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `n
 -- Table structure for table `roms`
 --
 -- Creation: Jun 15, 2022 at 04:16 AM
--- Last update: Jun 15, 2022 at 04:34 AM
 --
 
 DROP TABLE IF EXISTS `roms`;
@@ -473,7 +469,7 @@ INSERT INTO `roms` (`id`, `file_id`, `game_id`, `rom_name`, `rom_size`, `rom_typ
 
 DROP TABLE IF EXISTS `sessions`;
 CREATE TABLE `sessions` (
-  `id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` char(40) COLLATE utf8mb4_unicode_ci NOT NULL,
   `user_id` bigint(20) UNSIGNED DEFAULT NULL,
   `ip_address` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `user_agent` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -490,13 +486,19 @@ CREATE TABLE `sessions` (
 --
 
 TRUNCATE TABLE `sessions`;
+--
+-- Dumping data for table `sessions`
+--
+
+INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
+('k4UvquK9LkYyxYop5AArUa1wU91uYsm2WlphhWUM', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiempjSkcwc1RoOFRKVWZ1bGtvUGEycnhacXVCTzhsTzRsRGpCTndGOCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDA6Imh0dHA6Ly9wb2tlcm9tX3JlYmlydGgudGVzdC9wdWJsaWMvbG9naW4iO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1655268075);
+
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `users`
 --
 -- Creation: Jun 05, 2022 at 04:47 PM
--- Last update: Jun 15, 2022 at 04:38 AM
 --
 
 DROP TABLE IF EXISTS `users`;
