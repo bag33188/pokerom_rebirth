@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Date;
+
 if (!function_exists('parse_date_as_readable_string')) {
     /**
      * Converts a date/datetime object to a human-readable string

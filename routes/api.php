@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\api\UserController;
 use App\Http\Controllers\api\FileController;
 use App\Http\Controllers\api\GameController;
 use App\Http\Controllers\api\RomController;
+use App\Http\Controllers\api\UserController;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/version', fn() => response()
     ->json([
-        'version' => floatval(config('app.version'))
+        'version' => config('app.version')
     ], 202))
     ->name('api.version');
 
@@ -33,10 +34,12 @@ Route::prefix('auth')->group(function () {
 Route::middleware('auth:sanctum')->group(function () {
     // general api routes
     Route::apiResources(['/roms' => RomController::class, '/games' => GameController::class],
-        ['parameters' => [
-            'roms' => 'romId',
-            'games' => 'gameId'
-        ]]
+        [
+            'parameters' => [
+                'roms' => 'romId',
+                'games' => 'gameId'
+            ]
+        ]
     );
     Route::apiResource('/users', UserController::class)->only('index', 'show', 'destroy')
         ->parameter('user', 'userId');
