@@ -8,14 +8,21 @@ use App\Http\Requests\UpdateRomRequest;
 use App\Http\Resources\GameResource;
 use App\Http\Resources\RomCollection;
 use App\Http\Resources\RomResource;
+use App\Interfaces\RomRepositoryInterface;
 use App\Models\Rom;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 
 class RomController extends ApiController
 {
+    private RomRepositoryInterface $romRepository;
+
+    public function __construct(RomRepositoryInterface $romRepository)
+    {
+        $this->romRepository = $romRepository;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -80,20 +87,7 @@ class RomController extends ApiController
     {
         $rom = Rom::findOrFail($romId);
         $this->authorize('update', $rom);
-        $file = $rom->checkMatchingFile()->first();
-        if (isset($file)) {
-            DB::statement(/** @lang MariaDB */ "CALL LinkRomToFile(:fileId, :fileSize, :romId);", [
-                'fileId' => $file['_id'],
-                'fileSize' => $file->length,
-                'romId' => $rom->id
-            ]);
-            $rom->refresh();
-            return response()->json([
-                'message' => "file found and linked! file id: {$file['_id']}",
-                'data' => $rom->refresh()
-            ]);
-
-        }
+        $this->romRepository->linkRomToFile($rom);
         return response()->json(['message' => "File not found with name of {$rom->getRomFileName()}"], 404);
     }
 
