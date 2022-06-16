@@ -12,7 +12,7 @@ use App\Services\RomService;
 use App\Services\UserService;
 use Illuminate\Support\ServiceProvider;
 
-class ServicesProvider extends ServiceProvider
+class DataServiceProvider extends ServiceProvider
 {
     /**
      * Register services.
