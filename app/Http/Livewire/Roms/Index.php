@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Roms;
 
 use App\Models\Rom;
+use Illuminate\Contracts\{Foundation\Application, View\Factory, View\View};
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
@@ -16,7 +17,7 @@ class Index extends Component
         $this->romsTableColumns = array('Rom Name', 'Rom Size', 'Rom Type', 'Game', 'Download');
     }
 
-    public function render()
+    public function render(): Factory|View|Application
     {
         $this->roms = Rom::with(['game', 'file'])->get();
         $sum_total_size = DB::selectOne(/** @lang MariaDB */ "CALL GetTotalSizeOfAllRoms;");
