@@ -33,8 +33,10 @@ class UserController extends ApiController
     public function index(Request $request): JsonResponse|UserCollection
     {
         Gate::authorize('viewAny-user');
-        if ($request->query('paginate') === 'true') {
-            return response()->json($this->userRepository->paginateUsers((int)$request->query('per_page')));
+        if (filter_var($request->query('paginate'), FILTER_VALIDATE_BOOLEAN) === true) {
+            return response()
+                ->json($this->userRepository->paginateUsers((int)$request->query('per_page')),
+                    ResponseAlias::HTTP_OK);
         } else {
             return new UserCollection($this->userRepository->getAllUsers());
         }
