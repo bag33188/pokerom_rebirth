@@ -41,7 +41,7 @@ class FileRepository implements FileRepositoryInterface
      */
     public function showRom($file): Rom
     {
-        $rom = $file->rom()->first();
-        return $rom ?? throw new NotFoundException('no rom is associated with this file');
+        $associateRom = $file->rom()->first();
+        return $associateRom ?? throw new NotFoundException('no rom is associated with this file');
     }
 }
