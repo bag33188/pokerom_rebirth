@@ -121,6 +121,91 @@ let aggregations = {
             },
         },
     ],
+    "Find GB ROMs": [
+        {
+            $sort: {
+                length: -1,
+                filename: 1,
+                uploadDate: 1,
+            },
+        },
+        {
+            $match: {
+                filename: {
+                    $regex: "^[\\w\\d\\-_]+\\.gb$",
+                    $options: "i",
+                },
+            },
+        },
+    ],
+    "Find GBC ROMs": [
+        {
+            $sort: {
+                length: -1,
+                filename: 1,
+                uploadDate: 1,
+            },
+        },
+        {
+            $match: {
+                filename: {
+                    $regex: "^[\\w\\d\\-_]+\\.gbc$",
+                    $options: "i",
+                },
+            },
+        },
+    ],
+    "Find GBA ROMs": [
+        {
+            $sort: {
+                length: -1,
+                filename: 1,
+                uploadDate: 1,
+            },
+        },
+        {
+            $match: {
+                filename: {
+                    $regex: "^[\\w\\d\\-_]+\\.gba$",
+                    $options: "i",
+                },
+            },
+        },
+    ],
+    "Find NDS ROMs": [
+        {
+            $sort: {
+                length: -1,
+                filename: 1,
+                uploadDate: 1,
+            },
+        },
+        {
+            $match: {
+                filename: {
+                    $regex: "^[\\w\\d\\-_]+\\.nds$",
+                    $options: "i",
+                },
+            },
+        },
+    ],
+    "Find XCI ROMs": [
+        {
+            $sort: {
+                length: -1,
+                filename: 1,
+                uploadDate: 1,
+            },
+        },
+        {
+            $match: {
+                filename: {
+                    $regex: "^[\\w\\d\\-_]+\\.xci$",
+                    $options: "i",
+                },
+            },
+        },
+    ],
     "Calc Total File Size Bytes": [
         {
             $group: {
@@ -189,7 +274,6 @@ const pipeline = [
     aggregations["Proper Rom Files Sort"],
     aggregations["Show Rom Sizes (KB)"],
     aggregations["Calc Total File Size Bytes"],
-    aggregations["Find 3DS ROMs"],
 ];
 
 db.roms.files.aggregate([...pipeline[0], pipeline[1]]);
