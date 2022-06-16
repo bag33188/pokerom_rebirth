@@ -7,10 +7,9 @@ use App\Interfaces\RomRepositoryInterface;
 use App\Models\File;
 use App\Models\Game;
 use App\Models\Rom;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\Collection;
 use Jenssegers\Mongodb\Eloquent\Builder as QueryBuilder;
-use JetBrains\PhpStorm\ArrayShape;
-use Symfony\Component\HttpFoundation\Response as ResponseAlias;
+use LaravelIdea\Helper\App\Models\_IH_Rom_C;
 
 class RomRepository implements RomRepositoryInterface
 {
@@ -21,18 +20,28 @@ class RomRepository implements RomRepositoryInterface
         $this->rom = $rom;
     }
 
-    public function showAssociatedGame(int $romId): Game
+    public function findRomIfExists(int $romId): Rom|array|_IH_Rom_C
     {
-        $associatedGame = $this->rom->findOrFail($romId)->game()->firstOrFail();
+        return $this->rom->findOrFail($romId);
+    }
+
+    public function getAllRomsSorted(): Collection|_IH_Rom_C|array
+    {
+        return $this->rom->all()->sortBy([['game_id', 'asc'], ['rom_size', 'asc']]);
+    }
+
+    public function getGameAssociatedWithRom(int $romId): Game
+    {
+        $associatedGame = $this->findRomIfExists($romId)->game()->firstOrFail();
         return $associatedGame;
     }
 
     /**
      * @throws NotFoundException
      */
-    public function showAssociatedFile(int $romId): File
+    public function getFileAssociatedWithRom(int $romId): File
     {
-        $associatedFile = $this->rom->findOrFail($romId)->file()->first();
+        $associatedFile = $this->findRomIfExists($romId)->file()->first();
         return $associatedFile ?? throw new NotFoundException('this rom does not have a file');
     }
 

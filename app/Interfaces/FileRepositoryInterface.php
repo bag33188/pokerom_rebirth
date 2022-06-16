@@ -2,10 +2,11 @@
 
 namespace App\Interfaces;
 
-use App\Models\File;
-use Illuminate\Http\UploadedFile;
-
 interface FileRepositoryInterface
 {
-    public function showAssociatedRom(string $fileId);
+    public function getAllFilesSorted();
+
+    public function findFileIfExists(string $fileId);
+
+    public function showRomAssociatedWithFile(string $fileId);
 }

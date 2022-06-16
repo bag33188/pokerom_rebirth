@@ -62,9 +62,9 @@ class UserController extends ApiController
     /**
      * @throws AuthorizationException
      */
-    public function show(int $id): UserResource
+    public function show(int $userId): UserResource
     {
-        $user = User::findOrFail($id);
+        $user = $this->userRepository->findUserIfExists($userId);
         $this->authorize('view', $user);
         return new UserResource($user);
     }
@@ -91,9 +91,8 @@ class UserController extends ApiController
      */
     public function destroy(int $userId)
     {
-        $user = User::findOrFail($userId);
+        $user = $this->userRepository->findUserIfExists($userId);
         $this->authorize('delete', $user);
-
         return response()->json($this->userService->deleteUserAndTokens($user));
     }
 }

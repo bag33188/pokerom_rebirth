@@ -2,11 +2,11 @@
 
 namespace App\Interfaces;
 
-use App\Models\Game;
-use App\Models\Rom;
-
 interface GameRepositoryInterface
 {
+    public function getAllGamesSorted();
 
-    public function showAssociatedRom(int $gameId);
+    public function findGameIfExists(int $gameId);
+
+    public function getRomAssociatedWithGame(int $gameId);
 }

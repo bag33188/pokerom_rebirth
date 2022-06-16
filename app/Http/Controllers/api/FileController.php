@@ -31,8 +31,7 @@ class FileController extends ApiController
     public function index()
     {
         Gate::authorize('viewAny-file');
-        $files = File::all()->sortBy([['length', 'asc'], ['filename', 'asc']]);
-        return response()->json($files);
+        return response()->json($this->fileRepository->getAllFilesSorted());
     }
 
     /**
@@ -40,9 +39,9 @@ class FileController extends ApiController
      */
     public function indexRom(string $fileId)
     {
-        $file = File::findOrFail($fileId);
+        $file = $this->fileRepository->findFileIfExists($fileId);
         $this->authorize('view', $file);
-        return response()->json($this->fileRepository->showAssociatedRom($fileId));
+        return response()->json($this->fileRepository->showRomAssociatedWithFile($fileId));
     }
 
     /**
@@ -50,7 +49,7 @@ class FileController extends ApiController
      */
     public function show(string $fileId)
     {
-        $file = File::findOrFail($fileId);
+        $file = $this->fileRepository->findFileIfExists($fileId);
         $this->authorize('view', $file);
         return response()->json($file);
     }
@@ -61,7 +60,7 @@ class FileController extends ApiController
      */
     public function download(string $fileId): StreamedResponse
     {
-        $file = File::findOrFail($fileId);
+        $file = $this->fileRepository->findFileIfExists($fileId);
         return response()->streamDownload(function () use ($fileId) {
             $this->fileService->downloadFile($fileId);
         }, $file['filename'], array(
@@ -86,7 +85,7 @@ class FileController extends ApiController
      */
     public function destroy(string $fileId): JsonResponse
     {
-        $file = File::findOrFail($fileId);
+        $file = $this->fileRepository->findFileIfExists($fileId);
         $this->authorize('delete', $file);
         return response()->json($this->fileService->deleteFileFromBucket($fileId, $file));
     }

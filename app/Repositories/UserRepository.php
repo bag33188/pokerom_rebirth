@@ -17,6 +17,11 @@ class UserRepository implements UserRepositoryInterface
         $this->user = $user;
     }
 
+    public function findUserIfExists(int $userId): array|User|_IH_User_C
+    {
+        return $this->user->findOrFail($userId);
+    }
+
     public function paginateUsers(): array|LengthAwarePaginator|_IH_User_C
     {
         return $this->user->paginate(4)->withQueryString();

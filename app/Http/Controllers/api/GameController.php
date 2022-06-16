@@ -32,11 +32,7 @@ class GameController extends ApiController
      */
     public function index()
     {
-        $games = Game::all()->sortBy([
-            ['rom_id', 'asc'],
-            ['generation', 'asc']
-        ]);
-        return new GameCollection($games);
+        return new GameCollection($this->gameRepository->getAllGamesSorted());
     }
 
     /**
@@ -45,7 +41,7 @@ class GameController extends ApiController
      */
     public function indexRom(int $gameId)
     {
-        return response()->json($this->gameRepository->showAssociatedRom($gameId));
+        return response()->json($this->gameRepository->getRomAssociatedWithGame($gameId));
     }
 
     /**
@@ -63,7 +59,7 @@ class GameController extends ApiController
 
     public function update(UpdateGameRequest $request, int $gameId): JsonResponse
     {
-        $game = Game::findOrFail($gameId);
+        $game = $this->gameRepository->findGameIfExists($gameId);
         $game->update($request->all());
         return response()->json($game);
     }
@@ -83,7 +79,7 @@ class GameController extends ApiController
      */
     public function destroy(int $gameId): JsonResponse
     {
-        $game = Game::findOrFail($gameId);
+        $game = $this->gameRepository->findGameIfExists($gameId);
         $this->authorize('delete', $game);
         Game::destroy($gameId);
         return response()->json(['message' => "game $game->game_name deleted!"]);
