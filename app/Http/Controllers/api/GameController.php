@@ -12,7 +12,7 @@ use App\{Http\Controllers\Controller as ApiController,
     Models\Rom
 };
 use Illuminate\{Auth\Access\AuthorizationException, Http\JsonResponse};
-use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 class GameController extends ApiController
 {
@@ -43,8 +43,7 @@ class GameController extends ApiController
      */
     public function indexRom(int $gameId)
     {
-        $rom = Game::findOrFail($gameId)->rom()->first();
-        return response()->json($rom);
+        return response()->json($this->gameRepository->assocRom($gameId));
     }
 
     /**
@@ -58,7 +57,7 @@ class GameController extends ApiController
         // check if rom exists
         $rom = Rom::findOrFail($request['rom_id']);
         $game = Game::create($request->all());
-        return response()->json($this->gameRepository->associateGameWithRom($game, $rom), 201);
+        return response()->json($this->gameRepository->associateGameWithRom($game, $rom), ResponseAlias::HTTP_CREATED);
     }
 
     public function update(UpdateGameRequest $request, int $gameId): JsonResponse
