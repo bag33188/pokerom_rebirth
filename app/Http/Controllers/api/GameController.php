@@ -7,6 +7,7 @@ use App\{Http\Controllers\Controller as ApiController,
     Http\Requests\UpdateGameRequest,
     Http\Resources\GameCollection,
     Http\Resources\GameResource,
+    Interfaces\GameRepositoryInterface,
     Models\Game,
     Models\Rom
 };
@@ -15,6 +16,13 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class GameController extends ApiController
 {
+    private GameRepositoryInterface $gameRepository;
+
+    public function __construct(GameRepositoryInterface $gameRepository)
+    {
+        $this->gameRepository = $gameRepository;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -47,17 +55,10 @@ class GameController extends ApiController
      */
     public function store(StoreGameRequest $request): JsonResponse
     {
-        $romId = $request->get('romId') ??
-            throw new BadRequestHttpException(message: 'No ROM ID was sent.');
         // check if rom exists
-        Rom::findOrFail($romId);
-        $request['rom_id'] = $romId;
+        $rom = Rom::findOrFail($request['rom_id']);
         $game = Game::create($request->all());
-        $rom = Rom::find($romId);
-        $game->rom()->associate($rom);
-        $game->save();
-
-        return response()->json($game, 201);
+        return response()->json($this->gameRepository->associateGameWithRom($game, $rom), 201);
     }
 
     public function update(UpdateGameRequest $request, int $gameId): JsonResponse
