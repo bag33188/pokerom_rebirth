@@ -29,7 +29,8 @@ class FileRepository implements FileRepositoryInterface
     public function getRomAssociatedWithFile(string $fileId): Rom
     {
         $associatedRom = $this->findFileIfExists($fileId)->rom()->first();
-        return $associatedRom ?? throw new NotFoundException('no rom is associated with this file');
+        return $associatedRom ??
+            throw new NotFoundException('no rom is associated with this file');
     }
 
     public function getAllFilesSorted(): array|Collection|_IH_File_C
