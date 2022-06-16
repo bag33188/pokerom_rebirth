@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Events\FileDeleted;
+use App\Events\FileUploaded;
 use App\Interfaces\FileServiceInterface;
 use App\Models\File;
 use Illuminate\Http\UploadedFile;
@@ -26,6 +27,7 @@ class FileService implements FileServiceInterface
         $gridfs = new FileHandler();
         $gridfs->setUploadFileData($file);
         $gridfs->uploadFileFromStream();
+        event(new FileUploaded($gridfs->getFileDocument()));
         return ['message' => "file {$gridfs->getFilename()} created!"];
     }
 
@@ -38,8 +40,8 @@ class FileService implements FileServiceInterface
         return ['message' => "{$file['filename']} deleted!"];
     }
 
-//    private static function triggerFileDeletedEvent(File $file)
-//    {
-//        event('eloquent.deleted: App\Models\File', $file);
-//    }
+    private static function triggerFileDeletedEvent(File $file)
+    {
+        event('eloquent.deleted: App\Models\File', $file);
+    }
 }

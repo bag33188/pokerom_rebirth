@@ -2,6 +2,7 @@
 
 namespace Modules;
 
+use App\Models\File;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Config;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
@@ -70,6 +71,11 @@ class FileHandler extends GridFS
     public function getDownloadStreamFromFile(string $fileId)
     {
         return $this->gfsBucket->openDownloadStream(parent::parseObjectId($fileId));
+    }
+
+    public function getFileDocument()
+    {
+        return File::where('filename', '=', $this->getFilename())->first();
     }
 
     public function deleteFileFromBucket(string $fileId): void
