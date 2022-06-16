@@ -3,7 +3,7 @@
         <h2 class="text-center text-lg">Pok&eacute;mon ROMs library</h2>
     </x-slot>
     <div class="w-full flex justify-center">
-        <button type="button" @click="open = !open" class="bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-2 px-4 my-4 shadow rounded">
+        <button type="button" @click="open = !open" class="bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-2 px-4 my-4 shadow-md rounded">
             @include("ui.show-hide", ['text'=>'ROMs'])
         </button>
     </div>
