@@ -73,7 +73,7 @@ class FileHandler extends GridFS
         return $this->gfsBucket->openDownloadStream(parent::parseObjectId($fileId));
     }
 
-    public function getFileDocument()
+    public function getFileDocument(): File
     {
         return File::where('filename', '=', $this->getFilename())->first();
     }
