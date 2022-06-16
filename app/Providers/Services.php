@@ -2,6 +2,10 @@
 
 namespace App\Providers;
 
+use App\Interfaces\FileServiceInterface;
+use App\Interfaces\GameServiceInterface;
+use App\Interfaces\RomServiceInterface;
+use App\Interfaces\UserServiceInterface;
 use App\Models\File;
 use App\Models\User;
 use App\Services\FileService;
@@ -19,10 +23,10 @@ class Services extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind(UserService::class, User::class);
-        $this->app->bind(RomService::class, Rom::class);
-        $this->app->bind(GameService::class, Game::class);
-        $this->app->bind(FileService::class, File::class);
+        $this->app->bind(UserServiceInterface::class, UserService::class);
+        $this->app->bind(GameServiceInterface::class, GameService::class);
+        $this->app->bind(RomServiceInterface::class, RomService::class);
+        $this->app->bind(FileServiceInterface::class, FileService::class);
     }
 
     /**
