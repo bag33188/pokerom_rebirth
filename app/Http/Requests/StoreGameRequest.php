@@ -31,11 +31,10 @@ class StoreGameRequest extends FormRequest
      */
     protected function prepareForValidation(): void
     {
-        $romId = $this->get('romId') ??
-            throw new BadRequestHttpException(message: 'No ROM ID was sent.');
+
         $this->merge([
             'slug' => Str::slug($this->slug),
-            'rom_id' => $romId
+//            'rom_id' => $romId
         ]);
     }
 

@@ -13,11 +13,10 @@ class GameService implements GameServiceInterface {
     {
         $this->game = $game;
     }
-    public function associateGameWithRom(Rom &$rom): Game
+    public function associateGameWithRom(Rom $rom): Game
     {
-        $rom = $rom->refresh();
+        $rom->refresh();
         $this->game->rom()->associate($rom);
-        $this->game->save();
         return $this->game;
     }
 }

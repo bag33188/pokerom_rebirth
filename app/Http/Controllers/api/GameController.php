@@ -8,18 +8,22 @@ use App\{Http\Controllers\Controller as ApiController,
     Http\Resources\GameCollection,
     Http\Resources\GameResource,
     Interfaces\GameRepositoryInterface,
+    Interfaces\GameServiceInterface,
     Models\Game
 };
 use Illuminate\{Auth\Access\AuthorizationException, Http\JsonResponse};
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class GameController extends ApiController
 {
     private GameRepositoryInterface $gameRepository;
+    private GameServiceInterface $gameService;
 
-    public function __construct(GameRepositoryInterface $gameRepository)
+    public function __construct(GameRepositoryInterface $gameRepository, GameServiceInterface $gameService)
     {
         $this->gameRepository = $gameRepository;
+        $this->gameService = $gameService;
     }
 
     /**
@@ -53,9 +57,12 @@ class GameController extends ApiController
      */
     public function store(StoreGameRequest $request): JsonResponse
     {
+        $romId = $request->get('romId') ??
+            throw new BadRequestHttpException(message: 'No ROM ID was sent.');
+        $request['rom_id'] = $romId;
         $game = Game::create($request->all());
         $rom = $game->rom()->first();
-        return response()->json($this->gameRepository->associateGameWithRom($game, $rom)
+        return response()->json($this->gameService->associateGameWithRom($rom)
             , ResponseAlias::HTTP_CREATED);
     }
 
