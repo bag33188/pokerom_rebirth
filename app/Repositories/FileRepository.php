@@ -40,7 +40,11 @@ class FileRepository implements FileRepositoryInterface
     public function searchForRomMatchingFile(string $fileId)
     {
         [$name, $ext] = explode('.',
-            $this->findFileIfExists($fileId)->filename);
-        return Rom::where([['rom_name', '=', $name], ['rom_type', '=', $ext]])->whereNull('file_id');
+            $this->findFileIfExists($fileId)->filename, 2);
+        return Rom::where([
+            ['rom_name', '=', $name],
+            ['rom_type', '=', $ext],
+            ['has_file', '=', false]
+        ])->whereNull('file_id');
     }
 }

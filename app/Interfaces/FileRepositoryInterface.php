@@ -9,5 +9,6 @@ interface FileRepositoryInterface
     public function findFileIfExists(string $fileId);
 
     public function getRomAssociatedWithFile(string $fileId);
+
     public function searchForRomMatchingFile(string $fileId);
 }
