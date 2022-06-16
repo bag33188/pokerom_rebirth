@@ -2,6 +2,8 @@
 
 namespace App\Interfaces;
 
+use App\Models\Rom;
+
 interface RomServiceInterface {
-    public function tryToLinkRomToFile();
+    public function tryToLinkRomToFile(Rom $rom);
 }

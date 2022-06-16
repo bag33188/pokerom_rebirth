@@ -7,16 +7,11 @@ use App\Models\Game;
 use App\Models\Rom;
 
 class GameService implements GameServiceInterface {
-    private Game $game;
-
-    public function __construct(Game $game)
+    public function associateGameWithRom(Game $game, int $romId): Game
     {
-        $this->game = $game;
-    }
-    public function associateGameWithRom(Rom $rom): Game
-    {
-        $rom->refresh();
+        $rom = Rom::findOrFail($romId);
         $this->game->rom()->associate($rom);
+        $this->game->save();
         return $this->game;
     }
 }

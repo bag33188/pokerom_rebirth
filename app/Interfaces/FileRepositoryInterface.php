@@ -7,5 +7,5 @@ use Illuminate\Http\UploadedFile;
 
 interface FileRepositoryInterface
 {
-    public function showAssociatedRom(File $file);
+    public function showAssociatedRom(string $fileId);
 }

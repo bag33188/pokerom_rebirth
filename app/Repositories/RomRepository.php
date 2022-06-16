@@ -23,7 +23,7 @@ class RomRepository implements RomRepositoryInterface
 
     public function showAssociatedGame(int $romId): Game
     {
-        $associatedGame = Rom::findOrFail($romId)->game()->firstOrFail();
+        $associatedGame = $this->rom->findOrFail($romId)->game()->firstOrFail();
         return $associatedGame;
     }
 
@@ -32,7 +32,7 @@ class RomRepository implements RomRepositoryInterface
      */
     public function showAssociatedFile(int $romId): File
     {
-        $associatedFile = Rom::findOrFail($romId)->file()->first();
+        $associatedFile = $this->rom->findOrFail($romId)->file()->first();
         return $associatedFile ?? throw new NotFoundException('this rom does not have a file');
     }
 

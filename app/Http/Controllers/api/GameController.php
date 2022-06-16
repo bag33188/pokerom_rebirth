@@ -57,12 +57,8 @@ class GameController extends ApiController
      */
     public function store(StoreGameRequest $request): JsonResponse
     {
-        $romId = $request->get('romId') ??
-            throw new BadRequestHttpException(message: 'No ROM ID was sent.');
-        $request['rom_id'] = $romId;
         $game = Game::create($request->all());
-        $rom = $game->rom()->first();
-        return response()->json($this->gameService->associateGameWithRom($rom)
+        return response()->json($this->gameService->associateGameWithRom($game, $request['rom_id'])
             , ResponseAlias::HTTP_CREATED);
     }
 

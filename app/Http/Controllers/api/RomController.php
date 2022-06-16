@@ -9,6 +9,7 @@ use App\Http\Resources\GameResource;
 use App\Http\Resources\RomCollection;
 use App\Http\Resources\RomResource;
 use App\Interfaces\RomRepositoryInterface;
+use App\Interfaces\RomServiceInterface;
 use App\Models\Rom;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\JsonResponse;
@@ -19,10 +20,12 @@ use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 class RomController extends ApiController
 {
     private RomRepositoryInterface $romRepository;
+    private RomServiceInterface $romService;
 
-    public function __construct(RomRepositoryInterface $romRepository)
+    public function __construct(RomRepositoryInterface $romRepository,RomServiceInterface $romService)
     {
         $this->romRepository = $romRepository;
+        $this->romService = $romService;
     }
 
     /**
@@ -89,7 +92,7 @@ class RomController extends ApiController
     {
         $rom = Rom::findOrFail($romId);
         $this->authorize('update', $rom);
-        return response()->json($this->romRepository->tryToLinkRomToFile($rom), ResponseAlias::HTTP_ACCEPTED);
+        return response()->json($this->romService->tryToLinkRomToFile($rom), ResponseAlias::HTTP_ACCEPTED);
     }
 
     /**
