@@ -36,8 +36,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResources(['/roms' => RomController::class, '/games' => GameController::class],
         [
             'parameters' => [
-                'roms' => 'romId',
-                'games' => 'gameId'
+                'rom' => 'romId',
+                'game' => 'gameId'
             ]
         ]
     );
