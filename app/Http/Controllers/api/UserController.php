@@ -8,6 +8,7 @@ use App\Http\Requests\StoreUserRequest;
 use App\Http\Resources\UserCollection;
 use App\Http\Resources\UserResource;
 use App\Interfaces\UserRepositoryInterface;
+use App\Interfaces\UserServiceInterface;
 use App\Models\User;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\JsonResponse;
@@ -17,11 +18,11 @@ use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 class UserController extends ApiController
 {
-    private UserRepositoryInterface $userRepository;
+    private UserServiceInterface $userService;
 
-    public function __construct(UserRepositoryInterface $userRepository)
+    public function __construct(UserServiceInterface $userService)
     {
-        $this->userRepository = $userRepository;
+        $this->userService = $userService;
     }
 
     /**
@@ -40,19 +41,19 @@ class UserController extends ApiController
     public function register(StoreUserRequest $request): JsonResponse
     {
         $user = User::create($request->all());
-        return response()->json($this->userRepository->registerUserToken($user), ResponseAlias::HTTP_CREATED);
+        return response()->json($this->userService->registerUserToken($user), ResponseAlias::HTTP_CREATED);
     }
 
     public function login(LoginRequest $request): JsonResponse
     {
         // Check email
         $user = User::where('email', $request['email'])->firstOrFail();
-        return response()->json($this->userRepository->authenticateUserAgainstCreds($user, $request['password']));
+        return response()->json($this->userService->authenticateUserAgainstCreds($user, $request['password']));
     }
 
     public function logout(Request $request): JsonResponse
     {
-        return response()->json($this->userRepository->logoutCurrentUser($request->user()));
+        return response()->json($this->userService->logoutCurrentUser($request->user()));
     }
 
 
@@ -91,6 +92,6 @@ class UserController extends ApiController
         $user = User::findOrFail($userId);
         $this->authorize('delete', $user);
 
-        return response()->json($this->userRepository->deleteUserAndTokens($user));
+        return response()->json($this->userService->deleteUserAndTokens($user));
     }
 }

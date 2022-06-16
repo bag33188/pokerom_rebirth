@@ -13,38 +13,20 @@ use Modules\FileHandler;
 
 class FileRepository implements FileRepositoryInterface
 {
-    public function downloadFile(string $fileId)
-    {
-        $gridfs = new FileHandler();
-        $stream = $gridfs->getDownloadStreamFromFile($fileId);
-        $fileDownloader = new FileDownloader($stream, 0xFF000);
-        $fileDownloader->downloadFile();
-    }
 
-    #[ArrayShape(['message' => "string"])]
-    public function uploadFile(UploadedFile $file): array
-    {
-        $gridfs = new FileHandler();
-        $gridfs->setUploadFileData($file);
-        $gridfs->uploadFileFromStream();
-        return ['message' => "file {$gridfs->getFilename()} created!"];
-    }
+    private File $file;
 
-    #[ArrayShape(['message' => "string"])]
-    public function deleteFileFromBucket(string $fileId, File $file): array
+    public function __construct(File $file)
     {
-        $gridfs = new FileHandler();
-        $gridfs->deleteFileFromBucket($fileId);
-        event('eloquent.deleted: App\Models\File', $file);
-        return ['message' => "{$file['filename']} deleted!"];
+        $this->file = $file;
     }
 
     /**
      * @throws NotFoundException
      */
-    public function showAssociatedRom($file): Rom
+    public function showAssociatedRom($fileId): Rom
     {
-        $associatedRom = $file->rom()->first();
+        $associatedRom = $this->file->findOrFail($fileId)->rom()->first();
         return $associatedRom ?? throw new NotFoundException('no rom is associated with this file');
     }
 }

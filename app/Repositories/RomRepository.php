@@ -8,37 +8,22 @@ use App\Models\File;
 use App\Models\Game;
 use App\Models\Rom;
 use Illuminate\Support\Facades\DB;
+use Jenssegers\Mongodb\Eloquent\Builder as QueryBuilder;
 use JetBrains\PhpStorm\ArrayShape;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 class RomRepository implements RomRepositoryInterface
 {
-    /**
-     * @throws NotFoundException
-     */
-    #[ArrayShape(['message' => "string", 'data' => "\App\Models\Rom"])]
-    public function tryToLinkRomToFile(Rom $rom): array
+    private Rom $rom;
+
+    public function __construct(Rom $rom)
     {
-        $file = $rom->searchForFileMatchingRom()->first();
-        if (isset($file)) {
-            DB::statement(/** @lang MariaDB */ "CALL LinkRomToFile(:fileId, :fileSize, :romId);", [
-                'fileId' => $file['_id'],
-                'fileSize' => $file->length,
-                'romId' => $rom->id
-            ]);
-            $rom->refresh();
-            return [
-                'message' => "file found and linked! file id: {$file['_id']}",
-                'data' => $rom->refresh()
-            ];
-        } else {
-            throw new NotFoundException("File not found with name of {$rom->getRomFileName()}", ResponseAlias::HTTP_NOT_FOUND);
-        }
+        $this->rom = $rom;
     }
 
     public function showAssociatedGame(int $romId): Game
     {
-        $associatedGame = Rom::findOrFail($romId)->game()->firstOrFail();
+        $associatedGame = $this->rom->findOrFail($romId)->game()->firstOrFail();
         return $associatedGame;
     }
 
@@ -47,7 +32,17 @@ class RomRepository implements RomRepositoryInterface
      */
     public function showAssociatedFile(int $romId): File
     {
-        $associatedFile = Rom::findOrFail($romId)->file()->first();
+        $associatedFile = $this->rom->findOrFail($romId)->file()->first();
         return $associatedFile ?? throw new NotFoundException('this rom does not have a file');
+    }
+
+    /**
+     * This will attempt to cross-reference the MongoDB database and check if there is a file
+     * with the same name of the roms name plus its extension (rom type)
+     * @return QueryBuilder|null
+     */
+    public function searchForFileMatchingRom(): QueryBuilder|null
+    {
+        return File::where('filename', '=', $this->rom->getRomFileName());
     }
 }
