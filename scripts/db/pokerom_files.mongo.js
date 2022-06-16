@@ -281,7 +281,7 @@ let aggregations = {
                     },
                 },
                 total_size: {
-                    $concat: ["$total_size", " ", "Gibibytes"],
+                    $concat: ["$total_size", "\u0020", "Gibibytes"],
                 },
             },
         },
