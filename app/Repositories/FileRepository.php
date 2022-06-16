@@ -38,7 +38,7 @@ class FileRepository implements FileRepositoryInterface
         return $this->file->all()->sortBy([['length', 'asc'], ['filename', 'asc']]);
     }
 
-    public function searchForRomMatchingFile(string $fileId)
+    public function searchForRomMatchingFile(string $fileId): Rom
     {
         [$name, $ext] = explode('.',
             $this->findFileIfExists($fileId)->filename, 2);
