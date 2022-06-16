@@ -2,9 +2,11 @@
 
 namespace App\Interfaces;
 
+use App\Models\User;
+
 interface UserServiceInterface {
-    public function authenticateUserAgainstCreds(string $requestPassword);
+    public function authenticateUserAgainstCreds(User $user, string $requestPassword);
     public function logoutCurrentUser();
-    public function registerUserToken();
-    public function deleteUserAndTokens();
+    public function registerUserToken(User $user);
+    public function deleteUserAndTokens(User $user);
 }
