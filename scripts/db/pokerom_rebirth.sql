@@ -259,7 +259,7 @@ DROP TRIGGER IF EXISTS `games_after_delete`;
 DELIMITER $$
 CREATE TRIGGER `games_after_delete` AFTER DELETE ON `games` FOR EACH ROW BEGIN
   UPDATE `roms`
-  SET `roms`.`has_game` = FALSE
+  SET `roms`.`has_game` = FALSE, `roms`.`game_id` = NULL
   WHERE `roms`.`id` = OLD.`rom_id`;
 END
 $$
