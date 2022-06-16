@@ -11,7 +11,6 @@ use LaravelIdea\Helper\App\Models\_IH_File_C;
 
 class FileRepository implements FileRepositoryInterface
 {
-
     private File $file;
 
     public function __construct(File $file)

@@ -15,12 +15,11 @@ class RomObserver
         $this->romRepository = $romRepository;
     }
 
-
     public bool $afterCommit = false;
 
-    public function creating(Rom $rom): void
+    public function created(Rom $rom): void
     {
-        $file = $this->romRepository->searchForFileMatchingRom()->first();
+        $file = $this->romRepository->searchForFileMatchingRom($rom->id)->first();
         if (isset($file)) {
             DB::statement(/** @lang MariaDB */
                 "CALL LinkRomToFile(:fileId, :romSize, :romId);", [
@@ -35,7 +34,7 @@ class RomObserver
     public function updating(Rom $rom): void
     {
         if (!$rom->has_file || $rom->file_id == null) {
-            $file = $this->romRepository->searchForFileMatchingRom()->first();
+            $file = $this->romRepository->searchForFileMatchingRom($rom->id)->first();
             if (isset($file)) {
                 DB::statement(/** @lang MariaDB */ "CALL LinkRomToFile(:fileId, :romSize, :romId);", [
                     'fileId' => $file['_id'],

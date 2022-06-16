@@ -32,8 +32,7 @@ class RomRepository implements RomRepositoryInterface
 
     public function getGameAssociatedWithRom(int $romId): Game
     {
-        $associatedGame = $this->findRomIfExists($romId)->game()->firstOrFail();
-        return $associatedGame;
+        return $this->findRomIfExists($romId)->game()->firstOrFail();
     }
 
     /**
@@ -48,10 +47,11 @@ class RomRepository implements RomRepositoryInterface
     /**
      * This will attempt to cross-reference the MongoDB database and check if there is a file
      * with the same name of the roms name plus its extension (rom type)
-     * @return QueryBuilder|null
+     * @param int $romId
+     * @return QueryBuilder|File|null
      */
-    public function searchForFileMatchingRom(): QueryBuilder|null
+    public function searchForFileMatchingRom(int $romId): QueryBuilder|null|File
     {
-        return File::where('filename', '=', $this->rom->getRomFileName());
+        return File::where('filename', '=', $this->findRomIfExists($romId)->getRomFileName());
     }
 }

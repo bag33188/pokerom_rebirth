@@ -22,9 +22,9 @@ class RomService implements RomServiceInterface {
      * @throws NotFoundException
      */
     #[ArrayShape(['message' => "string", 'data' => "\App\Models\Rom"])]
-    public function tryToLinkRomToFile(Rom $rom): array
+    public function attemptToLinkRomToFile(Rom $rom): array
     {
-        $file = $this->romRepository->searchForFileMatchingRom()->first();
+        $file = $this->romRepository->searchForFileMatchingRom($rom->id)->first();
         if (isset($file)) {
             DB::statement(/** @lang MariaDB */ "CALL LinkRomToFile(:fileId, :fileSize, :romId);", [
                 'fileId' => $file['_id'],
