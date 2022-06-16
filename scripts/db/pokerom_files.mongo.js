@@ -237,6 +237,58 @@ let aggregations = {
             $limit: 1,
         },
     ],
+    "Calc Total File Size GigaBytes": [
+        {
+            $group: {
+                _id: null,
+                total_length: {
+                    $sum: "$length",
+                },
+            },
+        },
+        {
+            $addFields: {
+                total_size: {
+                    $toString: {
+                        $round: [
+                            {
+                                $toDouble: {
+                                    $divide: [
+                                        "$total_length",
+                                        {
+                                            $pow: [1024, 3],
+                                        },
+                                    ],
+                                },
+                            },
+                            2,
+                        ],
+                    },
+                },
+            },
+        },
+        {
+            $project: {
+                _id: 0,
+                total_length: {
+                    $toDecimal: {
+                        $divide: [
+                            "$total_length",
+                            {
+                                $pow: [1024, 3],
+                            },
+                        ],
+                    },
+                },
+                total_size: {
+                    $concat: ["$total_size", " ", "Gibibytes"],
+                },
+            },
+        },
+        {
+            $limit: 1,
+        },
+    ],
     "Show Rom Sizes (KB)": [
         {
             $addFields: {
