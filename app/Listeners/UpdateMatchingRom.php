@@ -7,7 +7,7 @@ use App\Interfaces\FileRepositoryInterface;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
-class CheckForMatchingRom
+class UpdateMatchingRom
 {
     private FileRepositoryInterface $fileRepository;
 

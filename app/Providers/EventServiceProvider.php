@@ -4,7 +4,7 @@ namespace App\Providers;
 
 use App\Events\FileDeleted;
 use App\Events\FileUploaded;
-use App\Listeners\CheckForMatchingRom;
+use App\Listeners\UpdateMatchingRom;
 use App\Listeners\UnsetRomFileData;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -32,9 +32,10 @@ class EventServiceProvider extends ServiceProvider
             UnsetRomFileData::class
         ],
         FileUploaded::class => [
-            CheckForMatchingRom::class
+            UpdateMatchingRom::class
         ]
     ];
+
     protected $observers = [
         Game::class => [GameObserver::class],
         Rom::class => [RomObserver::class],
@@ -49,7 +50,6 @@ class EventServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->register();
-
     }
 
     /**
