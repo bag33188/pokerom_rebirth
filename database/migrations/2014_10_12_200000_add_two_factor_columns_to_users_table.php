@@ -7,6 +7,8 @@ use Laravel\Fortify\Fortify;
 
 return new class extends Migration
 {
+    protected $connection = 'mysql';
+    public $withinTransaction = true;
     /**
      * Run the migrations.
      *

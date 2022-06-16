@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+    protected $connection = 'mysql';
+    public $withinTransaction = false;
     /**
      * Run the migrations.
      *

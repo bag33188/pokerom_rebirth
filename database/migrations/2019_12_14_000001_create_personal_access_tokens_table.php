@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Schema;
 
 class CreatePersonalAccessTokensTable extends Migration
 {
+    protected $connection = 'mysql';
+    public $withinTransaction = true;
     /**
      * Run the migrations.
      *
