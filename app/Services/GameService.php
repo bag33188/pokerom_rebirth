@@ -2,10 +2,11 @@
 
 namespace App\Services;
 
+use App\Interfaces\GameServiceInterface;
 use App\Models\Game;
 use App\Models\Rom;
 
-class GameService {
+class GameService implements GameServiceInterface {
     private Game $game;
 
     public function __construct(Game $game)

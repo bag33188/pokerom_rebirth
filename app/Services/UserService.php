@@ -2,12 +2,13 @@
 
 namespace App\Services;
 
+use App\Interfaces\UserServiceInterface;
 use App\Models\User;
 use JetBrains\PhpStorm\ArrayShape;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 
-class UserService
+class UserService implements UserServiceInterface
 {
     private User $user;
     public function __construct(User $user)

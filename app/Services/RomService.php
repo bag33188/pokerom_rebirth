@@ -4,12 +4,13 @@ namespace App\Services;
 
 use App\Exceptions\NotFoundException;
 use App\Interfaces\RomRepositoryInterface;
+use App\Interfaces\RomServiceInterface;
 use App\Models\Rom;
 use Illuminate\Support\Facades\DB;
 use JetBrains\PhpStorm\ArrayShape;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
-class RomService {
+class RomService implements RomServiceInterface {
     private RomRepositoryInterface $romRepository;
     private Rom $rom;
 

@@ -2,13 +2,14 @@
 
 namespace App\Services;
 
+use App\Interfaces\FileServiceInterface;
 use App\Models\File;
 use Illuminate\Http\UploadedFile;
 use JetBrains\PhpStorm\ArrayShape;
 use Modules\FileDownloader;
 use Modules\FileHandler;
 
-class FileService
+class FileService implements FileServiceInterface
 {
     private File $file;
 
