@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Events\FileDeleted;
 use App\Interfaces\FileServiceInterface;
 use App\Models\File;
 use Illuminate\Http\UploadedFile;
@@ -32,13 +33,13 @@ class FileService implements FileServiceInterface
     public function deleteFileFromBucket(string $fileId, File $file): array
     {
         $gridfs = new FileHandler();
+        event(new FileDeleted($file));
         $gridfs->deleteFileFromBucket($fileId);
-        self::triggerFileDeletedEvent($file);
         return ['message' => "{$file['filename']} deleted!"];
     }
 
-    private static function triggerFileDeletedEvent(File $file)
-    {
-        event('eloquent.deleted: App\Models\File', $file);
-    }
+//    private static function triggerFileDeletedEvent(File $file)
+//    {
+//        event('eloquent.deleted: App\Models\File', $file);
+//    }
 }

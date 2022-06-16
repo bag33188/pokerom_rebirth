@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Events\FileDeleted;
+use App\Listeners\UnsetRomFileData;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -26,11 +28,14 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
+        FileDeleted::class => [
+            UnsetRomFileData::class
+        ]
     ];
     protected $observers = [
         Game::class => [GameObserver::class],
         Rom::class => [RomObserver::class],
-        File::class => [FileObserver::class],
+//        File::class => [FileObserver::class],
         User::class => [UserObserver::class]
     ];
     /**
@@ -38,7 +43,7 @@ class EventServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         $this->register();
 
@@ -49,7 +54,7 @@ class EventServiceProvider extends ServiceProvider
      *
      * @return bool
      */
-    public function shouldDiscoverEvents()
+    public function shouldDiscoverEvents(): bool
     {
         return false;
     }
