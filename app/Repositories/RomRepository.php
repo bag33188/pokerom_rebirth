@@ -34,12 +34,12 @@ class RomRepository implements RomRepositoryInterface
         }
     }
 
-    public function assocGame(int $romId)
+    public function showGame(int $romId)
     {
         return Rom::findOrFail($romId)->game()->firstOrFail();
     }
 
-    public function assocFile(int $romId)
+    public function showFile(int $romId)
     {
         $file = Rom::findOrFail($romId)->file()->first();
         return [$file ?? ['message' => 'this rom does not have a file'],

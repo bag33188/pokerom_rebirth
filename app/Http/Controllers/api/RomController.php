@@ -36,13 +36,13 @@ class RomController extends ApiController
 
     public function indexGame(int $romId)
     {
-        return new GameResource($this->romRepository->assocGame($romId));
+        return new GameResource($this->romRepository->showGame($romId));
     }
 
     public function indexFile(int $romId)
     {
         Gate::authorize('viewAny-file');
-        return response()->json(...$this->romRepository->assocFile($romId));
+        return response()->json(...$this->romRepository->showFile($romId));
     }
 
     /**

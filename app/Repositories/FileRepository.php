@@ -26,7 +26,7 @@ class FileRepository implements FileRepositoryInterface {
         event('eloquent.deleted: App\Models\File', $file);
         return ['message' => "{$file['filename']} deleted!"];
     }
-    public function assocRom($file){
+    public function showRom($file){
         $rom = $file->rom()->first();
         return [$rom ??
             ['message' => 'no rom is associated with this file'],

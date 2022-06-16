@@ -37,7 +37,7 @@ class FileController extends ApiController
     {
         $file = File::findOrFail($fileId);
         $this->authorize('view', $file);
-        return response()->json(...$this->fileRepository->assocRom($file));
+        return response()->json(...$this->fileRepository->showRom($file));
     }
 
     /**

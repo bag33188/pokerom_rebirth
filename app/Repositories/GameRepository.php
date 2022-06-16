@@ -11,7 +11,7 @@ class GameRepository implements GameRepositoryInterface{
         $game->save();
         return $game;
     }
-    public function assocRom(int $gameId) {
+    public function showRom(int $gameId) {
         return Game::findOrFail($gameId)->rom()->first();
     }
 }

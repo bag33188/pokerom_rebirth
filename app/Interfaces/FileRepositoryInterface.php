@@ -6,5 +6,5 @@ interface FileRepositoryInterface {
     public function downloadFile($fileId);
     public function uploadFile($file);
     public function deleteFile($fileId,$file);
-    public function assocRom($file);
+    public function showRom($file);
 }
