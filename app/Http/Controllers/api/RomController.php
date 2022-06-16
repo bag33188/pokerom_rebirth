@@ -12,7 +12,9 @@ use App\Interfaces\RomRepositoryInterface;
 use App\Models\Rom;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Gate;
+use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 class RomController extends ApiController
 {
@@ -39,10 +41,13 @@ class RomController extends ApiController
         return new GameResource($this->romRepository->showGame($romId));
     }
 
+    /**
+     * @throws AuthorizationException
+     */
     public function indexFile(int $romId)
     {
         Gate::authorize('viewAny-file');
-        return response()->json(...$this->romRepository->showFile($romId));
+        return response()->json($this->romRepository->showFile($romId));
     }
 
     /**
@@ -84,7 +89,7 @@ class RomController extends ApiController
     {
         $rom = Rom::findOrFail($romId);
         $this->authorize('update', $rom);
-        return response()->json($this->romRepository->linkRomToFile($rom));
+        return response()->json($this->romRepository->linkRomToFile($rom), ResponseAlias::HTTP_ACCEPTED);
     }
 
     /**

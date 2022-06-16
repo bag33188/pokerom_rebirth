@@ -2,9 +2,16 @@
 
 namespace App\Interfaces;
 
-interface FileRepositoryInterface {
-    public function downloadFile($fileId);
-    public function uploadFile($file);
-    public function deleteFile($fileId,$file);
-    public function showRom($file);
+use App\Models\File;
+use Illuminate\Http\UploadedFile;
+
+interface FileRepositoryInterface
+{
+    public function downloadFile(string $fileId);
+
+    public function uploadFile(UploadedFile $file);
+
+    public function deleteFileFromBucket(string $fileId, File $file);
+
+    public function showRom(File $file);
 }

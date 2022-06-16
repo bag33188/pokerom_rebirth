@@ -7,9 +7,8 @@ use App\Http\Controllers\Controller as ApiController;
 use App\Http\Requests\StoreFileRequest;
 use App\Interfaces\FileRepositoryInterface;
 use App\Models\File;
-use Illuminate\{Auth\Access\AuthorizationException, Http\JsonResponse, Http\Response};
+use Illuminate\{Auth\Access\AuthorizationException, Http\JsonResponse};
 use Illuminate\Support\Facades\Gate;
-use Modules\FileHandler;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
@@ -23,6 +22,9 @@ class FileController extends ApiController
         $this->fileRepository = $fileRepository;
     }
 
+    /**
+     * @throws AuthorizationException
+     */
     public function index()
     {
         Gate::authorize('viewAny-file');
@@ -37,7 +39,7 @@ class FileController extends ApiController
     {
         $file = File::findOrFail($fileId);
         $this->authorize('view', $file);
-        return response()->json(...$this->fileRepository->showRom($file));
+        return response()->json($this->fileRepository->showRom($file));
     }
 
     /**
@@ -71,7 +73,8 @@ class FileController extends ApiController
     public function upload(StoreFileRequest $request): JsonResponse
     {
         $this->authorize('create', File::class);
-        return response()->json($this->fileRepository->uploadFile($request->file(FILE_FORM_KEY)), ResponseAlias::HTTP_CREATED)
+        $file = $request->file(FILE_FORM_KEY);
+        return response()->json($this->fileRepository->uploadFile($file), ResponseAlias::HTTP_CREATED)
             ->header('X-Content-Transfer-Type', FileTypes::OCTET_STREAM->value);
     }
 
@@ -82,6 +85,6 @@ class FileController extends ApiController
     {
         $file = File::findOrFail($fileId);
         $this->authorize('delete', $file);
-        return response()->json($this->fileRepository->deleteFile($fileId,$file));
+        return response()->json($this->fileRepository->deleteFileFromBucket($fileId, $file));
     }
 }

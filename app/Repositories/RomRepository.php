@@ -4,10 +4,10 @@ namespace App\Repositories;
 
 use App\Exceptions\NotFoundException;
 use App\Interfaces\RomRepositoryInterface;
+use App\Models\File;
+use App\Models\Game;
 use App\Models\Rom;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
-use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 class RomRepository implements RomRepositoryInterface
 {
@@ -16,7 +16,7 @@ class RomRepository implements RomRepositoryInterface
      */
     public function linkRomToFile(Rom $rom)
     {
-        $file = $rom->checkMatchingFile()->first();
+        $file = $rom->getFileMatchingRom()->first();
         if (isset($file)) {
             DB::statement(/** @lang MariaDB */ "CALL LinkRomToFile(:fileId, :fileSize, :romId);", [
                 'fileId' => $file['_id'],
@@ -28,21 +28,22 @@ class RomRepository implements RomRepositoryInterface
                 'message' => "file found and linked! file id: {$file['_id']}",
                 'data' => $rom->refresh()
             ];
-
         } else {
             throw new NotFoundException("File not found with name of {$rom->getRomFileName()}");
         }
     }
 
-    public function showGame(int $romId)
+    public function showGame(int $romId): Game
     {
         return Rom::findOrFail($romId)->game()->firstOrFail();
     }
 
-    public function showFile(int $romId)
+    /**
+     * @throws NotFoundException
+     */
+    public function showFile(int $romId): File
     {
         $file = Rom::findOrFail($romId)->file()->first();
-        return [$file ?? ['message' => 'this rom does not have a file'],
-            isset($file) ? ResponseAlias::HTTP_OK : 404];
+        return $file ?? throw new NotFoundException('this rom does not have a file');
     }
 }

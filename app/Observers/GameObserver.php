@@ -3,6 +3,7 @@
 namespace App\Observers;
 
 use App\Models\Game;
+use App\Models\Rom;
 use Illuminate\Support\Str;
 
 class GameObserver
@@ -17,6 +18,8 @@ class GameObserver
 
     public function creating(Game $game): void
     {
+        // check if rom exists
+        Rom::findOrFail($game->rom_id);
         self::slugify($game);
     }
 

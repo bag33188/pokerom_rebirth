@@ -11,7 +11,7 @@ class RomObserver
 
     public function creating(Rom $rom): void
     {
-        $file = $rom->checkMatchingFile()->first();
+        $file = $rom->getFileMatchingRom()->first();
         if (isset($file)) {
             DB::statement(/** @lang MariaDB */
                 "CALL LinkRomToFile(:fileId, :romSize, :romId);", [
@@ -26,7 +26,7 @@ class RomObserver
     public function updating(Rom $rom): void
     {
         if (!$rom->has_file || $rom->file_id == null) {
-            $file = $rom->checkMatchingFile()->first();
+            $file = $rom->getFileMatchingRom()->first();
             if (isset($file)) {
                 DB::statement(/** @lang MariaDB */ "CALL LinkRomToFile(:fileId, :romSize, :romId);", [
                     'fileId' => $file['_id'],

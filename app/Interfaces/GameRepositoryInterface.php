@@ -2,7 +2,12 @@
 
 namespace App\Interfaces;
 
-interface GameRepositoryInterface{
-    public function associateGameWithRom($game, &$rom);
+use App\Models\Game;
+use App\Models\Rom;
+
+interface GameRepositoryInterface
+{
+    public function associateGameWithRom(Game $game, Rom &$rom);
+
     public function showRom(int $gameId);
 }
