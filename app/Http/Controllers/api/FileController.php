@@ -85,9 +85,6 @@ class FileController extends ApiController
     {
         $file = File::findOrFail($fileId);
         $this->authorize('delete', $file);
-        $gridfs = new FileHandler();
-        $gridfs->deleteFileFromBucket($fileId);
-        $file->delete(); //! <- keep this in order to invoke the policy method
-        return response()->json(['message' => "{$file['filename']} deleted!"]);
+        return response()->json($this->fileRepository->deleteFile($fileId,$file));
     }
 }

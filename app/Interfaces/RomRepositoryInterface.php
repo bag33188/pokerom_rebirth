@@ -1,6 +1,8 @@
 <?php
 namespace App\Interfaces;
 
+use App\Models\Rom;
+
 interface RomRepositoryInterface {
-    public function linkRomToFile($rom);
+    public function linkRomToFile(Rom $rom);
 }

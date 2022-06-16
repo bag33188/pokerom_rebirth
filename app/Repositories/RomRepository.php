@@ -2,10 +2,15 @@
 
 namespace App\Repositories;
 
+use App\Exceptions\NotFoundException;
+use App\Interfaces\RomRepositoryInterface;
 use App\Models\Rom;
 use Illuminate\Support\Facades\DB;
 
-class RomRepository {
+class RomRepository implements RomRepositoryInterface {
+    /**
+     * @throws NotFoundException
+     */
     public function linkRomToFile(Rom $rom) {
         $file = $rom->checkMatchingFile()->first();
         if (isset($file)) {
@@ -15,11 +20,13 @@ class RomRepository {
                 'romId' => $rom->id
             ]);
             $rom->refresh();
-            return response()->json([
+            return [
                 'message' => "file found and linked! file id: {$file['_id']}",
                 'data' => $rom->refresh()
-            ]);
+            ];
 
+        } else {
+            throw new NotFoundException("File not found with name of {$rom->getRomFileName()}");
         }
     }
 }

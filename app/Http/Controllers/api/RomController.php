@@ -87,8 +87,7 @@ class RomController extends ApiController
     {
         $rom = Rom::findOrFail($romId);
         $this->authorize('update', $rom);
-        $this->romRepository->linkRomToFile($rom);
-        return response()->json(['message' => "File not found with name of {$rom->getRomFileName()}"], 404);
+        return response()->json($this->romRepository->linkRomToFile($rom));
     }
 
     /**

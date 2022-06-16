@@ -20,4 +20,10 @@ class FileRepository implements FileRepositoryInterface {
         $gridfs->uploadFileFromStream();
         return ['message' => "file {$gridfs->getFilename()} created!"];
     }
+    public function deleteFile($fileId,$file){
+        $gridfs = new FileHandler();
+        $gridfs->deleteFileFromBucket($fileId);
+        event('eloquent.deleted: App\Models\File', $file);
+        return ['message' => "{$file['filename']} deleted!"];
+    }
 }
