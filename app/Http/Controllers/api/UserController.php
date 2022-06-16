@@ -19,10 +19,12 @@ use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 class UserController extends ApiController
 {
     private UserServiceInterface $userService;
+    private UserRepositoryInterface $userRepository;
 
-    public function __construct(UserServiceInterface $userService)
+    public function __construct(UserServiceInterface $userService, UserRepositoryInterface $userRepository)
     {
         $this->userService = $userService;
+        $this->userRepository = $userRepository;
     }
 
     /**
@@ -32,9 +34,9 @@ class UserController extends ApiController
     {
         Gate::authorize('viewAny-user');
         if ($request->query('paginate') === 'true') {
-            return response()->json(User::paginate(4)->withQueryString());
+            return response()->json($this->userRepository->paginateUsers());
         } else {
-            return new UserCollection(User::all());
+            return new UserCollection($this->userRepository->getAllUsers());
         }
     }
 
@@ -53,7 +55,7 @@ class UserController extends ApiController
 
     public function logout(Request $request): JsonResponse
     {
-        return response()->json($this->userService->logoutCurrentUser($request->user()));
+        return response()->json($this->userService->logoutCurrentUser());
     }
 
 
