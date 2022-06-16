@@ -12,11 +12,11 @@ class GameService {
     {
         $this->game = $game;
     }
-    public function associateGameWithRom(Game $game, Rom &$rom): Game
+    public function associateGameWithRom(Rom &$rom): Game
     {
         $rom = $rom->refresh();
-        $game->rom()->associate($rom);
-        $game->save();
-        return $game;
+        $this->game->rom()->associate($rom);
+        $this->game->save();
+        return $this->game;
     }
 }

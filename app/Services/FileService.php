@@ -35,11 +35,11 @@ class FileService
     }
 
     #[ArrayShape(['message' => "string"])]
-    public function deleteFileFromBucket(string $fileId, File $file): array
+    public function deleteFileFromBucket(string $fileId): array
     {
         $gridfs = new FileHandler();
         $gridfs->deleteFileFromBucket($fileId);
-        event('eloquent.deleted: App\Models\File', $file);
-        return ['message' => "{$file['filename']} deleted!"];
+        event('eloquent.deleted: App\Models\File', $this->file);
+        return ['message' => "{$this->file['filename']} deleted!"];
     }
 }

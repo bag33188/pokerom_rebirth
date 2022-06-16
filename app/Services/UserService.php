@@ -15,9 +15,9 @@ class UserService
         $this->user=$user;
     }
 
-    private static function generateUserApiToken(User $user): string|\Laravel\Sanctum\string
+    private function generateUserApiToken(): string|\Laravel\Sanctum\string
     {
-        return $user->createToken(API_TOKEN_KEY)->plainTextToken;
+        return $this->user->createToken(API_TOKEN_KEY)->plainTextToken;
     }
 
     private function deleteAllUserAccessTokens()
@@ -31,41 +31,41 @@ class UserService
     }
 
     #[ArrayShape(['message' => "string"])]
-    public function deleteUserAndTokens(User $user): array
+    public function deleteUserAndTokens(): array
     {
         $this->deleteAllUserAccessTokens();
-        $user->delete();
-        return ['message' => "user $user->name deleted!"];
+        $this->user->delete();
+        return ['message' => "user $this->user->name deleted!"];
     }
 
     #[ArrayShape(['user' => "\App\Models\User", 'token' => "\Laravel\Sanctum\string|string"])]
-    public function registerUserToken(User $user): array
+    public function registerUserToken(): array
     {
-        $token = self::generateUserApiToken($user);
+        $token = $this->generateUserApiToken();
         return [
-            'user' => $user,
+            'user' => $this->user,
             'token' => $token
         ];
     }
 
     #[ArrayShape(['message' => "string"])]
-    public function logoutCurrentUser(User $user): array
+    public function logoutCurrentUser(): array
     {
         $this->deleteUserCurrentAccessTokens();
         return ['message' => 'logged out!'];
     }
 
     #[ArrayShape(['user' => "\App\Models\User", 'token' => "\Laravel\Sanctum\string|string"])]
-    public function authenticateUserAgainstCreds(User $user, string $requestPassword): array
+    public function authenticateUserAgainstCreds(string $requestPassword): array
     {
         // Check password hash against database
-        if (!$user->checkPassword($requestPassword)) {
+        if (!$this->user->checkPassword($requestPassword)) {
             throw new UnauthorizedHttpException(challenge: $requestPassword, message: 'Bad credentials', code: ResponseAlias::HTTP_UNAUTHORIZED);
         }
 
-        $token = self::generateUserApiToken($user);
+        $token = $this->generateUserApiToken();
         return [
-            'user' => $user,
+            'user' => $this->user,
             'token' => $token
         ];
     }
