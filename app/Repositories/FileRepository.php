@@ -7,6 +7,7 @@ use App\Interfaces\FileRepositoryInterface;
 use App\Models\File;
 use App\Models\Rom;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Query\Builder;
 use LaravelIdea\Helper\App\Models\_IH_File_C;
 
 class FileRepository implements FileRepositoryInterface
@@ -38,7 +39,7 @@ class FileRepository implements FileRepositoryInterface
         return $this->file->all()->sortBy([['length', 'asc'], ['filename', 'asc']]);
     }
 
-    public function searchForRomMatchingFile(string $fileId): Rom
+    public function searchForRomMatchingFile(string $fileId): Rom|Builder
     {
         [$name, $ext] = explode('.',
             $this->findFileIfExists($fileId)->filename, 2);
