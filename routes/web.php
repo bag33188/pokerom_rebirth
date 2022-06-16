@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\www\HomeController;
-use App\Http\Controllers\www\WelcomeController;
+use App\Http\Controllers\www\{HomeController, WelcomeController};
+use App\Http\Livewire\Roms\Index as RomsIndex;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,13 +15,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [WelcomeController::class, 'index']);
+Route::get('/', [WelcomeController::class, 'renderIndex'])->name('welcome');
 
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified'
 ])->group(function () {
-    Route::get('/roms', App\Http\Livewire\Roms\Index::class)->name('roms.index');
-    Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
+    Route::get('/dashboard', [HomeController::class, 'renderDashboard'])->name('dashboard');
+    Route::get('/roms', RomsIndex::class)->name('roms.index');
 });

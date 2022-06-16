@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\www;
 
 use App\Http\Controllers\Controller as ViewController;
-use Illuminate\Http\Request;
 
 class HomeController extends ViewController
 {
-    public function index() {
-        return view('dashboard');
+    private const PAGE_HEADING = 'Dashboard';
+
+    public function renderDashboard()
+    {
+        return view('dashboard', ['title' => self::PAGE_HEADING]);
     }
 }
