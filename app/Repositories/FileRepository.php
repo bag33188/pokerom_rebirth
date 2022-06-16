@@ -7,6 +7,7 @@ use App\Interfaces\FileRepositoryInterface;
 use App\Models\File;
 use App\Models\Rom;
 use Illuminate\Http\UploadedFile;
+use JetBrains\PhpStorm\ArrayShape;
 use Modules\FileDownloader;
 use Modules\FileHandler;
 
@@ -20,7 +21,8 @@ class FileRepository implements FileRepositoryInterface
         $fileDownloader->downloadFile();
     }
 
-    public function uploadFile(UploadedFile $file)
+    #[ArrayShape(['message' => "string"])]
+    public function uploadFile(UploadedFile $file): array
     {
         $gridfs = new FileHandler();
         $gridfs->setUploadFileData($file);
@@ -28,7 +30,8 @@ class FileRepository implements FileRepositoryInterface
         return ['message' => "file {$gridfs->getFilename()} created!"];
     }
 
-    public function deleteFileFromBucket(string $fileId, File $file)
+    #[ArrayShape(['message' => "string"])]
+    public function deleteFileFromBucket(string $fileId, File $file): array
     {
         $gridfs = new FileHandler();
         $gridfs->deleteFileFromBucket($fileId);
@@ -39,9 +42,9 @@ class FileRepository implements FileRepositoryInterface
     /**
      * @throws NotFoundException
      */
-    public function showRom($file): Rom
+    public function showAssociatedRom($file): Rom
     {
-        $associateRom = $file->rom()->first();
-        return $associateRom ?? throw new NotFoundException('no rom is associated with this file');
+        $associatedRom = $file->rom()->first();
+        return $associatedRom ?? throw new NotFoundException('no rom is associated with this file');
     }
 }

@@ -13,5 +13,5 @@ interface FileRepositoryInterface
 
     public function deleteFileFromBucket(string $fileId, File $file);
 
-    public function showRom(File $file);
+    public function showAssociatedRom(File $file);
 }

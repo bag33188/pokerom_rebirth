@@ -8,15 +8,18 @@ use App\Models\File;
 use App\Models\Game;
 use App\Models\Rom;
 use Illuminate\Support\Facades\DB;
+use JetBrains\PhpStorm\ArrayShape;
+use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 class RomRepository implements RomRepositoryInterface
 {
     /**
      * @throws NotFoundException
      */
-    public function linkRomToFile(Rom $rom)
+    #[ArrayShape(['message' => "string", 'data' => "\App\Models\Rom"])]
+    public function tryToLinkRomToFile(Rom $rom): array
     {
-        $file = $rom->getFileMatchingRom()->first();
+        $file = $rom->searchForFileMatchingRom()->first();
         if (isset($file)) {
             DB::statement(/** @lang MariaDB */ "CALL LinkRomToFile(:fileId, :fileSize, :romId);", [
                 'fileId' => $file['_id'],
@@ -29,22 +32,22 @@ class RomRepository implements RomRepositoryInterface
                 'data' => $rom->refresh()
             ];
         } else {
-            throw new NotFoundException("File not found with name of {$rom->getRomFileName()}");
+            throw new NotFoundException("File not found with name of {$rom->getRomFileName()}", ResponseAlias::HTTP_NOT_FOUND);
         }
     }
 
-    public function showGame(int $romId): Game
+    public function showAssociatedGame(int $romId): Game
     {
-        $associateGame = Rom::findOrFail($romId)->game()->firstOrFail();
-        return $associateGame;
+        $associatedGame = Rom::findOrFail($romId)->game()->firstOrFail();
+        return $associatedGame;
     }
 
     /**
      * @throws NotFoundException
      */
-    public function showFile(int $romId): File
+    public function showAssociatedFile(int $romId): File
     {
-        $associateFile = Rom::findOrFail($romId)->file()->first();
-        return $associateFile ?? throw new NotFoundException('this rom does not have a file');
+        $associatedFile = Rom::findOrFail($romId)->file()->first();
+        return $associatedFile ?? throw new NotFoundException('this rom does not have a file');
     }
 }

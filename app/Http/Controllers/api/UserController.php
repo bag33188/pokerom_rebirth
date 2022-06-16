@@ -7,14 +7,26 @@ use App\Http\Requests\LoginRequest;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Resources\UserCollection;
 use App\Http\Resources\UserResource;
+use App\Interfaces\UserRepositoryInterface;
 use App\Models\User;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
+use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 class UserController extends ApiController
 {
+    private UserRepositoryInterface $userRepository;
+
+    public function __construct(UserRepositoryInterface $userRepository)
+    {
+        $this->userRepository = $userRepository;
+    }
+
+    /**
+     * @throws AuthorizationException
+     */
     public function index(Request $request): JsonResponse|UserCollection
     {
         Gate::authorize('viewAny-user');
@@ -28,15 +40,7 @@ class UserController extends ApiController
     public function register(StoreUserRequest $request): JsonResponse
     {
         $user = User::create($request->all());
-
-        $token = $user->createToken('auth_token')->plainTextToken;
-
-        $response = [
-            'user' => $user,
-            'token' => $token
-        ];
-
-        return response()->json($response, 201);
+        return response()->json($this->userRepository->registerUserToken($user), ResponseAlias::HTTP_CREATED);
     }
 
     public function login(LoginRequest $request): JsonResponse
@@ -60,10 +64,7 @@ class UserController extends ApiController
 
     public function logout(Request $request): JsonResponse
     {
-        if ($request->user()) {
-            auth()->user()->currentAccessToken()->delete();
-        }
-        return response()->json(['message' => 'logged out!']);
+        return response()->json($this->userRepository->logoutCurrentUser($request->user()));
     }
 
 
@@ -101,8 +102,7 @@ class UserController extends ApiController
     {
         $user = User::findOrFail($userId);
         $this->authorize('delete', $user);
-        auth()->user()->tokens()->delete();
-        $user->delete();
-        return response()->json(['message' => "user $user->name deleted!"]);
+
+        return response()->json($this->userRepository->deleteUserAndTokens($user));
     }
 }

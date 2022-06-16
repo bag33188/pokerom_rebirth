@@ -9,5 +9,5 @@ interface GameRepositoryInterface
 {
     public function associateGameWithRom(Game $game, Rom &$rom);
 
-    public function showRom(int $gameId);
+    public function showAssociatedRom(int $gameId);
 }

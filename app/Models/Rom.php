@@ -64,7 +64,7 @@ class Rom extends Model
      * with the same name of the roms name plus its extension (rom type)
      * @return QueryBuilder|null
      */
-    public function getFileMatchingRom(): QueryBuilder|null
+    public function searchForFileMatchingRom(): QueryBuilder|null
     {
         return File::where('filename', '=', $this->getRomFileName());
     }

@@ -38,7 +38,7 @@ class RomController extends ApiController
 
     public function indexGame(int $romId)
     {
-        return new GameResource($this->romRepository->showGame($romId));
+        return new GameResource($this->romRepository->showAssociatedGame($romId));
     }
 
     /**
@@ -47,7 +47,7 @@ class RomController extends ApiController
     public function indexFile(int $romId)
     {
         Gate::authorize('viewAny-file');
-        return response()->json($this->romRepository->showFile($romId));
+        return response()->json($this->romRepository->showAssociatedFile($romId));
     }
 
     /**
@@ -89,7 +89,7 @@ class RomController extends ApiController
     {
         $rom = Rom::findOrFail($romId);
         $this->authorize('update', $rom);
-        return response()->json($this->romRepository->linkRomToFile($rom), ResponseAlias::HTTP_ACCEPTED);
+        return response()->json($this->romRepository->tryToLinkRomToFile($rom), ResponseAlias::HTTP_ACCEPTED);
     }
 
     /**
@@ -104,6 +104,6 @@ class RomController extends ApiController
         $rom = Rom::findOrFail($romId);
         $this->authorize('delete', $rom);
         Rom::destroy($romId);
-        return response()->json(['message' => "rom {$rom->rom_name} deleted!"]);
+        return response()->json(['message' => "rom $rom->rom_name deleted!"]);
     }
 }

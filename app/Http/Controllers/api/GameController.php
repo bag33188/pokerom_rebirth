@@ -42,7 +42,7 @@ class GameController extends ApiController
      */
     public function indexRom(int $gameId)
     {
-        return response()->json($this->gameRepository->showRom($gameId));
+        return response()->json($this->gameRepository->showAssociatedRom($gameId));
     }
 
     /**
