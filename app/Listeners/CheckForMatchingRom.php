@@ -29,10 +29,11 @@ class CheckForMatchingRom
      */
     public function handle(FileUploaded $event): void
     {
-        $rom = $this->fileRepository->searchForRomMatchingFile($event->file->getKey())->first();
+        $fileId = $event->file->getKey();
+        $rom = $this->fileRepository->searchForRomMatchingFile($fileId)->first();
         if (isset($rom)) {
             $rom['has_file'] = true;
-            $rom['file_id'] = $event->file->getKey();
+            $rom['file_id'] = $fileId;
             $rom->saveQuietly();
         }
     }
