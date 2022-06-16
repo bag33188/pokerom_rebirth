@@ -8,13 +8,7 @@ use App\Models\Rom;
 
 class GameRepository implements GameRepositoryInterface
 {
-    public function associateGameWithRom(Game $game, Rom &$rom): Game
-    {
-        $rom = $rom->refresh();
-        $game->rom()->associate($rom);
-        $game->save();
-        return $game;
-    }
+
 
     public function showAssociatedRom(int $gameId): Rom
     {

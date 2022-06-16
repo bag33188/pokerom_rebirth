@@ -14,6 +14,12 @@ use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 class RomRepository implements RomRepositoryInterface
 {
+    private Rom $rom;
+
+    public function __construct(Rom $rom)
+    {
+        $this->rom = $rom;
+    }
 
     public function showAssociatedGame(int $romId): Game
     {
@@ -37,6 +43,6 @@ class RomRepository implements RomRepositoryInterface
      */
     public function searchForFileMatchingRom(): QueryBuilder|null
     {
-        return File::where('filename', '=', $this->getRomFileName());
+        return File::where('filename', '=', $this->rom->getRomFileName());
     }
 }
