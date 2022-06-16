@@ -21,3 +21,7 @@ Currently, migration code and database seeds/info.
 2:11 AM 6/15/2022
 
 progressing smoothly ...
+
+https://medium.com/@farhadmsyv/laravel-repository-pattern-861c2dd96a32
+https://itnext.io/repository-design-pattern-done-right-in-laravel-d177b5fa75d4
+https://dev.to/carlomigueldy/getting-started-with-repository-pattern-in-laravel-using-inheritance-and-dependency-injection-2ohe
