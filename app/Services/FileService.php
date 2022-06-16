@@ -33,7 +33,12 @@ class FileService implements FileServiceInterface
     {
         $gridfs = new FileHandler();
         $gridfs->deleteFileFromBucket($fileId);
-        event('eloquent.deleted: App\Models\File', $file);
+        self::triggerFileDeletedEvent($file);
         return ['message' => "{$file['filename']} deleted!"];
+    }
+
+    private static function triggerFileDeletedEvent(File $file)
+    {
+        event('eloquent.deleted: App\Models\File', $file);
     }
 }
