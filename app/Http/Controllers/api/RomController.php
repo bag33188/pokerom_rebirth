@@ -36,16 +36,13 @@ class RomController extends ApiController
 
     public function indexGame(int $romId)
     {
-        $game = Rom::findOrFail($romId)->game()->firstOrFail();
-        return new GameResource($game);
+        return new GameResource($this->romRepository->assocGame($romId));
     }
 
     public function indexFile(int $romId)
     {
         Gate::authorize('viewAny-file');
-        $file = Rom::findOrFail($romId)->file()->first();
-        return response()->json($file ?? ['message' => 'this rom does not have a file'],
-            isset($file) ? 200 : 404);
+        return response()->json(...$this->romRepository->assocFile($romId));
     }
 
     /**

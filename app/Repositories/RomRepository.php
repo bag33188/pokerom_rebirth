@@ -7,11 +7,13 @@ use App\Interfaces\RomRepositoryInterface;
 use App\Models\Rom;
 use Illuminate\Support\Facades\DB;
 
-class RomRepository implements RomRepositoryInterface {
+class RomRepository implements RomRepositoryInterface
+{
     /**
      * @throws NotFoundException
      */
-    public function linkRomToFile(Rom $rom) {
+    public function linkRomToFile(Rom $rom)
+    {
         $file = $rom->checkMatchingFile()->first();
         if (isset($file)) {
             DB::statement(/** @lang MariaDB */ "CALL LinkRomToFile(:fileId, :fileSize, :romId);", [
@@ -28,5 +30,17 @@ class RomRepository implements RomRepositoryInterface {
         } else {
             throw new NotFoundException("File not found with name of {$rom->getRomFileName()}");
         }
+    }
+
+    public function assocGame(int $romId)
+    {
+        return Rom::findOrFail($romId)->game()->firstOrFail();
+    }
+
+    public function assocFile(int $romId)
+    {
+        $file = Rom::findOrFail($romId)->file()->first();
+        return [$file ?? ['message' => 'this rom does not have a file'],
+            isset($file) ? 200 : 404];
     }
 }
