@@ -34,7 +34,7 @@ class UserController extends ApiController
     {
         Gate::authorize('viewAny-user');
         if ($request->query('paginate') === 'true') {
-            return response()->json($this->userRepository->paginateUsers());
+            return response()->json($this->userRepository->paginateUsers((int)$request->query('per_page')));
         } else {
             return new UserCollection($this->userRepository->getAllUsers());
         }

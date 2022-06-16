@@ -22,9 +22,9 @@ class UserRepository implements UserRepositoryInterface
         return $this->user->findOrFail($userId);
     }
 
-    public function paginateUsers(int $perPage = 4): array|LengthAwarePaginator|_IH_User_C
+    public function paginateUsers(?int $perPage = null): array|LengthAwarePaginator|_IH_User_C
     {
-        return $this->user->paginate($perPage)->withQueryString();
+        return $this->user->paginate($perPage ?: 4)->withQueryString();
     }
 
     public function getAllUsers(): Collection|array|_IH_User_C
