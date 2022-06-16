@@ -8,12 +8,15 @@ use JetBrains\PhpStorm\ArrayShape;
 use Modules\FileDownloader;
 use Modules\FileHandler;
 
-class FileService {
+class FileService
+{
     private File $file;
+
     public function __construct(File $file)
     {
-        $this->file=$file;
+        $this->file = $file;
     }
+
     public function downloadFile(string $fileId)
     {
         $gridfs = new FileHandler();
