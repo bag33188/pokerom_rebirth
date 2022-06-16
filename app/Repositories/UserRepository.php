@@ -4,14 +4,33 @@ namespace App\Repositories;
 
 use App\Interfaces\UserRepositoryInterface;
 use App\Models\User;
+use Illuminate\Http\Response;
+use \Laravel\Sanctum\string as SanctumString;
 use JetBrains\PhpStorm\ArrayShape;
+use Symfony\Component\HttpFoundation\Response as ResponseAlias;
+use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 
 class UserRepository implements UserRepositoryInterface
 {
+    private static function generateUserApiToken(User $user): string|SanctumString
+    {
+        return $user->createToken(API_TOKEN_KEY)->plainTextToken;
+    }
+
+    private function deleteAllUserAccessTokens()
+    {
+        auth()->user()->tokens()->delete();
+    }
+
+    private function deleteUserCurrentAccessTokens()
+    {
+        auth()->user()->currentAccessToken()->delete();
+    }
+
     #[ArrayShape(['message' => "string"])]
     public function deleteUserAndTokens(User $user): array
     {
-        auth()->user()->tokens()->delete();
+        $this->deleteAllUserAccessTokens();
         $user->delete();
         return ['message' => "user $user->name deleted!"];
     }
@@ -19,7 +38,7 @@ class UserRepository implements UserRepositoryInterface
     #[ArrayShape(['user' => "\App\Models\User", 'token' => "\Laravel\Sanctum\string|string"])]
     public function registerUserToken(User $user): array
     {
-        $token = $user->createToken('auth_token')->plainTextToken;
+        $token = self::generateUserApiToken($user);
         return [
             'user' => $user,
             'token' => $token
@@ -29,7 +48,22 @@ class UserRepository implements UserRepositoryInterface
     #[ArrayShape(['message' => "string"])]
     public function logoutCurrentUser(User $user): array
     {
-        auth()->user()->currentAccessToken()->delete();
+        $this->deleteUserCurrentAccessTokens();
         return ['message' => 'logged out!'];
+    }
+
+    #[ArrayShape(['user' => "\App\Models\User", 'token' => "\Laravel\Sanctum\string|string"])]
+    public function authenticateUserAgainstCreds(User $user, string $requestPassword): array
+    {
+        // Check password hash against database
+        if (!$user->checkPassword($requestPassword)) {
+            throw new UnauthorizedHttpException(challenge: $requestPassword, message: 'Bad credentials', code: ResponseAlias::HTTP_UNAUTHORIZED);
+        }
+
+        $token = self::generateUserApiToken($user);
+        return [
+            'user' => $user,
+            'token' => $token
+        ];
     }
 }

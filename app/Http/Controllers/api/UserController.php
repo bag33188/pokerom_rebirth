@@ -47,19 +47,7 @@ class UserController extends ApiController
     {
         // Check email
         $user = User::where('email', $request['email'])->firstOrFail();
-
-        // Check password
-        if (!$user->checkPassword($request['password'])) {
-            return response()->json([
-                'message' => 'Bad credentials'
-            ], 401);
-        }
-
-        $token = $user->createToken('auth_token')->plainTextToken;
-        return response()->json([
-            'user' => $user,
-            'token' => $token
-        ]);
+        return response()->json($this->userRepository->authenticateUserAgainstCreds($user, $request['password']));
     }
 
     public function logout(Request $request): JsonResponse

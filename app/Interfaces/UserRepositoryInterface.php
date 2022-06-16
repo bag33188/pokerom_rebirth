@@ -11,4 +11,5 @@ interface UserRepositoryInterface
     public function registerUserToken(User $user);
 
     public function logoutCurrentUser(User $user);
+    public function authenticateUserAgainstCreds(User $user, string $requestPassword);
 }
