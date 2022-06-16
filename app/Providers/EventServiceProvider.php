@@ -12,11 +12,9 @@ use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvi
 use Illuminate\Support\Facades\Event;
 use App\Models\Rom;
 use App\Models\User;
-use App\Observers\FileObserver;
 use App\Observers\GameObserver;
 use App\Observers\RomObserver;
 use App\Observers\UserObserver;
-use App\Models\File;
 use App\Models\Game;
 
 class EventServiceProvider extends ServiceProvider
@@ -40,7 +38,6 @@ class EventServiceProvider extends ServiceProvider
     protected $observers = [
         Game::class => [GameObserver::class],
         Rom::class => [RomObserver::class],
-        File::class => [FileObserver::class],
         User::class => [UserObserver::class]
     ];
 
