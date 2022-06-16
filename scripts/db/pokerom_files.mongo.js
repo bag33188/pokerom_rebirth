@@ -328,4 +328,4 @@ const pipeline = [
     aggregations["Calc Total File Size Bytes"],
 ];
 
-db.roms.files.aggregate([...pipeline[0], pipeline[1]]);
+db.roms.files.aggregate(pipeline[0]);
