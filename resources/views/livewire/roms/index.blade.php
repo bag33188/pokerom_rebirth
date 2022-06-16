@@ -4,7 +4,7 @@
     </x-slot>
     <div class="w-full flex justify-center">
         <button type="button" @click="open = !open" class="bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-2 px-4 my-4 shadow rounded">
-            @include("ui.show-hide", ['txt'=>'ROMs'])
+            @include("ui.show-hide", ['text'=>'ROMs'])
         </button>
     </div>
     <table class="w-full text-sm text-left text-gray-500 light:text-gray-400" x-show="open">
