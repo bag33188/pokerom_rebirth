@@ -5,7 +5,9 @@ namespace App\Repositories;
 use App\Exceptions\NotFoundException;
 use App\Interfaces\RomRepositoryInterface;
 use App\Models\Rom;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
+use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 class RomRepository implements RomRepositoryInterface
 {
@@ -41,6 +43,6 @@ class RomRepository implements RomRepositoryInterface
     {
         $file = Rom::findOrFail($romId)->file()->first();
         return [$file ?? ['message' => 'this rom does not have a file'],
-            isset($file) ? 200 : 404];
+            isset($file) ? ResponseAlias::HTTP_OK : 404];
     }
 }
