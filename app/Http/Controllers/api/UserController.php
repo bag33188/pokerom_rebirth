@@ -53,7 +53,7 @@ class UserController extends ApiController
         return response()->json($this->userService->authenticateUserAgainstCredentials($user, $request['password']));
     }
 
-    public function logout(Request $request): JsonResponse
+    public function logout(): JsonResponse
     {
         return response()->json($this->userService->logoutCurrentUser());
     }
