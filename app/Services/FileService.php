@@ -11,13 +11,6 @@ use Modules\FileHandler;
 
 class FileService implements FileServiceInterface
 {
-    private File $file;
-
-    public function __construct(File $file)
-    {
-        $this->file = $file;
-    }
-
     public function downloadFile(string $fileId)
     {
         $gridfs = new FileHandler();
@@ -36,11 +29,11 @@ class FileService implements FileServiceInterface
     }
 
     #[ArrayShape(['message' => "string"])]
-    public function deleteFileFromBucket(string $fileId): array
+    public function deleteFileFromBucket(string $fileId, File $file): array
     {
         $gridfs = new FileHandler();
         $gridfs->deleteFileFromBucket($fileId);
-        event('eloquent.deleted: App\Models\File', $this->file);
-        return ['message' => "{$this->file['filename']} deleted!"];
+        event('eloquent.deleted: App\Models\File', $file);
+        return ['message' => "{$file['filename']} deleted!"];
     }
 }

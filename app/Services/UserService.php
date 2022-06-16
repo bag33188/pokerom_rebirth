@@ -10,8 +10,7 @@ use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 
 class UserService implements UserServiceInterface
 {
-
-    private function generateUserApiToken(User $user)
+    private static function generateUserApiToken(User $user): string
     {
         return $user->createToken(API_TOKEN_KEY)->plainTextToken;
     }
@@ -37,7 +36,7 @@ class UserService implements UserServiceInterface
     #[ArrayShape(['user' => "\App\Models\User", 'token' => "\Laravel\Sanctum\string|string"])]
     public function registerUserToken(User $user): array
     {
-        $token = $this->generateUserApiToken($user);
+        $token = self::generateUserApiToken($user);
         return [
             'user' => $user,
             'token' => $token
@@ -52,14 +51,14 @@ class UserService implements UserServiceInterface
     }
 
     #[ArrayShape(['user' => "\App\Models\User", 'token' => "\Laravel\Sanctum\string|string"])]
-    public function authenticateUserAgainstCreds(User $user, string $requestPassword): array
+    public function authenticateUserAgainstCredentials(User $user, string $requestPassword): array
     {
         // Check password hash against database
         if (!$user->checkPassword($requestPassword)) {
             throw new UnauthorizedHttpException(challenge: $requestPassword, message: 'Bad credentials', code: ResponseAlias::HTTP_UNAUTHORIZED);
         }
 
-        $token = $this->generateUserApiToken($user);
+        $token = self::generateUserApiToken($user);
         return [
             'user' => $user,
             'token' => $token

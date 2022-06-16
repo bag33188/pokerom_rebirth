@@ -6,22 +6,20 @@ use App\Interfaces\FileServiceInterface;
 use App\Interfaces\GameServiceInterface;
 use App\Interfaces\RomServiceInterface;
 use App\Interfaces\UserServiceInterface;
-use App\Models\File;
-use App\Models\User;
 use App\Services\FileService;
 use App\Services\GameService;
 use App\Services\RomService;
 use App\Services\UserService;
 use Illuminate\Support\ServiceProvider;
 
-class Services extends ServiceProvider
+class ServicesProvider extends ServiceProvider
 {
     /**
      * Register services.
      *
      * @return void
      */
-    public function register()
+    public function register(): void
     {
         $this->app->bind(UserServiceInterface::class, UserService::class);
         $this->app->bind(GameServiceInterface::class, GameService::class);
@@ -34,7 +32,7 @@ class Services extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         $this->register();
     }

@@ -9,7 +9,7 @@ use App\Models\Rom;
 class GameService implements GameServiceInterface {
     public function associateGameWithRom(Game $game, int $romId): Game
     {
-        $rom = Rom::findOrFail($romId);
+        $rom = Rom::find($romId);
         $game->rom()->associate($rom);
         $game->save();
         return $game;
