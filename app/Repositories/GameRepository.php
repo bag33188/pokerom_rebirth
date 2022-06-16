@@ -32,7 +32,6 @@ class GameRepository implements GameRepositoryInterface
 
     public function getRomAssociatedWithGame(int $gameId): Rom
     {
-        $associatedRom = $this->findGameIfExists($gameId)->rom()->first();
-        return $associatedRom;
+        return $this->findGameIfExists($gameId)->rom()->first();
     }
 }
