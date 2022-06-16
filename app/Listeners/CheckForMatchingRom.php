@@ -18,22 +18,21 @@ class CheckForMatchingRom
      */
     public function __construct(FileRepositoryInterface $fileRepository)
     {
-        //
         $this->fileRepository = $fileRepository;
     }
 
     /**
      * Handle the event.
      *
-     * @param \App\Events\FileUploaded $event
+     * @param FileUploaded $event
      * @return void
      */
-    public function handle(FileUploaded $event)
+    public function handle(FileUploaded $event): void
     {
-        $rom = $this->fileRepository->searchForRomMatchingFile($event->file->getAttributeValue('_id'))->first();
+        $rom = $this->fileRepository->searchForRomMatchingFile($event->file->getKey())->first();
         if (isset($rom)) {
             $rom['has_file'] = true;
-            $rom['file_id'] = $event->file->getAttributeValue('_id');
+            $rom['file_id'] = $event->file->getKey();
             $rom->saveQuietly();
         }
     }
