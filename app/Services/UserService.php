@@ -15,12 +15,12 @@ class UserService implements UserServiceInterface
         return $user->createToken(API_TOKEN_KEY)->plainTextToken;
     }
 
-    private function deleteAllUserAccessTokens()
+    private static function deleteAllUserAccessTokens()
     {
         auth()->user()->tokens()->delete();
     }
 
-    private function deleteUserCurrentAccessTokens()
+    private static function deleteUserCurrentAccessTokens()
     {
         auth()->user()->currentAccessToken()->delete();
     }
@@ -28,7 +28,7 @@ class UserService implements UserServiceInterface
     #[ArrayShape(['message' => "string"])]
     public function deleteUserAndTokens(User $user): array
     {
-        $this->deleteAllUserAccessTokens();
+        self::deleteAllUserAccessTokens();
         $user->delete();
         return ['message' => "user $user->name deleted!"];
     }
@@ -46,7 +46,7 @@ class UserService implements UserServiceInterface
     #[ArrayShape(['message' => "string"])]
     public function logoutCurrentUser(): array
     {
-        $this->deleteUserCurrentAccessTokens();
+        self::deleteUserCurrentAccessTokens();
         return ['message' => 'logged out!'];
     }
 
