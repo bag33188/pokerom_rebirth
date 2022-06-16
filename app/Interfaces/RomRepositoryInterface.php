@@ -6,7 +6,6 @@ use App\Models\Rom;
 
 interface RomRepositoryInterface
 {
-    public function tryToLinkRomToFile(Rom $rom);
 
     public function showAssociatedGame(int $romId);
 

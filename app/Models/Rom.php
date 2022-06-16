@@ -59,13 +59,4 @@ class Rom extends Model
         $this->attributes['rom_type'] = strtolower($value);
     }
 
-    /**
-     * This will attempt to cross-reference the MongoDB database and check if there is a file
-     * with the same name of the roms name plus its extension (rom type)
-     * @return QueryBuilder|null
-     */
-    public function searchForFileMatchingRom(): QueryBuilder|null
-    {
-        return File::where('filename', '=', $this->getRomFileName());
-    }
 }
