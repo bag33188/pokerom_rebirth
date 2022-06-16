@@ -41,7 +41,7 @@ class FileController extends ApiController
     {
         $file = $this->fileRepository->findFileIfExists($fileId);
         $this->authorize('view', $file);
-        return response()->json($this->fileRepository->showRomAssociatedWithFile($fileId));
+        return response()->json($this->fileRepository->getRomAssociatedWithFile($fileId));
     }
 
     /**

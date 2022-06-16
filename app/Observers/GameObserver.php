@@ -2,13 +2,19 @@
 
 namespace App\Observers;
 
+use App\Interfaces\RomRepositoryInterface;
 use App\Models\Game;
-use App\Models\Rom;
 use Illuminate\Support\Str;
 
 class GameObserver
 {
     public bool $afterCommit = false;
+    private RomRepositoryInterface $romRepository;
+
+    public function __construct(RomRepositoryInterface $romRepository)
+    {
+        $this->romRepository = $romRepository;
+    }
 
     private static function slugify(Game $game): void
     {
@@ -19,7 +25,7 @@ class GameObserver
     public function creating(Game $game): void
     {
         // check if rom exists
-        Rom::findOrFail($game->rom_id);
+        $this->romRepository->findRomIfExists($game->rom_id);
         self::slugify($game);
     }
 
