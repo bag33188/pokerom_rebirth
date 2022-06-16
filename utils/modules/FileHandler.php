@@ -16,9 +16,8 @@ class FileHandler extends GridFS
     private const SERVER_FILES_CONFIG_PATH = 'filesystems.server_rom_files_path';
     protected final const VALID_FILENAME = "/^([\w\d\s\-_]{3,32})\.[\w\d]{1,3}$/i";
 
-    public function __construct($databaseName = null, $bucketName = null, $chunkSize = null, bool $checkFilenameFormatValidity = false)
+    public function __construct($databaseName = null, $bucketName = null, $chunkSize = null)
     {
-        $this->checkValidFilename = $checkFilenameFormatValidity;
         parent::__construct($databaseName, $bucketName, $chunkSize);
     }
 
@@ -34,11 +33,13 @@ class FileHandler extends GridFS
      * **Only required if storing a file**
      *
      * @param UploadedFile $file Your request file being uploaded from the form field
+     * @param bool $checkFilenameFormatValidity Check if filename of upload file is valid
      * @return void
      */
-    public function setUploadFileData(UploadedFile $file): void
+    public function setUploadFileData(UploadedFile $file, bool $checkFilenameFormatValidity = false): void
     {
         $this->file = $file;
+        $this->checkValidFilename = $checkFilenameFormatValidity;
         $this->createFileNameFromFile();
         $this->createUploadFilePathFromFile();
     }
