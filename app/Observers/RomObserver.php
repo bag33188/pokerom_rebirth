@@ -3,46 +3,30 @@
 namespace App\Observers;
 
 use App\Interfaces\RomRepositoryInterface;
+use App\Interfaces\RomServiceInterface;
 use App\Models\Rom;
 use DB;
 
 class RomObserver
 {
-    private RomRepositoryInterface $romRepository;
+    private RomServiceInterface $romService;
 
-    public function __construct(RomRepositoryInterface $romRepository)
+    public function __construct(RomServiceInterface $romService)
     {
-        $this->romRepository = $romRepository;
+        $this->romService = $romService;
     }
 
     public bool $afterCommit = false;
 
     public function created(Rom $rom): void
     {
-        $file = $this->romRepository->searchForFileMatchingRom($rom->id)->first();
-        if (isset($file)) {
-            DB::statement(/** @lang MariaDB */
-                "CALL LinkRomToFile(:fileId, :romSize, :romId);", [
-                'fileId' => $file['_id'],
-                'romSize' => $file->length,
-                'romId' => $rom->id
-            ]);
-            $rom->refresh();
-        }
+        $this->romService->attemptToLinkRomToFile($rom);
     }
 
     public function updating(Rom $rom): void
     {
         if (!$rom->has_file || $rom->file_id == null) {
-            $file = $this->romRepository->searchForFileMatchingRom($rom->id)->first();
-            if (isset($file)) {
-                DB::statement(/** @lang MariaDB */ "CALL LinkRomToFile(:fileId, :romSize, :romId);", [
-                    'fileId' => $file['_id'],
-                    'romSize' => $file->length,
-                    'romId' => $rom->id
-                ]);
-                $rom->refresh();
-            }
+            $this->romService->attemptToLinkRomToFile($rom);
         }
     }
 

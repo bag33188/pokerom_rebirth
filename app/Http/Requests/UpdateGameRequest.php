@@ -33,7 +33,7 @@ class UpdateGameRequest extends FormRequest
     protected function prepareForValidation(): void
     {
         $this->merge([
-            'slug' => Str::slug($this->slug),
+            'slug' => Str::slug($this->game_name),
         ]);
     }
 

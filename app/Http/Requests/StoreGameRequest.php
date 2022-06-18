@@ -34,7 +34,7 @@ class StoreGameRequest extends FormRequest
         $romId = $this->get('romId') ??
             throw new BadRequestHttpException(message: 'No ROM ID was sent.');
         $this->merge([
-            'slug' => Str::slug($this->slug),
+            'slug' => Str::slug($this->game_name),
             'rom_id' => $romId
         ]);
     }

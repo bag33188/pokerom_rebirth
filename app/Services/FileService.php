@@ -32,8 +32,9 @@ class FileService implements FileServiceInterface
     }
 
     #[ArrayShape(['message' => "string"])]
-    public function deleteFileFromBucket(string $fileId, File $file): array
+    public function deleteFile(File $file): array
     {
+        $fileId = $file->getKey();
         event(new FileDeleted($file));
         $gridfs = new FileHandler();
         $gridfs->deleteFileFromBucket($fileId);

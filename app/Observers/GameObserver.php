@@ -16,7 +16,7 @@ class GameObserver
         $this->romRepository = $romRepository;
     }
 
-    private static function slugify(Game $game): void
+    private static function slugifyGameName(Game $game): void
     {
         $gameName = $game->getAttributeValue('game_name');
         $game->setAttribute('slug', Str::slug($gameName));
@@ -26,7 +26,7 @@ class GameObserver
     {
         // check if rom exists
         $this->romRepository->findRomIfExists($game->rom_id);
-        self::slugify($game);
+        self::slugifyGameName($game);
     }
 
     public function created(Game $game): void
@@ -41,7 +41,7 @@ class GameObserver
 
     public function updating(Game $game): void
     {
-        self::slugify($game);
+        self::slugifyGameName($game);
     }
 
     public function deleted(Game $game): void

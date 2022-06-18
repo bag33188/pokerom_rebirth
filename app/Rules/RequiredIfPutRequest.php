@@ -38,4 +38,12 @@ class RequiredIfPutRequest extends RequiredIf
     {
         return $this->httpRequest->getMethod() === 'PUT';
     }
+
+    public function __toString()
+    {
+        if (is_callable($this->condition)) {
+            return call_user_func($this->condition) ? 'required' : '';
+        }
+        return $this->condition ? 'required' : '';
+    }
 }

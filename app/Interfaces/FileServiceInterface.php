@@ -11,5 +11,5 @@ interface FileServiceInterface
 
     public function uploadFile(UploadedFile $file);
 
-    public function deleteFileFromBucket(string $fileId, File $file);
+    public function deleteFile(File $file);
 }

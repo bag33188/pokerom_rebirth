@@ -87,6 +87,6 @@ class FileController extends ApiController
     {
         $file = $this->fileRepository->findFileIfExists($fileId);
         $this->authorize('delete', $file);
-        return response()->json($this->fileService->deleteFileFromBucket($fileId, $file));
+        return response()->json($this->fileService->deleteFile($file));
     }
 }
