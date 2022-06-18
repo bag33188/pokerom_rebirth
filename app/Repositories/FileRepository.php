@@ -8,7 +8,6 @@ use App\Models\File;
 use App\Models\Rom;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Query\Builder;
-use LaravelIdea\Helper\App\Models\_IH_File_C;
 
 class FileRepository implements FileRepositoryInterface
 {
@@ -19,7 +18,7 @@ class FileRepository implements FileRepositoryInterface
         $this->file = $file;
     }
 
-    public function findFileIfExists(string $fileId): array|_IH_File_C|File
+    public function findFileIfExists(string $fileId): array|File
     {
         return $this->file->findOrFail($fileId);
     }
@@ -34,7 +33,7 @@ class FileRepository implements FileRepositoryInterface
             throw new NotFoundException('no rom is associated with this file');
     }
 
-    public function getAllFilesSorted(): array|Collection|_IH_File_C
+    public function getAllFilesSorted(): array|Collection
     {
         return $this->file->all()->sortBy([['length', 'asc'], ['filename', 'asc']]);
     }

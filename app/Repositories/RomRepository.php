@@ -9,7 +9,6 @@ use App\Models\Game;
 use App\Models\Rom;
 use Illuminate\Database\Eloquent\Collection;
 use Jenssegers\Mongodb\Eloquent\Builder as QueryBuilder;
-use LaravelIdea\Helper\App\Models\_IH_Rom_C;
 
 class RomRepository implements RomRepositoryInterface
 {
@@ -20,12 +19,12 @@ class RomRepository implements RomRepositoryInterface
         $this->rom = $rom;
     }
 
-    public function findRomIfExists(int $romId): Rom|array|_IH_Rom_C
+    public function findRomIfExists(int $romId): Rom|array
     {
         return $this->rom->findOrFail($romId);
     }
 
-    public function getAllRomsSorted(): Collection|_IH_Rom_C|array
+    public function getAllRomsSorted(): Collection|array
     {
         return $this->rom->all()->sortBy([['game_id', 'asc'], ['rom_size', 'asc']]);
     }

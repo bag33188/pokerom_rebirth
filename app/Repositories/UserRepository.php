@@ -6,7 +6,6 @@ use App\Interfaces\UserRepositoryInterface;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
-use LaravelIdea\Helper\App\Models\_IH_User_C;
 
 class UserRepository implements UserRepositoryInterface
 {
@@ -17,17 +16,17 @@ class UserRepository implements UserRepositoryInterface
         $this->user = $user;
     }
 
-    public function findUserIfExists(int $userId): array|User|_IH_User_C
+    public function findUserIfExists(int $userId): array|User
     {
         return $this->user->findOrFail($userId);
     }
 
-    public function paginateUsers(?int $perPage = null): array|LengthAwarePaginator|_IH_User_C
+    public function paginateUsers(?int $perPage = null): array|LengthAwarePaginator
     {
         return $this->user->paginate($perPage ?: 4)->withQueryString();
     }
 
-    public function getAllUsers(): Collection|array|_IH_User_C
+    public function getAllUsers(): Collection|array
     {
         return $this->user->all();
     }
