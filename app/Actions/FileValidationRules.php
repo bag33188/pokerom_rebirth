@@ -4,12 +4,13 @@ namespace App\Actions;
 
 use App\Rules\ValidFilename;
 
-trait FileValidationRules {
-    protected function fileRules(string $filename): array
+trait FileValidationRules
+{
+    protected function fileRules(string $filename, array $rules = ['required']): array
     {
         $fileRules = [];
         $fileRules[FILE_FORM_KEY] = array(
-            'required',
+            ...$rules,
             new ValidFilename($filename),
         );
         return $fileRules;
