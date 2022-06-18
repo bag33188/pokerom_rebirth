@@ -54,7 +54,7 @@ class StoreGameRequest extends FormRequest
             'game_name' => ['required', 'string', new MinLength(MIN_GAME_NAME), new MaxLength(MAX_GAME_NAME), new ValidGameName],
             'date_released' => ['required', 'date'],
             'game_type' => ['required', 'string', new MinLength(MIN_GAME_TYPE), new MaxLength(MAX_GAME_TYPE), new ValidGameType],
-            'region' => ['required', 'string', new MinLength(MIN_GAME_TYPE), new MaxLength(MAX_GAME_TYPE), new ValidGameRegion],
+            'region' => ['required', 'string', new MinLength(MIN_GAME_REGION), new MaxLength(MAX_GAME_REGION), new ValidGameRegion],
             'generation' => ['required', 'integer', new MinSize(MIN_GAME_GENERATION), new MaxLength(MAX_GAME_GENERATION)],
         ];
     }

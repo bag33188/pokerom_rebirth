@@ -65,7 +65,7 @@ class UpdateGameRequest extends FormRequest
             'game_name' => [$this->requiredIfPutRequest, 'string', new MinLength(MIN_GAME_NAME), new MaxLength(MAX_GAME_NAME), new ValidGameName],
             'date_released' => [$this->requiredIfPutRequest, 'date'],
             'game_type' => [$this->requiredIfPutRequest, 'string', new MinLength(MIN_GAME_TYPE), new MaxLength(MAX_GAME_TYPE), new ValidGameType],
-            'region' => [$this->requiredIfPutRequest, 'string', new MinLength(MIN_GAME_TYPE), new MaxLength(MAX_GAME_TYPE), new ValidGameRegion],
+            'region' => [$this->requiredIfPutRequest, 'string', new MinLength(MIN_GAME_REGION), new MaxLength(MAX_GAME_REGION), new ValidGameRegion],
             'generation' => [$this->requiredIfPutRequest, 'integer', new MinSize(MIN_GAME_GENERATION), new MaxLength(MAX_GAME_GENERATION)],
         ];
     }
