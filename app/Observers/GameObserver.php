@@ -2,19 +2,12 @@
 
 namespace App\Observers;
 
-use App\Interfaces\RomRepositoryInterface;
 use App\Models\Game;
 use Illuminate\Support\Str;
 
 class GameObserver
 {
     public bool $afterCommit = false;
-    private RomRepositoryInterface $romRepository;
-
-    public function __construct(RomRepositoryInterface $romRepository)
-    {
-        $this->romRepository = $romRepository;
-    }
 
     private static function slugifyGameName(Game $game): void
     {
