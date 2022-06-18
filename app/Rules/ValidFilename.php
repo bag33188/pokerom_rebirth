@@ -14,9 +14,9 @@ class ValidFilename implements Rule
      *
      * @return void
      */
-    public function __construct(string $value = null)
+    public function __construct(string $filename)
     {
-        $this->filename = $value;
+        $this->filename = $filename;
     }
 
 
