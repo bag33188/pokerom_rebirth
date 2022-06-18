@@ -4,14 +4,13 @@ namespace App\Listeners;
 
 use App\Events\FileDeleted;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
 
 class UnsetRomFileData implements ShouldQueue
 {
 
     public function shouldQueue(FileDeleted $event): bool
     {
-        return $event->file->exists;
+        return $event->file->rom()->exists();
     }
 
     /**
