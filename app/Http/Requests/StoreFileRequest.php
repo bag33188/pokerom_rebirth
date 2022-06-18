@@ -24,7 +24,7 @@ class StoreFileRequest extends FormRequest
 
     private function getFileNameIfExists(): string
     {
-        $file = $this[FILE_FORM_KEY] ?? null;
+        $file = @$this[FILE_FORM_KEY] ?? null;
         return isset($file) ? @$file->getClientOriginalName() : "ERR_NO_FILENAME";
     }
 
