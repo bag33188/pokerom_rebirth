@@ -22,10 +22,8 @@ class UnsetRomFileData implements ShouldQueue
     public function handle(FileDeleted $event): void
     {
         $rom = $event->file->rom()->first();
-        if (isset($rom)) {
-            $rom['has_file'] = false;
-            $rom['file_id'] = null;
-            $rom->saveQuietly();
-        }
+        $rom['has_file'] = false;
+        $rom['file_id'] = null;
+        $rom->saveQuietly();
     }
 }
