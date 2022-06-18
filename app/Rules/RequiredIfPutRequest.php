@@ -11,6 +11,7 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 class RequiredIfPutRequest extends RequiredIf
 {
     private Request $httpRequest;
+    public $condition;
 
     /**
      * @throws BadRequestHttpException
@@ -19,7 +20,8 @@ class RequiredIfPutRequest extends RequiredIf
     {
         $this->httpRequest = $request;
         $this->checkIfUsedCorrectly();
-        parent::__construct($this->condition());
+        $this->condition = $this->setCondition();
+        parent::__construct($this->condition);
     }
 
     /**
@@ -34,7 +36,7 @@ class RequiredIfPutRequest extends RequiredIf
         }
     }
 
-    private function condition(): bool
+    private function setCondition(): bool
     {
         return $this->httpRequest->getMethod() === 'PUT';
     }
