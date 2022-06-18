@@ -2,7 +2,6 @@
 
 namespace App\Services;
 
-use App\Exceptions\NotFoundException;
 use App\Interfaces\RomRepositoryInterface;
 use App\Interfaces\RomServiceInterface;
 use App\Models\File;
@@ -20,9 +19,6 @@ class RomService implements RomServiceInterface
         $this->romRepository = $romRepository;
     }
 
-    /**
-     * @throws NotFoundException
-     */
     #[ArrayShape(['message' => "string", 'data' => "\App\Models\Rom"])]
     public function attemptToLinkRomToFile(Rom $rom): array
     {
@@ -34,7 +30,7 @@ class RomService implements RomServiceInterface
                 'data' => $rom->refresh()
             ];
         } else {
-            throw new NotFoundException("File not found with name of {$rom->getRomFileName()}", ResponseAlias::HTTP_NOT_FOUND);
+            abort(ResponseAlias::HTTP_NOT_FOUND, "File not found with name of {$rom->getRomFileName()}");
         }
     }
 
