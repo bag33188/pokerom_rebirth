@@ -46,9 +46,11 @@ class RomService implements RomServiceInterface
 
     private function setRomDataFromFile(Rom $rom, File $file)
     {
-        DB::statement(/** @lang MariaDB */ "CALL LinkRomToFile(:fileId, :fileSize, :romId);", [
+        $sql = /** @lang MariaDB */
+            "CALL LinkRomToFile(:fileId, :fileSize, :romId);";
+        DB::statement($sql, [
             'fileId' => $file['_id'],
-            'fileSize' => $file->length,
+            'fileSize' => $file['length'],
             'romId' => $rom->id
         ]);
         $rom->refresh();
