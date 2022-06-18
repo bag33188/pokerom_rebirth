@@ -21,8 +21,18 @@ class UpdateGameRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        $game = Game::findOrFail($this->game);
+        $game = Game::findOrFail($this->getParameterValue());
         return $this->user()->can('update', $game);
+    }
+
+    private function getParameterName()
+    {
+        return $this->route()->parameterNames[0];
+    }
+
+    private function getParameterValue(): object|string|null
+    {
+        return $this->route()->parameter($this->getParameterName());
     }
 
     /**

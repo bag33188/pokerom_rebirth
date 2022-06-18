@@ -33,14 +33,7 @@ Route::prefix('auth')->group(function () {
 // auth
 Route::middleware('auth:sanctum')->group(function () {
     // general api routes
-    Route::apiResources(['/roms' => RomController::class, '/games' => GameController::class],
-        [
-            'parameters' => [
-                'rom' => 'romId',
-                'game' => 'gameId'
-            ]
-        ]
-    );
+    Route::apiResources(['/roms' => RomController::class, '/games' => GameController::class]);
     Route::apiResource('/users', UserController::class)->only('index', 'show', 'destroy')
         ->parameter('user', 'userId');
     Route::apiResource('/files', FileController::class)->only('index', 'show', 'destroy')
