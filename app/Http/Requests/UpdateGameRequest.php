@@ -14,11 +14,11 @@ use JetBrains\PhpStorm\ArrayShape;
 /** @mixin Game */
 class UpdateGameRequest extends FormRequest
 {
-    private RequiredIfPutRequest $requiredIfPut;
+    private RequiredIfPutRequest $requiredIfPutRequest;
 
-    public function __construct(RequiredIfPutRequest $requiredIfPut)
+    public function __construct(RequiredIfPutRequest $requiredIfPutRequest)
     {
-        $this->requiredIfPut = $requiredIfPut;
+        $this->$requiredIfPutRequest = $requiredIfPutRequest;
         parent::__construct();
     }
 
@@ -64,11 +64,11 @@ class UpdateGameRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'game_name' => [$this->requiredIfPut, 'string', 'min:7', 'max:40', new ValidGameName],
-            'date_released' => [$this->requiredIfPut, 'date'],
-            'game_type' => [$this->requiredIfPut, 'string', 'min:4', 'max:8', new ValidGameType],
-            'region' => [$this->requiredIfPut, 'string', 'min:4', 'max:8', new ValidGameRegion],
-            'generation' => [$this->requiredIfPut, 'integer', 'min:0', 'max:9'],
+            'game_name' => [$this->requiredIfPutRequest, 'string', 'min:7', 'max:40', new ValidGameName],
+            'date_released' => [$this->requiredIfPutRequest, 'date'],
+            'game_type' => [$this->requiredIfPutRequest, 'string', 'min:4', 'max:8', new ValidGameType],
+            'region' => [$this->requiredIfPutRequest, 'string', 'min:4', 'max:8', new ValidGameRegion],
+            'generation' => [$this->requiredIfPutRequest, 'integer', 'min:0', 'max:9'],
         ];
     }
 }

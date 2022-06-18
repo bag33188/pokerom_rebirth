@@ -12,10 +12,11 @@ use JetBrains\PhpStorm\ArrayShape;
 /** @mixin Rom */
 class UpdateRomRequest extends FormRequest
 {
-    private RequiredIfPutRequest $requiredIfPut;
-    public function __construct(RequiredIfPutRequest $requiredIfPut)
+    private RequiredIfPutRequest $requiredIfPutRequest;
+
+    public function __construct(RequiredIfPutRequest $requiredIfPutRequest)
     {
-        $this->requiredIfPut = $requiredIfPut;
+        $this->requiredIfPutRequest = $requiredIfPutRequest;
         parent::__construct();
     }
 
@@ -49,9 +50,9 @@ class UpdateRomRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'rom_name' => [$this->requiredIfPut, 'min:3', 'max:30', new ValidRomName],
-            'rom_type' => [$this->requiredIfPut, 'min:2', 'max:4', new ValidRomType],
-            'rom_size' => [$this->requiredIfPut, 'int', 'min:1020', 'max:17825792'],
+            'rom_name' => [$this->requiredIfPutRequest, 'min:3', 'max:30', new ValidRomName],
+            'rom_type' => [$this->requiredIfPutRequest, 'min:2', 'max:4', new ValidRomType],
+            'rom_size' => [$this->requiredIfPutRequest, 'int', 'min:1020', 'max:17825792'],
         ];
     }
 }
