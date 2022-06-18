@@ -12,10 +12,10 @@ class GameObserver
     /** @var bool Use database relationships to update models */
     private const USE_DB_LOGIC = true;
 
-    private static function slugifyGameName(Game $game): void
+    private static function slugifyGameName(Game &$game): void
     {
         $gameName = $game->getAttributeValue('game_name');
-        $game->setAttribute('slug', Str::slug($gameName));
+        $game = $game->setAttribute('slug', Str::slug($gameName));
     }
 
     public function creating(Game $game): void
