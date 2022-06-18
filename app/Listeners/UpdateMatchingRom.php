@@ -5,10 +5,17 @@ namespace App\Listeners;
 use App\Events\FileUploaded;
 use App\Interfaces\FileRepositoryInterface;
 use App\Models\Rom;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Queue\InteractsWithQueue;
 
-class UpdateMatchingRom
+class UpdateMatchingRom implements ShouldQueue
 {
+    use InteractsWithQueue;
+
     private FileRepositoryInterface $fileRepository;
+
+    public bool $afterCommit = true;
+
 
     /**
      * Create the event listener.
