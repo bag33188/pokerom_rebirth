@@ -27,18 +27,13 @@ class UpdateRomRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        $rom = Rom::findOrFail($this->getParameterValue());
+        $rom = Rom::findOrFail($this->getRomIdParamValue());
         return $this->user()->can('update', $rom);
     }
 
-    private function getParameterName()
+    private function getRomIdParamValue(): object|string|null
     {
-        return $this->route()->parameterNames[0];
-    }
-
-    private function getParameterValue(): object|string|null
-    {
-        return $this->route()->parameter($this->getParameterName());
+        return $this->route()->parameter('rom');
     }
 
     /**
