@@ -24,7 +24,7 @@ class LoginRequest extends FormRequest
      *
      * @return array<string, mixed>
      */
-    #[ArrayShape(['email' => "string[]", 'password' => "string[]"])]
+    #[ArrayShape(['email' => "array", 'password' => "array"])]
     public function rules(): array
     {
         return [
