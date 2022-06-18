@@ -77,7 +77,7 @@ class FileController extends ApiController
         $this->authorize('create', File::class);
         $file = $request->file(FILE_FORM_KEY);
         return response()->json($this->fileService->uploadFile($file), ResponseAlias::HTTP_CREATED)
-            ->header('X-Content-Transfer-Type', FileTypes::OCTET_STREAM->value);
+            ->header('X-Content-Transfer-Type', FileTypes::X_BINARY->value);
     }
 
     /**
