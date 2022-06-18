@@ -8,7 +8,7 @@ use Illuminate\Support\Str;
 class GameObserver
 {
     public bool $afterCommit = false;
-    private const USE_DB_TRIGGER_LOGIC = true;
+    private const USE_DB_LOGIC = true;
 
     private static function slugifyGameName(Game $game): void
     {
@@ -23,7 +23,7 @@ class GameObserver
 
     public function created(Game $game): void
     {
-        if (self::USE_DB_TRIGGER_LOGIC === false) {
+        if (self::USE_DB_LOGIC === false) {
             $rom = $game->rom()->first();
             // use attribute syntax for proper non-fillable updating
             $rom['has_game'] = true;
@@ -39,7 +39,7 @@ class GameObserver
 
     public function deleted(Game $game): void
     {
-        if (self::USE_DB_TRIGGER_LOGIC === false) {
+        if (self::USE_DB_LOGIC === false) {
             $rom = $game->rom()->first();
             $rom['game_id'] = null;
             $rom['has_game'] = false;

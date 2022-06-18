@@ -2,14 +2,13 @@
 
 namespace App\Observers;
 
-use App\Interfaces\RomRepositoryInterface;
 use App\Interfaces\RomServiceInterface;
 use App\Models\Rom;
-use DB;
 
 class RomObserver
 {
     private RomServiceInterface $romService;
+    private const USE_DB_LOGIC = true;
 
     public function __construct(RomServiceInterface $romService)
     {
@@ -38,6 +37,8 @@ class RomObserver
 
     public function deleted(Rom $rom): void
     {
-        $rom->game()->delete();
+        if (self::USE_DB_LOGIC === false) {
+            $rom->game()->delete();
+        }
     }
 }

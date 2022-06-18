@@ -41,7 +41,8 @@ class WelcomeNotification extends Notification
      */
     public function toMail(mixed $notifiable): MailMessage
     {
-        $lnMsg = (isset($this->username) ? "$this->username, welcome" : 'Welcome') . ' to the world of Pok' . _EACUTE . 'ROM!';
+        $lnMsg = sprintf("%s to the world of Pok%sROM!",
+            isset($this->username) ? "$this->username, welcome" : 'Welcome', _EACUTE);
         return (new MailMessage)
             ->subject('Thank you for joining ' . config('app.name') . '!!')
             ->from(config('mail.from.address'))
