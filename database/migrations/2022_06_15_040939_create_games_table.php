@@ -21,12 +21,12 @@ return new class extends Migration
             $table->foreignId('rom_id')->unique()
                 ->references('id')->on('roms')
                 ->cascadeOnDelete()->cascadeOnUpdate();
-            $table->string('game_name', 40);
+            $table->string('game_name', MAX_GAME_NAME);
             $table->enum('game_type', GAME_TYPES);
             $table->date('date_released');
             $table->tinyInteger('generation')->unsigned();
             $table->enum('region', REGIONS);
-            $table->string('slug', 40 + 2)->nullable()->unique()->comment($db_slug_comment);
+            $table->string('slug', MAX_GAME_NAME + 2)->nullable()->unique()->comment($db_slug_comment);
             $table->timestamps();
         });
     }

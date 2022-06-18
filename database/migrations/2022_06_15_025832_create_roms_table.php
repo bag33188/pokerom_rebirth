@@ -21,7 +21,7 @@ return new class extends Migration {
             $table->id()->autoIncrement();
             $table->char('file_id', 24)->nullable()->unique()->comment($db_file_id_comment);
             $table->bigInteger('game_id')->unsigned()->nullable()->unique();
-            $table->string('rom_name', 30)->unique();
+            $table->string('rom_name', MAX_ROM_NAME)->unique();
             $table->integer('rom_size')->default(1020)->unsigned()->comment($db_rom_size_comment);
             $table->enum('rom_type', ROM_TYPES);
             $table->boolean('has_game')->default(false);
