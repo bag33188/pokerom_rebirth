@@ -53,8 +53,9 @@ class GameController extends ApiController
     public function store(StoreGameRequest $request): JsonResponse
     {
         $game = Game::create($request->all());
-        return response()->json($this->gameService->associateGameWithRom($game, $request['rom_id'])
-            , ResponseAlias::HTTP_CREATED);
+        return response()->json(
+            $this->gameService->associateGameWithRom($game, $request['rom_id']),
+            ResponseAlias::HTTP_CREATED);
     }
 
     public function update(UpdateGameRequest $request, int $gameId): JsonResponse
