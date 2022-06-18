@@ -17,5 +17,6 @@ const MIN_ROM_TYPE = 2;
 const MAX_USER_NAME = 45;
 const MIN_USER_NAME = 1;
 const MAX_USER_EMAIL = 35;
+const MIN_USER_EMAIL = null;
 const MAX_USER_PASSWORD = 50;
 const MIN_USER_PASSWORD = 8;
