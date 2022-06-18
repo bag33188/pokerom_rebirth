@@ -7,7 +7,6 @@ use App\Interfaces\FileRepositoryInterface;
 use App\Models\File;
 use App\Models\Rom;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Query\Builder;
 
 class FileRepository implements FileRepositoryInterface
 {
@@ -38,14 +37,15 @@ class FileRepository implements FileRepositoryInterface
         return $this->file->all()->sortBy([['length', 'asc'], ['filename', 'asc']]);
     }
 
-    public function searchForRomMatchingFile(string $fileId): Rom|Builder
+    public function searchForRomMatchingFile(string $fileId): ?Rom
     {
         [$name, $ext] = explode('.',
             $this->findFileIfExists($fileId)->filename, 2);
-        return Rom::whereNull('file_id', 'and')->where([
+        return Rom::where([
             ['rom_name', '=', $name, 'and'],
             ['rom_type', '=', $ext, 'and'],
             ['has_file', '=', false],
-        ]);
+            ['file_id', '=', null]
+        ])->first();
     }
 }

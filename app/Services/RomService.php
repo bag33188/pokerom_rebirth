@@ -26,7 +26,7 @@ class RomService implements RomServiceInterface
     #[ArrayShape(['message' => "string", 'data' => "\App\Models\Rom"])]
     public function attemptToLinkRomToFile(Rom $rom): array
     {
-        $file = $this->romRepository->searchForFileMatchingRom($rom->id)->first();
+        $file = $this->romRepository->searchForFileMatchingRom($rom->id);
         if (isset($file)) {
             $this->setRomDataFromFile($rom, $file);
             return [
@@ -40,7 +40,7 @@ class RomService implements RomServiceInterface
 
     public function linkRomToFileIfExists(Rom $rom): void
     {
-        $file = $this->romRepository->searchForFileMatchingRom($rom->id)->first();
+        $file = $this->romRepository->searchForFileMatchingRom($rom->id);
         if (isset($file)) $this->setRomDataFromFile($rom, $file);
     }
 

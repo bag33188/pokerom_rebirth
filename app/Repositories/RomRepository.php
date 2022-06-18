@@ -53,10 +53,10 @@ class RomRepository implements RomRepositoryInterface
      * This will attempt to cross-reference the MongoDB database and check if there is a file
      * with the same name of the roms name plus its extension (rom type)
      * @param int $romId
-     * @return QueryBuilder|File|null
+     * @return File|null
      */
-    public function searchForFileMatchingRom(int $romId): QueryBuilder|null|File
+    public function searchForFileMatchingRom(int $romId): ?File
     {
-        return File::where('filename', '=', $this->findRomIfExists($romId)->getRomFileName());
+        return File::where('filename', '=', $this->findRomIfExists($romId)->getRomFileName())->first();
     }
 }
