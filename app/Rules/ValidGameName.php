@@ -25,7 +25,7 @@ class ValidGameName implements Rule
      */
     public function passes($attribute, $value): bool
     {
-        return preg_match(GAME_NAME_PATTERN, str_capitalize($value, true, 1));
+        return preg_match(GAME_NAME_PATTERN, ucfirst($value));
     }
 
     /**
