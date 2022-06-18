@@ -6,11 +6,11 @@ use App\Interfaces\GameServiceInterface;
 use App\Models\Game;
 use App\Models\Rom;
 
-class GameService implements GameServiceInterface
+class GameService extends RomService implements GameServiceInterface
 {
     public function createGame(int $romId, array $data): Game
     {
-        $rom = Rom::findOrFail($romId);
+        $rom = $this->romRepository->findRomIfExists($romId);
         $game = $rom->game()->create($data);
         $this->associateGameWithRom($game, $rom);
         return $game;

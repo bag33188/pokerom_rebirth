@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 class RomService implements RomServiceInterface
 {
-    private RomRepositoryInterface $romRepository;
+    protected RomRepositoryInterface $romRepository;
 
     public function __construct(RomRepositoryInterface $romRepository)
     {
