@@ -34,7 +34,7 @@ class UpdateMatchingRom
             if (isset($rom)) {
                 $rom['has_file'] = true;
                 $rom['file_id'] = $fileId;
-                $rom->saveQuietly();
+                $rom->save();
             }
         });
     }
