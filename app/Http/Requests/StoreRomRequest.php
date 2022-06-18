@@ -33,9 +33,9 @@ class StoreRomRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'rom_name' => ['required', ...$this->romNameRules()],
-            'rom_type' => ['required', ...$this->romTypeRules()],
-            'rom_size' => ['required', ...$this->romSizeRules()]
+            'rom_name' => $this->romNameRules(),
+            'rom_type' => $this->romTypeRules(),
+            'rom_size' => $this->romSizeRules(),
         ];
     }
 }

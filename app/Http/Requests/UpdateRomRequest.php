@@ -46,9 +46,9 @@ class UpdateRomRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'rom_name' => [$this->requiredIfPutRequest, ...$this->romNameRules()],
-            'rom_type' => [$this->requiredIfPutRequest, ...$this->romTypeRules()],
-            'rom_size' => [$this->requiredIfPutRequest, ...$this->romSizeRules()],
+            'rom_name' => $this->romNameRules([$this->requiredIfPutRequest]),
+            'rom_type' => $this->romTypeRules([$this->requiredIfPutRequest]),
+            'rom_size' => $this->romSizeRules([$this->requiredIfPutRequest]),
         ];
     }
 }

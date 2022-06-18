@@ -11,18 +11,18 @@ use App\Rules\ValidRomType;
 
 trait RomValidationRules
 {
-    protected function romTypeRules(): array
+    protected function romTypeRules(array $rules = ['required']): array
     {
-        return [new MinLength(MIN_ROM_TYPE), new MaxLength(MAX_ROM_TYPE), new ValidRomType];
+        return [...$rules, new MinLength(MIN_ROM_TYPE), new MaxLength(MAX_ROM_TYPE), new ValidRomType];
     }
 
-    protected function romNameRules(): array
+    protected function romNameRules(array $rules = ['required']): array
     {
-        return [new MinLength(MIN_ROM_NAME), new MaxLength(MAX_ROM_NAME), new ValidRomName];
+        return [...$rules, new MinLength(MIN_ROM_NAME), new MaxLength(MAX_ROM_NAME), new ValidRomName];
     }
 
-    protected function romSizeRules(): array
+    protected function romSizeRules(array $rules = ['required']): array
     {
-        return ['int', new MinSize(MIN_ROM_SIZE), new MaxSize(MAX_ROM_SIZE)];
+        return [...$rules, 'int', new MinSize(MIN_ROM_SIZE), new MaxSize(MAX_ROM_SIZE)];
     }
 }

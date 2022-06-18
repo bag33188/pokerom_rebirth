@@ -59,11 +59,11 @@ class UpdateGameRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'game_name' => [$this->requiredIfPutRequest, ...$this->gameNameRules()],
-            'date_released' => [$this->requiredIfPutRequest, ...$this->dateReleasedRules()],
-            'game_type' => [$this->requiredIfPutRequest, ...$this->gameTypeRules()],
-            'region' => [$this->requiredIfPutRequest, ...$this->gameRegionRules()],
-            'generation' => [$this->requiredIfPutRequest, ...$this->gameGenerationRules()],
+            'game_name' => $this->gameNameRules([$this->requiredIfPutRequest]),
+            'date_released' => $this->dateReleasedRules([$this->requiredIfPutRequest]),
+            'game_type' => $this->gameTypeRules([$this->requiredIfPutRequest]),
+            'region' => $this->gameRegionRules([$this->requiredIfPutRequest]),
+            'generation' => $this->gameGenerationRules([$this->requiredIfPutRequest]),
         ];
     }
 }

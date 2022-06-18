@@ -48,11 +48,11 @@ class StoreGameRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'game_name' => ['required', ...$this->gameNameRules()],
-            'date_released' => ['required', ...$this->dateReleasedRules()],
-            'game_type' => ['required', ...$this->gameTypeRules()],
-            'region' => ['required', ...$this->gameRegionRules()],
-            'generation' => ['required', ...$this->gameGenerationRules()],
+            'game_name' => $this->gameNameRules(),
+            'date_released' => $this->dateReleasedRules(),
+            'game_type' => $this->gameTypeRules(),
+            'region' => $this->gameRegionRules(),
+            'generation' => $this->gameGenerationRules(),
         ];
     }
 }
