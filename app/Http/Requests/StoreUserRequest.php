@@ -32,13 +32,15 @@ class StoreUserRequest extends FormRequest
      *
      * @return array<string, mixed>
      */
-    #[ArrayShape(['name' => "string[]", 'email' => "array", 'password' => "array"])]
+    #[ArrayShape(['name' => "array", 'email' => "array", 'password' => "array"])]
     public function rules(): array
     {
         return [
             'name' => ['required', 'string', new MinLength(MIN_USER_NAME), new MaxLength(MAX_USER_NAME)],
             'email' => ['required', 'string', 'email', new MaxLength(MAX_USER_EMAIL), Rule::unique("users", "email")],
-            'password' => ['required', 'confirmed', Password::defaults()]
+            'password' => ['required', 'confirmed', new MaxLength(MAX_USER_PASSWORD), Password::defaults(function () {
+                return Password::min(MIN_USER_PASSWORD)->uncompromised();
+            })]
         ];
     }
 }

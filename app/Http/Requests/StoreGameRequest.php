@@ -44,7 +44,7 @@ class StoreGameRequest extends FormRequest
      *
      * @return array
      */
-    #[ArrayShape(['game_name' => "string[]", 'date_released' => "string[]", 'game_type' => "array", 'region' => "array", 'generation' => "string[]"])]
+    #[ArrayShape(['game_name' => "array", 'date_released' => "array", 'game_type' => "array", 'region' => "array", 'generation' => "array"])]
     public function rules(): array
     {
         return [

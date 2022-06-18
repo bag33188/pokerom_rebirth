@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Rules\MaxLength;
+use App\Rules\MinLength;
 use Illuminate\Foundation\Http\FormRequest;
 use JetBrains\PhpStorm\ArrayShape;
 
@@ -28,7 +29,7 @@ class LoginRequest extends FormRequest
     {
         return [
             'email' => ['required', 'string', new MaxLength(MAX_USER_EMAIL), 'email'],
-            'password' => ['required', 'string']
+            'password' => ['required', 'string', new MinLength(MIN_USER_PASSWORD), new MaxLength(MAX_USER_PASSWORD)]
         ];
     }
 }
