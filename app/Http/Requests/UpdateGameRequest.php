@@ -2,14 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Actions\GameValidationRules;
 use App\Models\Game;
-use App\Rules\MaxLength;
-use App\Rules\MinLength;
-use App\Rules\MinSize;
 use App\Rules\RequiredIfPutRequest;
-use App\Rules\ValidGameName;
-use App\Rules\ValidGameRegion;
-use App\Rules\ValidGameType;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Str;
 use JetBrains\PhpStorm\ArrayShape;
@@ -17,6 +12,8 @@ use JetBrains\PhpStorm\ArrayShape;
 /** @mixin Game */
 class UpdateGameRequest extends FormRequest
 {
+    use GameValidationRules;
+
     private RequiredIfPutRequest $requiredIfPutRequest;
 
     public function __construct(RequiredIfPutRequest $requiredIfPutRequest)
@@ -58,15 +55,15 @@ class UpdateGameRequest extends FormRequest
      *
      * @return array<string, mixed>
      */
-    #[ArrayShape(['game_name' => "string[]", 'date_released' => "string[]", 'game_type' => "array", 'region' => "array", 'generation' => "string[]"])]
+    #[ArrayShape(['game_name' => "array", 'date_released' => "array", 'game_type' => "array", 'region' => "array", 'generation' => "array"])]
     public function rules(): array
     {
         return [
-            'game_name' => [$this->requiredIfPutRequest, 'string', new MinLength(MIN_GAME_NAME), new MaxLength(MAX_GAME_NAME), new ValidGameName],
-            'date_released' => [$this->requiredIfPutRequest, 'date'],
-            'game_type' => [$this->requiredIfPutRequest, 'string', new MinLength(MIN_GAME_TYPE), new MaxLength(MAX_GAME_TYPE), new ValidGameType],
-            'region' => [$this->requiredIfPutRequest, 'string', new MinLength(MIN_GAME_REGION), new MaxLength(MAX_GAME_REGION), new ValidGameRegion],
-            'generation' => [$this->requiredIfPutRequest, 'integer', new MinSize(MIN_GAME_GENERATION), new MaxLength(MAX_GAME_GENERATION)],
+            'game_name' => [$this->requiredIfPutRequest, ...$this->gameNameRules()],
+            'date_released' => [$this->requiredIfPutRequest, ...$this->dateReleasedRules()],
+            'game_type' => [$this->requiredIfPutRequest, ...$this->gameTypeRules()],
+            'region' => [$this->requiredIfPutRequest, ...$this->gameRegionRules()],
+            'generation' => [$this->requiredIfPutRequest, ...$this->gameGenerationRules()],
         ];
     }
 }

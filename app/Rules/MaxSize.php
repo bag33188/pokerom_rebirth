@@ -26,7 +26,7 @@ class MaxSize implements Rule
      * @param mixed $value
      * @return bool
      */
-    public function passes($attribute, $value)
+    public function passes($attribute, $value): bool
     {
         return $value <= $this->size;
     }
@@ -36,7 +36,7 @@ class MaxSize implements Rule
      *
      * @return string
      */
-    public function message()
+    public function message(): string
     {
         return "The :attribute must not be greater than {$this->size}.";
     }

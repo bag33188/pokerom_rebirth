@@ -25,7 +25,7 @@ class MinSize implements Rule
      * @param mixed $value
      * @return bool
      */
-    public function passes($attribute, $value)
+    public function passes($attribute, $value): bool
     {
         return $value >= $this->size;
     }
@@ -35,7 +35,7 @@ class MinSize implements Rule
      *
      * @return string
      */
-    public function message()
+    public function message(): string
     {
         return "The :attribute must be at least {$this->size}.";
     }

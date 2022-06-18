@@ -1,12 +1,15 @@
 <?php
+
 namespace App\Http\Requests;
 
+use App\Actions\FileValidationRules;
 use App\Models\File;
-use App\Rules\ValidFilename;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreFileRequest extends FormRequest
 {
+    use FileValidationRules;
+
     protected $stopOnFirstFailure = true;
 
     /**
@@ -32,11 +35,6 @@ class StoreFileRequest extends FormRequest
      */
     public function rules(): array
     {
-        $fileRules = [];
-        $fileRules[FILE_FORM_KEY] = array(
-            'required',
-            new ValidFilename($this->getFileNameIfExists()),
-        );
-        return $fileRules;
+        return $this->fileRules($this->getFileNameIfExists());
     }
 }

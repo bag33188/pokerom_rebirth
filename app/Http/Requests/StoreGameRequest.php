@@ -2,13 +2,8 @@
 
 namespace App\Http\Requests;
 
+use App\Actions\GameValidationRules;
 use App\Models\Game;
-use App\Rules\MaxLength;
-use App\Rules\MinLength;
-use App\Rules\MinSize;
-use App\Rules\ValidGameName;
-use App\Rules\ValidGameRegion;
-use App\Rules\ValidGameType;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Str;
 use JetBrains\PhpStorm\ArrayShape;
@@ -17,6 +12,8 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 /** @mixin Game */
 class StoreGameRequest extends FormRequest
 {
+    use GameValidationRules;
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -51,11 +48,11 @@ class StoreGameRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'game_name' => ['required', 'string', new MinLength(MIN_GAME_NAME), new MaxLength(MAX_GAME_NAME), new ValidGameName],
-            'date_released' => ['required', 'date'],
-            'game_type' => ['required', 'string', new MinLength(MIN_GAME_TYPE), new MaxLength(MAX_GAME_TYPE), new ValidGameType],
-            'region' => ['required', 'string', new MinLength(MIN_GAME_REGION), new MaxLength(MAX_GAME_REGION), new ValidGameRegion],
-            'generation' => ['required', 'integer', new MinSize(MIN_GAME_GENERATION), new MaxLength(MAX_GAME_GENERATION)],
+            'game_name' => ['required', ...$this->gameNameRules()],
+            'date_released' => ['required', ...$this->dateReleasedRules()],
+            'game_type' => ['required', ...$this->gameTypeRules()],
+            'region' => ['required', ...$this->gameRegionRules()],
+            'generation' => ['required', ...$this->gameGenerationRules()],
         ];
     }
 }

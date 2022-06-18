@@ -1,6 +1,5 @@
 <?php
 
-
 const MAX_GAME_NAME = 40;
 const MIN_GAME_NAME = 7;
 const MAX_GAME_TYPE = 8;
@@ -18,4 +17,5 @@ const MIN_ROM_TYPE = 2;
 const MAX_USER_NAME = 45;
 const MIN_USER_NAME = 1;
 const MAX_USER_EMAIL = 35;
-
+const MAX_USER_PASSWORD = 50;
+const MIN_USER_PASSWORD = 8;

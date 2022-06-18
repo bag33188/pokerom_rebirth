@@ -2,20 +2,17 @@
 
 namespace App\Http\Requests;
 
+use App\Actions\RomValidationRules;
 use App\Models\Rom;
-use App\Rules\MaxLength;
-use App\Rules\MaxSize;
-use App\Rules\MinLength;
-use App\Rules\MinSize;
 use App\Rules\RequiredIfPutRequest;
-use App\Rules\ValidRomName;
-use App\Rules\ValidRomType;
 use Illuminate\Foundation\Http\FormRequest;
 use JetBrains\PhpStorm\ArrayShape;
 
 /** @mixin Rom */
 class UpdateRomRequest extends FormRequest
 {
+    use RomValidationRules;
+
     private RequiredIfPutRequest $requiredIfPutRequest;
 
     public function __construct(RequiredIfPutRequest $requiredIfPutRequest)
@@ -45,13 +42,13 @@ class UpdateRomRequest extends FormRequest
      *
      * @return array<string, mixed>
      */
-    #[ArrayShape(['rom_name' => "array", 'rom_type' => "array", 'rom_size' => "string[]"])]
+    #[ArrayShape(['rom_name' => "array", 'rom_type' => "array", 'rom_size' => "array"])]
     public function rules(): array
     {
         return [
-            'rom_name' => [$this->requiredIfPutRequest, new MinLength(MIN_ROM_NAME), new MaxLength(MAX_ROM_NAME), new ValidRomName],
-            'rom_type' => [$this->requiredIfPutRequest, new MinLength(MIN_ROM_TYPE), new MaxLength(MAX_ROM_TYPE), new ValidRomType],
-            'rom_size' => [$this->requiredIfPutRequest, 'int', new MinSize(MIN_ROM_SIZE), new MaxSize(MAX_ROM_SIZE)],
+            'rom_name' => [$this->requiredIfPutRequest, ...$this->romNameRules()],
+            'rom_type' => [$this->requiredIfPutRequest, ...$this->romTypeRules()],
+            'rom_size' => [$this->requiredIfPutRequest, ...$this->romSizeRules()],
         ];
     }
 }

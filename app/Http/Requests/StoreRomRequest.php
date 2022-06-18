@@ -2,13 +2,8 @@
 
 namespace App\Http\Requests;
 
+use App\Actions\RomValidationRules;
 use App\Models\Rom;
-use App\Rules\MaxLength;
-use App\Rules\MaxSize;
-use App\Rules\MinLength;
-use App\Rules\MinSize;
-use App\Rules\ValidRomName;
-use App\Rules\ValidRomType;
 use Illuminate\Foundation\Http\FormRequest;
 use JetBrains\PhpStorm\ArrayShape;
 
@@ -17,6 +12,8 @@ use JetBrains\PhpStorm\ArrayShape;
  */
 class StoreRomRequest extends FormRequest
 {
+    use RomValidationRules;
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -32,13 +29,13 @@ class StoreRomRequest extends FormRequest
      *
      * @return array<string, mixed>
      */
-    #[ArrayShape(['rom_name' => "array", 'rom_type' => "array", 'rom_size' => "string[]"])]
+    #[ArrayShape(['rom_name' => "array", 'rom_type' => "array", 'rom_size' => "array"])]
     public function rules(): array
     {
         return [
-            'rom_name' => ['required', new MinLength(MIN_ROM_NAME), new MaxLength(MAX_ROM_NAME), new ValidRomName],
-            'rom_type' => ['required', new MinLength(MIN_ROM_TYPE), new MaxLength(MAX_ROM_TYPE), new ValidRomType],
-            'rom_size' => ['required', 'int', new MinSize(MIN_ROM_SIZE), new MaxSize(MAX_ROM_SIZE)]
+            'rom_name' => ['required', ...$this->romNameRules()],
+            'rom_type' => ['required', ...$this->romTypeRules()],
+            'rom_size' => ['required', ...$this->romSizeRules()]
         ];
     }
 }
