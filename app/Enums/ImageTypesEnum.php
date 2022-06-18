@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Enum;
+namespace App\Enums;
 
 enum ImageTypesEnum: string
 {
