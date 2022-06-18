@@ -11,6 +11,8 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 class RequiredIfPutRequest extends RequiredIf
 {
     private Request $httpRequest;
+
+    /** @var callable|bool */
     public $condition;
 
     /**
