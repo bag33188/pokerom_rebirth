@@ -3,6 +3,7 @@
 namespace App\Listeners;
 
 use App\Events\FileDeleted;
+use App\Models\Rom;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
 class UnsetRomFileData implements ShouldQueue
@@ -21,9 +22,11 @@ class UnsetRomFileData implements ShouldQueue
      */
     public function handle(FileDeleted $event): void
     {
-        $rom = $event->file->rom()->first();
-        $rom['has_file'] = false;
-        $rom['file_id'] = null;
-        $rom->saveQuietly();
+        Rom::withoutEvents(function () use ($event) {
+            $rom = $event->file->rom()->first();
+            $rom['has_file'] = false;
+            $rom['file_id'] = null;
+            $rom->save();
+        });
     }
 }
