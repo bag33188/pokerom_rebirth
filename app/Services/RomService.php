@@ -49,9 +49,9 @@ class RomService implements RomServiceInterface
         $sql = /** @lang MariaDB */
             "CALL LinkRomToFile(:fileId, :fileSize, :romId);";
         DB::statement($sql, [
-            'fileId' => $file['_id'],
+            'fileId' => $file->getKey(),
             'fileSize' => $file['length'],
-            'romId' => $rom->id
+            'romId' => $rom->getKey()
         ]);
         $rom->refresh();
     }
