@@ -23,7 +23,7 @@ if (!function_exists('str_capitalize')) {
             do {
                 $str_arr[$i] = sprintf("%s%s",
                     strtoupper($str_arr[$i][0]),
-                    strtolower(substr($str_arr[$i], 1, strlen($str_arr[$i]))));
+                    strtolower(substr($str_arr[$i], 1, strlen($str_arr[$i]) - 1)));
                 $i++;
             } while ($i < $depth);
             return implode($words_separator, $str_arr);
@@ -31,11 +31,11 @@ if (!function_exists('str_capitalize')) {
             for ($i = 0; $i < $word_count; $i++) {
                 $str_arr[$i] = sprintf("%s%s",
                     strtoupper($str_arr[$i][0]),
-                    strtolower(substr($str_arr[$i], 1, strlen($str_arr[$i]))));
+                    strtolower(substr($str_arr[$i], 1, strlen($str_arr[$i]) - 1)));
             }
             return join($words_separator, $str_arr);
         } else {
-            return strtoupper($value[0]) . strtolower(substr($value, 1, strlen($value)));
+            return strtoupper($value[0]) . strtolower(substr($value, 1, strlen($value) - 1));
         }
     }
 }
