@@ -4,8 +4,7 @@ namespace App\Listeners;
 
 use App\Events\FileUploaded;
 use App\Interfaces\FileRepositoryInterface;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
+use App\Models\Rom;
 
 class UpdateMatchingRom
 {
@@ -29,12 +28,14 @@ class UpdateMatchingRom
      */
     public function handle(FileUploaded $event): void
     {
-        $fileId = $event->file->getKey();
-        $rom = $this->fileRepository->searchForRomMatchingFile($fileId)->first();
-        if (isset($rom)) {
-            $rom['has_file'] = true;
-            $rom['file_id'] = $fileId;
-            $rom->saveQuietly();
-        }
+        Rom::withoutEvents(function () use ($event) {
+            $fileId = $event->file->getKey();
+            $rom = $this->fileRepository->searchForRomMatchingFile($fileId)->first();
+            if (isset($rom)) {
+                $rom['has_file'] = true;
+                $rom['file_id'] = $fileId;
+                $rom->saveQuietly();
+            }
+        });
     }
 }
