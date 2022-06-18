@@ -11,7 +11,7 @@ class GameService implements GameServiceInterface {
     {
         $rom = Rom::find($romId);
         $game->rom()->associate($rom);
-        $game->save();
+        $game->saveQuietly();
         return $game;
     }
 }
