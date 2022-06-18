@@ -21,8 +21,8 @@ class RequiredIfPutRequest extends RequiredIf
     public function __construct(Request $request)
     {
         $this->httpRequest = $request;
+        $this->setCondition();
         $this->checkIfUsedCorrectly();
-        $this->condition = $this->setCondition();
         parent::__construct($this->condition);
     }
 
@@ -38,8 +38,8 @@ class RequiredIfPutRequest extends RequiredIf
         }
     }
 
-    private function setCondition(): bool
+    private function setCondition(): void
     {
-        return $this->httpRequest->getMethod() === 'PUT';
+        $this->condition = $this->httpRequest->getMethod() === 'PUT';
     }
 }
