@@ -5,12 +5,14 @@ namespace App\Services;
 use App\Exceptions\NotFoundException;
 use App\Interfaces\RomRepositoryInterface;
 use App\Interfaces\RomServiceInterface;
+use App\Models\File;
 use App\Models\Rom;
 use Illuminate\Support\Facades\DB;
 use JetBrains\PhpStorm\ArrayShape;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
-class RomService implements RomServiceInterface {
+class RomService implements RomServiceInterface
+{
     private RomRepositoryInterface $romRepository;
 
     public function __construct(RomRepositoryInterface $romRepository)
@@ -26,12 +28,7 @@ class RomService implements RomServiceInterface {
     {
         $file = $this->romRepository->searchForFileMatchingRom($rom->id)->first();
         if (isset($file)) {
-            DB::statement(/** @lang MariaDB */ "CALL LinkRomToFile(:fileId, :fileSize, :romId);", [
-                'fileId' => $file['_id'],
-                'fileSize' => $file->length,
-                'romId' => $rom->id
-            ]);
-            $rom->refresh();
+            $this->setRomDataFromFile($rom, $file);
             return [
                 'message' => "file found and linked! file id: {$file['_id']}",
                 'data' => $rom->refresh()
@@ -39,5 +36,21 @@ class RomService implements RomServiceInterface {
         } else {
             throw new NotFoundException("File not found with name of {$rom->getRomFileName()}", ResponseAlias::HTTP_NOT_FOUND);
         }
+    }
+
+    public function linkRomToFileIfExists(Rom $rom): void
+    {
+        $file = $this->romRepository->searchForFileMatchingRom($rom->id)->first();
+        if (isset($file)) $this->setRomDataFromFile($rom, $file);
+    }
+
+    private function setRomDataFromFile(Rom $rom, File $file)
+    {
+        DB::statement(/** @lang MariaDB */ "CALL LinkRomToFile(:fileId, :fileSize, :romId);", [
+            'fileId' => $file['_id'],
+            'fileSize' => $file->length,
+            'romId' => $rom->id
+        ]);
+        $rom->refresh();
     }
 }

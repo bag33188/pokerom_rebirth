@@ -20,13 +20,13 @@ class RomObserver
 
     public function created(Rom $rom): void
     {
-        $this->romService->attemptToLinkRomToFile($rom);
+        $this->romService->linkRomToFileIfExists($rom);
     }
 
     public function updating(Rom $rom): void
     {
         if (!$rom->has_file || $rom->file_id == null) {
-            $this->romService->attemptToLinkRomToFile($rom);
+            $this->romService->linkRomToFileIfExists($rom);
         }
     }
 

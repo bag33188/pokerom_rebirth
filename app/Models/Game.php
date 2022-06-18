@@ -61,6 +61,11 @@ class Game extends Model
         $this->attributes['region'] = strtolower($value);
     }
 
+    public function setGameNameAttribute(string $value): void
+    {
+        $this->attributes['game_name'] = preg_replace("/pokemon/i", 'Pokemon', $value);
+    }
+
     public function setGameTypeAttribute(string $value): void
     {
         $this->attributes['game_type'] = strtolower($value);
