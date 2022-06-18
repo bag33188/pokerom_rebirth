@@ -29,9 +29,14 @@ class RomRepository implements RomRepositoryInterface
         return $this->rom->all()->sortBy([['game_id', 'asc'], ['rom_size', 'asc']]);
     }
 
+    /**
+     * @throws NotFoundException
+     */
     public function getGameAssociatedWithRom(int $romId): Game
     {
-        return $this->findRomIfExists($romId)->game()->firstOrFail();
+        $associatedGame = $this->findRomIfExists($romId)->game()->firstOrFail();
+        return $associatedGame ??
+            throw new NotFoundException('no game is associated with this rom');
     }
 
     /**
@@ -40,7 +45,8 @@ class RomRepository implements RomRepositoryInterface
     public function getFileAssociatedWithRom(int $romId): File
     {
         $associatedFile = $this->findRomIfExists($romId)->file()->first();
-        return $associatedFile ?? throw new NotFoundException('this rom does not have a file');
+        return $associatedFile ??
+            throw new NotFoundException('this rom does not have a file');
     }
 
     /**
