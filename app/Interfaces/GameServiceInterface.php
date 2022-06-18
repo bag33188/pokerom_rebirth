@@ -2,9 +2,7 @@
 
 namespace App\Interfaces;
 
-use App\Models\Game;
-
 interface GameServiceInterface
 {
-    public function associateGameWithRom(Game $game, int $romId);
+    public function createGame(int $romId, array $data);
 }

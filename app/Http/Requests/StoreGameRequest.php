@@ -7,7 +7,6 @@ use App\Models\Game;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Str;
 use JetBrains\PhpStorm\ArrayShape;
-use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 /** @mixin Game */
 class StoreGameRequest extends FormRequest
@@ -31,11 +30,9 @@ class StoreGameRequest extends FormRequest
      */
     protected function prepareForValidation(): void
     {
-        $romId = $this->get('romId') ??
-            throw new BadRequestHttpException(message: 'No ROM ID was sent.');
+
         $this->merge([
             'slug' => Str::slug($this->game_name),
-            'rom_id' => $romId
         ]);
     }
 

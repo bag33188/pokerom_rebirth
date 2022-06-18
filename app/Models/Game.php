@@ -23,7 +23,6 @@ class Game extends Model
         'generation',
         'date_released',
         'region',
-        'rom_id' // <- fillable since the foreign key is a constraint, will throw error
     ];
     protected $casts = [
         'date_released' => 'date'

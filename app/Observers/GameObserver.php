@@ -24,8 +24,6 @@ class GameObserver
 
     public function creating(Game $game): void
     {
-        // check if rom exists
-        $this->romRepository->findRomIfExists($game->rom_id);
         self::slugifyGameName($game);
     }
 
