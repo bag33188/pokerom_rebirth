@@ -8,6 +8,8 @@ use Illuminate\Support\Str;
 class GameObserver
 {
     public bool $afterCommit = false;
+
+    /** @var bool Use database relationships to update models */
     private const USE_DB_LOGIC = true;
 
     private static function slugifyGameName(Game $game): void

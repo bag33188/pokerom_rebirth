@@ -8,6 +8,8 @@ use App\Models\Rom;
 class RomObserver
 {
     private RomServiceInterface $romService;
+
+    /** @var bool Use database relationships to update models */
     private const USE_DB_LOGIC = true;
 
     public function __construct(RomServiceInterface $romService)
