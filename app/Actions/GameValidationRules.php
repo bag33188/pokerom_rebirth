@@ -3,6 +3,7 @@
 namespace App\Actions;
 
 use App\Rules\MaxLength;
+use App\Rules\MaxSize;
 use App\Rules\MinLength;
 use App\Rules\MinSize;
 use App\Rules\ValidGameName;
@@ -33,6 +34,6 @@ trait GameValidationRules
 
     protected function gameGenerationRules(array $rules = ['required']): array
     {
-        return [...$rules, 'integer', new MinSize(MIN_GAME_GENERATION), new MaxLength(MAX_GAME_GENERATION)];
+        return [...$rules, 'integer', new MinSize(MIN_GAME_GENERATION), new MaxSize(MAX_GAME_GENERATION)];
     }
 }
