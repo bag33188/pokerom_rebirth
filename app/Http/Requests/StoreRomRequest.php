@@ -34,7 +34,7 @@ class StoreRomRequest extends FormRequest
         return [
             'rom_name' => ['required', 'min:3', 'max:30', new ValidRomName],
             'rom_type' => ['required', 'min:2', 'max:4', new ValidRomType],
-            'rom_size' => ['required', 'int', 'min:1020', 'max:' . 17825792 /* KiB = 17 Gibibytes */]
+            'rom_size' => ['required', 'int', 'min:1020', 'max:' . MAX_ROM_SIZE]
         ];
     }
 }

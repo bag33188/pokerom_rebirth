@@ -47,7 +47,7 @@ class UpdateRomRequest extends FormRequest
         return [
             'rom_name' => [$this->requiredIfPutRequest, 'min:3', 'max:30', new ValidRomName],
             'rom_type' => [$this->requiredIfPutRequest, 'min:2', 'max:4', new ValidRomType],
-            'rom_size' => [$this->requiredIfPutRequest, 'int', 'min:1020', 'max:17825792'],
+            'rom_size' => [$this->requiredIfPutRequest, 'int', 'min:1020', 'max:' . MAX_ROM_SIZE],
         ];
     }
 }
