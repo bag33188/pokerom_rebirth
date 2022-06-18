@@ -14,7 +14,7 @@ if (!function_exists('str_capitalize')) {
     {
         $value = trim($value);
         if (!strlen($value) || !$value) return null;
-        $words_separator = $separator ?? " ";
+        $words_separator = $separator ?? "\u{0020}";
         $str_arr = explode($words_separator, $value);
         $word_count = sizeof($str_arr);
         if ($deep === true && $depth > 0) {
