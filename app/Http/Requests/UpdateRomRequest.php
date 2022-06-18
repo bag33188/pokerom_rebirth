@@ -31,10 +31,11 @@ class UpdateRomRequest extends FormRequest
     #[ArrayShape(['rom_name' => "array", 'rom_type' => "array", 'rom_size' => "string[]"])]
     public function rules(): array
     {
+        $required = new RequiredIfPutRequest($this);
         return [
-            'rom_name' => [new RequiredIfPutRequest($this), 'min:3', 'max:30', new ValidRomName],
-            'rom_type' => [new RequiredIfPutRequest($this), 'min:2', 'max:4', new ValidRomType],
-            'rom_size' => [new RequiredIfPutRequest($this), 'int', 'min:1020', 'max:17825792'],
+            'rom_name' => [$required, 'min:3', 'max:30', new ValidRomName],
+            'rom_type' => [$required, 'min:2', 'max:4', new ValidRomType],
+            'rom_size' => [$required, 'int', 'min:1020', 'max:17825792'],
         ];
     }
 }

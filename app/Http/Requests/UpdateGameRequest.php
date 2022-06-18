@@ -45,12 +45,13 @@ class UpdateGameRequest extends FormRequest
     #[ArrayShape(['game_name' => "string[]", 'date_released' => "string[]", 'game_type' => "array", 'region' => "array", 'generation' => "string[]"])]
     public function rules(): array
     {
+        $required = new RequiredIfPutRequest($this);
         return [
-            'game_name' => [new RequiredIfPutRequest($this), 'string', 'min:7', 'max:40', new ValidGameName],
-            'date_released' => [new RequiredIfPutRequest($this), 'date'],
-            'game_type' => [new RequiredIfPutRequest($this), 'string', 'min:4', 'max:8', new ValidGameType],
-            'region' => [new RequiredIfPutRequest($this), 'string', 'min:4', 'max:8', new ValidGameRegion],
-            'generation' => [new RequiredIfPutRequest($this), 'integer', 'min:0', 'max:9'],
+            'game_name' => [$required, 'string', 'min:7', 'max:40', new ValidGameName],
+            'date_released' => [$required, 'date'],
+            'game_type' => [$required, 'string', 'min:4', 'max:8', new ValidGameType],
+            'region' => [$required, 'string', 'min:4', 'max:8', new ValidGameRegion],
+            'generation' => [$required, 'integer', 'min:0', 'max:9'],
         ];
     }
 }
