@@ -42,10 +42,10 @@ class FileRepository implements FileRepositoryInterface
     {
         [$name, $ext] = explode('.',
             $this->findFileIfExists($fileId)->filename, 2);
-        return Rom::where([
+        return Rom::whereNull('file_id')->where([
             ['rom_name', '=', $name],
             ['rom_type', '=', $ext],
-            ['has_file', '=', false]
-        ])->whereNull('file_id');
+            ['has_file', '=', false],
+        ]);
     }
 }

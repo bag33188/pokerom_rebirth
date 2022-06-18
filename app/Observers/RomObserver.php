@@ -23,7 +23,7 @@ class RomObserver
         $this->romService->linkRomToFileIfExists($rom);
     }
 
-    public function updating(Rom $rom): void
+    public function updated(Rom $rom): void
     {
         if (!$rom->has_file || $rom->file_id == null) {
             $this->romService->linkRomToFileIfExists($rom);
