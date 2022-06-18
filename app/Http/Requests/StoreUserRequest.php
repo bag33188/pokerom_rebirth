@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Models\User;
+use App\Rules\MaxLength;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password;
@@ -34,8 +35,8 @@ class StoreUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string', 'max:45', 'min:1'],
-            'email' => ['required', 'string', 'email', 'max:35', Rule::unique("users", "email")],
+            'name' => ['required', 'string', new MaxLength(MAX_USER_NAME), 'min:1'],
+            'email' => ['required', 'string', 'email', new MaxLength(MAX_USER_EMAIL), Rule::unique("users", "email")],
             'password' => ['required', 'confirmed', Password::defaults()]
         ];
     }

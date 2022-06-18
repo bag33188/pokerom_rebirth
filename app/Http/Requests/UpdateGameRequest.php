@@ -3,6 +3,9 @@
 namespace App\Http\Requests;
 
 use App\Models\Game;
+use App\Rules\MaxLength;
+use App\Rules\MinLength;
+use App\Rules\MinSize;
 use App\Rules\RequiredIfPutRequest;
 use App\Rules\ValidGameName;
 use App\Rules\ValidGameRegion;
@@ -59,11 +62,11 @@ class UpdateGameRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'game_name' => [$this->requiredIfPutRequest, 'string', 'min:7', 'max:40', new ValidGameName],
+            'game_name' => [$this->requiredIfPutRequest, 'string', new MinLength(MIN_GAME_NAME), new MaxLength(MAX_GAME_NAME), new ValidGameName],
             'date_released' => [$this->requiredIfPutRequest, 'date'],
-            'game_type' => [$this->requiredIfPutRequest, 'string', 'min:4', 'max:8', new ValidGameType],
-            'region' => [$this->requiredIfPutRequest, 'string', 'min:4', 'max:8', new ValidGameRegion],
-            'generation' => [$this->requiredIfPutRequest, 'integer', 'min:0', 'max:9'],
+            'game_type' => [$this->requiredIfPutRequest, 'string', new MinLength(MIN_GAME_TYPE), new MaxLength(MAX_GAME_TYPE), new ValidGameType],
+            'region' => [$this->requiredIfPutRequest, 'string', new MinLength(MIN_GAME_TYPE), new MaxLength(MAX_GAME_TYPE), new ValidGameRegion],
+            'generation' => [$this->requiredIfPutRequest, 'integer', new MinSize(MIN_GAME_GENERATION), new MaxLength(MAX_GAME_GENERATION)],
         ];
     }
 }

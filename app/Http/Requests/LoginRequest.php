@@ -2,8 +2,8 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\MaxLength;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Auth;
 use JetBrains\PhpStorm\ArrayShape;
 
 class LoginRequest extends FormRequest
@@ -27,7 +27,7 @@ class LoginRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => ['required', 'string', 'max:35', 'email'],
+            'email' => ['required', 'string', new MaxLength(MAX_USER_EMAIL), 'email'],
             'password' => ['required', 'string']
         ];
     }

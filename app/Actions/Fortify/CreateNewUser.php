@@ -3,7 +3,7 @@
 namespace App\Actions\Fortify;
 
 use App\Models\User;
-use Illuminate\Support\Facades\Hash;
+use App\Rules\MaxLength;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
 use Laravel\Jetstream\Jetstream;
@@ -15,14 +15,14 @@ class CreateNewUser implements CreatesNewUsers
     /**
      * Validate and create a newly registered user.
      *
-     * @param  array  $input
+     * @param array $input
      * @return \App\Models\User
      */
     public function create(array $input)
     {
         Validator::make($input, [
-            'name' => ['required', 'string', 'max:45'],
-            'email' => ['required', 'string', 'email', 'max:35', 'unique:users'],
+            'name' => ['required', 'string', new MaxLength(MAX_USER_NAME)],
+            'email' => ['required', 'string', 'email', new MaxLength(MAX_USER_EMAIL), 'unique:users'],
             'password' => $this->passwordRules(),
             'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['accepted', 'required'] : '',
         ])->validate();

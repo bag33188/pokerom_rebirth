@@ -3,6 +3,9 @@
 namespace App\Http\Requests;
 
 use App\Models\Game;
+use App\Rules\MaxLength;
+use App\Rules\MinLength;
+use App\Rules\MinSize;
 use App\Rules\ValidGameName;
 use App\Rules\ValidGameRegion;
 use App\Rules\ValidGameType;
@@ -48,11 +51,11 @@ class StoreGameRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'game_name' => ['required', 'string', 'min:7', 'max:40', new ValidGameName],
+            'game_name' => ['required', 'string', new MinLength(MIN_GAME_NAME), new MaxLength(MAX_GAME_NAME), new ValidGameName],
             'date_released' => ['required', 'date'],
-            'game_type' => ['required', 'string', 'min:4', 'max:8', new ValidGameType],
-            'region' => ['required', 'string', 'min:4', 'max:8', new ValidGameRegion],
-            'generation' => ['required', 'integer', 'min:0', 'max:9'],
+            'game_type' => ['required', 'string', new MinLength(MIN_GAME_TYPE), new MaxLength(MAX_GAME_TYPE), new ValidGameType],
+            'region' => ['required', 'string', new MinLength(MIN_GAME_TYPE), new MaxLength(MAX_GAME_TYPE), new ValidGameRegion],
+            'generation' => ['required', 'integer', new MinSize(MIN_GAME_GENERATION), new MaxLength(MAX_GAME_GENERATION)],
         ];
     }
 }

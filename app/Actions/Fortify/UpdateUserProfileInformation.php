@@ -2,6 +2,7 @@
 
 namespace App\Actions\Fortify;
 
+use App\Rules\MaxLength;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
@@ -12,15 +13,15 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
     /**
      * Validate and update the given user's profile information.
      *
-     * @param  mixed  $user
-     * @param  array  $input
+     * @param mixed $user
+     * @param array $input
      * @return void
      */
     public function update($user, array $input)
     {
         Validator::make($input, [
-            'name' => ['required', 'string', 'max:45'],
-            'email' => ['required', 'email', 'max:35', Rule::unique('users')->ignore($user->id)],
+            'name' => ['required', 'string', new MaxLength(MAX_USER_NAME)],
+            'email' => ['required', 'email', new MaxLength(MAX_USER_EMAIL), Rule::unique('users')->ignore($user->id)],
             'photo' => ['nullable', 'mimes:jpg,jpeg,png', 'max:1024'],
         ])->validateWithBag('updateProfileInformation');
 
@@ -42,8 +43,8 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
     /**
      * Update the given verified user's profile information.
      *
-     * @param  mixed  $user
-     * @param  array  $input
+     * @param mixed $user
+     * @param array $input
      * @return void
      */
     protected function updateVerifiedUser($user, array $input)
