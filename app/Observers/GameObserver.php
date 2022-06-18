@@ -8,6 +8,7 @@ use Illuminate\Support\Str;
 class GameObserver
 {
     public bool $afterCommit = false;
+    private const USE_DB_TRIGGER_LOGIC = true;
 
     private static function slugifyGameName(Game $game): void
     {
@@ -22,12 +23,13 @@ class GameObserver
 
     public function created(Game $game): void
     {
-        // todo: delete this functionality because trigger was added to db???
-        $rom = $game->rom()->first();
-        // use attribute syntax for proper non-fillable updating
-        $rom['has_game'] = true;
-        $rom['game_id'] = $game->id;
-        $rom->saveQuietly();
+        if (self::USE_DB_TRIGGER_LOGIC === true) {
+            $rom = $game->rom()->first();
+            // use attribute syntax for proper non-fillable updating
+            $rom['has_game'] = true;
+            $rom['game_id'] = $game->id;
+            $rom->saveQuietly();
+        }
     }
 
     public function updating(Game $game): void
@@ -37,10 +39,11 @@ class GameObserver
 
     public function deleted(Game $game): void
     {
-        // todo: delete this functionality because trigger was added to db???
-        $rom = $game->rom()->first();
-        $rom['game_id'] = null;
-        $rom['has_game'] = false;
-        $rom->saveQuietly();
+        if (self::USE_DB_TRIGGER_LOGIC === true) {
+            $rom = $game->rom()->first();
+            $rom['game_id'] = null;
+            $rom['has_game'] = false;
+            $rom->saveQuietly();
+        }
     }
 }
