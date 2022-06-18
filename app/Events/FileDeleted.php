@@ -27,13 +27,13 @@ class FileDeleted
         $this->file = $file;
     }
 
-//    /**
-//     * Get the channels the event should broadcast on.
-//     *
-//     * @return \Illuminate\Broadcasting\Channel|array
-//     */
-//    public function broadcastOn()
-//    {
-//        return new PrivateChannel('channel-name');
-//    }
+    /**
+     * Get the channels the event should broadcast on.
+     *
+     * @return Channel|PrivateChannel|array
+     */
+    public function broadcastOn(): Channel|PrivateChannel|array
+    {
+        return new PrivateChannel('channel-name');
+    }
 }
