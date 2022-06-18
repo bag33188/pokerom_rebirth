@@ -18,6 +18,7 @@ class GameService implements GameServiceInterface
 
     private function associateGameWithRom(Game $game, Rom $rom)
     {
+        $rom->refresh();
         $game->rom()->associate($rom);
         $game->saveQuietly();
     }
