@@ -18,7 +18,7 @@ class UpdateGameRequest extends FormRequest
 
     public function __construct(RequiredIfPutRequest $requiredIfPutRequest)
     {
-        $this->$requiredIfPutRequest = $requiredIfPutRequest;
+        $this->requiredIfPutRequest = $requiredIfPutRequest;
         parent::__construct();
     }
 
