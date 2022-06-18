@@ -6,6 +6,7 @@ use App\Http\Controllers\api\RomController;
 use App\Http\Controllers\api\UserController;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
+use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,7 +22,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/version', fn() => response()
     ->json([
         'version' => config('app.version')
-    ], 202))
+    ], ResponseAlias::HTTP_ACCEPTED))
     ->name('api.version');
 
 // no auth
