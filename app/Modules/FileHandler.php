@@ -16,11 +16,6 @@ class FileHandler extends GridFS
     private const SERVER_FILES_CONFIG_PATH = 'filesystems.server_rom_files_path';
     protected final const VALID_FILENAME = "/^([\w\d\s\-_]{3,32})\.[\w\d]{1,3}$/i";
 
-    public function __construct($databaseName = null)
-    {
-        parent::__construct($databaseName);
-    }
-
     public function getFilename(): string
     {
         return $this->filename;

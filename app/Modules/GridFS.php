@@ -18,15 +18,18 @@ class GridFS
 
     private const MONGO_CONF_PREFIX = 'database.connections.mongodb';
 
-    public function __construct($databaseName = null)
+    public function __construct(string $databaseName = null)
     {
         self::$mongoConfig = Config::get(self::MONGO_CONF_PREFIX);
+        $this->setDatabaseValues($databaseName);
+        $this->gfsBucket = $this->setGfsBucket();
+    }
 
+    private function setDatabaseValues(string $databaseName): void
+    {
         $this->bucketName = self::$mongoConfig['gridfs']['bucketName'];
         $this->databaseName = $databaseName ?: self::$mongoConfig['database'];
         $this->chunkSize = (int)hexdec(self::$mongoConfig['gridfs']['chunkSize']);
-
-        $this->gfsBucket = $this->setGfsBucket();
     }
 
     private static function GFS_MONGO_URI(): string
