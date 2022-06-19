@@ -95,6 +95,6 @@ class UserController extends ApiController
     {
         $user = $this->userRepository->findUserIfExists($userId);
         $this->authorize('delete', $user);
-        return response()->json($this->userService->deleteUserAndTokens($user));
+        return response()->json($this->userService->deleteUser($user));
     }
 }

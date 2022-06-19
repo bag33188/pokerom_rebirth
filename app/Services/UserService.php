@@ -15,15 +15,15 @@ class UserService implements UserServiceInterface
         return $user->createToken(API_TOKEN_KEY)->plainTextToken;
     }
 
-    private static function deleteAllUserAccessTokens()
+    private static function revokeAllUserTokens()
     {
         auth()->user()->tokens()->delete();
     }
 
     #[ArrayShape(['message' => "string"])]
-    public function deleteUserAndTokens(User $user): array
+    public function deleteUser(User $user): array
     {
-        self::deleteAllUserAccessTokens();
+        self::revokeAllUserTokens();
         $user->delete();
         return ['message' => "user $user->name deleted!"];
     }
@@ -41,7 +41,7 @@ class UserService implements UserServiceInterface
     #[ArrayShape(['message' => "string"])]
     public function logoutCurrentUser(): array
     {
-        self::deleteAllUserAccessTokens();
+        self::revokeAllUserTokens();
         return ['message' => 'logged out!'];
     }
 
@@ -50,7 +50,10 @@ class UserService implements UserServiceInterface
     {
         // Check password hash against database
         if (!$user->checkPassword($requestPassword)) {
-            throw new UnauthorizedHttpException(challenge: $requestPassword, message: 'Bad credentials', code: ResponseAlias::HTTP_UNAUTHORIZED);
+            throw new UnauthorizedHttpException(
+                challenge: $requestPassword,
+                message: 'Bad credentials',
+                code: ResponseAlias::HTTP_UNAUTHORIZED);
         }
 
         $token = self::generateUserApiToken($user);

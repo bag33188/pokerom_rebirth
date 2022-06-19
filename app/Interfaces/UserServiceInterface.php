@@ -12,5 +12,5 @@ interface UserServiceInterface
 
     public function registerUserToken(User $user);
 
-    public function deleteUserAndTokens(User $user);
+    public function deleteUser(User $user);
 }
