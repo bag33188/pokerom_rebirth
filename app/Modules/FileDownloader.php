@@ -22,7 +22,7 @@ class FileDownloader
         return feof($this->fileStream);
     }
 
-    private function getCurrentFileBuffer(): bool|string
+    private function getCurrentFileBuffer(): false|string
     {
         return fread($this->fileStream, $this->readyBytesChunkSize);
     }
