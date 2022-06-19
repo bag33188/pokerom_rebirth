@@ -6,9 +6,9 @@ use App\Events\FileDeleted;
 use App\Events\FileUploaded;
 use App\Interfaces\FileServiceInterface;
 use App\Models\File;
+use GridFS;
 use Illuminate\Http\UploadedFile;
 use JetBrains\PhpStorm\ArrayShape;
-use GridFS;
 
 class FileService implements FileServiceInterface
 {
@@ -22,7 +22,7 @@ class FileService implements FileServiceInterface
     {
         GridFS::upload($file);
         event(new FileUploaded(GridFS::getFileDocument()));
-        $filename=GridFS::getFilename();
+        $filename = GridFS::getFilename();
         return ['message' => "file {$filename} created!"];
     }
 
