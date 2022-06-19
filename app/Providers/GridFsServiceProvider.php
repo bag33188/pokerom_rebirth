@@ -14,8 +14,9 @@ class GridFsServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
+        $ds = 'database.connections.mongodb.database';
         $this->app->bind(FileHandler::class,
-            fn() => new FileHandler(config('database.connections.mongodb.database')));
+            fn() => new FileHandler(config($ds)));
     }
 
     /**
