@@ -22,16 +22,14 @@ class FileService implements FileServiceInterface
     {
         GridFS::upload($file);
         event(new FileUploaded(GridFS::getFileDocument()));
-        $filename = GridFS::getFilename();
-        return ['message' => "file '$filename' created!"];
+        return ['message' => "file '" . GridFS::getFilename() . "' created!"];
     }
 
     #[ArrayShape(['message' => "string"])]
     public function deleteFile(File $file): array
     {
-        $fileId = $file->getKey();
         event(new FileDeleted($file));
-        GridFS::destroy($fileId);
+        GridFS::destroy($file->getKey());
         return ['message' => "{$file['filename']} deleted!"];
     }
 }
