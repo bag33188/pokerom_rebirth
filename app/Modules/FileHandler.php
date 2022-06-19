@@ -12,7 +12,6 @@ class FileHandler extends GridFS
     private UploadedFile $file;
     private string $filename;
     private string $filepath;
-    private bool $checkValidFilename;
 
     private const SERVER_FILES_CONFIG_PATH = 'filesystems.server_rom_files_path';
     protected final const VALID_FILENAME = "/^([\w\d\s\-_]{3,32})\.[\w\d]{1,3}$/i";
@@ -59,10 +58,9 @@ class FileHandler extends GridFS
         self::normalizeFileName($this->filename);
     }
 
-    protected function setUploadFileData(UploadedFile $file, bool $checkFilenameFormatValidity = false): void
+    protected function setUploadFileData(UploadedFile $file): void
     {
         $this->file = $file;
-        $this->checkValidFilename = $checkFilenameFormatValidity;
         $this->createFileNameFromFile();
         $this->createUploadFilePathFromFile();
     }
@@ -90,12 +88,10 @@ class FileHandler extends GridFS
 
     private function checkFormatOfFileNameIfRequested()
     {
-        if ($this->checkValidFilename === true) {
-            if (!preg_match(self::VALID_FILENAME, $this->filename)) {
-                $badRequestErrorMessage = 'Invalid filename detected.' . ' ' .
-                    'Matched against pattern: ' . '\`' . self::VALID_FILENAME . '\`';
-                throw new BadRequestHttpException($badRequestErrorMessage);
-            }
+        if (!preg_match(self::VALID_FILENAME, $this->filename)) {
+            $badRequestErrorMessage = 'Invalid filename detected.' . ' ' .
+                'Matched against pattern: ' . '\`' . self::VALID_FILENAME . '\`';
+            throw new BadRequestHttpException($badRequestErrorMessage);
         }
     }
 
