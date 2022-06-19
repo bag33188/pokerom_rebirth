@@ -22,28 +22,21 @@ class FileHandler extends GridFS
         parent::__construct($databaseName);
     }
 
-    /**
-     * @return string
-     */
     public function getFilename(): string
     {
         return $this->filename;
     }
 
-    /**
-     * **Only required if storing a file**
-     *
-     * @param UploadedFile $file Your request file being uploaded from the form field
-     * @param bool $checkFilenameFormatValidity Check if filename of upload file is valid
-     * @return void
-     */
-    protected function setUploadFileData(UploadedFile $file, bool $checkFilenameFormatValidity = false): void
+    public function getFileDocument(): File
     {
-        $this->file = $file;
-        $this->checkValidFilename = $checkFilenameFormatValidity;
-        $this->createFileNameFromFile();
-        $this->createUploadFilePathFromFile();
+        return File::where('filename', '=', $this->getFilename())->first();
     }
+
+    public function destroy(string $fileId): void
+    {
+        $this->gfsBucket->delete(parent::parseObjectId($fileId));
+    }
+
 
     public function upload(UploadedFile $file)
     {
@@ -65,13 +58,21 @@ class FileHandler extends GridFS
         self::normalizeFileName($this->filename);
     }
 
+    protected function setUploadFileData(UploadedFile $file, bool $checkFilenameFormatValidity = false): void
+    {
+        $this->file = $file;
+        $this->checkValidFilename = $checkFilenameFormatValidity;
+        $this->createFileNameFromFile();
+        $this->createUploadFilePathFromFile();
+    }
+
     private function createUploadFilePathFromFile(): void
     {
         $this->filepath = sprintf("%s/%s",
             Config::get(self::SERVER_FILES_CONFIG_PATH), $this->filename);
     }
 
-    protected function uploadFileFromStream(): void
+    private function uploadFileFromStream(): void
     {
         $stream = fopen($this->filepath, 'rb');
         $this->gfsBucket->uploadFromStream($this->filename, $stream);
@@ -81,19 +82,9 @@ class FileHandler extends GridFS
      * @param string $fileId
      * @return resource
      */
-    protected function getDownloadStreamFromFile(string $fileId)
+    private function getDownloadStreamFromFile(string $fileId)
     {
         return $this->gfsBucket->openDownloadStream(parent::parseObjectId($fileId));
-    }
-
-    public function getFileDocument(): File
-    {
-        return File::where('filename', '=', $this->getFilename())->first();
-    }
-
-    public function destroy(string $fileId): void
-    {
-        $this->gfsBucket->delete(parent::parseObjectId($fileId));
     }
 
     private function checkFormatOfFileNameIfRequested()
