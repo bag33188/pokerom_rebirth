@@ -23,7 +23,7 @@ class FileService implements FileServiceInterface
         GridFS::upload($file);
         event(new FileUploaded(GridFS::getFileDocument()));
         $filename = GridFS::getFilename();
-        return ['message' => "file {$filename} created!"];
+        return ['message' => "file '$filename' created!"];
     }
 
     #[ArrayShape(['message' => "string"])]
