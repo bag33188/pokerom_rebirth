@@ -14,7 +14,8 @@ class FileHandler extends GridFS
     private string $filepath;
 
     private const SERVER_FILES_CONFIG_PATH = 'filesystems.server_rom_files_path';
-    protected final const VALID_FILENAME = "/^([\w\d\s\-_]+)\.[\w\d]+$/i";
+    private const DOWNLOAD_CHUNK_SIZE = 0xFF000;
+    public final const VALID_FILENAME = "/^([\w\d\s\-_]+)\.[\w\d]+$/i";
 
     public function __construct(string $databaseName = null)
     {
@@ -41,7 +42,7 @@ class FileHandler extends GridFS
     public function download(string $fileId): void
     {
         $stream = $this->createDownloadStreamFromFile($fileId);
-        $fileDownloader = new FileDownloader($stream, 0xFF000);
+        $fileDownloader = new FileDownloader($stream, self::DOWNLOAD_CHUNK_SIZE);
         $fileDownloader->downloadFile();
     }
 
