@@ -58,7 +58,7 @@ class FileHandler extends GridFS
         self::normalizeFileName($this->filename);
     }
 
-    protected function setUploadFileData(UploadedFile $file): void
+    private function setUploadFileData(UploadedFile $file): void
     {
         $this->file = $file;
         $this->createFileNameFromFile();
