@@ -2,11 +2,15 @@
 
 namespace App\Providers;
 
+use App;
 use App\Modules\FileHandler;
+use Config;
 use Illuminate\Support\ServiceProvider;
 
 class GridFsServiceProvider extends ServiceProvider
 {
+    private const DB_NAME_CONF_KEY = 'database.connections.mongodb.database';
+
     /**
      * Register services.
      *
@@ -14,9 +18,9 @@ class GridFsServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $key = 'database.connections.mongodb.database';
-        $this->app->bind(FileHandler::class,
-            fn() => new FileHandler(config($key)));
+        $key = self::DB_NAME_CONF_KEY;
+        App::bind(FileHandler::class,
+            fn() => new FileHandler(Config::get($key)));
     }
 
     /**
