@@ -24,7 +24,9 @@ Route::get('/version', fn() => response()
         'version' => config('app.version')
     ], ResponseAlias::HTTP_ACCEPTED))
     ->name('api.version');
+Route::get('/hello', function() {
 
+});
 // no auth
 Route::prefix('auth')->group(function () {
     Route::post('/login', [UserController::class, 'login']);
