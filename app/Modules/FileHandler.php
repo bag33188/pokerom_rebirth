@@ -16,6 +16,11 @@ class FileHandler extends GridFS
     private const SERVER_FILES_CONFIG_PATH = 'filesystems.server_rom_files_path';
     protected final const VALID_FILENAME = "/^([\w\d\s\-_]+)\.[\w\d]+$/i";
 
+    public function __construct(string $databaseName = null)
+    {
+        parent::__construct($databaseName);
+    }
+
     public function getFilename(): string
     {
         return $this->filename;
@@ -42,7 +47,7 @@ class FileHandler extends GridFS
 
     public function destroy(string $fileId): void
     {
-        $this->gfsBucket->delete(parent::parseObjectId($fileId));
+        $this->gfsBucket->delete(self::parseObjectId($fileId));
     }
 
     private function setUploadFileData(UploadedFile $file): void
@@ -77,7 +82,7 @@ class FileHandler extends GridFS
      */
     private function createDownloadStreamFromFile(string $fileId)
     {
-        return $this->gfsBucket->openDownloadStream(parent::parseObjectId($fileId));
+        return $this->gfsBucket->openDownloadStream(self::parseObjectId($fileId));
     }
 
     private function checkFormatOfFileName()
