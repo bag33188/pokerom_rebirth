@@ -29,6 +29,7 @@ class FileHandler extends GridFS
 
     public function getFileDocument(): File
     {
+        // todo: move this logic to file repository??
         return File::where('filename', '=', $this->getFilename())->first();
     }
 
