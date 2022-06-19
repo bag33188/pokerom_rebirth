@@ -32,7 +32,6 @@ class FileHandler extends GridFS
         $this->gfsBucket->delete(parent::parseObjectId($fileId));
     }
 
-
     public function upload(UploadedFile $file)
     {
         $this->setUploadFileData($file);
