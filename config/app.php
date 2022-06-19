@@ -17,7 +17,7 @@ return [
 
     'name' => env('APP_NAME', 'Pok' . _EACUTE . 'ROM'),
 
-    'version' => (float)env('APP_VERSION'),
+    'version' => (float)env('APP_VERSION', 4.0),
 
     /*
     |--------------------------------------------------------------------------
