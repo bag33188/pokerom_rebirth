@@ -2,6 +2,9 @@
 
 namespace App\Interfaces;
 
+use App\Models\Game;
+use App\Models\Rom;
+
 interface RomRepositoryInterface
 {
     public function getAllRomsSorted();
