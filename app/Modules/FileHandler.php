@@ -27,11 +27,6 @@ class FileHandler extends GridFS
         return File::where('filename', '=', $this->getFilename())->first();
     }
 
-    public function destroy(string $fileId): void
-    {
-        $this->gfsBucket->delete(parent::parseObjectId($fileId));
-    }
-
     public function upload(UploadedFile $file): void
     {
         $this->setUploadFileData($file);
@@ -45,6 +40,10 @@ class FileHandler extends GridFS
         $fileDownloader->downloadFile();
     }
 
+    public function destroy(string $fileId): void
+    {
+        $this->gfsBucket->delete(parent::parseObjectId($fileId));
+    }
 
     private function setUploadFileData(UploadedFile $file): void
     {
