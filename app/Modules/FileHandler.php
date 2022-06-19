@@ -91,7 +91,7 @@ class FileHandler extends GridFS
         return File::where('filename', '=', $this->getFilename())->first();
     }
 
-    public function deleteFileFromBucket(string $fileId): void
+    public function destroy(string $fileId): void
     {
         $this->gfsBucket->delete(parent::parseObjectId($fileId));
     }

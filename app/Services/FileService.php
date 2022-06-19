@@ -31,7 +31,7 @@ class FileService implements FileServiceInterface
     {
         $fileId = $file->getKey();
         event(new FileDeleted($file));
-        GridFS::deleteFileFromBucket($fileId);
+        GridFS::destroy($fileId);
         return ['message' => "{$file['filename']} deleted!"];
     }
 }
