@@ -12,7 +12,7 @@ class GridFsServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function register()
+    public function register(): void
     {
         $this->app->bind(FileHandler::class, fn() => new FileHandler());
     }
@@ -22,13 +22,13 @@ class GridFsServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         $this->register();
     }
 
 
-    public function provides()
+    public function provides(): array
     {
         return [FileHandler::class];
     }

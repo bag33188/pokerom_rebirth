@@ -8,21 +8,22 @@ use App\Interfaces\FileServiceInterface;
 use App\Models\File;
 use Illuminate\Http\UploadedFile;
 use JetBrains\PhpStorm\ArrayShape;
-use FileHandler;
+use GridFS;
 
 class FileService implements FileServiceInterface
 {
     public function downloadFile(string $fileId)
     {
-        FileHandler::download($fileId);
+        GridFS::download($fileId);
     }
 
     #[ArrayShape(['message' => "string"])]
     public function uploadFile(UploadedFile $file): array
     {
-        FileHandler::upload($file);
-        event(new FileUploaded(FileHandler::getFileDocument()));
-        return ['message' => "file {FileHandler::getFilename()} created!"];
+        GridFS::upload($file);
+        event(new FileUploaded(GridFS::getFileDocument()));
+        $filename=GridFS::getFilename();
+        return ['message' => "file {$filename} created!"];
     }
 
     #[ArrayShape(['message' => "string"])]
@@ -30,7 +31,7 @@ class FileService implements FileServiceInterface
     {
         $fileId = $file->getKey();
         event(new FileDeleted($file));
-        FileHandler::deleteFileFromBucket($fileId);
+        GridFS::deleteFileFromBucket($fileId);
         return ['message' => "{$file['filename']} deleted!"];
     }
 }
