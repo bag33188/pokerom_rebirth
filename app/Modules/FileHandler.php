@@ -30,7 +30,8 @@ class FileHandler extends GridFS
         return $this->filename;
     }
 
-    public function hello() {
+    public function hello()
+    {
         echo "hi";
     }
 
@@ -41,12 +42,25 @@ class FileHandler extends GridFS
      * @param bool $checkFilenameFormatValidity Check if filename of upload file is valid
      * @return void
      */
-    public function setUploadFileData(UploadedFile $file, bool $checkFilenameFormatValidity = false): void
+    protected function setUploadFileData(UploadedFile $file, bool $checkFilenameFormatValidity = false): void
     {
         $this->file = $file;
         $this->checkValidFilename = $checkFilenameFormatValidity;
         $this->createFileNameFromFile();
         $this->createUploadFilePathFromFile();
+    }
+
+    public function upload(UploadedFile $file)
+    {
+        $this->setUploadFileData($file);
+        $this->uploadFileFromStream();
+    }
+
+    public function download(string $fileId)
+    {
+        $stream = $this->getDownloadStreamFromFile($fileId);
+        $fileDownloader = new FileDownloader($stream, 0xFF000);
+        $fileDownloader->downloadFile();
     }
 
     private function createFileNameFromFile(): void
@@ -62,7 +76,7 @@ class FileHandler extends GridFS
             Config::get(self::SERVER_FILES_CONFIG_PATH), $this->filename);
     }
 
-    public function uploadFileFromStream(): void
+    protected function uploadFileFromStream(): void
     {
         $stream = fopen($this->filepath, 'rb');
         $this->gfsBucket->uploadFromStream($this->filename, $stream);
@@ -72,7 +86,7 @@ class FileHandler extends GridFS
      * @param string $fileId
      * @return resource
      */
-    public function getDownloadStreamFromFile(string $fileId)
+    protected function getDownloadStreamFromFile(string $fileId)
     {
         return $this->gfsBucket->openDownloadStream(parent::parseObjectId($fileId));
     }
