@@ -90,7 +90,7 @@ class FileHandler extends GridFS
     {
         if (!preg_match(self::VALID_FILENAME, $this->filename)) {
             $badRequestErrorMessage = 'Invalid filename detected.' . ' ' .
-                'Matched against pattern: ' . '\`' . self::VALID_FILENAME . '\`';
+                'Matched against pattern: ' . '`' . self::VALID_FILENAME . '`';
             throw new BadRequestHttpException($badRequestErrorMessage);
         }
     }
