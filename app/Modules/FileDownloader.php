@@ -11,7 +11,7 @@ class FileDownloader
     private $fileStream;
     private int $readyBytesChunkSize;
 
-    public function __construct($fileStream, $readyBytesChunkSize = 0x3FC00)
+    public function __construct(/** @var resource */ $fileStream, int $readyBytesChunkSize = 0x3FC00)
     {
         $this->fileStream = $fileStream;
         $this->readyBytesChunkSize = $readyBytesChunkSize;
