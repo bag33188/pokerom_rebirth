@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Modules;
+namespace App\Facades;
 
+use App\Modules\FileHandler;
 use Illuminate\Support\Facades\Facade;
 
 class FileHandlerFacade extends Facade

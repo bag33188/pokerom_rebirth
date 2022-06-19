@@ -30,11 +30,6 @@ class FileHandler extends GridFS
         return $this->filename;
     }
 
-    public function hello()
-    {
-        echo "hi";
-    }
-
     /**
      * **Only required if storing a file**
      *

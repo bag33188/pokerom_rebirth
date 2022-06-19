@@ -220,7 +220,7 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
-        'GridFS' => App\Modules\FileHandlerFacade::class
+        'GridFS' => \App\Facades\FileHandlerFacade::class
     ])->toArray(),
 
 ];
