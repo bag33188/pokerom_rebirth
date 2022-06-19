@@ -20,11 +20,6 @@ class UserService implements UserServiceInterface
         auth()->user()->tokens()->delete();
     }
 
-    private static function deleteUserCurrentAccessTokens()
-    {
-        auth()->user()->currentAccessToken()->delete();
-    }
-
     #[ArrayShape(['message' => "string"])]
     public function deleteUserAndTokens(User $user): array
     {
@@ -46,7 +41,7 @@ class UserService implements UserServiceInterface
     #[ArrayShape(['message' => "string"])]
     public function logoutCurrentUser(): array
     {
-        self::deleteUserCurrentAccessTokens();
+        self::deleteAllUserAccessTokens();
         return ['message' => 'logged out!'];
     }
 
