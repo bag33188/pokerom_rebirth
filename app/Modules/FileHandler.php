@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules;
+namespace App\Modules;
 
 use App\Models\File;
 use Illuminate\Http\UploadedFile;
@@ -28,6 +28,10 @@ class FileHandler extends GridFS
     public function getFilename(): string
     {
         return $this->filename;
+    }
+
+    public function hello() {
+        echo "hi";
     }
 
     /**

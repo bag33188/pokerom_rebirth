@@ -201,7 +201,6 @@ return [
         App\Providers\JetstreamServiceProvider::class,
         App\Providers\RepositoryServiceProvider::class,
         App\Providers\DataServiceProvider::class,
-        App\Providers\GridFsServiceProvider::class,
 
         // Laravel IDE Helper
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class
@@ -220,7 +219,6 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
-        'FileHandler'=>App\Facades\FileHandlerFacade::class
     ])->toArray(),
 
 ];
