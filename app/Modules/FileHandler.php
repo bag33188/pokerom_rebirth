@@ -32,15 +32,15 @@ class FileHandler extends GridFS
         $this->gfsBucket->delete(parent::parseObjectId($fileId));
     }
 
-    public function upload(UploadedFile $file)
+    public function upload(UploadedFile $file): void
     {
         $this->setUploadFileData($file);
         $this->uploadFileFromStream();
     }
 
-    public function download(string $fileId)
+    public function download(string $fileId): void
     {
-        $stream = $this->getDownloadStreamFromFile($fileId);
+        $stream = $this->createDownloadStreamFromFile($fileId);
         $fileDownloader = new FileDownloader($stream, 0xFF000);
         $fileDownloader->downloadFile();
     }
@@ -48,8 +48,14 @@ class FileHandler extends GridFS
     private function createFileNameFromFile(): void
     {
         $this->filename = $this->file->getClientOriginalName();
-        $this->checkFormatOfFileNameIfRequested();
+        $this->checkFormatOfFileName();
         self::normalizeFileName($this->filename);
+    }
+
+    private function createUploadFilePathFromFile(): void
+    {
+        $this->filepath = sprintf("%s/%s",
+            Config::get(self::SERVER_FILES_CONFIG_PATH), $this->filename);
     }
 
     private function setUploadFileData(UploadedFile $file): void
@@ -57,12 +63,6 @@ class FileHandler extends GridFS
         $this->file = $file;
         $this->createFileNameFromFile();
         $this->createUploadFilePathFromFile();
-    }
-
-    private function createUploadFilePathFromFile(): void
-    {
-        $this->filepath = sprintf("%s/%s",
-            Config::get(self::SERVER_FILES_CONFIG_PATH), $this->filename);
     }
 
     private function uploadFileFromStream(): void
@@ -75,12 +75,12 @@ class FileHandler extends GridFS
      * @param string $fileId
      * @return resource
      */
-    private function getDownloadStreamFromFile(string $fileId)
+    private function createDownloadStreamFromFile(string $fileId)
     {
         return $this->gfsBucket->openDownloadStream(parent::parseObjectId($fileId));
     }
 
-    private function checkFormatOfFileNameIfRequested()
+    private function checkFormatOfFileName()
     {
         if (!preg_match(self::VALID_FILENAME, $this->filename)) {
             $badRequestErrorMessage = 'Invalid filename detected.' . ' ' .
