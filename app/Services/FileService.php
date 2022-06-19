@@ -13,19 +13,23 @@ use App\Modules\FileHandler;
 
 class FileService implements FileServiceInterface
 {
+    private FileHandler $gridfs;
+    public function __construct()
+    {
+        $this->gridfs = app(FileHandler::class);
+    }
+
     public function downloadFile(string $fileId)
     {
-        $gridfs = new FileHandler();
-        $gridfs->download($fileId);
+        $this->gridfs->download($fileId);
     }
 
     #[ArrayShape(['message' => "string"])]
     public function uploadFile(UploadedFile $file): array
     {
-        $gridfs = new FileHandler();
-        $gridfs->upload($file);
-        event(new FileUploaded($gridfs->getFileDocument()));
-        return ['message' => "file {$gridfs->getFilename()} created!"];
+        $this->gridfs->upload($file);
+        event(new FileUploaded($this->gridfs->getFileDocument()));
+        return ['message' => "file {$this->gridfs->getFilename()} created!"];
     }
 
     #[ArrayShape(['message' => "string"])]
@@ -33,8 +37,7 @@ class FileService implements FileServiceInterface
     {
         $fileId = $file->getKey();
         event(new FileDeleted($file));
-        $gridfs = new FileHandler();
-        $gridfs->deleteFileFromBucket($fileId);
+        $this->gridfs->deleteFileFromBucket($fileId);
         return ['message' => "{$file['filename']} deleted!"];
     }
 }

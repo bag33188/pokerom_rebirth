@@ -3,6 +3,7 @@
 namespace App\Interfaces;
 
 use App\Models\File;
+use App\Modules\FileHandler;
 use Illuminate\Http\UploadedFile;
 
 interface FileServiceInterface
