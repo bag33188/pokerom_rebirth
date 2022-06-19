@@ -14,7 +14,7 @@ class FileHandler extends GridFS
     private string $filepath;
 
     private const SERVER_FILES_CONFIG_PATH = 'filesystems.server_rom_files_path';
-    protected final const VALID_FILENAME = "/^([\w\d\s\-_]{3,32})\.[\w\d]{1,3}$/i";
+    protected final const VALID_FILENAME = "/^([\w\d\s\-_]+)\.[\w\d]+$/i";
 
     public function getFilename(): string
     {
@@ -45,9 +45,17 @@ class FileHandler extends GridFS
         $fileDownloader->downloadFile();
     }
 
+
+    private function setUploadFileData(UploadedFile $file): void
+    {
+        $this->file = $file;
+        $this->createFileNameFromFile();
+        $this->createUploadFilePathFromFile();
+    }
+
     private function createFileNameFromFile(): void
     {
-        $this->filename = $this->file->getClientOriginalName();
+        $this->filename = @$this->file->getClientOriginalName();
         $this->checkFormatOfFileName();
         self::normalizeFileName($this->filename);
     }
@@ -56,13 +64,6 @@ class FileHandler extends GridFS
     {
         $this->filepath = sprintf("%s/%s",
             Config::get(self::SERVER_FILES_CONFIG_PATH), $this->filename);
-    }
-
-    private function setUploadFileData(UploadedFile $file): void
-    {
-        $this->file = $file;
-        $this->createFileNameFromFile();
-        $this->createUploadFilePathFromFile();
     }
 
     private function uploadFileFromStream(): void
