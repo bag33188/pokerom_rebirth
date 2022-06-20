@@ -21,14 +21,9 @@ class GameService implements GameServiceInterface
     {
         $rom = $this->romRepository->findRomIfExists($romId);
         $game = $rom->game()->create($data);
-        self::associateGameWithRom($game, $rom);
-        return new JsonServiceResponse(['data' => $game], ResponseAlias::HTTP_CREATED);
-    }
-
-    private static function associateGameWithRom(Game $game, Rom $rom)
-    {
         $rom->refresh();
         $game->rom()->associate($rom);
         $game->saveQuietly();
+        return new JsonServiceResponse(['data' => $game], ResponseAlias::HTTP_CREATED);
     }
 }
