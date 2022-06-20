@@ -13,17 +13,6 @@ trait ExceptionRender
     private static string $defaultView = 'errors.generic';
     private static string $defaultMsg = 'An error occurred.';
 
-//    protected function renderException(ApplicationException $exception, Request $request, string $viewName, string $apiMessage): Response|JsonResponse
-//    {
-//        if ($request->is('api/*')) {
-//            $error = new Error(error: $apiMessage ?? self::$defaultMsg);
-//            return response()->json($error, $exception->status());
-//        } else {
-//            return response()->view($viewName ?? self::$defaultView,
-//                ['message' => $exception->getMessage()], $exception->status());
-//        }
-//    }
-
     protected function renderApiException(string $apiMessage, int $status): JsonResponse
     {
         $error = new Error(error: $apiMessage ?? self::$defaultMsg);
@@ -37,8 +26,8 @@ trait ExceptionRender
     }
 
     #[Pure]
-    protected static function makeCustomMessage(Exception $exception, string $msg): string
+    protected static function makeCustomMessage(Exception $exception, string $customMessage): string
     {
-        return (strlen($exception->getMessage()) != 0) ? $exception->getMessage() : $msg;
+        return (strlen($exception->getMessage()) != 0) ? $exception->getMessage() : $customMessage;
     }
 }

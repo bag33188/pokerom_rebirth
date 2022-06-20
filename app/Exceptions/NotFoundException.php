@@ -25,12 +25,14 @@ class NotFoundException extends ApplicationException
     {
         return self::makeMessage($this, "Error: requested endpoint not found.");
     }
+
     public function status(): int
     {
         return ResponseAlias::HTTP_NOT_FOUND;
     }
+
     public function viewName(): string
     {
-        return  'errors.404';
+        return 'errors.404';
     }
 }

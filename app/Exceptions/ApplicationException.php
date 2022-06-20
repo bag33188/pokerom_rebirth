@@ -24,6 +24,5 @@ abstract class ApplicationException extends Exception
         } else {
             return $this->renderViewException($this->viewName(), $this->getMessage(), $this->status());
         }
-//        return $this->renderException($this, $request, $this->viewName(), $this->apiMessage());
     }
 }
