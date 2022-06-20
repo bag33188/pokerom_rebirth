@@ -9,6 +9,8 @@ use Illuminate\Http\Resources\Json\JsonResource;
 /** @mixin Rom */
 class RomResource extends JsonResource
 {
+    public $additional = ['success' => true];
+
     /**
      * @param Request $request
      * @return array

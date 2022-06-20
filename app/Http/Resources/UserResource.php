@@ -9,6 +9,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 /** @mixin User */
 class UserResource extends JsonResource
 {
+    public $additional = ['success' => true];
     /**
      * @param Request $request
      * @return array

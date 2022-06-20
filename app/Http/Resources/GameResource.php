@@ -9,6 +9,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 /** @mixin Game */
 class GameResource extends JsonResource
 {
+    public $additional = ['success' => true];
     /**
      * @param Request $request
      * @return array

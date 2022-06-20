@@ -9,6 +9,7 @@ use JetBrains\PhpStorm\ArrayShape;
 /** @see \App\Models\Rom */
 class RomCollection extends ResourceCollection
 {
+    public $additional = ['success' => true];
     /**
      * @param Request $request
      * @return array
