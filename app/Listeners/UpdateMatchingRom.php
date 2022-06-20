@@ -16,7 +16,6 @@ class UpdateMatchingRom implements ShouldQueue
 
     public bool $afterCommit = true;
 
-
     /**
      * Create the event listener.
      *
