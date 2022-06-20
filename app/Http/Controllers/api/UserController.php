@@ -14,7 +14,6 @@ use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
-use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 class UserController extends ApiController
 {
@@ -35,8 +34,7 @@ class UserController extends ApiController
         Gate::authorize('viewAny-user');
         if (filter_var($request->query('paginate'), FILTER_VALIDATE_BOOLEAN) === true) {
             return response()
-                ->json($this->userRepository->paginateUsers((int)$request->query('per_page')),
-                    ResponseAlias::HTTP_OK);
+                ->json($this->userRepository->paginateUsers((int)$request->query('per_page')));
         } else {
             return new UserCollection($this->userRepository->getAllUsers());
         }
