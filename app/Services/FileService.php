@@ -8,7 +8,6 @@ use App\Interfaces\FileServiceInterface;
 use App\Models\File;
 use GridFS;
 use Illuminate\Http\UploadedFile;
-use JetBrains\PhpStorm\ArrayShape;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 class FileService implements FileServiceInterface
