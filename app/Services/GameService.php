@@ -4,8 +4,6 @@ namespace App\Services;
 
 use App\Interfaces\GameServiceInterface;
 use App\Interfaces\RomRepositoryInterface;
-use App\Models\Game;
-use App\Models\Rom;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 class GameService implements GameServiceInterface
