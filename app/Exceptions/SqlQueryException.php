@@ -6,7 +6,10 @@ use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 class SqlQueryException extends ApplicationException
 {
-    protected int $statusCode = ResponseAlias::HTTP_CONFLICT;
+    public function status(): int
+    {
+       return ResponseAlias::HTTP_CONFLICT;
+    }
 
     public function viewName(): string
     {
