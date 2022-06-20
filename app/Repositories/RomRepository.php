@@ -2,13 +2,11 @@
 
 namespace App\Repositories;
 
-use App\Exceptions\NotFoundException;
 use App\Interfaces\RomRepositoryInterface;
 use App\Models\File;
 use App\Models\Game;
 use App\Models\Rom;
 use Illuminate\Database\Eloquent\Collection;
-use Jenssegers\Mongodb\Eloquent\Builder as QueryBuilder;
 
 class RomRepository implements RomRepositoryInterface
 {
@@ -29,24 +27,16 @@ class RomRepository implements RomRepositoryInterface
         return $this->rom->all()->sortBy([['game_id', 'asc'], ['rom_size', 'asc']]);
     }
 
-    /**
-     * @throws NotFoundException
-     */
     public function getGameAssociatedWithRom(int $romId): Game
     {
         $associatedGame = $this->findRomIfExists($romId)->game()->firstOrFail();
-        return $associatedGame ??
-            throw new NotFoundException('no game is associated with this rom');
+        return $associatedGame;
     }
 
-    /**
-     * @throws NotFoundException
-     */
     public function getFileAssociatedWithRom(int $romId): File
     {
-        $associatedFile = $this->findRomIfExists($romId)->file()->first();
-        return $associatedFile ??
-            throw new NotFoundException('this rom does not have a file');
+        $associatedFile = $this->findRomIfExists($romId)->file()->firstOrFail();
+        return $associatedFile;
     }
 
     /**

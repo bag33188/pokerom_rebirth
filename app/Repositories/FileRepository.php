@@ -2,7 +2,6 @@
 
 namespace App\Repositories;
 
-use App\Exceptions\NotFoundException;
 use App\Interfaces\FileRepositoryInterface;
 use App\Models\File;
 use App\Models\Rom;
@@ -22,14 +21,10 @@ class FileRepository implements FileRepositoryInterface
         return $this->file->findOrFail($fileId);
     }
 
-    /**
-     * @throws NotFoundException
-     */
     public function getRomAssociatedWithFile(string $fileId): Rom
     {
-        $associatedRom = $this->findFileIfExists($fileId)->rom()->first();
-        return $associatedRom ??
-            throw new NotFoundException('no rom is associated with this file');
+        $associatedRom = $this->findFileIfExists($fileId)->rom()->firstOrFail();
+        return $associatedRom;
     }
 
     public function getAllFilesSorted(): Collection
