@@ -15,11 +15,11 @@ yarn-error.log
 misc/old
 
 ### Custom ###
-data/schemas/*.bkp
-data/schemas/*.dtmp
+misc/data/schemas/*.bkp
+misc/data/schemas/*.dtmp
+misc/data/dump
 private/rom_files/*
 !private/rom_files/.htaccess
-data/dump/file_info.csv
 
 ### Public ###
 public/css/**/*
