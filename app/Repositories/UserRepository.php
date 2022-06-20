@@ -16,17 +16,17 @@ class UserRepository implements UserRepositoryInterface
         $this->user = $user;
     }
 
-    public function findUserIfExists(int $userId): array|User
+    public function findUserIfExists(int $userId): User
     {
         return $this->user->findOrFail($userId);
     }
 
-    public function paginateUsers(?int $perPage = null): array|LengthAwarePaginator
+    public function paginateUsers(?int $perPage = null): LengthAwarePaginator
     {
         return $this->user->paginate($perPage ?: 4)->withQueryString();
     }
 
-    public function getAllUsers(): Collection|array
+    public function getAllUsers(): Collection
     {
         return $this->user->all();
     }

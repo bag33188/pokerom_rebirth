@@ -19,12 +19,12 @@ class RomRepository implements RomRepositoryInterface
         $this->rom = $rom;
     }
 
-    public function findRomIfExists(int $romId): Rom|array
+    public function findRomIfExists(int $romId): Rom
     {
         return $this->rom->findOrFail($romId);
     }
 
-    public function getAllRomsSorted(): Collection|array
+    public function getAllRomsSorted(): Collection
     {
         return $this->rom->all()->sortBy([['game_id', 'asc'], ['rom_size', 'asc']]);
     }

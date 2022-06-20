@@ -17,7 +17,7 @@ class FileRepository implements FileRepositoryInterface
         $this->file = $file;
     }
 
-    public function findFileIfExists(string $fileId): array|File
+    public function findFileIfExists(string $fileId): File
     {
         return $this->file->findOrFail($fileId);
     }
@@ -32,7 +32,7 @@ class FileRepository implements FileRepositoryInterface
             throw new NotFoundException('no rom is associated with this file');
     }
 
-    public function getAllFilesSorted(): array|Collection
+    public function getAllFilesSorted(): Collection
     {
         return $this->file->all()->sortBy([['length', 'asc'], ['filename', 'asc']]);
     }

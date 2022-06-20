@@ -16,12 +16,12 @@ class GameRepository implements GameRepositoryInterface
         $this->game = $game;
     }
 
-    public function findGameIfExists(int $gameId): array|Game
+    public function findGameIfExists(int $gameId): Game
     {
         return $this->game->findOrFail($gameId);
     }
 
-    public function getAllGamesSorted(): Collection|array
+    public function getAllGamesSorted(): Collection
     {
         return $this->game->all()->sortBy([
             ['rom_id', 'asc'],
