@@ -9,8 +9,6 @@ class ValidFilename implements Rule
 {
     private string $filename;
 
-
-
     /**
      * Create a new rule instance.
      *
@@ -31,8 +29,7 @@ class ValidFilename implements Rule
      */
     public function passes($attribute, $value): bool
     {
-        return preg_match(FILENAME_PATTERN, $this->filename ??
-            ($value ?: throw new UnsupportedMediaTypeHttpException("ERR_CANNOT_GET_FILENAME")));
+        return preg_match(FILENAME_PATTERN, @$value);
     }
 
     /**
