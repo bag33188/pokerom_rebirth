@@ -18,12 +18,12 @@ abstract class ApplicationException extends Exception
 
     abstract public function errorMessage(): ?string;
 
-    protected function makeCustomMessageIfDefaultIsNull(string $customMessage): string
+    protected final function makeCustomMessageIfDefaultIsNull(string $customMessage): string
     {
         return (strlen($this->getMessage()) != 0) ? $this->getMessage() : $customMessage;
     }
 
-    public function render(Request $request): Response|JsonResponse
+    public final function render(Request $request): Response|JsonResponse
     {
         if ($request->is('api/*')) {
             $error = new Error(error: $this->errorMessage() ?? self::$defaultMsg);

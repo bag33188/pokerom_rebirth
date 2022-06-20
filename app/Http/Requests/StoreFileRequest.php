@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Actions\Validators\FileValidationRules;
+use App\Exceptions\UnsupportedRomTypeException;
 use App\Models\File;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -32,6 +33,7 @@ class StoreFileRequest extends FormRequest
      * Get the validation rules that apply to the request.
      *
      * @return array<string, mixed>
+     * @throws UnsupportedRomTypeException
      */
     public function rules(): array
     {
