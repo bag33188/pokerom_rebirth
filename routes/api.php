@@ -27,8 +27,8 @@ Route::get('/version', fn() => response()
 
 // no auth
 Route::prefix('auth')->group(function () {
-    Route::post('/login', [UserController::class, 'login']);
-    Route::post('/register', [UserController::class, 'register']);
+    Route::post('/login', [UserController::class, 'login'])->middleware('guest');
+    Route::post('/register', [UserController::class, 'register'])->middleware('guest');
 });
 
 // auth
