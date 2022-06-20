@@ -21,7 +21,7 @@ class FileService implements FileServiceInterface
     {
         GridFS::upload($file);
         event(new FileUploaded(GridFS::getFileDocument()));
-        return new JsonServiceResponse(['message' => "file '" . GridFS::getFilename() . "' created!"], ResponseAlias::HTTP_CREATED);
+        return new JsonServiceResponse(['message' => "file '" . $file->getClientOriginalName() . "' created!"], ResponseAlias::HTTP_CREATED);
     }
 
     public function deleteFile(File $file): JsonServiceResponse
