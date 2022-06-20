@@ -10,7 +10,6 @@ use App\Interfaces\FileServiceInterface;
 use App\Models\File;
 use Illuminate\{Auth\Access\AuthorizationException, Http\JsonResponse};
 use Illuminate\Support\Facades\Gate;
-use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
 
@@ -76,7 +75,8 @@ class FileController extends ApiController
     {
         $this->authorize('create', File::class);
         $file = $request->file(FILE_FORM_KEY);
-        return response()->json($this->fileService->uploadFile($file), ResponseAlias::HTTP_CREATED)
+        $res = $this->fileService->uploadFile($file);
+        return response()->json($res->json, $res->code)
             ->header('X-Content-Transfer-Type', FileTypes::X_BINARY->value);
     }
 
@@ -87,6 +87,7 @@ class FileController extends ApiController
     {
         $file = $this->fileRepository->findFileIfExists($fileId);
         $this->authorize('delete', $file);
-        return response()->json($this->fileService->deleteFile($file), ResponseAlias::HTTP_OK);
+        $res = $this->fileService->deleteFile($file);
+        return response()->json($res->json, $res->code);
     }
 }

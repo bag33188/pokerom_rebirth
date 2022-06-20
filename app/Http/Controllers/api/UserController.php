@@ -45,19 +45,22 @@ class UserController extends ApiController
     public function register(StoreUserRequest $request): JsonResponse
     {
         $user = User::create($request->all());
-        return response()->json($this->userService->registerUserToken($user), ResponseAlias::HTTP_CREATED);
+        $res = $this->userService->registerUserToken($user);
+        return response()->json($res->json, $res->code);
     }
 
     public function login(LoginRequest $request): JsonResponse
     {
         // Check email
         $user = User::where('email', $request['email'])->firstOrFail();
-        return response()->json($this->userService->authenticateUserAgainstCredentials($user, $request['password']));
+        $res = $this->userService->authenticateUserAgainstCredentials($user, $request['password']);
+        return response()->json($res->json, $res->code);
     }
 
     public function logout(): JsonResponse
     {
-        return response()->json($this->userService->logoutCurrentUser());
+        $res = $this->userService->logoutCurrentUser();
+        return response()->json($res->json, $res->code);
     }
 
 
@@ -95,6 +98,7 @@ class UserController extends ApiController
     {
         $user = $this->userRepository->findUserIfExists($userId);
         $this->authorize('delete', $user);
-        return response()->json($this->userService->deleteUser($user));
+        $res = $this->userService->deleteUser($user);
+        return response()->json($res->json, $res->code);
     }
 }

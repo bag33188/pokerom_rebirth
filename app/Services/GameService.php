@@ -6,6 +6,7 @@ use App\Interfaces\GameServiceInterface;
 use App\Interfaces\RomRepositoryInterface;
 use App\Models\Game;
 use App\Models\Rom;
+use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 class GameService implements GameServiceInterface
 {
@@ -16,12 +17,12 @@ class GameService implements GameServiceInterface
         $this->romRepository = $romRepository;
     }
 
-    public function createGame(int $romId, array $data): Game
+    public function createGame(int $romId, array $data): JsonServiceResponse
     {
         $rom = $this->romRepository->findRomIfExists($romId);
         $game = $rom->game()->create($data);
         $this->associateGameWithRom($game, $rom);
-        return $game;
+        return new JsonServiceResponse(['data' => $game], ResponseAlias::HTTP_CREATED);
     }
 
     private function associateGameWithRom(Game $game, Rom $rom)

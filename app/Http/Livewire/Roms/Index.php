@@ -20,7 +20,8 @@ class Index extends Component
     public function render(): Factory|View|Application
     {
         $this->roms = Rom::with(['game', 'file'])->get();
-        $sum_total_size = DB::selectOne(/** @lang MariaDB */ "CALL GetTotalSizeOfAllRoms;");
+        $sql = /** @lang MariaDB */ "CALL GetTotalSizeOfAllRoms;";
+        $sum_total_size = DB::selectOne($sql);
         return view('livewire.roms.index', ['roms_total_size' => $sum_total_size->total_size]);
     }
 

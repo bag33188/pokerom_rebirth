@@ -6,7 +6,6 @@ use App\Interfaces\UserServiceInterface;
 use App\Models\User;
 use JetBrains\PhpStorm\ArrayShape;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
-use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 
 class UserService implements UserServiceInterface
 {
@@ -21,45 +20,41 @@ class UserService implements UserServiceInterface
     }
 
     #[ArrayShape(['message' => "string"])]
-    public function deleteUser(User $user): array
+    public function deleteUser(User $user): JsonServiceResponse
     {
         $this->revokeUserTokens();
         $user->delete();
-        return ['message' => "user $user->name deleted!"];
+        return new JsonServiceResponse(['message' => "user $user->name deleted!"], ResponseAlias::HTTP_OK);
     }
 
-    #[ArrayShape(['user' => "\App\Models\User", 'token' => "\Laravel\Sanctum\string|string"])]
-    public function registerUserToken(User $user): array
+    public function registerUserToken(User $user): JsonServiceResponse
     {
         $token = self::generateUserApiToken($user);
-        return [
+        return new JsonServiceResponse([
             'user' => $user,
             'token' => $token
-        ];
+        ], ResponseAlias::HTTP_CREATED);
     }
 
     #[ArrayShape(['message' => "string"])]
-    public function logoutCurrentUser(): array
+    public function logoutCurrentUser(): JsonServiceResponse
     {
         $this->revokeUserTokens();
-        return ['message' => 'logged out!'];
+        return new JsonServiceResponse(['message' => 'logged out!'], ResponseAlias::HTTP_OK);
     }
 
     #[ArrayShape(['user' => "\App\Models\User", 'token' => "\Laravel\Sanctum\string|string"])]
-    public function authenticateUserAgainstCredentials(User $user, string $requestPassword): array
+    public function authenticateUserAgainstCredentials(User $user, string $requestPassword): JsonServiceResponse
     {
         // Check password hash against database
         if (!$user->checkPassword($requestPassword)) {
-            throw new UnauthorizedHttpException(
-                challenge: $requestPassword,
-                message: 'Bad credentials',
-                code: ResponseAlias::HTTP_UNAUTHORIZED);
+            return new JsonServiceResponse(['message' => 'Bad credentials'], ResponseAlias::HTTP_UNAUTHORIZED);
         }
 
         $token = self::generateUserApiToken($user);
-        return [
+        return new JsonServiceResponse([
             'user' => $user,
             'token' => $token
-        ];
+        ], ResponseAlias::HTTP_OK);
     }
 }

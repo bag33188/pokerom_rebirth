@@ -9,6 +9,7 @@ use App\Models\File;
 use GridFS;
 use Illuminate\Http\UploadedFile;
 use JetBrains\PhpStorm\ArrayShape;
+use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 class FileService implements FileServiceInterface
 {
@@ -18,18 +19,18 @@ class FileService implements FileServiceInterface
     }
 
     #[ArrayShape(['message' => "string"])]
-    public function uploadFile(UploadedFile $file): array
+    public function uploadFile(UploadedFile $file): JsonServiceResponse
     {
         GridFS::upload($file);
         event(new FileUploaded(GridFS::getFileDocument()));
-        return ['message' => "file '" . GridFS::getFilename() . "' created!"];
+        return new JsonServiceResponse(['message' => "file '" . GridFS::getFilename() . "' created!"], ResponseAlias::HTTP_CREATED);
     }
 
     #[ArrayShape(['message' => "string"])]
-    public function deleteFile(File $file): array
+    public function deleteFile(File $file): JsonServiceResponse
     {
         event(new FileDeleted($file));
         GridFS::destroy($file->getKey());
-        return ['message' => "{$file['filename']} deleted!"];
+        return new JsonServiceResponse(['message' => "{$file['filename']} deleted!"], ResponseAlias::HTTP_OK);
     }
 }

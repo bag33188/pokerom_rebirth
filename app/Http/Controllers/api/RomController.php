@@ -14,7 +14,6 @@ use App\Models\Rom;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Gate;
-use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 class RomController extends ApiController
 {
@@ -90,7 +89,8 @@ class RomController extends ApiController
     {
         $rom = $this->romRepository->findRomIfExists($romId);
         $this->authorize('update', $rom);
-        return response()->json($this->romService->attemptToLinkRomToFile($rom), ResponseAlias::HTTP_OK);
+        $res = $this->romService->attemptToLinkRomToFile($rom);
+        return response()->json($res->json, $res->code);
     }
 
     /**

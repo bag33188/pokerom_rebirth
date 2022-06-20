@@ -2,13 +2,13 @@
 
 namespace App\Services;
 
-use App\Exceptions\NotFoundException;
 use App\Interfaces\RomRepositoryInterface;
 use App\Interfaces\RomServiceInterface;
 use App\Models\File;
 use App\Models\Rom;
 use Illuminate\Support\Facades\DB;
 use JetBrains\PhpStorm\ArrayShape;
+use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 class RomService implements RomServiceInterface
 {
@@ -19,21 +19,18 @@ class RomService implements RomServiceInterface
         $this->romRepository = $romRepository;
     }
 
-    /**
-     * @throws NotFoundException
-     */
-    #[ArrayShape(['message' => "string", 'data' => "\App\Models\Rom"])]
-    public function attemptToLinkRomToFile(Rom $rom): array
+    #[ArrayShape(['json' => "array", 'code' => "int"])]
+    public function attemptToLinkRomToFile(Rom $rom): JsonServiceResponse
     {
         $file = $this->romRepository->searchForFileMatchingRom($rom->id);
         if (isset($file)) {
             $this->setRomDataFromFile($rom, $file);
-            return [
+            return new JsonServiceResponse([
                 'message' => "file found and linked! file id: {$file['_id']}",
                 'data' => $rom->refresh()
-            ];
+            ], ResponseAlias::HTTP_OK);
         } else {
-            throw new NotFoundException("File not found with name of {$rom->getRomFileName()}");
+            return new JsonServiceResponse(['message' => "File not found with name of {$rom->getRomFileName()}"], ResponseAlias::HTTP_NOT_FOUND);
         }
     }
 
