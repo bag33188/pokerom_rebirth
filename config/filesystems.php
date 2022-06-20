@@ -72,6 +72,9 @@ return [
     'links' => [
         public_path('storage') => storage_path('app/public'),
     ],
+
+
+    // For GridFS
     'server_rom_files_path' => env('SERVER_ROM_FILES_DIR')
 
 ];
