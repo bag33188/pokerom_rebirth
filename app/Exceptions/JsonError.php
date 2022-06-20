@@ -9,7 +9,7 @@ use JsonException;
 use JsonSerializable;
 use Throwable;
 
-class Error implements Arrayable, Jsonable, JsonSerializable
+class JsonError implements Arrayable, Jsonable, JsonSerializable
 {
     public function __construct(private readonly string $error = '')
     {
@@ -24,7 +24,7 @@ class Error implements Arrayable, Jsonable, JsonSerializable
         ];
     }
 
-    #[ArrayShape(['error' => "string", 'help' => "string"])]
+    #[ArrayShape(['success' => "false", 'message' => "string"])]
     public function jsonSerialize(): array
     {
         return $this->toArray();
@@ -33,7 +33,7 @@ class Error implements Arrayable, Jsonable, JsonSerializable
     /**
      * @throws Throwable
      */
-    public function toJson($options = 0.0): bool|string
+    public function toJson($options = 0): bool|string
     {
         $jsonEncoded = json_encode($this->jsonSerialize(), $options);
         throw_unless($jsonEncoded, JsonException::class);

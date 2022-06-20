@@ -1,4 +1,7 @@
 <x-error-layout>
+    @php
+        'Oops, an unknown error occurred, please try again later.';
+    @endphp
     <div class="m-5" style="width: 60vw;">
         <div role="alert">
             <div class="bg-red-500 text-white font-bold rounded-t px-4 py-2">
