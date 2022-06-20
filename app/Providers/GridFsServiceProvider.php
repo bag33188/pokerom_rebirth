@@ -34,6 +34,9 @@ class GridFsServiceProvider extends ServiceProvider
     }
 
 
+    /**
+     * @return string[]
+     */
     public function provides(): array
     {
         return [FileHandler::class];
