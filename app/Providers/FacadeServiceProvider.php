@@ -35,6 +35,6 @@ class FacadeServiceProvider extends ServiceProvider
 
     public function provides(): array
     {
-        return [RomRepository::class, GameRepository::class, FileRepository::class];
+        return [RomRepository::class, GameRepository::class, FileRepository::class, UserRepository::class];
     }
 }

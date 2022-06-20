@@ -5,7 +5,7 @@ namespace App\Facades;
 use App\Modules\FileHandler;
 use Illuminate\Support\Facades\Facade;
 
-class FileStorageFacade extends Facade
+class RomFileStorageFacade extends Facade
 {
     protected static function getFacadeAccessor(): string
     {
