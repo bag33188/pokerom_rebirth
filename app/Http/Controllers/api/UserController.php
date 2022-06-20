@@ -51,8 +51,7 @@ class UserController extends ApiController
 
     public function login(LoginRequest $request): JsonResponse
     {
-        // Check email
-        $user = User::where('email', $request['email'])->firstOrFail();
+        $user = $this->userRepository->findUserByEmail($request['email']);
         $res = $this->userService->authenticateUserAgainstCredentials($user, $request['password']);
         return response()->json($res->json, $res->code);
     }

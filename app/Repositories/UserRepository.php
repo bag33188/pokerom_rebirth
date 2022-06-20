@@ -21,6 +21,11 @@ class UserRepository implements UserRepositoryInterface
         return $this->user->findOrFail($userId);
     }
 
+    public function findUserByEmail(string $email): User
+    {
+        return $this->user->where('email', $email)->firstOrFail();
+    }
+
     public function paginateUsers(?int $perPage = null): LengthAwarePaginator
     {
         return $this->user->paginate($perPage ?: 4)->withQueryString();

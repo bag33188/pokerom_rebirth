@@ -9,4 +9,6 @@ interface UserRepositoryInterface
     public function findUserIfExists(int $userId);
 
     public function paginateUsers(?int $perPage);
+
+    public function findUserByEmail(string $email);
 }
