@@ -8,14 +8,11 @@ use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 class NotFoundException extends ApplicationException
 {
+    protected int $statusCode = ResponseAlias::HTTP_NOT_FOUND;
+
     public function errorMessage(): string
     {
         return $this->makeCustomMessageIfDefaultIsNull("Error: requested endpoint not found.");
-    }
-
-    public function status(): int
-    {
-        return ResponseAlias::HTTP_NOT_FOUND;
     }
 
     public function viewName(): string
