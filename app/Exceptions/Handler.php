@@ -62,5 +62,6 @@ class Handler extends ExceptionHandler
         $this->renderable(fn(NotFoundHttpException $e) => throw new NotFoundException($e->getMessage()));
         $this->renderable(fn(QueryException $e) => throw new SqlQueryException($e->getMessage()));
         $this->renderable(fn(BulkWriteException $e) => throw new MongoBulkException($e->getMessage()));
+//        $this->renderable(fn(\Exception $e) )
     }
 }

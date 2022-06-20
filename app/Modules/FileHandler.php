@@ -5,7 +5,7 @@ namespace App\Modules;
 use App\Models\File;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Config;
-use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Symfony\Component\HttpKernel\Exception\UnprocessableEntityHttpException;
 
 class FileHandler extends GridFS
 {
@@ -90,7 +90,7 @@ class FileHandler extends GridFS
         if (!preg_match(self::VALID_FILENAME, $this->filename)) {
             $badRequestErrorMessage = 'Invalid filename detected.' . ' ' .
                 'Matched against pattern: ' . '`' . self::VALID_FILENAME . '`';
-            throw new BadRequestHttpException($badRequestErrorMessage);
+            throw new UnprocessableEntityHttpException($badRequestErrorMessage);
         }
     }
 
