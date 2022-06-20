@@ -74,7 +74,15 @@ return [
     ],
 
 
-    // For GridFS
+    /*
+     |--------------------------------------------------------------------------
+     | GridFS File Upload Path
+     |--------------------------------------------------------------------------
+     | This is the path located on the server to upload rom files from for
+     | storing bin-data in MongoDB's GridFS Storage System.
+     | This used since large files' (greater than 2GB) path's cannot be
+     | resolved by PHP or laravel.
+     */
     'server_rom_files_path' => env('SERVER_ROM_FILES_DIR')
 
 ];
