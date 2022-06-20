@@ -2,7 +2,7 @@
 
 namespace App\Enums;
 
-enum FileTypes: string
+enum FileTypesEnum: string
 {
     // (generic) binary stream where file type is unknown
     case OCTET_STREAM = "application/octet-stream";

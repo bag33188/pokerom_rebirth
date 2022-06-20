@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\api;
 
-use App\Enums\FileTypes;
+use App\Enums\FileTypesEnum as FileTypes;
 use App\Http\Controllers\Controller as ApiController;
 use App\Http\Requests\StoreFileRequest;
 use App\Interfaces\FileRepositoryInterface;
