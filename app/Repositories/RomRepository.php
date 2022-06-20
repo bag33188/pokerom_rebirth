@@ -29,14 +29,12 @@ class RomRepository implements RomRepositoryInterface
 
     public function getGameAssociatedWithRom(int $romId): Game
     {
-        $associatedGame = $this->findRomIfExists($romId)->game()->firstOrFail();
-        return $associatedGame;
+        return $this->findRomIfExists($romId)->game()->firstOrFail();
     }
 
     public function getFileAssociatedWithRom(int $romId): File
     {
-        $associatedFile = $this->findRomIfExists($romId)->file()->firstOrFail();
-        return $associatedFile;
+        return $this->findRomIfExists($romId)->file()->firstOrFail();
     }
 
     /**

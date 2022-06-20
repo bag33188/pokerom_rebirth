@@ -10,13 +10,12 @@ use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 
 class UserService implements UserServiceInterface
 {
-    public int $statusCode;
     private static function generateUserApiToken(User $user): string
     {
         return $user->createToken(API_TOKEN_KEY)->plainTextToken;
     }
 
-    private static function revokeUserTokens()
+    private function revokeUserTokens()
     {
         auth()->user()->tokens()->delete();
     }
@@ -24,7 +23,7 @@ class UserService implements UserServiceInterface
     #[ArrayShape(['message' => "string"])]
     public function deleteUser(User $user): array
     {
-        self::revokeUserTokens();
+        $this->revokeUserTokens();
         $user->delete();
         return ['message' => "user $user->name deleted!"];
     }
@@ -42,7 +41,7 @@ class UserService implements UserServiceInterface
     #[ArrayShape(['message' => "string"])]
     public function logoutCurrentUser(): array
     {
-        self::revokeUserTokens();
+        $this->revokeUserTokens();
         return ['message' => 'logged out!'];
     }
 
