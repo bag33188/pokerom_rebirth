@@ -16,6 +16,6 @@ class JsonServiceResponse
 
     private static function setSuccessState(array &$json, int $code): void
     {
-        $json['success'] = $code < 400;
+        $json['success'] = $code < 400 && $code >= 200;
     }
 }

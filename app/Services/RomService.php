@@ -40,7 +40,7 @@ class RomService implements RomServiceInterface
         if (isset($file)) $this->setRomDataFromFile($rom, $file);
     }
 
-    private function setRomDataFromFile(Rom $rom, File $file)
+    private function setRomDataFromFile(Rom $rom, File $file): void
     {
         $sql = /** @lang MariaDB */
             "CALL LinkRomToFile(:fileId, :fileSize, :romId);";
