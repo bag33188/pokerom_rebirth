@@ -10,6 +10,7 @@ use Throwable;
 
 class SqlQueryException extends Exception
 {
+    use ExceptionRender;
     public function __construct(string $message = "", int $code = 400, ?Throwable $previous = null)
     {
         parent::__construct($message, $code, $previous);
@@ -17,11 +18,6 @@ class SqlQueryException extends Exception
 
     public function render(Request $request): Response|JsonResponse
     {
-        if ($request->is('api/*')) {
-            return response()->json(['message' => $this->getMessage()], $this->getCode());
-        } else {
-            return response()->view('errors.query-exception',
-                ['message' => $this->getMessage()], $this->getCode());
-        }
+        return self::renderException($this, $request, 'errors.query-exception');
     }
 }
