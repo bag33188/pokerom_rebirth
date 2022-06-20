@@ -2,12 +2,7 @@
 
 namespace App\Exceptions;
 
-use Exception;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
-use Throwable;
 
 class SqlQueryException extends ApplicationException
 {

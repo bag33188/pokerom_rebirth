@@ -9,7 +9,8 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 abstract class ApplicationException extends Exception
 {
-    use ExceptionRender;
+    private static string $defaultView = 'errors.generic';
+    private static string $defaultMsg = 'An error occurred.';
 
     abstract public function status(): int;
 
@@ -17,12 +18,19 @@ abstract class ApplicationException extends Exception
 
     abstract public function apiMessage(): ?string;
 
+    protected function makeCustomMessage(string $customMessage): string
+    {
+        return (strlen($this->getMessage()) != 0) ? $this->getMessage() : $customMessage;
+    }
+
     public function render(Request $request): Response|JsonResponse
     {
         if ($request->is('api/*')) {
-            return $this->renderApiException($this->apiMessage(), $this->status());
+            $error = new Error(error: $this->apiMessage() ?? self::$defaultMsg);
+            return response()->json($error, $this->status());
         } else {
-            return $this->renderViewException($this->viewName(), $this->getMessage(), $this->status());
+            return response()->view($viewName ?? self::$defaultView,
+                ['message' => $this->getMessage()], $this->status());
         }
     }
 }
