@@ -19,7 +19,7 @@ class GridFsServiceProvider extends ServiceProvider
     public function register(): void
     {
         $key = self::DB_NAME_CONF_KEY;
-        App::bind(FileHandler::class,
+        App::singleton(FileHandler::class,
             fn() => new FileHandler(databaseName: Config::get($key)));
     }
 
