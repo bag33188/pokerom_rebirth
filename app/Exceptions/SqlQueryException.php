@@ -16,7 +16,7 @@ class SqlQueryException extends ApplicationException
         return 'errors.query-exception';
     }
 
-    public function apiMessage(): string
+    public function errorMessage(): string
     {
         return $this->getMessage();
     }

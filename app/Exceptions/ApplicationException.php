@@ -16,9 +16,9 @@ abstract class ApplicationException extends Exception
 
     abstract public function viewName(): ?string;
 
-    abstract public function apiMessage(): ?string;
+    abstract public function errorMessage(): ?string;
 
-    protected function makeCustomMessage(string $customMessage): string
+    protected function makeCustomMessageIfDefaultIsNull(string $customMessage): string
     {
         return (strlen($this->getMessage()) != 0) ? $this->getMessage() : $customMessage;
     }
@@ -26,11 +26,11 @@ abstract class ApplicationException extends Exception
     public function render(Request $request): Response|JsonResponse
     {
         if ($request->is('api/*')) {
-            $error = new Error(error: $this->apiMessage() ?? self::$defaultMsg);
+            $error = new Error(error: $this->errorMessage() ?? self::$defaultMsg);
             return response()->json($error, $this->status());
         } else {
             return response()->view($this->viewName() ?? self::$defaultView,
-                ['message' => $this->getMessage()], $this->status());
+                ['message' => $this->errorMessage()], $this->status());
         }
     }
 }

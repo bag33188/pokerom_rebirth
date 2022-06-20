@@ -11,7 +11,7 @@ class UnsupportedRomTypeException extends ApplicationException
         return ResponseAlias::HTTP_UNSUPPORTED_MEDIA_TYPE;
     }
 
-    public function apiMessage(): string
+    public function errorMessage(): string
     {
         $fileType = explode('.', $this->getMessage(), 2)[1];
         return "File type is not supported: $fileType";

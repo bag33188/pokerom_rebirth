@@ -8,9 +8,9 @@ use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 class NotFoundException extends ApplicationException
 {
-    public function apiMessage(): string
+    public function errorMessage(): string
     {
-        return $this->makeCustomMessage("Error: requested endpoint not found.");
+        return $this->makeCustomMessageIfDefaultIsNull("Error: requested endpoint not found.");
     }
 
     public function status(): int

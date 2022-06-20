@@ -19,7 +19,7 @@ class MongoBulkException extends ApplicationException
         return ResponseAlias::HTTP_CONFLICT;
     }
 
-    public function apiMessage(): string
+    public function errorMessage(): string
     {
         return $this->getMessage();
     }
