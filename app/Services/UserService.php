@@ -10,6 +10,7 @@ use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 
 class UserService implements UserServiceInterface
 {
+    public int $statusCode;
     private static function generateUserApiToken(User $user): string
     {
         return $user->createToken(API_TOKEN_KEY)->plainTextToken;
