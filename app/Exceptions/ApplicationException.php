@@ -26,10 +26,10 @@ abstract class ApplicationException extends Exception
     public final function render(Request $request): Response|JsonResponse
     {
         if ($request->is('api/*')) {
-            $error = new Error(error: $this->errorMessage() ?? self::$defaultMsg);
+            $error = new Error(error: $this->errorMessage() ?: self::$defaultMsg);
             return response()->json($error, $this->status());
         } else {
-            return response()->view($this->viewName() ?? self::$defaultView,
+            return response()->view($this->viewName() ?: self::$defaultView,
                 ['message' => $this->errorMessage()], $this->status());
         }
     }
