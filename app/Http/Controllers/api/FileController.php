@@ -11,16 +11,15 @@ use App\Models\File;
 use Illuminate\{Auth\Access\AuthorizationException, Http\JsonResponse};
 use Illuminate\Support\Facades\Gate;
 use Symfony\Component\HttpFoundation\StreamedResponse;
+use FileRepo;
 
 
 class FileController extends ApiController
 {
-    private FileRepositoryInterface $fileRepository;
     private FileServiceInterface $fileService;
 
-    public function __construct(FileRepositoryInterface $fileRepository, FileServiceInterface $fileService)
+    public function __construct(FileServiceInterface $fileService)
     {
-        $this->fileRepository = $fileRepository;
         $this->fileService = $fileService;
     }
 
@@ -30,7 +29,7 @@ class FileController extends ApiController
     public function index()
     {
         Gate::authorize('viewAny-file');
-        return response()->json($this->fileRepository->getAllFilesSorted());
+        return response()->json(FileRepo::getAllFilesSorted());
     }
 
     /**
@@ -38,9 +37,9 @@ class FileController extends ApiController
      */
     public function indexRom(string $fileId)
     {
-        $file = $this->fileRepository->findFileIfExists($fileId);
+        $file = FileRepo::findFileIfExists($fileId);
         $this->authorize('view', $file);
-        return response()->json($this->fileRepository->getRomAssociatedWithFile($fileId));
+        return response()->json(FileRepo::getRomAssociatedWithFile($fileId));
     }
 
     /**
@@ -48,7 +47,7 @@ class FileController extends ApiController
      */
     public function show(string $fileId)
     {
-        $file = $this->fileRepository->findFileIfExists($fileId);
+        $file = FileRepo::findFileIfExists($fileId);
         $this->authorize('view', $file);
         return response()->json($file);
     }
@@ -59,7 +58,7 @@ class FileController extends ApiController
      */
     public function download(string $fileId): StreamedResponse
     {
-        $file = $this->fileRepository->findFileIfExists($fileId);
+        $file = FileRepo::findFileIfExists($fileId);
         return response()->streamDownload(function () use ($fileId) {
             $this->fileService->downloadFile($fileId);
         }, $file['filename'], array(
@@ -85,7 +84,7 @@ class FileController extends ApiController
      */
     public function destroy(string $fileId): JsonResponse
     {
-        $file = $this->fileRepository->findFileIfExists($fileId);
+        $file = FileRepo::findFileIfExists($fileId);
         $this->authorize('delete', $file);
         $res = $this->fileService->deleteFile($file);
         return response()->json($res->json, $res->code);

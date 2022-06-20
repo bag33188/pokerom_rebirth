@@ -221,9 +221,11 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
-        'GridFS' => \App\Facades\FileHandlerFacade::class,
+        'GridFS' => \App\Facades\FileStorageFacade::class,
         'RomRepo'=>\App\Facades\RomRepositoryFacade::class,
         'GameRepo'=>\App\Facades\GameRepositoryFacade::class,
+        'FileRepo'=>\App\Facades\FileRepositoryFacade::class,
+        'UserRepo'=>\App\Facades\UserRepositoryFacade::class,
     ])->toArray(),
 
 ];

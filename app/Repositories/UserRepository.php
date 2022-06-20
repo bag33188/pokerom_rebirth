@@ -9,30 +9,23 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 class UserRepository implements UserRepositoryInterface
 {
-    private User $user;
-
-    public function __construct(User $user)
-    {
-        $this->user = $user;
-    }
-
     public function findUserIfExists(int $userId): User
     {
-        return $this->user->findOrFail($userId);
+        return User::findOrFail($userId);
     }
 
     public function findUserByEmail(string $email): User
     {
-        return $this->user->where('email', $email)->firstOrFail();
+        return User::where('email', $email)->firstOrFail();
     }
 
     public function paginateUsers(?int $perPage = null): LengthAwarePaginator
     {
-        return $this->user->paginate($perPage ?: 4)->withQueryString();
+        return User::paginate($perPage ?: 4)->withQueryString();
     }
 
     public function getAllUsers(): Collection
     {
-        return $this->user->all();
+        return User::all();
     }
 }

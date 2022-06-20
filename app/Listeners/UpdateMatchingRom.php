@@ -3,8 +3,8 @@
 namespace App\Listeners;
 
 use App\Events\FileUploaded;
-use App\Interfaces\FileRepositoryInterface;
 use App\Models\Rom;
+use FileRepo;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
@@ -12,19 +12,8 @@ class UpdateMatchingRom implements ShouldQueue
 {
     use InteractsWithQueue;
 
-    private FileRepositoryInterface $fileRepository;
 
     public bool $afterCommit = true;
-
-    /**
-     * Create the event listener.
-     *
-     * @return void
-     */
-    public function __construct(FileRepositoryInterface $fileRepository)
-    {
-        $this->fileRepository = $fileRepository;
-    }
 
     /**
      * Handle the event.
@@ -36,7 +25,7 @@ class UpdateMatchingRom implements ShouldQueue
     {
         Rom::withoutEvents(function () use ($event) {
             $fileId = $event->file->getKey();
-            $rom = $this->fileRepository->searchForRomMatchingFile($fileId);
+            $rom = FileRepo::searchForRomMatchingFile($fileId);
             if (isset($rom)) {
                 $rom['has_file'] = true;
                 $rom['file_id'] = $fileId;

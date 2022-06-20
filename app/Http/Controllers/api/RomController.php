@@ -14,15 +14,14 @@ use App\Models\Rom;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Gate;
+use RomRepo;
 
 class RomController extends ApiController
 {
-    private RomRepositoryInterface $romRepository;
     private RomServiceInterface $romService;
 
-    public function __construct(RomRepositoryInterface $romRepository, RomServiceInterface $romService)
+    public function __construct(RomServiceInterface $romService)
     {
-        $this->romRepository = $romRepository;
         $this->romService = $romService;
     }
 
@@ -33,12 +32,12 @@ class RomController extends ApiController
      */
     public function index()
     {
-        return new RomCollection($this->romRepository->getAllRomsSorted());
+        return new RomCollection(RomRepo::getAllRomsSorted());
     }
 
     public function indexGame(int $romId)
     {
-        return new GameResource($this->romRepository->getGameAssociatedWithRom($romId));
+        return new GameResource(RomRepo::getGameAssociatedWithRom($romId));
     }
 
     /**
@@ -47,7 +46,7 @@ class RomController extends ApiController
     public function indexFile(int $romId)
     {
         Gate::authorize('viewAny-file');
-        return response()->json($this->romRepository->getFileAssociatedWithRom($romId));
+        return response()->json(RomRepo::getFileAssociatedWithRom($romId));
     }
 
     /**
@@ -71,13 +70,13 @@ class RomController extends ApiController
      */
     public function show(int $romId): RomResource
     {
-        $rom = $this->romRepository->findRomIfExists($romId);
+        $rom = RomRepo::findRomIfExists($romId);
         return new RomResource($rom);
     }
 
     public function update(UpdateRomRequest $request, int $romId): JsonResponse
     {
-        $rom = $this->romRepository->findRomIfExists($romId);
+        $rom = RomRepo::findRomIfExists($romId);
         $rom->update($request->all());
         return response()->json($rom);
     }
@@ -87,7 +86,7 @@ class RomController extends ApiController
      */
     public function linkRomToFile(int $romId)
     {
-        $rom = $this->romRepository->findRomIfExists($romId);
+        $rom = RomRepo::findRomIfExists($romId);
         $this->authorize('update', $rom);
         $res = $this->romService->attemptToLinkRomToFile($rom);
         return response()->json($res->json, $res->code);
@@ -102,7 +101,7 @@ class RomController extends ApiController
      */
     public function destroy(int $romId): JsonResponse
     {
-        $rom = $this->romRepository->findRomIfExists($romId);
+        $rom = RomRepo::findRomIfExists($romId);
         $this->authorize('delete', $rom);
         Rom::destroy($romId);
         return response()->json(['message' => "rom $rom->rom_name deleted!"]);

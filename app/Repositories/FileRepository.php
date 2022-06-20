@@ -9,16 +9,9 @@ use Illuminate\Database\Eloquent\Collection;
 
 class FileRepository implements FileRepositoryInterface
 {
-    private File $file;
-
-    public function __construct(File $file)
-    {
-        $this->file = $file;
-    }
-
     public function findFileIfExists(string $fileId): File
     {
-        return $this->file->findOrFail($fileId);
+        return File::findOrFail($fileId);
     }
 
     public function getRomAssociatedWithFile(string $fileId): Rom
@@ -28,7 +21,7 @@ class FileRepository implements FileRepositoryInterface
 
     public function getAllFilesSorted(): Collection
     {
-        return $this->file->all()->sortBy([['length', 'asc'], ['filename', 'asc']]);
+        return File::all()->sortBy([['length', 'asc'], ['filename', 'asc']]);
     }
 
     public function searchForRomMatchingFile(string $fileId): ?Rom

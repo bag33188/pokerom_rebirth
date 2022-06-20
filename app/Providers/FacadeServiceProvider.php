@@ -2,9 +2,10 @@
 
 namespace App\Providers;
 
-use App\Facades\RomRepositoryFacade;
+use App\Repositories\FileRepository;
 use App\Repositories\GameRepository;
 use App\Repositories\RomRepository;
+use App\Repositories\UserRepository;
 use Illuminate\Support\ServiceProvider;
 
 class FacadeServiceProvider extends ServiceProvider
@@ -14,10 +15,12 @@ class FacadeServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function register()
+    public function register(): void
     {
         $this->app->bind(RomRepository::class, fn() => new RomRepository);
         $this->app->bind(GameRepository::class, fn() => new GameRepository);
+        $this->app->bind(FileRepository::class, fn() => new FileRepository);
+        $this->app->bind(UserRepository::class, fn() => new UserRepository);
     }
 
     /**
@@ -25,13 +28,13 @@ class FacadeServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         $this->register();
     }
 
-    public function provides()
+    public function provides(): array
     {
-        return [RomRepository::class, GameRepository::class];
+        return [RomRepository::class, GameRepository::class, FileRepository::class];
     }
 }
