@@ -23,6 +23,6 @@ trait ExceptionRender
     #[Pure]
     protected static function makeCustomMessage(Exception $exception, string $msg): string
     {
-        return strlen(@$exception->getMessage()) != 0 ? $exception->getMessage() : $msg;
+        return (strlen(@$exception->getMessage()) != 0) ? $exception->getMessage() : $msg;
     }
 }
