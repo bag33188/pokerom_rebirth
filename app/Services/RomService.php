@@ -2,13 +2,13 @@
 
 namespace App\Services;
 
+use App\Exceptions\NotFoundException;
 use App\Interfaces\RomRepositoryInterface;
 use App\Interfaces\RomServiceInterface;
 use App\Models\File;
 use App\Models\Rom;
 use Illuminate\Support\Facades\DB;
 use JetBrains\PhpStorm\ArrayShape;
-use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 class RomService implements RomServiceInterface
 {
@@ -19,6 +19,9 @@ class RomService implements RomServiceInterface
         $this->romRepository = $romRepository;
     }
 
+    /**
+     * @throws NotFoundException
+     */
     #[ArrayShape(['message' => "string", 'data' => "\App\Models\Rom"])]
     public function attemptToLinkRomToFile(Rom $rom): array
     {
@@ -30,7 +33,7 @@ class RomService implements RomServiceInterface
                 'data' => $rom->refresh()
             ];
         } else {
-            abort(ResponseAlias::HTTP_NOT_FOUND, "File not found with name of {$rom->getRomFileName()}");
+            throw new NotFoundException("File not found with name of {$rom->getRomFileName()}");
         }
     }
 
