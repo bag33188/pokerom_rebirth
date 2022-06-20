@@ -21,11 +21,11 @@ class GameService implements GameServiceInterface
     {
         $rom = $this->romRepository->findRomIfExists($romId);
         $game = $rom->game()->create($data);
-        $this->associateGameWithRom($game, $rom);
+        self::associateGameWithRom($game, $rom);
         return new JsonServiceResponse(['data' => $game], ResponseAlias::HTTP_CREATED);
     }
 
-    private function associateGameWithRom(Game $game, Rom $rom)
+    private static function associateGameWithRom(Game $game, Rom $rom)
     {
         $rom->refresh();
         $game->rom()->associate($rom);
