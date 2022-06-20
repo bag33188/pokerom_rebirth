@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\api;
 
-use App\Enums\FileTypesEnum as FileTypes;
+use App\Enums\FileTypes;
 use App\Http\Controllers\Controller as ApiController;
 use App\Http\Requests\StoreFileRequest;
 use App\Interfaces\FileRepositoryInterface;
@@ -87,6 +87,6 @@ class FileController extends ApiController
     {
         $file = $this->fileRepository->findFileIfExists($fileId);
         $this->authorize('delete', $file);
-        return response()->json($this->fileService->deleteFile($file));
+        return response()->json($this->fileService->deleteFile($file), ResponseAlias::HTTP_OK);
     }
 }

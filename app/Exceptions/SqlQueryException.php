@@ -13,9 +13,9 @@ class SqlQueryException extends Exception
     use ExceptionRender;
 
     private static string $viewName = 'errors.query-exception';
-    private const BAD_REQUEST = 400;
+    private const CONFLICT = 409;
 
-    public function __construct(string $message = "", int $code = self::BAD_REQUEST, ?Throwable $previous = null)
+    public function __construct(string $message = "", int $code = self::CONFLICT, ?Throwable $previous = null)
     {
         parent::__construct($message, $code, $previous);
     }

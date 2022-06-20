@@ -13,7 +13,7 @@ use App\{Http\Controllers\Controller as ApiController,
 };
 use Illuminate\{Auth\Access\AuthorizationException, Http\JsonResponse};
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
-use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Symfony\Component\HttpKernel\Exception\PreconditionFailedHttpException;
 
 class GameController extends ApiController
 {
@@ -54,7 +54,7 @@ class GameController extends ApiController
     public function store(StoreGameRequest $request): JsonResponse
     {
         $romId = $request->query('romId') ??
-            throw new BadRequestHttpException(message: 'No ROM ID was sent.');
+            throw new PreconditionFailedHttpException(message: 'No ROM ID was sent.');
         return response()->json(
             $this->gameService->createGame($romId, $request->all()),
             ResponseAlias::HTTP_CREATED);

@@ -15,9 +15,6 @@ class RequiredIfPutRequest extends RequiredIf
     /** @var callable|bool */
     public $condition;
 
-    /**
-     * @throws BadRequestHttpException
-     */
     public function __construct(Request $request)
     {
         $this->httpRequest = $request;

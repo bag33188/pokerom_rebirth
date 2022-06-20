@@ -3,7 +3,7 @@
 
 namespace App\Enums;
 
-enum ImageTypesEnum: string
+enum ImageTypes: string
 {
     // PORTABLE NETWORK GRAPHICS
     case IMG_PNG = "image/png";

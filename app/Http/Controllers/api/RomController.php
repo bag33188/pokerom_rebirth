@@ -90,7 +90,7 @@ class RomController extends ApiController
     {
         $rom = $this->romRepository->findRomIfExists($romId);
         $this->authorize('update', $rom);
-        return response()->json($this->romService->attemptToLinkRomToFile($rom), ResponseAlias::HTTP_ACCEPTED);
+        return response()->json($this->romService->attemptToLinkRomToFile($rom), ResponseAlias::HTTP_OK);
     }
 
     /**
