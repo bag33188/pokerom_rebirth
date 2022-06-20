@@ -29,7 +29,7 @@ abstract class ApplicationException extends Exception
             $error = new Error(error: $this->apiMessage() ?? self::$defaultMsg);
             return response()->json($error, $this->status());
         } else {
-            return response()->view($viewName ?? self::$defaultView,
+            return response()->view($this->viewName() ?? self::$defaultView,
                 ['message' => $this->getMessage()], $this->status());
         }
     }
