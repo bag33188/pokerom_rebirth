@@ -60,7 +60,7 @@ class RomController extends ApiController
     {
         $rom = Rom::create($request->all());
 
-        return response()->json($rom);
+        return response()->json($rom, 201);
     }
 
     /**
