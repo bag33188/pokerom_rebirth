@@ -11,10 +11,19 @@ class UnsupportedRomTypeException extends ApplicationException
         return ResponseAlias::HTTP_UNSUPPORTED_MEDIA_TYPE;
     }
 
+    /**
+     * Only works if filename is passed into exception constructor as message.
+     *
+     * @return string
+     */
+    private function getFileExtension(): string
+    {
+        return explode('.', $this->getMessage(), 2)[1];
+    }
+
     public function errorMessage(): string
     {
-        $fileType = explode('.', $this->getMessage(), 2)[1];
-        return "File type is not supported: $fileType";
+        return "File type is not supported: \"{$this->getFileExtension()}\"";
     }
 
     public function viewName(): ?string
