@@ -2,7 +2,6 @@
 
 namespace App\Exceptions;
 
-use Illuminate\Http\Response;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 class UnsupportedRomTypeException extends ApplicationException
@@ -12,13 +11,14 @@ class UnsupportedRomTypeException extends ApplicationException
         return ResponseAlias::HTTP_UNSUPPORTED_MEDIA_TYPE;
     }
 
-    public function help(): string
+    public function apiMessage(): string
     {
-        return 'no rommfds';
+        $fileType= explode('.', $this->getMessage(), 2)[1];
+        return "File type is not supported: $fileType";
     }
 
-    public function error(): string
+    public function viewName(): string
     {
-        return 'bebe';
+        return 'Error: Unsupported ROM type.';
     }
 }

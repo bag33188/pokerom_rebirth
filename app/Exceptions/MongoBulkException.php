@@ -8,20 +8,26 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Throwable;
 
-class MongoBulkException extends Exception
+class MongoBulkException extends ApplicationException
 {
     use ExceptionRender;
 
     private static string $viewName = 'errors.query-exception';
-    private const CONFLICT = 409;
 
-    public function __construct(string $message = "", int $code = self::CONFLICT, ?Throwable $previous = null)
+    /**
+     * @return string
+     */
+    public function viewName(): string
     {
-        parent::__construct($message, $code, $previous);
+        return self::$viewName;
     }
 
-    public function render(Request $request): Response|JsonResponse
+    public function status():int{
+        return Response::HTTP_CONFLICT;
+    }
+
+    public function apiMessage(): ?string
     {
-        return self::renderException($this, $request, self::$viewName);
+        return $this->getMessage();
     }
 }

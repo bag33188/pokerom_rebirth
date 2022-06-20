@@ -9,6 +9,8 @@ class ValidFilename implements Rule
 {
     private string $filename;
 
+
+
     /**
      * Create a new rule instance.
      *
@@ -29,7 +31,8 @@ class ValidFilename implements Rule
      */
     public function passes($attribute, $value): bool
     {
-        return preg_match(FILENAME_PATTERN, @$value);
+        return preg_match(FILENAME_PATTERN, $this->filename ??
+            ($value ?: 'fsdfa'));
     }
 
     /**
