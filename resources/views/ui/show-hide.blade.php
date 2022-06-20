@@ -1,5 +1,5 @@
 @push('styles')
-    <style type="text/css">
+    <style <?php echo 'type="text/css"'; ?>>
         [x-cloak] {
             display: none;
         }
