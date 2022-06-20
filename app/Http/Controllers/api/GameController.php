@@ -54,7 +54,7 @@ class GameController extends ApiController
     public function store(StoreGameRequest $request): JsonResponse
     {
         $romId = $request->query('romId') ??
-            throw new PreconditionFailedHttpException(message: 'No ROM ID was sent.');
+            throw new PreconditionFailedHttpException(message: 'No ROM ID was sent.', code: 412);
         return response()->json(
             $this->gameService->createGame($romId, $request->all()),
             ResponseAlias::HTTP_CREATED);

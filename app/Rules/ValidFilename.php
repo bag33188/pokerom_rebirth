@@ -3,11 +3,13 @@
 namespace App\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
-use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Symfony\Component\HttpKernel\Exception\UnsupportedMediaTypeHttpException;
 
 class ValidFilename implements Rule
 {
     private string $filename;
+
+
 
     /**
      * Create a new rule instance.
@@ -30,7 +32,7 @@ class ValidFilename implements Rule
     public function passes($attribute, $value): bool
     {
         return preg_match(FILENAME_PATTERN, $this->filename ??
-            ($value ?: new BadRequestHttpException("ERR_CANNOT_GET_FILENAME")));
+            ($value ?: throw new UnsupportedMediaTypeHttpException("ERR_CANNOT_GET_FILENAME")));
     }
 
     /**
