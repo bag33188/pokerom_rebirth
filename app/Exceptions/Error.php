@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use JetBrains\PhpStorm\ArrayShape;
+use JsonException;
 use JsonSerializable;
 use Illuminate\Contracts\Support\Jsonable;
 use Illuminate\Contracts\Support\Arrayable;
@@ -34,7 +35,7 @@ class Error implements Arrayable, Jsonable, JsonSerializable
     public function toJson($options = 0.0): bool|string
     {
         $jsonEncoded = json_encode($this->jsonSerialize(), $options);
-        throw_unless($jsonEncoded, JsonEncodeException::class);
+        throw_unless($jsonEncoded, JsonException::class);
         return $jsonEncoded;
     }
 }
