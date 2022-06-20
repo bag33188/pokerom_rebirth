@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\Actions\GameValidationRules;
+use App\Actions\Validators\GameValidationRules;
 use App\Models\Game;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Str;
