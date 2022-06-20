@@ -23,7 +23,7 @@ class Handler extends ExceptionHandler
      * @var array<class-string<Throwable>, LogLevel::*>
      */
     protected $levels = [
-        PDOException::class => LogLevel::ERROR,
+        PDOException::class => LogLevel::CRITICAL,
         WriteException::class => LogLevel::ERROR,
     ];
 
