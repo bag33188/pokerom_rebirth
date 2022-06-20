@@ -2,11 +2,11 @@
 
 namespace App\Exceptions;
 
+use Illuminate\Contracts\Support\Arrayable;
+use Illuminate\Contracts\Support\Jsonable;
 use JetBrains\PhpStorm\ArrayShape;
 use JsonException;
 use JsonSerializable;
-use Illuminate\Contracts\Support\Jsonable;
-use Illuminate\Contracts\Support\Arrayable;
 use Throwable;
 
 class Error implements Arrayable, Jsonable, JsonSerializable
@@ -15,10 +15,11 @@ class Error implements Arrayable, Jsonable, JsonSerializable
     {
     }
 
-    #[ArrayShape(['message' => "string"])]
+    #[ArrayShape(['success' => "false", 'message' => "string"])]
     public function toArray(): array
     {
         return [
+            'success' => false,
             'message' => $this->error
         ];
     }
