@@ -36,4 +36,10 @@ class RepositoryServiceProvider extends ServiceProvider
     {
         $this->register();
     }
+
+    // not needed??!!
+    public function provides(): array
+    {
+        return [RomRepository::class, GameRepository::class, FileRepository::class, UserRepository::class];
+    }
 }

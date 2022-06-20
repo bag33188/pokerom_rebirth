@@ -8,7 +8,6 @@ use RomRepo;
 
 class GameService implements GameServiceInterface
 {
-
     public function createGame(int $romId, array $data): JsonServiceResponse
     {
         $rom = RomRepo::findRomIfExists($romId);

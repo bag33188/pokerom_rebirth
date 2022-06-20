@@ -2,15 +2,11 @@
 
 namespace App\Http\Controllers\api;
 
-use App\{Http\Controllers\Controller as ApiController,
-    Http\Requests\StoreGameRequest,
-    Http\Requests\UpdateGameRequest,
-    Http\Resources\GameCollection,
-    Http\Resources\GameResource,
-    Interfaces\GameRepositoryInterface,
-    Interfaces\GameServiceInterface,
-    Models\Game
-};
+use App\Http\Controllers\Controller as ApiController;
+use App\Http\Requests\{StoreGameRequest, UpdateGameRequest};
+use App\Http\Resources\{GameCollection, GameResource};
+use App\Interfaces\GameServiceInterface;
+use App\Models\Game;
 use GameRepo;
 use Illuminate\{Auth\Access\AuthorizationException, Http\JsonResponse};
 use Symfony\Component\HttpKernel\Exception\PreconditionFailedHttpException;
