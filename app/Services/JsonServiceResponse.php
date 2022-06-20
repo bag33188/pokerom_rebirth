@@ -9,8 +9,13 @@ class JsonServiceResponse
 
     public function __construct(array $json, int $code)
     {
-        $json['success'] = $code < 400;
+        self::setSuccessState($json, $code);
         $this->json = $json;
         $this->code = $code;
+    }
+
+    private static function setSuccessState(&$json, $code): void
+    {
+        $json['success'] = $code < 400;
     }
 }
