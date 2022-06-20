@@ -8,18 +8,22 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use JetBrains\PhpStorm\Pure;
 use Throwable;
+
 
 # use JetBrains\PhpStorm\Internal\LanguageLevelTypeAware;
 
 class NotFoundException extends Exception
 {
-    use ExceptionRender;
+    use ExceptionRender {
+        ExceptionRender::makeCustomMessage as makeMessage;
+    }
 
     private string $notFoundMessage;
+    private static string $viewName = 'errors.404';
+    private const NOT_FOUND = 404;
 
-    public function __construct(string $message = "", int $code = 404, ?Throwable $previous = null)
+    public function __construct(string $message = "", int $code = self::NOT_FOUND, ?Throwable $previous = null)
     {
         parent::__construct($message, $code, $previous);
         $this->notFoundMessage = $this->generateNotFoundMessage();
@@ -27,11 +31,11 @@ class NotFoundException extends Exception
 
     private function generateNotFoundMessage(): string
     {
-        return self::makeCustomMessage($this, "Error: requested endpoint not found.");
+        return self::makeMessage($this, "Error: requested endpoint not found.");
     }
 
     public function render(Request $request): View|Factory|JsonResponse|Application
     {
-        return self::renderException($this, $request, 'errors.404', $this->notFoundMessage);
+        return self::renderException($this, $request, self::$viewName, $this->notFoundMessage);
     }
 }

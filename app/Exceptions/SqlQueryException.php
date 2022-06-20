@@ -11,13 +11,17 @@ use Throwable;
 class SqlQueryException extends Exception
 {
     use ExceptionRender;
-    public function __construct(string $message = "", int $code = 400, ?Throwable $previous = null)
+
+    private static string $viewName = 'errors.query-exception';
+    private const BAD_REQUEST = 400;
+
+    public function __construct(string $message = "", int $code = self::BAD_REQUEST, ?Throwable $previous = null)
     {
         parent::__construct($message, $code, $previous);
     }
 
     public function render(Request $request): Response|JsonResponse
     {
-        return self::renderException($this, $request, 'errors.query-exception');
+        return self::renderException($this, $request, self::$viewName);
     }
 }
