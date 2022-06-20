@@ -10,20 +10,35 @@ use JetBrains\PhpStorm\Pure;
 
 trait ExceptionRender
 {
-    protected static function renderException(ApplicationException $exception, Request $request, string $viewName = null, string $apiMessage = null): Response|JsonResponse
+    private static string $defaultView = 'errors.generic';
+    private static string $defaultMsg = 'An error occurred.';
+
+//    protected function renderException(ApplicationException $exception, Request $request, string $viewName, string $apiMessage): Response|JsonResponse
+//    {
+//        if ($request->is('api/*')) {
+//            $error = new Error(error: $apiMessage ?? self::$defaultMsg);
+//            return response()->json($error, $exception->status());
+//        } else {
+//            return response()->view($viewName ?? self::$defaultView,
+//                ['message' => $exception->getMessage()], $exception->status());
+//        }
+//    }
+
+    protected function renderApiException(string $apiMessage, int $status): JsonResponse
     {
-        if ($request->is('api/*')) {
-            $error = new Error(error: $apiMessage ?? 'error');
-            return response()->json($error, $exception->status());
-        } else {
-            return response()->view($viewName ?? 'errors.generic',
-                ['message' => $exception->getMessage()], $exception->status());
-        }
+        $error = new Error(error: $apiMessage ?? self::$defaultMsg);
+        return response()->json($error, $status);
+    }
+
+    protected function renderViewException(string $viewName, string $message, int $status): Response
+    {
+        return response()->view($viewName ?? self::$defaultView,
+            ['message' => $message], $status);
     }
 
     #[Pure]
     protected static function makeCustomMessage(Exception $exception, string $msg): string
     {
-        return (strlen(@$exception->getMessage()) != 0) ? $exception->getMessage() : $msg;
+        return (strlen($exception->getMessage()) != 0) ? $exception->getMessage() : $msg;
     }
 }

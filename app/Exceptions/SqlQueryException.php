@@ -11,11 +11,6 @@ use Throwable;
 
 class SqlQueryException extends ApplicationException
 {
-    use ExceptionRender;
-
-    private static string $viewName = 'errors.query-exception';
-    private const CONFLICT = 409;
-
     public function status(): int
     {
        return ResponseAlias::HTTP_CONFLICT;

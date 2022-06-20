@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 abstract class ApplicationException extends Exception
 {
     use ExceptionRender;
+
     abstract public function status(): int;
 
     abstract public function viewName(): ?string;
@@ -18,6 +19,11 @@ abstract class ApplicationException extends Exception
 
     public function render(Request $request): Response|JsonResponse
     {
-        return self::renderException($this, $request, $this->viewName(), $this->apiMessage());
+        if ($request->is('api/*')) {
+            return $this->renderApiException($this->apiMessage(), $this->status());
+        } else {
+            return $this->renderViewException($this->viewName(), $this->getMessage(), $this->status());
+        }
+//        return $this->renderException($this, $request, $this->viewName(), $this->apiMessage());
     }
 }
