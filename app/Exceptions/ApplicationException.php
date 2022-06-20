@@ -12,11 +12,11 @@ abstract class ApplicationException extends Exception
     private static string $defaultView = 'errors.generic';
     private static string $defaultMsg = 'An error occurred.';
 
-    abstract public function status(): int;
+    abstract protected function status(): int;
 
-    abstract public function viewName(): ?string;
+    abstract protected function viewName(): ?string;
 
-    abstract public function errorMessage(): ?string;
+    abstract protected function errorMessage(): ?string;
 
     protected final function makeCustomMessageIfDefaultIsNull(string $customMessage): string
     {
