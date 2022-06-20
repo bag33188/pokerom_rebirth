@@ -11,7 +11,5 @@
         <span x-show="!open" x-cloak>Show</span>
     </p>
     <span>&nbsp;</span>
-    <p class="inline">
-        <span>{{$text}}</span>
-    </p>
+    <p class="inline">{{$text}}</p>
 </div>
