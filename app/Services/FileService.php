@@ -18,7 +18,6 @@ class FileService implements FileServiceInterface
         GridFS::download($fileId);
     }
 
-    #[ArrayShape(['message' => "string"])]
     public function uploadFile(UploadedFile $file): JsonServiceResponse
     {
         GridFS::upload($file);
@@ -26,7 +25,6 @@ class FileService implements FileServiceInterface
         return new JsonServiceResponse(['message' => "file '" . GridFS::getFilename() . "' created!"], ResponseAlias::HTTP_CREATED);
     }
 
-    #[ArrayShape(['message' => "string"])]
     public function deleteFile(File $file): JsonServiceResponse
     {
         event(new FileDeleted($file));

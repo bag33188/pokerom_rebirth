@@ -19,7 +19,6 @@ class UserService implements UserServiceInterface
         auth()->user()->tokens()->delete();
     }
 
-    #[ArrayShape(['message' => "string"])]
     public function deleteUser(User $user): JsonServiceResponse
     {
         $this->revokeUserTokens();
@@ -36,14 +35,12 @@ class UserService implements UserServiceInterface
         ], ResponseAlias::HTTP_CREATED);
     }
 
-    #[ArrayShape(['message' => "string"])]
     public function logoutCurrentUser(): JsonServiceResponse
     {
         $this->revokeUserTokens();
         return new JsonServiceResponse(['message' => 'logged out!'], ResponseAlias::HTTP_OK);
     }
 
-    #[ArrayShape(['user' => "\App\Models\User", 'token' => "\Laravel\Sanctum\string|string"])]
     public function authenticateUserAgainstCredentials(User $user, string $requestPassword): JsonServiceResponse
     {
         // Check password hash against database

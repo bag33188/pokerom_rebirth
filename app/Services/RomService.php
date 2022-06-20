@@ -7,7 +7,6 @@ use App\Interfaces\RomServiceInterface;
 use App\Models\File;
 use App\Models\Rom;
 use Illuminate\Support\Facades\DB;
-use JetBrains\PhpStorm\ArrayShape;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 class RomService implements RomServiceInterface
@@ -19,7 +18,6 @@ class RomService implements RomServiceInterface
         $this->romRepository = $romRepository;
     }
 
-    #[ArrayShape(['json' => "array", 'code' => "int"])]
     public function attemptToLinkRomToFile(Rom $rom): JsonServiceResponse
     {
         $file = $this->romRepository->searchForFileMatchingRom($rom->id);
