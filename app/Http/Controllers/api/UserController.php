@@ -80,18 +80,6 @@ class UserController extends ApiController
     }
 
     /**
-     * unfinished
-     * @throws AuthorizationException
-     */
-    public function update(Request $request, int $userId)
-    {
-        $user = $request->user(); // User::find($userId);
-        $this->authorize('update', $user);
-        $user->update(['password' => $request['password']]);
-        return response($user);
-    }
-
-    /**
      * @throws AuthorizationException
      */
     public function destroy(int $userId)
