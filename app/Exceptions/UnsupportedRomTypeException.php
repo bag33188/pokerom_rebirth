@@ -13,12 +13,12 @@ class UnsupportedRomTypeException extends ApplicationException
 
     public function apiMessage(): string
     {
-        $fileType= explode('.', $this->getMessage(), 2)[1];
+        $fileType = explode('.', $this->getMessage(), 2)[1];
         return "File type is not supported: $fileType";
     }
 
-    public function viewName(): string
+    public function viewName(): ?string
     {
-        return 'Error: Unsupported ROM type.';
+        return null;
     }
 }

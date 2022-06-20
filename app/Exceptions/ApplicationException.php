@@ -18,6 +18,6 @@ abstract class ApplicationException extends Exception
 
     public function render(Request $request): Response|JsonResponse
     {
-        return self::renderException($this, $request, $this->viewName(), @$this->apiMessage());
+        return self::renderException($this, $request, $this->viewName(), $this->apiMessage());
     }
 }

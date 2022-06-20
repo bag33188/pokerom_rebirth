@@ -8,34 +8,29 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 use Throwable;
 
 
 # use JetBrains\PhpStorm\Internal\LanguageLevelTypeAware;
 
-class NotFoundException extends Exception
+class NotFoundException extends ApplicationException
 {
     use ExceptionRender {
         ExceptionRender::makeCustomMessage as makeMessage;
     }
 
-    private string $notFoundMessage;
-    private static string $viewName = 'errors.404';
-    private const NOT_FOUND = 404;
-
-    public function __construct(string $message = "", int $code = self::NOT_FOUND, ?Throwable $previous = null)
-    {
-        parent::__construct($message, $code, $previous);
-        $this->notFoundMessage = $this->generateNotFoundMessage();
-    }
-
-    private function generateNotFoundMessage(): string
+    public function apiMessage(): string
     {
         return self::makeMessage($this, "Error: requested endpoint not found.");
     }
-
-    public function render(Request $request): View|Factory|JsonResponse|Application
+    public function status(): int
     {
-        return self::renderException($this, $request, self::$viewName, $this->notFoundMessage);
+        return ResponseAlias::HTTP_NOT_FOUND;
+    }
+    public function viewName(): string
+    {
+        return  'errors.404';
     }
 }

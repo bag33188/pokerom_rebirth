@@ -3,13 +3,12 @@
 namespace App\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
-use Symfony\Component\HttpKernel\Exception\UnsupportedMediaTypeHttpException;
 
 class ValidFilename implements Rule
 {
     private string $filename;
 
-
+    private static string $errorDefault = 'ERR_NO_FILENAME';
 
     /**
      * Create a new rule instance.
@@ -32,7 +31,7 @@ class ValidFilename implements Rule
     public function passes($attribute, $value): bool
     {
         return preg_match(FILENAME_PATTERN, $this->filename ??
-            ($value ?: 'fsdfa'));
+            ($value ?: self::$errorDefault));
     }
 
     /**

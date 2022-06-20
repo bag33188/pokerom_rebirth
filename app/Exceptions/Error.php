@@ -14,6 +14,7 @@ class Error implements Arrayable, Jsonable, JsonSerializable
     {
     }
 
+    #[ArrayShape(['message' => "string"])]
     public function toArray(): array
     {
         return [

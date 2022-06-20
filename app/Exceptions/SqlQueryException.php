@@ -6,22 +6,28 @@ use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 use Throwable;
 
-class SqlQueryException extends Exception
+class SqlQueryException extends ApplicationException
 {
     use ExceptionRender;
 
     private static string $viewName = 'errors.query-exception';
     private const CONFLICT = 409;
 
-    public function __construct(string $message = "", int $code = self::CONFLICT, ?Throwable $previous = null)
+    public function status(): int
     {
-        parent::__construct($message, $code, $previous);
+       return ResponseAlias::HTTP_CONFLICT;
     }
 
-    public function render(Request $request): Response|JsonResponse
+    public function viewName(): string
     {
-        return self::renderException($this, $request, self::$viewName);
+        return 'errors.query-exception';
+    }
+
+    public function apiMessage(): string
+    {
+        return $this->getMessage();
     }
 }

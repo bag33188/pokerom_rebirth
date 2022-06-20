@@ -10,13 +10,13 @@ use JetBrains\PhpStorm\Pure;
 
 trait ExceptionRender
 {
-    protected static function renderException(ApplicationException $exception, Request $request, string $viewName, string $apiMessage = null): Response|JsonResponse
+    protected static function renderException(ApplicationException $exception, Request $request, string $viewName = null, string $apiMessage = null): Response|JsonResponse
     {
         if ($request->is('api/*')) {
-            $error = new Error(error: $apiMessage);
+            $error = new Error(error: $apiMessage ?? 'error');
             return response()->json($error, $exception->status());
         } else {
-            return response()->view($viewName,
+            return response()->view($viewName ?? 'errors.generic',
                 ['message' => $exception->getMessage()], $exception->status());
         }
     }
