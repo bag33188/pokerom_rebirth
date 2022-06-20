@@ -202,6 +202,7 @@ return [
         App\Providers\RepositoryServiceProvider::class,
         App\Providers\DataServiceProvider::class,
         App\Providers\GridFsServiceProvider::class,
+        App\Providers\FacadeServiceProvider::class,
 
         // Laravel IDE Helper
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class
@@ -220,7 +221,9 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
-        'GridFS' => \App\Facades\FileHandlerFacade::class
+        'GridFS' => \App\Facades\FileHandlerFacade::class,
+        'RomRepo'=>\App\Facades\RomRepositoryFacade::class,
+        'GameRepo'=>\App\Facades\GameRepositoryFacade::class,
     ])->toArray(),
 
 ];

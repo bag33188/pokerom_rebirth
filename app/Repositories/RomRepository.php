@@ -10,21 +10,14 @@ use Illuminate\Database\Eloquent\Collection;
 
 class RomRepository implements RomRepositoryInterface
 {
-    private Rom $rom;
-
-    public function __construct(Rom $rom)
-    {
-        $this->rom = $rom;
-    }
-
     public function findRomIfExists(int $romId): Rom
     {
-        return $this->rom->findOrFail($romId);
+        return Rom::findOrFail($romId);
     }
 
     public function getAllRomsSorted(): Collection
     {
-        return $this->rom->all()->sortBy([['game_id', 'asc'], ['rom_size', 'asc']]);
+        return Rom::all()->sortBy([['game_id', 'asc'], ['rom_size', 'asc']]);
     }
 
     public function getGameAssociatedWithRom(int $romId): Game

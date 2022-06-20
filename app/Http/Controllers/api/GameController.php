@@ -11,17 +11,16 @@ use App\{Http\Controllers\Controller as ApiController,
     Interfaces\GameServiceInterface,
     Models\Game
 };
+use GameRepo;
 use Illuminate\{Auth\Access\AuthorizationException, Http\JsonResponse};
 use Symfony\Component\HttpKernel\Exception\PreconditionFailedHttpException;
 
 class GameController extends ApiController
 {
-    private GameRepositoryInterface $gameRepository;
     private GameServiceInterface $gameService;
 
-    public function __construct(GameRepositoryInterface $gameRepository, GameServiceInterface $gameService)
+    public function __construct(GameServiceInterface $gameService)
     {
-        $this->gameRepository = $gameRepository;
         $this->gameService = $gameService;
     }
 
@@ -32,7 +31,7 @@ class GameController extends ApiController
      */
     public function index()
     {
-        return new GameCollection($this->gameRepository->getAllGamesSorted());
+        return new GameCollection(GameRepo::getAllGamesSorted());
     }
 
     /**
@@ -41,7 +40,7 @@ class GameController extends ApiController
      */
     public function indexRom(int $gameId)
     {
-        return response()->json($this->gameRepository->getRomAssociatedWithGame($gameId));
+        return response()->json(GameRepo::getRomAssociatedWithGame($gameId));
     }
 
     /**
@@ -62,14 +61,14 @@ class GameController extends ApiController
 
     public function update(UpdateGameRequest $request, int $gameId): JsonResponse
     {
-        $game = $this->gameRepository->findGameIfExists($gameId);
+        $game = GameRepo::findGameIfExists($gameId);
         $game->update($request->all());
         return response()->json($game);
     }
 
     public function show(int $gameId)
     {
-        return new GameResource($this->gameRepository->findGameIfExists($gameId));
+        return new GameResource(GameRepo::findGameIfExists($gameId));
     }
 
     /**
@@ -81,7 +80,7 @@ class GameController extends ApiController
      */
     public function destroy(int $gameId): JsonResponse
     {
-        $game = $this->gameRepository->findGameIfExists($gameId);
+        $game = GameRepo::findGameIfExists($gameId);
         $this->authorize('delete', $game);
         Game::destroy($gameId);
         return response()->json(['message' => "game $game->game_name deleted!"]);

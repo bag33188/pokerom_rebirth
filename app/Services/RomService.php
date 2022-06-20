@@ -8,19 +8,15 @@ use App\Models\File;
 use App\Models\Rom;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
+use RomRepo;
 
 class RomService implements RomServiceInterface
 {
-    protected RomRepositoryInterface $romRepository;
-
-    public function __construct(RomRepositoryInterface $romRepository)
-    {
-        $this->romRepository = $romRepository;
-    }
 
     public function attemptToLinkRomToFile(Rom $rom): JsonServiceResponse
     {
-        $file = $this->romRepository->searchForFileMatchingRom($rom->id);
+        $file = RomRepo::searchForFileMatchingRom($rom->id);
+//        $file = RomRepo::searchForFileMatchingRom($rom->id);
         if (isset($file)) {
             $this->setRomDataFromFile($rom, $file);
             return new JsonServiceResponse([
@@ -34,7 +30,7 @@ class RomService implements RomServiceInterface
 
     public function linkRomToFileIfExists(Rom $rom): void
     {
-        $file = $this->romRepository->searchForFileMatchingRom($rom->id);
+        $file = RomRepo::searchForFileMatchingRom($rom->id);
         if (isset($file)) $this->setRomDataFromFile($rom, $file);
     }
 
