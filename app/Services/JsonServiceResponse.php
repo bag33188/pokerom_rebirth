@@ -13,7 +13,7 @@ class JsonServiceResponse implements Jsonable
     public function __construct(array $data, int $code)
     {
         self::setSuccessState($data, $code);
-        $this->$data = $data;
+        $this->data = $data;
         $this->code = $code;
     }
 
@@ -27,8 +27,7 @@ class JsonServiceResponse implements Jsonable
         return json_encode($this->data);
     }
 
-    // renderJson...renderResponse????
-    public function response(): JsonResponse
+    public function renderResponse(): JsonResponse
     {
         return response()->json($this->data, $this->code);
     }

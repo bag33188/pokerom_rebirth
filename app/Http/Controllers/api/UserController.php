@@ -27,12 +27,11 @@ class UserController extends ApiController
     /**
      * @throws AuthorizationException
      */
-    public function index(Request $request): JsonResponse|UserCollection
+    public function index(Request $request): UserCollection
     {
         Gate::authorize('viewAny-user');
         if (filter_var($request->query('paginate'), FILTER_VALIDATE_BOOLEAN) === true) {
-            return response()
-                ->json(UserRepo::paginateUsers((int)$request->query('per_page')));
+            return new UserCollection(UserRepo::paginateUsers((int)$request->query('per_page')));
         } else {
             return new UserCollection(UserRepo::getAllUsers());
         }
@@ -41,20 +40,19 @@ class UserController extends ApiController
     public function register(StoreUserRequest $request): JsonResponse
     {
         $user = User::create($request->all());
-        return $this->userDataService->registerUserToken($user)->response();
+        return $this->userDataService->registerUserToken($user)->renderResponse();
     }
 
     public function login(LoginRequest $request): JsonResponse
     {
         $user = UserRepo::findUserByEmail($request['email']);
-        return $this->userDataService->authenticateUserAgainstCredentials($user, $request['password'])->response();
+        return $this->userDataService->authenticateUserAgainstCredentials($user, $request['password'])->renderResponse();
     }
 
     public function logout(): JsonResponse
     {
-        return $this->userDataService->logoutCurrentUser()->response();
+        return $this->userDataService->logoutCurrentUser()->renderResponse();
     }
-
 
     /**
      * @throws AuthorizationException
@@ -78,6 +76,6 @@ class UserController extends ApiController
     {
         $user = UserRepo::findUserIfExists($userId);
         $this->authorize('delete', $user);
-        return $this->userDataService->deleteUser($user)->response();
+        return $this->userDataService->deleteUser($user)->renderResponse();
     }
 }
