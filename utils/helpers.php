@@ -2,7 +2,7 @@
 
 //--- GLOBAL HELPER FUNCTIONS ---//
 
-$helpers_path = 'helpers';
+$helpers_path = 'functions';
 
 require_once "$helpers_path/str_capitalize.php";
 require_once "$helpers_path/number_to_roman.php";
