@@ -80,7 +80,7 @@ class RomController extends ApiController
     {
         $rom = RomRepo::findRomIfExists($romId);
         $rom->update($request->all());
-        return response()->json(api_res($rom));
+        return response()->json(new RomResource($rom));
     }
 
     /**
@@ -106,6 +106,6 @@ class RomController extends ApiController
         $rom = RomRepo::findRomIfExists($romId);
         $this->authorize('delete', $rom);
         Rom::destroy($romId);
-        return response()->json(api_res(['message' => "rom $rom->rom_name deleted!"]));
+        return response()->json(['message' => "rom $rom->rom_name deleted!", 'success' => true]);
     }
 }
