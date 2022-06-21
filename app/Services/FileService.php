@@ -18,7 +18,7 @@ class FileService implements FileServiceInterface
     {
         return new StreamedResponse(function () use ($file) {
             RomFile::download($file->getKey());
-        }, $file['filename'], array(
+        }, ResponseAlias::HTTP_ACCEPTED, array(
             'Content-Type' => FileTypes::OCTET_STREAM->value,
             'Content-Transfer-Encoding' => 'chunked',
             'Content-Disposition' => "attachment; filename=\"{$file['filename']}\""));
