@@ -22,7 +22,7 @@ class FileDataService implements FileServiceInterface
         }, ResponseAlias::HTTP_ACCEPTED, array(
             'Content-Type' => FileTypes::OCTET_STREAM->value,
             'Content-Transfer-Encoding' => 'chunked',
-            'Content-Disposition' => "attachment; filename=\"{$file->filename}\""));
+            'Content-Disposition' => "attachment; filename=\"$file->filename\""));
     }
 
     public function uploadFile(UploadedFile $file): JsonDataServiceResponse
@@ -36,6 +36,6 @@ class FileDataService implements FileServiceInterface
     {
         event(new FileDeleted($file));
         RomFile::destroy($file->getKey());
-        return new JsonDataServiceResponse(['message' => "{$file->filename} deleted!"], ResponseAlias::HTTP_OK);
+        return new JsonDataServiceResponse(['message' => "$file->filename deleted!"], ResponseAlias::HTTP_OK);
     }
 }
