@@ -59,12 +59,7 @@ class FileController extends ApiController
     public function download(string $fileId): StreamedResponse
     {
         $file = FileRepo::findFileIfExists($fileId);
-        return response()->streamDownload(function () use ($fileId) {
-            $this->fileService->downloadFile($fileId);
-        }, $file['filename'], array(
-            'Content-Type' => FileTypes::OCTET_STREAM->value,
-            'Content-Transfer-Encoding' => 'chunked'
-        ), disposition: 'attachment');
+        return $this->fileService->downloadFile($fileId, $file['filename']);
     }
 
     /**
