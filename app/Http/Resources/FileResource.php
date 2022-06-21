@@ -2,12 +2,12 @@
 
 namespace App\Http\Resources;
 
-use App\Models\File;
+use App\Models\RomFile;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use JetBrains\PhpStorm\ArrayShape;
 
-/** @mixin File */
+/** @mixin RomFile */
 class FileResource extends JsonResource
 {
     public $additional = ['success' => true];
@@ -18,7 +18,7 @@ class FileResource extends JsonResource
      * @param Request $request
      * @return array
      */
-    #[ArrayShape(['_id' => "string", 'chunkSize' => "integer", 'filename' => "string", 'length' => "int", 'uploadDate' => "string", 'md5' => "string"])]
+    #[ArrayShape(['_id' => "string", 'chunkSize' => "int", 'filename' => "string", 'length' => "int", 'uploadDate' => "string", 'md5' => "string"])]
     public function toArray($request): array
     {
         return [
