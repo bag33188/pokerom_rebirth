@@ -18,8 +18,8 @@ misc/old
 misc/data/schemas/*.bkp
 misc/data/schemas/*.dtmp
 misc/data/dump
-private/rom_files/*
-!private/rom_files/.htaccess
+storage/app/rom_files/*
+!storage/app/rom_files/.htaccess
 
 ### Public ###
 public/css/**/*

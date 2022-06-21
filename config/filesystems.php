@@ -83,6 +83,6 @@ return [
      | This used since large files' (greater than 2GB) path's cannot be
      | resolved by PHP or laravel.
      */
-    'server_rom_files_path' => env('SERVER_ROM_FILES_DIR')
+    'server_rom_files_path' => storage_path('app/rom_files')
 
 ];
