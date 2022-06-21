@@ -21,7 +21,7 @@ class RomFilesHandler extends GridFS
 
     public function __construct(string $databaseName = null)
     {
-        self::$serverUploadFilePath = Config::get('filesystems.server_rom_files_path');
+        self::$serverUploadFilePath = Config::get('gridfs.filesPath');
         parent::__construct($databaseName);
     }
 
