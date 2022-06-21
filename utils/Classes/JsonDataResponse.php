@@ -19,6 +19,11 @@ class JsonDataResponse implements Jsonable
         $this->headers = $headers;
     }
 
+    public function __invoke(): JsonResponse
+    {
+        return $this->renderResponse();
+    }
+
     private static function setSuccessState(array &$data, int $statusCode): void
     {
         $data['success'] = $statusCode < 400 && $statusCode >= 200;

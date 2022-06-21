@@ -11,6 +11,7 @@ use GameRepo;
 use Illuminate\{Auth\Access\AuthorizationException, Http\JsonResponse};
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 use Symfony\Component\HttpKernel\Exception\PreconditionRequiredHttpException;
+use Utils\Classes\JsonDataResponse;
 
 class GameController extends ApiController
 {
@@ -77,6 +78,7 @@ class GameController extends ApiController
         $game = GameRepo::findGameIfExists($gameId);
         $this->authorize('delete', $game);
         Game::destroy($gameId);
-        return response()->json(['message' => "game $game->game_name deleted!"]);
+        $res = new JsonDataResponse(['message' => "game $game->game_name deleted!"], ResponseAlias::HTTP_OK);
+        return $res();
     }
 }
