@@ -37,7 +37,7 @@
         },
         "files": [
             "utils/constants.php",
-            "utils/helpers.php"
+            "utils/functions.php"
         ]
     },
     "autoload-dev": {
