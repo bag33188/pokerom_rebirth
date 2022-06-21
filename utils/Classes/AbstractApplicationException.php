@@ -28,7 +28,8 @@ abstract class AbstractApplicationException extends Exception
         $statusCode = $this->status() ?: $this->getCode();
         $responseView = $this->viewName() ?: self::$defaultView;
         if ($request->is('api/*')) {
-            return response()->json(['message' => $message, 'success' => false], $statusCode);
+            $response = new JsonDataResponse(['message' => $message], $statusCode);
+            return $response->renderResponse();
         } else {
             return response()->view($responseView, ['message' => $message], $statusCode);
         }

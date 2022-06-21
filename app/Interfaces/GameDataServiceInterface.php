@@ -2,9 +2,9 @@
 
 namespace App\Interfaces;
 
-use Utils\Classes\JsonDataServiceResponse;
+use Utils\Classes\JsonDataResponse;
 
 interface GameDataServiceInterface
 {
-    public function createGame(int $romId, array $data): JsonDataServiceResponse;
+    public function createGame(int $romId, array $data): JsonDataResponse;
 }

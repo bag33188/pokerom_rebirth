@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Interfaces;
+namespace App\Factories;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 
-interface UserRepositoryInterface
+interface UserRepositoryFactory
 {
     public function getAllUsers(): Collection;
 

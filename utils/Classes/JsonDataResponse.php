@@ -5,7 +5,7 @@ namespace Utils\Classes;
 use Illuminate\Contracts\Support\Jsonable;
 use Illuminate\Http\JsonResponse;
 
-class JsonDataServiceResponse implements Jsonable
+class JsonDataResponse implements Jsonable
 {
     public readonly array $data;
     public readonly int $code;

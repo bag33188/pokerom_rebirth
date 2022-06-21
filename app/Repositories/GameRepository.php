@@ -2,12 +2,12 @@
 
 namespace App\Repositories;
 
-use App\Interfaces\GameRepositoryInterface;
+use App\Factories\GameRepositoryFactory;
 use App\Models\Game;
 use App\Models\Rom;
 use Illuminate\Database\Eloquent\Collection;
 
-class GameRepository implements GameRepositoryInterface
+class GameRepository implements GameRepositoryFactory
 {
 
     public function findGameIfExists(int $gameId): Game

@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Interfaces;
+namespace App\Factories;
 
 use App\Models\File;
 use App\Models\Rom;
 use Illuminate\Database\Eloquent\Collection;
 
-interface FileRepositoryInterface
+interface FileRepositoryFactory
 {
     public function getAllFilesSorted(): Collection;
 

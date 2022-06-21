@@ -5,24 +5,24 @@ namespace App\Services;
 use App\Interfaces\RomDataServiceInterface;
 use App\Models\File;
 use App\Models\Rom;
-use Utils\Classes\JsonDataServiceResponse;
+use Utils\Classes\JsonDataResponse;
 use Illuminate\Support\Facades\DB;
 use RomRepo;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 class RomDataDataService implements RomDataServiceInterface
 {
-    public function attemptToLinkRomToFile(Rom $rom): JsonDataServiceResponse
+    public function attemptToLinkRomToFile(Rom $rom): JsonDataResponse
     {
         $file = RomRepo::searchForFileMatchingRom($rom->id);
         if (isset($file)) {
             $this->setRomDataFromFile($rom, $file);
-            return new JsonDataServiceResponse([
+            return new JsonDataResponse([
                 'message' => "file found and linked! file id: {$file->getKey()}",
                 'data' => $rom->refresh()
             ], ResponseAlias::HTTP_OK);
         } else {
-            return new JsonDataServiceResponse(['message' => "File not found with name of {$rom->getRomFileName()}"], ResponseAlias::HTTP_NOT_FOUND);
+            return new JsonDataResponse(['message' => "File not found with name of {$rom->getRomFileName()}"], ResponseAlias::HTTP_NOT_FOUND);
         }
     }
 
