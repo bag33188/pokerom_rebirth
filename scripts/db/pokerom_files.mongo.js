@@ -1,3 +1,6 @@
+/**
+ * {@link /scripts/helpers/aggregations.js}
+ */
 conn = new Mongo("localhost:27017");
 
 db = conn.getDB("admin");
