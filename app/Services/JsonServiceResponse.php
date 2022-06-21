@@ -2,6 +2,8 @@
 
 namespace App\Services;
 
+use Illuminate\Http\JsonResponse;
+
 class JsonServiceResponse
 {
     public readonly array $json;
@@ -17,5 +19,10 @@ class JsonServiceResponse
     private static function setSuccessState(array &$object, int $statusCode): void
     {
         $object['success'] = $statusCode < 400 && $statusCode >= 200;
+    }
+
+    public function response(): JsonResponse
+    {
+        return response()->json($this->json, $this->code);
     }
 }

@@ -57,11 +57,11 @@ class RomController extends ApiController
      * @param StoreRomRequest $request
      * @return JsonResponse
      */
-    public function store(StoreRomRequest $request): JsonResponse
+    public function store(StoreRomRequest $request)
     {
         $rom = Rom::create($request->all());
 
-        return response()->json(new RomResource($rom), ResponseAlias::HTTP_CREATED);
+        return (new RomResource($rom))->response()->setStatusCode(ResponseAlias::HTTP_CREATED);
     }
 
     /**
@@ -76,11 +76,11 @@ class RomController extends ApiController
         return new RomResource($rom);
     }
 
-    public function update(UpdateRomRequest $request, int $romId): JsonResponse
+    public function update(UpdateRomRequest $request, int $romId)
     {
         $rom = RomRepo::findRomIfExists($romId);
         $rom->update($request->all());
-        return response()->json(new RomResource($rom));
+        return new RomResource($rom);
     }
 
     /**
@@ -90,8 +90,7 @@ class RomController extends ApiController
     {
         $rom = RomRepo::findRomIfExists($romId);
         $this->authorize('update', $rom);
-        $res = $this->romService->attemptToLinkRomToFile($rom);
-        return response()->json($res->json, $res->code);
+        return response()->json($this->romService->attemptToLinkRomToFile($rom)->response());
     }
 
     /**
