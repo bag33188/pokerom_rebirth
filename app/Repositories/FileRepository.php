@@ -24,6 +24,11 @@ class FileRepository implements FileRepositoryInterface
         return File::all()->sortBy([['length', 'asc'], ['filename', 'asc']]);
     }
 
+    public function getFileByFilename(string $filename): File
+    {
+        return File::where('filename', '=', $filename)->first();
+    }
+
     public function searchForRomMatchingFile(string $fileId): ?Rom
     {
         [$name, $ext] = explode('.',

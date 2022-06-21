@@ -10,5 +10,7 @@ interface FileRepositoryInterface
 
     public function getRomAssociatedWithFile(string $fileId);
 
+    public function getFileByFilename(string $filename);
+
     public function searchForRomMatchingFile(string $fileId);
 }
