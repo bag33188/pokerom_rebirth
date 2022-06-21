@@ -2,15 +2,15 @@
 
 namespace App\Services;
 
-use App\Interfaces\RomServiceInterface;
+use App\Interfaces\RomDataServiceInterface;
 use App\Models\File;
 use App\Models\Rom;
-use Classes\JsonDataServiceResponse;
+use Utils\Classes\JsonDataServiceResponse;
 use Illuminate\Support\Facades\DB;
 use RomRepo;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
-class RomDataService implements RomServiceInterface
+class RomDataDataService implements RomDataServiceInterface
 {
     public function attemptToLinkRomToFile(Rom $rom): JsonDataServiceResponse
     {

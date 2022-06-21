@@ -8,7 +8,7 @@ use App\Http\Requests\UpdateRomRequest;
 use App\Http\Resources\GameResource;
 use App\Http\Resources\RomCollection;
 use App\Http\Resources\RomResource;
-use App\Interfaces\RomServiceInterface;
+use App\Interfaces\RomDataServiceInterface;
 use App\Models\Rom;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\JsonResponse;
@@ -18,9 +18,9 @@ use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 class RomController extends ApiController
 {
-    private RomServiceInterface $romDataService;
+    private RomDataServiceInterface $romDataService;
 
-    public function __construct(RomServiceInterface $romDataService)
+    public function __construct(RomDataServiceInterface $romDataService)
     {
         $this->romDataService = $romDataService;
     }

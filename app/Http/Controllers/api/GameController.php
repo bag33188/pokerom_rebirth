@@ -5,7 +5,7 @@ namespace App\Http\Controllers\api;
 use App\Http\Controllers\Controller as ApiController;
 use App\Http\Requests\{StoreGameRequest, UpdateGameRequest};
 use App\Http\Resources\{GameCollection, GameResource, RomResource};
-use App\Interfaces\GameServiceInterface;
+use App\Interfaces\GameDataServiceInterface;
 use App\Models\Game;
 use GameRepo;
 use Illuminate\{Auth\Access\AuthorizationException, Http\JsonResponse};
@@ -14,9 +14,9 @@ use Symfony\Component\HttpKernel\Exception\PreconditionRequiredHttpException;
 
 class GameController extends ApiController
 {
-    private GameServiceInterface $gameDataService;
+    private GameDataServiceInterface $gameDataService;
 
-    public function __construct(GameServiceInterface $gameDataService)
+    public function __construct(GameDataServiceInterface $gameDataService)
     {
         $this->gameDataService = $gameDataService;
     }

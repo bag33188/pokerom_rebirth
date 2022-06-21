@@ -2,10 +2,10 @@
 
 namespace App\Exceptions;
 
-use Classes\ApplicationException;
+use Utils\Classes\AbstractApplicationException;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
-class UnsupportedRomTypeException extends ApplicationException
+class UnsupportedRomTypeExceptionAbstract extends AbstractApplicationException
 {
     public function status(): int
     {

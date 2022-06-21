@@ -2,7 +2,7 @@
 
 namespace App\Actions\Validators;
 
-use App\Exceptions\UnsupportedRomTypeException;
+use App\Exceptions\UnsupportedRomTypeExceptionAbstract;
 use App\Rules\ValidFilename;
 
 trait FileValidationRules
@@ -11,17 +11,17 @@ trait FileValidationRules
         "/\.(gba|gbc|gb|nds|xci|3ds)$/i";
 
     /**
-     * @throws UnsupportedRomTypeException
+     * @throws UnsupportedRomTypeExceptionAbstract
      */
     private static function checkForUnsupportedMediaType(string $filename): void
     {
         if (!preg_match(self::$fileTypesPattern, $filename)) {
-            throw new UnsupportedRomTypeException($filename);
+            throw new UnsupportedRomTypeExceptionAbstract($filename);
         }
     }
 
     /**
-     * @throws UnsupportedRomTypeException
+     * @throws UnsupportedRomTypeExceptionAbstract
      */
     protected function fileRules(string $filename, array $rules = ['required']): array
     {

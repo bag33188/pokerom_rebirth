@@ -2,9 +2,9 @@
 
 namespace App\Exceptions;
 
-use Classes\ApplicationException;
+use Utils\Classes\AbstractApplicationException;
 
-class GeneralHttpException extends ApplicationException
+class GeneralHttpExceptionAbstract extends AbstractApplicationException
 {
 
     protected function status(): int

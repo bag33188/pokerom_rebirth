@@ -2,17 +2,17 @@
 
 namespace App\Observers;
 
-use App\Interfaces\RomServiceInterface;
+use App\Interfaces\RomDataServiceInterface;
 use App\Models\Rom;
 
 class RomObserver
 {
-    private RomServiceInterface $romDataService;
+    private RomDataServiceInterface $romDataService;
 
     /** @var bool Use database relationships to update models */
     private const USE_DB_LOGIC = true;
 
-    public function __construct(RomServiceInterface $romDataService)
+    public function __construct(RomDataServiceInterface $romDataService)
     {
         $this->romDataService = $romDataService;
     }

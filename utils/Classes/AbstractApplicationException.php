@@ -1,13 +1,13 @@
 <?php
 
-namespace Classes;
+namespace Utils\Classes;
 
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
-abstract class ApplicationException extends Exception
+abstract class AbstractApplicationException extends Exception
 {
     private static string $defaultView = 'errors.generic';
 

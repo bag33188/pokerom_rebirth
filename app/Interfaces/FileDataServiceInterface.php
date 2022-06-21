@@ -3,11 +3,11 @@
 namespace App\Interfaces;
 
 use App\Models\File;
-use Classes\JsonDataServiceResponse;
+use Utils\Classes\JsonDataServiceResponse;
 use Illuminate\Http\UploadedFile;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
-interface FileServiceInterface
+interface FileDataServiceInterface
 {
     public function downloadFile(File $file): StreamedResponse;
 

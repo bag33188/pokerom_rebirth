@@ -7,7 +7,7 @@ use App\Http\Requests\LoginRequest;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Resources\UserCollection;
 use App\Http\Resources\UserResource;
-use App\Interfaces\UserServiceInterface;
+use App\Interfaces\UserDataServiceInterface;
 use App\Models\User;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\JsonResponse;
@@ -17,9 +17,9 @@ use UserRepo;
 
 class UserController extends ApiController
 {
-    private UserServiceInterface $userDataService;
+    private UserDataServiceInterface $userDataService;
 
-    public function __construct(UserServiceInterface $userDataService)
+    public function __construct(UserDataServiceInterface $userDataService)
     {
         $this->userDataService = $userDataService;
     }

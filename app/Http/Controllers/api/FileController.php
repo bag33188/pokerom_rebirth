@@ -8,7 +8,7 @@ use App\Http\Requests\StoreFileRequest;
 use App\Http\Resources\FileCollection;
 use App\Http\Resources\FileResource;
 use App\Http\Resources\RomResource;
-use App\Interfaces\FileServiceInterface;
+use App\Interfaces\FileDataServiceInterface;
 use App\Models\File;
 use FileRepo;
 use Illuminate\{Auth\Access\AuthorizationException, Http\JsonResponse};
@@ -18,9 +18,9 @@ use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class FileController extends ApiController
 {
-    private FileServiceInterface $fileDataService;
+    private FileDataServiceInterface $fileDataService;
 
-    public function __construct(FileServiceInterface $fileDataService)
+    public function __construct(FileDataServiceInterface $fileDataService)
     {
         $this->fileDataService = $fileDataService;
     }

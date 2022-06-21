@@ -1,8 +1,8 @@
 <?php
 
-namespace Classes;
+namespace Utils\Classes;
 
-abstract class GridFsFile
+abstract class AbstractGridFsFile
 {
     public readonly string $_id;
     public readonly int $chunkSize;

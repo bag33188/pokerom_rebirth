@@ -5,15 +5,15 @@ namespace App\Services;
 use App\Enums\FileTypesEnum as FileTypes;
 use App\Events\FileDeleted;
 use App\Events\FileUploaded;
-use App\Interfaces\FileServiceInterface;
+use App\Interfaces\FileDataServiceInterface;
 use App\Models\File;
-use Classes\JsonDataServiceResponse;
+use Utils\Classes\JsonDataServiceResponse;
 use Illuminate\Http\UploadedFile;
 use RomFile;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
-class FileDataService implements FileServiceInterface
+class FileDataDataService implements FileDataServiceInterface
 {
     public function downloadFile(File $file): StreamedResponse
     {

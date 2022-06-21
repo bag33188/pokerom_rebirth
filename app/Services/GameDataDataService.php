@@ -2,12 +2,12 @@
 
 namespace App\Services;
 
-use App\Interfaces\GameServiceInterface;
-use Classes\JsonDataServiceResponse;
+use App\Interfaces\GameDataServiceInterface;
+use Utils\Classes\JsonDataServiceResponse;
 use RomRepo;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
-class GameDataService implements GameServiceInterface
+class GameDataDataService implements GameDataServiceInterface
 {
     public function createGame(int $romId, array $data): JsonDataServiceResponse
     {

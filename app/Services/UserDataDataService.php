@@ -2,12 +2,12 @@
 
 namespace App\Services;
 
-use App\Interfaces\UserServiceInterface;
+use App\Interfaces\UserDataServiceInterface;
 use App\Models\User;
-use Classes\JsonDataServiceResponse;
+use Utils\Classes\JsonDataServiceResponse;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
-class UserDataService implements UserServiceInterface
+class UserDataDataService implements UserDataServiceInterface
 {
     private static function generateUserApiToken(User $user): string
     {

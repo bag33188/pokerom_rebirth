@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Classes\GridFsFile;
+use Utils\Classes\AbstractGridFsFile as GridFsFile;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Jenssegers\Mongodb\Eloquent\Model as DocumentModel;
 

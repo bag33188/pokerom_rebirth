@@ -32,8 +32,8 @@
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/",
-            "Modules\\": "utils/Modules",
-            "Classes\\": "utils/Classes"
+            "Utils\\Modules\\": "utils/Modules",
+            "Utils\\Classes\\": "utils/Classes"
         },
         "files": [
             "utils/constants.php",
