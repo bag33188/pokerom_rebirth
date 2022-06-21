@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Config;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 use Symfony\Component\HttpKernel\Exception\UnprocessableEntityHttpException;
 
-class FileHandler extends GridFS
+class RomFilesHandler extends GridFS
 {
     private UploadedFile $file;
     private string $filename;

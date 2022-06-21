@@ -3,7 +3,7 @@
 namespace App\Providers;
 
 use App;
-use App\Modules\FileHandler;
+use App\Modules\RomFilesHandler;
 use Config;
 use Illuminate\Support\ServiceProvider;
 
@@ -19,8 +19,8 @@ class GridFsServiceProvider extends ServiceProvider
     public function register(): void
     {
         $key = self::DB_NAME_CONF_KEY;
-        App::singleton(FileHandler::class,
-            fn() => new FileHandler(databaseName: Config::get($key)));
+        App::singleton(RomFilesHandler::class,
+            fn() => new RomFilesHandler(databaseName: Config::get($key)));
     }
 
     /**
@@ -39,6 +39,6 @@ class GridFsServiceProvider extends ServiceProvider
      */
     public function provides(): array
     {
-        return [FileHandler::class];
+        return [RomFilesHandler::class];
     }
 }
