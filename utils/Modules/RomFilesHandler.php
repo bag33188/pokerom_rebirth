@@ -32,7 +32,7 @@ class RomFilesHandler extends GridFS
 
     public function getFileDocument(): File
     {
-        return FileRepo::getFileByFilename($this->getFilename());
+        return FileRepo::getFileByFilename($this->filename);
     }
 
     public function upload(UploadedFile $file): void
