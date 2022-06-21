@@ -5,6 +5,9 @@ namespace App\Http\Controllers\api;
 use App\Enums\FileTypesEnum as FileTypes;
 use App\Http\Controllers\Controller as ApiController;
 use App\Http\Requests\StoreFileRequest;
+use App\Http\Resources\FileCollection;
+use App\Http\Resources\FileResource;
+use App\Http\Resources\RomResource;
 use App\Interfaces\FileServiceInterface;
 use App\Models\File;
 use FileRepo;
@@ -25,20 +28,20 @@ class FileController extends ApiController
     /**
      * @throws AuthorizationException
      */
-    public function index(): JsonResponse
+    public function index(): FileCollection
     {
         Gate::authorize('viewAny-file');
-        return response()->json(FileRepo::getAllFilesSorted());
+        return new FileCollection(FileRepo::getAllFilesSorted());
     }
 
     /**
      * @throws AuthorizationException
      */
-    public function indexRom(string $fileId): JsonResponse
+    public function indexRom(string $fileId): RomResource
     {
         $file = FileRepo::findFileIfExists($fileId);
         $this->authorize('view', $file);
-        return response()->json(FileRepo::getRomAssociatedWithFile($fileId));
+        return new RomResource(FileRepo::getRomAssociatedWithFile($fileId));
     }
 
     /**
@@ -48,7 +51,7 @@ class FileController extends ApiController
     {
         $file = FileRepo::findFileIfExists($fileId);
         $this->authorize('view', $file);
-        return response()->json($file);
+        return new FileResource($file);
     }
 
     /**
