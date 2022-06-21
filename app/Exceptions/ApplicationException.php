@@ -26,10 +26,11 @@ abstract class ApplicationException extends Exception
     {
         $message = $this->errorMessage() ?: $this->getMessage();
         $statusCode = $this->status() ?: $this->getCode();
+        $responseView = $this->viewName() ?: self::$defaultView;
         if ($request->is('api/*')) {
             return response()->json(['message' => $message, 'success' => false], $statusCode);
         } else {
-            return response()->view($this->viewName() ?: self::$defaultView, ['message' => $message], $statusCode);
+            return response()->view($responseView, ['message' => $message], $statusCode);
         }
     }
 }
