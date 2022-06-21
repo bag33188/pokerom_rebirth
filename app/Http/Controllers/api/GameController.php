@@ -33,11 +33,11 @@ class GameController extends ApiController
 
     /**
      * @param int $gameId
-     * @return JsonResponse
+     * @return RomResource
      */
     public function indexRom(int $gameId)
     {
-        return response()->json(new RomResource(GameRepo::getRomAssociatedWithGame($gameId)));
+        return new RomResource(GameRepo::getRomAssociatedWithGame($gameId));
     }
 
     /**

@@ -16,7 +16,6 @@ class RomDataService implements RomServiceInterface
     public function attemptToLinkRomToFile(Rom $rom): JsonServiceResponse
     {
         $file = RomRepo::searchForFileMatchingRom($rom->id);
-//        $file = RomRepo::searchForFileMatchingRom($rom->id);
         if (isset($file)) {
             $this->setRomDataFromFile($rom, $file);
             return new JsonServiceResponse([
@@ -30,6 +29,7 @@ class RomDataService implements RomServiceInterface
 
     public function linkRomToFileIfExists(Rom $rom): void
     {
+        /** @var File */
         $file = RomRepo::searchForFileMatchingRom($rom->id);
         if (isset($file)) $this->setRomDataFromFile($rom, $file);
     }

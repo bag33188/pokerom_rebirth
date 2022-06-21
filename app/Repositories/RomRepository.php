@@ -34,7 +34,7 @@ class RomRepository implements RomRepositoryInterface
      * This will attempt to cross-reference the MongoDB database and check if there is a file
      * with the same name of the roms name plus its extension (rom type)
      * @param int $romId
-     * @return File|null
+     * @return \App\Models\File|null
      */
     public function searchForFileMatchingRom(int $romId): ?File
     {
