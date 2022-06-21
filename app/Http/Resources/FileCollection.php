@@ -2,12 +2,12 @@
 
 namespace App\Http\Resources;
 
-use App\Models\File;
+use App\Models\RomFile;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 use JetBrains\PhpStorm\ArrayShape;
 
-/** @mixin File */
+/** @mixin RomFile */
 class FileCollection extends ResourceCollection
 {
     public $additional = ['success' => true];
