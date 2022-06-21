@@ -36,9 +36,4 @@ class DataServiceProvider extends ServiceProvider
     {
         $this->register();
     }
-
-    public function provides(): array
-    {
-        return [UserService::class, RomService::class, GameService::class, FileService::class];
-    }
 }
