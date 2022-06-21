@@ -247,8 +247,8 @@ Object.keys(aggregations)
     .sort((a, b) => {
         return a.length - b.length;
     })
-    .forEach((aggregate) => {
-        pipeline.push(aggregations[aggregate]);
+    .forEach((aggregateName) => {
+        pipeline.push(aggregations[aggregateName]);
     });
 
 console.log(pipeline);
