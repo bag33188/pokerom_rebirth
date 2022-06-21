@@ -1,9 +1,12 @@
 <?php
 
-use JetBrains\PhpStorm\ArrayShape;
+use Illuminate\Database\Eloquent\Model;
 
-#[ArrayShape([0 => "array", 'success' => "bool"])]
-function api_res(array $data, bool $success = true): array
+function api_res(mixed $data, bool $success = true): array
 {
-    return [...$data, 'success' => $success];
+    if ($data instanceof Model) {
+        return ['data' => $data, 'success' => $success];
+    } else {
+        return [...$data, 'success' => $success];
+    }
 }
