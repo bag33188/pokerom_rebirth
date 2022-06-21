@@ -5,6 +5,7 @@ namespace App\Http\Controllers\api;
 use App\Http\Controllers\Controller as ApiController;
 use App\Http\Requests\StoreRomRequest;
 use App\Http\Requests\UpdateRomRequest;
+use App\Http\Resources\FileResource;
 use App\Http\Resources\GameResource;
 use App\Http\Resources\RomCollection;
 use App\Http\Resources\RomResource;
@@ -15,6 +16,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Gate;
 use RomRepo;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
+use Utils\Classes\JsonDataResponse;
 
 class RomController extends ApiController
 {
@@ -46,7 +48,7 @@ class RomController extends ApiController
     public function indexFile(int $romId)
     {
         Gate::authorize('viewAny-file');
-        return response()->json(RomRepo::getFileAssociatedWithRom($romId));
+        return new FileResource(RomRepo::getFileAssociatedWithRom($romId));
     }
 
     /**
@@ -103,6 +105,7 @@ class RomController extends ApiController
         $rom = RomRepo::findRomIfExists($romId);
         $this->authorize('delete', $rom);
         Rom::destroy($romId);
-        return response()->json(['message' => "rom $rom->rom_name deleted!", 'success' => true]);
+        $res = new JsonDataResponse(['message' => "rom $rom->rom_name deleted!", 'success' => true], ResponseAlias::HTTP_OK);
+        return $res();
     }
 }
