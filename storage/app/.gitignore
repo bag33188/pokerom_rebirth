@@ -1,3 +1,5 @@
 *
 !public/
+!rom_files/.htaccess
+!rom_files/.gitkeep
 !.gitignore
