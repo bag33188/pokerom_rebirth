@@ -15,13 +15,9 @@ class JsonError implements Arrayable, Jsonable, JsonSerializable
     {
     }
 
-    #[ArrayShape(['success' => "false", 'message' => "string"])]
     public function toArray(): array
     {
-        return [
-            'success' => false,
-            'message' => $this->error
-        ];
+        return api_res(['message' => $this->error], false);
     }
 
     #[ArrayShape(['success' => "false", 'message' => "string"])]
