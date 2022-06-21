@@ -60,7 +60,7 @@ class GameController extends ApiController
         return new GameResource($game);
     }
 
-    public function show(int $gameId)
+    public function show(int $gameId): GameResource
     {
         return new GameResource(GameRepo::findGameIfExists($gameId));
     }
