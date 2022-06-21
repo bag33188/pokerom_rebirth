@@ -7,7 +7,7 @@ use Illuminate\Http\UploadedFile;
 
 interface FileServiceInterface
 {
-    public function downloadFile(string $fileId, string $filename);
+    public function downloadFile(File $file);
 
     public function uploadFile(UploadedFile $file);
 

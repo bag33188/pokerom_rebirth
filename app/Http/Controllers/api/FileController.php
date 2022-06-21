@@ -59,7 +59,7 @@ class FileController extends ApiController
     public function download(string $fileId): StreamedResponse
     {
         $file = FileRepo::findFileIfExists($fileId);
-        return $this->fileService->downloadFile($fileId, $file['filename']);
+        return $this->fileService->downloadFile($file);
     }
 
     /**

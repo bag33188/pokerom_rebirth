@@ -14,14 +14,14 @@ use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class FileService implements FileServiceInterface
 {
-    public function downloadFile(string $fileId, string $filename): StreamedResponse
+    public function downloadFile(File $file): StreamedResponse
     {
-        return new StreamedResponse(function () use ($fileId, $filename) {
-            RomFile::download($fileId);
-        }, $filename, array(
+        return new StreamedResponse(function () use ($file) {
+            RomFile::download($file->getKey());
+        }, $file['filename'], array(
             'Content-Type' => FileTypes::OCTET_STREAM->value,
             'Content-Transfer-Encoding' => 'chunked',
-            'Content-Disposition' => "attachment; filename=\"$filename\""));
+            'Content-Disposition' => "attachment; filename=\"{$file['filename']}\""));
     }
 
     public function uploadFile(UploadedFile $file): JsonServiceResponse
