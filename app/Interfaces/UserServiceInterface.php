@@ -3,15 +3,15 @@
 namespace App\Interfaces;
 
 use App\Models\User;
-use App\Services\JsonServiceResponse;
+use Classes\JsonDataServiceResponse;
 
 interface UserServiceInterface
 {
-    public function authenticateUserAgainstCredentials(User $user, string $requestPassword): JsonServiceResponse;
+    public function authenticateUserAgainstCredentials(User $user, string $requestPassword): JsonDataServiceResponse;
 
-    public function logoutCurrentUser(): JsonServiceResponse;
+    public function logoutCurrentUser(): JsonDataServiceResponse;
 
-    public function registerUserToken(User $user): JsonServiceResponse;
+    public function registerUserToken(User $user): JsonDataServiceResponse;
 
-    public function deleteUser(User $user): JsonServiceResponse;
+    public function deleteUser(User $user): JsonDataServiceResponse;
 }

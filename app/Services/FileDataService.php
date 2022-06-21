@@ -7,8 +7,9 @@ use App\Events\FileDeleted;
 use App\Events\FileUploaded;
 use App\Interfaces\FileServiceInterface;
 use App\Models\File;
-use RomFile;
+use Classes\JsonDataServiceResponse;
 use Illuminate\Http\UploadedFile;
+use RomFile;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
@@ -21,20 +22,20 @@ class FileDataService implements FileServiceInterface
         }, ResponseAlias::HTTP_ACCEPTED, array(
             'Content-Type' => FileTypes::OCTET_STREAM->value,
             'Content-Transfer-Encoding' => 'chunked',
-            'Content-Disposition' => "attachment; filename=\"{$file->getAttributeValue('filename')}\""));
+            'Content-Disposition' => "attachment; filename=\"{$file->filename}\""));
     }
 
-    public function uploadFile(UploadedFile $file): JsonServiceResponse
+    public function uploadFile(UploadedFile $file): JsonDataServiceResponse
     {
         RomFile::upload($file);
         event(new FileUploaded(RomFile::getFileDocument()));
-        return new JsonServiceResponse(['message' => "file '" . RomFile::getFilename() . "' created!"], ResponseAlias::HTTP_CREATED);
+        return new JsonDataServiceResponse(['message' => "file '" . RomFile::getFilename() . "' created!"], ResponseAlias::HTTP_CREATED);
     }
 
-    public function deleteFile(File $file): JsonServiceResponse
+    public function deleteFile(File $file): JsonDataServiceResponse
     {
         event(new FileDeleted($file));
         RomFile::destroy($file->getKey());
-        return new JsonServiceResponse(['message' => "{$file['filename']} deleted!"], ResponseAlias::HTTP_OK);
+        return new JsonDataServiceResponse(['message' => "{$file->filename} deleted!"], ResponseAlias::HTTP_OK);
     }
 }

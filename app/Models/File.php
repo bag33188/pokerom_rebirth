@@ -2,13 +2,13 @@
 
 namespace App\Models;
 
+use Classes\RomFile;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Jenssegers\Mongodb\Eloquent\Model as DocumentModel;
 
+/** @mixin RomFile */
 class File extends DocumentModel
 {
-    // use HasFactory;
-
     protected $connection = 'mongodb';
     protected $collection = 'roms.files';
     protected $table = 'roms.files'; // use for eloquent helper code

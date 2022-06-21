@@ -3,11 +3,11 @@
 namespace App\Interfaces;
 
 use App\Models\Rom;
-use App\Services\JsonServiceResponse;
+use Classes\JsonDataServiceResponse;
 
 interface RomServiceInterface
 {
-    public function attemptToLinkRomToFile(Rom $rom): JsonServiceResponse;
+    public function attemptToLinkRomToFile(Rom $rom): JsonDataServiceResponse;
 
     public function linkRomToFileIfExists(Rom $rom): void;
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Exceptions;
+namespace Classes;
 
 use Exception;
 use Illuminate\Http\Request;

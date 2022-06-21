@@ -31,7 +31,9 @@
         "psr-4": {
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
-            "Database\\Seeders\\": "database/seeders/"
+            "Database\\Seeders\\": "database/seeders/",
+            "Modules\\": "utils/Modules",
+            "Classes\\": "utils/Classes"
         },
         "files": [
             "utils/constants.php",

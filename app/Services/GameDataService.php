@@ -3,12 +3,13 @@
 namespace App\Services;
 
 use App\Interfaces\GameServiceInterface;
-use Symfony\Component\HttpFoundation\Response as ResponseAlias;
+use Classes\JsonDataServiceResponse;
 use RomRepo;
+use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 class GameDataService implements GameServiceInterface
 {
-    public function createGame(int $romId, array $data): JsonServiceResponse
+    public function createGame(int $romId, array $data): JsonDataServiceResponse
     {
         $rom = RomRepo::findRomIfExists($romId);
         $game = $rom->game()->create($data);
@@ -16,6 +17,6 @@ class GameDataService implements GameServiceInterface
         $rom->refresh(); // reload rom resource to included updated relationships
         $game->rom()->associate($rom);
         $game->saveQuietly();
-        return new JsonServiceResponse(['data' => $game], ResponseAlias::HTTP_CREATED);
+        return new JsonDataServiceResponse(['data' => $game], ResponseAlias::HTTP_CREATED);
     }
 }

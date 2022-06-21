@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Modules;
+namespace Modules;
 
 /**
  * Only use this module if you need to download large files (IE. in excess of 2 Gigabytes)

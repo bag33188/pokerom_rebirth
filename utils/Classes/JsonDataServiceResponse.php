@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Services;
+namespace Classes;
 
 use Illuminate\Contracts\Support\Jsonable;
 use Illuminate\Http\JsonResponse;
 
-class JsonServiceResponse implements Jsonable
+class JsonDataServiceResponse implements Jsonable
 {
     public readonly array $data;
     public readonly int $code;

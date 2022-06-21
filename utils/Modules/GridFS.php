@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Modules;
+namespace Modules;
 
 use Illuminate\Support\Facades\Config;
 use MongoDB\BSON\ObjectId;

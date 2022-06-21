@@ -2,7 +2,7 @@
 
 namespace App\Http\Resources;
 
-use App\Models\RomFile;
+use Classes\RomFile;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 use JetBrains\PhpStorm\ArrayShape;

@@ -2,6 +2,7 @@
 
 namespace App\Exceptions;
 
+use Classes\ApplicationException;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 class SqlQueryException extends ApplicationException

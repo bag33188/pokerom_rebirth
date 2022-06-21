@@ -2,6 +2,8 @@
 
 namespace App\Exceptions;
 
+use Classes\ApplicationException;
+
 class GeneralHttpException extends ApplicationException
 {
 

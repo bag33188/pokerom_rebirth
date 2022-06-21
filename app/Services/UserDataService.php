@@ -4,7 +4,7 @@ namespace App\Services;
 
 use App\Interfaces\UserServiceInterface;
 use App\Models\User;
-use JetBrains\PhpStorm\ArrayShape;
+use Classes\JsonDataServiceResponse;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 class UserDataService implements UserServiceInterface
@@ -19,37 +19,37 @@ class UserDataService implements UserServiceInterface
         auth()->user()->tokens()->delete();
     }
 
-    public function deleteUser(User $user): JsonServiceResponse
+    public function deleteUser(User $user): JsonDataServiceResponse
     {
         $this->revokeUserTokens();
         $user->delete();
-        return new JsonServiceResponse(['message' => "user $user->name deleted!"], ResponseAlias::HTTP_OK);
+        return new JsonDataServiceResponse(['message' => "user $user->name deleted!"], ResponseAlias::HTTP_OK);
     }
 
-    public function registerUserToken(User $user): JsonServiceResponse
+    public function registerUserToken(User $user): JsonDataServiceResponse
     {
         $token = self::generateUserApiToken($user);
-        return new JsonServiceResponse([
+        return new JsonDataServiceResponse([
             'user' => $user,
             'token' => $token
         ], ResponseAlias::HTTP_CREATED);
     }
 
-    public function logoutCurrentUser(): JsonServiceResponse
+    public function logoutCurrentUser(): JsonDataServiceResponse
     {
         $this->revokeUserTokens();
-        return new JsonServiceResponse(['message' => 'logged out!'], ResponseAlias::HTTP_OK);
+        return new JsonDataServiceResponse(['message' => 'logged out!'], ResponseAlias::HTTP_OK);
     }
 
-    public function authenticateUserAgainstCredentials(User $user, string $requestPassword): JsonServiceResponse
+    public function authenticateUserAgainstCredentials(User $user, string $requestPassword): JsonDataServiceResponse
     {
         // Check password hash against database
         if (!$user->checkPassword($requestPassword)) {
-            return new JsonServiceResponse(['message' => 'Bad credentials'], ResponseAlias::HTTP_UNAUTHORIZED);
+            return new JsonDataServiceResponse(['message' => 'Bad credentials'], ResponseAlias::HTTP_UNAUTHORIZED);
         }
 
         $token = self::generateUserApiToken($user);
-        return new JsonServiceResponse([
+        return new JsonDataServiceResponse([
             'user' => $user,
             'token' => $token
         ], ResponseAlias::HTTP_OK);

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Modules;
+namespace Modules;
 
 use App\Models\File;
 use FileRepo;
