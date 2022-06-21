@@ -1,3 +1,5 @@
+/*! MongoDB Aggregations */
+
 let aggregations = {
     "Proper Rom Files Sort": [
         {
@@ -235,9 +237,23 @@ let aggregations = {
     ],
 };
 
-
-const pipeline = [
-    aggregations["Proper Rom Files Sort"],
-    aggregations["Show Rom Sizes (KB)"],
-    aggregations["Calc Total File Size Bytes"],
+let pipeline = [
+    // aggregations["Proper Rom Files Sort"],
+    // aggregations["Show Rom Sizes (KB)"],
+    // aggregations["Calc Total File Size Bytes"],
 ];
+
+Object.keys(aggregations)
+    .sort((a, b) => {
+        return a.length - b.length;
+    })
+    .forEach((aggregate) => {
+        pipeline.push(aggregations[aggregate]);
+    });
+
+console.log(pipeline);
+
+module.exports = {
+    aggregations,
+    pipeline,
+};
