@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\api;
 
-use App\Enums\FileTypesEnum as FileTypes;
 use App\Http\Controllers\Controller as ApiController;
 use App\Http\Requests\StoreFileRequest;
 use App\Http\Resources\FileCollection;
@@ -72,7 +71,7 @@ class FileController extends ApiController
         $this->authorize('create', File::class);
         $file = $request->file(FILE_FORM_KEY);
 
-        return $this->fileDataService->uploadFile($file)->renderResponse()->header('X-Content-Transfer-Type', FileTypes::X_BINARY->value);
+        return $this->fileDataService->uploadFile($file)->renderResponse();
     }
 
     /**

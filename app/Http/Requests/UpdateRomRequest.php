@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\Actions\Validators\RomValidationRules;
+use App\Actions\Validators\RomValidationRulesTrait;
 use App\Models\Rom;
 use App\Rules\RequiredIfPutRequest;
 use Illuminate\Foundation\Http\FormRequest;
@@ -11,7 +11,7 @@ use JetBrains\PhpStorm\ArrayShape;
 /** @mixin Rom */
 class UpdateRomRequest extends FormRequest
 {
-    use RomValidationRules;
+    use RomValidationRulesTrait;
 
     private RequiredIfPutRequest $requiredIfPutRequest;
 

@@ -10,7 +10,7 @@ use App\Rules\ValidGameName;
 use App\Rules\ValidGameRegion;
 use App\Rules\ValidGameType;
 
-trait GameValidationRules
+trait GameValidationRulesTrait
 {
     protected function gameNameRules(array $rules = ['required']): array
     {

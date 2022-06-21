@@ -2,14 +2,14 @@
 
 namespace App\Http\Requests;
 
-use App\Actions\Validators\FileValidationRules;
+use App\Actions\Validators\FileValidationRulesTrait;
 use App\Exceptions\UnsupportedRomTypeException;
 use App\Models\File;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreFileRequest extends FormRequest
 {
-    use FileValidationRules;
+    use FileValidationRulesTrait;
 
     protected $stopOnFirstFailure = true;
 

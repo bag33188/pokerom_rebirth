@@ -29,7 +29,7 @@ class FileDataDataService implements FileDataServiceInterface
     {
         RomFile::upload($file);
         event(new FileUploaded(RomFile::getFileDocument()));
-        return new JsonDataServiceResponse(['message' => "file '" . RomFile::getFilename() . "' created!"], ResponseAlias::HTTP_CREATED);
+        return new JsonDataServiceResponse(['message' => "file '" . RomFile::getFilename() . "' created!"], ResponseAlias::HTTP_CREATED, ['X-Content-Transfer-Type', FileTypes::X_BINARY->value]);
     }
 
     public function deleteFile(File $file): JsonDataServiceResponse

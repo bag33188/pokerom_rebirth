@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\Actions\Validators\RomValidationRules;
+use App\Actions\Validators\RomValidationRulesTrait;
 use App\Models\Rom;
 use Illuminate\Foundation\Http\FormRequest;
 use JetBrains\PhpStorm\ArrayShape;
@@ -12,7 +12,7 @@ use JetBrains\PhpStorm\ArrayShape;
  */
 class StoreRomRequest extends FormRequest
 {
-    use RomValidationRules;
+    use RomValidationRulesTrait;
 
     /**
      * Determine if the user is authorized to make this request.

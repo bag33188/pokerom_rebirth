@@ -9,12 +9,14 @@ class JsonDataServiceResponse implements Jsonable
 {
     public readonly array $data;
     public readonly int $code;
+    public readonly array $headers;
 
-    public function __construct(array $data, int $code)
+    public function __construct(array $data, int $code, array $headers = [])
     {
         self::setSuccessState($data, $code);
         $this->data = $data;
         $this->code = $code;
+        $this->headers = $headers;
     }
 
     private static function setSuccessState(array &$data, int $statusCode): void
@@ -29,6 +31,6 @@ class JsonDataServiceResponse implements Jsonable
 
     public function renderResponse(): JsonResponse
     {
-        return response()->json($this->data, $this->code);
+        return response()->json($this->data, $this->code, $this->headers);
     }
 }

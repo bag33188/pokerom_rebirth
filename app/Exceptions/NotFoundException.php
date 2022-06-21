@@ -2,12 +2,12 @@
 
 namespace App\Exceptions;
 
-use Utils\Classes\AbstractApplicationException;
+use Utils\Classes\AbstractApplicationException as ApplicationException;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 # use JetBrains\PhpStorm\Internal\LanguageLevelTypeAware;
 
-class NotFoundException extends AbstractApplicationException
+class NotFoundException extends ApplicationException
 {
     public function errorMessage(): string
     {

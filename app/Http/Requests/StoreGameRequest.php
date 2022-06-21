@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\Actions\Validators\GameValidationRules;
+use App\Actions\Validators\GameValidationRulesTrait;
 use App\Models\Game;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Str;
@@ -11,7 +11,7 @@ use JetBrains\PhpStorm\ArrayShape;
 /** @mixin Game */
 class StoreGameRequest extends FormRequest
 {
-    use GameValidationRules;
+    use GameValidationRulesTrait;
 
     /**
      * Determine if the user is authorized to make this request.

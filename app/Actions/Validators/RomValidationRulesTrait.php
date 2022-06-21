@@ -9,7 +9,7 @@ use App\Rules\MinSize;
 use App\Rules\ValidRomName;
 use App\Rules\ValidRomType;
 
-trait RomValidationRules
+trait RomValidationRulesTrait
 {
     protected function romTypeRules(array $rules = ['required']): array
     {

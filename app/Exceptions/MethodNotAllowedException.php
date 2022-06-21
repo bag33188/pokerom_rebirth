@@ -2,10 +2,10 @@
 
 namespace App\Exceptions;
 
-use Utils\Classes\AbstractApplicationException;
+use Utils\Classes\AbstractApplicationException as ApplicationException;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
-class MethodNotAllowedException extends AbstractApplicationException
+class MethodNotAllowedException extends ApplicationException
 {
 
     protected function status(): int

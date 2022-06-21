@@ -5,7 +5,7 @@ namespace App\Actions\Validators;
 use App\Exceptions\UnsupportedRomTypeException;
 use App\Rules\ValidFilename;
 
-trait FileValidationRules
+trait FileValidationRulesTrait
 {
     private static string $fileTypesPattern = /** @lang RegExp */
         "/\.(gba|gbc|gb|nds|xci|3ds)$/i";
