@@ -7,7 +7,7 @@ use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 # use JetBrains\PhpStorm\Internal\LanguageLevelTypeAware;
 
-class NotFoundExceptionAbstract extends AbstractApplicationException
+class NotFoundException extends AbstractApplicationException
 {
     public function errorMessage(): string
     {

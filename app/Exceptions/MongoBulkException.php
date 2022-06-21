@@ -5,7 +5,7 @@ namespace App\Exceptions;
 use Utils\Classes\AbstractApplicationException;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
-class MongoBulkExceptionAbstract extends AbstractApplicationException
+class MongoBulkException extends AbstractApplicationException
 {
     /**
      * @return string
