@@ -2,11 +2,11 @@
 
 namespace App\Models;
 
-use Classes\RomFile;
+use Classes\GridFsFile;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Jenssegers\Mongodb\Eloquent\Model as DocumentModel;
 
-/** @mixin RomFile */
+/** @mixin GridFsFile */
 class File extends DocumentModel
 {
     protected $connection = 'mongodb';

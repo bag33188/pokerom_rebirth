@@ -2,12 +2,12 @@
 
 namespace App\Http\Resources;
 
-use Classes\RomFile;
+use Classes\GridFsFile;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use JetBrains\PhpStorm\ArrayShape;
 
-/** @mixin RomFile */
+/** @mixin GridFsFile */
 class FileResource extends JsonResource
 {
     public $additional = ['success' => true];

@@ -2,7 +2,7 @@
 
 namespace Classes;
 
-abstract class RomFile
+abstract class GridFsFile
 {
     public readonly string $_id;
     public readonly int $chunkSize;
