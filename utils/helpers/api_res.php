@@ -2,11 +2,13 @@
 
 use Illuminate\Database\Eloquent\Model;
 
-function api_res(mixed $data, bool $success = true): array
-{
-    if ($data instanceof Model) {
-        return ['data' => $data, 'success' => $success];
-    } else {
-        return [...$data, 'success' => $success];
+if (!function_exists('api_res')) {
+    function api_res(mixed $data, bool $responseIsSuccessful = true): array
+    {
+        if ($data instanceof Model) {
+            return ['data' => $data, 'success' => $responseIsSuccessful];
+        } else {
+            return [...$data, 'success' => $responseIsSuccessful];
+        }
     }
 }
