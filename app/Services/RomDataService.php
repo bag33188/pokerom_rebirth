@@ -2,24 +2,22 @@
 
 namespace App\Services;
 
-use App\Interfaces\RomRepositoryInterface;
 use App\Interfaces\RomServiceInterface;
 use App\Models\File;
 use App\Models\Rom;
 use Illuminate\Support\Facades\DB;
-use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 use RomRepo;
+use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 class RomDataService implements RomServiceInterface
 {
-
     public function attemptToLinkRomToFile(Rom $rom): JsonServiceResponse
     {
         $file = RomRepo::searchForFileMatchingRom($rom->id);
         if (isset($file)) {
             $this->setRomDataFromFile($rom, $file);
             return new JsonServiceResponse([
-                'message' => "file found and linked! file id: {$file['_id']}",
+                'message' => "file found and linked! file id: {$file->getKey()}",
                 'data' => $rom->refresh()
             ], ResponseAlias::HTTP_OK);
         } else {
@@ -29,7 +27,6 @@ class RomDataService implements RomServiceInterface
 
     public function linkRomToFileIfExists(Rom $rom): void
     {
-        /** @var File */
         $file = RomRepo::searchForFileMatchingRom($rom->id);
         if (isset($file)) $this->setRomDataFromFile($rom, $file);
     }

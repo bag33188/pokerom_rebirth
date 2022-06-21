@@ -14,7 +14,7 @@ class UserDataService implements UserServiceInterface
         return $user->createToken(API_TOKEN_KEY)->plainTextToken;
     }
 
-    private function revokeUserTokens()
+    private function revokeUserTokens(): void
     {
         auth()->user()->tokens()->delete();
     }
