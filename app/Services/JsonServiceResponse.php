@@ -2,8 +2,11 @@
 
 namespace App\Services;
 
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Contracts\Support\Jsonable;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Response;
 
 class JsonServiceResponse implements Jsonable
 {
@@ -29,6 +32,6 @@ class JsonServiceResponse implements Jsonable
 
     public function response(): JsonResponse
     {
-        return response($this->toJson(), $this->code);
+        return response()->json($this->json, $this->code);
     }
 }
