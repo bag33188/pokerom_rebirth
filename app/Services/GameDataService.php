@@ -6,7 +6,7 @@ use App\Interfaces\GameServiceInterface;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 use RomRepo;
 
-class GameService implements GameServiceInterface
+class GameDataService implements GameServiceInterface
 {
     public function createGame(int $romId, array $data): JsonServiceResponse
     {

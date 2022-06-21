@@ -12,7 +12,7 @@ use Illuminate\Http\UploadedFile;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
-class FileService implements FileServiceInterface
+class FileDataService implements FileServiceInterface
 {
     public function downloadFile(File $file): StreamedResponse
     {

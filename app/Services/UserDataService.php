@@ -7,7 +7,7 @@ use App\Models\User;
 use JetBrains\PhpStorm\ArrayShape;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
-class UserService implements UserServiceInterface
+class UserDataService implements UserServiceInterface
 {
     private static function generateUserApiToken(User $user): string
     {

@@ -6,10 +6,10 @@ use App\Interfaces\FileServiceInterface;
 use App\Interfaces\GameServiceInterface;
 use App\Interfaces\RomServiceInterface;
 use App\Interfaces\UserServiceInterface;
-use App\Services\FileService;
-use App\Services\GameService;
-use App\Services\RomService;
-use App\Services\UserService;
+use App\Services\FileDataService;
+use App\Services\GameDataService;
+use App\Services\RomDataService;
+use App\Services\UserDataService;
 use Illuminate\Support\ServiceProvider;
 
 class DataServiceProvider extends ServiceProvider
@@ -21,10 +21,10 @@ class DataServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->bind(UserServiceInterface::class, UserService::class);
-        $this->app->bind(GameServiceInterface::class, GameService::class);
-        $this->app->bind(RomServiceInterface::class, RomService::class);
-        $this->app->bind(FileServiceInterface::class, FileService::class);
+        $this->app->bind(UserServiceInterface::class, UserDataService::class);
+        $this->app->bind(GameServiceInterface::class, GameDataService::class);
+        $this->app->bind(RomServiceInterface::class, RomDataService::class);
+        $this->app->bind(FileServiceInterface::class, FileDataService::class);
     }
 
     /**

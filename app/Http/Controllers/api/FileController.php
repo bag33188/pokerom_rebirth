@@ -25,7 +25,7 @@ class FileController extends ApiController
     /**
      * @throws AuthorizationException
      */
-    public function index()
+    public function index(): JsonResponse
     {
         Gate::authorize('viewAny-file');
         return response()->json(FileRepo::getAllFilesSorted());
@@ -34,7 +34,7 @@ class FileController extends ApiController
     /**
      * @throws AuthorizationException
      */
-    public function indexRom(string $fileId)
+    public function indexRom(string $fileId): JsonResponse
     {
         $file = FileRepo::findFileIfExists($fileId);
         $this->authorize('view', $file);
