@@ -19,9 +19,9 @@ class GridFsServiceProvider extends ServiceProvider implements DeferrableProvide
      */
     public function register(): void
     {
-        $key = self::DB_NAME_CONF_KEY;
+        $databaseName = Config::get(self::DB_NAME_CONF_KEY);
         App::singleton(RomFilesHandler::class,
-            fn() => new RomFilesHandler(databaseName: Config::get($key)));
+            fn() => new RomFilesHandler($databaseName));
     }
 
     /**
@@ -36,6 +36,8 @@ class GridFsServiceProvider extends ServiceProvider implements DeferrableProvide
 
 
     /**
+     * Defer Service until needed.
+     *
      * @return string[]
      */
     public function provides(): array
