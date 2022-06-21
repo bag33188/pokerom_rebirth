@@ -59,7 +59,7 @@ class GameController extends ApiController
     {
         $game = GameRepo::findGameIfExists($gameId);
         $game->update($request->all());
-        return response()->json($game);
+        return response()->json(new GameResource($game));
     }
 
     public function show(int $gameId)

@@ -8,3 +8,6 @@ const API_TOKEN_KEY = 'auth_token';
 const _EACUTE = "\u{00E9}";
 /** uppercase version of the special _**`E`**_ character in the Pokemon logo */
 const _U_EACUTE = "\u{00C9}";
+
+const RESPONSE_SUCCESS = ['success' => true];
+const RESPONSE_FAIL = ['success' => false];
