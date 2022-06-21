@@ -16,13 +16,12 @@ class RomFilesHandler extends GridFS
     private string $filepath;
     private static string $serverUploadFilePath;
 
-    private const SERVER_FILES_CONFIG_PATH = 'filesystems.server_rom_files_path';
     private const DOWNLOAD_CHUNK_SIZE = 0xFF000;
     public final const VALID_FILENAME = "/^([\w\d\s\-_]+)\.[\w\d]+$/i";
 
     public function __construct(string $databaseName = null)
     {
-        self::$serverUploadFilePath = Config::get(self::SERVER_FILES_CONFIG_PATH);
+        self::$serverUploadFilePath = Config::get('filesystems.server_rom_files_path');
         parent::__construct($databaseName);
     }
 
