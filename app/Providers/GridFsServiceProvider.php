@@ -10,7 +10,7 @@ use Modules\RomFilesHandler;
 
 class GridFsServiceProvider extends ServiceProvider implements DeferrableProvider
 {
-    private const DB_NAME_CONF_KEY = 'database.connections.mongodb.database';
+    private const DB_NAME_CONF_KEY = 'gridfs.connection.database';
 
     /**
      * Register services.

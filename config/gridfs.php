@@ -14,5 +14,5 @@ return [
         ]
     ],
     'bucketName' => env('DB_GFS_BUCKET_NAME'),
-    'chunkSize' => env('DB_GFS_CHUNK_SIZE'),
+    'chunkSize' => intval(env('DB_GFS_CHUNK_SIZE'), 16),
 ];

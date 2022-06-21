@@ -15,33 +15,36 @@ class GridFS
     private int $chunkSize;
     protected Bucket $gfsBucket;
     private static array $mongoConfig;
+    private static array $gfsConfig;
 
-    private const MONGO_CONF_PREFIX = 'gridfs';
+    private const GFS_CONF_PREFIX = 'gridfs';
+    private const MONGO_CONF_PREFIX = 'gridfs.connection';
 
     public function __construct(string $databaseName = null)
     {
         self::$mongoConfig = Config::get(self::MONGO_CONF_PREFIX);
+        self::$gfsConfig = Config::get(self::GFS_CONF_PREFIX);
         $this->setDatabaseValues($databaseName);
         $this->gfsBucket = $this->setGfsBucket();
     }
 
-    private function setDatabaseValues(string $databaseName): void
+    private function setDatabaseValues(?string $databaseName): void
     {
-        $this->bucketName = self::$mongoConfig['bucketName'];
-        $this->databaseName = $databaseName ?: self::$mongoConfig['connection']['database'];
-        $this->chunkSize = (int)hexdec(self::$mongoConfig['chunkSize']);
+        $this->bucketName = self::$gfsConfig['bucketName'];
+        $this->databaseName = $databaseName ?: self::$mongoConfig['database'];
+        $this->chunkSize = self::$gfsConfig['chunkSize'];
     }
 
     private static function GFS_MONGO_URI(): string
     {
         return '' .
-            self::$mongoConfig['driver'] . '://' .
-            self::$mongoConfig['connection']['username'] . ':' .
-            self::$mongoConfig['connection']['password'] . '@' .
-            self::$mongoConfig['connection']['host'] . ':' .
-            self::$mongoConfig['connection']['port'] . '/?authMechanism=' .
-            self::$mongoConfig['connection']['auth']['mechanism'] . '&authSource=' .
-            self::$mongoConfig['connection']['auth']['source'];
+            self::$gfsConfig['driver'] . '://' .
+            self::$mongoConfig['username'] . ':' .
+            self::$mongoConfig['password'] . '@' .
+            self::$mongoConfig['host'] . ':' .
+            self::$mongoConfig['port'] . '/?authMechanism=' .
+            self::$mongoConfig['auth']['mechanism'] . '&authSource=' .
+            self::$mongoConfig['auth']['source'];
     }
 
     private function connectToMongoClient(): Database
