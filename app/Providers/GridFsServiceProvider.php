@@ -6,8 +6,9 @@ use App;
 use App\Modules\RomFilesHandler;
 use Config;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Contracts\Support\DeferrableProvider;
 
-class GridFsServiceProvider extends ServiceProvider
+class GridFsServiceProvider extends ServiceProvider implements DeferrableProvider
 {
     private const DB_NAME_CONF_KEY = 'database.connections.mongodb.database';
 
