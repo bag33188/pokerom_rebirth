@@ -6,13 +6,10 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 abstract class ApplicationException extends Exception
 {
     private static string $defaultView = 'errors.generic';
-    private static string $defaultMsg = 'An error occurred.';
-    private static int $defaultCode = ResponseAlias::HTTP_INTERNAL_SERVER_ERROR;
 
     abstract protected function status(): int;
 
@@ -27,8 +24,8 @@ abstract class ApplicationException extends Exception
 
     public final function render(Request $request): Response|JsonResponse
     {
-        $message = $this->errorMessage() ?: self::$defaultMsg;
-        $statusCode = $this->status() ?: self::$defaultCode;
+        $message = $this->errorMessage() ?: $this->getMessage();
+        $statusCode = $this->status() ?: $this->getCode();
         if ($request->is('api/*')) {
             $error = new JsonError($message);
             return response()->json($error, $statusCode);
