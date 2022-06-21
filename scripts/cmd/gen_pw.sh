@@ -29,7 +29,7 @@ gen_pw() {
         # echo 'im in cmd'
         cd ../..
     fi
-  pw_gen_script_location="./scripts/helpers/password-generator.js"
+  pw_gen_script_location="./scripts/helpers/password-hasher.js"
   salt_val=$1
   node $pw_gen_script_location --salt="$salt_val"
   exit 0
