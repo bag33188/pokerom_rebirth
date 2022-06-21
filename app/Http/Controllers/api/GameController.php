@@ -8,7 +8,7 @@ use App\Http\Resources\{GameCollection, GameResource, RomResource};
 use App\Interfaces\GameServiceInterface;
 use App\Models\Game;
 use GameRepo;
-use Illuminate\{Auth\Access\AuthorizationException, Http\JsonResponse, Http\Response};
+use Illuminate\{Auth\Access\AuthorizationException, Http\JsonResponse};
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 use Symfony\Component\HttpKernel\Exception\PreconditionRequiredHttpException;
 
