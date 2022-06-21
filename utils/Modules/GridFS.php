@@ -16,7 +16,7 @@ class GridFS
     protected Bucket $gfsBucket;
     private static array $mongoConfig;
 
-    private const MONGO_CONF_PREFIX = 'database.connections.mongodb';
+    private const MONGO_CONF_PREFIX = 'gridfs';
 
     public function __construct(string $databaseName = null)
     {
@@ -27,21 +27,21 @@ class GridFS
 
     private function setDatabaseValues(string $databaseName): void
     {
-        $this->bucketName = self::$mongoConfig['gridfs']['bucketName'];
-        $this->databaseName = $databaseName ?: self::$mongoConfig['database'];
-        $this->chunkSize = (int)hexdec(self::$mongoConfig['gridfs']['chunkSize']);
+        $this->bucketName = self::$mongoConfig['bucketName'];
+        $this->databaseName = $databaseName ?: self::$mongoConfig['connection']['database'];
+        $this->chunkSize = (int)hexdec(self::$mongoConfig['chunkSize']);
     }
 
     private static function GFS_MONGO_URI(): string
     {
         return '' .
             self::$mongoConfig['driver'] . '://' .
-            self::$mongoConfig['username'] . ':' .
-            self::$mongoConfig['password'] . '@' .
-            self::$mongoConfig['host'] . ':' .
-            self::$mongoConfig['port'] . '/?authMechanism=' .
-            self::$mongoConfig['options']['authMechanism'] . '&authSource=' .
-            self::$mongoConfig['options']['authSource'];
+            self::$mongoConfig['connection']['username'] . ':' .
+            self::$mongoConfig['connection']['password'] . '@' .
+            self::$mongoConfig['connection']['host'] . ':' .
+            self::$mongoConfig['connection']['port'] . '/?authMechanism=' .
+            self::$mongoConfig['connection']['auth']['mechanism'] . '&authSource=' .
+            self::$mongoConfig['connection']['auth']['source'];
     }
 
     private function connectToMongoClient(): Database
