@@ -18,8 +18,9 @@ misc/old
 misc/data/schemas/*.bkp
 misc/data/schemas/*.dtmp
 misc/data/dump
-storage/app/rom_files/*
+storage/app/rom_files/*.*
 !storage/app/rom_files/.htaccess
+!storage/app/rom_files/.gitkeep
 
 ### Public ###
 public/css/**/*
