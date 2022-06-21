@@ -46,7 +46,7 @@ class RomController extends ApiController
     public function indexFile(int $romId)
     {
         Gate::authorize('viewAny-file');
-        return response()->json(RomRepo::getFileAssociatedWithRom($romId));
+        return response()->json(api_res(RomRepo::getFileAssociatedWithRom($romId)));
     }
 
     /**
@@ -59,7 +59,7 @@ class RomController extends ApiController
     {
         $rom = Rom::create($request->all());
 
-        return response()->json($rom, 201);
+        return response()->json(api_res($rom), 201);
     }
 
     /**
@@ -78,7 +78,7 @@ class RomController extends ApiController
     {
         $rom = RomRepo::findRomIfExists($romId);
         $rom->update($request->all());
-        return response()->json($rom);
+        return response()->json(api_res($rom));
     }
 
     /**
@@ -104,6 +104,6 @@ class RomController extends ApiController
         $rom = RomRepo::findRomIfExists($romId);
         $this->authorize('delete', $rom);
         Rom::destroy($romId);
-        return response()->json(['message' => "rom $rom->rom_name deleted!"]);
+        return response()->json(api_res(['message' => "rom $rom->rom_name deleted!"]));
     }
 }
