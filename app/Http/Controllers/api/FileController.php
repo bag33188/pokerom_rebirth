@@ -5,13 +5,12 @@ namespace App\Http\Controllers\api;
 use App\Enums\FileTypesEnum as FileTypes;
 use App\Http\Controllers\Controller as ApiController;
 use App\Http\Requests\StoreFileRequest;
-use App\Interfaces\FileRepositoryInterface;
 use App\Interfaces\FileServiceInterface;
 use App\Models\File;
+use FileRepo;
 use Illuminate\{Auth\Access\AuthorizationException, Http\JsonResponse};
 use Illuminate\Support\Facades\Gate;
 use Symfony\Component\HttpFoundation\StreamedResponse;
-use FileRepo;
 
 
 class FileController extends ApiController
