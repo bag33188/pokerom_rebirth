@@ -46,7 +46,7 @@ class Rom extends Model
         return $this->hasOne(File::class, '_id', 'file_id');
     }
 
-    protected final function romType(): Attribute
+    protected function romType(): Attribute
     {
         return Attribute::make(
             get: fn($value) => strtoupper($value)

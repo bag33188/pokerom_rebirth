@@ -41,14 +41,14 @@ class Game extends Model
         );
     }
 
-    protected final function region(): Attribute
+    protected function region(): Attribute
     {
         return Attribute::make(
             get: fn($value) => ucfirst($value)
         );
     }
 
-    protected final function gameType(): Attribute
+    protected function gameType(): Attribute
     {
         return Attribute::make(
             get: fn($value) => str_capitalize($value, true, 2, '-')
