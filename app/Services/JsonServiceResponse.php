@@ -2,36 +2,33 @@
 
 namespace App\Services;
 
-use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Contracts\Support\Jsonable;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Response;
 
 class JsonServiceResponse implements Jsonable
 {
-    public readonly array $json;
+    public readonly array $data;
     public readonly int $code;
 
-    public function __construct(array $json, int $code)
+    public function __construct(array $data, int $code)
     {
-        self::setSuccessState($json, $code);
-        $this->json = $json;
+        self::setSuccessState($data, $code);
+        $this->$data = $data;
         $this->code = $code;
     }
 
-    private static function setSuccessState(array &$object, int $statusCode): void
+    private static function setSuccessState(array &$data, int $statusCode): void
     {
-        $object['success'] = $statusCode < 400 && $statusCode >= 200;
+        $data['success'] = $statusCode < 400 && $statusCode >= 200;
     }
 
     public function toJson($options = 0): bool|string
     {
-       return json_encode($this->json);
+        return json_encode($this->data);
     }
 
     public function response(): JsonResponse
     {
-        return response()->json($this->json, $this->code);
+        return response()->json($this->data, $this->code);
     }
 }
