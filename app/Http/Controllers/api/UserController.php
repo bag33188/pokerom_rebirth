@@ -18,11 +18,11 @@ use UserRepo;
 
 class UserController extends ApiController
 {
-    private UserServiceInterface $userService;
+    private UserServiceInterface $userDataService;
 
-    public function __construct(UserServiceInterface $userService, UserRepositoryInterface $userRepository)
+    public function __construct(UserServiceInterface $userDataService, UserRepositoryInterface $userRepository)
     {
-        $this->userService = $userService;
+        $this->userDataService = $userDataService;
     }
 
     /**
@@ -42,18 +42,18 @@ class UserController extends ApiController
     public function register(StoreUserRequest $request): JsonResponse
     {
         $user = User::create($request->all());
-        return $this->userService->registerUserToken($user)->response();
+        return $this->userDataService->registerUserToken($user)->response();
     }
 
     public function login(LoginRequest $request): JsonResponse
     {
         $user = UserRepo::findUserByEmail($request['email']);
-        return $this->userService->authenticateUserAgainstCredentials($user, $request['password'])->response();
+        return $this->userDataService->authenticateUserAgainstCredentials($user, $request['password'])->response();
     }
 
     public function logout(): JsonResponse
     {
-        return $this->userService->logoutCurrentUser()->response();
+        return $this->userDataService->logoutCurrentUser()->response();
     }
 
 
@@ -79,6 +79,6 @@ class UserController extends ApiController
     {
         $user = UserRepo::findUserIfExists($userId);
         $this->authorize('delete', $user);
-        return $this->userService->deleteUser($user)->response();
+        return $this->userDataService->deleteUser($user)->response();
     }
 }

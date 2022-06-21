@@ -7,27 +7,27 @@ use App\Models\Rom;
 
 class RomObserver
 {
-    private RomServiceInterface $romService;
+    private RomServiceInterface $romDataService;
 
     /** @var bool Use database relationships to update models */
     private const USE_DB_LOGIC = true;
 
-    public function __construct(RomServiceInterface $romService)
+    public function __construct(RomServiceInterface $romDataService)
     {
-        $this->romService = $romService;
+        $this->romDataService = $romDataService;
     }
 
     public bool $afterCommit = false;
 
     public function created(Rom $rom): void
     {
-        $this->romService->linkRomToFileIfExists($rom);
+        $this->romDataService->linkRomToFileIfExists($rom);
     }
 
     public function updated(Rom $rom): void
     {
         if (!$rom->has_file || $rom->file_id == null) {
-            $this->romService->linkRomToFileIfExists($rom);
+            $this->romDataService->linkRomToFileIfExists($rom);
         }
     }
 

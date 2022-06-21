@@ -14,11 +14,11 @@ use Symfony\Component\HttpKernel\Exception\PreconditionRequiredHttpException;
 
 class GameController extends ApiController
 {
-    private GameServiceInterface $gameService;
+    private GameServiceInterface $gameDataService;
 
-    public function __construct(GameServiceInterface $gameService)
+    public function __construct(GameServiceInterface $gameDataService)
     {
-        $this->gameService = $gameService;
+        $this->gameDataService = $gameDataService;
     }
 
     /**
@@ -50,7 +50,7 @@ class GameController extends ApiController
     {
         $romId = $request->query('romId') ??
             throw new PreconditionRequiredHttpException(message: 'No ROM ID was sent.', code: ResponseAlias::HTTP_PRECONDITION_REQUIRED);
-        return $this->gameService->createGame($romId, $request->all())->response();
+        return $this->gameDataService->createGame($romId, $request->all())->response();
     }
 
     public function update(UpdateGameRequest $request, int $gameId)

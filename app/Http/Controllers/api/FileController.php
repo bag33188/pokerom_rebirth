@@ -15,11 +15,11 @@ use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class FileController extends ApiController
 {
-    private FileServiceInterface $fileService;
+    private FileServiceInterface $fileDataService;
 
-    public function __construct(FileServiceInterface $fileService)
+    public function __construct(FileServiceInterface $fileDataService)
     {
-        $this->fileService = $fileService;
+        $this->fileDataService = $fileDataService;
     }
 
     /**
@@ -58,7 +58,7 @@ class FileController extends ApiController
     public function download(string $fileId): StreamedResponse
     {
         $file = FileRepo::findFileIfExists($fileId);
-        return $this->fileService->downloadFile($file);
+        return $this->fileDataService->downloadFile($file);
     }
 
     /**
@@ -69,7 +69,7 @@ class FileController extends ApiController
         $this->authorize('create', File::class);
         $file = $request->file(FILE_FORM_KEY);
 
-        return $this->fileService->uploadFile($file)->response()->header('X-Content-Transfer-Type', FileTypes::X_BINARY->value);
+        return $this->fileDataService->uploadFile($file)->response()->header('X-Content-Transfer-Type', FileTypes::X_BINARY->value);
     }
 
     /**
@@ -79,6 +79,6 @@ class FileController extends ApiController
     {
         $file = FileRepo::findFileIfExists($fileId);
         $this->authorize('delete', $file);
-        return $this->fileService->deleteFile($file)->response();
+        return $this->fileDataService->deleteFile($file)->response();
     }
 }

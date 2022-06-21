@@ -18,11 +18,11 @@ use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 class RomController extends ApiController
 {
-    private RomServiceInterface $romService;
+    private RomServiceInterface $romDataService;
 
-    public function __construct(RomServiceInterface $romService)
+    public function __construct(RomServiceInterface $romDataService)
     {
-        $this->romService = $romService;
+        $this->romDataService = $romDataService;
     }
 
     /**
@@ -88,7 +88,7 @@ class RomController extends ApiController
     {
         $rom = RomRepo::findRomIfExists($romId);
         $this->authorize('update', $rom);
-        return $this->romService->attemptToLinkRomToFile($rom)->response();
+        return $this->romDataService->attemptToLinkRomToFile($rom)->response();
     }
 
     /**
