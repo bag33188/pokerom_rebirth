@@ -1,3 +1,4 @@
+### Laravel Project Original ###
 /node_modules
 /public/hot
 /public/storage
@@ -18,7 +19,9 @@ misc/old
 misc/data/schemas/*.bkp
 misc/data/schemas/*.dtmp
 misc/data/dump
-
+storage/rom_files/*
+!storage/rom_files/.htaccess
+!storage/rom_files/.gitkeep
 
 ### Public ###
 public/css/**/*
