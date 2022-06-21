@@ -50,10 +50,7 @@ class GameController extends ApiController
     {
         $romId = $request->query('romId') ??
             throw new PreconditionRequiredHttpException(message: 'No ROM ID was sent.', code: ResponseAlias::HTTP_PRECONDITION_REQUIRED);
-        $res = $this->gameService->createGame($romId, $request->all());
-        return response()->json(
-            $res->json,
-            $res->code);
+        return $this->gameService->createGame($romId, $request->all())->response();
     }
 
     public function update(UpdateGameRequest $request, int $gameId)

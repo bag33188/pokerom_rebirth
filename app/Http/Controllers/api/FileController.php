@@ -74,8 +74,8 @@ class FileController extends ApiController
     {
         $this->authorize('create', File::class);
         $file = $request->file(FILE_FORM_KEY);
-        $res = $this->fileService->uploadFile($file);
-        return response()->json($res->json, $res->code)
+
+        return response()->json($this->fileService->uploadFile($file)->response())
             ->header('X-Content-Transfer-Type', FileTypes::X_BINARY->value);
     }
 
@@ -86,7 +86,6 @@ class FileController extends ApiController
     {
         $file = FileRepo::findFileIfExists($fileId);
         $this->authorize('delete', $file);
-        $res = $this->fileService->deleteFile($file);
-        return response()->json($res->json, $res->code);
+        return response()->json($this->fileService->deleteFile($file)->response());
     }
 }
