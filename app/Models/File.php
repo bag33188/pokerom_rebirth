@@ -5,9 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Jenssegers\Mongodb\Eloquent\Model as DocumentModel;
 use MongoDB\BSON\ObjectId;
-use Utils\Classes\AbstractGridFsFile as GridFsFile;
+use Utils\Classes\AbstractGridFsFile as GfsFile;
 
-/** @mixin GridFsFile */
+/** @mixin GfsFile */
 class File extends DocumentModel
 {
     protected $connection = 'mongodb';

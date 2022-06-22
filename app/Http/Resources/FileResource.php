@@ -2,12 +2,12 @@
 
 namespace App\Http\Resources;
 
-use Utils\Classes\AbstractGridFsFile;
+use Utils\Classes\AbstractGridFsFile as GfsFile;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use JetBrains\PhpStorm\ArrayShape;
 
-/** @mixin AbstractGridFsFile */
+/** @mixin GfsFile */
 class FileResource extends JsonResource
 {
     public $additional = ['success' => true];

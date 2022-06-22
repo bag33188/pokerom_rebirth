@@ -2,12 +2,12 @@
 
 namespace App\Http\Resources;
 
-use Utils\Classes\AbstractGridFsFile;
+use Utils\Classes\AbstractGridFsFile as GfsFile;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 use JetBrains\PhpStorm\ArrayShape;
 
-/** @mixin AbstractGridFsFile */
+/** @mixin GfsFile */
 class FileCollection extends ResourceCollection
 {
     public $additional = ['success' => true];
