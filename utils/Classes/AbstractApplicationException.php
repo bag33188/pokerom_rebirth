@@ -27,16 +27,31 @@ abstract class AbstractApplicationException extends Exception
         return strlen($this->getMessage()) != 0;
     }
 
+    private function getErrorMessageIfNotNull(): string
+    {
+        return $this->errorMessage() ?: $this->getMessage();
+
+    }
+
+    private function getStatusCodeIfNotNull(): int
+    {
+        return $this->status() ?: (int)$this->getCode();
+    }
+
+    private function getViewNameIfNotNull(): string
+    {
+        return $this->viewName() ?: self::$defaultView;
+    }
+
     public final function render(Request $request): Response|JsonResponse
     {
-        $message = $this->errorMessage() ?: $this->getMessage();
-        $statusCode = $this->status() ?: $this->getCode();
-        $responseView = $this->viewName() ?: self::$defaultView;
+        $message = $this->getErrorMessageIfNotNull();
+        $code = $this->getStatusCodeIfNotNull();
         if ($request->is('api/*')) {
-            $response = new JsonDataResponse(['message' => $message], $statusCode);
+            $response = new JsonDataResponse(['message' => $message], $code);
             return $response->renderResponse();
         } else {
-            return response()->view($responseView, ['message' => $message], $statusCode);
+            return response()->view($this->getViewNameIfNotNull(), ['message' => $message], $code);
         }
     }
 }
