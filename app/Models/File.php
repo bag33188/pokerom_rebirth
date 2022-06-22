@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Jenssegers\Mongodb\Eloquent\Model as DocumentModel;
 use MongoDB\BSON\ObjectId;
 use Utils\Classes\AbstractGridFsFile as GfsFile;
+use Utils\Modules\GridFS;
 
 /** @mixin GfsFile */
 class File extends DocumentModel
@@ -21,7 +22,7 @@ class File extends DocumentModel
 
     public final function getObjectId(): ObjectId
     {
-        return new ObjectId($this->getKey());
+        return GridFS::parseObjectId($this->getKey());
     }
 
     public final function rom(): BelongsTo

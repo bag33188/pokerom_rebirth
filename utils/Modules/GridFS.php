@@ -63,7 +63,7 @@ class GridFS
         ]);
     }
 
-    protected final static function parseObjectId(string $id): ObjectId
+    public final static function parseObjectId(string $id): ObjectId
     {
         return new ObjectId($id);
     }
