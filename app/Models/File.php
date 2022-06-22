@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
-use Utils\Classes\AbstractGridFsFile as GridFsFile;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Jenssegers\Mongodb\Eloquent\Model as DocumentModel;
+use MongoDB\BSON\ObjectId;
+use Utils\Classes\AbstractGridFsFile as GridFsFile;
 
 /** @mixin GridFsFile */
 class File extends DocumentModel
@@ -17,6 +18,11 @@ class File extends DocumentModel
     protected $casts = [
         'uploadDate' => 'datetime',
     ];
+
+    public final function getObjectId(): ObjectId
+    {
+        return new ObjectId($this->getKey());
+    }
 
     public final function rom(): BelongsTo
     {
