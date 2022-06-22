@@ -19,7 +19,12 @@ abstract class AbstractApplicationException extends Exception
 
     protected final function makeCustomMessageIfDefaultIsNull(string $customMessage): string
     {
-        return (strlen($this->getMessage()) != 0) ? $this->getMessage() : $customMessage;
+        return ($this->lengthOfMessageIsNotZero()) ? $this->getMessage() : $customMessage;
+    }
+
+    private function lengthOfMessageIsNotZero(): bool
+    {
+        return strlen($this->getMessage()) != 0;
     }
 
     public final function render(Request $request): Response|JsonResponse
