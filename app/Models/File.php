@@ -19,7 +19,7 @@ class File extends MongoDbModel
         'uploadDate' => 'datetime',
     ];
 
-    public final function getObjectId(): ObjectId
+    public function getObjectId(): ObjectId
     {
         return new ObjectId($this->getKey());
     }
