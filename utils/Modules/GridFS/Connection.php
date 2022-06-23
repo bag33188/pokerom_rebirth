@@ -34,7 +34,7 @@ class Connection
         $this->chunkSize = self::$gfsConfig['chunkSize'];
     }
 
-    protected final static function GFS_MONGO_URI(): string
+    private static function GFS_MONGO_URI(): string
     {
         return '' .
             self::$gfsConfig['driver'] . '://' .
@@ -46,14 +46,14 @@ class Connection
             self::$mongoConfig['auth']['source'];
     }
 
-    protected final function connectToMongoClient(): Database
+    private function connectToMongoClient(): Database
     {
         $dsn = self::GFS_MONGO_URI();
         $db = new MongoClient($dsn);
         return $db->selectDatabase($this->databaseName);
     }
 
-    protected final function setGfsBucket(): Bucket
+    private function setGfsBucket(): Bucket
     {
         $mongodb = $this->connectToMongoClient();
         return $mongodb->selectGridFSBucket([
