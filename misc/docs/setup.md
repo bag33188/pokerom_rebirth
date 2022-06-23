@@ -218,6 +218,15 @@ debugger: xdebug
 
 [xdebug with postman](https://lukashajdu.com/post/usign-xdebug-with-postman/ "use xdebug with postman")
 
+### Install MongoDB
+
+> https://www.mongodb.com/try/download/community?tck=docs_server
+> https://www.mongodb.com/try/download/database-tools
+
+### PHPMyAdmin MaraiDB Shell
+
+http://www.learnwebtech.in/mysql-command-line/#:~:text=MySql%20Query%20explaination-,use%20mysql%20command%20%E2%80%9Cmysql%20%2Duroot%20%2Dp%E2%80%9D%20to%20login,mysql%20and%20%2Dp%20for%20password.&text=to%20create%20database%20in%20mysql,database%20run%20command%20use%20learn_php.
+
 ### Other
 
 > https://httpd.apache.org/docs/2.4/howto/http2.html
