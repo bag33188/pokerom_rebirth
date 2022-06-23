@@ -25,7 +25,7 @@ class Game extends Model
         'date_released' => 'date'
     ];
 
-    // rom_id foreign key is NOT nullable
+    //! rom_id foreign key is NOT nullable
     public final function rom(): BelongsTo
     {
         return $this->belongsTo(Rom::class, 'rom_id', 'id');
