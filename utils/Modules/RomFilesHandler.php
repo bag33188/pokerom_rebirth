@@ -17,7 +17,7 @@ class RomFilesHandler extends GridFS
     private static string $serverUploadFilePath;
 
     private const DOWNLOAD_CHUNK_SIZE = 0xFF000;
-    public final const VALID_FILENAME = "/^([\w\d\s\-_]+)\.[\w\d]+$/i";
+    public final const VALID_FILENAME_PATTERN = "/^([\w\d\s\-_]+)\.[\w\d]+$/i";
 
     public function __construct(string $databaseName = null)
     {
@@ -131,9 +131,9 @@ class RomFilesHandler extends GridFS
      */
     private function checkFormatOfFileName(): void
     {
-        if (!preg_match(self::VALID_FILENAME, $this->filename)) {
+        if (!preg_match(self::VALID_FILENAME_PATTERN, $this->filename)) {
             $badFilenameErrorMessage = 'Invalid filename detected. ' .
-                'Matched against pattern: `' . self::VALID_FILENAME . '`';
+                'Matched against pattern: `' . self::VALID_FILENAME_PATTERN . '`';
             throw new UnprocessableEntityHttpException($badFilenameErrorMessage, code: ResponseAlias::HTTP_UNPROCESSABLE_ENTITY);
         }
     }

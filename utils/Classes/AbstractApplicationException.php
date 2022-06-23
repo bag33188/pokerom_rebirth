@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 abstract class AbstractApplicationException extends Exception
 {
-    private static string $defaultView = 'errors.generic';
+    private const DEFAULT_ERROR_VIEW = 'errors.generic';
 
     abstract protected function status(): int;
 
@@ -40,7 +40,7 @@ abstract class AbstractApplicationException extends Exception
 
     private function getViewNameIfNotNull(): string
     {
-        return $this->viewName() ?: self::$defaultView;
+        return $this->viewName() ?: self::DEFAULT_ERROR_VIEW;
     }
 
     public final function render(Request $request): Response|JsonResponse
