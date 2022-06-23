@@ -14,11 +14,8 @@ class Connection extends GfsDatabaseConnection
     protected string $databaseName;
     protected int $chunkSize;
     protected Bucket $gfsBucket;
-    private static array $mongoConfig;
-    private static array $gfsConfig;
-
-    private const GFS_CONF_PREFIX = 'gridfs';
-    private const MONGO_CONF_PREFIX = 'gridfs.connection';
+    protected static array $mongoConfig;
+    protected static array $gfsConfig;
 
     public function __construct(string $databaseName = null)
     {

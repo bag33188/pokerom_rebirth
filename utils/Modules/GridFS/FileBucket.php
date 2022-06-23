@@ -13,7 +13,7 @@ class FileBucket extends GridFsBucket
 {
     public function __construct(string $databaseName = null)
     {
-        self::$serverUploadFilePath = Config::get('gridfs.fileUploadPath');
+        self::$serverUploadFilePath = Config::get(self::$gfsConfig['fileUploadPath']);
         parent::__construct($databaseName);
     }
 
