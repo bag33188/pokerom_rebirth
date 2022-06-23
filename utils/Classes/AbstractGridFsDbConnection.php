@@ -2,8 +2,7 @@
 
 namespace Utils\Classes;
 
-use MongoDB\Database;
-use MongoDB\GridFS\Bucket;
+use MongoDB\{Database, GridFS\Bucket};
 
 abstract class AbstractGridFsDbConnection
 {
