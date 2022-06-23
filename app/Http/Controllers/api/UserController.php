@@ -30,7 +30,7 @@ class UserController extends ApiController
     public function index(Request $request): UserCollection
     {
         Gate::authorize('viewAny-user');
-        if (filter_var($request->query('paginate'), FILTER_VALIDATE_BOOLEAN) === true) {
+        if (string_to_bool($request->query('paginate')) === true) {
             return new UserCollection(UserRepo::paginateUsers((int)$request->query('per_page')));
         } else {
             return new UserCollection(UserRepo::getAllUsers());
