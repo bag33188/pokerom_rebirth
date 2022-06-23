@@ -51,8 +51,7 @@ class GameController extends ApiController
     {
         $romId = $request->query('romId') ??
             throw new PreconditionRequiredHttpException(message: 'No ROM ID was sent.', code: ResponseAlias::HTTP_PRECONDITION_REQUIRED);
-        $rom = RomRepo::findRomIfExists($romId);
-        $game = $rom->game()->create($request->all());
+        $this->gameDataService->createGameFromRomId($romId, $request->all());
         $this->gameDataService->associateRomWithGame($rom, $game);
         return (new GameResource($game))->response()->setStatusCode(ResponseAlias::HTTP_CREATED);
     }

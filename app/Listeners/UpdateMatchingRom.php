@@ -15,6 +15,13 @@ class UpdateMatchingRom implements ShouldQueue
 
     public bool $afterCommit = true;
 
+    public function shouldQueue(FileUploaded $event): bool
+    {
+        $fileId = $event->file->getKey();
+        $rom = FileRepo::searchForRomMatchingFile($fileId);
+        return isset($rom);
+    }
+
     /**
      * Handle the event.
      *
@@ -24,13 +31,10 @@ class UpdateMatchingRom implements ShouldQueue
     public function handle(FileUploaded $event): void
     {
         Rom::withoutEvents(function () use ($event) {
-            $fileId = $event->file->getKey();
-            $rom = FileRepo::searchForRomMatchingFile($fileId);
-            if (isset($rom)) {
-                $rom['has_file'] = true;
-                $rom['file_id'] = $fileId;
-                $rom->save();
-            }
+            $rom = $event->file->rom()->first();
+            $rom['has_file'] = true;
+            $rom['file_id'] = $event->file->_id;
+            $rom->save();
         });
     }
 }

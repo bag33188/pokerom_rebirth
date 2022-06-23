@@ -4,17 +4,19 @@ namespace App\Providers;
 
 use App\Events\FileDeleted;
 use App\Events\FileUploaded;
-use App\Listeners\UpdateMatchingRom;
+use App\Events\GameCreated;
+use App\Listeners\AssociateRomWithGame;
 use App\Listeners\UnsetRomFileData;
-use Illuminate\Auth\Events\Registered;
-use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
-use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
+use App\Listeners\UpdateMatchingRom;
+use App\Models\Game;
 use App\Models\Rom;
 use App\Models\User;
 use App\Observers\GameObserver;
 use App\Observers\RomObserver;
 use App\Observers\UserObserver;
-use App\Models\Game;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
+use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -32,6 +34,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         FileUploaded::class => [
             UpdateMatchingRom::class
+        ],
+        GameCreated::class => [
+            AssociateRomWithGame::class
         ]
     ];
 
