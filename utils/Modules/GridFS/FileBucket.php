@@ -26,6 +26,7 @@ class FileBucket extends Connection
     public function __construct()
     {
         self::$serverUploadFilePath = Config::get('gridfs.fileUploadPath');
+        parent::__construct();
     }
 
     protected final static function parseObjectId(string $fileId): ObjectId
