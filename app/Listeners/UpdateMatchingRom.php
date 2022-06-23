@@ -30,9 +30,11 @@ class UpdateMatchingRom implements ShouldQueue
         Rom::withoutEvents(function () use ($event) {
             $fileId = $event->file->getKey();
             $rom = FileRepo::searchForRomMatchingFile($fileId);
-            $rom['has_file'] = true;
-            $rom['file_id'] = $event->file->_id;
-            $rom->save();
+            if (isset($rom)) {
+                $rom['has_file'] = true;
+                $rom['file_id'] = $event->file->_id;
+                $rom->save();
+            }
         });
     }
 }
