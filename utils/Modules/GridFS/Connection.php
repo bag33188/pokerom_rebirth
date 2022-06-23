@@ -28,9 +28,9 @@ class Connection
     /**
      * Order: **_Database Name_ (`string`), _Bucket Name_ (`string`), _Chunk Size_ (`int`)**
      *
-     * @param string|null $databaseName
-     * @param string|null $bucketName
-     * @param int|null $chunkSize
+     * @param string|null $databaseName Name of desired MongoDB database
+     * @param string|null $bucketName Name of the bucket for grid file storage
+     * @param int|null $chunkSize Size of chunked files to be stored in the grid
      * @return void
      */
     public final function setDatabaseValues(string $databaseName = null,
