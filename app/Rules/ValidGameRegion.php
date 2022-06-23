@@ -35,6 +35,6 @@ class ValidGameRegion implements Rule
      */
     public function message(): string
     {
-        return 'Invalid region. Must be: ' . join(', ', REGIONS);
+        return 'Invalid region. Must be one of: ' . join(', ', REGIONS) . '.';
     }
 }
