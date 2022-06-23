@@ -8,7 +8,6 @@ class ValidFilename implements Rule
 {
     private string $filename;
 
-    private const __NO_FILENAME__ = 'ERR_NO_FILENAME';
 
     /**
      * Create a new rule instance.
@@ -28,7 +27,7 @@ class ValidFilename implements Rule
      * @param mixed $value
      * @return bool
      */
-    public function passes($attribute, $value = self::__NO_FILENAME__): bool
+    public function passes($attribute, $value = __NO_FILENAME__): bool
     {
         return preg_match(FILENAME_PATTERN, $this->filename ?? $value);
     }

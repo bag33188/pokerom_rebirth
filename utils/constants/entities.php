@@ -8,3 +8,5 @@ const API_TOKEN_KEY = 'auth_token';
 const _EACUTE = "\u{00E9}";
 /** uppercase version of {@see _EACUTE} */
 const _U_EACUTE = "\u{00C9}";
+
+const __NO_FILENAME__ = 'ERR_NO_FILENAME';

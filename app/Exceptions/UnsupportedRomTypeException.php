@@ -7,8 +7,6 @@ use Utils\Classes\AbstractApplicationException as ApplicationException;
 
 class UnsupportedRomTypeException extends ApplicationException
 {
-    private const __NO_FILENAME__ = 'ERR_NO_FILENAME';
-
     public function status(): int
     {
         return ResponseAlias::HTTP_UNSUPPORTED_MEDIA_TYPE;
@@ -21,7 +19,7 @@ class UnsupportedRomTypeException extends ApplicationException
      */
     private function getFileExtension(): string
     {
-        return @explode('.', $this->getMessage(), 2)[1] ?? self::__NO_FILENAME__;
+        return @explode('.', $this->getMessage(), 2)[1] ?? __NO_FILENAME__;
     }
 
     public function errorMessage(): string
