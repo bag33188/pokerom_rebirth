@@ -60,8 +60,5 @@ abstract class AbstractGridFsBucket extends Connection
      */
     abstract protected function setUploadFileData(UploadedFile $file): void;
 
-    protected final static function parseObjectId(string $fileId): ObjectId
-    {
-        return new ObjectId($fileId);
-    }
+    abstract protected static function parseObjectId(string $fileId): ObjectId;
 }

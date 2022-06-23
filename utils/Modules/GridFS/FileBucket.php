@@ -4,6 +4,7 @@ namespace Utils\Modules\GridFS;
 
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Config;
+use MongoDB\BSON\ObjectId;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 use Symfony\Component\HttpKernel\Exception\UnprocessableEntityHttpException;
 use Utils\Classes\AbstractGridFsBucket as GridFsBucket;
@@ -102,5 +103,10 @@ class FileBucket extends GridFsBucket
         $name = trim($name);
         $ext = strtolower($ext);
         $filename = "$name.$ext";
+    }
+
+    protected final static function parseObjectId(string $fileId): ObjectId
+    {
+        return new ObjectId($fileId);
     }
 }
