@@ -16,7 +16,6 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Gate;
 use RomRepo;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
-use Utils\Classes\JsonDataResponse;
 
 class RomController extends ApiController
 {
@@ -105,7 +104,6 @@ class RomController extends ApiController
         $rom = RomRepo::findRomIfExists($romId);
         $this->authorize('delete', $rom);
         Rom::destroy($romId);
-        $response = new JsonDataResponse(['message' => "rom $rom->rom_name deleted!", 'success' => true], ResponseAlias::HTTP_OK);
-        return $response();
+        return jsondata(['message' => "rom $rom->rom_name deleted!"], ResponseAlias::HTTP_OK);
     }
 }
