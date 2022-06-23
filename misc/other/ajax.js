@@ -1,12 +1,14 @@
 "use strict";
 
-var apiUrl = "http://pokerom_rebirth.test/public/api/dev";
+var apiUrl = "http://pokerom_rebirth.test/public/api";
+var token = "";
 
 function loadRomsData() {
     var xhr = new XMLHttpRequest();
 
     xhr.open("GET", apiUrl + "/roms", true);
     xhr.setRequestHeader("Accept", "application/json");
+    xhr.setRequestHeader("Authorization", "Bearer " + token);
 
     xhr.onprogress = function () {
         console.log("Fetching data...");
