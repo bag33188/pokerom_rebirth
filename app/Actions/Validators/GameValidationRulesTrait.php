@@ -9,6 +9,7 @@ use App\Rules\MinSize;
 use App\Rules\ValidGameName;
 use App\Rules\ValidGameRegion;
 use App\Rules\ValidGameType;
+use JetBrains\PhpStorm\Pure;
 
 trait GameValidationRulesTrait
 {
@@ -32,6 +33,7 @@ trait GameValidationRulesTrait
         return [...$rules, 'string', new MinLength(MIN_GAME_REGION), new MaxLength(MAX_GAME_REGION), new ValidGameRegion];
     }
 
+    #[Pure]
     protected function gameGenerationRules(array $rules = ['required']): array
     {
         return [...$rules, 'integer', new MinSize(MIN_GAME_GENERATION), new MaxSize(MAX_GAME_GENERATION)];

@@ -8,6 +8,7 @@ use App\Rules\MinLength;
 use App\Rules\MinSize;
 use App\Rules\ValidRomName;
 use App\Rules\ValidRomType;
+use JetBrains\PhpStorm\Pure;
 
 trait RomValidationRulesTrait
 {
@@ -21,6 +22,7 @@ trait RomValidationRulesTrait
         return [...$rules, 'string', new MinLength(MIN_ROM_NAME), new MaxLength(MAX_ROM_NAME), new ValidRomName];
     }
 
+    #[Pure]
     protected function romSizeRules(array $rules = ['required']): array
     {
         return [...$rules, 'int', new MinSize(MIN_ROM_SIZE), new MaxSize(MAX_ROM_SIZE)];
