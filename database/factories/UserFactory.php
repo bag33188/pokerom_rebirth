@@ -18,6 +18,13 @@ class UserFactory extends Factory
      */
     protected $model = User::class;
 
+    private const USER_PASSWORDS = [
+        '123456789',
+        'password',
+        '123notme!',
+        'helloworld'
+    ];
+
     /**
      * Define the model's default state.
      *
@@ -30,7 +37,7 @@ class UserFactory extends Factory
             'name' => $this->faker->name(),
             'email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
-            'password' => bcrypt('12345678'), // password
+            'password' => bcrypt(self::USER_PASSWORDS[rand(0, sizeof(self::USER_PASSWORDS))]), // password
             'remember_token' => Str::random(10),
         ];
     }

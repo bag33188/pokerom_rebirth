@@ -43,7 +43,7 @@
             </tbody>
             <tfoot>
             <tr class="text-sm text-gray-700 uppercase light:bg-gray-700 light:text-gray-400">
-                <td class="px-6 py-3">Total Count:&nbsp;<span class="font-semibold">{{sizeof($roms)}}</span></td>
+                <td class="px-6 py-3">Total Count:&nbsp;<span class="font-semibold">{{count($roms)}}</span></td>
                 <td class="px-6 py-3">Total Size:&nbsp;<span class="font-semibold">{{$roms_total_size}}</span></td>
             </tr>
             </tfoot>

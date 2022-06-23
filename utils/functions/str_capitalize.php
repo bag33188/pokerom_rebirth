@@ -16,7 +16,7 @@ if (!function_exists('str_capitalize')) {
         if (!strlen($value) || !$value) return null;
         $words_separator = $separator ?? "\u{0020}";
         $str_arr = explode($words_separator, $value);
-        $word_count = sizeof($str_arr);
+        $word_count = count($str_arr);
         if ($deep === true && $depth > 0) {
             if ($depth > $word_count) $depth = $word_count;
             $i = 0;
