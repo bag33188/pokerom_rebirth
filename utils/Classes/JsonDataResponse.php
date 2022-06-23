@@ -1,6 +1,6 @@
 <?php
 
-namespace Utils\Modules;
+namespace Utils\Classes;
 
 use Illuminate\Contracts\Support\Jsonable;
 use Illuminate\Http\JsonResponse;

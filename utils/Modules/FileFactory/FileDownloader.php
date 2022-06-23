@@ -1,6 +1,6 @@
 <?php
 
-namespace Utils\Modules;
+namespace Utils\Modules\FileFactory;
 
 /**
  * Only use this module if you need to download large files (IE. in excess of 2 Gigabytes)

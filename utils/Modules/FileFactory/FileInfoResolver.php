@@ -1,6 +1,6 @@
 <?php
 
-namespace Utils\Modules\GridFS;
+namespace Utils\Modules\FileFactory;
 
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Config;

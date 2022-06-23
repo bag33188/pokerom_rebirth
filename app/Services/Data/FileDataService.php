@@ -11,7 +11,7 @@ use Illuminate\Http\UploadedFile;
 use RomFile;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 use Symfony\Component\HttpFoundation\StreamedResponse;
-use Utils\Modules\JsonDataResponse;
+use Utils\Classes\JsonDataResponse;
 
 class FileDataService implements FileDataServiceInterface
 {

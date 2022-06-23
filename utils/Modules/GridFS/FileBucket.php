@@ -4,6 +4,7 @@ namespace Utils\Modules\GridFS;
 
 use Illuminate\Http\UploadedFile;
 use MongoDB\BSON\ObjectId;
+use Utils\Modules\FileFactory\FileInfoResolver;
 
 class FileBucket extends Connection
 {

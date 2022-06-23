@@ -6,7 +6,7 @@ use App\Models\File;
 use FileRepo;
 use Illuminate\Http\UploadedFile;
 use Jenssegers\Mongodb\Eloquent\Model;
-use Utils\Modules\FileDownloader;
+use Utils\Modules\FileFactory\FileDownloader;
 use Utils\Modules\GridFS\FileBucket;
 use Utils\Modules\GridFS\FileBucketMethods;
 

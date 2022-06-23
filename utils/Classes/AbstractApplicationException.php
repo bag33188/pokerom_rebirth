@@ -6,7 +6,6 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Utils\Modules\JsonDataResponse;
 
 abstract class AbstractApplicationException extends Exception
 {
