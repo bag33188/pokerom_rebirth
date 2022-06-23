@@ -27,14 +27,4 @@ class DataServiceProvider extends ServiceProvider
         $this->app->bind(IRomDataService::class, RomDataService::class);
         $this->app->bind(IFileDataService::class, FileDataService::class);
     }
-
-    /**
-     * Bootstrap services.
-     *
-     * @return void
-     */
-    public function boot(): void
-    {
-//        $this->register();
-    }
 }

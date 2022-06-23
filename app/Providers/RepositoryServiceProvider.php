@@ -26,14 +26,4 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(GameRepositoryInterface::class, GameRepository::class);
         $this->app->bind(UserRepositoryInterface::class, UserRepository::class);
     }
-
-    /**
-     * Bootstrap services.
-     *
-     * @return void
-     */
-    public function boot(): void
-    {
-//        $this->register();
-    }
 }

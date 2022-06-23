@@ -20,16 +20,6 @@ class GridFsServiceProvider extends ServiceProvider implements DeferrableProvide
             fn() => new RomFilesBucket());
     }
 
-    /**
-     * Bootstrap services.
-     *
-     * @return void
-     */
-    public function boot(): void
-    {
-//        $this->register();
-    }
-
 
     /**
      * Defer Service until needed.
