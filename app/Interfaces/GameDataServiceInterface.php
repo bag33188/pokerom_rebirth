@@ -2,9 +2,9 @@
 
 namespace App\Interfaces;
 
-use Illuminate\Http\JsonResponse;
+use App\Http\Resources\GameResource;
 
 interface GameDataServiceInterface
 {
-    public function createGame(int $romId, array $data): JsonResponse;
+    public function createGame(int $romId, array $data): GameResource;
 }
