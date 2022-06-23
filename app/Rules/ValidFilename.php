@@ -28,10 +28,9 @@ class ValidFilename implements Rule
      * @param mixed $value
      * @return bool
      */
-    public function passes($attribute, $value): bool
+    public function passes($attribute, $value = self::NO_FILENAME): bool
     {
-        return preg_match(FILENAME_PATTERN, $this->filename ??
-            ($value ?? self::NO_FILENAME));
+        return preg_match(FILENAME_PATTERN, $this->filename ?? $value);
     }
 
     /**
