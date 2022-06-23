@@ -4,22 +4,12 @@ namespace Utils\Modules\GridFS;
 
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Config;
-use MongoDB\BSON\ObjectId;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 use Symfony\Component\HttpKernel\Exception\UnprocessableEntityHttpException;
+use Utils\Classes\AbstractGridFsBucket as GridFsBucket;
 
-class FileBucket extends Connection
+class FileBucket extends GridFsBucket
 {
-    protected UploadedFile $file;
-    protected string $filename;
-    protected string $filepath;
-
-    /**
-     * The path on the server to which the uploaded file should be retrieved from.
-     * @var string
-     */
-    protected static string $serverUploadFilePath;
-
     protected const DOWNLOAD_CHUNK_SIZE = 0x3FC00;
     public final const VALID_FILENAME_PATTERN = "/^([\w\d\s\-_]+)\.[\w\d]+$/i";
 
@@ -29,13 +19,30 @@ class FileBucket extends Connection
         parent::__construct($databaseName);
     }
 
+    protected function uploadFileFromStream(): void
+    {
+        $stream = fopen($this->filepath, 'rb');
+        $this->gfsBucket->uploadFromStream($this->filename, $stream);
+    }
+
+
+    protected function createDownloadStreamFromFile(string $fileId)
+    {
+        return $this->gfsBucket->openDownloadStream(self::parseObjectId($fileId));
+    }
+
+    protected function deleteFileFromBucket(string $fileId): void
+    {
+        $this->gfsBucket->delete(self::parseObjectId($fileId));
+    }
+
     /**
      * Sets all needed file information for uploading to database
      *
      * @param UploadedFile $file
      * @return void
      */
-    protected function setUploadFileData(UploadedFile $file): void
+    private function setUploadFileData(UploadedFile $file): void
     {
         $this->file = $file;
         $this->createFileNameFromFile();
@@ -52,7 +59,7 @@ class FileBucket extends Connection
      * @see normalizeFileName
      * @see checkFormatOfFileName
      */
-    protected function createFileNameFromFile(): void
+    private function createFileNameFromFile(): void
     {
         $this->filename = @$this->file->getClientOriginalName();
         $this->checkFormatOfFileName();
@@ -64,52 +71,10 @@ class FileBucket extends Connection
      *
      * @return void
      */
-    protected function createUploadFilePathFromFile(): void
+    private function createUploadFilePathFromFile(): void
     {
         $this->filepath = sprintf("%s/%s",
             self::$serverUploadFilePath, $this->filename);
-    }
-
-    /**
-     * Opens a file stream from the defined filepath and
-     * opens a mongodb gridfs upload stream using the file's name and
-     * newly opened filestream.
-     *
-     * @return void
-     *
-     * @see \MongoDB\GridFS\Bucket uploadFromStream
-     */
-    protected function uploadFileFromStream(): void
-    {
-        $stream = fopen($this->filepath, 'rb');
-        $this->gfsBucket->uploadFromStream($this->filename, $stream);
-    }
-
-    /**
-     * Opens a gridfs download stream from a parsed ObjectID that contains
-     * any given file's ID.
-     *
-     * @param string $fileId
-     * @return resource
-     *
-     * @see \MongoDB\GridFS\Bucket openDownloadStream
-     */
-    protected function createDownloadStreamFromFile(string $fileId)
-    {
-        return $this->gfsBucket->openDownloadStream(self::parseObjectId($fileId));
-    }
-
-    /**
-     * Deletes a given file from the GridFS bucket.
-     * IE. All of its **data chunks** and **file metadata**
-     * in the _chunks_ and _files_ collections respectively.
-     *
-     * @param string $fileId
-     * @return void
-     */
-    protected function deleteFileFromBucket(string $fileId): void
-    {
-        $this->gfsBucket->delete(self::parseObjectId($fileId));
     }
 
     /**
@@ -141,10 +106,5 @@ class FileBucket extends Connection
         $name = trim($name);
         $ext = strtolower($ext);
         $filename = "$name.$ext";
-    }
-
-    protected final static function parseObjectId(string $fileId): ObjectId
-    {
-        return new ObjectId($fileId);
     }
 }
