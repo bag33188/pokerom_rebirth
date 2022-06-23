@@ -116,7 +116,7 @@ class NumToRoman
     public static function numerals_to_number(string $numerals): int
     {
         $number = 0;
-        $numeral_string = strrev((string)$numerals);
+        $numeral_string = strrev($numerals);
         $length = strlen($numeral_string);
 
         $prev_number = false;
@@ -136,7 +136,7 @@ class NumToRoman
 
             //TODO Make a check using maybe regex at the beginning of the method.
             if (!isset(self::$NUMERALS_TO_NUMBER[$char]))
-                throw new InvalidArgumentException("Invalid character '{$char}' in numeral string");
+                throw new InvalidArgumentException("Invalid character '$char' in numeral string");
 
 
             $num = self::$NUMERALS_TO_NUMBER[$char];
