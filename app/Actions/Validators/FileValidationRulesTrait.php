@@ -7,15 +7,12 @@ use App\Rules\ValidFilename;
 
 trait FileValidationRulesTrait
 {
-    private static string $fileTypesPattern = /** @lang RegExp */
-        "/\.(gba|gbc|gb|nds|xci|3ds)$/i";
-
     /**
      * @throws UnsupportedRomTypeException
      */
     private static function checkForUnsupportedMediaType(string $filename): void
     {
-        if (!preg_match(self::$fileTypesPattern, $filename)) {
+        if (!preg_match(ROM_FILE_TYPES_PATTERN, $filename)) {
             throw new UnsupportedRomTypeException($filename);
         }
     }
