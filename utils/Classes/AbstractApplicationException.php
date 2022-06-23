@@ -30,7 +30,6 @@ abstract class AbstractApplicationException extends Exception
     private function getErrorMessageIfNotNull(): string
     {
         return $this->errorMessage() ?: $this->getMessage();
-
     }
 
     private function getStatusCodeIfNotNull(): int
