@@ -2,12 +2,12 @@
 
 namespace App\Services;
 
-use App\Factories\FileHandlerFactory;
 use App\Models\File;
 use FileRepo;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Config;
 use Jenssegers\Mongodb\Eloquent\Model;
+use Utils\Factories\FileHandlerFactory;
 use Utils\Modules\GridFS\GridFsFilesHandler as GfsFilesHandler;
 
 class RomFilesHandler extends GfsFilesHandler implements FileHandlerFactory

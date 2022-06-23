@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Factories;
+namespace Utils\Factories;
 
 use Illuminate\Http\UploadedFile;
 use Jenssegers\Mongodb\Eloquent\Model;
