@@ -21,7 +21,12 @@ class GridFsServiceProvider extends ServiceProvider implements DeferrableProvide
             fn(Application $app): RomFilesBucket => new RomFilesBucket());
     }
 
-    public function boot()
+    /**
+     * Bootstrap any application services.
+     *
+     * @return void
+     */
+    public function boot(): void
     {
         RomFile::setDatabaseValues();
         RomFile::setGfsBucket();
