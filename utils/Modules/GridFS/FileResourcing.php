@@ -8,5 +8,7 @@ interface FileResourcing
 {
     public function getFilename(): string;
 
+    public function getFileExt(): string;
+
     public function getFileDocument(): Model;
 }

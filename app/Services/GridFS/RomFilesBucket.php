@@ -18,6 +18,11 @@ class RomFilesBucket extends GfsBucket
         return $this->filename;
     }
 
+    public function getFileExt(): string
+    {
+        return explode('.', $this->filename, 2)[1];
+    }
+
     public function getFileDocument(): File
     {
         return FileRepo::getFileByFilename($this->filename);
