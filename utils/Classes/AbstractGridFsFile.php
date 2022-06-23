@@ -8,9 +8,9 @@ use MongoDB\BSON\ObjectId;
 /**
  * Laravel IDEA Helper does not support MongoDB objects (at least not very well).
  * The purpose of this abstract class is to provider easier hinting and implementation
- * of this app's {@link \App\Models\File File model}.
+ * of this app's {@link \App\Models\File File} model.
  *
- * @see \App\Models\File File Model
+ * @see \App\Models\File File
  */
 abstract class AbstractGridFsFile extends MongoDbModel
 {
