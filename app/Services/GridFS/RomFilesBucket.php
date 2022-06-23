@@ -5,7 +5,6 @@ namespace App\Services\GridFS;
 use App\Models\File;
 use FileRepo;
 use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\Config;
 use Jenssegers\Mongodb\Eloquent\Model;
 use Utils\Modules\FileDownloader;
 use Utils\Modules\GridFS\FileBucket;
@@ -14,13 +13,6 @@ use Utils\Modules\GridFS\FileBucketMethods;
 class RomFilesBucket extends FileBucket implements FileBucketMethods
 {
     protected const DOWNLOAD_CHUNK_SIZE = 0xFF000;
-
-    public function __construct(string $databaseName = null)
-    {
-        self::$serverUploadFilePath = Config::get('gridfs.fileUploadPath');
-
-        parent::__construct($databaseName);
-    }
 
     public function getFilename(): string
     {

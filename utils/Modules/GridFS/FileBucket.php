@@ -3,6 +3,7 @@
 namespace Utils\Modules\GridFS;
 
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Config;
 use MongoDB\BSON\ObjectId;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 use Symfony\Component\HttpKernel\Exception\UnprocessableEntityHttpException;
@@ -24,6 +25,7 @@ class FileBucket extends Connection
 
     public function __construct(string $databaseName = null)
     {
+        self::$serverUploadFilePath = Config::get('gridfs.fileUploadPath');
         parent::__construct($databaseName);
     }
 
