@@ -19,4 +19,6 @@ abstract class AbstractGridFsFile extends MongoDbModel
     public readonly int $length;
     public readonly string $uploadDate;
     public readonly string $md5;
+
+    protected final const COLUMNS = array('_id', 'chunkSize', 'filename', 'length', 'uploadDate', 'md5');
 }
