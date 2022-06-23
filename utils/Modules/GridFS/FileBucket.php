@@ -11,7 +11,6 @@ class FileBucket extends Connection
     protected string $filepath;
     protected const DOWNLOAD_CHUNK_SIZE = 0x3FC00;
 
-
     protected final static function parseObjectId(string $fileId): ObjectId
     {
         return new ObjectId($fileId);

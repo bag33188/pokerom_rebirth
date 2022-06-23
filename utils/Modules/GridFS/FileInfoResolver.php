@@ -9,14 +9,10 @@ use Symfony\Component\HttpKernel\Exception\UnprocessableEntityHttpException;
 
 class FileInfoResolver
 {
-    /**
-     * The path on the server to which the uploaded file should be retrieved from.
-     * @var string
-     */
-    protected static string $serverUploadFilePath;
+    private static string $serverUploadFilePath;
+    private UploadedFile $file;
     public final const VALID_FILENAME_PATTERN = /** @lang RegExp */
         "/^([\w\d\s\-_]+)\.[\w\d]+$/i";
-    protected UploadedFile $file;
 
     public function __construct(UploadedFile $file)
     {
@@ -31,7 +27,6 @@ class FileInfoResolver
         self::normalizeFileName($filename);
         return $filename;
     }
-
 
     public function getFilePath(): string
     {
@@ -63,5 +58,4 @@ class FileInfoResolver
         $ext = strtolower($ext);
         $filename = "$name.$ext";
     }
-
 }
