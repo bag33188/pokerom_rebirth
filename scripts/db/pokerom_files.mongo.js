@@ -30,7 +30,7 @@ db.createCollection("roms.files", {
                     minLength: 3,
                     maxLength: 32,
                     description:
-                        "filename can only have 1 period, and no spaces. only hyphens and underscores allowed...along with numbers and letters",
+                        "Filename must be: between 3 and 32 characters and only contain letters, numbers, hyphens and/or underscores. File extension must be one of: .gb, .gbc, .gba, .nds, .3ds, .xci.",
                 },
                 uploadDate: {
                     bsonType: "date",
