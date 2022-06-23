@@ -6,7 +6,7 @@ use ArrayObject;
 use InvalidArgumentException;
 
 /** @see https://stackoverflow.com/a/29687580 */
-class NumToRoman
+class NumberToRoman
 {
     /**
      * @var string[] A notation map to represent the common Roman numeral values.
