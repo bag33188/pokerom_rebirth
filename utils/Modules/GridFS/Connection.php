@@ -25,6 +25,14 @@ class Connection
         self::$gfsConfig = Config::get(self::GFS_CONF_PREFIX);
     }
 
+    /**
+     * Order: <b>Bucket Name (`string`), Chunk Size (`int`), Database Name (`string`)</b>
+     *
+     * @param string|null $bucketName
+     * @param int|null $chunkSize
+     * @param string|null $databaseName
+     * @return void
+     */
     public final function setDatabaseValues(string $bucketName = null, int $chunkSize = null, string $databaseName = null): void
     {
         $this->bucketName = $bucketName ?? self::$gfsConfig['bucketName'];
