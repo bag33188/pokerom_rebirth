@@ -12,7 +12,7 @@ class FileInfoResolver
     private static string $serverUploadFilePath;
     private UploadedFile $file;
     public final const VALID_FILENAME_PATTERN = /** @lang RegExp */
-        "/^([\w\d\s\-_]+)\.[\w\d]+$/i";
+        "/^([\w\d\s\-_]+)\.([\w\d]+)$/i";
 
     public function __construct(UploadedFile $file)
     {
