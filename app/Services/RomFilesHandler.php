@@ -2,13 +2,14 @@
 
 namespace App\Services;
 
+use App\Factories\FileHandlerFactory;
 use App\Models\File;
 use FileRepo;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Config;
 use Utils\Modules\GridFS\GridFsFilesHandler as GfsFilesHandler;
 
-class RomFilesHandler extends GfsFilesHandler
+class RomFilesHandler extends GfsFilesHandler implements FileHandlerFactory
 {
     protected const DOWNLOAD_CHUNK_SIZE = 0xFF000;
 

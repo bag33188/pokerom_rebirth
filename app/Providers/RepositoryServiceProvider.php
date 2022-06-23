@@ -2,10 +2,10 @@
 
 namespace App\Providers;
 
-use App\Factories\FileRepositoryFactory;
-use App\Factories\GameRepositoryFactory;
-use App\Factories\RomRepositoryFactory;
-use App\Factories\UserRepositoryFactory;
+use App\Interfaces\FileRepositoryInterface;
+use App\Interfaces\GameRepositoryInterface;
+use App\Interfaces\RomRepositoryInterface;
+use App\Interfaces\UserRepositoryInterface;
 use App\Repositories\FileRepository;
 use App\Repositories\GameRepository;
 use App\Repositories\RomRepository;
@@ -21,10 +21,10 @@ class RepositoryServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->bind(FileRepositoryFactory::class, FileRepository::class);
-        $this->app->bind(RomRepositoryFactory::class, RomRepository::class);
-        $this->app->bind(GameRepositoryFactory::class, GameRepository::class);
-        $this->app->bind(UserRepositoryFactory::class, UserRepository::class);
+        $this->app->bind(FileRepositoryInterface::class, FileRepository::class);
+        $this->app->bind(RomRepositoryInterface::class, RomRepository::class);
+        $this->app->bind(GameRepositoryInterface::class, GameRepository::class);
+        $this->app->bind(UserRepositoryInterface::class, UserRepository::class);
     }
 
     /**

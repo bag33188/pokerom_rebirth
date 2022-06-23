@@ -2,12 +2,12 @@
 
 namespace App\Repositories;
 
-use App\Factories\FileRepositoryFactory;
+use App\Interfaces\FileRepositoryInterface;
 use App\Models\File;
 use App\Models\Rom;
 use Illuminate\Database\Eloquent\Collection;
 
-class FileRepository implements FileRepositoryFactory
+class FileRepository implements FileRepositoryInterface
 {
     public function findFileIfExists(string $fileId): File
     {

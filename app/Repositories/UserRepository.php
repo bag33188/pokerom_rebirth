@@ -2,12 +2,12 @@
 
 namespace App\Repositories;
 
-use App\Factories\UserRepositoryFactory;
+use App\Interfaces\UserRepositoryInterface;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 
-class UserRepository implements UserRepositoryFactory
+class UserRepository implements UserRepositoryInterface
 {
     public function findUserIfExists(int $userId): User
     {

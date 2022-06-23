@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Factories;
+namespace App\Interfaces;
 
 use App\Models\Game;
 use App\Models\Rom;
 use Illuminate\Database\Eloquent\Collection;
 
-interface GameRepositoryFactory
+interface GameRepositoryInterface
 {
     public function getAllGamesSorted(): Collection;
 

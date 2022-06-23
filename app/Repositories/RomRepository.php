@@ -2,13 +2,13 @@
 
 namespace App\Repositories;
 
-use App\Factories\RomRepositoryFactory;
+use App\Interfaces\RomRepositoryInterface;
 use App\Models\File;
 use App\Models\Game;
 use App\Models\Rom;
 use Illuminate\Database\Eloquent\Collection;
 
-class RomRepository implements RomRepositoryFactory
+class RomRepository implements RomRepositoryInterface
 {
     public function findRomIfExists(int $romId): Rom
     {
