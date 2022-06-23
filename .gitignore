@@ -18,7 +18,7 @@ misc/old
 ### Custom ###
 misc/schemas/*.bkp
 misc/schemas/*.dtmp
-misc/dump
+misc/data/dump
 #storage/rom_files/*.nds
 #storage/rom_files/*.xci
 #storage/rom_files/*.3ds
