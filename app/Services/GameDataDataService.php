@@ -14,7 +14,7 @@ class GameDataDataService implements GameDataServiceInterface
     {
         $rom = RomRepo::findRomIfExists($romId);
         $game = $rom->game()->create($data);
-        event(new GameCreated($game, $rom));
+        GameCreated::dispatch($game, $rom);
         return $game;
     }
 }

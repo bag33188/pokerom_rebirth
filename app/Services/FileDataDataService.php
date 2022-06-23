@@ -4,14 +4,13 @@ namespace App\Services;
 
 use App\Enums\FileTypesEnum as FileTypes;
 use App\Events\FileDeleted;
-use App\Events\FileUploaded;
 use App\Interfaces\FileDataServiceInterface;
 use App\Models\File;
-use Utils\Classes\JsonDataResponse;
 use Illuminate\Http\UploadedFile;
 use RomFile;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 use Symfony\Component\HttpFoundation\StreamedResponse;
+use Utils\Classes\JsonDataResponse;
 
 class FileDataDataService implements FileDataServiceInterface
 {
@@ -28,13 +27,13 @@ class FileDataDataService implements FileDataServiceInterface
     public function uploadFile(UploadedFile $file): JsonDataResponse
     {
         RomFile::upload($file);
-        event(new FileUploaded(RomFile::getFileDocument()));
+        FileDeleted::dispatch(RomFile::getFileDocument());
         return new JsonDataResponse(['message' => "file '" . RomFile::getFilename() . "' created!"], ResponseAlias::HTTP_CREATED, ['X-Content-Transfer-Type', FileTypes::X_BINARY->value]);
     }
 
     public function deleteFile(File $file): JsonDataResponse
     {
-        event(new FileDeleted($file));
+        FileDeleted::dispatch($file);
         RomFile::destroy($file->getKey());
         return new JsonDataResponse(['message' => "$file->filename deleted!"], ResponseAlias::HTTP_OK);
     }
