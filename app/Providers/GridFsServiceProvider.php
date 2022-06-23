@@ -27,7 +27,7 @@ class GridFsServiceProvider extends ServiceProvider implements DeferrableProvide
      */
     public function boot(): void
     {
-        $this->register();
+//        $this->register();
     }
 
 

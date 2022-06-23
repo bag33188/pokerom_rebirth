@@ -35,6 +35,6 @@ class DataServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        $this->register();
+//        $this->register();
     }
 }
