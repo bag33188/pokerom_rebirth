@@ -6,6 +6,8 @@
 * [angular sidenav and responsive nav](https://youtu.be/SerD960-du8)
 * [angular sidenav and responsive nav code](https://code-maze.com/angular-material-navigation/)
 
+https://stackoverflow.com/questions/61160012/laravel-sanctum-authsanctum-middleware-with-angular-spa-unauthenticated-respons 
+
 [xdebug install wizard]: https://xdebug.org/wizard
 [php-debugging-session]: https://www.jetbrains.com/help/phpstorm/php-debugging-session.html
 [zero-configuration-debugging]: https://www.jetbrains.com/help/phpstorm/zero-configuration-debugging.html#start-debugging-session
