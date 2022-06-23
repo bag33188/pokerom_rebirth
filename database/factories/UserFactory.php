@@ -19,10 +19,12 @@ class UserFactory extends Factory
     protected $model = User::class;
 
     private const USER_PASSWORDS = [
+        '1234567890',
         '123456789',
+        '12345678',
         'password',
-        '123notme!',
-        'helloworld'
+        '123notME!',
+        'HelloWorld'
     ];
 
     /**
@@ -37,7 +39,7 @@ class UserFactory extends Factory
             'name' => $this->faker->name(),
             'email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
-            'password' => bcrypt(self::USER_PASSWORDS[rand(0, sizeof(self::USER_PASSWORDS))]), // password
+            'password' => bcrypt(self::USER_PASSWORDS[rand(0, sizeof(self::USER_PASSWORDS) - 1)]), // password
             'remember_token' => Str::random(10),
         ];
     }
