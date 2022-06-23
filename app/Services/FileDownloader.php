@@ -3,7 +3,7 @@
 namespace App\Services;
 
 /**
- * Only use this module if you need to download large files (IE. in excess of 2 Gigabytes)
+ * Only use this Service if you need to download large files (IE. in excess of 2 Gigabytes)
  */
 class FileDownloader
 {
@@ -32,16 +32,16 @@ class FileDownloader
         fclose($this->fileStream);
     }
 
-    public function downloadFile(): void
-    {
-        $this->printBytesIfNotEndOfFile();
-        $this->closeFileStream();
-    }
-
-    public function printBytesIfNotEndOfFile(): void
+    private function printBytesIfNotEndOfFile(): void
     {
         while (!$this->isEndOfFile()) {
             echo $this->getCurrentFileBuffer();
         }
+    }
+
+    public function downloadFile(): void
+    {
+        $this->printBytesIfNotEndOfFile();
+        $this->closeFileStream();
     }
 }
