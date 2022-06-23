@@ -17,6 +17,11 @@ class FileBucket extends GridFsBucket
         parent::__construct($databaseName);
     }
 
+    protected final static function parseObjectId(string $fileId): ObjectId
+    {
+        return new ObjectId($fileId);
+    }
+
     protected function uploadFileFromStream(): void
     {
         $stream = fopen($this->filepath, 'rb');
@@ -103,10 +108,5 @@ class FileBucket extends GridFsBucket
         $name = trim($name);
         $ext = strtolower($ext);
         $filename = "$name.$ext";
-    }
-
-    protected final static function parseObjectId(string $fileId): ObjectId
-    {
-        return new ObjectId($fileId);
     }
 }
