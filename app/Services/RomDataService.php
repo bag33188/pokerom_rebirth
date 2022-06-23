@@ -5,10 +5,10 @@ namespace App\Services;
 use App\Interfaces\RomDataServiceInterface;
 use App\Models\File;
 use App\Models\Rom;
-use Utils\Classes\JsonDataResponse;
 use Illuminate\Support\Facades\DB;
 use RomRepo;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
+use Utils\Modules\JsonDataResponse;
 
 class RomDataService implements RomDataServiceInterface
 {

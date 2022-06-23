@@ -3,9 +3,9 @@
 namespace App\Interfaces;
 
 use App\Models\File;
-use Utils\Classes\JsonDataResponse;
 use Illuminate\Http\UploadedFile;
 use Symfony\Component\HttpFoundation\StreamedResponse;
+use Utils\Modules\JsonDataResponse;
 
 interface FileDataServiceInterface
 {

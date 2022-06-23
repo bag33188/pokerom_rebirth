@@ -3,7 +3,7 @@
 namespace App\Interfaces;
 
 use App\Models\User;
-use Utils\Classes\JsonDataResponse;
+use Utils\Modules\JsonDataResponse;
 
 interface UserDataServiceInterface
 {

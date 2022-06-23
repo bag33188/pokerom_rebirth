@@ -6,7 +6,6 @@ use App\Models\File;
 use FileRepo;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Config;
-use Utils\Modules\FileDownloader;
 use Utils\Modules\GridFS\GridFsFilesHandler as GfsFilesHandler;
 
 class RomFilesHandler extends GfsFilesHandler
