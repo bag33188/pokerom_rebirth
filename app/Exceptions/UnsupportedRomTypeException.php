@@ -2,11 +2,13 @@
 
 namespace App\Exceptions;
 
-use Utils\Classes\AbstractApplicationException as ApplicationException;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
+use Utils\Classes\AbstractApplicationException as ApplicationException;
 
 class UnsupportedRomTypeException extends ApplicationException
 {
+    private const __NO_FILENAME__ = 'ERR_NO_FILENAME';
+
     public function status(): int
     {
         return ResponseAlias::HTTP_UNSUPPORTED_MEDIA_TYPE;
@@ -19,7 +21,7 @@ class UnsupportedRomTypeException extends ApplicationException
      */
     private function getFileExtension(): string
     {
-        return explode('.', $this->getMessage(), 2)[1];
+        return @explode('.', $this->getMessage(), 2)[1] ?? self::__NO_FILENAME__;
     }
 
     public function errorMessage(): string
