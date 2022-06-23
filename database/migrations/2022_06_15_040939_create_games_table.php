@@ -15,7 +15,8 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('games', function (Blueprint $table) {
+        $game_slug_length = MAX_GAME_NAME + 2;
+        Schema::create('games', function (Blueprint $table) use ($game_slug_length) {
             $table->id()->autoIncrement();
             $table->foreignId('rom_id')->unique()
                 ->references('id')->on('roms')
@@ -25,7 +26,7 @@ return new class extends Migration {
             $table->date('date_released');
             $table->tinyInteger('generation')->unsigned();
             $table->enum('region', REGIONS);
-            $table->string('slug', MAX_GAME_NAME + 2)->nullable()->unique()->comment('only the slug is a unique key. since the game name can be remotely similar through novelty character encodings.');
+            $table->string('slug', $game_slug_length)->nullable()->unique()->comment('only the slug is a unique key. since the game name can be remotely similar through novelty character encodings.');
             $table->timestamps();
         });
     }

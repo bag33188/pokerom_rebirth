@@ -21,11 +21,11 @@ return new class extends Migration {
             $table->string('name', MAX_USER_NAME);
             $table->string('email', MAX_USER_EMAIL)->unique();
             $table->timestamp('email_verified_at')->nullable();
-            $table->char('password', 60)->comment('60 chars for bcrypt hashing specification');
+            $table->char('password', BCRYPT_PASSWORD_LENGTH)->comment('60 chars for bcrypt hashing specification');
             $table->enum('role', USER_ROLES)->default(USER_ROLES[$userRoleIndex]);
             $table->rememberToken();
             $table->foreignId('current_team_id')->nullable();
-            $table->string('profile_photo_path', 2048)->nullable();
+            $table->string('profile_photo_path', PROFILE_PHOTO_URI_LENGTH)->nullable();
             $table->timestamps();
         });
     }

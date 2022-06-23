@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     protected $connection = 'mysql';
     public $withinTransaction = true;
+
     /**
      * Run the migrations.
      *
@@ -16,7 +17,7 @@ return new class extends Migration {
     {
         Schema::create('password_resets', function (Blueprint $table) {
             $table->string('email', MAX_USER_EMAIL)->index();
-            $table->char('token', 60);
+            $table->char('token', PASSWORD_RESET_TOKEN_LENGTH);
             $table->timestamp('created_at')->nullable();
         });
     }

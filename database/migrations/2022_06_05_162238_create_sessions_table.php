@@ -15,9 +15,9 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('sessions', function (Blueprint $table) {
-            $table->char('id', 40)->primary();
+            $table->char('id', SESSION_ID_LENGTH)->primary();
             $table->foreignId('user_id')->nullable()->index();
-            $table->string('ip_address', 45)->nullable()->comment("45 characters because of ipv6");
+            $table->string('ip_address', IP_ADDRESS_LENGTH)->nullable()->comment("45 characters because of ipv6");
             $table->text('user_agent')->nullable();
             $table->text('payload');
             $table->integer('last_activity')->index();
