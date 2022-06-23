@@ -5,7 +5,7 @@ namespace Utils\Factories;
 use Illuminate\Http\UploadedFile;
 use Jenssegers\Mongodb\Eloquent\Model;
 
-interface FileHandlerFactory
+interface FileBucketFactory
 {
     public function getFilename(): string;
 

@@ -7,11 +7,11 @@ use FileRepo;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Config;
 use Jenssegers\Mongodb\Eloquent\Model;
-use Utils\Factories\FileHandlerFactory;
+use Utils\Factories\FileBucketFactory;
 use Utils\Modules\FileDownloader;
 use Utils\Modules\GridFS\FileBucket;
 
-class RomFilesBucket extends FileBucket implements FileHandlerFactory
+class RomFilesBucket extends FileBucket implements FileBucketFactory
 {
     protected const DOWNLOAD_CHUNK_SIZE = 0xFF000;
 
