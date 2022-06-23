@@ -11,6 +11,8 @@ abstract class AbstractGridFsBucket extends Connection
     protected UploadedFile $file;
     protected string $filename;
     protected string $filepath;
+    protected const DOWNLOAD_CHUNK_SIZE = 0x3FC00;
+    public final const VALID_FILENAME_PATTERN = "/^([\w\d\s\-_]+)\.[\w\d]+$/i";
 
     /**
      * The path on the server to which the uploaded file should be retrieved from.
@@ -49,6 +51,14 @@ abstract class AbstractGridFsBucket extends Connection
      * @return void
      */
     abstract protected function deleteFileFromBucket(string $fileId): void;
+
+    /**
+     * Sets all needed file information for uploading to database
+     *
+     * @param UploadedFile $file
+     * @return void
+     */
+    abstract protected function setUploadFileData(UploadedFile $file): void;
 
     protected final static function parseObjectId(string $fileId): ObjectId
     {

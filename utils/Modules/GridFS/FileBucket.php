@@ -10,9 +10,6 @@ use Utils\Classes\AbstractGridFsBucket as GridFsBucket;
 
 class FileBucket extends GridFsBucket
 {
-    protected const DOWNLOAD_CHUNK_SIZE = 0x3FC00;
-    public final const VALID_FILENAME_PATTERN = "/^([\w\d\s\-_]+)\.[\w\d]+$/i";
-
     public function __construct(string $databaseName = null)
     {
         self::$serverUploadFilePath = Config::get('gridfs.fileUploadPath');
@@ -24,7 +21,6 @@ class FileBucket extends GridFsBucket
         $stream = fopen($this->filepath, 'rb');
         $this->gfsBucket->uploadFromStream($this->filename, $stream);
     }
-
 
     protected function createDownloadStreamFromFile(string $fileId)
     {
@@ -42,7 +38,7 @@ class FileBucket extends GridFsBucket
      * @param UploadedFile $file
      * @return void
      */
-    private function setUploadFileData(UploadedFile $file): void
+    protected function setUploadFileData(UploadedFile $file): void
     {
         $this->file = $file;
         $this->createFileNameFromFile();
