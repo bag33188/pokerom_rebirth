@@ -9,7 +9,6 @@ use App\Interfaces\GameDataServiceInterface;
 use App\Models\Game;
 use GameRepo;
 use Illuminate\{Auth\Access\AuthorizationException, Http\JsonResponse};
-use RomRepo;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 use Symfony\Component\HttpKernel\Exception\PreconditionRequiredHttpException;
 
@@ -51,8 +50,7 @@ class GameController extends ApiController
     {
         $romId = $request->query('romId') ??
             throw new PreconditionRequiredHttpException(message: 'No ROM ID was sent.', code: ResponseAlias::HTTP_PRECONDITION_REQUIRED);
-        $this->gameDataService->createGameFromRomId($romId, $request->all());
-        $this->gameDataService->associateRomWithGame($rom, $game);
+        $game = $this->gameDataService->createGameFromRomId($romId, $request->all());
         return (new GameResource($game))->response()->setStatusCode(ResponseAlias::HTTP_CREATED);
     }
 
