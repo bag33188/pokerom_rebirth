@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Services;
+namespace Utils\Modules;
 
 /**
- * Only use this Service if you need to download large files (IE. in excess of 2 Gigabytes)
+ * Only use this module if you need to download large files (IE. in excess of 2 Gigabytes)
  */
 class FileDownloader
 {

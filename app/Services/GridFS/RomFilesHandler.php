@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\GridFS;
 
 use App\Models\File;
 use FileRepo;
@@ -8,6 +8,7 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Config;
 use Jenssegers\Mongodb\Eloquent\Model;
 use Utils\Factories\FileHandlerFactory;
+use Utils\Modules\FileDownloader;
 use Utils\Modules\GridFS\GridFsFilesHandler as GfsFilesHandler;
 
 class RomFilesHandler extends GfsFilesHandler implements FileHandlerFactory

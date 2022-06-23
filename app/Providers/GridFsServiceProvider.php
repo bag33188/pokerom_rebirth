@@ -3,7 +3,7 @@
 namespace App\Providers;
 
 use App;
-use App\Services\RomFilesHandler;
+use App\Services\GridFS\RomFilesHandler;
 use Config;
 use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Support\ServiceProvider;

@@ -2,7 +2,7 @@
 
 namespace App\Facades;
 
-use App\Services\RomFilesHandler;
+use App\Services\GridFS\RomFilesHandler;
 use Illuminate\Support\Facades\Facade;
 
 class RomFileStorageFacade extends Facade
