@@ -8,9 +8,9 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Config;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 use Symfony\Component\HttpKernel\Exception\UnprocessableEntityHttpException;
-use Utils\Classes\AbstractGfsFilesHandler;
+use Utils\Classes\AbstractGfsFilesHandler as GfsFilesHandler;
 
-class RomFilesHandler extends AbstractGfsFilesHandler
+class RomFilesHandler extends GfsFilesHandler
 {
     protected UploadedFile $file;
     protected string $filename;
@@ -49,79 +49,45 @@ class RomFilesHandler extends AbstractGfsFilesHandler
         $fileDownloader->downloadFile();
     }
 
-    public function destroy(string $fileId): void
+    public function destroy(File $file): void
     {
-        $this->gfsBucket->delete(self::parseObjectId($fileId));
+        $this->deleteFileFromBucket($file->getKey());
     }
 
-    /**
-     * Sets all needed file information for uploading to database
-     *
-     * @param UploadedFile $file
-     * @return void
-     */
-    private function setUploadFileData(UploadedFile $file): void
+    protected function setUploadFileData(UploadedFile $file): void
     {
         $this->file = $file;
         $this->createFileNameFromFile();
         $this->createUploadFilePathFromFile();
     }
 
-    /**
-     * Creates the filename string from the given uploaded file.
-     * Checks if it is in a valid format and then
-     * normalizes the filename.
-     *
-     * @return void
-     *
-     * @see normalizeFileName
-     * @see checkFormatOfFileName
-     */
-    private function createFileNameFromFile(): void
+    protected function createFileNameFromFile(): void
     {
         $this->filename = @$this->file->getClientOriginalName();
         $this->checkFormatOfFileName();
         self::normalizeFileName($this->filename);
     }
 
-    /**
-     * Concatenates the server's upload file path with the filename
-     *
-     * @return void
-     */
-    private function createUploadFilePathFromFile(): void
+    protected function createUploadFilePathFromFile(): void
     {
         $this->filepath = sprintf("%s/%s",
             self::$serverUploadFilePath, $this->filename);
     }
 
-    /**
-     * Opens a file stream from the defined filepath and
-     * opens a mongodb gridfs upload stream using the file's name and
-     * newly opened filestream.
-     *
-     * @return void
-     *
-     * @see \MongoDB\GridFS\Bucket uploadFromStream
-     */
-    private function uploadFileFromStream(): void
+    protected function uploadFileFromStream(): void
     {
         $stream = fopen($this->filepath, 'rb');
         $this->gfsBucket->uploadFromStream($this->filename, $stream);
     }
 
-    /**
-     * Opens a gridfs download stream from a parsed ObjectID that contains
-     * any given file's ID.
-     *
-     * @param string $fileId
-     * @return resource
-     *
-     * @see \MongoDB\GridFS\Bucket openDownloadStream
-     */
-    private function createDownloadStreamFromFile(string $fileId)
+    protected function createDownloadStreamFromFile(string $fileId)
     {
         return $this->gfsBucket->openDownloadStream(self::parseObjectId($fileId));
+    }
+
+    protected function deleteFileFromBucket(string $fileId): void
+    {
+        $this->gfsBucket->delete(self::parseObjectId($fileId));
     }
 
     /**

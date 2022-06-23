@@ -34,7 +34,7 @@ class FileDataDataService implements FileDataServiceInterface
     public function deleteFile(File $file): JsonDataResponse
     {
         FileDeleted::dispatch($file);
-        RomFile::destroy($file->getKey());
+        RomFile::destroy($file);
         return new JsonDataResponse(['message' => "$file->filename deleted!"], ResponseAlias::HTTP_OK);
     }
 }
