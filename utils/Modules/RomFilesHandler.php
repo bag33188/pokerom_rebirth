@@ -8,13 +8,14 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Config;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 use Symfony\Component\HttpKernel\Exception\UnprocessableEntityHttpException;
+use Utils\Classes\AbstractGfsFilesHandler;
 
-class RomFilesHandler extends GridFS
+class RomFilesHandler extends AbstractGfsFilesHandler
 {
-    private UploadedFile $file;
-    private string $filename;
-    private string $filepath;
-    private static string $serverUploadFilePath;
+    protected UploadedFile $file;
+    protected string $filename;
+    protected string $filepath;
+    protected static string $serverUploadFilePath;
 
     private const DOWNLOAD_CHUNK_SIZE = 0xFF000;
     public final const VALID_FILENAME_PATTERN = "/^([\w\d\s\-_]+)\.[\w\d]+$/i";
