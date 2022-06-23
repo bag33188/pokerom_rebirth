@@ -35,7 +35,7 @@ if (!function_exists('str_capitalize')) {
             }
             return join($words_separator, $str_arr);
         } else {
-            return strtoupper($value[0]) . strtolower(substr($value, 1, strlen($value) - 1));
+            return ucfirst($value); // strtoupper($value[0]) . strtolower(substr($value, 1, strlen($value) - 1));
         }
     }
 }
