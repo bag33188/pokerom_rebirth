@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use Utils\Classes\JsonDataResponse;
 
-class FileDataDataService implements FileDataServiceInterface
+class FileDataService implements FileDataServiceInterface
 {
     public function downloadFile(File $file): StreamedResponse
     {

@@ -7,7 +7,7 @@ use App\Interfaces\GameDataServiceInterface;
 use App\Models\Game;
 use RomRepo;
 
-class GameDataDataService implements GameDataServiceInterface
+class GameDataService implements GameDataServiceInterface
 {
     public function createGameFromRomId(int $romId, array $data): Game
     {

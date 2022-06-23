@@ -7,7 +7,7 @@ use App\Models\User;
 use Utils\Classes\JsonDataResponse;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
-class UserDataDataService implements UserDataServiceInterface
+class UserDataService implements UserDataServiceInterface
 {
     private static function generateUserApiToken(User $user): string
     {

@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 use RomRepo;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
-class RomDataDataService implements RomDataServiceInterface
+class RomDataService implements RomDataServiceInterface
 {
     public function attemptToLinkRomToFile(Rom $rom): JsonDataResponse
     {
