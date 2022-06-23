@@ -29,7 +29,7 @@ storage/**/*.gba
 !storage/**/.gitkeep
 !storage/**/*.url
 
-### Public ###
+### Public Folder Assets (Generated) ###
 public/css/**/*
 public/js/**/*
 /public/vendor/
