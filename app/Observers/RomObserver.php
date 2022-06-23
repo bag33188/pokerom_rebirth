@@ -10,7 +10,7 @@ class RomObserver
     private RomDataServiceInterface $romDataService;
 
     /** @var bool Use database relationships to update models */
-    private const USE_DB_LOGIC = true;
+    private static bool $use_db_logic = true;
 
     public function __construct(RomDataServiceInterface $romDataService)
     {
@@ -39,7 +39,7 @@ class RomObserver
 
     public function deleted(Rom $rom): void
     {
-        if (self::USE_DB_LOGIC === false) {
+        if (self::$use_db_logic === false) {
             $rom->game()->delete();
         }
     }
