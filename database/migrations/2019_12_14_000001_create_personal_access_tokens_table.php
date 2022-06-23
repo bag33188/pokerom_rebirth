@@ -8,6 +8,7 @@ class CreatePersonalAccessTokensTable extends Migration
 {
     protected $connection = 'mysql';
     public $withinTransaction = true;
+
     /**
      * Run the migrations.
      *
@@ -15,10 +16,11 @@ class CreatePersonalAccessTokensTable extends Migration
      */
     public function up(): void
     {
-        Schema::create('personal_access_tokens', function (Blueprint $table) {
+        $personal_access_tokens_name_comment = "used to be 15 in pokerom_v3, may want to look into that";
+        Schema::create('personal_access_tokens', function (Blueprint $table) use ($personal_access_tokens_name_comment) {
             $table->bigIncrements('id');
             $table->morphs('tokenable');
-            $table->string('name', 20)->comment("used to be 15 in pokerom_v3, may want to look into that");
+            $table->string('name', 20)->comment($personal_access_tokens_name_comment);
             $table->char('token', 64)->unique();
             $table->text('abilities')->nullable();
             $table->timestamp('last_used_at')->nullable();

@@ -13,7 +13,7 @@ return new class extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
         $db_slug_comment = 'only the slug is a unique key. since the game name can be remotely similar through novelty character encodings.';
         Schema::create('games', function (Blueprint $table) use ($db_slug_comment) {
@@ -36,7 +36,7 @@ return new class extends Migration
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('games');
     }
