@@ -1,11 +1,11 @@
 <?php
 
-namespace Utils\Factories;
+namespace Utils\Modules\GridFS;
 
 use Illuminate\Http\UploadedFile;
 use Jenssegers\Mongodb\Eloquent\Model;
 
-interface FileBucketFactory
+interface FileBucketMethods
 {
     public function getFilename(): string;
 
