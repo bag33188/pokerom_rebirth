@@ -22,7 +22,7 @@ class GridFsServiceProvider extends ServiceProvider implements DeferrableProvide
 
 
     /**
-     * Defer Service until needed.
+     * Get the services provided by the provider.
      *
      * @return string[]
      */
