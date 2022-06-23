@@ -220,7 +220,7 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
-        'RomFile' => \App\Facades\RomFileStorageFacade::class,
+        'RomFile' => \App\Facades\RomFileBucketFacade::class,
         'RomRepo'=>\App\Facades\RomRepositoryFacade::class,
         'GameRepo'=>\App\Facades\GameRepositoryFacade::class,
         'FileRepo'=>\App\Facades\FileRepositoryFacade::class,

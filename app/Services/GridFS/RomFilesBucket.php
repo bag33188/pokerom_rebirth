@@ -9,9 +9,9 @@ use Illuminate\Support\Facades\Config;
 use Jenssegers\Mongodb\Eloquent\Model;
 use Utils\Factories\FileHandlerFactory;
 use Utils\Modules\FileDownloader;
-use Utils\Modules\GridFS\FilesHandler as GfsFilesHandler;
+use Utils\Modules\GridFS\GridBucket as GfsFilesHandler;
 
-class RomFilesHandler extends GfsFilesHandler implements FileHandlerFactory
+class RomFilesBucket extends GfsFilesHandler implements FileHandlerFactory
 {
     protected const DOWNLOAD_CHUNK_SIZE = 0xFF000;
 

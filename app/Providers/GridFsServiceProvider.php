@@ -3,7 +3,7 @@
 namespace App\Providers;
 
 use App;
-use App\Services\GridFS\RomFilesHandler;
+use App\Services\GridFS\RomFilesBucket;
 use Config;
 use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Support\ServiceProvider;
@@ -20,8 +20,8 @@ class GridFsServiceProvider extends ServiceProvider implements DeferrableProvide
     public function register(): void
     {
         $databaseName = Config::get(self::DB_NAME_CONF_KEY);
-        App::singleton(RomFilesHandler::class,
-            fn() => new RomFilesHandler($databaseName));
+        App::singleton(RomFilesBucket::class,
+            fn() => new RomFilesBucket($databaseName));
     }
 
     /**
@@ -42,6 +42,6 @@ class GridFsServiceProvider extends ServiceProvider implements DeferrableProvide
      */
     public function provides(): array
     {
-        return [RomFilesHandler::class];
+        return [RomFilesBucket::class];
     }
 }

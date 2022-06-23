@@ -7,7 +7,7 @@ use MongoDB\BSON\ObjectId;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 use Symfony\Component\HttpKernel\Exception\UnprocessableEntityHttpException;
 
-class FilesHandler extends Connection
+class GridBucket extends Connection
 {
     protected UploadedFile $file;
     protected string $filename;
