@@ -29,7 +29,6 @@ class GridFsServiceProvider extends ServiceProvider implements DeferrableProvide
     public function boot(): void
     {
         RomFile::setDatabaseValues();
-        RomFile::setGfsBucket();
     }
 
     /**

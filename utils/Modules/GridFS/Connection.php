@@ -30,6 +30,7 @@ class Connection
         $this->bucketName = $bucketName ?? self::$gfsConfig['bucketName'];
         $this->chunkSize = $chunkSize ?? self::$gfsConfig['chunkSize'];
         $this->databaseName = $databaseName ?? self::$mongoConfig['database'];
+        $this->setGfsBucket();
     }
 
     private static function GFS_MONGO_URI(): string
@@ -51,7 +52,7 @@ class Connection
         return $db->selectDatabase($this->databaseName);
     }
 
-    public final function setGfsBucket(): void
+    private function setGfsBucket(): void
     {
         $mongodb = $this->connectToMongoClient();
         $this->gfsBucket = $mongodb->selectGridFSBucket([
