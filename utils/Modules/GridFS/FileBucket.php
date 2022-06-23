@@ -25,7 +25,7 @@ class FileBucket extends Connection
 
     public function __construct(string $databaseName = null)
     {
-        self::$serverUploadFilePath = Config::get(self::$gfsConfig['fileUploadPath']);
+        self::$serverUploadFilePath = Config::get('gridfs.fileUploadPath');
         parent::__construct($databaseName);
     }
 

@@ -13,11 +13,11 @@ class Connection
     protected string $databaseName;
     protected int $chunkSize;
     protected Bucket $gfsBucket;
-    protected static array $mongoConfig;
-    protected static array $gfsConfig;
+    private static array $mongoConfig;
+    private static array $gfsConfig;
 
-    protected final const GFS_CONF_PREFIX = 'gridfs';
-    protected final const MONGO_CONF_PREFIX = 'gridfs.connection';
+    private const GFS_CONF_PREFIX = 'gridfs';
+    private const MONGO_CONF_PREFIX = 'gridfs.connection';
 
     public function __construct(string $databaseName = null)
     {
