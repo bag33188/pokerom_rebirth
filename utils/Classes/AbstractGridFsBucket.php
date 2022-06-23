@@ -61,5 +61,11 @@ abstract class AbstractGridFsBucket extends Connection
      */
     abstract protected function setUploadFileData(UploadedFile $file): void;
 
+    /**
+     * Convert's an Object ID String to a BSON Object ID (based on a file's id)
+     *
+     * @param string $fileId _id
+     * @return ObjectId
+     */
     abstract protected static function parseObjectId(string $fileId): ObjectId;
 }
