@@ -196,6 +196,8 @@ Links and references
 
 add this cookie to requests: `XDEBUG_SESSION=phpstorm; Path=/; Domain=pokerom_rebirth.test; Expires=Tue, 19 Jan 2038 03:14:07 GMT;`
 
+under domain name: pokerom_rebirth.test
+
 [xdebug with postman](https://lukashajdu.com/post/usign-xdebug-with-postman/ "use xdebug with postman")
 
 ### Other
