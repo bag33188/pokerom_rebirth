@@ -2,6 +2,7 @@
 
 namespace Utils\Modules;
 
+use ArrayObject;
 use InvalidArgumentException;
 
 /** @see https://stackoverflow.com/a/29687580 */
@@ -19,7 +20,7 @@ class NumToRoman
         ];
 
     /**
-     * @var \ArrayObject[] A map of Roman numerals based on place value. Each item ends with the first numeral in the next place value.
+     * @var ArrayObject[] A map of Roman numerals based on place value. Each item ends with the first numeral in the next place value.
      * @static
      */
     protected static array $NUMERALS_BY_PLACE_VALUE =
