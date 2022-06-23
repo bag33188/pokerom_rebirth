@@ -2,13 +2,13 @@
 
 namespace App\Facades;
 
-use App\Services\GridFS\RomBucketFilesHandler;
+use App\Services\GridFS\RomFilesHandler;
 use Illuminate\Support\Facades\Facade;
 
 class RomFileStorageFacade extends Facade
 {
     protected static function getFacadeAccessor(): string
     {
-        return RomBucketFilesHandler::class;
+        return RomFilesHandler::class;
     }
 }

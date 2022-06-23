@@ -6,9 +6,8 @@ use Illuminate\Support\Facades\Config;
 use MongoDB\Client as MongoClient;
 use MongoDB\Database;
 use MongoDB\GridFS\Bucket;
-use Utils\Classes\AbstractGridFsConnection as GridFsConnection;
 
-class Connection extends GridFsConnection
+class Connection
 {
     protected string $bucketName;
     protected string $databaseName;
@@ -35,7 +34,7 @@ class Connection extends GridFsConnection
         $this->chunkSize = self::$gfsConfig['chunkSize'];
     }
 
-    protected static function GFS_MONGO_URI(): string
+    private static function GFS_MONGO_URI(): string
     {
         return '' .
             self::$gfsConfig['driver'] . '://' .
@@ -47,14 +46,14 @@ class Connection extends GridFsConnection
             self::$mongoConfig['auth']['source'];
     }
 
-    protected final function connectToMongoClient(): Database
+    private function connectToMongoClient(): Database
     {
         $dsn = self::GFS_MONGO_URI();
         $db = new MongoClient($dsn);
         return $db->selectDatabase($this->databaseName);
     }
 
-    protected final function setGfsBucket(): Bucket
+    private function setGfsBucket(): Bucket
     {
         $mongodb = $this->connectToMongoClient();
         return $mongodb->selectGridFSBucket([
