@@ -1,11 +1,9 @@
 <?php
 
-namespace Utils\Classes;
+namespace Utils\Modules\GridFS;
 
 use Illuminate\Http\UploadedFile;
 use Jenssegers\Mongodb\Eloquent\Model;
-use Utils\Modules\GridFS\FileBucket;
-use Utils\Modules\GridFS\GridFileResourcing;
 
 abstract class AbstractGridFsBucket extends FileBucket implements GridFileResourcing
 {

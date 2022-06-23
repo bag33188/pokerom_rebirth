@@ -6,8 +6,8 @@ use App\Models\File;
 use FileRepo;
 use Illuminate\Http\UploadedFile;
 use Jenssegers\Mongodb\Eloquent\Model;
-use Utils\Classes\AbstractGridFsBucket as GfsBucket;
 use Utils\Modules\FileFactory\FileDownloader;
+use Utils\Modules\GridFS\AbstractGridFsBucket as GfsBucket;
 
 class RomFilesBucket extends GfsBucket
 {
