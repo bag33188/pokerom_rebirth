@@ -12,7 +12,7 @@ abstract class AbstractGridFsBucket extends Connection
     protected string $filename;
     protected string $filepath;
     protected const DOWNLOAD_CHUNK_SIZE = 0x3FC00;
-    public final const VALID_FILENAME_PATTERN = "/^([\w\d\s\-_]+)\.[\w\d]+$/i";
+    public final const VALID_FILENAME_PATTERN = /** @lang RegExp */"/^([\w\d\s\-_]+)\.[\w\d]+$/i";
 
     /**
      * The path on the server to which the uploaded file should be retrieved from.
