@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\Data;
 
 use App\Enums\FileTypesEnum as FileTypes;
 use App\Events\FileDeleted;

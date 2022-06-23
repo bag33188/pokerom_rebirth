@@ -6,10 +6,10 @@ use App\Interfaces\FileDataServiceInterface as IFileDataService;
 use App\Interfaces\GameDataServiceInterface as IGameDataService;
 use App\Interfaces\RomDataServiceInterface as IRomDataService;
 use App\Interfaces\UserDataServiceInterface as IUserDataService;
-use App\Services\FileDataService;
-use App\Services\GameDataService;
-use App\Services\RomDataService;
-use App\Services\UserDataService;
+use App\Services\Data\FileDataService;
+use App\Services\Data\GameDataService;
+use App\Services\Data\RomDataService;
+use App\Services\Data\UserDataService;
 use Illuminate\Support\ServiceProvider;
 
 

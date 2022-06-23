@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\Data;
 
 use App\Interfaces\RomDataServiceInterface;
 use App\Models\File;
