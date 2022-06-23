@@ -30,7 +30,7 @@ class Connection
     private function setDatabaseValues(?string $databaseName): void
     {
         $this->bucketName = self::$gfsConfig['bucketName'];
-        $this->databaseName = $databaseName ?: self::$mongoConfig['database'];
+        $this->databaseName = $databaseName ?? self::$mongoConfig['database'];
         $this->chunkSize = self::$gfsConfig['chunkSize'];
     }
 

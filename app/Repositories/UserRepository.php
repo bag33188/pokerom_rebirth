@@ -21,7 +21,7 @@ class UserRepository implements UserRepositoryInterface
 
     public function paginateUsers(?int $perPage = null): LengthAwarePaginator
     {
-        return User::paginate($perPage ?: 4)->withQueryString();
+        return User::paginate($perPage ?? 4)->withQueryString();
     }
 
     public function getAllUsers(): Collection

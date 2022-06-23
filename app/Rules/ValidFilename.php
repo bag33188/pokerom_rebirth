@@ -31,7 +31,7 @@ class ValidFilename implements Rule
     public function passes($attribute, $value): bool
     {
         return preg_match(FILENAME_PATTERN, $this->filename ??
-            ($value ?: self::NO_FILENAME));
+            ($value ?? self::NO_FILENAME));
     }
 
     /**
