@@ -13,12 +13,13 @@ npm-debug.log
 yarn-error.log
 /.idea
 /.vscode
-misc/old
 
 ### Custom ###
 misc/schemas/*.bkp
 misc/schemas/*.dtmp
 misc/data/dump
+misc/old
+# composer.phar
 #storage/rom_files/*.nds
 #storage/rom_files/*.xci
 #storage/rom_files/*.3ds
