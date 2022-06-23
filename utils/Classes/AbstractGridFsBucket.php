@@ -11,10 +11,6 @@ abstract class AbstractGridFsBucket extends FileBucket implements GridFileResour
 {
     protected const DOWNLOAD_CHUNK_SIZE = 0x3FC00;
 
-    abstract public function getFilename(): string;
-
-    abstract public function getFileDocument(): Model;
-
     abstract public function upload(UploadedFile $file): void;
 
     abstract public function download(string $fileId): void;
