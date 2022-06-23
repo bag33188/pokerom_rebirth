@@ -2,8 +2,8 @@
 
 namespace App\Facades;
 
+use App\Services\RomFilesHandler;
 use Illuminate\Support\Facades\Facade;
-use Utils\Modules\RomFilesHandler;
 
 class RomFileStorageFacade extends Facade
 {

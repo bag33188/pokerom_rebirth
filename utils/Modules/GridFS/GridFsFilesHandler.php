@@ -1,59 +1,37 @@
 <?php
 
-namespace Utils\Modules;
+namespace Utils\Modules\GridFS;
 
-use App\Models\File;
-use FileRepo;
 use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\Config;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 use Symfony\Component\HttpKernel\Exception\UnprocessableEntityHttpException;
-use Utils\Classes\AbstractGfsFilesHandler as GfsFilesHandler;
 
-class RomFilesHandler extends GfsFilesHandler
+class GridFsFilesHandler extends Connection
 {
     protected UploadedFile $file;
     protected string $filename;
     protected string $filepath;
+
+    /**
+     * The path on the server to which the uploaded file should be retrieved from.
+     * @var string
+     */
     protected static string $serverUploadFilePath;
 
-    protected const DOWNLOAD_CHUNK_SIZE = 0xFF000;
+    protected const DOWNLOAD_CHUNK_SIZE = 0x3FC00;
     public final const VALID_FILENAME_PATTERN = "/^([\w\d\s\-_]+)\.[\w\d]+$/i";
 
     public function __construct(string $databaseName = null)
     {
-        self::$serverUploadFilePath = Config::get('gridfs.fileUploadPath');
         parent::__construct($databaseName);
     }
 
-    public function getFilename(): string
-    {
-        return $this->filename;
-    }
-
-    public function getFileDocument(): File
-    {
-        return FileRepo::getFileByFilename($this->filename);
-    }
-
-    public function upload(UploadedFile $file): void
-    {
-        $this->setUploadFileData($file);
-        $this->uploadFileFromStream();
-    }
-
-    public function download(string $fileId): void
-    {
-        $stream = $this->createDownloadStreamFromFile($fileId);
-        $fileDownloader = new FileDownloader($stream, self::DOWNLOAD_CHUNK_SIZE);
-        $fileDownloader->downloadFile();
-    }
-
-    public function destroy(File $file): void
-    {
-        $this->deleteFileFromBucket($file->getKey());
-    }
-
+    /**
+     * Sets all needed file information for uploading to database
+     *
+     * @param UploadedFile $file
+     * @return void
+     */
     protected function setUploadFileData(UploadedFile $file): void
     {
         $this->file = $file;
@@ -61,6 +39,16 @@ class RomFilesHandler extends GfsFilesHandler
         $this->createUploadFilePathFromFile();
     }
 
+    /**
+     * Creates the filename string from the given uploaded file.
+     * Checks if it is in a valid format and then
+     * normalizes the filename.
+     *
+     * @return void
+     *
+     * @see normalizeFileName
+     * @see checkFormatOfFileName
+     */
     protected function createFileNameFromFile(): void
     {
         $this->filename = @$this->file->getClientOriginalName();
@@ -68,23 +56,54 @@ class RomFilesHandler extends GfsFilesHandler
         self::normalizeFileName($this->filename);
     }
 
+    /**
+     * Concatenates the server's upload file path with the filename
+     *
+     * @return void
+     */
     protected function createUploadFilePathFromFile(): void
     {
         $this->filepath = sprintf("%s/%s",
             self::$serverUploadFilePath, $this->filename);
     }
 
+    /**
+     * Opens a file stream from the defined filepath and
+     * opens a mongodb gridfs upload stream using the file's name and
+     * newly opened filestream.
+     *
+     * @return void
+     *
+     * @see \MongoDB\GridFS\Bucket uploadFromStream
+     */
     protected function uploadFileFromStream(): void
     {
         $stream = fopen($this->filepath, 'rb');
         $this->gfsBucket->uploadFromStream($this->filename, $stream);
     }
 
+    /**
+     * Opens a gridfs download stream from a parsed ObjectID that contains
+     * any given file's ID.
+     *
+     * @param string $fileId
+     * @return resource
+     *
+     * @see \MongoDB\GridFS\Bucket openDownloadStream
+     */
     protected function createDownloadStreamFromFile(string $fileId)
     {
         return $this->gfsBucket->openDownloadStream(self::parseObjectId($fileId));
     }
 
+    /**
+     * Deletes a given file from the GridFS bucket.
+     * IE. All of its **data chunks** and **file metadata**
+     * in the _chunks_ and _files_ collections respectively.
+     *
+     * @param string $fileId
+     * @return void
+     */
     protected function deleteFileFromBucket(string $fileId): void
     {
         $this->gfsBucket->delete(self::parseObjectId($fileId));

@@ -3,10 +3,10 @@
 namespace App\Providers;
 
 use App;
+use App\Services\RomFilesHandler;
 use Config;
 use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Support\ServiceProvider;
-use Utils\Modules\RomFilesHandler;
 
 class GridFsServiceProvider extends ServiceProvider implements DeferrableProvider
 {

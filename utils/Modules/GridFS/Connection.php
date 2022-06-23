@@ -1,18 +1,18 @@
 <?php
 
-namespace Utils\Modules;
+namespace Utils\Modules\GridFS;
 
 use Illuminate\Support\Facades\Config;
-use MongoDB\BSON\ObjectId;
 use MongoDB\Client as MongoClient;
 use MongoDB\Database;
 use MongoDB\GridFS\Bucket;
+use Utils\Classes\AbstractGridFsConnection as GridFsConnection;
 
-class GridFS
+class Connection extends GridFsConnection
 {
-    private string $bucketName;
-    private string $databaseName;
-    private int $chunkSize;
+    protected string $bucketName;
+    protected string $databaseName;
+    protected int $chunkSize;
     protected Bucket $gfsBucket;
     private static array $mongoConfig;
     private static array $gfsConfig;
@@ -35,7 +35,7 @@ class GridFS
         $this->chunkSize = self::$gfsConfig['chunkSize'];
     }
 
-    private static function GFS_MONGO_URI(): string
+    protected static function GFS_MONGO_URI(): string
     {
         return '' .
             self::$gfsConfig['driver'] . '://' .
@@ -47,24 +47,19 @@ class GridFS
             self::$mongoConfig['auth']['source'];
     }
 
-    private function connectToMongoClient(): Database
+    protected final function connectToMongoClient(): Database
     {
         $dsn = self::GFS_MONGO_URI();
         $db = new MongoClient($dsn);
         return $db->selectDatabase($this->databaseName);
     }
 
-    private function setGfsBucket(): Bucket
+    protected final function setGfsBucket(): Bucket
     {
         $mongodb = $this->connectToMongoClient();
         return $mongodb->selectGridFSBucket([
             'chunkSizeBytes' => $this->chunkSize,
             'bucketName' => $this->bucketName
         ]);
-    }
-
-    public final static function parseObjectId(string $id): ObjectId
-    {
-        return new ObjectId($id);
     }
 }
