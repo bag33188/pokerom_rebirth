@@ -2,7 +2,6 @@
 
 namespace App\Providers;
 
-use App;
 use App\Services\GridFS\RomFilesBucket;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Support\DeferrableProvider;
@@ -17,7 +16,7 @@ class GridFsServiceProvider extends ServiceProvider implements DeferrableProvide
      */
     public function register(): void
     {
-        App::singleton(RomFilesBucket::class,
+        $this->app->singleton(RomFilesBucket::class,
             fn(Application $app): RomFilesBucket => new RomFilesBucket());
     }
 
