@@ -6,11 +6,10 @@ use App\Models\File;
 use FileRepo;
 use Illuminate\Http\UploadedFile;
 use Jenssegers\Mongodb\Eloquent\Model;
+use Utils\Classes\AbstractGridFsBucket as GfsBucket;
 use Utils\Modules\FileFactory\FileDownloader;
-use Utils\Modules\GridFS\FileBucket;
-use Utils\Modules\GridFS\FileBucketMethods;
 
-class RomFilesBucket extends FileBucket implements FileBucketMethods
+class RomFilesBucket extends GfsBucket
 {
     protected const DOWNLOAD_CHUNK_SIZE = 0xFF000;
 
