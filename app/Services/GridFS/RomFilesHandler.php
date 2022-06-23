@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Config;
 use Jenssegers\Mongodb\Eloquent\Model;
 use Utils\Factories\FileHandlerFactory;
 use Utils\Modules\FileDownloader;
-use Utils\Modules\GridFS\GridFsFilesHandler as GfsFilesHandler;
+use Utils\Modules\GridFS\FilesHandler as GfsFilesHandler;
 
 class RomFilesHandler extends GfsFilesHandler implements FileHandlerFactory
 {
