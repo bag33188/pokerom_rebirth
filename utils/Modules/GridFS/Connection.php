@@ -23,8 +23,6 @@ class Connection
     {
         self::$mongoConfig = Config::get(self::MONGO_CONF_PREFIX);
         self::$gfsConfig = Config::get(self::GFS_CONF_PREFIX);
-//        $this->setDatabaseValues();
-//        $this->setGfsBucket();
     }
 
     public final function setDatabaseValues(string $bucketName = null, int $chunkSize = null, string $databaseName = null): void
