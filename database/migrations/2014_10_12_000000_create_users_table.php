@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     protected $connection = 'mysql';
     public $withinTransaction = true;
+
     /**
      * Run the migrations.
      *
@@ -14,14 +15,14 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        $user_table_password_comment = '60 chars for bcrypt hashing specification';
-        Schema::create('users', function (Blueprint $table) use ($user_table_password_comment) {
+        $userRoleIndex = array_search('user', USER_ROLES, true);
+        Schema::create('users', function (Blueprint $table) use ($userRoleIndex) {
             $table->id()->autoIncrement();
             $table->string('name', MAX_USER_NAME);
             $table->string('email', MAX_USER_EMAIL)->unique();
             $table->timestamp('email_verified_at')->nullable();
-            $table->char('password', 60)->comment($user_table_password_comment);
-            $table->enum('role', USER_ROLES)->default('user');
+            $table->char('password', 60)->comment('60 chars for bcrypt hashing specification');
+            $table->enum('role', USER_ROLES)->default(USER_ROLES[$userRoleIndex]);
             $table->rememberToken();
             $table->foreignId('current_team_id')->nullable();
             $table->string('profile_photo_path', 2048)->nullable();
