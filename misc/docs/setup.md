@@ -198,6 +198,24 @@ add this cookie to requests: `XDEBUG_SESSION=phpstorm; Path=/; Domain=pokerom_re
 
 under domain name: pokerom_rebirth.test
 
+```
+https:
+name:pokerom_rebirth.test
+host: pokerom_rebirth.test
+port: 443
+
+debugger: xdebug
+```
+
+```
+http:
+name:pokerom_rebirth.test
+host: pokerom_rebirth.test
+port: 80
+
+debugger: xdebug
+```
+
 [xdebug with postman](https://lukashajdu.com/post/usign-xdebug-with-postman/ "use xdebug with postman")
 
 ### Other
