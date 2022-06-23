@@ -22,6 +22,7 @@ misc/dump
 storage/rom_files/*
 !storage/rom_files/.htaccess
 !storage/rom_files/.gitkeep
+!storage/rom_files/*.url
 
 ### Public ###
 public/css/**/*
