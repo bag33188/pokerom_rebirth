@@ -4,6 +4,7 @@ namespace App\Services\Data;
 
 use App\Enums\FileTypesEnum as FileTypes;
 use App\Events\FileDeleted;
+use App\Events\FileUploaded;
 use App\Interfaces\FileDataServiceInterface;
 use App\Models\File;
 use Illuminate\Http\UploadedFile;
@@ -27,7 +28,7 @@ class FileDataService implements FileDataServiceInterface
     public function uploadFile(UploadedFile $file): JsonDataResponse
     {
         RomFile::upload($file);
-        FileDeleted::dispatch(RomFile::getFileDocument());
+        FileUploaded::dispatch(RomFile::getFileDocument());
         return new JsonDataResponse(['message' => "file '" . RomFile::getFilename() . "' created!"], ResponseAlias::HTTP_CREATED, ['X-Content-Transfer-Type', FileTypes::X_BINARY->value]);
     }
 

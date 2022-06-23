@@ -7,6 +7,7 @@ use App\Models\File;
 use FileRepo;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Config;
+use Jenssegers\Mongodb\Eloquent\Model;
 use Utils\Modules\GridFS\GridFsFilesHandler as GfsFilesHandler;
 
 class RomFilesHandler extends GfsFilesHandler implements FileHandlerFactory
@@ -43,7 +44,7 @@ class RomFilesHandler extends GfsFilesHandler implements FileHandlerFactory
         $fileDownloader->downloadFile();
     }
 
-    public function destroy(File $file): void
+    public function destroy(Model $file): void
     {
         $this->deleteFileFromBucket($file->getKey());
     }
