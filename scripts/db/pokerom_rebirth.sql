@@ -52,7 +52,7 @@ DROP PROCEDURE IF EXISTS `GetTotalSizeOfAllRoms`$$
 CREATE DEFINER=`bag33188`@`%` PROCEDURE `GetTotalSizeOfAllRoms` ()   BEGIN
   SET @`size_val` = CAST(CalcSumOfAllRomSize() AS VARCHAR(14));
   SELECT CONCAT(@`size_val`, ' ', 'Bytes') AS `total_size`;
-/**
+/** !important:
 Right now the total length of bytes (as a string) is less than 14 (11 currently `82401764352`)
 
 may need to increase varchar limit in the future
@@ -85,7 +85,7 @@ START TRANSACTION;
       `has_file` = TRUE
   WHERE `id` = `ROM_ID`;
 COMMIT;
-/*
+/** !important:
 notes:
  * rom size is stored in kilobytes
  * mongodb uses raw bytes as file length value
@@ -97,7 +97,7 @@ END$$
 --
 DROP FUNCTION IF EXISTS `CalcReadableRomSize`$$
 CREATE DEFINER=`bag33188`@`%` FUNCTION `CalcReadableRomSize` (`rom_length` INT) RETURNS VARCHAR(9) CHARSET utf8mb4 DETERMINISTIC BEGIN
-/**
+/** !important:
 Note: these calculations and measurements are based on the standard units of data.
 Ie. 1 Gigabyte = 1000 MegaBytes = 1000 Kilobytes
 Other parts of the app use the Computer Information system
@@ -120,7 +120,7 @@ Ie. 1 Gibibyte = 1024 Mebibytes = 1024 Kibibytes = 1024 = 1048576 Standard Bytes
   END IF;
   SET @`size_str` = CAST(`size_val` AS VARCHAR(6));
   RETURN CONCAT(@`size_str`, ' ', `size_type`);
-/**
+/** !important:
 max rounded size value is 5 digits (plus a . character), so 6 (min, 3);
 and the fixed string length of size type is 2; .... pluse
 the space in between, 6 + 2 + 1 = 9 .....
@@ -136,8 +136,8 @@ CREATE DEFINER=`bag33188`@`%` FUNCTION `CalcSumOfAllRomSize` () RETURNS BIGINT(1
     FROM `roms` LIMIT 1;
     SET  @`total_value_bytes` = `total_value` * 1024;
     RETURN @`total_value_bytes`;
-/**
-Right now the total length of bytes (as a string) is less than 14 (11 currently, `82401764352`)
+/** !important:
+Right now the total length of bytes (as a string) is less than 14 (11 currently, `82401763216`)
 
 may need to increase varchar limit in the future
 */
