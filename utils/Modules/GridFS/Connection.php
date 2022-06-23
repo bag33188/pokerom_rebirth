@@ -23,15 +23,15 @@ class Connection
     {
         self::$mongoConfig = Config::get(self::MONGO_CONF_PREFIX);
         self::$gfsConfig = Config::get(self::GFS_CONF_PREFIX);
-        $this->setDatabaseValues();
-        $this->setGfsBucket();
+//        $this->setDatabaseValues();
+//        $this->setGfsBucket();
     }
 
-    private function setDatabaseValues(): void
+    public final function setDatabaseValues(string $bucketName = null, int $chunkSize = null, string $databaseName = null): void
     {
-        $this->bucketName = self::$gfsConfig['bucketName'];
-        $this->databaseName = self::$mongoConfig['database'];
-        $this->chunkSize = self::$gfsConfig['chunkSize'];
+        $this->bucketName = $bucketName ?? self::$gfsConfig['bucketName'];
+        $this->chunkSize = $chunkSize ?? self::$gfsConfig['chunkSize'];
+        $this->databaseName = $databaseName ?? self::$mongoConfig['database'];
     }
 
     private static function GFS_MONGO_URI(): string
@@ -53,7 +53,7 @@ class Connection
         return $db->selectDatabase($this->databaseName);
     }
 
-    private function setGfsBucket(): void
+    public final function setGfsBucket(): void
     {
         $mongodb = $this->connectToMongoClient();
         $this->gfsBucket = $mongodb->selectGridFSBucket([
