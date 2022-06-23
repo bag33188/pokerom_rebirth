@@ -29,6 +29,17 @@ misc/old
 #!storage/rom_files/.gitkeep
 #!storage/rom_files/*.url
 
+### Public ###
+public/css/**/*
+public/js/**/*
+/public/vendor/
+
+### Laravel IDEA Helper ###
+_ide_helper.php
+.phpstorm.meta.php
+_ide_helper_models.php
+
+
 # Created by https://www.toptal.com/developers/gitignore/api/phpstorm+all,jetbrains+all,macos,windows,laravel,node,composer
 # Edit at https://www.toptal.com/developers/gitignore?templates=phpstorm+all,jetbrains+all,macos,windows,laravel,node,composer
 
