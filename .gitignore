@@ -25,9 +25,9 @@ storage/rom_files/*.3ds
 storage/rom_files/*.gb
 storage/rom_files/*.gbc
 storage/rom_files/*.gba
-#!storage/rom_files/.htaccess
-#!storage/rom_files/.gitkeep
-#!storage/rom_files/*.url
+!storage/rom_files/.htaccess
+!storage/rom_files/.gitkeep
+!storage/rom_files/*.url
 
 ### Public ###
 public/css/**/*
