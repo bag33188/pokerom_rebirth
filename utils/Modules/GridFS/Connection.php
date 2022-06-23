@@ -26,18 +26,20 @@ class Connection
     }
 
     /**
-     * Order: <b>Bucket Name (`string`), Chunk Size (`int`), Database Name (`string`)</b>
+     * Order: **_Database Name_ (`string`), _Bucket Name_ (`string`), _Chunk Size_ (`int`)**
      *
+     * @param string|null $databaseName
      * @param string|null $bucketName
      * @param int|null $chunkSize
-     * @param string|null $databaseName
      * @return void
      */
-    public final function setDatabaseValues(string $bucketName = null, int $chunkSize = null, string $databaseName = null): void
+    public final function setDatabaseValues(string $databaseName = null,
+                                            string $bucketName = null,
+                                            int    $chunkSize = null): void
     {
+        $this->databaseName = $databaseName ?? self::$mongoConfig['database'];
         $this->bucketName = $bucketName ?? self::$gfsConfig['bucketName'];
         $this->chunkSize = $chunkSize ?? self::$gfsConfig['chunkSize'];
-        $this->databaseName = $databaseName ?? self::$mongoConfig['database'];
         $this->setGfsBucket();
     }
 

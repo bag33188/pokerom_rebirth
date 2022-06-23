@@ -29,15 +29,17 @@ class GridFsServiceProvider extends ServiceProvider implements DeferrableProvide
     public function boot(): void
     {
         $dbProps = [
+            config('gridfs.connection.database'),
             config('gridfs.bucketName'),
             config('gridfs.chunkSize'),
-            config('gridfs.connection.database')
         ];
         RomFile::setDatabaseValues(...$dbProps);
     }
 
     /**
      * Get the services provided by the provider.
+     *
+     * _Does not bootstrap until service provider is needed_.
      *
      * @return string[]
      */
