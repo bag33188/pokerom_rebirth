@@ -2,20 +2,16 @@
 
 namespace App\Services;
 
-use App\Http\Resources\GameResource;
 use App\Interfaces\GameDataServiceInterface;
-use RomRepo;
+use App\Models\Game;
+use App\Models\Rom;
 
 class GameDataDataService implements GameDataServiceInterface
 {
-    public function createGame(int $romId, array $data): GameResource
+    public function associateRomWithGame(Rom $rom, Game $game)
     {
-        $rom = RomRepo::findRomIfExists($romId);
-        $game = $rom->game()->create($data);
-        // associate game object with rom object
         $rom->refresh(); // reload rom resource to included updated relationships
         $game->rom()->associate($rom);
         $game->saveQuietly();
-        return (new GameResource($game));
     }
 }
