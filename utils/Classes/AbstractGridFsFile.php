@@ -23,6 +23,4 @@ abstract class AbstractGridFsFile extends MongoDbModel
     public readonly string $md5;
 
     abstract public function getObjectId(): ObjectId;
-
-    abstract public function rom(): BelongsTo;
 }
