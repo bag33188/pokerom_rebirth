@@ -8,6 +8,9 @@ class ValidFilename implements Rule
 {
     private string $filename;
 
+    /** array of valid file extensions */
+    private const FILE_EXTENSIONS = array('.gb', '.gbc', '.gba', '.nds', '.3ds', '.xci');
+
 
     /**
      * Create a new rule instance.
@@ -42,6 +45,6 @@ class ValidFilename implements Rule
     {
         return 'Invalid file name. Filename must be: ' .
             'between 3 and 32 characters and only contain letters, numbers, hyphens and/or underscores. ' .
-            'File extension must be one of: ' . implode(', ', FILE_EXTENSIONS) . '.';
+            'File extension must be one of: ' . implode(', ', self::FILE_EXTENSIONS) . '.';
     }
 }
