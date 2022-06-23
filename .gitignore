@@ -39,8 +39,8 @@ _ide_helper.php
 .phpstorm.meta.php
 _ide_helper_models.php
 
-# Created by https://www.toptal.com/developers/gitignore/api/phpstorm+all,jetbrains+all,macos,osx,windows,laravel,node,composer,visualstudiocode,sublimetext
-# Edit at https://www.toptal.com/developers/gitignore?templates=phpstorm+all,jetbrains+all,macos,osx,windows,laravel,node,composer,visualstudiocode,sublimetext
+# Created by https://www.toptal.com/developers/gitignore/api/osx,node,macos,laravel,windows,composer,sublimetext,phpstorm+all,jetbrains+all,visualstudiocode,linux
+# Edit at https://www.toptal.com/developers/gitignore?templates=osx,node,macos,laravel,windows,composer,sublimetext,phpstorm+all,jetbrains+all,visualstudiocode,linux
 
 ### Composer ###
 composer.phar
@@ -161,6 +161,21 @@ storage/*.key
 #Homestead.json
 /.vagrant
 #.phpunit.result.cache
+
+### Linux ###
+*~
+
+# temporary files which can be created if a process still has a handle open of a deleted file
+.fuse_hidden*
+
+# KDE directory preferences
+.directory
+
+# Linux trash folder which might appear on any partition or disk
+.Trash-*
+
+# .nfs files are created when an open file is removed but is still being accessed
+.nfs*
 
 ### macOS ###
 # General
@@ -483,4 +498,4 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-# End of https://www.toptal.com/developers/gitignore/api/phpstorm+all,jetbrains+all,macos,osx,windows,laravel,node,composer,visualstudiocode,sublimetext
+# End of https://www.toptal.com/developers/gitignore/api/osx,node,macos,laravel,windows,composer,sublimetext,phpstorm+all,jetbrains+all,visualstudiocode,linux
