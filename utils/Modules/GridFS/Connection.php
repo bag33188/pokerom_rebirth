@@ -6,10 +6,19 @@ use Illuminate\Support\Facades\Config;
 use MongoDB\Client as MongoClient;
 use MongoDB\Database;
 use MongoDB\GridFS\Bucket;
-use Utils\Classes\AbstractGridFsDbConnection as GfsDatabaseConnection;
 
-class Connection extends GfsDatabaseConnection
+class Connection
 {
+    protected string $bucketName;
+    protected string $databaseName;
+    protected int $chunkSize;
+    protected Bucket $gfsBucket;
+    protected static array $mongoConfig;
+    protected static array $gfsConfig;
+
+    protected final const GFS_CONF_PREFIX = 'gridfs';
+    protected final const MONGO_CONF_PREFIX = 'gridfs.connection';
+
     public function __construct(string $databaseName = null)
     {
         self::$mongoConfig = Config::get(self::MONGO_CONF_PREFIX);

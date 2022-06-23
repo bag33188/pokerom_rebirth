@@ -7,10 +7,22 @@ use Illuminate\Support\Facades\Config;
 use MongoDB\BSON\ObjectId;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 use Symfony\Component\HttpKernel\Exception\UnprocessableEntityHttpException;
-use Utils\Classes\AbstractGridFsBucket as GridFsBucket;
 
-class FileBucket extends GridFsBucket
+class FileBucket extends Connection
 {
+    protected UploadedFile $file;
+    protected string $filename;
+    protected string $filepath;
+    protected const DOWNLOAD_CHUNK_SIZE = 0x3FC00;
+    public final const VALID_FILENAME_PATTERN = /** @lang RegExp */
+        "/^([\w\d\s\-_]+)\.[\w\d]+$/i";
+
+    /**
+     * The path on the server to which the uploaded file should be retrieved from.
+     * @var string
+     */
+    protected static string $serverUploadFilePath;
+
     public function __construct(string $databaseName = null)
     {
         self::$serverUploadFilePath = Config::get(self::$gfsConfig['fileUploadPath']);
