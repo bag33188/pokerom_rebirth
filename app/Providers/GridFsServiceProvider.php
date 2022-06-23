@@ -17,7 +17,7 @@ class GridFsServiceProvider extends ServiceProvider implements DeferrableProvide
     public function register(): void
     {
         App::singleton(RomFilesBucket::class,
-            fn($app) => new RomFilesBucket());
+            fn($app): RomFilesBucket => new RomFilesBucket());
     }
 
 
