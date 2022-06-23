@@ -2,8 +2,8 @@
 
 namespace App\Exceptions;
 
-use Utils\Classes\AbstractApplicationException as ApplicationException;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
+use Utils\Classes\AbstractApplicationException as ApplicationException;
 
 # use JetBrains\PhpStorm\Internal\LanguageLevelTypeAware;
 
