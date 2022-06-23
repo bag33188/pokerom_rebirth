@@ -1,5 +1,7 @@
 <?php
 
+// Validation //
+
 const MAX_GAME_NAME = 40;
 const MIN_GAME_NAME = 7;
 const MAX_GAME_TYPE = 8;
@@ -20,6 +22,8 @@ const MAX_USER_EMAIL = 35;
 const MIN_USER_EMAIL = null;
 const MAX_USER_PASSWORD = 50;
 const MIN_USER_PASSWORD = 8;
+
+// Database //
 
 const BCRYPT_PASSWORD_LENGTH = 60;
 const OBJECT_ID_LENGTH = 24;
