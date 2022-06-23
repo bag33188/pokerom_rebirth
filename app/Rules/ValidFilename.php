@@ -40,6 +40,8 @@ class ValidFilename implements Rule
      */
     public function message(): string
     {
-        return 'Invalid file name. Filename must be: between 3 and 32 characters and only contain letters, numbers, hyphens and/or underscores. File extension must be one of: ' . implode(', ', FILE_EXTENSIONS) . '.';
+        return 'Invalid file name. Filename must be: ' .
+            'between 3 and 32 characters and only contain letters, numbers, hyphens and/or underscores. ' .
+            'File extension must be one of: ' . implode(', ', FILE_EXTENSIONS) . '.';
     }
 }
