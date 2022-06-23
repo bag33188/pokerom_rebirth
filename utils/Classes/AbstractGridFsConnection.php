@@ -2,7 +2,6 @@
 
 namespace Utils\Classes;
 
-use MongoDB\BSON\ObjectId;
 use MongoDB\Database;
 use MongoDB\GridFS\Bucket;
 
@@ -18,9 +17,4 @@ abstract class AbstractGridFsConnection
     abstract protected function connectToMongoClient(): Database;
 
     abstract protected function setGfsBucket(): Bucket;
-
-    public final static function parseObjectId(string $id): ObjectId
-    {
-        return new ObjectId($id);
-    }
 }

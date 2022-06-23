@@ -3,7 +3,6 @@
 namespace Utils\Classes;
 
 use Jenssegers\Mongodb\Eloquent\Model as MongoDbModel;
-use MongoDB\BSON\ObjectId;
 
 /**
  * Laravel IDEA Helper does not support MongoDB objects (at least not very well).
@@ -20,6 +19,4 @@ abstract class AbstractGridFsFile extends MongoDbModel
     public readonly int $length;
     public readonly string $uploadDate;
     public readonly string $md5;
-
-    abstract public function getObjectId(): ObjectId;
 }

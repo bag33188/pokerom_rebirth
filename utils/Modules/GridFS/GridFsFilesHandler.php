@@ -3,6 +3,7 @@
 namespace Utils\Modules\GridFS;
 
 use Illuminate\Http\UploadedFile;
+use MongoDB\BSON\ObjectId;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 use Symfony\Component\HttpKernel\Exception\UnprocessableEntityHttpException;
 
@@ -138,5 +139,10 @@ class GridFsFilesHandler extends Connection
         $name = trim($name);
         $ext = strtolower($ext);
         $filename = "$name.$ext";
+    }
+
+    protected final static function parseObjectId(string $fileId): ObjectId
+    {
+        return new ObjectId($fileId);
     }
 }
