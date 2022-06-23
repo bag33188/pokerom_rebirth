@@ -1,12 +1,4 @@
-#*
-rom_files/*.nds
-rom_files/*.xci
-rom_files/*.3ds
-rom_files/*.gb
-rom_files/*.gbc
-rom_files/*.gba
+*
 !public/
-!rom_files/.htaccess
-!rom_files/.gitkeep
-!rom_files/onedrive_core_roms.url
+!rom_files/
 !.gitignore
