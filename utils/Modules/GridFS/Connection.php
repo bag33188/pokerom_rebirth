@@ -19,18 +19,18 @@ class Connection
     private const GFS_CONF_PREFIX = 'gridfs';
     private const MONGO_CONF_PREFIX = 'gridfs.connection';
 
-    public function __construct(string $databaseName = null)
+    public function __construct()
     {
         self::$mongoConfig = Config::get(self::MONGO_CONF_PREFIX);
         self::$gfsConfig = Config::get(self::GFS_CONF_PREFIX);
-        $this->setDatabaseValues($databaseName);
-        $this->gfsBucket = $this->setGfsBucket();
+        $this->setDatabaseValues();
+        $this->setGfsBucket();
     }
 
-    private function setDatabaseValues(?string $databaseName): void
+    private function setDatabaseValues(): void
     {
         $this->bucketName = self::$gfsConfig['bucketName'];
-        $this->databaseName = $databaseName ?? self::$mongoConfig['database'];
+        $this->databaseName = self::$mongoConfig['database'];
         $this->chunkSize = self::$gfsConfig['chunkSize'];
     }
 
@@ -53,10 +53,10 @@ class Connection
         return $db->selectDatabase($this->databaseName);
     }
 
-    private function setGfsBucket(): Bucket
+    private function setGfsBucket(): void
     {
         $mongodb = $this->connectToMongoClient();
-        return $mongodb->selectGridFSBucket([
+        $this->gfsBucket = $mongodb->selectGridFSBucket([
             'chunkSizeBytes' => $this->chunkSize,
             'bucketName' => $this->bucketName
         ]);
