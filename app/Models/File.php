@@ -3,12 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Jenssegers\Mongodb\Eloquent\Model as DocumentModel;
+use Jenssegers\Mongodb\Eloquent\Model as MongoDbModel;
 use MongoDB\BSON\ObjectId;
 use Utils\Classes\AbstractGridFsFile as GfsFile;
 
 /** @mixin GfsFile */
-class File extends DocumentModel
+class File extends MongoDbModel
 {
     protected $connection = 'mongodb';
     protected $collection = 'roms.files';
