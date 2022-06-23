@@ -29,21 +29,8 @@ misc/old
 #!storage/rom_files/.gitkeep
 #!storage/rom_files/*.url
 
-### Public ###
-public/css/**/*
-public/js/**/*
-/public/vendor/
-
-### Laravel IDEA Helper ###
-_ide_helper.php
-.phpstorm.meta.php
-_ide_helper_models.php
-
-# Created by https://www.toptal.com/developers/gitignore/api/phpstorm+all,jetbrains+all,macos,windows,laravel,node
-# Edit at https://www.toptal.com/developers/gitignore?templates=phpstorm+all,jetbrains+all,macos,windows,laravel,node
-
-# Created by https://www.toptal.com/developers/gitignore/api/composer
-# Edit at https://www.toptal.com/developers/gitignore?templates=composer
+# Created by https://www.toptal.com/developers/gitignore/api/phpstorm+all,jetbrains+all,macos,windows,laravel,node,composer
+# Edit at https://www.toptal.com/developers/gitignore?templates=phpstorm+all,jetbrains+all,macos,windows,laravel,node,composer
 
 ### Composer ###
 composer.phar
@@ -142,10 +129,9 @@ fabric.properties
 !.idea/runConfigurations
 
 ### Laravel ###
-/vendor/
 node_modules/
-# npm-debug.log
-# yarn-error.log
+#npm-debug.log
+#yarn-error.log
 
 # Laravel 4 specific
 bootstrap/compiled.php
@@ -160,11 +146,11 @@ public_html/storage
 public_html/hot
 
 storage/*.key
-# .env
-# Homestead.yaml
-# Homestead.json
+.env
+#Homestead.yaml
+#Homestead.json
 /.vagrant
-# .phpunit.result.cache
+#.phpunit.result.cache
 
 ### macOS ###
 # General
@@ -418,4 +404,4 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-# End of https://www.toptal.com/developers/gitignore/api/phpstorm+all,jetbrains+all,macos,windows,laravel,node
+# End of https://www.toptal.com/developers/gitignore/api/phpstorm+all,jetbrains+all,macos,windows,laravel,node,composer
