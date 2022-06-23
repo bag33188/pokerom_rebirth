@@ -19,15 +19,15 @@ misc/schemas/*.bkp
 misc/schemas/*.dtmp
 misc/data/dump
 misc/old
-#storage/rom_files/*.nds
-#storage/rom_files/*.xci
-#storage/rom_files/*.3ds
-#storage/rom_files/*.gb
-#storage/rom_files/*.gbc
-#storage/rom_files/*.gba
-#!storage/rom_files/.htaccess
-#!storage/rom_files/.gitkeep
-#!storage/rom_files/*.url
+storage/**/*.nds
+storage/**/*.xci
+storage/**/*.3ds
+storage/**/*.gb
+storage/**/*.gbc
+storage/**/*.gba
+!storage/**/.htaccess
+!storage/**/.gitkeep
+!storage/**/*.url
 
 ### Public ###
 public/css/**/*
