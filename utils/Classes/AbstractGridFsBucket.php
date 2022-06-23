@@ -5,9 +5,9 @@ namespace Utils\Classes;
 use Illuminate\Http\UploadedFile;
 use Jenssegers\Mongodb\Eloquent\Model;
 use Utils\Modules\GridFS\FileBucket;
-use Utils\Modules\GridFS\FileResourcing;
+use Utils\Modules\GridFS\GridFileResourcing;
 
-abstract class AbstractGridFsBucket extends FileBucket implements FileResourcing
+abstract class AbstractGridFsBucket extends FileBucket implements GridFileResourcing
 {
     protected const DOWNLOAD_CHUNK_SIZE = 0x3FC00;
 

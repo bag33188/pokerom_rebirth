@@ -4,7 +4,7 @@ namespace Utils\Modules\GridFS;
 
 use Jenssegers\Mongodb\Eloquent\Model;
 
-interface FileResourcing
+interface GridFileResourcing
 {
     public function getFilename(): string;
 
