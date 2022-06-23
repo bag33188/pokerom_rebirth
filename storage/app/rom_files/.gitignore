@@ -5,5 +5,4 @@
 *.gbc
 *.gba
 !.htaccess
-!.gitkeep
 !onedrive_core_roms.url
