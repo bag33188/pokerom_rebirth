@@ -10,13 +10,6 @@ use Utils\Classes\AbstractGridFsDbConnection as GfsDatabaseConnection;
 
 class Connection extends GfsDatabaseConnection
 {
-    protected string $bucketName;
-    protected string $databaseName;
-    protected int $chunkSize;
-    protected Bucket $gfsBucket;
-    protected static array $mongoConfig;
-    protected static array $gfsConfig;
-
     public function __construct(string $databaseName = null)
     {
         self::$mongoConfig = Config::get(self::MONGO_CONF_PREFIX);
