@@ -11,6 +11,7 @@ class MaxSize implements Rule
     /**
      * Create a new rule instance.
      *
+     * @param int $size Maximum size value
      * @return void
      */
     public function __construct(int $size)

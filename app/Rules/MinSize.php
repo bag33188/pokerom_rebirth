@@ -11,6 +11,7 @@ class MinSize implements Rule
     /**
      * Create a new rule instance.
      *
+     * @param int $size Minimum size value
      * @return void
      */
     public function __construct(int $size)

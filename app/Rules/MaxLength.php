@@ -11,6 +11,7 @@ class MaxLength implements Rule
     /**
      * Create a new rule instance.
      *
+     * @param int $length Maximum length value
      * @return void
      */
     public function __construct(int $length)

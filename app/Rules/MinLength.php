@@ -11,6 +11,7 @@ class MinLength implements Rule
     /**
      * Create a new rule instance.
      *
+     * @param int $length Minimum length value
      * @return void
      */
     public function __construct(int $length)

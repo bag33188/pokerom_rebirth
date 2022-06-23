@@ -30,7 +30,8 @@ class RequiredIfPutRequest extends RequiredIf
     {
         $errMsg = (App::environment('local'))
             ? 'This rule can only be used on a PUT or PATCH request.' : 'Error: Bad request';
-        if (strtoupper($this->httpRequest->getMethod()) !== 'PUT' && strtoupper($this->httpRequest->getMethod() !== 'PATCH')) {
+        $requestMethod = strtoupper($this->httpRequest->getMethod());
+        if ($requestMethod !== 'PUT' && $requestMethod !== 'PATCH') {
             throw new BadRequestHttpException($errMsg);
         }
     }

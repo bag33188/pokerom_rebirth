@@ -12,6 +12,7 @@ class ValidFilename implements Rule
     /**
      * Create a new rule instance.
      *
+     * @param string $filename Pass in filename for validation
      * @return void
      */
     public function __construct(string $filename)
