@@ -17,7 +17,7 @@ class RomFilesHandler extends AbstractGfsFilesHandler
     protected string $filepath;
     protected static string $serverUploadFilePath;
 
-    private const DOWNLOAD_CHUNK_SIZE = 0xFF000;
+    protected const DOWNLOAD_CHUNK_SIZE = 0xFF000;
     public final const VALID_FILENAME_PATTERN = "/^([\w\d\s\-_]+)\.[\w\d]+$/i";
 
     public function __construct(string $databaseName = null)

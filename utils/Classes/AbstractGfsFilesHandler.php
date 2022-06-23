@@ -12,6 +12,7 @@ abstract class AbstractGfsFilesHandler extends GridFS
     protected string $filename;
     protected string $filepath;
     protected static string $serverUploadFilePath;
+    protected const DOWNLOAD_CHUNK_SIZE = 0x3FC00;
 
     abstract public function getFilename(): string;
 
