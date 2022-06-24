@@ -14,7 +14,7 @@ class GeneralHttpException extends ApplicationException
 
     protected function viewName(): ?string
     {
-        return 'error.generic';
+        return self::DEFAULT_ERROR_VIEW;
     }
 
     protected function errorMessage(): string

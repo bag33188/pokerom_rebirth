@@ -10,7 +10,7 @@ use Illuminate\Http\Response;
 
 abstract class AbstractApplicationException extends Exception
 {
-    private const DEFAULT_ERROR_VIEW = 'errors.generic';
+    protected final const DEFAULT_ERROR_VIEW = 'errors.generic';
 
     abstract protected function status(): int;
 
