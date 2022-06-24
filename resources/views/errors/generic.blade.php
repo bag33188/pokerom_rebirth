@@ -1,6 +1,6 @@
 <x-error-layout>
     @php
-        $message = __('Oops, an unknown error occurred, please try again later.');
+        $message = __('<b>Oops, an unknown error occurred, please try again later.</b>');
     @endphp
     <div class="m-5" style="width: 60vw;">
         <div role="alert">

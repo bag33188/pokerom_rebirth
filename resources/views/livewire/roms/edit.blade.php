@@ -1,3 +1,11 @@
+@php
+    $formSelectClasses = <<<EOS
+    border-gray-300 focus:border-indigo-300
+    focus:ring focus:ring-indigo-200
+    focus:ring-opacity-50 rounded-md shadow-sm
+    block mt-1 w-full
+    EOS;
+@endphp
 <div>
     <x-slot name="header">
         <h2>Edit {{$rom->getRomFileName()}}</h2>
@@ -17,17 +25,23 @@
             <div class="mt-2.5">
                 <x-jet-label for="romType" value="{{ __('Rom Type') }}" />
                 <select
-                    class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm block mt-1 w-full"
-                    name="rom_type" id="romType" required autofocus>
+                    class="{{ $formSelectClasses }}"
+                    name="rom_type" id="romType"
+                    required autofocus>
                     @foreach(ROM_TYPES as $romType)
                         <option
-                            value="{{$romType}}" {{strtolower($rom->rom_type) == $romType ? 'selected' : ''}}>{{strtoupper($romType)}}</option>
+                            value="{{$romType}}"
+                            {{strtolower($rom->rom_type) == $romType ? 'selected' : ''}}
+                        >{{ strtoupper($romType) }}</option>
                     @endforeach
                 </select>
             </div>
             <div class="mt-2.5">
                 <x-jet-label for="romSize" value="{{ __('Rom Size') }}" />
-                <x-jet-input id="romSize" name="rom_size" class="block mt-1 w-full" type="number" min="{{MIN_ROM_SIZE}}"
+                <x-jet-input id="romSize"
+                             name="rom_size"
+                             class="block mt-1 w-full"
+                             type="number" min="{{MIN_ROM_SIZE}}"
                              max="{{MAX_ROM_SIZE}}"
                              :value="$rom->rom_size"
                              required autofocus />
@@ -37,5 +51,4 @@
             </x-jet-button>
         </form>
     </div>
-
 </div>
