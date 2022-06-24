@@ -1,9 +1,12 @@
+@php
+    $editBtnClasses = 'class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25 transition"';
+@endphp
 <div class="p-2.5">
     <x-slot name="header">
         <h2 class="text-center">{{$rom->getRomFileName()}} Information</h2>
     </x-slot>
     <div class="w-full grid grid-cols-2 grid-rows-2">
-        <ul class="bg-white rounded-lg border border-gray-200 text-gray-900 col-start-1 col-end-2 row-start-1 row-end-1">
+        <ul class="bg-white rounded-lg border border-gray-200 text-gray-900 col-span-full row-start-1 row-end-1">
             <li class="px-6 py-2 border-b border-gray-200 w-full">{{$rom->rom_name}}</li>
             <li class="px-6 py-2 border-b border-gray-200 w-full">{{RomRepo::getRomReadableSize($rom->rom_size)}}</li>
             <li class="px-6 py-2 border-b border-gray-200 w-full">{{$rom->rom_type}}</li>
@@ -16,13 +19,11 @@
         </ul>
 
         @if(Auth::user()->isAdmin())
-            <div class="col-start-1 col-end-1 row-start-2 row-end-2">
-                <a href="{{route('roms.edit', $this->rom->id)}}"
-                   class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Edit!</a>
-            </div>
-            <div class="col-start-2 col-end-2 row-start-2 row-end-2">
-
+            <div class="col-start-2 col-end-2 row-start-2 row-end-2 justify-self-end">
                 <livewire:roms.delete :rom-id="$romId" />
+            </div>
+            <div class="col-start-1 col-end-1 row-start-2 row-end-2 justify-self-start">
+                <a href="{{route('roms.edit', $this->rom->id)}}" {!! $editBtnClasses !!}>Edit!</a>
             </div>
         @endif
     </div>
