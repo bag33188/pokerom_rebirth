@@ -11,12 +11,12 @@ use Illuminate\Support\Facades\DB;
 
 class RomRepository implements RomRepositoryInterface
 {
-    public function getSingleRomWithGameAndFile(int $romId): Rom
+    public function getSingleRomWithGameAndFileInfo(int $romId): Rom
     {
         return Rom::with(['game', 'file'])->where('id', '=', $romId)->firstOrFail();
     }
 
-    public function getRomsWithGameAndFile(): Collection
+    public function getRomsWithGameAndFileInfo(): Collection
     {
         return Rom::with(['game', 'file'])->get();
     }

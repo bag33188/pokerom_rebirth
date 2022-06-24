@@ -17,7 +17,7 @@ class Show extends Component
     public function mount(int $romId)
     {
         $this->romId = $romId;
-        $this->rom = RomRepo::getSingleRomWithGameAndFile($romId);
+        $this->rom = RomRepo::getSingleRomWithGameAndFileInfo($romId);
     }
 
     public function render(): Factory|View|Application
