@@ -48,6 +48,6 @@ class WelcomeNotification extends Notification
             ->from(config('mail.from.address'))
             ->line($lnMsg)
             ->action('Check it out!', route('roms.index'))
-            ->line('enjoy!');
+            ->line('Enjoy!');
     }
 }
