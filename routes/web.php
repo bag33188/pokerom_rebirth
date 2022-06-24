@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Livewire\Roms\Show as RomsShow;
+use App\Http\Livewire\Roms\Edit as RomsEdit;
 use App\Http\Controllers\www\{HomeController, WelcomeController};
 use App\Http\Livewire\Roms\Index as RomsIndex;
 use Illuminate\Support\Facades\Route;
@@ -25,5 +26,6 @@ Route::middleware([
 ])->group(function () {
     Route::get('/dashboard', [HomeController::class, 'renderDashboard'])->name('dashboard');
     Route::get('/roms', RomsIndex::class)->name('roms.index');
-    Route::get('/roms/{id}', RomsShow::class)->name('roms.show');
+    Route::get('/roms/show/{id}', RomsShow::class)->name('roms.show');
+    Route::get('/roms/edit/{id}', RomsEdit::class)->name('roms.edit')->middleware('admin');
 });

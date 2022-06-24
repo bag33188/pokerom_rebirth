@@ -7,9 +7,20 @@ use App\Models\File;
 use App\Models\Game;
 use App\Models\Rom;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\DB;
 
 class RomRepository implements RomRepositoryInterface
 {
+    public function getSingleRomWithGameAndFile(int $romId): Rom
+    {
+        return Rom::with(['game', 'file'])->where('id', '=', $romId)->firstOrFail();
+    }
+
+    public function getRomsWithGameAndFile(): Collection
+    {
+        return Rom::with(['game', 'file'])->get();
+    }
+
     public function findRomIfExists(int $romId): Rom
     {
         return Rom::findOrFail($romId);
@@ -39,5 +50,12 @@ class RomRepository implements RomRepositoryInterface
     public function searchForFileMatchingRom(int $romId): ?File
     {
         return File::where('filename', '=', $this->findRomIfExists($romId)->getRomFileName())->first();
+    }
+
+    public function getRomReadableSize(int $size): string
+    {
+        $sql = /** @lang MariaDB */
+            "SELECT CalcReadableRomSize(?) AS readable_size;";
+        return DB::selectOne($sql, [$size])->readable_size;
     }
 }
