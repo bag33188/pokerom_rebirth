@@ -3,7 +3,7 @@
         @csrf
         @method('DELETE')
 
-        <x-jet-button class="mt-4">
+        <x-jet-button>
             {{ __('Delete!') }}
         </x-jet-button>
     </form>

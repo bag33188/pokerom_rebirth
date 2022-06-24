@@ -5,7 +5,7 @@
     <x-slot name="header">
         <h2 class="text-center">{{$rom->getRomFileName()}} Information</h2>
     </x-slot>
-    <div class="w-full grid grid-cols-2 grid-rows-2">
+    <div class="w-full grid grid-cols-2 grid-rows-2 gap-x-4">
         <ul class="bg-white rounded-lg border border-gray-200 text-gray-900 col-span-full row-start-1 row-end-1">
             <li class="px-6 py-2 border-b border-gray-200 w-full">{{$rom->rom_name}}</li>
             <li class="px-6 py-2 border-b border-gray-200 w-full">{{RomRepo::getRomReadableSize($rom->rom_size)}}</li>

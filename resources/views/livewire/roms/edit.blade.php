@@ -57,7 +57,9 @@
             </x-jet-button>
         </form>
         @if(Auth::user()->isAdmin())
-            <livewire:roms.delete :rom-id="$romId" />
+            <div class="mt-4">
+                <livewire:roms.delete :rom-id="$romId" />
+            </div>
         @endif
     </div>
 </div>
