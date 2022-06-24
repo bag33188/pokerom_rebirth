@@ -15,15 +15,15 @@
     </x-slot>
     <div class="w-full grid grid-cols-2 grid-rows-{{$isAdmin ? 2 : 1}} gap-y-4">
         <ul class="bg-white rounded-lg border border-gray-200 text-gray-900 col-span-full row-start-1 row-end-1">
-            <li {!! $listItemClasses !!}>{{$rom->rom_name}}</li>
-            <li {!! $listItemClasses !!}>{{RomRepo::getReadableRomSize($rom->rom_size)}}</li>
-            <li {!! $listItemClasses !!}>{{$rom->rom_type}}</li>
-            <li {!! $listItemClasses !!}>{{@$rom->game->game_name . ' Version' ?? 'no game'}}</li>
+            <li {!! $listItemClasses !!}>Rom Name: {{$rom->rom_name}}</li>
+            <li {!! $listItemClasses !!}>Rom Size: {{RomRepo::getReadableRomSize($rom->rom_size)}}</li>
+            <li {!! $listItemClasses !!}>Rom Type: {{$rom->rom_type}}</li>
+            <li {!! $listItemClasses !!}>Game Name: {{@$rom->game->game_name . ' Version' ?? 'no game'}}</li>
             @if($rom->has_game)
-                <li {!! $listItemClasses !!}>{{$rom->game->region}}</li>
-                <li {!! $listItemClasses !!}>{{number_to_roman($rom->game->generation)}}</li>
-                <li {!! $listItemClasses !!}>{{parse_date_as_readable_string($rom->game->date_released, addDayName: false)}}</li>
-                <li {!! $listItemClasses !!}>{{$rom->game->game_type}}</li>
+                <li {!! $listItemClasses !!}>Game Region: {{$rom->game->region}}</li>
+                <li {!! $listItemClasses !!}>Generation: {{number_to_roman($rom->game->generation)}}</li>
+                <li {!! $listItemClasses !!}>Date Released: {{parse_date_as_readable_string($rom->game->date_released, addDayName: false)}}</li>
+                <li {!! $listItemClasses !!}>Game Type: {{$rom->game->game_type}}</li>
             @endif
         </ul>
 
