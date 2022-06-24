@@ -110,7 +110,7 @@ Ie. 1 Gibibyte = 1024 Mebibytes = 1024 Kibibytes = 1024 = 1048576 Standard Bytes
     SET `size_val` = ROUND(CAST(`rom_length` / 1000 AS FLOAT), 2);
   ELSEIF `rom_length` >= 1000000 THEN
     SET `size_type` = 'GB';
-    SET `size_val`= ROUND(CAST(`rom_length` / 1000000  AS FLOAT), 2);
+    SET `size_val`= ROUND(CAST(`rom_length` / 1000000 AS FLOAT), 2);
   ELSEIF `rom_length` > 1020 AND `rom_length` <= 1024 THEN
     SET `size_type` = 'KB';
     SET `size_val` = CAST(`rom_length` AS FLOAT);
