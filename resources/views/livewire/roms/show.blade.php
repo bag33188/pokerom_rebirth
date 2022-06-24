@@ -22,7 +22,7 @@
 
         @if($isAdmin)
             <div class="col-start-2 col-end-2 row-start-2 row-end-2 justify-self-end">
-                <livewire:roms.delete :rom-id="$romId" />
+                @livewire('roms.delete', ['romId' => $romId])
             </div>
             <div class="col-start-1 col-end-1 row-start-2 row-end-2 justify-self-start">
                 <a href="{{route('roms.edit', $this->rom->id)}}" {!! $editBtnClasses !!}>Edit!</a>
