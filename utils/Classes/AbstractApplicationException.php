@@ -46,7 +46,6 @@ abstract class AbstractApplicationException extends Exception
             $response = new JsonDataResponse(['message' => $message], $code);
             return $response->renderResponse();
         } else {
-            session()->flash('success', $message);
             if (!$this->viewName()) {
                 return redirect()->to(url()->previous())->dangerBanner($message);
             }
