@@ -35,6 +35,6 @@ class Delete extends Component
         $rom = RomRepo::findRomIfExists($romId);
         $this->authorize('delete', $rom);
         $rom->delete();
-        return redirect()->route('roms.index')->banner($rom->rom_name . " successfully deleted!");
+        return redirect()->route('roms.index')->banner("$rom->rom_name successfully deleted!");
     }
 }
