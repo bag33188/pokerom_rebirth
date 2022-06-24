@@ -28,7 +28,7 @@ class Index extends Component
 
     public function getRomDownloadUrl(string $fileId, bool $dev = false): string
     {
-        $baseUrl = "/public/api";
+        $baseUrl = "/api";
         $baseFilesEndpoint = "files/$fileId/download";
         if ($dev) return "$baseUrl/dev/$baseFilesEndpoint";
         return "$baseUrl/$baseFilesEndpoint";
