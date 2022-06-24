@@ -7,13 +7,12 @@
     disabled:opacity-25 transition"
     EOS;
     $listItemClasses = 'class="px-6 py-2 border-b border-gray-200 w-full"';
-    $userIsAdmin = Auth::user()->isAdmin();
 @endphp
 <div class="p-2.5">
     <x-slot name="header">
         <h2 class="text-center">{{$rom->getRomFileName()}} Information</h2>
     </x-slot>
-    <div class="w-full grid grid-cols-2 grid-rows-{{$userIsAdmin ? 2 : 1}} gap-y-4">
+    <div class="w-full grid grid-cols-2 grid-rows-2 gap-y-4">
         <ul class="bg-white rounded-lg border border-gray-200 text-gray-900 col-span-full row-start-1 row-end-1">
             <li {!! $listItemClasses !!}>Rom Name: {{$rom->rom_name}}</li>
             <li {!! $listItemClasses !!}>Rom Size: {{RomRepo::getReadableRomSize($rom->rom_size)}}</li>
@@ -28,7 +27,7 @@
             @endif
         </ul>
 
-        @if($userIsAdmin)
+        @if(Auth::user()->isAdmin())
             <div class="col-start-2 col-end-2 row-start-2 row-end-2 justify-self-end">
                 @livewire('roms.delete', ['romId' => $romId])
             </div>
