@@ -1,4 +1,4 @@
-<div>
+<div class="inline-block">
     <form action="{{route('roms.delete', $romId)}}" method="POST">
         @csrf
         @method('DELETE')
