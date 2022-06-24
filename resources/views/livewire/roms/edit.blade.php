@@ -20,7 +20,7 @@
         </div>
         <div>
             <x-jet-label for="romType" value="{{ __('Rom Type') }}" />
-            <select name="rom_type" id="romType" required>
+            <select name="rom_type" id="romType" required autofocus>
                 @foreach(ROM_TYPES as $romType)
                     <option
                         value="{{$romType}}" {{strtolower($rom->rom_type) == $romType ? 'selected' : ''}}>{{strtoupper($romType)}}</option>
@@ -32,7 +32,7 @@
             <x-jet-input id="romSize" name="rom_size" class="block mt-1 w-full" type="number" min="{{MIN_ROM_SIZE}}"
                          max="{{MAX_ROM_SIZE}}"
                          :value="old('rom_size')"
-                         required></x-jet-input>
+                         required autofocus></x-jet-input>
         </div>
         <x-jet-button class="ml-4">
             {{ __('Update!') }}
