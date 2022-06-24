@@ -19,9 +19,9 @@ class Edit extends Component
     public Rom $rom;
     private int $romId;
 
-    public function mount(int $id)
+    public function mount(int $romId)
     {
-        $this->romId = $id;
+        $this->romId = $romId;
     }
 
     public function render(): Factory|View|Application
@@ -29,10 +29,10 @@ class Edit extends Component
         return view('livewire.roms.edit', ['romId' => $this->romId]);
     }
 
-    public function update(UpdateRomRequest $request, int $id): RedirectResponse
+    public function update(UpdateRomRequest $request, int $romId): RedirectResponse
     {
-        $this->rom = RomRepo::findRomIfExists($id);
+        $this->rom = RomRepo::findRomIfExists($romId);
         $this->rom->update(['rom_name' => $request->rom_name]);
-        return redirect()->route('roms.show', $id);
+        return redirect()->route('roms.show', $romId);
     }
 }

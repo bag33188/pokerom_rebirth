@@ -26,7 +26,7 @@ Route::middleware([
 ])->group(function () {
     Route::get('/dashboard', [HomeController::class, 'renderDashboard'])->name('dashboard');
     Route::get('/roms', RomsIndex::class)->name('roms.index');
-    Route::get('/roms/show/{id}', RomsShow::class)->name('roms.show');
-    Route::get('/roms/edit/{id}', RomsEdit::class)->name('roms.edit')->middleware('admin');
-    Route::patch('/roms/update/{id}', [RomsEdit::class, 'update'])->name('roms.update');
+    Route::get('/roms/show/{romId}', RomsShow::class)->name('roms.show');
+    Route::get('/roms/edit/{romId}', RomsEdit::class)->name('roms.edit')->middleware('admin');
+    Route::patch('/roms/update/{romId}', [RomsEdit::class, 'update'])->name('roms.update');
 });
