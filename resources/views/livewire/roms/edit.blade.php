@@ -7,7 +7,7 @@
 @endphp
 <div>
     <x-slot name="header">
-        <h2>Edit {{$rom->getRomFileName()}}</h2>
+        <h2 class="text-center">Edit {{$rom->getRomFileName()}}</h2>
     </x-slot>
     <div class="p-3">
         <x-jet-validation-errors class="mb-4" />
