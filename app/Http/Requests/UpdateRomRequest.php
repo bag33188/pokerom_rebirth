@@ -34,7 +34,7 @@ class UpdateRomRequest extends FormRequest
 
     private function getRomIdParamValue(): object|string|null
     {
-        return $this->route()->parameter('rom');
+        return $this->route()->parameter('rom') ?: $this->route()->parameter('id') ?: $this->route()->parameter('romId');
     }
 
     /**
