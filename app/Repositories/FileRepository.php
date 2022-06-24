@@ -36,7 +36,7 @@ class FileRepository implements FileRepositoryInterface
         return Rom::where([
             ['rom_name', '=', $name, 'and'],
             ['rom_type', '=', $ext, 'and'],
-            ['has_file', '=', false, 'or'],
+            ['has_file', '=', false, 'and'],
             ['file_id', '=', null]
         ])->first();
     }
