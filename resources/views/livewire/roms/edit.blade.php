@@ -1,9 +1,8 @@
 @php
     $formSelectClasses = <<<EOS
-    border-gray-300 focus:border-indigo-300
-    focus:ring focus:ring-indigo-200
-    focus:ring-opacity-50 rounded-md shadow-sm
-    block mt-1 w-full
+    class="border-gray-300 focus:border-indigo-300
+    focus:ring focus:ring-indigo-200 focus:ring-opacity-50
+    rounded-md shadow-sm block mt-1 w-full"
     EOS;
 @endphp
 <div>
@@ -19,20 +18,27 @@
 
             <div class="mt-2.5">
                 <x-jet-label for="romName" value="{{ __('Rom Name') }}" />
-                <x-jet-input id="romName" class="block mt-1 w-full" type="text" name="rom_name" :value="$rom->rom_name"
+                <x-jet-input id="romName"
+                             class="block mt-1 w-full"
+                             type="text"
+                             name="rom_name"
+                             minlength="{{MIN_ROM_NAME}}"
+                             maxlength="{{MAX_ROM_NAME}}"
+                             :value="$rom->rom_name"
                              required autofocus />
             </div>
             <div class="mt-2.5">
                 <x-jet-label for="romType" value="{{ __('Rom Type') }}" />
                 <select
-                    class="{{ $formSelectClasses }}"
+                    {!! $formSelectClasses !!}
                     name="rom_type" id="romType"
                     required autofocus>
                     @foreach(ROM_TYPES as $romType)
                         <option
                             value="{{$romType}}"
-                            {{strtolower($rom->rom_type) == $romType ? 'selected' : ''}}
-                        >{{ strtoupper($romType) }}</option>
+                            {!! (strtolower($rom->rom_type) == $romType)
+                                  ? 'selected="selected"' : '' !!}>
+                            {{ strtoupper($romType) }}</option>
                     @endforeach
                 </select>
             </div>
