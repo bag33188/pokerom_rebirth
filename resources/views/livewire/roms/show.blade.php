@@ -2,8 +2,8 @@
     <x-slot name="header">
         <h2 class="text-center">{{$rom->getRomFileName()}} Information</h2>
     </x-slot>
-    <div class="flex justify-center flex-col w-full">
-        <ul class="bg-white rounded-lg border border-gray-200 text-gray-900">
+    <div class="w-full grid grid-cols-2 grid-rows-2">
+        <ul class="bg-white rounded-lg border border-gray-200 text-gray-900 col-start-1 col-end-2 row-start-1 row-end-1">
             <li class="px-6 py-2 border-b border-gray-200 w-full">{{$rom->rom_name}}</li>
             <li class="px-6 py-2 border-b border-gray-200 w-full">{{RomRepo::getRomReadableSize($rom->rom_size)}}</li>
             <li class="px-6 py-2 border-b border-gray-200 w-full">{{$rom->rom_type}}</li>
@@ -16,11 +16,14 @@
         </ul>
 
         @if(Auth::user()->isAdmin())
-            <div class="w-full inline-flex justify-end">
+            <div class="col-start-1 col-end-1 row-start-2 row-end-2">
                 <a href="{{route('roms.edit', $this->rom->id)}}"
                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Edit!</a>
             </div>
+            <div class="col-start-2 col-end-2 row-start-2 row-end-2">
+
+                <livewire:roms.delete :rom-id="$romId" />
+            </div>
         @endif
     </div>
-
 </div>

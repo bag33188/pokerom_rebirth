@@ -12,15 +12,17 @@ use RomRepo;
 class Show extends Component
 {
     private Rom $rom;
+    private int $romId;
 
     public function mount(int $romId)
     {
+        $this->romId = $romId;
         $this->rom = RomRepo::getSingleRomWithGameAndFile($romId);
     }
 
     public function render(): Factory|View|Application
     {
-        return view('livewire.roms.show', ['rom' => $this->rom]);
+        return view('livewire.roms.show', ['rom' => $this->rom, 'romId' => $this->romId]);
     }
 
 }
