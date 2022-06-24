@@ -22,6 +22,7 @@ class Edit extends Component
     public function mount(int $romId)
     {
         $this->romId = $romId;
+        $this->rom = RomRepo::findRomIfExists($romId);
     }
 
     public function render(): Factory|View|Application

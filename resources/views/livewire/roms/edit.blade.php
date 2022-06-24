@@ -1,4 +1,7 @@
 <div>
+    <x-slot name="header">
+        <h2>Edit {{$rom->getRomFileName()}}</h2>
+    </x-slot>
     <x-jet-validation-errors class="mb-4"/>
 
     @if (session('status'))
