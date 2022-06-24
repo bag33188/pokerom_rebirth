@@ -34,6 +34,6 @@ class Edit extends Component
     {
         $this->rom = RomRepo::findRomIfExists($romId);
         $this->rom->update(['rom_name' => $request->rom_name]);
-        return redirect()->route('roms.show', $romId);
+        return redirect()->route('roms.show', $romId)->banner('Rom Updated successfully.');
     }
 }
