@@ -2,10 +2,11 @@
 
 namespace Utils\Classes;
 
+use App\Providers\RouteServiceProvider;
 use Exception;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Symfony\Component\HttpFoundation\JsonResponse;
 
 abstract class AbstractApplicationException extends Exception
 {
@@ -42,7 +43,7 @@ abstract class AbstractApplicationException extends Exception
         return $this->viewName() ?: self::DEFAULT_ERROR_VIEW;
     }
 
-    public final function render(Request $request): Response|JsonResponse
+    public final function render(Request $request): JsonResponse|RedirectResponse
     {
         $message = $this->getErrorMessageIfNotNull();
         $code = $this->getStatusCodeIfNotNull();
@@ -50,7 +51,8 @@ abstract class AbstractApplicationException extends Exception
             $response = new JsonDataResponse(['message' => $message], $code);
             return $response->renderResponse();
         } else {
-            return response()->view($this->getViewNameIfNotNull(), ['message' => $message], $code);
+            return redirect(RouteServiceProvider::HOME)->dangerBanner($message);
+//            return response()->view($this->getViewNameIfNotNull(), ['message' => $message], $code);
         }
     }
 }
