@@ -24,5 +24,4 @@ class Show extends Component
     {
         return view('livewire.roms.show', ['rom' => $this->rom, 'romId' => $this->romId]);
     }
-
 }
