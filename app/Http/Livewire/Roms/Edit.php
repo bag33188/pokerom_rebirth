@@ -7,14 +7,12 @@ use App\Models\Rom;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\RedirectResponse;
 use Livewire\Component;
 use RomRepo;
 
 class Edit extends Component
 {
-    use AuthorizesRequests;
 
     public Rom $rom;
     private int $romId;

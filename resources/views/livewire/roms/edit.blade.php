@@ -56,5 +56,8 @@
                 {{ __('Update!') }}
             </x-jet-button>
         </form>
+        @if(Auth::user()->isAdmin())
+            <livewire:roms.delete :rom-id="$romId"></livewire:roms.delete>
+        @endif
     </div>
 </div>

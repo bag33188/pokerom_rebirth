@@ -4,6 +4,7 @@ use App\Http\Controllers\www\{HomeController, WelcomeController};
 use App\Http\Livewire\Roms\Edit as RomsEdit;
 use App\Http\Livewire\Roms\Index as RomsIndex;
 use App\Http\Livewire\Roms\Show as RomsShow;
+use App\Http\Livewire\Roms\Delete as RomsDelete;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,4 +30,5 @@ Route::middleware([
     Route::get('/roms/show/{romId}', RomsShow::class)->name('roms.show');
     Route::get('/roms/edit/{romId}', RomsEdit::class)->name('roms.edit')->middleware('admin');
     Route::put('/roms/update/{romId}', [RomsEdit::class, 'update'])->name('roms.update');
+    Route::delete('/roms/delete/{romId}', [RomsDelete::class, 'delete'])->name('roms.delete');
 });
