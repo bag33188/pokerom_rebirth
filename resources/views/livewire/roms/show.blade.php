@@ -6,6 +6,7 @@
     focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300
     disabled:opacity-25 transition"
     EOS;
+    $listItemClasses = 'class="px-6 py-2 border-b border-gray-200 w-full"';
     $isAdmin = Auth::user()->isAdmin();
 @endphp
 <div class="p-2.5">
@@ -14,15 +15,15 @@
     </x-slot>
     <div class="w-full grid grid-cols-2 grid-rows-{{$isAdmin ? 2 : 1}} gap-y-4">
         <ul class="bg-white rounded-lg border border-gray-200 text-gray-900 col-span-full row-start-1 row-end-1">
-            <li class="px-6 py-2 border-b border-gray-200 w-full">{{$rom->rom_name}}</li>
-            <li class="px-6 py-2 border-b border-gray-200 w-full">{{RomRepo::getReadableRomSize($rom->rom_size)}}</li>
-            <li class="px-6 py-2 border-b border-gray-200 w-full">{{$rom->rom_type}}</li>
-            <li class="px-6 py-2 border-b border-gray-200 w-full">{{@$rom->game->game_name . ' Version' ?? 'no game'}}</li>
+            <li {!! $listItemClasses !!}>{{$rom->rom_name}}</li>
+            <li {!! $listItemClasses !!}>{{RomRepo::getReadableRomSize($rom->rom_size)}}</li>
+            <li {!! $listItemClasses !!}>{{$rom->rom_type}}</li>
+            <li {!! $listItemClasses !!}>{{@$rom->game->game_name . ' Version' ?? 'no game'}}</li>
             @if($rom->has_game)
-                <li class="px-6 py-2 border-b border-gray-200 w-full">{{$rom->game->region}}</li>
-                <li class="px-6 py-2 border-b border-gray-200 w-full">{{number_to_roman($rom->game->generation)}}</li>
-                <li class="px-6 py-2 border-b border-gray-200 w-full">{{parse_date_as_readable_string($rom->game->date_released, addDayName: false)}}</li>
-                <li class="px-6 py-2 border-b border-gray-200 w-full">{{$rom->game->game_type}}</li>
+                <li {!! $listItemClasses !!}>{{$rom->game->region}}</li>
+                <li {!! $listItemClasses !!}>{{number_to_roman($rom->game->generation)}}</li>
+                <li {!! $listItemClasses !!}>{{parse_date_as_readable_string($rom->game->date_released, addDayName: false)}}</li>
+                <li {!! $listItemClasses !!}>{{$rom->game->game_type}}</li>
             @endif
         </ul>
 
