@@ -11,9 +11,9 @@ use Illuminate\Support\Facades\DB;
 
 class RomRepository implements RomRepositoryInterface
 {
-    public function getSingleRomWithGameAndFileInfo(int $romId): Rom
+    public function getSingleRomWithGameInfo(int $romId): Rom
     {
-        return Rom::with(['game', 'file'])->where('id', '=', $romId)->firstOrFail();
+        return Rom::with(['game'])->where('id', '=', $romId)->firstOrFail();
     }
 
     public function getRomsWithGameAndFileInfo(): Collection

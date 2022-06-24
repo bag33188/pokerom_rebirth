@@ -11,7 +11,7 @@ interface RomRepositoryInterface
 {
     public function getAllRomsSorted(): Collection;
 
-    public function getSingleRomWithGameAndFileInfo(int $romId): Rom;
+    public function getSingleRomWithGameInfo(int $romId): Rom;
 
     public function getRomsWithGameAndFileInfo(): Collection;
 
