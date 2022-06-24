@@ -28,5 +28,5 @@ Route::middleware([
     Route::get('/roms', RomsIndex::class)->name('roms.index');
     Route::get('/roms/show/{romId}', RomsShow::class)->name('roms.show');
     Route::get('/roms/edit/{romId}', RomsEdit::class)->name('roms.edit')->middleware('admin');
-    Route::patch('/roms/update/{romId}', [RomsEdit::class, 'update'])->name('roms.update');
+    Route::put('/roms/update/{romId}', [RomsEdit::class, 'update'])->name('roms.update');
 });
