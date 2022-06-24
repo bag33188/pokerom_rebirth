@@ -53,7 +53,7 @@
                              required autofocus />
             </div>
             <x-jet-button class="mt-4 float-right">
-                {{ __('Update!') }}
+                {{ __('Save!') }}
             </x-jet-button>
         </form>
     </div>
