@@ -1,0 +1,10 @@
+<div>
+    <ul>
+        <li>{{$rom->rom_name}}</li>
+        <li>{{$this->getRomReadableSize($rom->rom_size)}}</li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+</div>

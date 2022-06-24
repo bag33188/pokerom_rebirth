@@ -4,7 +4,8 @@
     </x-slot>
     <div x-data="{ open: true }">
         <div class="w-full flex justify-center">
-            <button type="button" @click="open = !open" class="bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-2 px-4 my-4 shadow-md rounded">
+            <button type="button" @click="open = !open"
+                    class="bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-2 px-4 my-4 shadow-md rounded">
                 @include("ui.show-hide", ['text'=>'ROMs'])
             </button>
         </div>
@@ -37,6 +38,11 @@
                         @else
                             <p class="font-normal text-lg">No File yet :(</p>
                         @endif
+                    </td>
+                    <td class="px-6 py-4">
+                        <a href="/public/roms/{{$rom->getKey()}}" class="inline-flex items-center py-2 px-4 bg-red-500 hover:bg-red-400 text-white font-bold
+                                    p-0 border-b-4 border-red-700 hover:border-red-500 rounded active:border-t-4
+                                    active:border-b-0 active:bg-red-400">Get Info</a>
                     </td>
                 </tr>
             @endforeach

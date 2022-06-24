@@ -60,7 +60,8 @@ Route::middleware('auth:sanctum')->group(function () {
 
 if (App::environment('local')) {
     Route::prefix('dev')->group(function () {
-        // todo: find/add a way to send token to download link (in order to authenticate)
+        // todo: find/add a way to send token to download link (in order to authenticate) (maybe use a POST request???)
         Route::get('/files/{fileId}/download', [FileController::class, 'download']);
+        // Route::post('/files/{fileId}/download', [FileController::class, 'download']);
     });
 }

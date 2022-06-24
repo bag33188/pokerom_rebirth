@@ -14,7 +14,7 @@ class Index extends Component
 
     public function mount()
     {
-        $this->romsTableColumns = array('ROM Name', 'ROM Size', 'ROM Type', 'Game Name', 'Download');
+        $this->romsTableColumns = array('ROM Name', 'ROM Size', 'ROM Type', 'Game Name', 'Download', 'Information');
     }
 
     public function render(): Factory|View|Application
