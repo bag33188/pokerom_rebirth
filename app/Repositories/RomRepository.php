@@ -50,7 +50,7 @@ class RomRepository implements RomRepositoryInterface
      */
     public function searchForFileMatchingRom(int $romId): ?File
     {
-        return File::where('filename', '=', $this->findRomIfExists($romId)->getRomFileName())->first();
+        return File::where('filename', '=', @$this->findRomIfExists($romId)->getRomFileName())->first();
     }
 
     public function getReadableRomSize(int $size): string
