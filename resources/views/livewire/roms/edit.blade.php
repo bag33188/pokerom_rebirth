@@ -52,14 +52,9 @@
                              :value="$rom->rom_size"
                              required autofocus />
             </div>
-            <x-jet-button class="mt-4">
+            <x-jet-button class="mt-4 float-right">
                 {{ __('Update!') }}
             </x-jet-button>
         </form>
-        @if(Auth::user()->isAdmin())
-            <div class="mt-4">
-                <livewire:roms.delete :rom-id="$romId" />
-            </div>
-        @endif
     </div>
 </div>
