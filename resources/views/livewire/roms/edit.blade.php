@@ -15,7 +15,7 @@
 
         <div>
             <x-jet-label for="romName" value="{{ __('Rom Name') }}" />
-            <x-jet-input id="romName" class="block mt-1 w-full" type="text" name="rom_name" :value="old('rom_name')"
+            <x-jet-input id="romName" class="block mt-1 w-full" type="text" name="rom_name" :value="$rom->rom_name"
                          required autofocus />
         </div>
         <div>
@@ -31,7 +31,7 @@
             <x-jet-label for="romSize" value="{{ __('Rom Size') }}" />
             <x-jet-input id="romSize" name="rom_size" class="block mt-1 w-full" type="number" min="{{MIN_ROM_SIZE}}"
                          max="{{MAX_ROM_SIZE}}"
-                         :value="old('rom_size')"
+                         :value="$rom->rom_size"
                          required autofocus></x-jet-input>
         </div>
         <x-jet-button class="ml-4">
