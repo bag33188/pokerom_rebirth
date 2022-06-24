@@ -32,7 +32,7 @@
             <x-jet-input id="romSize" name="rom_size" class="block mt-1 w-full" type="number" min="{{MIN_ROM_SIZE}}"
                          max="{{MAX_ROM_SIZE}}"
                          :value="$rom->rom_size"
-                         required autofocus></x-jet-input>
+                         required autofocus />
         </div>
         <x-jet-button class="ml-4">
             {{ __('Update!') }}
