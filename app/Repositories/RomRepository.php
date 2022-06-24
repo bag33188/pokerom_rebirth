@@ -44,6 +44,7 @@ class RomRepository implements RomRepositoryInterface
     /**
      * This will attempt to cross-reference the MongoDB database and check if there is a file
      * with the same name of the roms name plus its extension (rom type)
+     *
      * @param int $romId
      * @return \App\Models\File|null
      */
@@ -52,7 +53,7 @@ class RomRepository implements RomRepositoryInterface
         return File::where('filename', '=', $this->findRomIfExists($romId)->getRomFileName())->first();
     }
 
-    public function getRomReadableSize(int $size): string
+    public function getReadableRomSize(int $size): string
     {
         $sql = /** @lang MariaDB */
             "SELECT CalcReadableRomSize(?) AS readable_size;";

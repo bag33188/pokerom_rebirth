@@ -22,7 +22,7 @@
                 <tr data-rom-id="{{$rom->id}}"
                     class="border-b light:border-gray-700 odd:bg-white even:bg-gray-50 odd:light:bg-gray-800 even:light:bg-gray-700">
                     <td class="px-6 py-4">{{$rom->rom_name}}</td>
-                    <td class="px-6 py-4">{{RomRepo::getRomReadableSize($rom->rom_size)}}</td>
+                    <td class="px-6 py-4">{{RomRepo::getReadableRomSize($rom->rom_size)}}</td>
                     <td class="px-6 py-4">.{{strtolower($rom->rom_type)}}</td>
                     <td class="px-6 py-4">{{$rom->has_game ? $rom->game->game_name : 'N/A'}}</td>
                     <td class="px-6 py-4">

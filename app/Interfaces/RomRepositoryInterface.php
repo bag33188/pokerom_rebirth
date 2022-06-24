@@ -23,5 +23,5 @@ interface RomRepositoryInterface
 
     public function getFileAssociatedWithRom(int $romId): File;
 
-    public function getRomReadableSize(int $size): string;
+    public function getReadableRomSize(int $size): string;
 }
