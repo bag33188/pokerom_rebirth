@@ -7,12 +7,9 @@ use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 class MongoBulkException extends ApplicationException
 {
-    /**
-     * @return string
-     */
-    public function viewName(): string
+    public function viewName(): ?string
     {
-        return 'errors.query-exception';
+        return null; //'errors.query-exception';
     }
 
     public function status(): int

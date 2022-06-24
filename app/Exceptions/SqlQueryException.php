@@ -12,9 +12,9 @@ class SqlQueryException extends ApplicationException
        return ResponseAlias::HTTP_CONFLICT;
     }
 
-    public function viewName(): string
+    public function viewName(): ?string
     {
-        return 'errors.query-exception';
+        return null; //'errors.query-exception';
     }
 
     public function errorMessage(): string
