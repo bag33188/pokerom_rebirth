@@ -14,6 +14,11 @@ class UpdateMatchingRom implements ShouldQueue
 
     public bool $afterCommit = true;
 
+    /**
+     * Needs to be static since RomFile bucket connection is singleton
+     *
+     * @var Rom
+     */
     private static Rom $matchingRom;
 
     public function shouldQueue(FileUploaded $event): bool
@@ -22,6 +27,7 @@ class UpdateMatchingRom implements ShouldQueue
         return !$event->file->rom()->exists() && isset(self::$matchingRom);
     }
 
+    /** be sure to rap in an instance method since even has multiple instances */
     private function setMatchingRom(Rom $rom): void
     {
         self::$matchingRom = $rom;
