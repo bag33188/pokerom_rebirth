@@ -21,7 +21,7 @@
             @if($rom->has_game)
                 <li class="px-6 py-2 border-b border-gray-200 w-full">{{$rom->game->region}}</li>
                 <li class="px-6 py-2 border-b border-gray-200 w-full">{{number_to_roman($rom->game->generation)}}</li>
-                <li class="px-6 py-2 border-b border-gray-200 w-full">{{parse_date_as_readable_string($rom->game->date_released, false)}}</li>
+                <li class="px-6 py-2 border-b border-gray-200 w-full">{{parse_date_as_readable_string($rom->game->date_released, addDayName: false)}}</li>
                 <li class="px-6 py-2 border-b border-gray-200 w-full">{{$rom->game->game_type}}</li>
             @endif
         </ul>
