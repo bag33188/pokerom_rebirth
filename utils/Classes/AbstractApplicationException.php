@@ -38,11 +38,6 @@ abstract class AbstractApplicationException extends Exception
         return $this->status() ?: (int)$this->getCode();
     }
 
-    private function getViewNameIfNotNull(): string
-    {
-        return $this->viewName() ?: self::DEFAULT_ERROR_VIEW;
-    }
-
     public final function render(Request $request): Response|JsonResponse|RedirectResponse
     {
         $message = $this->getErrorMessageIfNotNull();
@@ -55,7 +50,7 @@ abstract class AbstractApplicationException extends Exception
             if (!$this->viewName()) {
                 return redirect()->to(url()->previous())->dangerBanner($message);
             }
-            return response()->view($this->getViewNameIfNotNull(), ['message' => $message], $code);
+            return response()->view($this->viewName(), ['message' => $message], $code);
         }
     }
 }
