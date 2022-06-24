@@ -3,7 +3,10 @@
 namespace Utils\Classes;
 
 use Exception;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 abstract class AbstractApplicationException extends Exception
 {
@@ -40,7 +43,7 @@ abstract class AbstractApplicationException extends Exception
         return $this->viewName() ?: self::DEFAULT_ERROR_VIEW;
     }
 
-    public final function render(Request $request)
+    public final function render(Request $request): Response|JsonResponse|RedirectResponse
     {
         $message = $this->getErrorMessageIfNotNull();
         $code = $this->getStatusCodeIfNotNull();
@@ -50,7 +53,6 @@ abstract class AbstractApplicationException extends Exception
         } else {
             session()->flash('success', $message);
             if (!$this->viewName()) {
-
                 return redirect()->to(url()->previous())->dangerBanner($message);
             }
             return response()->view($this->getViewNameIfNotNull(), ['message' => $message], $code);
