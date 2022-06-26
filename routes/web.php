@@ -1,11 +1,12 @@
 <?php
 
 use App\Http\Controllers\www\{HomeController, WelcomeController};
+use App\Http\Livewire\Game\Index as GameIndex;
+use App\Http\Livewire\Game\Show as GameShow;
+use App\Http\Livewire\Roms\Delete as RomsDelete;
 use App\Http\Livewire\Roms\Edit as RomsEdit;
 use App\Http\Livewire\Roms\Index as RomsIndex;
 use App\Http\Livewire\Roms\Show as RomsShow;
-use App\Http\Livewire\Roms\Delete as RomsDelete;
-use App\Http\Livewire\Game\Index as GameIndex;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,4 +34,5 @@ Route::middleware([
     Route::put('/roms/update/{romId}', [RomsEdit::class, 'update'])->name('roms.update');
     Route::delete('/roms/delete/{romId}', [RomsDelete::class, 'delete'])->name('roms.delete');
     Route::get('/games', GameIndex::class)->name('games.index');
+    Route::get('/games/{gameId}', GameShow::class)->name('games.show');
 });
