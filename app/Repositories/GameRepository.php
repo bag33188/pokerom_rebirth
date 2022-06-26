@@ -30,7 +30,7 @@ class GameRepository implements GameRepositoryInterface
     }
 
 
-    public function getProperGameType(string $gameType): string
+    public function getProperGameTypeString(string $gameType): string
     {
         $sql = /** @lang MariaDB */
             "SELECT GetProperGameTypeString(?) AS gameType;";

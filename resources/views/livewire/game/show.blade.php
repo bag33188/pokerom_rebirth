@@ -17,7 +17,7 @@
             <li {!! $listItemClasses !!}>{{$game->game_name}} Version</li>
             <li {!! $listItemClasses !!}>Generation {{number_to_roman($game->generation)}}</li>
             <li {!! $listItemClasses !!}>{{$game->region}} Region</li>
-            <li {!! $listItemClasses !!}>{{GameRepo::getProperGameType($game->game_type)}}</li>
+            <li {!! $listItemClasses !!}>{{GameRepo::getProperGameTypeString($game->game_type)}}</li>
             <li {!! $listItemClasses !!}>Released on: {{parse_date_as_readable_string($game->date_released)}}</li>
         </ul>
         @if(Auth::user()->isAdmin())
