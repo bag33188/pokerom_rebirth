@@ -2,6 +2,8 @@
 
 if (!function_exists('string_to_bool')) {
     /**
+     * Convert string boolean value to boolean
+     *
      * @param string $value
      * @return bool
      */
