@@ -17,6 +17,7 @@ class GridFsServiceProvider extends ServiceProvider implements DeferrableProvide
      */
     public function register(): void
     {
+        // use singleton since only admin user will be invoking this logic
         $this->app->singleton(RomFilesBucket::class,
             fn(Application $app): RomFilesBucket => new RomFilesBucket());
     }
