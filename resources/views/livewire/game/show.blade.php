@@ -12,5 +12,8 @@
             <li {!! $listItemClasses !!}>Game Region: {{$game->region}}</li>
             <li {!! $listItemClasses !!}>Date Released: {{parse_date_as_readable_string($game->date_released)}}</li>
         </ul>
+        <div class="row-start-2 row-end-2">
+            <a href="{{route('games.index')}}" class="px-1">Go Back</a>
+        </div>
     </div>
 </div>
