@@ -6,7 +6,6 @@ use GameRepo;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
-use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
 class Index extends Component
