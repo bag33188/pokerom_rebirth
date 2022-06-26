@@ -1,5 +1,5 @@
 @php
-    $availableRoms=$this->getAvailableRoms();
+    $availableRoms=GameRepo::getAllRomsWithNoGame();
     $availableRomsCount = count($availableRoms);
 @endphp
 <div>
@@ -10,5 +10,5 @@
         @endphp
     @endfor
     {!! "<br/>" !!}
-    {{var_export($this->getAvailableRoms())}}
+    {{var_export(GameRepo::getAllRomsWithNoGame())}}
 </div>

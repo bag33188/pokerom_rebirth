@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\DB;
 
 class GameRepository implements GameRepositoryInterface
 {
-
     public function findGameIfExists(int $gameId): Game
     {
         return Game::findOrFail($gameId);
@@ -35,5 +34,13 @@ class GameRepository implements GameRepositoryInterface
         $sql = /** @lang MariaDB */
             "SELECT GetProperGameTypeString(?) AS gameType;";
         return DB::selectOne($sql, [$gameType])->gameType;
+    }
+
+    public function getAllRomsWithNoGame(): array
+    {
+        // todo: implement toJson and arrayable??
+        $sql = /** @lang MariaDB */
+            "CALL FindRomsWithNoGame";
+        return DB::select($sql);
     }
 }
