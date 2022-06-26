@@ -22,7 +22,7 @@ class FileDataService implements FileDataServiceInterface
         }, ResponseAlias::HTTP_ACCEPTED, array(
             'Content-Type' => FileTypes::OCTET_STREAM->value,
             'Content-Transfer-Encoding' => 'chunked',
-            'Content-Disposition' => "attachment; filename=\"$file->filename\""));
+            'Content-Disposition' => 'attachment; filename="$file->filename"'));
     }
 
     public function uploadFile(UploadedFile $file): JsonDataResponse
