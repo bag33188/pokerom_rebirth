@@ -6,5 +6,6 @@
     @for($i = 0; $i < $availableRomsCount; $i++)
         {{$availableRoms[$i]->rom_name}}
     @endfor
+    {!! "<br/>" !!}
     {{var_export($this->getAvailableRoms())}}
 </div>
