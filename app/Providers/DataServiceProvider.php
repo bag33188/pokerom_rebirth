@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Interfaces\RomFileDataServiceInterface as IFileDataService;
+use App\Interfaces\RomFileDataServiceInterface as IRomFileDataService;
 use App\Interfaces\GameDataServiceInterface as IGameDataService;
 use App\Interfaces\RomDataServiceInterface as IRomDataService;
 use App\Interfaces\UserDataServiceInterface as IUserDataService;
@@ -25,6 +25,6 @@ class DataServiceProvider extends ServiceProvider
         $this->app->bind(IUserDataService::class, UserDataService::class);
         $this->app->bind(IGameDataService::class, GameDataService::class);
         $this->app->bind(IRomDataService::class, RomDataService::class);
-        $this->app->bind(IFileDataService::class, RomFileDataService::class);
+        $this->app->bind(IRomFileDataService::class, RomFileDataService::class);
     }
 }
