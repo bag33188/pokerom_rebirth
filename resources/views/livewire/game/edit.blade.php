@@ -55,7 +55,7 @@
                     required autofocus>
                     @foreach(REGIONS as $region)
                         <option
-                            value="{{ucfirst($region)}}"
+                            value="{{$region}}"
                             {!! (strtolower($game->region) == $region)
                                   ? 'selected' : '' !!}>
                             {{ ucfirst($region) }}</option>
