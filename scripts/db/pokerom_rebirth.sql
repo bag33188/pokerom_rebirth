@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 26, 2022 at 07:40 PM
+-- Generation Time: Jun 26, 2022 at 08:05 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -145,14 +145,14 @@ May need to increase varchar limit in the future
 END$$
 
 DROP FUNCTION IF EXISTS `GetProperGameTypeString`$$
-CREATE DEFINER=`bag33188`@`%` FUNCTION `GetProperGameTypeString` (`G_TYPE` VARCHAR(8)) RETURNS VARCHAR(13) CHARSET utf8mb4  CASE LOWER(`G_TYPE`)
-WHEN 'core' THEN RETURN 'Core Game';
-WHEN 'hack' THEN RETURN 'ROM Hack';
-WHEN 'spin-off' THEN RETURN 'Spin-Off Game';
+CREATE DEFINER=`bag33188`@`%` FUNCTION `GetProperGameTypeString` (`G_TYPE` VARCHAR(8)) RETURNS VARCHAR(21) CHARSET utf8mb4  CASE LOWER(`G_TYPE`)
+WHEN 'core' THEN RETURN 'Core Pokemon Game';
+WHEN 'hack' THEN RETURN 'Pokemon ROM Hack';
+WHEN 'spin-off' THEN RETURN 'Spin-Off Pokemon Game';
 ELSE RETURN 'N/A';
 /** !important
-The return value length is 13 since the max str-len return option
-which is 'Spin-Off Game' is 13 characters extactly.
+The return value length is 21 since the max str-len return option
+which is 'Spin-Off Pokemon Game' is 21 characters extactly.
 The max input value length is 8 since the max str-len of an input option
 which is 'spin-off' is excactly 8 chars
 */
@@ -452,7 +452,7 @@ INSERT INTO `roms` (`id`, `file_id`, `game_id`, `rom_name`, `rom_size`, `rom_typ
 -- Table structure for table `sessions`
 --
 -- Creation: Jun 05, 2022 at 04:47 PM
--- Last update: Jun 26, 2022 at 05:40 PM
+-- Last update: Jun 26, 2022 at 06:05 PM
 --
 
 DROP TABLE IF EXISTS `sessions`;
@@ -479,7 +479,7 @@ TRUNCATE TABLE `sessions`;
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('OStTlkW3yJfu9YU23icVN2lj0D4kNGXPpqNoPUOE', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiZmgxbkJ2cUdpMG1QU1lPSzJUVzR0V0xYUDYxTFVZTklsdTlGYnRoZyI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDA6Imh0dHA6Ly9wb2tlcm9tX3JlYmlydGgudGVzdC9wdWJsaWMvZ2FtZXMiO31zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO3M6MjE6InBhc3N3b3JkX2hhc2hfc2FuY3R1bSI7czo2MDoiJDJ5JDEwJFRjOWhHNk5aMmI2S2hYZzdOZVhlak9nV0pTRE1rMVJ1NkxKZjEzVjJ0NkpzN0ZzdnlxdmoyIjt9', 1656265204);
+('OStTlkW3yJfu9YU23icVN2lj0D4kNGXPpqNoPUOE', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiZmgxbkJ2cUdpMG1QU1lPSzJUVzR0V0xYUDYxTFVZTklsdTlGYnRoZyI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDc6Imh0dHA6Ly9wb2tlcm9tX3JlYmlydGgudGVzdC9wdWJsaWMvZ2FtZXMvc2hvdy8xIjt9czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjIxOiJwYXNzd29yZF9oYXNoX3NhbmN0dW0iO3M6NjA6IiQyeSQxMCRUYzloRzZOWjJiNktoWGc3TmVYZWpPZ1dKU0RNazFSdTZMSmYxM1YydDZKczdGc3Z5cXZqMiI7fQ==', 1656266717);
 
 -- --------------------------------------------------------
 
