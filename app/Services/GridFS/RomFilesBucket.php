@@ -2,7 +2,7 @@
 
 namespace App\Services\GridFS;
 
-use App\Models\File;
+use App\Models\RomFile;
 use FileRepo;
 use Illuminate\Http\UploadedFile;
 use Jenssegers\Mongodb\Eloquent\Model;
@@ -23,7 +23,7 @@ class RomFilesBucket extends GfsBucket
         return explode('.', $this->filename, 2)[1];
     }
 
-    public function getFileDocument(): File
+    public function getFileDocument(): RomFile
     {
         return FileRepo::getFileByFilename($this->filename);
     }

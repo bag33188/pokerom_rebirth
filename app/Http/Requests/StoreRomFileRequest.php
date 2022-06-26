@@ -4,10 +4,10 @@ namespace App\Http\Requests;
 
 use App\Actions\Validators\FileValidationRulesTrait;
 use App\Exceptions\UnsupportedRomTypeException;
-use App\Models\File;
+use App\Models\RomFile;
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreFileRequest extends FormRequest
+class StoreRomFileRequest extends FormRequest
 {
     use FileValidationRulesTrait;
 
@@ -20,7 +20,7 @@ class StoreFileRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return $this->user()->can('create', File::class);
+        return $this->user()->can('create', RomFile::class);
     }
 
     private function getFileNameIfExists(): string

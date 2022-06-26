@@ -42,7 +42,7 @@ class Rom extends Model
 
     public final function file(): HasOneDocument
     {
-        return $this->hasOne(File::class, '_id', 'file_id');
+        return $this->hasOne(RomFile::class, '_id', 'file_id');
     }
 
     protected function romType(): Attribute

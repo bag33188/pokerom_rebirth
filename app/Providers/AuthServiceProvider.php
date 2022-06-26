@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Models\{File, Game, Rom, User};
+use App\Models\{RomFile, Game, Rom, User};
 use App\Policies\{FilePolicy, GamePolicy, RomPolicy, UserPolicy};
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
@@ -18,7 +18,7 @@ class AuthServiceProvider extends ServiceProvider
         User::class => UserPolicy::class,
         Game::class => GamePolicy::class,
         Rom::class => RomPolicy::class,
-        File::class => FilePolicy::class
+        RomFile::class => FilePolicy::class
     ];
 
     /**

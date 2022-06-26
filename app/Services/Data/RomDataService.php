@@ -3,7 +3,7 @@
 namespace App\Services\Data;
 
 use App\Interfaces\RomDataServiceInterface;
-use App\Models\File;
+use App\Models\RomFile;
 use App\Models\Rom;
 use Illuminate\Support\Facades\DB;
 use RomRepo;
@@ -32,7 +32,7 @@ class RomDataService implements RomDataServiceInterface
         if (isset($file)) $this->setRomDataFromFile($rom, $file);
     }
 
-    private function setRomDataFromFile(Rom $rom, File $file): void
+    private function setRomDataFromFile(Rom $rom, RomFile $file): void
     {
         $sql = /** @lang MariaDB */
             "CALL LinkRomToFile(:fileId, :fileSize, :romId);";

@@ -2,16 +2,16 @@
 
 namespace App\Interfaces;
 
-use App\Models\File;
+use App\Models\RomFile;
 use Illuminate\Http\UploadedFile;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use Utils\Classes\JsonDataResponse;
 
-interface FileDataServiceInterface
+interface RomFileDataServiceInterface
 {
-    public function downloadFile(File $file): StreamedResponse;
+    public function downloadFile(RomFile $file): StreamedResponse;
 
     public function uploadFile(UploadedFile $file): JsonDataResponse;
 
-    public function deleteFile(File $file): JsonDataResponse;
+    public function deleteFile(RomFile $file): JsonDataResponse;
 }

@@ -2,13 +2,13 @@
 
 namespace App\Facades;
 
-use App\Repositories\FileRepository;
+use App\Repositories\RomFileRepository;
 use Illuminate\Support\Facades\Facade;
 
 class FileRepositoryFacade extends Facade
 {
     protected static function getFacadeAccessor(): string
     {
-        return FileRepository::class;
+        return RomFileRepository::class;
     }
 }

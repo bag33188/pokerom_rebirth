@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller as ApiController;
-use App\Http\Requests\StoreFileRequest;
-use App\Http\Resources\FileCollection;
-use App\Http\Resources\FileResource;
+use App\Http\Requests\StoreRomFileRequest;
+use App\Http\Resources\RomFileCollection;
+use App\Http\Resources\RomFileResource;
 use App\Http\Resources\RomResource;
-use App\Interfaces\FileDataServiceInterface;
-use App\Models\File;
+use App\Interfaces\RomFileDataServiceInterface;
+use App\Models\RomFile;
 use FileRepo;
 use Illuminate\{Auth\Access\AuthorizationException, Http\JsonResponse};
 use Illuminate\Support\Facades\Gate;
@@ -17,9 +17,9 @@ use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class FileController extends ApiController
 {
-    private FileDataServiceInterface $fileDataService;
+    private RomFileDataServiceInterface $fileDataService;
 
-    public function __construct(FileDataServiceInterface $fileDataService)
+    public function __construct(RomFileDataServiceInterface $fileDataService)
     {
         $this->fileDataService = $fileDataService;
     }
@@ -27,10 +27,10 @@ class FileController extends ApiController
     /**
      * @throws AuthorizationException
      */
-    public function index(): FileCollection
+    public function index(): RomFileCollection
     {
         Gate::authorize('viewAny-file');
-        return new FileCollection(FileRepo::getAllFilesSorted());
+        return new RomFileCollection(FileRepo::getAllFilesSorted());
     }
 
     /**
@@ -50,7 +50,7 @@ class FileController extends ApiController
     {
         $file = FileRepo::findFileIfExists($fileId);
         $this->authorize('view', $file);
-        return new FileResource($file);
+        return new RomFileResource($file);
     }
 
     /**
@@ -66,9 +66,9 @@ class FileController extends ApiController
     /**
      * @throws AuthorizationException
      */
-    public function upload(StoreFileRequest $request): JsonResponse
+    public function upload(StoreRomFileRequest $request): JsonResponse
     {
-        $this->authorize('create', File::class);
+        $this->authorize('create', RomFile::class);
         $file = $request->file(FILE_FORM_KEY);
 
         return $this->fileDataService->uploadFile($file)->renderResponse();

@@ -3,7 +3,7 @@
 namespace App\Repositories;
 
 use App\Interfaces\RomRepositoryInterface;
-use App\Models\File;
+use App\Models\RomFile;
 use App\Models\Game;
 use App\Models\Rom;
 use Illuminate\Database\Eloquent\Collection;
@@ -36,7 +36,7 @@ class RomRepository implements RomRepositoryInterface
         return $this->findRomIfExists($romId)->game()->firstOrFail();
     }
 
-    public function getFileAssociatedWithRom(int $romId): File
+    public function getFileAssociatedWithRom(int $romId): RomFile
     {
         return $this->findRomIfExists($romId)->file()->firstOrFail();
     }
@@ -46,11 +46,11 @@ class RomRepository implements RomRepositoryInterface
      * with the same name of the roms name plus its extension (rom type)
      *
      * @param int $romId
-     * @return \App\Models\File|null
+     * @return \App\Models\RomFile|null
      */
-    public function searchForFileMatchingRom(int $romId): ?File
+    public function searchForFileMatchingRom(int $romId): ?RomFile
     {
-        return File::where('filename', '=', @$this->findRomIfExists($romId)->getRomFileName())->first();
+        return RomFile::where('filename', '=', @$this->findRomIfExists($romId)->getRomFileName())->first();
     }
 
     public function getReadableRomSize(int $size): string

@@ -2,7 +2,7 @@
 
 namespace App\Events;
 
-use App\Models\File;
+use App\Models\RomFile;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PrivateChannel;
@@ -13,14 +13,14 @@ class FileDeleted
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public File $file;
+    public RomFile $file;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct(File $file)
+    public function __construct(RomFile $file)
     {
         $this->file = $file;
     }

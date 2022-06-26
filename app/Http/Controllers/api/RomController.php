@@ -5,7 +5,7 @@ namespace App\Http\Controllers\api;
 use App\Http\Controllers\Controller as ApiController;
 use App\Http\Requests\StoreRomRequest;
 use App\Http\Requests\UpdateRomRequest;
-use App\Http\Resources\FileResource;
+use App\Http\Resources\RomFileResource;
 use App\Http\Resources\GameResource;
 use App\Http\Resources\RomCollection;
 use App\Http\Resources\RomResource;
@@ -47,7 +47,7 @@ class RomController extends ApiController
     public function indexFile(int $romId)
     {
         Gate::authorize('viewAny-file');
-        return new FileResource(RomRepo::getFileAssociatedWithRom($romId));
+        return new RomFileResource(RomRepo::getFileAssociatedWithRom($romId));
     }
 
     /**

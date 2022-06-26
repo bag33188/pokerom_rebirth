@@ -8,7 +8,7 @@ use MongoDB\BSON\ObjectId;
 use Utils\Classes\AbstractGridFsFile as GfsFile;
 
 /** @mixin GfsFile */
-class File extends MongoDbModel
+class RomFile extends MongoDbModel
 {
     protected $connection = 'mongodb';
     protected $collection = 'roms.files';

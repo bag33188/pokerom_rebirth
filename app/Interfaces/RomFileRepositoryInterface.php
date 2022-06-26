@@ -2,19 +2,19 @@
 
 namespace App\Interfaces;
 
-use App\Models\File;
+use App\Models\RomFile;
 use App\Models\Rom;
 use Illuminate\Database\Eloquent\Collection;
 
-interface FileRepositoryInterface
+interface RomFileRepositoryInterface
 {
     public function getAllFilesSorted(): Collection;
 
-    public function findFileIfExists(string $fileId): File;
+    public function findFileIfExists(string $fileId): RomFile;
 
     public function getRomAssociatedWithFile(string $fileId): Rom;
 
-    public function getFileByFilename(string $filename): File;
+    public function getFileByFilename(string $filename): RomFile;
 
     public function searchForRomMatchingFile(string $fileId): ?Rom;
 }

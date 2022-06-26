@@ -2,16 +2,16 @@
 
 namespace App\Repositories;
 
-use App\Interfaces\FileRepositoryInterface;
-use App\Models\File;
+use App\Interfaces\RomFileRepositoryInterface;
+use App\Models\RomFile;
 use App\Models\Rom;
 use Illuminate\Database\Eloquent\Collection;
 
-class FileRepository implements FileRepositoryInterface
+class RomFileRepository implements RomFileRepositoryInterface
 {
-    public function findFileIfExists(string $fileId): File
+    public function findFileIfExists(string $fileId): RomFile
     {
-        return File::findOrFail($fileId);
+        return RomFile::findOrFail($fileId);
     }
 
     public function getRomAssociatedWithFile(string $fileId): Rom
@@ -21,12 +21,12 @@ class FileRepository implements FileRepositoryInterface
 
     public function getAllFilesSorted(): Collection
     {
-        return File::all()->sortBy([['length', 'asc'], ['filename', 'asc']]);
+        return RomFile::all()->sortBy([['length', 'asc'], ['filename', 'asc']]);
     }
 
-    public function getFileByFilename(string $filename): File
+    public function getFileByFilename(string $filename): RomFile
     {
-        return File::where('filename', '=', $filename)->first();
+        return RomFile::where('filename', '=', $filename)->first();
     }
 
     public function searchForRomMatchingFile(string $fileId): ?Rom

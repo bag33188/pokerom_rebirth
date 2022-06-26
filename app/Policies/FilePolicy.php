@@ -2,7 +2,7 @@
 
 namespace App\Policies;
 
-use App\Models\File;
+use App\Models\RomFile;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
@@ -21,7 +21,7 @@ class FilePolicy
         return $user->isAdmin();
     }
 
-    public function view(User $user, File $file): bool
+    public function view(User $user, RomFile $file): bool
     {
         return $user->isAdmin();
     }
@@ -30,10 +30,10 @@ class FilePolicy
      * Determine whether the user can delete the model.
      *
      * @param User $user
-     * @param File $file
+     * @param RomFile $file
      * @return bool
      */
-    public function delete(User $user, File $file): bool
+    public function delete(User $user, RomFile $file): bool
     {
         return $user->isAdmin();
     }

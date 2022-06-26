@@ -6,7 +6,7 @@ use App\Services\GridFS\RomFilesBucket;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Support\ServiceProvider;
-use RomFile;
+use GfsRomFile;
 
 class GridFsServiceProvider extends ServiceProvider implements DeferrableProvider
 {
@@ -34,7 +34,7 @@ class GridFsServiceProvider extends ServiceProvider implements DeferrableProvide
             config('gridfs.bucketName'),
             config('gridfs.chunkSize'),
         ];
-        RomFile::setDatabaseValues(...$dbProps);
+        GfsRomFile::setDatabaseValues(...$dbProps);
     }
 
     /**

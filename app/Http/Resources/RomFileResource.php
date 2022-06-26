@@ -8,7 +8,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 use JetBrains\PhpStorm\ArrayShape;
 
 /** @mixin GfsFile */
-class FileResource extends JsonResource
+class RomFileResource extends JsonResource
 {
     public $additional = ['success' => true];
 
