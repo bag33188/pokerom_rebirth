@@ -43,7 +43,7 @@
                             value="{{$gameType}}"
                             {!! (strtolower($game->game_type) == $gameType)
                                   ? 'selected="selected"' : '' !!}>
-                            {{ $gameType }}</option>
+                            {{ str_capitalize($gameType, true, 2, '-') }}</option>
                     @endforeach
                 </select>
             </div>
