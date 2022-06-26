@@ -64,8 +64,8 @@ abstract class AbstractApplicationException extends Exception
      * If request accepts json or is api request, a json response will be returned with error data.
      *
      * If request is web request:
-     *      If not view-name is specified, the render will be redirected and show a danger banner with the error message
-     *      If view-name is specified, the render will output the view with specified error message and http status code
+     *  - If not view-name is specified, the render will be redirected and show a danger banner with the error message
+     *  - If view-name is specified, the render will output the view with specified error message and http status code
      *
      * @param Request $request
      * @return Response|JsonResponse|RedirectResponse
