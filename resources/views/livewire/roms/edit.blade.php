@@ -10,14 +10,14 @@
         <h2 class="text-center">Edit {{$rom->getRomFileName()}}</h2>
     </x-slot>
     <div class="p-3">
-        <x-jet-validation-errors class="mb-4" />
+        <x-jet-validation-errors class="mb-4"/>
 
-        <form method="POST" action="{{route("roms.update", $romId)}}">
+        <form method="POST" action="{{route("roms.update", ['romId'=>$romId])}}">
             @csrf
             @method('PUT')
 
             <div class="mt-2.5">
-                <x-jet-label for="romName" value="{{ __('Rom Name') }}" />
+                <x-jet-label for="romName" value="{{ __('Rom Name') }}"/>
                 <x-jet-input id="romName"
                              class="block mt-1 w-full"
                              type="text"
@@ -25,10 +25,10 @@
                              minlength="{{MIN_ROM_NAME}}"
                              maxlength="{{MAX_ROM_NAME}}"
                              :value="$rom->rom_name"
-                             required autofocus />
+                             required autofocus/>
             </div>
             <div class="mt-2.5">
-                <x-jet-label for="romType" value="{{ __('Rom Type') }}" />
+                <label for="romType" class="block font-medium text-sm text-gray-700">{{__('Rom Type')}}</label>
                 <select
                     {!! $formSelectClasses !!}
                     name="rom_type" id="romType"
@@ -43,14 +43,14 @@
                 </select>
             </div>
             <div class="mt-2.5">
-                <x-jet-label for="romSize" value="{{ __('Rom Size') }}" />
+                <x-jet-label for="romSize" value="{{ __('Rom Size') }}"/>
                 <x-jet-input id="romSize"
                              name="rom_size"
                              class="block mt-1 w-full"
                              type="number" min="{{MIN_ROM_SIZE}}"
                              max="{{MAX_ROM_SIZE}}"
                              :value="$rom->rom_size"
-                             required autofocus />
+                             required autofocus/>
             </div>
             <x-jet-button class="mt-4 float-right">
                 {{ __('Save!') }}
