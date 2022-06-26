@@ -28,7 +28,7 @@
                 <x-jet-input id="gameName" class="block mt-1 w-full" type="text" name="game_name"
                              minlength="{{MIN_GAME_NAME}}"
                              maxlength="{{MAX_GAME_NAME}}"
-                             :value="$game->game_name"
+                             :value="str_replace(_EACUTE, 'e', $game->game_name)"
                              required autofocus
                 />
             </div>
@@ -61,6 +61,10 @@
                             {{ ucfirst($region) }}</option>
                     @endforeach
                 </select>
+            </div>
+            <div class="mt-2.5">
+                <x-jet-label for="dateReleased" value="{{__('Date Released')}}"/>
+                <x-jet-input type="date" :value="preg_replace('/\s?([0-6][0-9]\:){2}(?:[0-6][0-9])/', '', $game->date_released)" id="dateReleased"/>
             </div>
 
             <div class="mt-4">
