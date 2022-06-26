@@ -38,7 +38,7 @@ class RomDataService implements RomDataServiceInterface
             "CALL LinkRomToFile(:fileId, :fileSize, :romId);";
         DB::statement($sql, [
             'fileId' => $file->getKey(),
-            'fileSize' => $file['length'],
+            'fileSize' => $file->length,
             'romId' => $rom->getKey()
         ]);
         $rom->refresh();

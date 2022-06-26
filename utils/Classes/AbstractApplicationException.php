@@ -42,7 +42,7 @@ abstract class AbstractApplicationException extends Exception
     {
         $message = $this->getErrorMessageIfNotNull();
         $code = $this->getStatusCodeIfNotNull();
-        if ($request->is('api/*')) {
+        if ($request->is('api/*') || $request->expectsJson()) {
             $response = new JsonDataResponse(['message' => $message], $code);
             return $response->renderResponse();
         } else {

@@ -5,6 +5,10 @@ use Utils\Classes\JsonDataResponse;
 
 if (!function_exists('jsondata')) {
     /**
+     * Use this function to return a new {@see JsonDataResponse} object for use with methods
+     * that do not explicitly return a resource and/or collection
+     * (or that don't use a {@see \App\Providers\DataServiceProvider DataServiceProvider} method)
+     *
      * @param array $data
      * @param int $code
      * @param array $headers
