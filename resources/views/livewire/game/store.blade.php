@@ -11,8 +11,12 @@
                 }
             @endphp
         </select>
-        {!! "<br/>" !!}
-        {{var_export(GameRepo::getAllRomsWithNoGame())}}
+        @php
+            echo "<br />";
+            var_dump(@GameRepo::getAllRomsWithNoGame()[0]);
+            echo "<br />";
+            var_export(GameRepo::getAllRomsWithNoGame())
+        @endphp
     @else
         <h3>No available roms to add a game to :(</h3>
     @endif
