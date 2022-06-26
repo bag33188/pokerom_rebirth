@@ -2,7 +2,7 @@
     $availableRoms=GameRepo::getAllRomsWithNoGame();
     $availableRomsCount = count($availableRoms);
 @endphp
-<div>
+<div class="container">
     @for($i = 0; $i < $availableRomsCount; $i++)
         @php
             $rom=$availableRoms[$i];
