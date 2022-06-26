@@ -20,10 +20,10 @@
             <li {!! $listItemClasses !!}>{{GameRepo::getProperGameType($game->game_type)}}</li>
             <li {!! $listItemClasses !!}>Released on: {{parse_date_as_readable_string($game->date_released)}}</li>
         </ul>
-        <div class="row-start-2 row-end-2 ml-1 col-start-2 col-end-2 justify-self-end">
-            @livewire('game.delete', ['gameId'=>$gameId])
-        </div>
         @if(Auth::user()->isAdmin())
+            <div class="row-start-2 row-end-2 ml-1 col-start-2 col-end-2 justify-self-end">
+                @livewire('game.delete', ['gameId'=>$gameId])
+            </div>
             <div class="col-start-1 col-end-1 row-start-2 row-end-2 justify-self-start">
                 <a href="{{route('games.edit', ['gameId'=>$this->game->id])}}" {!! $jetstreamBtnClasses !!}>Edit!</a>
             </div>
