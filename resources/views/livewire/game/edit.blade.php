@@ -66,7 +66,7 @@
                 <x-jet-label for="dateReleased" value="{{__('Date Released')}}"/>
                 <x-jet-input type="date"
                              class="block mt-1 w-full"
-                             :value="preg_replace('/(\s?)([0-2][0-4]:[0-5]\d:[0-5]\d)/', '', $game->date_released)"
+                             :value="preg_replace(TIME_STRING, '', $game->date_released)"
                              id="dateReleased" name="date_released" required autofocus/>
             </div>
             <div class="mt-2.5">
