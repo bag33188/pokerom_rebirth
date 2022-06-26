@@ -13,4 +13,6 @@ interface GameRepositoryInterface
     public function findGameIfExists(int $gameId): Game;
 
     public function getRomAssociatedWithGame(int $gameId): Rom;
+
+    public function getProperGameType(string $gameType): string;
 }

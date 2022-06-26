@@ -18,11 +18,4 @@ class Index extends Component
         $this->games = GameRepo::getAllGamesSorted();
         return view('livewire.game.index');
     }
-
-    public function getProperGameType(string $gameType): string
-    {
-        $sql = /** @lang MariaDB */
-            "SELECT GetProperGameTypeString(?) as gameType;";
-        return DB::selectOne($sql, [$gameType])->gameType;
-    }
 }
