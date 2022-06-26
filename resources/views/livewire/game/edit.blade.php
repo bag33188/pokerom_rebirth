@@ -4,6 +4,13 @@
     focus:ring focus:ring-indigo-200 focus:ring-opacity-50
     rounded-md shadow-sm block mt-1 w-full"
     EOS;
+    $btnPrimaryClasses = <<<'EOS'
+    class="inline-flex items-center px-4 py-2 bg-blue-700 border
+    border-transparent rounded-md font-semibold text-xs text-white
+    uppercase tracking-widest hover:bg-blue-800 active:bg-blue-800
+    focus:outline-none focus:border-blue-600 focus:ring focus:ring-blue-300
+    disabled:opacity-25 transition"
+    EOS;
 @endphp
 <div>
     <x-slot name="header">
@@ -54,6 +61,15 @@
                             {{ ucfirst($region) }}</option>
                     @endforeach
                 </select>
+            </div>
+
+            <div class="mt-4">
+                <x-jet-button class="float-right">
+                    {{ __('Save!') }}
+                </x-jet-button>
+                <div class="float-left">
+                    <a href="../" {!! $btnPrimaryClasses !!}>Cancel</a>
+                </div>
             </div>
         </form>
     </div>
