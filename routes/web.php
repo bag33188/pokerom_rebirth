@@ -1,11 +1,11 @@
 <?php
 
 use App\Http\Controllers\www\{HomeController, WelcomeController};
+use App\Http\Livewire\Game\Create as CreateGame;
 use App\Http\Livewire\Game\Delete as DeleteGame;
 use App\Http\Livewire\Game\Edit as EditGame;
 use App\Http\Livewire\Game\Index as IndexGame;
 use App\Http\Livewire\Game\Show as ShowGame;
-use App\Http\Livewire\Game\Create as StoreGame;
 use App\Http\Livewire\Rom\Delete as DeleteRom;
 use App\Http\Livewire\Rom\Edit as EditRom;
 use App\Http\Livewire\Rom\Index as IndexRom;
@@ -40,8 +40,8 @@ Route::middleware([
     });
     Route::prefix('games')->group(function () {
         Route::get('/', IndexGame::class)->name('games.index');
-        Route::get('/create', StoreGame::class)->name('games.create')->middleware('admin');
-        Route::post('/store', [StoreGame::class, 'store'])->name('games.store');
+        Route::get('/create', CreateGame::class)->name('games.create')->middleware('admin');
+        Route::post('/store', [CreateGame::class, 'store'])->name('games.store');
         Route::get('/show/{gameId}', ShowGame::class)->name('games.show');
         Route::get('/edit/{gameId}', EditGame::class)->name('games.edit')->middleware('admin');
         Route::put('/update/{gameId}', [EditGame::class, 'update'])->name('games.update');
