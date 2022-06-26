@@ -19,7 +19,7 @@ class Index extends Component
         return view('livewire.game.index');
     }
 
-    public function getProperGameType(string $gameType)
+    public function getProperGameType(string $gameType): string
     {
         $sql = /** @lang MariaDB */
             "SELECT GetProperGameType(?) as gameType;";
