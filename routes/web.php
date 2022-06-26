@@ -5,10 +5,10 @@ use App\Http\Livewire\Game\Delete as GameDelete;
 use App\Http\Livewire\Game\Edit as GameEdit;
 use App\Http\Livewire\Game\Index as GameIndex;
 use App\Http\Livewire\Game\Show as GameShow;
-use App\Http\Livewire\Roms\Delete as RomsDelete;
-use App\Http\Livewire\Roms\Edit as RomsEdit;
-use App\Http\Livewire\Roms\Index as RomsIndex;
-use App\Http\Livewire\Roms\Show as RomsShow;
+use App\Http\Livewire\Rom\Delete as RomDelete;
+use App\Http\Livewire\Rom\Edit as RomEdit;
+use App\Http\Livewire\Rom\Index as RomIndex;
+use App\Http\Livewire\Rom\Show as RomShow;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,11 +30,11 @@ Route::middleware([
     'verified'
 ])->group(function () {
     Route::get('/dashboard', [HomeController::class, 'renderDashboard'])->name('dashboard');
-    Route::get('/roms', RomsIndex::class)->name('roms.index');
-    Route::get('/roms/show/{romId}', RomsShow::class)->name('roms.show');
-    Route::get('/roms/edit/{romId}', RomsEdit::class)->name('roms.edit')->middleware('admin');
-    Route::put('/roms/update/{romId}', [RomsEdit::class, 'update'])->name('roms.update');
-    Route::delete('/roms/delete/{romId}', [RomsDelete::class, 'delete'])->name('roms.delete');
+    Route::get('/roms', RomIndex::class)->name('roms.index');
+    Route::get('/roms/show/{romId}', RomShow::class)->name('roms.show');
+    Route::get('/roms/edit/{romId}', RomEdit::class)->name('roms.edit')->middleware('admin');
+    Route::put('/roms/update/{romId}', [RomEdit::class, 'update'])->name('roms.update');
+    Route::delete('/roms/delete/{romId}', [RomDelete::class, 'delete'])->name('roms.delete');
     Route::get('/games', GameIndex::class)->name('games.index');
     Route::get('/games/show/{gameId}', GameShow::class)->name('games.show');
     Route::get('/games/edit/{gameId}', GameEdit::class)->name('games.edit')->middleware('admin');

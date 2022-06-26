@@ -29,7 +29,7 @@
 
         @if(Auth::user()->isAdmin())
             <div class="col-start-2 col-end-2 row-start-2 row-end-2 justify-self-end h-auto">
-                @livewire('roms.delete', ['romId' => $romId])
+                @livewire('rom.delete', ['romId' => $romId])
             </div>
             <div class="col-start-1 col-end-1 row-start-2 row-end-2 justify-self-start h-auto">
                 <a href="{{route('roms.edit', $this->rom->id)}}" {!! $editBtnClasses !!}>Edit!</a>

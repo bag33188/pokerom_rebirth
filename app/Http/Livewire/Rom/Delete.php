@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Roms;
+namespace App\Http\Livewire\Rom;
 
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\Foundation\Application;

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Roms;
+namespace App\Http\Livewire\Rom;
 
 use App\Models\Rom;
 use Illuminate\Contracts\{Foundation\Application, View\Factory, View\View};

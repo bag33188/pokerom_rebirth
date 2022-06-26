@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Roms;
+namespace App\Http\Livewire\Rom;
 
 use App\Http\Requests\UpdateRomRequest;
 use App\Models\Rom;
