@@ -5,6 +5,7 @@ use App\Http\Livewire\Roms\Edit as RomsEdit;
 use App\Http\Livewire\Roms\Index as RomsIndex;
 use App\Http\Livewire\Roms\Show as RomsShow;
 use App\Http\Livewire\Roms\Delete as RomsDelete;
+use App\Http\Livewire\Game\Index as GameIndex;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,4 +32,5 @@ Route::middleware([
     Route::get('/roms/edit/{romId}', RomsEdit::class)->name('roms.edit')->middleware('admin');
     Route::put('/roms/update/{romId}', [RomsEdit::class, 'update'])->name('roms.update');
     Route::delete('/roms/delete/{romId}', [RomsDelete::class, 'delete'])->name('roms.delete');
+    Route::get('/games', GameIndex::class)->name('games.index');
 });
