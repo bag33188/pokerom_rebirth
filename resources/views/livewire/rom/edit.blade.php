@@ -58,7 +58,7 @@
                         <option
                             value="{{$romType}}"
                             {!! (strtolower($rom->rom_type) == $romType)
-                                  ? 'selected="selected"' : '' !!}>
+                                  ? 'selected' : '' !!}>
                             {{ strtoupper($romType) }}</option>
                     @endforeach
                 </select>
