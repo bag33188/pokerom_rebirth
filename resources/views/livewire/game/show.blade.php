@@ -24,7 +24,7 @@
         </div>
         @if(Auth::user()->isAdmin())
             <div class="col-start-2 col-end-2 row-start-2 row-end-2 justify-self-end">
-                <a href="{{route('games.edit', $this->game->id)}}" {!! $jetstreamBtnClasses !!}>Edit!</a>
+                <a href="{{route('games.edit', ['gameId'=>$this->game->id])}}" {!! $jetstreamBtnClasses !!}>Edit!</a>
             </div>
         @endif
     </div>
