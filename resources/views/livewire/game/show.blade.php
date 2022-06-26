@@ -14,10 +14,10 @@
     </x-slot>
     <div class="w-full grid grid-cols-2 grid-rows-[minmax(0,_1fr)_auto] gap-y-4">
         <ul class="bg-white rounded-lg border border-gray-200 text-gray-900 col-span-full row-start-1 row-end-1">
-            <li {!! $listItemClasses !!}>Generation: {{$game->generation}}</li>
-            <li {!! $listItemClasses !!}>Game Type: {{GameRepo::getProperGameType($game->game_type)}}</li>
-            <li {!! $listItemClasses !!}>Game Region: {{$game->region}}</li>
-            <li {!! $listItemClasses !!}>Date Released: {{parse_date_as_readable_string($game->date_released)}}</li>
+            <li {!! $listItemClasses !!}>Generation {{number_to_roman($game->generation)}}</li>
+            <li {!! $listItemClasses !!}>{{$game->region}} Region</li>
+            <li {!! $listItemClasses !!}>{{GameRepo::getProperGameType($game->game_type)}}</li>
+            <li {!! $listItemClasses !!}>Released on: {{parse_date_as_readable_string($game->date_released)}}</li>
         </ul>
         <div class="row-start-2 row-end-2 ml-1">
             <a href="{{route('games.index')}}" {!! $goBackBtnClasses !!}>Go Back</a>
