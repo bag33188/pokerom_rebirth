@@ -3,7 +3,7 @@
 namespace App\Services\GridFS;
 
 use App\Models\RomFile;
-use FileRepo;
+use RomFileRepo;
 use Illuminate\Http\UploadedFile;
 use Jenssegers\Mongodb\Eloquent\Model;
 use Utils\Modules\FileFactory\FileDownloader;
@@ -25,7 +25,7 @@ class RomFilesBucket extends GfsBucket
 
     public function getFileDocument(): RomFile
     {
-        return FileRepo::getFileByFilename($this->filename);
+        return RomFileRepo::getFileByFilename($this->filename);
     }
 
     public function upload(UploadedFile $file): void
