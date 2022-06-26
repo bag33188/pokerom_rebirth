@@ -1,5 +1,6 @@
 <div class="container">
     @if($availableRoms > 0)
+        <label for="romId">Select ROM</label>
         <select id="romId" name="rom_id">
             @for($i = 0; $i < $availableRomsCount; $i++)
                 @php
