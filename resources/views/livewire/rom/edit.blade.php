@@ -46,7 +46,7 @@
             <div class="mt-2.5">
                 <label for="romType" class="block font-medium text-sm text-gray-700">{{__('Rom Type')}}</label>
                 <x-form-select
-                    name="rom_type" id="romType"
+                    element-name="rom_type" html-id="romType"
                     required autofocus>
                     @foreach(ROM_TYPES as $romType)
                         <option
