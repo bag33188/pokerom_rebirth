@@ -65,20 +65,22 @@
             <div class="mt-2.5">
                 <x-jet-label for="dateReleased" value="{{__('Date Released')}}"/>
                 <x-jet-input type="date"
+                             class="block mt-1 w-full"
                              :value="preg_replace('/(\s?)((?:[0-6][0-9]\:){2}(?:[0-6][0-9]){1})/', '', $game->date_released)"
                              id="dateReleased" name="date_released" required autofocus/>
             </div>
             <div class="mt-2.5">
                 <x-jet-label for="generation" value="{{__('Generation')}}"/>
                 <x-jet-input type="number" :value="$game->generation" id="generation" name="generation"
+                             class="block mt-1 w-full"
                              min="{{MIN_GAME_GENERATION}}" max="{{MAX_GAME_GENERATION}}" required autofocus/>
             </div>
 
             <div class="mt-4">
-                <x-jet-button class="float-right clear-both">
+                <x-jet-button class="float-right">
                     {{ __('Save!') }}
                 </x-jet-button>
-                <div class="float-left clear-both">
+                <div class="float-left">
                     <a href="../" {!! $btnPrimaryClasses !!}>Cancel</a>
                 </div>
             </div>
