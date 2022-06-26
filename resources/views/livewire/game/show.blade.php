@@ -19,8 +19,13 @@
             <li {!! $listItemClasses !!}>{{GameRepo::getProperGameType($game->game_type)}}</li>
             <li {!! $listItemClasses !!}>Released on: {{parse_date_as_readable_string($game->date_released)}}</li>
         </ul>
-        <div class="row-start-2 row-end-2 ml-1">
+        <div class="row-start-2 row-end-2 ml-1 col-start-1 col-end-1">
             <a href="{{route('games.index')}}" {!! $goBackBtnClasses !!}>Go Back</a>
         </div>
+        @if(Auth::user()->isAdmin())
+            <div class="col-start-2 col-end-2 row-start-2 row-end-2 justify-self-end">
+                <a href="{{route('games.edit', $this->game->id)}}" {!! $goBackBtnClasses !!}>Edit!</a>
+            </div>
+        @endif
     </div>
 </div>

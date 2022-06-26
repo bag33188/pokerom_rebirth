@@ -37,5 +37,5 @@ Route::middleware([
     Route::get('/games', GameIndex::class)->name('games.index');
     Route::get('/games/show/{gameId}', GameShow::class)->name('games.show');
     Route::get('/games/edit/{gameId}', GameEdit::class)->name('games.edit')->middleware('admin');
-    Route::put('/games/update/{gameId}', [GameEdit::class, 'update'])->name('games.update')->middleware('admin');
+    Route::put('/games/update/{gameId}', [GameEdit::class, 'update'])->name('games.update');
 });
