@@ -3,7 +3,7 @@
         <h2 class="text-center">Add Game</h2>
     </x-slot>
     <div class="mt-3.5">
-        @if($availableRoms > 0)
+        @if($availableRomsCount > 0)
             <form action="{{route('games.store')}}" method="POST">
                 @method('POST')
                 @csrf
@@ -66,7 +66,7 @@
                 </div>
             </form>
         @else
-            <h3>No available roms to add a game to :(</h3>
+            <h2 class="text-center text-lg mt-3">Sorry, there are no available roms to add a game to :(</h2>
         @endif
     </div>
 </div>
