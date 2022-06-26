@@ -17,6 +17,7 @@ class Store extends Component
 
     public function getAvailableRoms(): array
     {
+        // todo: implement toJson and arrayable
         $sql = /** @lang MariaDB */
             "CALL FindRomsWithNoGame()";
         return DB::select($sql);
