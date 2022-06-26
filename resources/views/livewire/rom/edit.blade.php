@@ -1,9 +1,4 @@
 @php
-    $formSelectClasses = <<<EOS
-    class="border-gray-300 focus:border-indigo-300
-    focus:ring focus:ring-indigo-200 focus:ring-opacity-50
-    rounded-md shadow-sm block mt-1 w-full"
-    EOS;
     $btnWarnClasses = <<<'EOS'
     class="inline-flex items-center px-4 py-2 bg-yellow-400 border
     border-transparent rounded-md font-semibold text-xs text-white
@@ -50,8 +45,7 @@
             </div>
             <div class="mt-2.5">
                 <label for="romType" class="block font-medium text-sm text-gray-700">{{__('Rom Type')}}</label>
-                <select
-                    {!! $formSelectClasses !!}
+                <x-form-select
                     name="rom_type" id="romType"
                     required autofocus>
                     @foreach(ROM_TYPES as $romType)
@@ -61,7 +55,7 @@
                                   ? 'selected' : '' !!}>
                             {{ strtoupper($romType) }}</option>
                     @endforeach
-                </select>
+                </x-form-select>
             </div>
             <div class="mt-2.5">
                 <x-jet-label for="romSize" value="{{ __('Rom Size') }}"/>

@@ -1,9 +1,4 @@
 @php
-    $formSelectClasses = <<<EOS
-    class="border-gray-300 focus:border-indigo-300
-    focus:ring focus:ring-indigo-200 focus:ring-opacity-50
-    rounded-md shadow-sm block mt-1 w-full"
-    EOS;
     $btnPrimaryClasses = <<<'EOS'
     class="inline-flex items-center px-4 py-2 bg-blue-700 border
     border-transparent rounded-md font-semibold text-xs text-white
@@ -34,8 +29,7 @@
             </div>
             <div class="mt-2.5">
                 <label for="gameType" class="block font-medium text-sm text-gray-700">{{__('Game Type')}}</label>
-                <select
-                    {!! $formSelectClasses !!}
+                <x-form-select
                     name="game_type" id="gameType"
                     required autofocus>
                     @foreach(GAME_TYPES as $gameType)
@@ -45,12 +39,11 @@
                                   ? 'selected' : '' !!}>
                             {{ str_capitalize($gameType, true, 2, '-') }}</option>
                     @endforeach
-                </select>
+                </x-form-select>
             </div>
             <div class="mt-2.5">
                 <label for="gameRegion" class="block font-medium text-sm text-gray-700">{{__('Region')}}</label>
-                <select
-                    {!! $formSelectClasses !!}
+                <x-form-select
                     name="region" id="gameRegion"
                     required autofocus>
                     @foreach(REGIONS as $region)
@@ -60,7 +53,7 @@
                                   ? 'selected' : '' !!}>
                             {{ ucfirst($region) }}</option>
                     @endforeach
-                </select>
+                </x-form-select>
             </div>
             <div class="mt-2.5">
                 <x-jet-label for="dateReleased" value="{{__('Date Released')}}"/>
