@@ -27,7 +27,12 @@ class UpdateMatchingRom implements ShouldQueue
         return !$event->file->rom()->exists() && isset(self::$matchingRom);
     }
 
-    /** be sure to rap in an instance method since even has multiple instances */
+    /**
+     * be sure to rap in an instance method since even has multiple instances
+     *
+     * @param Rom $rom
+     * @return void
+     */
     private function setMatchingRom(Rom $rom): void
     {
         self::$matchingRom = $rom;
