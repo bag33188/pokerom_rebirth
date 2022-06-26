@@ -7,7 +7,7 @@
 </head>
 <body class="h-full">
 <div class="bg-white">
-    <div class="flex h-full flex-col justify-center" style="align-items: center;">
+    <div class="flex h-full flex-col justify-center items-center">
         {{$slot}}
     </div>
 </div>
