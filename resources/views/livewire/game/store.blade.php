@@ -6,5 +6,5 @@
     @for($i = 0; $i < $availableRomsCount; $i++)
         {{$availableRoms[$i]->rom_name}}
     @endfor
-    {{var_export($this->getAvailableRoms()[0]->rom_name)}}
+    {{var_export($this->getAvailableRoms())}}
 </div>
