@@ -4,6 +4,9 @@
     </x-slot>
     <div class="mt-3.5">
         @if($availableRomsCount > 0)
+
+            <x-jet-validation-errors class="mb-4"/>
+
             <form action="{{route('games.store')}}" method="POST">
                 @method('POST')
                 @csrf
