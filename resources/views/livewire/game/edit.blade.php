@@ -75,10 +75,10 @@
             </div>
 
             <div class="mt-4">
-                <x-jet-button class="float-right">
+                <x-jet-button class="float-right clear-both">
                     {{ __('Save!') }}
                 </x-jet-button>
-                <div class="float-left">
+                <div class="float-left clear-both">
                     <a href="../" {!! $btnPrimaryClasses !!}>Cancel</a>
                 </div>
             </div>
