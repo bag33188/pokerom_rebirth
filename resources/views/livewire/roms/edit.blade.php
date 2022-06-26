@@ -4,15 +4,29 @@
     focus:ring focus:ring-indigo-200 focus:ring-opacity-50
     rounded-md shadow-sm block mt-1 w-full"
     EOS;
-    $goBackHrefClasses = <<<'EOS'
-    class="inline-flex items-center px-4 py-2 bg-gray-800 border
+    $btnWarnClasses = <<<'EOS'
+    class="inline-flex items-center px-4 py-2 bg-yellow-400 border
     border-transparent rounded-md font-semibold text-xs text-white
-    uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900
-    focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300
+    uppercase tracking-widest hover:bg-yellow-500 active:bg-yellow-600
+    focus:outline-none focus:border-yellow-600 focus:ring focus:ring-yellow-300
     disabled:opacity-25 transition"
     EOS;
-    $btnPrimaryClasses=['text-white', 'bg-blue-700', 'hover:bg-blue-800', 'focus:ring-4', 'focus:ring-blue-300', 'font-medium', 'rounded-lg', 'text-sm', 'px-5', 'py-2.5', 'mr-2', 'mb-2', 'dark:bg-blue-600', 'dark:hover:bg-blue-700', 'focus:outline-none', 'dark:focus:ring-blue-800'];
-    $btnDangerClasses=[
+    $btnDangerClasses = <<<'EOS'
+    class="inline-flex items-center px-4 py-2 bg-red-700 border
+    border-transparent rounded-md font-semibold text-xs text-white
+    uppercase tracking-widest hover:bg-red-800 active:bg-red-800
+    focus:outline-none focus:border-red-600 focus:ring focus:ring-red-300
+    disabled:opacity-25 transition"
+    EOS;
+        $btnPrimaryClasses = <<<'EOS'
+    class="inline-flex items-center px-4 py-2 bg-blue-700 border
+    border-transparent rounded-md font-semibold text-xs text-white
+    uppercase tracking-widest hover:bg-blue-800 active:bg-blue-800
+    focus:outline-none focus:border-blue-600 focus:ring focus:ring-blue-300
+    disabled:opacity-25 transition"
+    EOS;
+    $btnPrimaryClasses1=['text-white', 'bg-blue-700', 'hover:bg-blue-800', 'focus:ring-4', 'focus:ring-blue-300', 'font-medium', 'rounded-lg', 'text-sm', 'px-5', 'py-2.5', 'mr-2', 'mb-2', 'dark:bg-blue-600', 'dark:hover:bg-blue-700', 'focus:outline-none', 'dark:focus:ring-blue-800'];
+    $btnDangerClasses1=[
   'focus:outline-none',
   'text-white',
   'bg-red-700',
@@ -30,22 +44,7 @@
   'dark:hover:bg-red-700',
   'dark:focus:ring-red-900'
 ];
-    $btnWarnClasses=[
-  'focus:outline-none',
-  'text-white',
-  'bg-yellow-400',
-  'hover:bg-yellow-500',
-  'focus:ring-4',
-  'focus:ring-yellow-300',
-  'font-medium',
-  'rounded-lg',
-  'text-sm',
-  'px-5',
-  'py-2.5',
-  'mr-2',
-  'mb-2',
-  'dark:focus:ring-yellow-900'
-];
+
     $btnDander='focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900';
     $btnWarn='focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:focus:ring-yellow-900';
     $btnPrimary='text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800';
@@ -102,7 +101,7 @@
                     {{ __('Save!') }}
                 </x-jet-button>
                 <div class="float-left">
-                    <a href="../" {!! $btnWarn !!}>Cancel</a>
+                    <a href="../" {!! $btnPrimaryClasses !!}>Cancel</a>
                 </div>
             </div>
         </form>
