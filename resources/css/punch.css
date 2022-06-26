@@ -1,0 +1,85 @@
+:root {
+    --color0: #fff;
+    --color1: #111111;
+    --color2: #1f3053;
+    --color3: #1f2d4d;
+    --color4: #151e33;
+    --color5: #5c8bee;
+    --color6: #38538c;
+    --color7: #4162a8;
+    --color8: #1e2d4d;
+    --color9: #87adff;
+    --color10: #1d2c4d;
+    --color11: #000;
+    --color12: #808080;
+}
+
+a.punch,
+button.punch {
+    display: inline-block !important;
+    background: var(--color7) !important;
+    border-top: 1px solid var(--color6) !important;
+    border-right: 1px solid var(--color3) !important;
+    border-bottom: 1px solid var(--color4) !important;
+    border-left: 1px solid var(--color3) !important;
+    -webkit-border-radius: 4px !important;
+    -moz-border-radius: 4px !important;
+    -ms-border-radius: 4px !important;
+    -o-border-radius: 4px !important;
+    border-radius: 4px !important;
+    -webkit-box-shadow: inset 0 1px 10px 1px var(--color5),
+        0px 1px 0 var(--color10), 0 6px 0px var(--color2),
+        0 8px 4px 1px var(--color1) !important;
+    -moz-box-shadow: inset 0 1px 10px 1px var(--color5),
+        0px 1px 0 var(--color10), 0 6px 0px var(--color2),
+        0 8px 4px 1px var(--color1) !important;
+    -ms-box-shadow: inset 0 1px 10px 1px var(--color5), 0px 1px 0 var(--color10),
+        0 6px 0px var(--color2), 0 8px 4px 1px var(--color1) !important;
+    -o-box-shadow: inset 0 1px 10px 1px var(--color5), 0px 1px 0 var(--color10),
+        0 6px 0px var(--color2), 0 8px 4px 1px var(--color1) !important;
+    box-shadow: inset 0 1px 10px 1px var(--color5), 0px 1px 0 var(--color10),
+        0 6px 0px var(--color2), 0 8px 4px 1px var(--color1) !important;
+    color: var(--color0) !important;
+    font: bold 14px "helvetica neue", helvetica, arial, sans-serif !important;
+    line-height: 1 !important;
+    margin-bottom: 15px !important;
+    padding: 8px 0 10px 0 !important;
+    text-align: center !important;
+    text-shadow: 0px -1px 1px var(--color8) !important;
+    text-decoration: none !important;
+    width: 225px !important;
+    -webkit-background-clip: padding-box !important;
+}
+
+a.punch:hover,
+button.punch:hover {
+    -webkit-box-shadow: inset 0 0px 20px 1px var(--color9),
+        0px 1px 0 var(--color10), 0 6px 0px var(--color2),
+        0 8px 4px 1px var(--color1) !important;
+    -moz-box-shadow: inset 0 0px 20px 1px var(--color9),
+        0px 1px 0 var(--color10), 0 6px 0px var(--color2),
+        0 8px 4px 1px var(--color1) !important;
+    -ms-box-shadow: inset 0 0px 20px 1px var(--color9), 0px 1px 0 var(--color10),
+        0 6px 0px var(--color2), 0 8px 4px 1px var(--color1) !important;
+    -o-box-shadow: inset 0 0px 20px 1px var(--color9), 0px 1px 0 var(--color10),
+        0 6px 0px var(--color2), 0 8px 4px 1px var(--color1) !important;
+    box-shadow: inset 0 0px 20px 1px var(--color9), 0px 1px 0 var(--color10),
+        0 6px 0px var(--color2), 0 8px 4px 1px var(--color1) !important;
+    cursor: pointer !important;
+}
+
+a.punch:active,
+button.punch:active {
+    -webkit-box-shadow: inset 0 1px 10px 1px var(--color5),
+        0 1px 0 var(--color10), 0 2px 0 var(--color2), 0 4px 3px 0 var(--color1) !important;
+    -moz-box-shadow: inset 0 1px 10px 1px var(--color5), 0 1px 0 var(--color10),
+        0 2px 0 var(--color2), 0 4px 3px 0 var(--color1) !important;
+    -ms-box-shadow: inset 0 1px 10px 1px var(--color5), 0 1px 0 var(--color10),
+        0 2px 0 var(--color2), 0 4px 3px 0 var(--color1) !important;
+    -o-box-shadow: inset 0 1px 10px 1px var(--color5), 0 1px 0 var(--color10),
+        0 2px 0 var(--color2), 0 4px 3px 0 var(--color1) !important;
+    box-shadow: inset 0 1px 10px 1px var(--color5), 0 1px 0 var(--color10),
+        0 2px 0 var(--color2), 0 4px 3px 0 var(--color1) !important;
+    margin-top: 5px !important;
+    margin-bottom: 10px !important;
+}
