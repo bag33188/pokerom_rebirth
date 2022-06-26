@@ -64,7 +64,7 @@
             </div>
             <div class="mt-2.5">
                 <x-jet-label for="dateReleased" value="{{__('Date Released')}}"/>
-                <x-jet-input type="date" :value="preg_replace('/\s?([0-6][0-9]\:){2}(?:[0-6][0-9])/', '', $game->date_released)" id="dateReleased"/>
+                <x-jet-input type="date" :value="preg_replace('/(\s?)((?:[0-6][0-9]\:){2}(?:[0-6][0-9]){1})/', '', $game->date_released)" id="dateReleased"/>
             </div>
 
             <div class="mt-4">
