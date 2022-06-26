@@ -3,7 +3,7 @@
         @foreach($games as $game)
             <div class="p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md">
                 <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">{{$game->game_name}}</h5>
-                <div class="w-full bg-white rounded-lg lg:w-1/3">
+                <div class="w-full bg-white rounded-lg">
                     <ul class="divide-y-2 divide-gray-100">
                         <li class="p-3 hover:bg-blue-600 hover:text-blue-200">
                             {{$game->generation}}
@@ -15,7 +15,7 @@
                             {{$game->game_type}}
                         </li>
                         <li class="p-3 hover:bg-blue-600 hover:text-blue-200">
-                            {{$game->date_released}}
+                            {{parse_date_as_readable_string($game->date_released)}}
                         </li>
                     </ul>
                 </div>
@@ -31,6 +31,5 @@
                 </a>
             </div>
         @endforeach
-
     </div>
 </div>
