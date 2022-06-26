@@ -1,6 +1,6 @@
 @php
     $listItemClasses = 'class="px-6 py-2 border-b border-gray-200 w-full"';
-    $goBackBtnClasses = <<<'EOS'
+    $jetstreamBtnClasses = <<<'EOS'
     class="inline-flex items-center px-4 py-2 bg-gray-800 border
     border-transparent rounded-md font-semibold text-xs text-white
     uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900
@@ -20,11 +20,11 @@
             <li {!! $listItemClasses !!}>Released on: {{parse_date_as_readable_string($game->date_released)}}</li>
         </ul>
         <div class="row-start-2 row-end-2 ml-1 col-start-1 col-end-1">
-            <a href="{{route('games.index')}}" {!! $goBackBtnClasses !!}>Go Back</a>
+            <a href="{{route('games.index')}}" {!! $jetstreamBtnClasses !!}>Go Back</a>
         </div>
         @if(Auth::user()->isAdmin())
             <div class="col-start-2 col-end-2 row-start-2 row-end-2 justify-self-end">
-                <a href="{{route('games.edit', $this->game->id)}}" {!! $goBackBtnClasses !!}>Edit!</a>
+                <a href="{{route('games.edit', $this->game->id)}}" {!! $jetstreamBtnClasses !!}>Edit!</a>
             </div>
         @endif
     </div>
