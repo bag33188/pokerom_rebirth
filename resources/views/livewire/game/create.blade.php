@@ -2,7 +2,7 @@
     <x-slot name="header">
         <h2 class="text-center">Add Game</h2>
     </x-slot>
-    <div class="mt-2.5">
+    <div class="mt-3.5">
         @if($availableRoms > 0)
             <form action="{{route('games.store')}}" method="POST">
                 @method('POST')
