@@ -81,7 +81,7 @@
                     {{ __('Save!') }}
                 </x-jet-button>
                 <div class="float-left">
-                    <a href="../" {!! $btnPrimaryClasses !!}>Cancel</a>
+                    <a href="{{route('games.show', ['gameId'=>$gameId])}}" {!! $btnPrimaryClasses !!}>Cancel</a>
                 </div>
             </div>
         </form>
