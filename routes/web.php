@@ -34,5 +34,5 @@ Route::middleware([
     Route::put('/roms/update/{romId}', [RomsEdit::class, 'update'])->name('roms.update');
     Route::delete('/roms/delete/{romId}', [RomsDelete::class, 'delete'])->name('roms.delete');
     Route::get('/games', GameIndex::class)->name('games.index');
-    Route::get('/games/{gameId}', GameShow::class)->name('games.show');
+    Route::get('/games/show/{gameId}', GameShow::class)->name('games.show');
 });
