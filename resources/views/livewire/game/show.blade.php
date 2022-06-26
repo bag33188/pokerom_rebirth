@@ -14,6 +14,7 @@
     </x-slot>
     <div class="w-full grid grid-cols-2 grid-rows-[minmax(0,_1fr)_auto] gap-y-4">
         <ul class="bg-white rounded-lg border border-gray-200 text-gray-900 col-span-full row-start-1 row-end-1">
+            <li {!! $listItemClasses !!}>Game Name: {{$game->game_name}}</li>
             <li {!! $listItemClasses !!}>Generation {{number_to_roman($game->generation)}}</li>
             <li {!! $listItemClasses !!}>{{$game->region}} Region</li>
             <li {!! $listItemClasses !!}>{{GameRepo::getProperGameType($game->game_type)}}</li>
