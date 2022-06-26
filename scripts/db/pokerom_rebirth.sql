@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 26, 2022 at 07:28 PM
+-- Generation Time: Jun 26, 2022 at 07:32 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -144,8 +144,8 @@ May need to increase varchar limit in the future
 */
 END$$
 
-DROP FUNCTION IF EXISTS `GetProperGameType`$$
-CREATE DEFINER=`bag33188`@`%` FUNCTION `GetProperGameType` (`G_TYPE` VARCHAR(8)) RETURNS VARCHAR(13) CHARSET utf8mb4  CASE LOWER(`G_TYPE`)
+DROP FUNCTION IF EXISTS `GetProperGameTypeString`$$
+CREATE DEFINER=`bag33188`@`%` FUNCTION `GetProperGameTypeString` (`G_TYPE` VARCHAR(8)) RETURNS VARCHAR(13) CHARSET utf8mb4  CASE LOWER(`G_TYPE`)
 WHEN 'core' THEN RETURN 'Core Game';
 WHEN 'hack' THEN RETURN 'ROM Hack';
 WHEN 'spin-off' THEN RETURN 'Spin-Off Game';

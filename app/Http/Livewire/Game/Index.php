@@ -22,7 +22,7 @@ class Index extends Component
     public function getProperGameType(string $gameType): string
     {
         $sql = /** @lang MariaDB */
-            "SELECT GetProperGameType(?) as gameType;";
+            "SELECT GetProperGameTypeString(?) as gameType;";
         return DB::selectOne($sql, [$gameType])->gameType;
     }
 }
