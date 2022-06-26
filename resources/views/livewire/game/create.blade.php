@@ -74,14 +74,12 @@
                              class="block mt-1 w-full"
                              min="{{MIN_GAME_GENERATION}}" max="{{MAX_GAME_GENERATION}}" required autofocus/>
             </div>
-
             <div class="mt-4">
                 <x-jet-button class="float-right">
                     {{ __('Save!') }}
                 </x-jet-button>
             </div>
         </form>
-
     @else
         <h3>No available roms to add a game to :(</h3>
     @endif

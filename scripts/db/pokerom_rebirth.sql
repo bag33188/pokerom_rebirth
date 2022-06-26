@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 26, 2022 at 09:35 PM
+-- Generation Time: Jun 26, 2022 at 11:54 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -58,6 +58,9 @@ Right now the total length of bytes (as a string) is less than 14 (11 currently 
 may need to increase varchar limit in the future
 */
 END$$
+
+DROP PROCEDURE IF EXISTS `joinromsandgames`$$
+CREATE DEFINER=`bag33188`@`%` PROCEDURE `joinromsandgames` ()   SELECT `games`.*, `roms`.`id` AS `romTableKey`, CONCAT(`roms`.`rom_name`, '.', UCASE(`roms`.`rom_type`)) AS `romFileName` FROM `games` RIGHT JOIN `roms` ON `roms`.`id` = `games`.`rom_id` ORDER BY `romTableKey` DESC$$
 
 DROP PROCEDURE IF EXISTS `LinkAllRomGameIDsToGames`$$
 CREATE DEFINER=`bag33188`@`%` PROCEDURE `LinkAllRomGameIDsToGames` ()  SQL SECURITY INVOKER BEGIN
@@ -194,7 +197,7 @@ TRUNCATE TABLE `failed_jobs`;
 -- Table structure for table `games`
 --
 -- Creation: Jun 15, 2022 at 04:16 AM
--- Last update: Jun 26, 2022 at 06:31 PM
+-- Last update: Jun 26, 2022 at 09:51 PM
 --
 
 DROP TABLE IF EXISTS `games`;
@@ -268,6 +271,36 @@ INSERT INTO `games` (`id`, `rom_id`, `game_name`, `game_type`, `date_released`, 
 (39, 39, 'Pokemon Ash Gray', 'hack', '2009-05-31', 1, 'kanto', 'pokemon-ash-gray', '2022-06-04 15:44:19', '2022-06-04 15:44:19'),
 (40, 40, 'Pokemon Renegade Platinum', 'hack', '2019-04-16', 4, 'sinnoh', 'pokemon-renegade-platinum', '2022-06-04 15:44:32', '2022-06-04 15:44:32');
 
+--
+-- Triggers `games`
+--
+DROP TRIGGER IF EXISTS `games_after_delete`;
+DELIMITER $$
+CREATE TRIGGER `games_after_delete` AFTER DELETE ON `games` FOR EACH ROW BEGIN
+  UPDATE `roms`
+  SET `roms`.`has_game` = FALSE, `roms`.`game_id` = NULL
+  WHERE `roms`.`id` = OLD.`rom_id`;
+END
+$$
+DELIMITER ;
+DROP TRIGGER IF EXISTS `games_after_insert`;
+DELIMITER $$
+CREATE TRIGGER `games_after_insert` AFTER INSERT ON `games` FOR EACH ROW BEGIN
+  DECLARE `rom_already_has_game` BOOL;
+  SELECT `has_game`
+  INTO @`rom_already_has_game`
+  FROM `roms`
+  WHERE `roms`.`id` = NEW.`rom_id`;
+  IF @`rom_already_has_game` = FALSE
+  THEN
+    UPDATE `roms`
+    SET `roms`.`has_game` = TRUE, `roms`.`game_id` = NEW.`id`
+    WHERE `roms`.`id` = NEW.`rom_id`;
+  END IF;
+END
+$$
+DELIMITER ;
+
 -- --------------------------------------------------------
 
 --
@@ -337,7 +370,7 @@ TRUNCATE TABLE `password_resets`;
 -- Table structure for table `personal_access_tokens`
 --
 -- Creation: Jun 05, 2022 at 04:47 PM
--- Last update: Jun 26, 2022 at 07:30 PM
+-- Last update: Jun 26, 2022 at 09:31 PM
 --
 
 DROP TABLE IF EXISTS `personal_access_tokens`;
@@ -368,7 +401,7 @@ TRUNCATE TABLE `personal_access_tokens`;
 
 INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `name`, `token`, `abilities`, `last_used_at`, `created_at`, `updated_at`) VALUES
 (1, 'App\\Models\\User', 1, 'auth_token', '1662a4096e795ca20c6d5ccee5bd7e9e7933b1a452eabf0d2de0073b2bec7422', '[\"*\"]', '2022-06-23 11:24:29', '2022-06-23 11:21:23', '2022-06-23 11:24:29'),
-(2, 'App\\Models\\User', 1, 'auth_token', '687d0fbe322bb7bfe3310925d772995a6efc61df3b1c13b8f562753e6b0bbefe', '[\"*\"]', '2022-06-27 02:30:28', '2022-06-23 11:26:08', '2022-06-27 02:30:28');
+(2, 'App\\Models\\User', 1, 'auth_token', '687d0fbe322bb7bfe3310925d772995a6efc61df3b1c13b8f562753e6b0bbefe', '[\"*\"]', '2022-06-27 04:31:30', '2022-06-23 11:26:08', '2022-06-27 04:31:30');
 
 -- --------------------------------------------------------
 
@@ -376,7 +409,7 @@ INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `n
 -- Table structure for table `roms`
 --
 -- Creation: Jun 15, 2022 at 04:16 AM
--- Last update: Jun 26, 2022 at 07:30 PM
+-- Last update: Jun 26, 2022 at 09:51 PM
 --
 
 DROP TABLE IF EXISTS `roms`;
@@ -447,7 +480,8 @@ INSERT INTO `roms` (`id`, `file_id`, `game_id`, `rom_name`, `rom_size`, `rom_typ
 (38, '6292fde23bcc58a48f0cc451', 38, 'pokeprism', 2048, 'gbc', 1, 1, '2022-06-04 08:20:25', '2022-06-04 15:44:07'),
 (39, '6292fdb85c7bfd3e3903dd71', 39, 'Pokemon_Ash_Gray_4-5-3', 16384, 'gba', 1, 1, '2022-06-04 08:20:25', '2022-06-04 15:44:19'),
 (40, '6292fd925630ef3ecf06f0b1', 40, 'RenegadePlatinum', 102464, 'nds', 1, 1, '2022-06-04 08:20:25', '2022-06-04 15:44:32'),
-(41, NULL, NULL, 'cbe', 1020, 'gba', 0, 0, '2022-06-27 02:30:28', '2022-06-27 02:30:28');
+(41, '62b8d03209996661f20da201', NULL, 'cbe', 1020, 'gba', 0, 1, '2022-06-27 02:30:28', '2022-06-27 04:31:30'),
+(42, NULL, NULL, 'cbea', 1020, 'gba', 0, 0, '2022-06-27 03:30:03', '2022-06-27 03:30:03');
 
 -- --------------------------------------------------------
 
@@ -455,7 +489,7 @@ INSERT INTO `roms` (`id`, `file_id`, `game_id`, `rom_name`, `rom_size`, `rom_typ
 -- Table structure for table `sessions`
 --
 -- Creation: Jun 05, 2022 at 04:47 PM
--- Last update: Jun 26, 2022 at 07:34 PM
+-- Last update: Jun 26, 2022 at 09:52 PM
 --
 
 DROP TABLE IF EXISTS `sessions`;
@@ -482,7 +516,7 @@ TRUNCATE TABLE `sessions`;
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('OStTlkW3yJfu9YU23icVN2lj0D4kNGXPpqNoPUOE', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiZmgxbkJ2cUdpMG1QU1lPSzJUVzR0V0xYUDYxTFVZTklsdTlGYnRoZyI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDQ6Imh0dHA6Ly9wb2tlcm9tX3JlYmlydGgudGVzdC9wdWJsaWMvZ2FtZXMvYWRkIjt9czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjIxOiJwYXNzd29yZF9oYXNoX3NhbmN0dW0iO3M6NjA6IiQyeSQxMCRUYzloRzZOWjJiNktoWGc3TmVYZWpPZ1dKU0RNazFSdTZMSmYxM1YydDZKczdGc3Z5cXZqMiI7fQ==', 1656272087);
+('OStTlkW3yJfu9YU23icVN2lj0D4kNGXPpqNoPUOE', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiZmgxbkJ2cUdpMG1QU1lPSzJUVzR0V0xYUDYxTFVZTklsdTlGYnRoZyI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDc6Imh0dHA6Ly9wb2tlcm9tX3JlYmlydGgudGVzdC9wdWJsaWMvZ2FtZXMvY3JlYXRlIjt9czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjIxOiJwYXNzd29yZF9oYXNoX3NhbmN0dW0iO3M6NjA6IiQyeSQxMCRUYzloRzZOWjJiNktoWGc3TmVYZWpPZ1dKU0RNazFSdTZMSmYxM1YydDZKczdGc3Z5cXZqMiI7fQ==', 1656280369);
 
 -- --------------------------------------------------------
 
@@ -604,7 +638,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `games`
 --
 ALTER TABLE `games`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -622,7 +656,7 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `roms`
 --
 ALTER TABLE `roms`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT for table `users`
