@@ -8,8 +8,8 @@ class HomeController extends ViewController
 {
     private const PAGE_HEADING = 'Dashboard';
 
-    public function renderDashboard()
+    public function index()
     {
-        return view('dashboard', ['title' => self::PAGE_HEADING]);
+        return view('dashboard', ['pageHeading' => self::PAGE_HEADING]);
     }
 }

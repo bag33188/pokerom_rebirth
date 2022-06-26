@@ -1,15 +1,15 @@
 <?php
 
 use App\Http\Controllers\www\{HomeController, WelcomeController};
-use App\Http\Livewire\Game\Delete as GameDelete;
-use App\Http\Livewire\Game\Edit as GameEdit;
-use App\Http\Livewire\Game\Index as GameIndex;
-use App\Http\Livewire\Game\Show as GameShow;
-use App\Http\Livewire\Game\Store as GameStore;
-use App\Http\Livewire\Rom\Delete as RomDelete;
-use App\Http\Livewire\Rom\Edit as RomEdit;
-use App\Http\Livewire\Rom\Index as RomIndex;
-use App\Http\Livewire\Rom\Show as RomShow;
+use App\Http\Livewire\Game\Delete as DeleteGame;
+use App\Http\Livewire\Game\Edit as EditGame;
+use App\Http\Livewire\Game\Index as IndexGame;
+use App\Http\Livewire\Game\Show as ShowGame;
+use App\Http\Livewire\Game\Store as StoreGame;
+use App\Http\Livewire\Rom\Delete as DeleteRom;
+use App\Http\Livewire\Rom\Edit as EditRom;
+use App\Http\Livewire\Rom\Index as IndexRom;
+use App\Http\Livewire\Rom\Show as ShowRom;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,27 +23,27 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [WelcomeController::class, 'renderIndex'])->name('welcome');
+Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
 
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified'
 ])->group(function () {
-    Route::get('/dashboard', [HomeController::class, 'renderDashboard'])->name('dashboard');
+    Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
     Route::prefix('roms')->group(function () {
-        Route::get('/', RomIndex::class)->name('roms.index');
-        Route::get('/show/{romId}', RomShow::class)->name('roms.show');
-        Route::get('/edit/{romId}', RomEdit::class)->name('roms.edit')->middleware('admin');
-        Route::put('/update/{romId}', [RomEdit::class, 'update'])->name('roms.update');
-        Route::delete('/delete/{romId}', [RomDelete::class, 'delete'])->name('roms.delete');
+        Route::get('/', IndexRom::class)->name('roms.index');
+        Route::get('/show/{romId}', ShowRom::class)->name('roms.show');
+        Route::get('/edit/{romId}', EditRom::class)->name('roms.edit')->middleware('admin');
+        Route::put('/update/{romId}', [EditRom::class, 'update'])->name('roms.update');
+        Route::delete('/delete/{romId}', [DeleteRom::class, 'delete'])->name('roms.delete');
     });
     Route::prefix('games')->group(function () {
-        Route::get('/', GameIndex::class)->name('games.index');
-        Route::get('/add', GameStore::class)->name('games.add')->middleware('admin');
-        Route::get('/show/{gameId}', GameShow::class)->name('games.show');
-        Route::get('/edit/{gameId}', GameEdit::class)->name('games.edit')->middleware('admin');
-        Route::put('/update/{gameId}', [GameEdit::class, 'update'])->name('games.update');
-        Route::delete('/delete/{gameId}', [GameDelete::class, 'delete'])->name('games.delete');
+        Route::get('/', IndexGame::class)->name('games.index');
+        Route::get('/add', StoreGame::class)->name('games.add')->middleware('admin');
+        Route::get('/show/{gameId}', ShowGame::class)->name('games.show');
+        Route::get('/edit/{gameId}', EditGame::class)->name('games.edit')->middleware('admin');
+        Route::put('/update/{gameId}', [EditGame::class, 'update'])->name('games.update');
+        Route::delete('/delete/{gameId}', [DeleteGame::class, 'delete'])->name('games.delete');
     });
 });

@@ -8,9 +8,9 @@ use Config;
 class WelcomeController extends ViewController
 {
     // todo: change to renderSplash in future??
-    public function renderIndex()
+    public function index()
     {
-        $pageTitle = Config::get('app.name');
-        return view('welcome', ['title' => $pageTitle]);
+        $appName = Config::get('app.name');
+        return view('welcome', ['title' => $appName]);
     }
 }
