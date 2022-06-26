@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Game;
 
+use GameRepo;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -15,7 +16,7 @@ class Show extends Component
     public function mount(int $gameId)
     {
         $this->gameId = $gameId;
-        $this->game = \GameRepo::findGameIfExists($gameId);
+        $this->game = GameRepo::findGameIfExists($gameId);
     }
 
     public function render(): Factory|View|Application
