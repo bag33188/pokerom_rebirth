@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Game;
 
 use GameRepo;
 use Livewire\Component;
+use Illuminate\Support\Facades\DB;
 
 class Index extends Component
 {
@@ -12,5 +13,10 @@ class Index extends Component
     {
         $this->games = GameRepo::getAllGamesSorted();
         return view('livewire.game.index');
+    }
+
+    public function getProperGameType(string $gameType) {
+        $sql = "SELECT GetProperGameType(?) as gameType;";
+        return DB::selectOne($sql, [$gameType])->gameType;
     }
 }

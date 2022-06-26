@@ -12,7 +12,7 @@
                             {{$game->region}}
                         </li>
                         <li class="p-3 hover:bg-blue-600 hover:text-blue-200">
-                            {{$game->game_type}}
+                            {{$this->getProperGameType($game->game_type)}}
                         </li>
                         <li class="p-3 hover:bg-blue-600 hover:text-blue-200">
                             {{parse_date_as_readable_string($game->date_released)}}
