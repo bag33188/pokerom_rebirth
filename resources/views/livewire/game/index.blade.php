@@ -3,9 +3,9 @@
         <h2 class="text-center text-lg">Pok&eacute;mon Games Library</h2>
     </x-slot>
     <div class="container mx-auto my-3.5">
-        <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+        <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4 justify-items-center">
             @foreach($games as $game)
-                <div class="p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md">
+                <div class="p-6 w-full bg-white rounded-lg border border-gray-200 shadow-md">
                     <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">{{$game->game_name}}</h5>
                     <div class="w-full bg-white rounded-lg my-2.5">
                         <ul class="divide-y-2 divide-gray-100">
