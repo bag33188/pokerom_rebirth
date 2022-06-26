@@ -42,7 +42,7 @@
                         <option
                             value="{{$gameType}}"
                             {!! (strtolower($game->game_type) == $gameType)
-                                  ? 'selected="selected"' : '' !!}>
+                                  ? 'selected' : '' !!}>
                             {{ str_capitalize($gameType, true, 2, '-') }}</option>
                     @endforeach
                 </select>
@@ -57,7 +57,7 @@
                         <option
                             value="{{ucfirst($region)}}"
                             {!! (strtolower($game->region) == $region)
-                                  ? 'selected="selected"' : '' !!}>
+                                  ? 'selected' : '' !!}>
                             {{ ucfirst($region) }}</option>
                     @endforeach
                 </select>
