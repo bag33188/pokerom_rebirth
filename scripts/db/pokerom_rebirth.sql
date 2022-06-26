@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 23, 2022 at 06:21 AM
+-- Generation Time: Jun 26, 2022 at 07:28 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -107,10 +107,10 @@ Ie. 1 Gibibyte = 1024 Mebibytes = 1024 Kibibytes = 1024 = 1048576 Standard Bytes
   DECLARE `size_type` CHAR(2);
   IF `rom_length` > 1024 AND `rom_length` < 1000000 THEN
     SET `size_type` = 'MB';
-    SET `size_val` = ROUND(CAST(`rom_length` / 1000 AS FLOAT), 2);
+    SET `size_val` = ROUND(`rom_length` / 1000, 2);
   ELSEIF `rom_length` >= 1000000 THEN
     SET `size_type` = 'GB';
-    SET `size_val`= ROUND(CAST(`rom_length` / 1000000 AS FLOAT), 2);
+    SET `size_val`= ROUND(`rom_length` / 1000000, 2);
   ELSEIF `rom_length` > 1020 AND `rom_length` <= 1024 THEN
     SET `size_type` = 'KB';
     SET `size_val` = CAST(`rom_length` AS FLOAT);
@@ -137,11 +137,26 @@ CREATE DEFINER=`bag33188`@`%` FUNCTION `CalcSumOfAllRomSize` () RETURNS BIGINT(1
     SET  @`total_value_bytes` = `total_value` * 1024;
     RETURN @`total_value_bytes`;
 /** !important:
-Right now the total length of bytes (as a string) is less than 14 (11 currently, `82401763216`)
+Right now the total length of bytes (as a string) of
+all ROMs is less than 14 (11 currently, `82401764352`)
 
-may need to increase varchar limit in the future
+May need to increase varchar limit in the future
 */
 END$$
+
+DROP FUNCTION IF EXISTS `GetProperGameType`$$
+CREATE DEFINER=`bag33188`@`%` FUNCTION `GetProperGameType` (`G_TYPE` VARCHAR(8)) RETURNS VARCHAR(13) CHARSET utf8mb4  CASE LOWER(`G_TYPE`)
+WHEN 'core' THEN RETURN 'Core Game';
+WHEN 'hack' THEN RETURN 'ROM Hack';
+WHEN 'spin-off' THEN RETURN 'Spin-Off Game';
+ELSE BEGIN END;
+/** !important
+The return value length is 13 since the max str-len return option
+which is 'Spin-Off Game' is 13 characters extactly.
+The max input value length is 8 since the max str-len of an input option
+which is 'spin-off' is excactly 8 chars
+*/
+END CASE$$
 
 DELIMITER ;
 
@@ -179,7 +194,6 @@ TRUNCATE TABLE `failed_jobs`;
 -- Table structure for table `games`
 --
 -- Creation: Jun 15, 2022 at 04:16 AM
--- Last update: Jun 23, 2022 at 04:19 AM
 --
 
 DROP TABLE IF EXISTS `games`;
@@ -259,7 +273,6 @@ INSERT INTO `games` (`id`, `rom_id`, `game_name`, `game_type`, `date_released`, 
 -- Table structure for table `migrations`
 --
 -- Creation: Jun 05, 2022 at 04:47 PM
--- Last update: Jun 23, 2022 at 04:19 AM
 --
 
 DROP TABLE IF EXISTS `migrations`;
@@ -323,7 +336,6 @@ TRUNCATE TABLE `password_resets`;
 -- Table structure for table `personal_access_tokens`
 --
 -- Creation: Jun 05, 2022 at 04:47 PM
--- Last update: Jun 23, 2022 at 04:21 AM
 --
 
 DROP TABLE IF EXISTS `personal_access_tokens`;
@@ -353,7 +365,8 @@ TRUNCATE TABLE `personal_access_tokens`;
 --
 
 INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `name`, `token`, `abilities`, `last_used_at`, `created_at`, `updated_at`) VALUES
-(1, 'App\\Models\\User', 1, 'auth_token', '1662a4096e795ca20c6d5ccee5bd7e9e7933b1a452eabf0d2de0073b2bec7422', '[\"*\"]', '2022-06-23 11:21:35', '2022-06-23 11:21:23', '2022-06-23 11:21:35');
+(1, 'App\\Models\\User', 1, 'auth_token', '1662a4096e795ca20c6d5ccee5bd7e9e7933b1a452eabf0d2de0073b2bec7422', '[\"*\"]', '2022-06-23 11:24:29', '2022-06-23 11:21:23', '2022-06-23 11:24:29'),
+(2, 'App\\Models\\User', 1, 'auth_token', '687d0fbe322bb7bfe3310925d772995a6efc61df3b1c13b8f562753e6b0bbefe', '[\"*\"]', '2022-06-24 05:44:19', '2022-06-23 11:26:08', '2022-06-24 05:44:19');
 
 -- --------------------------------------------------------
 
@@ -361,7 +374,7 @@ INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `n
 -- Table structure for table `roms`
 --
 -- Creation: Jun 15, 2022 at 04:16 AM
--- Last update: Jun 23, 2022 at 04:19 AM
+-- Last update: Jun 26, 2022 at 04:40 PM
 --
 
 DROP TABLE IF EXISTS `roms`;
@@ -392,7 +405,7 @@ TRUNCATE TABLE `roms`;
 --
 
 INSERT INTO `roms` (`id`, `file_id`, `game_id`, `rom_name`, `rom_size`, `rom_type`, `has_game`, `has_file`, `created_at`, `updated_at`) VALUES
-(1, '6292fd825a0d65bff6068e71', 1, 'POKEMON_RED01', 1024, 'gb', 1, 1, '2022-06-04 08:20:25', '2022-06-04 15:30:44'),
+(1, '6292fd825a0d65bff6068e71', 1, 'POKEMON_RED01', 1024, 'gb', 1, 1, '2022-06-04 08:20:25', '2022-06-26 23:40:03'),
 (2, '6292fd79a11b7b48600157a1', 2, 'POKEMON_BLUE01', 1024, 'gb', 1, 1, '2022-06-04 08:20:25', '2022-06-04 15:31:29'),
 (3, '62929c5483f6032a7d0ceb41', 3, 'POKEMON_YELLOW01', 1024, 'gb', 1, 1, '2022-06-04 08:20:25', '2022-06-04 15:31:59'),
 (4, '6292fd7d22122e0b5f077bf1', 4, 'POKEMON_GREEN01', 1024, 'gb', 1, 1, '2022-06-04 08:20:25', '2022-06-04 15:43:16'),
@@ -439,7 +452,7 @@ INSERT INTO `roms` (`id`, `file_id`, `game_id`, `rom_name`, `rom_size`, `rom_typ
 -- Table structure for table `sessions`
 --
 -- Creation: Jun 05, 2022 at 04:47 PM
--- Last update: Jun 23, 2022 at 04:20 AM
+-- Last update: Jun 26, 2022 at 05:27 PM
 --
 
 DROP TABLE IF EXISTS `sessions`;
@@ -466,7 +479,7 @@ TRUNCATE TABLE `sessions`;
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('YrR0iWuEs9GssHmMk86AMSJRgwaeqTfdWmiKuBs8', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiSUlEMHNPOHZPSk5EQTFReDZQbmZLc3hRZWgwOERRN0didThNU2lWSSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6ODI6Imh0dHA6Ly9wb2tlcm9tX3JlYmlydGgudGVzdC9wdWJsaWMvYXBpL2Rldi9maWxlcy82MjkyZmRmZmFkNmI4M2RhMDYwZTliOTEvZG93bmxvYWQiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO3M6MjE6InBhc3N3b3JkX2hhc2hfc2FuY3R1bSI7czo2MDoiJDJ5JDEwJFRjOWhHNk5aMmI2S2hYZzdOZVhlak9nV0pTRE1rMVJ1NkxKZjEzVjJ0NkpzN0ZzdnlxdmoyIjt9', 1655958026);
+('OStTlkW3yJfu9YU23icVN2lj0D4kNGXPpqNoPUOE', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiZmgxbkJ2cUdpMG1QU1lPSzJUVzR0V0xYUDYxTFVZTklsdTlGYnRoZyI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mzk6Imh0dHA6Ly9wb2tlcm9tX3JlYmlydGgudGVzdC9wdWJsaWMvcm9tcyI7fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7czoyMToicGFzc3dvcmRfaGFzaF9zYW5jdHVtIjtzOjYwOiIkMnkkMTAkVGM5aEc2TloyYjZLaFhnN05lWGVqT2dXSlNETWsxUnU2TEpmMTNWMnQ2SnM3RnN2eXF2ajIiO30=', 1656264474);
 
 -- --------------------------------------------------------
 
@@ -474,7 +487,6 @@ INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, 
 -- Table structure for table `users`
 --
 -- Creation: Jun 05, 2022 at 04:47 PM
--- Last update: Jun 23, 2022 at 04:21 AM
 --
 
 DROP TABLE IF EXISTS `users`;
@@ -509,7 +521,8 @@ TRUNCATE TABLE `users`;
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `two_factor_secret`, `two_factor_recovery_codes`, `two_factor_confirmed_at`, `role`, `remember_token`, `current_team_id`, `profile_photo_path`, `created_at`, `updated_at`) VALUES
-(1, 'Brock', 'bglatman@outlook.com', NULL, '$2y$10$Tc9hG6NZ2b6KhXg7NeXejOgWJSDMk1Ru6LJf13V2t6Js7Fsvyqvj2', NULL, NULL, NULL, 'admin', NULL, NULL, NULL, '2022-06-23 11:20:17', '2022-06-23 11:20:17');
+(1, 'Brock', 'bglatman@outlook.com', NULL, '$2y$10$Tc9hG6NZ2b6KhXg7NeXejOgWJSDMk1Ru6LJf13V2t6Js7Fsvyqvj2', NULL, NULL, NULL, 'admin', 'EJlmfVwuVc5lGNXmvS2NYGmbxhf7EdI9NzsNDnduTwAwVLiZ70Cp0oqjTvHE', NULL, NULL, '2022-06-23 11:20:17', '2022-06-23 11:20:17'),
+(2, 'John Doe', 'jdoe123@gmail.com', NULL, '$2y$10$1oWabvlrdF6fT9qPTVJXdeem/SQ7PDERCPsd0P20rtdVcsPejkpm2', NULL, NULL, NULL, 'user', NULL, NULL, NULL, '2022-06-24 10:07:54', '2022-06-24 10:07:54');
 
 --
 -- Indexes for dumped tables
@@ -600,7 +613,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `roms`
@@ -612,7 +625,7 @@ ALTER TABLE `roms`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables
