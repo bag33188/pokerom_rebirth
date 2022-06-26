@@ -24,7 +24,7 @@ class Delete extends Component
 
     public function render(): Factory|View|Application
     {
-        return view('livewire.roms.delete', ['romId' => $this->romId]);
+        return view('livewire.rom.delete', ['romId' => $this->romId]);
     }
 
     /**

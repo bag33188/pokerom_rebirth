@@ -25,7 +25,7 @@ class Edit extends Component
 
     public function render(): Factory|View|Application
     {
-        return view('livewire.roms.edit', ['romId' => $this->romId]);
+        return view('livewire.rom.edit', ['romId' => $this->romId]);
     }
 
     public function update(UpdateRomRequest $request, int $romId): RedirectResponse

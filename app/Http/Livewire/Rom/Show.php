@@ -22,6 +22,6 @@ class Show extends Component
 
     public function render(): Factory|View|Application
     {
-        return view('livewire.roms.show', ['rom' => $this->rom, 'romId' => $this->romId]);
+        return view('livewire.rom.show', ['rom' => $this->rom, 'romId' => $this->romId]);
     }
 }

@@ -23,7 +23,7 @@ class Index extends Component
         $sql = /** @lang MariaDB */
             "CALL GetTotalSizeOfAllRoms;";
         $sum_total_size = DB::selectOne($sql);
-        return view('livewire.roms.index', ['roms_total_size' => $sum_total_size->total_size]);
+        return view('livewire.rom.index', ['roms_total_size' => $sum_total_size->total_size]);
     }
 
     public function getRomDownloadUrl(string $fileId, bool $dev = false): string
