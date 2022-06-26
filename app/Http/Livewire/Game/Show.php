@@ -17,6 +17,6 @@ class Show extends Component
 
     public function render()
     {
-        return view('livewire.game.show', ['game' => $this->game]);
+        return view('livewire.game.show', ['game' => $this->game, 'gameId' => $this->gameId]);
     }
 }
