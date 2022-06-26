@@ -1,5 +1,4 @@
-@import 'scrollbar.css';
-@import 'punch.css';
+@import "punch.css";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
