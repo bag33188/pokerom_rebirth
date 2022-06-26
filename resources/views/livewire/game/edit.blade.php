@@ -26,7 +26,7 @@
                 />
             </div>
             <div class="mt-2.5">
-                <label for="gameType" class="block font-medium text-sm text-gray-700">{{__('Rom Type')}}</label>
+                <label for="gameType" class="block font-medium text-sm text-gray-700">{{__('Game Type')}}</label>
                 <select
                     {!! $formSelectClasses !!}
                     name="game_type" id="gameType"
@@ -37,6 +37,21 @@
                             {!! (strtolower($game->game_type) == $gameType)
                                   ? 'selected="selected"' : '' !!}>
                             {{ $gameType }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="mt-2.5">
+                <label for="gameRegion" class="block font-medium text-sm text-gray-700">{{__('Region')}}</label>
+                <select
+                    {!! $formSelectClasses !!}
+                    name="region" id="gameRegion"
+                    required autofocus>
+                    @foreach(REGIONS as $region)
+                        <option
+                            value="{{ucfirst($region)}}"
+                            {!! (strtolower($game->region) == $region)
+                                  ? 'selected="selected"' : '' !!}>
+                            {{ ucfirst($region) }}</option>
                     @endforeach
                 </select>
             </div>
