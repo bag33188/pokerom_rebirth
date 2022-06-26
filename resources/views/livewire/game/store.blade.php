@@ -1,13 +1,15 @@
 <div class="container">
     @if($availableRoms > 0)
-        <label for="romId">Select ROM</label>
-        <select id="romId" name="rom_id">
-            @for($i = 0; $i < $availableRomsCount; $i++)
-                @php
+        <label for="availableRoms">Select ROM</label>
+        <select id="availableRoms" name="rom_id"
+                class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm block mt-1">
+            @php
+                for($i = 0; $i < $availableRomsCount; $i++) {
                     $rom = $availableRoms[$i];
-                    echo "<option value='$rom->id'>$rom->rom_name</option>"
-                @endphp
-            @endfor
+                    $html = /** @lang HTML */ "<option value='$rom->id'>$rom->rom_name</option>";
+                    print $html;
+                }
+            @endphp
         </select>
         {!! "<br/>" !!}
         {{var_export(GameRepo::getAllRomsWithNoGame())}}
