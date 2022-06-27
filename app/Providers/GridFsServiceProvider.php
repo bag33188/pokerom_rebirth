@@ -29,11 +29,11 @@ class GridFsServiceProvider extends ServiceProvider implements DeferrableProvide
      */
     public function boot(): void
     {
-        $dbProps = [
+        $dbProps = array(
             config('gridfs.connection.database'),
             config('gridfs.bucketName'),
             config('gridfs.chunkSize'),
-        ];
+        );
         GfsRomFile::setDatabaseValues(...$dbProps);
     }
 
