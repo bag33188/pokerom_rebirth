@@ -1,3 +1,6 @@
+@push('scripts')
+    <script type="text/javascript" src="{{asset('js/modules/capitalize.js')}}"></script>
+@endpush
 <div class="container mx-auto w-full">
     <x-slot name="header">
         <h2 class="text-center">Add Game</h2>
@@ -45,9 +48,9 @@
                     <x-form-select
                         element-name="region" html-id="gameRegion"
                         required autofocus>
-                        @foreach(REGIONS as $region)
-                            <option value="{{$region}}">{{ ucfirst($region) }}</option>
-                        @endforeach
+                        @for($i = 0; $i < count(REGIONS); $i++)
+                            <option value="{{REGIONS[$i]}}" id="region-{{$i + 1}}">{{ REGIONS[$i] }}</option>
+                        @endfor
                     </x-form-select>
                 </div>
                 <div class="mt-2.5">
@@ -72,4 +75,10 @@
             <h2 class="text-center text-lg mt-3">Sorry, there are no available roms to add a game to :(</h2>
         @endif
     </div>
+    <script type="text/javascript">
+        for (let i = 0; i < {{count(REGIONS)}}; i++) {
+            let regionName = document.getElementById(`region-${i + 1}`);
+            regionName.textContent = regionName.textContent.capitalize();
+        }
+    </script>
 </div>
