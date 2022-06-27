@@ -2,8 +2,15 @@
     <x-slot name="header">
         <h2 class="text-center text-lg">Pok&eacute;mon Games Library</h2>
     </x-slot>
-    <div class="container mx-auto my-3.5">
-        <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4 justify-items-center">
+    <div class="container mx-auto" x-data="{ open: true }">
+        <div class="w-full flex justify-center">
+            <button type="button" @click="open = !open"
+                    class="bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-2 px-4 my-4 shadow-md rounded">
+                @include("ui.show-hide", ['text'=>'Games'])
+            </button>
+        </div>
+        <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4 justify-items-center my-1.5 pb-4"
+             x-show="open">
             @foreach($games as $game)
                 <div class="p-6 w-full bg-white rounded-lg border border-gray-200 shadow-md">
                     <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">{{$game->game_name}}</h5>
