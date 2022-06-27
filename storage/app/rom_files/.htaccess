@@ -5,7 +5,7 @@
 </Files>
 
 # deny access to rom files
-<FilesMatch "\.(gb|gbc|gba|nds|3ds|xci)$">
+<FilesMatch "\.(gb|gbc|gba|nds|3ds|xci|url)$">
     Order allow,deny
     Deny from all
 </FilesMatch>
