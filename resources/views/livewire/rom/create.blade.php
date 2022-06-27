@@ -1,4 +1,4 @@
-<div>
+<div class="container mx-auto w-full">
     <x-slot name="header">
         <h2 class="text-center">Add a ROM</h2>
     </x-slot>

@@ -1,12 +1,6 @@
-@php
-    $btnPrimaryClasses = <<<'EOS'
-    class="inline-flex items-center px-4 py-2 bg-blue-700 border
-    border-transparent rounded-md font-semibold text-xs text-white
-    uppercase tracking-widest hover:bg-blue-800 active:bg-blue-800
-    focus:outline-none focus:border-blue-600 focus:ring focus:ring-blue-300
-    disabled:opacity-25 transition"
-    EOS;
-@endphp
+@push('scripts')
+    <script type="text/javascript" src="{{asset('js/modules/capitalize.js')}}"></script>
+@endpush
 <div>
     <x-slot name="header">
         <h2 class="text-center">Edit {{$game->game_name}} Version</h2>
@@ -35,9 +29,10 @@
                     @foreach(GAME_TYPES as $gameType)
                         <option
                             value="{{$gameType}}"
+                            id="game-type-{{array_search($gameType, GAME_TYPES) + 1}}"
                             {!! (strtolower($game->game_type) == $gameType)
                                   ? 'selected' : '' !!}>
-                            {{ str_capitalize($gameType, true, 2, '-') }}</option>
+                            {{ $gameType }}</option>
                     @endforeach
                 </x-form-select>
             </div>
@@ -74,9 +69,16 @@
                     {{ __('Save!') }}
                 </x-jet-button>
                 <div class="float-left">
-                    <a href="{{route('games.show', ['gameId'=>$gameId])}}" {!! $btnPrimaryClasses !!}>Cancel</a>
+                    <a href="{{route('games.show', ['gameId'=>$gameId])}}" {!! BTN_PRIMARY_CLASSES !!}>Cancel</a>
                 </div>
             </div>
         </form>
     </div>
+    <script>
+        const gameTypesCount = {{sizeof(GAME_TYPES)}};
+        for (let i = 0; i < gameTypesCount; i++) {
+            let gameType = document.getElementById(`game-type-${i + 1}`);
+            gameType.textContent = gameType.textContent.capitalize(true, 2, '-');
+        }
+    </script>
 </div>
