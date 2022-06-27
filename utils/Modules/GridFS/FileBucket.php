@@ -20,6 +20,7 @@ class FileBucket extends Connection
     {
         $stream = fopen($this->filepath, 'rb');
         $this->gfsBucket->uploadFromStream($this->filename, $stream);
+        fclose($stream);
     }
 
     protected function createDownloadStreamFromFile(string $fileId)

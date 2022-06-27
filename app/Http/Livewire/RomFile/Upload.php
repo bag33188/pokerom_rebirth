@@ -4,6 +4,7 @@ namespace App\Http\Livewire\RomFile;
 
 use Illuminate\Http\Request;
 use Livewire\Component;
+use GfsRomFile;
 
 class Upload extends Component
 {
@@ -14,7 +15,10 @@ class Upload extends Component
 
     public function upload(Request $request) {
         $a= $request->file(FILE_FORM_KEY);
+//        echo $a->getPathInfo();
+//        echo $a->getFilename();
+        GfsRomFile::upload($a);
         // todo: THIS WORKS!!!!!
-        echo $a->getClientOriginalName();
+        echo 'hi';
     }
 }
