@@ -3,12 +3,15 @@
 namespace App\Http\Livewire\RomFile;
 
 use GfsRomFile;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Livewire\Component;
 
 class Upload extends Component
 {
-    public function render()
+    public function render(): Factory|View|Application
     {
         return view('livewire.rom-file.upload');
     }
@@ -19,8 +22,8 @@ class Upload extends Component
         //https://laracasts.com/discuss/channels/laravel/advice-on-solutions-for-very-large-file-uploads?page=1&replyId=774409
         //https://github.com/pionl/laravel-chunk-upload
         //https://github.com/23/resumable.js
-        $a = $request->file(FILE_FORM_KEY);
-        GfsRomFile::upload($a);
-        echo 'hi';
+        $file = $request->file(FILE_FORM_KEY);
+        GfsRomFile::upload($file);
+        echo 'file uploaded!';
     }
 }
