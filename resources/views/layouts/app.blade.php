@@ -12,8 +12,8 @@
 
         <!-- Styles -->
         {{--<link rel="stylesheet" href="{{ mix('css/app.css') }}">--}}
-        <link rel="stylesheet" <?= 'type="text/css"'; ?> href="{{ asset('css/app.css') }}">
-        <link rel="stylesheet" <?= 'type="text/css"'; ?> href="{{ asset('css/punch.css') }}">
+        <link rel="stylesheet" <?= 'type="text/css"'; ?> href="{{ asset('css/app.css') }}" />
+        <link rel="stylesheet" <?= 'type="text/css"'; ?> href="{{ asset('css/punch.css') }}" />
         @stack('styles')
 
         @livewireStyles
