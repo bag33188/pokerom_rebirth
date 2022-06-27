@@ -9,5 +9,6 @@ require_once "$functions_path/parse_date_as_readable_string.php";
 require_once "$functions_path/string_to_bool.php";
 require_once "$functions_path/jsondata.php";
 require_once "$functions_path/number_to_roman.php";
+include_once "$functions_path/unicode_eacute.php";
 
 //--- END GLOBAL HELPER FUNCTIONS ---//

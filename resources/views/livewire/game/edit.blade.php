@@ -17,7 +17,7 @@
                 <x-jet-input id="gameName" class="block mt-1 w-full" type="text" name="game_name"
                              minlength="{{MIN_GAME_NAME}}"
                              maxlength="{{MAX_GAME_NAME}}"
-                             :value="str_replace(_EACUTE, 'e', $game->game_name)"
+                             :value="ununicode_poke($game->game_name)"
                              required autofocus
                 />
             </div>
