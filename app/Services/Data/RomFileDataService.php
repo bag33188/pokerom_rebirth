@@ -35,7 +35,7 @@ class RomFileDataService implements RomFileDataServiceInterface
     public function deleteFile(RomFile $file): JsonDataResponse
     {
         FileDeleted::dispatch($file);
-        RomFile::destroy($file);
+        GfsRomFile::destroy($file);
         return new JsonDataResponse(['message' => "$file->filename deleted!"], ResponseAlias::HTTP_OK);
     }
 }
