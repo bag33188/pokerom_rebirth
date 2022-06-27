@@ -7,6 +7,11 @@ use Illuminate\Support\Facades\Config;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 use Symfony\Component\HttpKernel\Exception\UnprocessableEntityHttpException;
 
+/**
+ * Logic to parse filename and filepath for uploading files.
+ *
+ * Deals with large files (5GB and upwards), but only draws from one static path (see config)
+ */
 class FileInfoResolver
 {
     private static string $serverUploadFilePath;
@@ -39,7 +44,7 @@ class FileInfoResolver
         if (!preg_match(self::VALID_FILENAME_PATTERN, $filename)) {
             $badFilenameErrorMessage = 'Invalid filename detected. ' .
                 'Matched against pattern: `' . self::VALID_FILENAME_PATTERN . '`';
-            throw new UnprocessableEntityHttpException($badFilenameErrorMessage, code: ResponseAlias::HTTP_UNPROCESSABLE_ENTITY);
+            throw new UnprocessableEntityHttpException(message: $badFilenameErrorMessage, code: ResponseAlias::HTTP_UNPROCESSABLE_ENTITY);
         }
     }
 
