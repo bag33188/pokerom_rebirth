@@ -11,6 +11,12 @@ class FileBucket extends Connection
     protected string $filename;
     protected string $filepath;
 
+    /**
+     * Converts ObjectID string to BSON ObjectID
+     *
+     * @param string $fileId
+     * @return ObjectId
+     */
     protected final static function parseObjectId(string $fileId): ObjectId
     {
         return new ObjectId($fileId);
