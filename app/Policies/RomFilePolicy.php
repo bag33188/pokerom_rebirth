@@ -6,7 +6,7 @@ use App\Models\RomFile;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class FilePolicy
+class RomFilePolicy
 {
     use HandlesAuthorization;
 

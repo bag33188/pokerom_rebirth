@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Gate;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
 
-class FileController extends ApiController
+class RomFileController extends ApiController
 {
     private RomFileDataServiceInterface $romFileDataService;
 
@@ -29,7 +29,7 @@ class FileController extends ApiController
      */
     public function index(): RomFileCollection
     {
-        Gate::authorize('viewAny-file');
+        Gate::authorize('viewAny-romFile');
         return new RomFileCollection(RomFileRepo::getAllFilesSorted());
     }
 

@@ -46,7 +46,7 @@ class RomController extends ApiController
      */
     public function indexFile(int $romId)
     {
-        Gate::authorize('viewAny-file');
+        Gate::authorize('viewAny-romFile');
         return new RomFileResource(RomRepo::getFileAssociatedWithRom($romId));
     }
 

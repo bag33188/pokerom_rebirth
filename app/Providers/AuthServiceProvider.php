@@ -3,7 +3,7 @@
 namespace App\Providers;
 
 use App\Models\{RomFile, Game, Rom, User};
-use App\Policies\{FilePolicy, GamePolicy, RomPolicy, UserPolicy};
+use App\Policies\{RomFilePolicy, GamePolicy, RomPolicy, UserPolicy};
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 
@@ -18,7 +18,7 @@ class AuthServiceProvider extends ServiceProvider
         User::class => UserPolicy::class,
         Game::class => GamePolicy::class,
         Rom::class => RomPolicy::class,
-        RomFile::class => FilePolicy::class
+        RomFile::class => RomFilePolicy::class
     ];
 
     /**
@@ -34,7 +34,7 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('viewAny-user', function (User $user) {
             return $user->isAdmin();
         });
-        Gate::define('viewAny-file', function (User $user) {
+        Gate::define('viewAny-romFile', function (User $user) {
             return $user->isAdmin();
         });
 

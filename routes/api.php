@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\api\FileController;
+use App\Http\Controllers\api\RomFileController;
 use App\Http\Controllers\api\GameController;
 use App\Http\Controllers\api\RomController;
 use App\Http\Controllers\api\UserController;
@@ -37,7 +37,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResources(['/roms' => RomController::class, '/games' => GameController::class]);
     Route::apiResource('/users', UserController::class)->only('index', 'show', 'destroy')
         ->parameter('user', 'userId');
-    Route::apiResource('/files', FileController::class)->only('index', 'show', 'destroy')
+    Route::apiResource('/files', RomFileController::class)->only('index', 'show', 'destroy')
         ->parameter('file', 'fileId');
 
     // custom api routes
@@ -46,14 +46,14 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/logout', [UserController::class, 'logout']);
     });
     Route::prefix('files')->group(function () {
-        Route::post('/upload', [FileController::class, 'upload']);
-        Route::get('/{fileId}/download', [FileController::class, 'download']);
+        Route::post('/upload', [RomFileController::class, 'upload']);
+        Route::get('/{fileId}/download', [RomFileController::class, 'download']);
     });
 
     // relationships
     Route::get('/roms/{romId}/game', [RomController::class, 'indexGame']);
     Route::get('/roms/{romId}/file', [RomController::class, 'indexFile']);
-    Route::get('/files/{fileId}/rom', [FileController::class, 'indexRom']);
+    Route::get('/files/{fileId}/rom', [RomFileController::class, 'indexRom']);
     Route::get('/games/{gameId}/rom', [GameController::class, 'indexRom']);
     Route::patch('/roms/{romId}/linkFile', [RomController::class, 'linkRomToFile']);
 });
@@ -61,7 +61,7 @@ Route::middleware('auth:sanctum')->group(function () {
 if (App::environment('local')) {
     Route::prefix('dev')->group(function () {
         // todo: find/add a way to send token to download link (in order to authenticate) (maybe use a POST request???)
-        Route::get('/files/{fileId}/download', [FileController::class, 'download']);
+        Route::get('/files/{fileId}/download', [RomFileController::class, 'download']);
         // Route::post('/files/{fileId}/download', [FileController::class, 'download']);
     });
 }

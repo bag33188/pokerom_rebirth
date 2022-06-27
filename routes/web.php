@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Livewire\RomFile\Upload as UploadRomFile;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\www\{HomeController, WelcomeController};
 use App\Http\Livewire\Game\Create as CreateGame;
@@ -50,4 +51,6 @@ Route::middleware([
         Route::put('/update/{gameId}', [EditGame::class, 'update'])->name('games.update');
         Route::delete('/delete/{gameId}', [DeleteGame::class, 'delete'])->name('games.delete');
     });
+    Route::get('/files/upload', UploadRomFile::class)->name('files.upload');
+    Route::post('/files/store', [UploadRomFile::class, 'upload'])->name('files.store');
 });
