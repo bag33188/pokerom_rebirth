@@ -23,6 +23,10 @@ class FileBucket extends Connection
         fclose($stream);
     }
 
+    /**
+     * @param string $fileId
+     * @return resource
+     */
     protected function createDownloadStreamFromFile(string $fileId)
     {
         return $this->gfsBucket->openDownloadStream(self::parseObjectId($fileId));
