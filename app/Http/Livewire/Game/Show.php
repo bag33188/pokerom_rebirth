@@ -13,7 +13,7 @@ class Show extends Component
     private $game;
     private int $gameId;
 
-    public function mount(int $gameId)
+    public function mount(int $gameId): void
     {
         $this->gameId = $gameId;
         $this->game = GameRepo::findGameIfExists($gameId);

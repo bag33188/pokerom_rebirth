@@ -6,6 +6,7 @@ use App\Http\Livewire\Game\Delete as DeleteGame;
 use App\Http\Livewire\Game\Edit as EditGame;
 use App\Http\Livewire\Game\Index as IndexGame;
 use App\Http\Livewire\Game\Show as ShowGame;
+use App\Http\Livewire\Rom\Create as CreateRom;
 use App\Http\Livewire\Rom\Delete as DeleteRom;
 use App\Http\Livewire\Rom\Edit as EditRom;
 use App\Http\Livewire\Rom\Index as IndexRom;
@@ -33,6 +34,8 @@ Route::middleware([
     Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
     Route::prefix('roms')->group(function () {
         Route::get('/', IndexRom::class)->name('roms.index');
+        Route::get('/create', CreateRom::class)->name('roms.create');
+        Route::post('/store', [CreateRom::class, 'store'])->name('roms.store');
         Route::get('/show/{romId}', ShowRom::class)->name('roms.show');
         Route::get('/edit/{romId}', EditRom::class)->name('roms.edit')->middleware('admin');
         Route::put('/update/{romId}', [EditRom::class, 'update'])->name('roms.update');
