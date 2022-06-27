@@ -1,5 +1,7 @@
 @push('scripts')
-    <script type="text/javascript" src="{{asset('js/modules/capitalize.js')}}"></script>
+    @if($availableRomsCount > 0)
+        <script type="text/javascript" src="{{asset('js/modules/capitalize.js')}}"></script>
+    @endif
 @endpush
 <div class="container mx-auto w-full">
     <x-slot name="header">
@@ -75,11 +77,13 @@
             <h2 class="text-center text-lg mt-3">Sorry, there are no available roms to add a game to :(</h2>
         @endif
     </div>
-    <script type="text/javascript">
-        const regionsLength = {{count(REGIONS)}};
-        for (let i = 0; i < regionsLength; i++) {
-            let regionName = document.getElementById(`region-${i + 1}`);
-            regionName.textContent = regionName.textContent.capitalize();
-        }
-    </script>
+    @if($availableRomsCount > 0)
+        <script type="text/javascript">
+            const regionsLength = {{sizeof(REGIONS)}};
+            for (let i = 0; i < regionsLength; i++) {
+                let regionName = document.getElementById(`region-${i + 1}`);
+                regionName.textContent = regionName.textContent.capitalize();
+            }
+        </script>
+    @endif
 </div>
