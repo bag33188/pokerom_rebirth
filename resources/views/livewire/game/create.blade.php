@@ -76,7 +76,8 @@
         @endif
     </div>
     <script type="text/javascript">
-        for (let i = 0; i < {{count(REGIONS)}} /*regions.length*/; i++) {
+        const regionsLength = {{count(REGIONS)}};
+        for (let i = 0; i < regionsLength; i++) {
             let regionName = document.getElementById(`region-${i + 1}`);
             regionName.textContent = regionName.textContent.capitalize();
         }
