@@ -34,7 +34,7 @@ Route::middleware([
     Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
     Route::prefix('roms')->group(function () {
         Route::get('/', IndexRom::class)->name('roms.index');
-        Route::get('/create', CreateRom::class)->name('roms.create');
+        Route::get('/create', CreateRom::class)->name('roms.create')->middleware('admin');
         Route::post('/store', [CreateRom::class, 'store'])->name('roms.store');
         Route::get('/show/{romId}', ShowRom::class)->name('roms.show');
         Route::get('/edit/{romId}', EditRom::class)->name('roms.edit')->middleware('admin');
