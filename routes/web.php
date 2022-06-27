@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\www\{HomeController, WelcomeController};
 use App\Http\Livewire\Game\Create as CreateGame;
 use App\Http\Livewire\Game\Delete as DeleteGame;
@@ -11,7 +12,6 @@ use App\Http\Livewire\Rom\Delete as DeleteRom;
 use App\Http\Livewire\Rom\Edit as EditRom;
 use App\Http\Livewire\Rom\Index as IndexRom;
 use App\Http\Livewire\Rom\Show as ShowRom;
-use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
