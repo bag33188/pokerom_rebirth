@@ -44,6 +44,7 @@ class RomFilesBucket extends GfsBucket
 
     public function destroy(Model $file): void
     {
+        // use the getKey method for indexing since file is a generic abstract class
         $this->deleteFileFromBucket($file->getKey());
     }
 }
