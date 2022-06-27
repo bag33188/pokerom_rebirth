@@ -9,6 +9,7 @@ class FileDownloader
 {
     /** @var resource */
     private $fileStream;
+    /** @var int  */
     private int $readyBytesChunkSize;
 
     public function __construct(/** @var resource */ $fileStream, int $readyBytesChunkSize = 0x3FC00)
