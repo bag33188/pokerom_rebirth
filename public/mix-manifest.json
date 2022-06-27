@@ -1,5 +1,6 @@
 {
     "/js/app.js": "/js/app.js",
+    "/js/modules/capitalize.js": "/js/modules/capitalize.js",
     "/css/app.css": "/css/app.css",
     "/css/punch.css": "/css/punch.css"
 }
