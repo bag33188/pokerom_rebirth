@@ -22,10 +22,12 @@ class Create extends Component
 
     public function render(): Factory|View|Application
     {
-        return view('livewire.game.create', ['availableRoms' => $this->availableRoms, 'availableRomsCount' => $this->availableRomsCount]);
+        $romsAvailable = $this->availableRomsCount > 0;
+        return view('livewire.game.create', ['availableRoms' => $this->availableRoms, 'availableRomsCount' => $this->availableRomsCount, 'romsAvailable' => $romsAvailable]);
     }
 
-    public function store(StoreGameRequest $request, GameDataServiceInterface $gameDataService) {
+    public function store(StoreGameRequest $request, GameDataServiceInterface $gameDataService)
+    {
         $game = $gameDataService->createGameFromRomId((int)$request['rom_id'], $request->all());
         return redirect()->route('games.index')->banner("Game $game->game_name created successfully.");
     }
