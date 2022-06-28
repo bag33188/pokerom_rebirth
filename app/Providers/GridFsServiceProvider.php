@@ -21,8 +21,8 @@ class GridFsServiceProvider extends ServiceProvider implements DeferrableProvide
             config('gridfs.bucketName'),
             config('gridfs.chunkSize'),
         );
-        // use singleton since only admin user will be invoking this logic
-        $this->app->singleton(RomFilesBucket::class,
+        // use scoped singleton since only admin user will be invoking this logic
+        $this->app->scoped(RomFilesBucket::class,
             fn(Application $app): RomFilesBucket => new RomFilesBucket(...$dbProps));
     }
 

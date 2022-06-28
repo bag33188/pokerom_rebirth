@@ -15,7 +15,7 @@ class UpdateMatchingRom implements ShouldQueue
     public bool $afterCommit = true;
 
     /**
-     * Needs to be static since RomFile bucket connection is singleton
+     * Needs to be static since RomFile bucket connection is scoped singleton
      *
      * @var Rom
      */
