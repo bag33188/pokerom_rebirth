@@ -1,5 +1,5 @@
 <div class="inline-block">
-    <x-jet-button wire:click="delete({{$gameId}})">
+    <x-jet-danger-button wire:click="delete({{$gameId}})">
         {{ __('Delete!') }}
-    </x-jet-button>
+    </x-jet-danger-button>
 </div>
