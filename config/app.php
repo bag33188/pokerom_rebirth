@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Pok' . _EACUTE . 'ROM'),
+    'name' => env('APP_NAME', unicode_poke('PokeROM')),
 
     'version' => (float)env('APP_VERSION', 4.0),
 
