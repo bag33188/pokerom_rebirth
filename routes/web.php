@@ -36,10 +36,8 @@ Route::middleware([
     Route::prefix('roms')->group(function () {
         Route::get('/', IndexRom::class)->name('roms.index');
         Route::get('/create', CreateRom::class)->name('roms.create')->middleware('admin');
-//        Route::post('/store', [CreateRom::class, 'store'])->name('roms.store');
         Route::get('/show/{romId}', ShowRom::class)->name('roms.show');
         Route::get('/edit/{romId}', EditRom::class)->name('roms.edit')->middleware('admin');
-//        Route::put('/update/{romId}', [EditRom::class, 'update'])->name('roms.update');
         Route::delete('/delete/{romId}', [DeleteRom::class, 'delete'])->name('roms.delete');
     });
     Route::prefix('games')->group(function () {
@@ -47,7 +45,6 @@ Route::middleware([
         Route::get('/create', CreateGame::class)->name('games.create')->middleware('admin');
         Route::get('/show/{gameId}', ShowGame::class)->name('games.show');
         Route::get('/edit/{gameId}', EditGame::class)->name('games.edit')->middleware('admin');
-//        Route::put('/update/{gameId}', [EditGame::class, 'update'])->name('games.update');
         Route::delete('/delete/{gameId}', [DeleteGame::class, 'delete'])->name('games.delete');
     });
     Route::prefix('files')->group(function () {

@@ -15,7 +15,7 @@ class Delete extends Component
 {
     use AuthorizesRequests;
 
-    public int $gameId;
+    public $gameId;
 
     public function mount(int $gameId)
     {
@@ -24,7 +24,7 @@ class Delete extends Component
 
     public function render(): Factory|View|Application
     {
-        return view('livewire.game.delete', ['gameId' => $this->gameId]);
+        return view('livewire.game.delete');
     }
 
     /**
@@ -32,9 +32,11 @@ class Delete extends Component
      */
     public function delete(int $gameId): RedirectResponse
     {
+
         $game = GameRepo::findGameIfExists($gameId);
         $this->authorize('delete', $game);
         $game->delete();
-        return redirect()->route('games.index')->banner("$game->game_name successfully deleted!");
+        session()->flash('message', 'Data deleted successfully.');
+
     }
 }

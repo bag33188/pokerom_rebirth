@@ -22,7 +22,7 @@ class Create extends Component
     public $region;
     public $rom_id;
 
-    public function mount()
+    public function boot()
     {
         $this->availableRoms = GameRepo::getAllRomsWithNoGame();
         $this->availableRomsCount = count($this->availableRoms);
@@ -32,12 +32,6 @@ class Create extends Component
     {
         $romsAvailable = $this->availableRomsCount > 0;
         return view('livewire.game.create', ['availableRoms' => $this->availableRoms, 'availableRomsCount' => $this->availableRomsCount, 'romsAvailable' => $romsAvailable]);
-    }
-
-
-    public function updated($propertyName)
-    {
-        $this->validateOnly($propertyName);
     }
 
     #[ArrayShape(['game_name' => "array", 'date_released' => "array", 'game_type' => "array", 'region' => "array", 'generation' => "array"])]
@@ -62,5 +56,6 @@ class Create extends Component
             'date_released' => $this->date_released,
             'generation' => $this->generation
         ]);
+
     }
 }
