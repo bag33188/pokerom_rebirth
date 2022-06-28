@@ -55,7 +55,7 @@
                              required autofocus/>
             </div>
             <div class="mt-4">
-                <x-jet-button class="float-right" wire:click="update" type="button">
+                <x-jet-button class="float-right" wire:click="update">
                     {{ __('Save!') }}
                 </x-jet-button>
                 <div class="float-left">

@@ -8,9 +8,7 @@
     <div class="p-3">
         <x-jet-validation-errors class="mb-4"/>
 
-        <form method="POST" wire:submit.prevent="update">
-            @csrf
-            @method('PUT')
+        <form wire:submit.prevent="update">
 
             <div class="mt-2.5">
                 <x-jet-label for="gameName" value="{{__('Game Name')}}"/>
@@ -68,7 +66,7 @@
             </div>
 
             <div class="mt-4">
-                <x-jet-button class="float-right">
+                <x-jet-button class="float-right" wire:click="update">
                     {{ __('Save!') }}
                 </x-jet-button>
                 <div class="float-left">

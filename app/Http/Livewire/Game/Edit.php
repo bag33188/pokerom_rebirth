@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Game;
 
 use App\Actions\Validators\GameValidationRulesTrait;
 use App\Models\Game;
+use Exception;
 use GameRepo;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -56,13 +57,19 @@ class Edit extends Component
 
     public function update()
     {
-        $this->game->update([
-            'game_name' => $this->game_name,
-            'game_type' => $this->game_type,
-            'region' => $this->region,
-            'date_released' => $this->date_released,
-            'generation' => $this->generation
-        ]);
+        try {
+            $this->game->update([
+                'game_name' => $this->game_name,
+                'game_type' => $this->game_type,
+                'region' => $this->region,
+                'date_released' => $this->date_released,
+                'generation' => $this->generation
+            ]);
+            return redirect()->to(route('games.show', $this->gameId))->banner('Game Updated successfully.');
+
+        } catch (Exception $e) {
+            session()->flash('message', $e->getMessage());
+        }
 //        return redirect()->route('games.show', ['gameId' => $this->gameId])->banner('Game Updated successfully.');
     }
 }

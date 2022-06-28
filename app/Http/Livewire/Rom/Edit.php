@@ -61,7 +61,7 @@ class Edit extends Component
                 'rom_name' => $this->rom_name,
                 'rom_size' => $this->rom_size
             ]);
-            return redirect()->to(route('roms.show', $this->romId));
+            return redirect()->to(route('roms.show', $this->romId))->banner('rom updated!');
         } catch (Exception $e) {
             session()->flash('message', $e->getMessage());
         }

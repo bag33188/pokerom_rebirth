@@ -59,8 +59,7 @@ class Create extends Component
                 'generation' => $this->generation
             ]);
             $this->reset();
-            session()->flash('message', 'Game created successfully.');
-            return redirect()->to(route('games.index'));
+            return redirect()->to(route('games.index'))->banner('Game created successfully.');
 
         } catch (Exception $e) {
             session()->flash('message', $e->getMessage());

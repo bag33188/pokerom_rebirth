@@ -79,7 +79,7 @@
                                  min="{{MIN_GAME_GENERATION}}" max="{{MAX_GAME_GENERATION}}" required autofocus/>
                 </div>
                 <div class="mt-4">
-                    <x-jet-button class="float-right" type="button" wire:click="submit">
+                    <x-jet-button class="float-right" wire:click="submit">
                         {{ __('Save!') }}
                     </x-jet-button>
                 </div>

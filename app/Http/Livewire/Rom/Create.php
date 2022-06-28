@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Rom;
 
 use App\Actions\Validators\RomValidationRulesTrait;
 use App\Models\Rom;
+use Exception;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -40,13 +41,20 @@ class Create extends Component
 
     public function submit()
     {
-        $this->validate();
-        Rom::create([
-            'rom_name' => $this->rom_name,
-            'rom_size' => $this->rom_size,
-            'rom_type' => $this->rom_type
-        ]);
-        $this->reset();
+        try {
+            $this->validate();
+            Rom::create([
+                'rom_name' => $this->rom_name,
+                'rom_size' => $this->rom_size,
+                'rom_type' => $this->rom_type
+            ]);
+            $this->reset();
+
+            return redirect()->to(route('roms.index'))->banner('rom created!');
+        } catch (Exception $e) {
+            session()->flash('message', $e->getMessage());
+
+        }
 
     }
 }

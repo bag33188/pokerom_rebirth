@@ -5,9 +5,7 @@
     <div class="p-3">
         <x-jet-validation-errors class="mb-4"/>
 
-        <form method="POST" wire:submit.prevent="submit">
-            @csrf
-            @method('POST')
+        <form wire:submit.prevent="submit">
 
             <div class="mt-2.5">
                 <x-jet-label for="romName" value="{{ __('Rom Name') }}"/>
@@ -43,7 +41,7 @@
                              required autofocus/>
             </div>
             <div class="mt-4">
-                <x-jet-button class="float-right">
+                <x-jet-button class="float-right" wire:click="submit">
                     {{ __('Save!') }}
                 </x-jet-button>
             </div>
