@@ -3,7 +3,9 @@
 namespace Utils\Classes;
 
 use Exception;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 abstract class AbstractApplicationException extends Exception
 {
@@ -57,7 +59,7 @@ abstract class AbstractApplicationException extends Exception
         return $this->status() ?: (int)$this->getCode();
     }
 
-    public final function render(Request $request)
+    public final function render(Request $request): Response|bool|JsonResponse
     {
         $message = $this->getErrorMessageIfNotNull();
         $code = $this->getStatusCodeIfNotNull();
@@ -65,9 +67,9 @@ abstract class AbstractApplicationException extends Exception
             $response = new JsonDataResponse(['message' => $message], $code);
             return $response->renderResponse();
         } else {
-//            if ($this->viewName()) {
-//                return response()->view($this->viewName(), ['message' => $message], $code);
-//            }
+            if ($this->viewName()) {
+                return response()->view($this->viewName(), ['message' => $message], $code);
+            }
             session()->flash('message', $message);
             return false;
         }
