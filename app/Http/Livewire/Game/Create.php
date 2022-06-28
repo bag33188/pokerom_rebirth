@@ -57,5 +57,7 @@ class Create extends Component
             'generation' => $this->generation
         ]);
         $this->reset();
+        session()->flash('message', 'Game created successfully.');
+
     }
 }
