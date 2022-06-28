@@ -26,11 +26,13 @@ class Edit extends Component
     {
         $this->gameId = $gameId;
         $this->game = GameRepo::findGameIfExists($gameId);
-        $this->game_name = $this->game->game_name;
-        $this->game_type = $this->game->game_type;
-        $this->region = $this->game->region;
-        $this->generation = $this->game->generation;
-        $this->date_released = preg_replace(TIME_STRING, '', $this->game->date_released);
+        $this->fill([
+            'date_released' => preg_replace(TIME_STRING, '', $this->game->date_released),
+            'generation' => $this->game->generation,
+            'region' => $this->game->region,
+            'game_type' => $this->game->game_type,
+            'game_name' => $this->game->game_name
+        ]);
     }
 
     public function render(): Factory|View|Application
