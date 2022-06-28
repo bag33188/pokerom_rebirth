@@ -29,13 +29,23 @@
                 </div>
                 @if(Auth::user()->isAdmin())
                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                        <x-jet-nav-link href="{{ route('games.create') }}" :active="request()->routeIs('games.create')">
-                            {{ __('Add Game') }}
+                        <x-jet-nav-link href="{{ route('files.index') }}" :active="request()->routeIs('files.index')">
+                            {{ __('ROM Files') }}
                         </x-jet-nav-link>
                     </div>
                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                         <x-jet-nav-link href="{{ route('roms.create') }}" :active="request()->routeIs('roms.create')">
                             {{ __('Add ROM') }}
+                        </x-jet-nav-link>
+                    </div>
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <x-jet-nav-link href="{{ route('games.create') }}" :active="request()->routeIs('games.create')">
+                            {{ __('Add Game') }}
+                        </x-jet-nav-link>
+                    </div>
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <x-jet-nav-link href="{{ route('files.store') }}" :active="request()->routeIs('files.store')">
+                            {{ __('Add ROM File') }}
                         </x-jet-nav-link>
                     </div>
                 @endif
@@ -191,13 +201,23 @@
         </div>
         @if(auth()->user()->isAdmin())
             <div class="pt-2 pb-3 space-y-1">
-                <x-jet-responsive-nav-link href="{{ route('games.create') }}" :active="request()->routeIs('games.create')">
-                    {{ __('Add Game') }}
+                <x-jet-responsive-nav-link href="{{ route('files.index') }}" :active="request()->routeIs('files.index')">
+                    {{ __('ROM Files') }}
                 </x-jet-responsive-nav-link>
             </div>
             <div class="pt-2 pb-3 space-y-1">
                 <x-jet-responsive-nav-link href="{{ route('roms.create') }}" :active="request()->routeIs('roms.create')">
                     {{ __('Add ROM') }}
+                </x-jet-responsive-nav-link>
+            </div>
+            <div class="pt-2 pb-3 space-y-1">
+                <x-jet-responsive-nav-link href="{{ route('games.create') }}" :active="request()->routeIs('games.create')">
+                    {{ __('Add Game') }}
+                </x-jet-responsive-nav-link>
+            </div>
+            <div class="pt-2 pb-3 space-y-1">
+                <x-jet-responsive-nav-link href="{{ route('files.create') }}" :active="request()->routeIs('files.create')">
+                    {{ __('Add ROM File') }}
                 </x-jet-responsive-nav-link>
             </div>
         @endif

@@ -1,5 +1,5 @@
 @push('styles')
-    <style>
+    <style <?= 'type="text/css"'; ?>>
         #files-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -12,7 +12,7 @@
             height: 100%;
             justify-self: center;
             align-self: center;
-            border: 2px solid #000;
+            border: 2px solid #333;
             border-radius: 4px;
             display: inline-grid;
             grid-template-columns: 1fr;
@@ -45,7 +45,7 @@
     <div id="files-grid">
         @foreach($romFiles as $romFile)
             <div class="files-grid-item">
-                <p>{{$romFile->filename}}</p>
+                <p title="{{$romFile->_id}}">{{$romFile->filename}}</p>
                 <div class="files-actions-wrapper">
                     <a href="{{route('files.show', $romFile)}}" {!! JETSTREAM_BTN_CLASSES !!}>Actions</a>
                 </div>
