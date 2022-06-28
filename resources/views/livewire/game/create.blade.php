@@ -52,7 +52,7 @@
                         element-name="region" html-id="gameRegion"
                         required autofocus>
                         @for($i = 0; $i < count(REGIONS); $i++)
-                            <option value="{{REGIONS[$i]}}" id="region-{{$i + 1}}">{{ REGIONS[$i] }}</option>
+                            <option value="{{REGIONS[$i]}}" id="region-{{$i + 1}}">{{ ucfirst(REGIONS[$i]) }}</option>
                         @endfor
                     </x-form-select>
                 </div>
