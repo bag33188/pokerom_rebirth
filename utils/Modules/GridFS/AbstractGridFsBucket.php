@@ -32,5 +32,5 @@ abstract class AbstractGridFsBucket extends FileBucket implements GridFileResour
      * @param Model $file
      * @return void
      */
-    abstract public function destroy(Model $file): void;
+    abstract public function delete(Model $file): void;
 }

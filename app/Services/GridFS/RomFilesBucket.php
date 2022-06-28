@@ -42,7 +42,7 @@ class RomFilesBucket extends GfsBucket
         $fileDownloader->downloadFile();
     }
 
-    public function destroy(Model $file): void
+    public function delete(Model $file): void
     {
         // use the getKey method for indexing since file is a generic abstract class
         $this->deleteFileFromBucket($file->getKey());

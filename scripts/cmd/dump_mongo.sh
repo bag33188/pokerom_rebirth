@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-
 # =========================
 # Dump MongoDB File(s) Data
 # =========================
