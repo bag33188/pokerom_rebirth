@@ -17,7 +17,7 @@ class WelcomeNotification extends Notification
      *
      * @return void
      */
-    public function __construct(string $username = null)
+    public function __construct(string $username)
     {
         $this->username = $username;
     }
