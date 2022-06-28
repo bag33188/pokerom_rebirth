@@ -8,7 +8,6 @@ use View;
 
 class AppServiceProvider extends ServiceProvider
 {
-
     /**
      * Register any application services.
      *
