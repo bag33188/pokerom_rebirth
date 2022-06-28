@@ -182,6 +182,8 @@ xdebug.idekey=phpstorm
 
 install: [xdebug installation wizard](https://xdebug.org/wizard "install xdebug for php")
 
+chrome ext: [xdebug chrome extension](https://chrome.google.com/webstore/detail/xdebug-helper/eadndfjplgieldjbigjakmdgkmoaaaoc?hl=en)
+
 ##### PHPStorm
 
 Links and references
