@@ -60,6 +60,7 @@ class Create extends Component
             ]);
             $this->reset();
             session()->flash('message', 'Game created successfully.');
+            return redirect()->to(route('games.index'));
 
         } catch (Exception $e) {
             session()->flash('message', $e->getMessage());

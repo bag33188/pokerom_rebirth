@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Rom;
 
 use App\Actions\Validators\RomValidationRulesTrait;
 use App\Models\Rom;
+use Exception;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -52,13 +53,17 @@ class Edit extends Component
 
     public function update()
     {
-        $this->validate();
-        $this->rom = RomRepo::findRomIfExists($this->romId);
-        $this->rom->update([
-            'rom_type' => $this->rom_type,
-            'rom_name' => $this->rom_name,
-            'rom_size' => $this->rom_size
-        ]);
-//        return redirect()->route('roms.show', ['romId' => $this->romId])->banner('Rom Updated successfully.');
+        try {
+            $this->validate();
+            $this->rom = RomRepo::findRomIfExists($this->romId);
+            $this->rom->update([
+                'rom_type' => $this->rom_type,
+                'rom_name' => $this->rom_name,
+                'rom_size' => $this->rom_size
+            ]);
+            return redirect()->to(route('roms.show', $this->romId));
+        } catch (Exception $e) {
+            session()->flash('message', $e->getMessage());
+        }
     }
 }

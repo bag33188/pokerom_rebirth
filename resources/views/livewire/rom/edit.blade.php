@@ -3,11 +3,20 @@
         <h2 class="text-center">Edit {{$rom->getRomFileName()}}</h2>
     </x-slot>
     <div class="p-3">
+        @if (session()->has('message'))
+            <div class="bg-gray-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md my-3"
+                 role="alert">
+                <div class="flex">
+                    <div>
+                        <p class="text-sm">{{ session('message') }}</p>
+                    </div>
+                </div>
+            </div>
+        @endif
         <x-jet-validation-errors class="mb-4"/>
 
-        <form method="POST" wire:submit.prevent="update">
-            @csrf
-            @method('PUT')
+        <form wire:submit.prevent="update">
+
 
             <div class="mt-2.5">
                 <x-jet-label for="romName" value="{{ __('Rom Name') }}"/>
@@ -46,7 +55,7 @@
                              required autofocus/>
             </div>
             <div class="mt-4">
-                <x-jet-button class="float-right">
+                <x-jet-button class="float-right" wire:click="update" type="button">
                     {{ __('Save!') }}
                 </x-jet-button>
                 <div class="float-left">

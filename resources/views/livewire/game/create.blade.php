@@ -22,9 +22,7 @@
 
             <x-jet-validation-errors class="mb-4"/>
 
-            <form wire:submit.prevent="submit" method="POST">
-                @method('POST')
-                @csrf
+            <form wire:submit.prevent="submit">
 
                 <label for="availableRoms">Select ROM</label>
                 <x-form-select wire:model="rom_id" html-id="availableRoms" element-name="rom_id" autofocus required>
@@ -81,7 +79,7 @@
                                  min="{{MIN_GAME_GENERATION}}" max="{{MAX_GAME_GENERATION}}" required autofocus/>
                 </div>
                 <div class="mt-4">
-                    <x-jet-button class="float-right">
+                    <x-jet-button class="float-right" type="button" wire:click="submit">
                         {{ __('Save!') }}
                     </x-jet-button>
                 </div>
