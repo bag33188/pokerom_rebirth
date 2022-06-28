@@ -48,7 +48,7 @@ Route::middleware([
     });
     Route::prefix('files')->group(function () {
         Route::get('/', [RomFileController::class, 'index'])->name('files.index');
-        Route::get('/{romFile}', [RomFileController::class, 'show'])->name('files.show');
+        Route::get('/info/{romFile}', [RomFileController::class, 'show'])->name('files.show');
         Route::get('/create', [RomFileController::class, 'create'])->name('files.create')->middleware('admin');
         Route::post('/store', [RomFileController::class, 'store'])->name('files.store');
         Route::delete('/delete/{romFile}', [RomFileController::class, 'destroy'])->name('files.delete');

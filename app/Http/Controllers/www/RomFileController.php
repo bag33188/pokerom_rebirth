@@ -49,7 +49,7 @@ class RomFileController extends ViewController
      */
     public function create()
     {
-        return response()->view('rom-files.upload');
+        return response()->view('rom-files.create');
     }
 
     /**

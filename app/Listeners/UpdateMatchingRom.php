@@ -17,9 +17,9 @@ class UpdateMatchingRom implements ShouldQueue
     /**
      * Needs to be static since RomFile bucket connection is scoped singleton
      *
-     * @var Rom
+     * @var ?Rom
      */
-    private static Rom $matchingRom;
+    private static ?Rom $matchingRom;
 
     public function shouldQueue(FileUploaded $event): bool
     {
@@ -31,10 +31,10 @@ class UpdateMatchingRom implements ShouldQueue
     /**
      * be sure to rap in an instance method since even has multiple instances
      *
-     * @param Rom $rom
+     * @param ?Rom $rom
      * @return void
      */
-    private function setMatchingRom(Rom $rom): void
+    private function setMatchingRom(?Rom $rom): void
     {
         self::$matchingRom = $rom;
     }
