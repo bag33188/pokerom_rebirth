@@ -46,5 +46,7 @@ class Create extends Component
             'rom_size' => $this->rom_size,
             'rom_type' => $this->rom_type
         ]);
+        $this->reset();
+
     }
 }

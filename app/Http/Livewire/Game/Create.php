@@ -56,5 +56,6 @@ class Create extends Component
             'date_released' => $this->date_released,
             'generation' => $this->generation
         ]);
+        $this->reset();
     }
 }
