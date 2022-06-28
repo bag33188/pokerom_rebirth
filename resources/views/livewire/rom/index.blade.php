@@ -40,10 +40,10 @@
                         @endif
                     </td>
                     <td class="px-6 py-4">
-                        {{--                        <a href="{{route('roms.show', $rom->id)}}" class="inline-flex items-center py-2 px-4 bg-red-500 hover:bg-red-400 text-white font-bold--}}
-                        {{--                                    p-0 border-b-4 border-red-700 hover:border-red-500 rounded active:border-t-4--}}
-                        {{--                                    active:border-b-0 active:bg-red-400"></a>--}}
-                        <x-jet-button wire:click="show({{$rom->id}})">Get Info</x-jet-button>
+                        <button type="button" class="inline-flex items-center py-2 px-4 bg-red-500 hover:bg-red-400 text-white font-bold
+                                    p-0 border-b-4 border-red-700 hover:border-red-500 rounded active:border-t-4
+                                    active:border-b-0 active:bg-red-400" wire:click="show({{$rom->id}})">Get Info
+                        </button>
                     </td>
                 </tr>
             @endforeach
