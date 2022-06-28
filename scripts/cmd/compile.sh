@@ -26,7 +26,7 @@ compile() {
     if [[ "$current_folder" = "cmd" ]]; then
         cd ../..
     fi
-    composer update
+    composer install && composer update
     npm run dev
 }
 
