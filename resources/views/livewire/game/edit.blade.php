@@ -8,13 +8,14 @@
     <div class="p-3">
         <x-jet-validation-errors class="mb-4"/>
 
-        <form method="POST" action="{{route('games.update', ['gameId'=>$gameId])}}">
+        <form method="POST" wire:submit.prevent="update">
             @csrf
             @method('PUT')
 
             <div class="mt-2.5">
                 <x-jet-label for="gameName" value="{{__('Game Name')}}"/>
                 <x-jet-input id="gameName" class="block mt-1 w-full" type="text" name="game_name"
+                             wire:model="game_name"
                              minlength="{{MIN_GAME_NAME}}"
                              maxlength="{{MAX_GAME_NAME}}"
                              :value="ununicode_poke($game->game_name)"
@@ -24,6 +25,7 @@
             <div class="mt-2.5">
                 <label for="gameType" class="block font-medium text-sm text-gray-700">{{__('Game Type')}}</label>
                 <x-form-select
+                    wire:model="game_type"
                     element-name="game_type" html-id="gameType"
                     required autofocus>
                     @foreach(GAME_TYPES as $gameType)
@@ -39,6 +41,7 @@
             <div class="mt-2.5">
                 <label for="gameRegion" class="block font-medium text-sm text-gray-700">{{__('Region')}}</label>
                 <x-form-select
+                    wire:model="region"
                     element-name="region" html-id="gameRegion"
                     required autofocus>
                     @foreach(REGIONS as $region)
@@ -53,6 +56,7 @@
             <div class="mt-2.5">
                 <x-jet-label for="dateReleased" value="{{__('Date Released')}}"/>
                 <x-jet-input type="date"
+                             wire:model="date_released"
                              class="block mt-1 w-full"
                              :value="preg_replace(TIME_STRING, '', $game->date_released)"
                              id="dateReleased" name="date_released" required autofocus/>
@@ -61,6 +65,7 @@
                 <x-jet-label for="generation" value="{{__('Generation')}}"/>
                 <x-jet-input type="number" :value="$game->generation" id="generation" name="generation"
                              class="block mt-1 w-full"
+                             wire:model="generation"
                              min="{{MIN_GAME_GENERATION}}" max="{{MAX_GAME_GENERATION}}" required autofocus/>
             </div>
 

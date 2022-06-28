@@ -47,7 +47,7 @@ Route::middleware([
         Route::get('/create', CreateGame::class)->name('games.create')->middleware('admin');
         Route::get('/show/{gameId}', ShowGame::class)->name('games.show');
         Route::get('/edit/{gameId}', EditGame::class)->name('games.edit')->middleware('admin');
-        Route::put('/update/{gameId}', [EditGame::class, 'update'])->name('games.update');
+//        Route::put('/update/{gameId}', [EditGame::class, 'update'])->name('games.update');
         Route::delete('/delete/{gameId}', [DeleteGame::class, 'delete'])->name('games.delete');
     });
     Route::prefix('files')->group(function () {
