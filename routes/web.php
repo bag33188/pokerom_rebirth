@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\www\{HomeController, WelcomeController};
+use App\Http\Controllers\www\{HomeController, RomFileController, WelcomeController};
 use App\Http\Livewire\Game\Create as CreateGame;
 use App\Http\Livewire\Game\Delete as DeleteGame;
 use App\Http\Livewire\Game\Edit as EditGame;
@@ -11,7 +11,6 @@ use App\Http\Livewire\Rom\Delete as DeleteRom;
 use App\Http\Livewire\Rom\Edit as EditRom;
 use App\Http\Livewire\Rom\Index as IndexRom;
 use App\Http\Livewire\Rom\Show as ShowRom;
-use App\Http\Livewire\RomFile\Upload as UploadRomFile;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -48,7 +47,7 @@ Route::middleware([
         Route::delete('/delete/{gameId}', [DeleteGame::class, 'delete'])->name('games.delete');
     });
     Route::prefix('files')->group(function () {
-        Route::get('/create', UploadRomFile::class)->name('files.create')->middleware('admin');
-        Route::post('/store', [UploadRomFile::class, 'upload'])->name('files.store');
+        Route::get('/create', [RomFileController::class, 'create'])->name('files.create')->middleware('admin');
+        Route::post('/store', [RomFileController::class, 'store'])->name('files.store');
     });
 });
