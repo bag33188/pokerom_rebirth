@@ -45,7 +45,6 @@ Route::middleware([
     Route::prefix('games')->group(function () {
         Route::get('/', IndexGame::class)->name('games.index');
         Route::get('/create', CreateGame::class)->name('games.create')->middleware('admin');
-        Route::post('/store', [CreateGame::class, 'store'])->name('games.store');
         Route::get('/show/{gameId}', ShowGame::class)->name('games.show');
         Route::get('/edit/{gameId}', EditGame::class)->name('games.edit')->middleware('admin');
         Route::put('/update/{gameId}', [EditGame::class, 'update'])->name('games.update');

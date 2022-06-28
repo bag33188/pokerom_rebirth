@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire\Game;
 
-use App\Http\Requests\StoreGameRequest;
+use App\Actions\Validators\GameValidationRulesTrait;
 use App\Interfaces\GameDataServiceInterface;
 use GameRepo;
 use Illuminate\Contracts\{Foundation\Application, View\Factory, View\View};
@@ -10,9 +10,16 @@ use Livewire\Component;
 
 class Create extends Component
 {
+    use GameValidationRulesTrait;
+
     private array $availableRoms = [];
     private int $availableRomsCount = 0;
-
+    public $game_name;
+    public $game_type;
+    public $generation;
+    public $date_released;
+    public $region;
+    public $rom_id;
 
     public function mount()
     {
@@ -26,9 +33,27 @@ class Create extends Component
         return view('livewire.game.create', ['availableRoms' => $this->availableRoms, 'availableRomsCount' => $this->availableRomsCount, 'romsAvailable' => $romsAvailable]);
     }
 
-    public function store(StoreGameRequest $request, GameDataServiceInterface $gameDataService)
+    public function rules()
     {
-        $game = $gameDataService->createGameFromRomId((int)$request['rom_id'], $request->all());
-        return redirect()->route('games.index')->banner("Game $game->game_name created successfully.");
+        return [
+            'game_name' => $this->gameNameRules(),
+            'date_released' => $this->dateReleasedRules(),
+            'game_type' => $this->gameTypeRules(),
+            'region' => $this->gameRegionRules(),
+            'generation' => $this->gameGenerationRules(),
+        ];
+    }
+
+    public function submit(GameDataServiceInterface $gameDataService)
+    {
+        $this->validate();
+        $gameDataService->createGameFromRomId((int)$this->rom_id, [
+            'game_name' => $this->game_name,
+            'game_type' => $this->game_type,
+            'region' => $this->region,
+            'date_released' => $this->date_released,
+            'generation' => $this->generation
+        ]);
+
     }
 }
