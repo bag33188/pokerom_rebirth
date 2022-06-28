@@ -65,9 +65,11 @@ abstract class AbstractApplicationException extends Exception
             $response = new JsonDataResponse(['message' => $message], $code);
             return $response->renderResponse();
         } else {
-            if ($this->viewName()) {
-                return response()->view($this->viewName(), ['message' => $message], $code);
-            }
+//            if ($this->viewName()) {
+//                return response()->view($this->viewName(), ['message' => $message], $code);
+//            }
+            session()->flash('message', $message);
+            return false;
         }
     }
 }
