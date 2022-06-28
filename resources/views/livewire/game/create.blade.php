@@ -1,12 +1,14 @@
 @push('scripts')
-    <script type="text/javascript" src="{{asset('js/modules/capitalize.js')}}"></script>
-
+    @if($availableRomsCount > 0)
+        <script type="text/javascript" src="{{asset('js/modules/capitalize.js')}}"></script>
+    @endif
 @endpush
 <div class="container mx-auto w-full">
     <x-slot name="header">
         <h2 class="text-center">Add Game</h2>
     </x-slot>
     <div class="mt-3.5">
+        @if($availableRomsCount > 0)
 
             <x-jet-validation-errors class="mb-4"/>
 
@@ -17,10 +19,8 @@
                 <label for="availableRoms">Select ROM</label>
                 <x-form-select wire:model="rom_id" html-id="availableRoms" element-name="rom_id" autofocus required>
                     @php
-                        for($i = 0; $i < $availableRomsCount; $i++) {
-                            $rom = $availableRoms[$i];
-                            $html = /** @lang HTML */ "<option value='$rom->id'>$rom->rom_name</option>";
-                            print $html;
+                        foreach ($availableRoms as $rom) {
+                            echo "<option value='{$rom->id}'>$rom->rom_name</option>";
                         }
                     @endphp
                 </x-form-select>
@@ -75,7 +75,17 @@
                     </x-jet-button>
                 </div>
             </form>
-
+        @else
+            <h2 class="text-center text-lg mt-3">Sorry, there are no available roms to add a game to :(</h2>
+        @endif
     </div>
-
+    @if($availableRomsCount > 0)
+        <script type="text/javascript">
+            const regionsLength = {{sizeof(REGIONS)}};
+            for (let i = 0; i < regionsLength; i++) {
+                let regionName = document.getElementById(`region-${i + 1}`);
+                regionName.textContent = regionName.textContent.capitalize();
+            }
+        </script>
+    @endif
 </div>

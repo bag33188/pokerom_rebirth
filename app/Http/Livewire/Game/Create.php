@@ -13,25 +13,25 @@ class Create extends Component
 {
     use GameValidationRulesTrait;
 
-    private array $availableRoms = [];
-    private int $availableRomsCount = 0;
+    public $availableRoms = [];
+    public $availableRomsCount = 0;
     public $game_name;
-    public $game_type;
+    public $game_type = GAME_TYPES[0];
     public $generation;
     public $date_released;
-    public $region;
+    public $region =  REGIONS[0];
     public $rom_id;
 
     public function boot()
     {
         $this->availableRoms = GameRepo::getAllRomsWithNoGame();
         $this->availableRomsCount = count($this->availableRoms);
+        $this->rom_id =$this->availableRoms[0]->id;
     }
 
     public function render(): Factory|View|Application
     {
-        $romsAvailable = $this->availableRomsCount > 0;
-        return view('livewire.game.create', ['availableRoms' => $this->availableRoms, 'availableRomsCount' => $this->availableRomsCount, 'romsAvailable' => $romsAvailable]);
+        return view('livewire.game.create');
     }
 
     #[ArrayShape(['game_name' => "array", 'date_released' => "array", 'game_type' => "array", 'region' => "array", 'generation' => "array"])]
@@ -49,7 +49,7 @@ class Create extends Component
     public function submit(GameDataServiceInterface $gameDataService)
     {
         $this->validate();
-        $gameDataService->createGameFromRomId((int)$this->rom_id, [
+        $gameDataService->createGameFromRomId($this->rom_id, [
             'game_name' => $this->game_name,
             'game_type' => $this->game_type,
             'region' => $this->region,

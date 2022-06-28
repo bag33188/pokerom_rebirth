@@ -30,7 +30,7 @@ class Delete extends Component
     /**
      * @throws AuthorizationException
      */
-    public function delete(int $gameId): RedirectResponse
+    public function delete(int $gameId)
     {
 
         $game = GameRepo::findGameIfExists($gameId);
