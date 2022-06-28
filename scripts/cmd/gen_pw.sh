@@ -9,11 +9,11 @@ Permissions (Unix)
 ------------------
 
 add to current permissions
-$ cd scripts
+$ cd scripts/cmd
 $ chmod +x ./gen_pw.sh
 
 set current permissions
-$ cd scripts
+$ cd scripts/cmd
 $ chmod 755 ./gen_pw.sh
 --MULTILINE-COMMENT--
 

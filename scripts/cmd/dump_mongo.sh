@@ -9,11 +9,11 @@ Permissions (Unix)
 ------------------
 
 add to current permissions
-$ cd scripts
+$ cd scripts/cmd
 $ chmod +x ./dump_mongo.sh
 
 set current permissions
-$ cd scripts
+$ cd scripts/cmd
 $ chmod 755 ./dump_mongo.sh
 --MULTILINE-COMMENT--
 
