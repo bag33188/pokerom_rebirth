@@ -67,8 +67,9 @@ abstract class AbstractApplicationException extends Exception
             $response = new JsonDataResponse(['message' => $message], $code);
             return $response->renderResponse();
         } else {
-            if ($this->viewName()) {
-                return response()->view($this->viewName(), ['message' => $message], $code);
+            $isLivewire = $request->header('X-Livewire');
+            if ($this->viewName() || !$isLivewire) {
+                return response()->view($this->viewName() ?? self::DEFAULT_ERROR_VIEW, ['message' => $message], $code);
             }
             return false;
         }
