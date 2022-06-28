@@ -15,13 +15,13 @@
             <x-jet-validation-errors class="mb-4"/>
 
             <form wire:submit.prevent="submit">
-
                 <label for="availableRoms">Select ROM</label>
                 <x-form-select wire:model="rom_id" html-id="availableRoms" element-name="rom_id" autofocus required>
                     @php
-                        foreach ($availableRoms as $rom) {
-                            $rom = json_decode(json_encode($rom), associative: false);
-                            print "<option value='$rom->id'>$rom->rom_name</option>";
+                        for($i = 0; $i < $availableRomsCount; $i++) {
+                            $rom = json_decode(json_encode($availableRoms[$i]), associative: false);
+                            $html = "<option value='$rom->id'>$rom->rom_name</option>";
+                            echo preg_replace("/'/m", '"', $html);
                         }
                     @endphp
                 </x-form-select>
