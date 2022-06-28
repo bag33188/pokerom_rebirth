@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider;
 use Illuminate\Support\ServiceProvider;
+use View;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -27,9 +28,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        view()->composer('*', function($view){
+        View::composer('*', function ($view) {
             $view_name = str_replace('.', '-', $view->getName());
-            view()->share('view_name', $view_name);
+            View::share('view_name', $view_name);
         });
     }
 }
