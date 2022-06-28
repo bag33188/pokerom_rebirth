@@ -11,7 +11,7 @@ use Utils\Modules\GridFS\AbstractGridFsBucket as GfsBucket;
 
 class RomFilesBucket extends GfsBucket
 {
-    /** @var int override default download chunk size */
+    // override default download chunk size
     protected const DOWNLOAD_CHUNK_SIZE = 0xFF000;
 
     public function getFilename(): string
