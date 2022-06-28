@@ -16,14 +16,16 @@ class GridFsServiceProvider extends ServiceProvider implements DeferrableProvide
      */
     public function register(): void
     {
-        $dbProps = [
-            config('gridfs.connection.database'),
-            config('gridfs.bucketName'),
-            config('gridfs.chunkSize'),
-        ];
+
         // use scoped singleton since only admin user will be invoking this logic
-        $this->app->scoped(RomFilesBucket::class,
-            fn(Application $app): RomFilesBucket => new RomFilesBucket(...$dbProps));
+        $this->app->scoped(RomFilesBucket::class, function (Application $app) {
+            $dbProps = [
+                config('gridfs.connection.database'),
+                config('gridfs.bucketName'),
+                config('gridfs.chunkSize'),
+            ];
+            return new RomFilesBucket(...$dbProps);
+        });
     }
 
     /**
