@@ -34,6 +34,6 @@ class Delete extends Component
         $game = GameRepo::findGameIfExists($gameId);
         $this->authorize('delete', $game);
         $game->delete();
-        return redirect()->to(route('games.index'));
+        $this->redirect(route('games.index'));
     }
 }

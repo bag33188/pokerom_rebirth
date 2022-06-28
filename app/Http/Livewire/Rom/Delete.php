@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Rom;
 
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -13,7 +14,7 @@ class Delete extends Component
 {
     use AuthorizesRequests;
 
-    public int $romId;
+    public $romId;
 
     public function mount(int $romId)
     {
@@ -22,15 +23,18 @@ class Delete extends Component
 
     public function render(): Factory|View|Application
     {
-        return view('livewire.rom.delete', ['romId' => $this->romId]);
+        return view('livewire.rom.delete');
     }
 
 
+    /**
+     * @throws AuthorizationException
+     */
     public function delete(int $romId)
     {
         $rom = RomRepo::findRomIfExists($romId);
         $this->authorize('delete', $rom);
         $rom->delete();
-        return redirect()->to(route('roms.index'));
+        $this->redirect(route('roms.index'));
     }
 }

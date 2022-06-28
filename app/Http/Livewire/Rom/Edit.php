@@ -66,7 +66,7 @@ class Edit extends Component
                 'rom_name' => $this->rom_name,
                 'rom_size' => $this->rom_size
             ]);
-            return redirect()->to(route('roms.show', $this->romId));
+            $this->redirect(route('roms.show', $this->romId));
         } catch (Exception $e) {
             session()->flash('message', $e->getMessage());
         }

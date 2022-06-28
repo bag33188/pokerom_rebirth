@@ -65,7 +65,7 @@ class Create extends Component
                 'generation' => $this->generation
             ]);
             $this->reset();
-            return redirect()->to(route('games.index'));
+            $this->redirect(route('games.index'));
 
         } catch (Exception $e) {
             session()->flash('message', $e->getMessage());

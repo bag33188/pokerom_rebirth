@@ -71,7 +71,7 @@ class Edit extends Component
                 'date_released' => $this->date_released,
                 'generation' => $this->generation
             ]);
-            return redirect()->to(route('games.show', $this->gameId));
+            $this->redirect(route('games.show', $this->gameId));
 
         } catch (Exception $e) {
             session()->flash('message', $e->getMessage());

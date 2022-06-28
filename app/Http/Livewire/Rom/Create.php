@@ -49,7 +49,7 @@ class Create extends Component
                 'rom_type' => $this->rom_type
             ]);
 
-            return redirect()->to(route('roms.index'));
+            $this->redirect(route('roms.index'));
         } catch (Exception $e) {
             session()->flash('message', $e->getMessage());
         }
