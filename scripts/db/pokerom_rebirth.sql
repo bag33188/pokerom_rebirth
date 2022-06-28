@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 28, 2022 at 03:14 AM
+-- Generation Time: Jun 28, 2022 at 03:32 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -41,6 +41,9 @@ CREATE DEFINER=`bag33188`@`%` PROCEDURE `FindRomsWithNoGame` ()   BEGIN
 SELECT `id`, `rom_name`, `rom_type`, IF (0 = FALSE, 'false', 'true') AS `has_game`, `game_id` FROM `roms` WHERE `has_game` = FALSE AND `game_id` IS NULL ORDER BY `rom_name` DESC;
 END$$
 
+DROP PROCEDURE IF EXISTS `GetAllPokeROMData`$$
+CREATE DEFINER=`bag33188`@`%` PROCEDURE `GetAllPokeROMData` ()   SELECT `games`.`id` AS `games_id`, `games`.`game_name`, `games`.`game_type`, `games`.`date_released`, `games`.`generation`, `games`.`region`, `roms`.`id` AS `roms_id`, `roms`.`file_id`, KbToB(`roms`.`rom_size`) AS `rom_size_bytes`,  CONCAT(`roms`.`rom_name`, '.', UCASE(`roms`.`rom_type`)) AS `rom_fullname` FROM `games` RIGHT JOIN `roms` ON `roms`.`id` = `games`.`rom_id` ORDER BY `roms_id` DESC$$
+
 DROP PROCEDURE IF EXISTS `GetAllUnlinkedRoms`$$
 CREATE DEFINER=`bag33188`@`localhost` PROCEDURE `GetAllUnlinkedRoms` ()  COMMENT 'checks for both unlinked games and/or files' BEGIN
   SELECT `id` AS `rom_id`, `file_id`, `rom_name`, `rom_type`, IF (0 = FALSE, 'false', 'true') AS `has_game`, IF (0 = FALSE, 'false', 'true') AS `has_file`
@@ -58,9 +61,6 @@ Right now the total length of bytes (as a string) is less than 14 (11 currently 
 may need to increase varchar limit in the future
 */
 END$$
-
-DROP PROCEDURE IF EXISTS `joinromsandgames`$$
-CREATE DEFINER=`bag33188`@`%` PROCEDURE `joinromsandgames` ()   SELECT `games`.*, `roms`.`id` AS `romTableKey`, CONCAT(`roms`.`rom_name`, '.', UCASE(`roms`.`rom_type`)) AS `romFileName` FROM `games` RIGHT JOIN `roms` ON `roms`.`id` = `games`.`rom_id` ORDER BY `romTableKey` DESC$$
 
 DROP PROCEDURE IF EXISTS `LinkAllRomGameIDsToGames`$$
 CREATE DEFINER=`bag33188`@`%` PROCEDURE `LinkAllRomGameIDsToGames` ()  SQL SECURITY INVOKER BEGIN
@@ -163,6 +163,9 @@ The max input value length is 8 since the max str-len of an input option
 which is 'spin-off' is excactly 8 chars
 */
 END CASE$$
+
+DROP FUNCTION IF EXISTS `KbToB`$$
+CREATE DEFINER=`bag33188`@`%` FUNCTION `KbToB` (`kilobytes` INT) RETURNS BIGINT(10) UNSIGNED  RETURN `kilobytes` * 1024$$
 
 DELIMITER ;
 
