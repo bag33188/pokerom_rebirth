@@ -18,7 +18,6 @@
                              wire:model="game_name"
                              minlength="{{MIN_GAME_NAME}}"
                              maxlength="{{MAX_GAME_NAME}}"
-                             :value="ununicode_poke($game->game_name)"
                              required autofocus
                 />
             </div>
@@ -58,7 +57,6 @@
                 <x-jet-input type="date"
                              wire:model="date_released"
                              class="block mt-1 w-full"
-                             :value="preg_replace(TIME_STRING, '', $game->date_released)"
                              id="dateReleased" name="date_released" required autofocus/>
             </div>
             <div class="mt-2.5">

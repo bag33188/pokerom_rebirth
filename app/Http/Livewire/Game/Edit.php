@@ -33,7 +33,7 @@ class Edit extends Component
             'generation' => $this->game->generation,
             'region' => $this->game->region,
             'game_type' => $this->game->game_type,
-            'game_name' => $this->game->game_name
+            'game_name' => ununicode_poke($this->game->game_name)
         ]);
     }
 

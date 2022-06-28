@@ -18,7 +18,6 @@
                              name="rom_name"
                              minlength="{{MIN_ROM_NAME}}"
                              maxlength="{{MAX_ROM_NAME}}"
-                             :value="$rom->rom_name"
                              required autofocus/>
             </div>
             <div class="mt-2.5">
@@ -44,7 +43,6 @@
                              class="block mt-1 w-full"
                              type="number" min="{{MIN_ROM_SIZE}}"
                              max="{{MAX_ROM_SIZE}}"
-                             :value="$rom->rom_size"
                              required autofocus/>
             </div>
             <div class="mt-4">
