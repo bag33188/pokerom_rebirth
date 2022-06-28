@@ -12,6 +12,7 @@ class Connection
     protected string $bucketName;
     protected string $databaseName;
     protected int $chunkSize;
+    /** @var Bucket GridFS bucket object */
     protected Bucket $gfsBucket;
     private static array $mongoConfig;
     private static array $gfsConfig;
