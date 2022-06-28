@@ -31,7 +31,7 @@
                         <option
                             value="{{$gameType}}"
                             id="game-type-{{array_search($gameType, GAME_TYPES) + 1}}"
-                            {!! (strtolower($game->game_type) == $gameType)
+                            {!! $game_type == $gameType
                                   ? 'selected' : '' !!}>
                             {{ $gameType }}</option>
                     @endforeach
@@ -46,7 +46,7 @@
                     @foreach(REGIONS as $gameRegion)
                         <option
                             value="{{$gameRegion}}"
-                            {!! (strtolower($game->region) == $gameRegion)
+                            {!! $region == $gameRegion
                                   ? 'selected' : '' !!}>
                             {{ ucfirst($gameRegion) }}</option>
                     @endforeach

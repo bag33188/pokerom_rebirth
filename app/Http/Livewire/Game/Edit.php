@@ -33,7 +33,7 @@ class Edit extends Component
             'date_released' => preg_replace(TIME_STRING, '', $this->game->date_released),
             'generation' => $this->game->generation,
             'region' => strtolower($this->game->region),
-            'game_type' => $this->game->game_type,
+            'game_type' => strtolower($this->game->game_type),
             'game_name' => ununicode_poke($this->game->game_name)
         ]);
     }

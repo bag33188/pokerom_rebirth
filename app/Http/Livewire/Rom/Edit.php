@@ -39,7 +39,7 @@ class Edit extends Component
         $this->rom = RomRepo::findRomIfExists($romId);
         $this->fill(
             [
-                'rom_type' => $this->rom->rom_type,
+                'rom_type' => strtolower($this->rom->rom_type),
                 'rom_name' => $this->rom->rom_name,
                 'rom_size' => $this->rom->rom_size
             ]

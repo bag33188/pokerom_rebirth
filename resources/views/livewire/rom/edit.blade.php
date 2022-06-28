@@ -27,7 +27,7 @@
                     @foreach(ROM_TYPES as $romType)
                         <option
                             value="{{$romType}}"
-                            {!! (strtolower($rom->rom_type) == $romType)
+                            {!! $rom_type == $romType
                                   ? 'selected' : '' !!}>
                             {{ strtoupper($romType) }}</option>
                     @endforeach

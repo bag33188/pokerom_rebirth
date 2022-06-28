@@ -28,6 +28,8 @@ compile() {
     fi
     composer install && composer update
     npm run dev
+    git status
+    git add . && git commit -m "update code base" && git push
 }
 
 compile
