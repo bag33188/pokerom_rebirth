@@ -3,10 +3,7 @@
 namespace Utils\Classes;
 
 use Exception;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 
 abstract class AbstractApplicationException extends Exception
 {
@@ -60,17 +57,7 @@ abstract class AbstractApplicationException extends Exception
         return $this->status() ?: (int)$this->getCode();
     }
 
-    /**
-     * If request accepts json or is api request, a json response will be returned with error data.
-     *
-     * If request is web request:
-     *  - If not view-name is specified, the render will be redirected and show a danger banner with the error message
-     *  - If view-name is specified, the render will output the view with specified error message and http status code
-     *
-     * @param Request $request
-     * @return Response|JsonResponse|RedirectResponse
-     */
-    public final function render(Request $request): Response|JsonResponse|RedirectResponse
+    public final function render(Request $request)
     {
         $message = $this->getErrorMessageIfNotNull();
         $code = $this->getStatusCodeIfNotNull();
@@ -78,12 +65,9 @@ abstract class AbstractApplicationException extends Exception
             $response = new JsonDataResponse(['message' => $message], $code);
             return $response->renderResponse();
         } else {
-            if (!$this->viewName()) {
-                session()->flash('message', $message);
-
-                return redirect()->to(url()->previous());
+            if ($this->viewName()) {
+                return response()->view($this->viewName(), ['message' => $message], $code);
             }
-            return response()->view($this->viewName(), ['message' => $message], $code);
         }
     }
 }
