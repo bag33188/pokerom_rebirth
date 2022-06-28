@@ -51,12 +51,12 @@
                     wire:model="region"
                     element-name="region" html-id="gameRegion"
                     required autofocus>
-                    @foreach(REGIONS as $gregion)
+                    @foreach(REGIONS as $gameRegion)
                         <option
-                            value="{{$gregion}}"
-                            {!! (strtolower($game->region) == $gregion)
+                            value="{{$gameRegion}}"
+                            {!! (strtolower($game->region) == $gameRegion)
                                   ? 'selected' : '' !!}>
-                            {{ ucfirst($gregion) }}</option>
+                            {{ ucfirst($gameRegion) }}</option>
                     @endforeach
                 </x-form-select>
             </div>
