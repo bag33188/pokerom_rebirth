@@ -1,6 +1,3 @@
-@push('scripts')
-    <script type="text/javascript" src="{{asset('js/modules/capitalize.js')}}"></script>
-@endpush
 <div>
     <x-slot name="header">
         <h2 class="text-center">Edit {{$game->game_name}} Version</h2>
@@ -30,10 +27,8 @@
                     @foreach(GAME_TYPES as $gameType)
                         <option
                             value="{{$gameType}}"
-                            id="game-type-{{array_search($gameType, GAME_TYPES) + 1}}"
-                            {!! $game_type == $gameType
-                                  ? 'selected' : '' !!}>
-                            {{ $gameType }}</option>
+                            id="game-type-{{array_search($gameType, GAME_TYPES) + 1}}">
+                            {{ str_capitalize($gameType, true, 2, '-') }}</option>
                     @endforeach
                 </x-form-select>
             </div>
@@ -45,9 +40,7 @@
                     required autofocus>
                     @foreach(REGIONS as $gameRegion)
                         <option
-                            value="{{$gameRegion}}"
-                            {!! $region == $gameRegion
-                                  ? 'selected' : '' !!}>
+                            value="{{$gameRegion}}">
                             {{ ucfirst($gameRegion) }}</option>
                     @endforeach
                 </x-form-select>
@@ -79,11 +72,4 @@
             </div>
         </form>
     </div>
-    <script>
-        const gameTypesCount = {{sizeof(GAME_TYPES)}};
-        for (let i = 0; i < gameTypesCount; i++) {
-            let gameType = document.getElementById(`game-type-${i + 1}`);
-            gameType.textContent = gameType.textContent.capitalize(true, 2, '-');
-        }
-    </script>
 </div>
