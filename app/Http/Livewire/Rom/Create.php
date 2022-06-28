@@ -17,7 +17,7 @@ class Create extends Component
 
     public $rom_name;
     public $rom_size;
-    public $rom_type;
+    public $rom_type = ROM_TYPES[0];
 
     #[ArrayShape(['rom_name' => "array", 'rom_type' => "array", 'rom_size' => "array"])]
     protected function rules(): array
