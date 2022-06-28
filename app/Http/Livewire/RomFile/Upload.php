@@ -25,7 +25,10 @@ class Upload extends Component
         //https://github.com/23/resumable.js
         $file = $request->file(FILE_FORM_KEY);
         GfsRomFile::upload($file);
-//        \Storage::putFile('photos', $file, 'private');
+//        if (!\Storage::directoryExists('photos')) {
+//            \Storage::makeDirectory('photos');
+//            \Storage::putFile('photos', $file, 'private');
+//        }
         return redirect()->to(url()->previous())->banner("file uploaded!");
     }
 }
