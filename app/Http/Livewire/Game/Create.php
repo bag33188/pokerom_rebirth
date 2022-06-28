@@ -34,6 +34,12 @@ class Create extends Component
         return view('livewire.game.create', ['availableRoms' => $this->availableRoms, 'availableRomsCount' => $this->availableRomsCount, 'romsAvailable' => $romsAvailable]);
     }
 
+
+    public function updated($propertyName)
+    {
+        $this->validateOnly($propertyName);
+    }
+
     #[ArrayShape(['game_name' => "array", 'date_released' => "array", 'game_type' => "array", 'region' => "array", 'generation' => "array"])]
     public function rules(): array
     {
