@@ -7,7 +7,6 @@ use App\Models\Rom;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
-use Illuminate\Http\RedirectResponse;
 use Livewire\Component;
 
 class Create extends Component
@@ -25,6 +24,11 @@ class Create extends Component
             'rom_type' => $this->romTypeRules(),
             'rom_size' => $this->romSizeRules(),
         ];
+    }
+
+    public function updated($propertyName)
+    {
+        $this->validateOnly($propertyName);
     }
 
     public function render(): Factory|View|Application
