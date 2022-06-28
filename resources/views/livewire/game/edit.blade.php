@@ -68,9 +68,11 @@
             </div>
 
             <div class="mt-4">
-                <x-jet-button class="float-right" wire:click="update">
-                    {{ __('Save!') }}
-                </x-jet-button>
+                <div class="float-right">
+                    <x-jet-button wire:click="update">
+                        {{ __('Save!') }}
+                    </x-jet-button>
+                </div>
                 <div class="float-left">
                     <x-jet-button type="button" wire:click="cancel({{$gameId}})">Cancel</x-jet-button>
                 </div>
