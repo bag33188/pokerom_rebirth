@@ -20,16 +20,16 @@
                                 {{$game->game_name . ' Version'}}
                             </li>
                             <li class="p-3 hover:bg-blue-600 hover:text-blue-200">
-                                {{$game->generation > 0 ? $game->generation : 'N/A'}}
+                                Generation {{$game->generation > 0 ? number_to_roman($game->generation) : 'N/A'}}
                             </li>
                             <li class="p-3 hover:bg-blue-600 hover:text-blue-200">
-                                {{$game->region}}
+                                {{$game->region}} Region
                             </li>
                             <li class="p-3 hover:bg-blue-600 hover:text-blue-200">
                                 {{GameRepo::getProperGameTypeString($game->game_type)}}
                             </li>
                             <li class="p-3 hover:bg-blue-600 hover:text-blue-200">
-                                {{parse_date_as_readable_string($game->date_released)}}
+                                Released on {{parse_date_as_readable_string($game->date_released, false)}}
                             </li>
                         </ul>
                     </div>

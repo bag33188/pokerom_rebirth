@@ -27,7 +27,7 @@ compile() {
         cd ../..
     fi
     composer install && composer update
-    npm run dev
+    npm run development
     git status
     git add . && git commit -m "update code base" && git push
 }
