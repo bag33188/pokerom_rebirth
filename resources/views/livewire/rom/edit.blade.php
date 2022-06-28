@@ -3,21 +3,10 @@
         <h2 class="text-center">Edit {{$rom->getRomFileName()}}</h2>
     </x-slot>
     <div class="p-3">
-        @if (session()->has('message'))
-            <div class="bg-gray-100 border-t-4 border-red-500 rounded-b text-teal-900 px-4 py-3 shadow-md my-3"
-                 role="alert">
-                <div class="flex">
-                    <div>
-                        <p class="text-sm">{{ session('message') }}</p>
-                    </div>
-                </div>
-            </div>
-        @endif
+        @include('ui.session-error')
         <x-jet-validation-errors class="mb-4"/>
 
         <form wire:submit.prevent="update">
-
-
             <div class="mt-2.5">
                 <x-jet-label for="romName" value="{{ __('Rom Name') }}"/>
                 <x-jet-input id="romName"
