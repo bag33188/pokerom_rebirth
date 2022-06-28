@@ -39,7 +39,7 @@ Route::middleware([
 //        Route::post('/store', [CreateRom::class, 'store'])->name('roms.store');
         Route::get('/show/{romId}', ShowRom::class)->name('roms.show');
         Route::get('/edit/{romId}', EditRom::class)->name('roms.edit')->middleware('admin');
-        Route::put('/update/{romId}', [EditRom::class, 'update'])->name('roms.update');
+//        Route::put('/update/{romId}', [EditRom::class, 'update'])->name('roms.update');
         Route::delete('/delete/{romId}', [DeleteRom::class, 'delete'])->name('roms.delete');
     });
     Route::prefix('games')->group(function () {
