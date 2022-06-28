@@ -70,6 +70,5 @@ class Edit extends Component
         } catch (Exception $e) {
             session()->flash('message', $e->getMessage());
         }
-//        return redirect()->route('games.show', ['gameId' => $this->gameId])->banner('Game Updated successfully.');
     }
 }

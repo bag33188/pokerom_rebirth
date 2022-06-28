@@ -53,8 +53,6 @@ class Create extends Component
             return redirect()->to(route('roms.index'))->banner('rom created!');
         } catch (Exception $e) {
             session()->flash('message', $e->getMessage());
-
         }
-
     }
 }

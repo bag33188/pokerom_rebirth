@@ -1,10 +1,5 @@
 <div class="inline-block">
-    <form action="{{route('roms.delete', $romId)}}" method="POST">
-        @csrf
-        @method('DELETE')
-
-        <x-jet-button>
-            {{ __('Delete!') }}
-        </x-jet-button>
-    </form>
+    <x-jet-button wire:click="delete({{$romId}})">
+        {{ __('Delete!') }}
+    </x-jet-button>
 </div>
