@@ -57,6 +57,7 @@ class Edit extends Component
 
     public function update()
     {
+        $this->validate();
         try {
             $this->game->update([
                 'game_name' => $this->game_name,
