@@ -14,7 +14,8 @@ class Edit extends Component
 {
     use RomValidationRulesTrait;
 
-    public Rom $rom;
+    /** @var Rom */
+    public $rom;
     public $romId;
     public $rom_name;
     public $rom_size;

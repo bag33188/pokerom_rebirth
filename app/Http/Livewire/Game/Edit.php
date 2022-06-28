@@ -14,7 +14,8 @@ class Edit extends Component
 {
     use GameValidationRulesTrait;
 
-    public Game $game;
+    /** @var Game */
+    public $game;
     public $gameId;
     public $game_name;
     public $game_type;
