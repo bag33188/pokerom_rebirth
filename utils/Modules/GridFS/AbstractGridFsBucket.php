@@ -7,11 +7,7 @@ use Jenssegers\Mongodb\Eloquent\Model;
 
 abstract class AbstractGridFsBucket extends FileBucket implements GridFileResourcing
 {
-    /**
-     * Size of chunks interval(s) to download
-     *
-     * @var int
-     */
+    /** @var int Size of chunks interval(s) to download */
     protected const DOWNLOAD_CHUNK_SIZE = 0x3FC00;
 
     /**
