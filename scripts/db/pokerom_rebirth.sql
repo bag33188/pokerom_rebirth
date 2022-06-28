@@ -3,13 +3,13 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 27, 2022 at 08:07 PM
+-- Generation Time: Jun 28, 2022 at 03:14 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
 --
--- CREATE USER 'bag33188'@'%' IDENTIFIED VIA mysql_native_password USING '***';GRANT ALL PRIVILEGES ON *.* TO 'bag33188'@'%' REQUIRE NONE WITH GRANT OPTION MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0;CREATE DATABASE IF NOT EXISTS `bag33188`;GRANT ALL PRIVILEGES ON `bag33188`.* TO 'bag33188'@'%';GRANT ALL PRIVILEGES ON `bag33188\_%`.* TO 'bag33188'@'%';
--- set autocommit = {0|1}
+-- pokerom v3 db export
+-- mariadb
 --
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -95,6 +95,9 @@ notes:
 */
 END$$
 
+DROP PROCEDURE IF EXISTS `UnlinkAllRomFiles`$$
+CREATE DEFINER=`bag33188`@`%` PROCEDURE `UnlinkAllRomFiles` ()  SQL SECURITY INVOKER COMMENT 'Use for mobile when rom files don''t exist in gridfs' UPDATE `roms` SET `roms`.`file_id` = NULL, `roms`.`has_file` = FALSE$$
+
 --
 -- Functions
 --
@@ -168,7 +171,7 @@ DELIMITER ;
 --
 -- Table structure for table `failed_jobs`
 --
--- Creation: Jun 05, 2022 at 04:47 PM
+-- Creation: Jun 15, 2022 at 12:03 PM
 --
 
 DROP TABLE IF EXISTS `failed_jobs`;
@@ -196,8 +199,7 @@ TRUNCATE TABLE `failed_jobs`;
 --
 -- Table structure for table `games`
 --
--- Creation: Jun 15, 2022 at 04:16 AM
--- Last update: Jun 27, 2022 at 03:14 PM
+-- Creation: Jun 15, 2022 at 12:03 PM
 --
 
 DROP TABLE IF EXISTS `games`;
@@ -306,7 +308,7 @@ DELIMITER ;
 --
 -- Table structure for table `migrations`
 --
--- Creation: Jun 05, 2022 at 04:47 PM
+-- Creation: Jun 15, 2022 at 12:03 PM
 --
 
 DROP TABLE IF EXISTS `migrations`;
@@ -345,7 +347,7 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 --
 -- Table structure for table `password_resets`
 --
--- Creation: Jun 05, 2022 at 04:47 PM
+-- Creation: Jun 15, 2022 at 12:03 PM
 --
 
 DROP TABLE IF EXISTS `password_resets`;
@@ -369,8 +371,7 @@ TRUNCATE TABLE `password_resets`;
 --
 -- Table structure for table `personal_access_tokens`
 --
--- Creation: Jun 05, 2022 at 04:47 PM
--- Last update: Jun 27, 2022 at 06:03 PM
+-- Creation: Jun 15, 2022 at 12:03 PM
 --
 
 DROP TABLE IF EXISTS `personal_access_tokens`;
@@ -408,8 +409,7 @@ INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `n
 --
 -- Table structure for table `roms`
 --
--- Creation: Jun 15, 2022 at 04:16 AM
--- Last update: Jun 27, 2022 at 03:14 PM
+-- Creation: Jun 16, 2022 at 08:27 AM
 --
 
 DROP TABLE IF EXISTS `roms`;
@@ -486,8 +486,7 @@ INSERT INTO `roms` (`id`, `file_id`, `game_id`, `rom_name`, `rom_size`, `rom_typ
 --
 -- Table structure for table `sessions`
 --
--- Creation: Jun 05, 2022 at 04:47 PM
--- Last update: Jun 27, 2022 at 06:01 PM
+-- Creation: Jun 15, 2022 at 12:03 PM
 --
 
 DROP TABLE IF EXISTS `sessions`;
@@ -521,8 +520,7 @@ INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, 
 --
 -- Table structure for table `users`
 --
--- Creation: Jun 05, 2022 at 04:47 PM
--- Last update: Jun 27, 2022 at 02:05 PM
+-- Creation: Jun 15, 2022 at 12:03 PM
 --
 
 DROP TABLE IF EXISTS `users`;
@@ -637,7 +635,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `games`
 --
 ALTER TABLE `games`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -655,7 +653,7 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `roms`
 --
 ALTER TABLE `roms`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -672,7 +670,203 @@ ALTER TABLE `users`
 --
 ALTER TABLE `games`
   ADD CONSTRAINT `games_rom_id_foreign` FOREIGN KEY (`rom_id`) REFERENCES `roms` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-COMMIT;
+
+
+--
+-- Metadata
+--
+USE `phpmyadmin`;
+
+--
+-- Metadata for table failed_jobs
+--
+
+--
+-- Truncate table before insert `pma__column_info`
+--
+
+TRUNCATE TABLE `pma__column_info`;
+--
+-- Truncate table before insert `pma__table_uiprefs`
+--
+
+TRUNCATE TABLE `pma__table_uiprefs`;
+--
+-- Truncate table before insert `pma__tracking`
+--
+
+TRUNCATE TABLE `pma__tracking`;
+--
+-- Metadata for table games
+--
+
+--
+-- Truncate table before insert `pma__column_info`
+--
+
+TRUNCATE TABLE `pma__column_info`;
+--
+-- Truncate table before insert `pma__table_uiprefs`
+--
+
+TRUNCATE TABLE `pma__table_uiprefs`;
+--
+-- Dumping data for table `pma__table_uiprefs`
+--
+
+INSERT INTO `pma__table_uiprefs` (`username`, `db_name`, `table_name`, `prefs`, `last_update`) VALUES
+('bag33188', 'pokerom_rebirth', 'games', '{\"sorted_col\":\"`games`.`created_at` DESC\"}', '2022-06-16 08:21:25');
+
+--
+-- Truncate table before insert `pma__tracking`
+--
+
+TRUNCATE TABLE `pma__tracking`;
+--
+-- Metadata for table migrations
+--
+
+--
+-- Truncate table before insert `pma__column_info`
+--
+
+TRUNCATE TABLE `pma__column_info`;
+--
+-- Truncate table before insert `pma__table_uiprefs`
+--
+
+TRUNCATE TABLE `pma__table_uiprefs`;
+--
+-- Truncate table before insert `pma__tracking`
+--
+
+TRUNCATE TABLE `pma__tracking`;
+--
+-- Metadata for table password_resets
+--
+
+--
+-- Truncate table before insert `pma__column_info`
+--
+
+TRUNCATE TABLE `pma__column_info`;
+--
+-- Truncate table before insert `pma__table_uiprefs`
+--
+
+TRUNCATE TABLE `pma__table_uiprefs`;
+--
+-- Truncate table before insert `pma__tracking`
+--
+
+TRUNCATE TABLE `pma__tracking`;
+--
+-- Metadata for table personal_access_tokens
+--
+
+--
+-- Truncate table before insert `pma__column_info`
+--
+
+TRUNCATE TABLE `pma__column_info`;
+--
+-- Truncate table before insert `pma__table_uiprefs`
+--
+
+TRUNCATE TABLE `pma__table_uiprefs`;
+--
+-- Truncate table before insert `pma__tracking`
+--
+
+TRUNCATE TABLE `pma__tracking`;
+--
+-- Metadata for table roms
+--
+
+--
+-- Truncate table before insert `pma__column_info`
+--
+
+TRUNCATE TABLE `pma__column_info`;
+--
+-- Truncate table before insert `pma__table_uiprefs`
+--
+
+TRUNCATE TABLE `pma__table_uiprefs`;
+--
+-- Dumping data for table `pma__table_uiprefs`
+--
+
+INSERT INTO `pma__table_uiprefs` (`username`, `db_name`, `table_name`, `prefs`, `last_update`) VALUES
+('bag33188', 'pokerom_rebirth', 'roms', '{\"CREATE_TIME\":\"2022-06-16 01:27:45\",\"col_order\":[0,1,2,3,4,5,6,7,8,9],\"col_visib\":[1,1,1,1,1,1,1,1,1,1]}', '2022-06-24 07:13:48');
+
+--
+-- Truncate table before insert `pma__tracking`
+--
+
+TRUNCATE TABLE `pma__tracking`;
+--
+-- Metadata for table sessions
+--
+
+--
+-- Truncate table before insert `pma__column_info`
+--
+
+TRUNCATE TABLE `pma__column_info`;
+--
+-- Truncate table before insert `pma__table_uiprefs`
+--
+
+TRUNCATE TABLE `pma__table_uiprefs`;
+--
+-- Truncate table before insert `pma__tracking`
+--
+
+TRUNCATE TABLE `pma__tracking`;
+--
+-- Metadata for table users
+--
+
+--
+-- Truncate table before insert `pma__column_info`
+--
+
+TRUNCATE TABLE `pma__column_info`;
+--
+-- Truncate table before insert `pma__table_uiprefs`
+--
+
+TRUNCATE TABLE `pma__table_uiprefs`;
+--
+-- Truncate table before insert `pma__tracking`
+--
+
+TRUNCATE TABLE `pma__tracking`;
+--
+-- Metadata for database pokerom_rebirth
+--
+
+--
+-- Truncate table before insert `pma__bookmark`
+--
+
+TRUNCATE TABLE `pma__bookmark`;
+--
+-- Truncate table before insert `pma__relation`
+--
+
+TRUNCATE TABLE `pma__relation`;
+--
+-- Truncate table before insert `pma__savedsearches`
+--
+
+TRUNCATE TABLE `pma__savedsearches`;
+--
+-- Truncate table before insert `pma__central_columns`
+--
+
+TRUNCATE TABLE `pma__central_columns`;COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
