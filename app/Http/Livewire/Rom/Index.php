@@ -33,4 +33,9 @@ class Index extends Component
         if ($dev) return "$baseUrl/dev/$baseFilesEndpoint";
         return "$baseUrl/$baseFilesEndpoint";
     }
+
+    public function show(int $romId)
+    {
+        $this->redirect(route('roms.show', $romId));
+    }
 }
