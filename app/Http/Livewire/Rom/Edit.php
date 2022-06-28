@@ -7,6 +7,7 @@ use App\Models\Rom;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use JetBrains\PhpStorm\ArrayShape;
 use Livewire\Component;
 use RomRepo;
 
@@ -21,6 +22,7 @@ class Edit extends Component
     public $rom_size;
     public $rom_type;
 
+    #[ArrayShape(['rom_name' => "array", 'rom_type' => "array", 'rom_size' => "array"])]
     public function rules(): array
     {
         return [

@@ -8,6 +8,7 @@ use GameRepo;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use JetBrains\PhpStorm\ArrayShape;
 use Livewire\Component;
 
 class Edit extends Component
@@ -41,7 +42,8 @@ class Edit extends Component
         return view('livewire.game.edit');
     }
 
-    public function rules()
+    #[ArrayShape(['game_name' => "array", 'date_released' => "array", 'game_type' => "array", 'region' => "array", 'generation' => "array"])]
+    public function rules(): array
     {
         return [
             'game_name' => $this->gameNameRules(),
