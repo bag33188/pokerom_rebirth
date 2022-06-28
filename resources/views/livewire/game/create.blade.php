@@ -21,7 +21,7 @@
                     @php
                         foreach ($availableRoms as $rom) {
                             $rom = json_decode(json_encode($rom), associative: false);
-                            echo "<option value='$rom->id'>$rom->rom_name</option>";
+                            print "<option value='$rom->id'>$rom->rom_name</option>";
                         }
                     @endphp
                 </x-form-select>
