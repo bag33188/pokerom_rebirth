@@ -48,7 +48,7 @@
                     {{ __('Save!') }}
                 </x-jet-button>
                 <div class="float-left">
-                    <x-jet-button wire:click="cancel({{$romId}})">Cancel</x-jet-button>
+                    <x-jet-button type="button" wire:click="cancel({{$romId}})">Cancel</x-jet-button>
                 </div>
             </div>
         </form>

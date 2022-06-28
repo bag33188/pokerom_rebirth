@@ -15,7 +15,7 @@
                 @livewire('game.delete', ['gameId'=>$gameId])
             </div>
             <div class="col-start-1 col-end-1 row-start-2 row-end-2 justify-self-start">
-                <x-jet-secondary-button wire:click="edit({{$gameId}})">Edit!</x-jet-secondary-button>
+                <x-jet-secondary-button type="button" wire:click="edit({{$gameId}})">Edit!</x-jet-secondary-button>
             </div>
         @endif
     </div>
