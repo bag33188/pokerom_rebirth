@@ -8,7 +8,6 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Illuminate\Http\RedirectResponse;
 use Livewire\Component;
 
 class Delete extends Component
@@ -30,11 +29,11 @@ class Delete extends Component
     /**
      * @throws AuthorizationException
      */
-    public function delete(int $gameId): RedirectResponse
+    public function delete(int $gameId)
     {
         $game = GameRepo::findGameIfExists($gameId);
         $this->authorize('delete', $game);
         $game->delete();
-        return redirect()->to(route('games.index'))->banner('game deleted successfully.');
+        return redirect()->to(route('games.index'));
     }
 }

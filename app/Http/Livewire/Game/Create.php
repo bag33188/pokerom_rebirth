@@ -49,8 +49,8 @@ class Create extends Component
 
     public function submit(GameDataServiceInterface $gameDataService)
     {
+        $this->validate();
         try {
-            $this->validate();
             $gameDataService->createGameFromRomId($this->rom_id, [
                 'game_name' => $this->game_name,
                 'game_type' => $this->game_type,
@@ -59,7 +59,7 @@ class Create extends Component
                 'generation' => $this->generation
             ]);
             $this->reset();
-            return redirect()->to(route('games.index'))->banner('Game created successfully.');
+            return redirect()->to(route('games.index'));
 
         } catch (Exception $e) {
             session()->flash('message', $e->getMessage());

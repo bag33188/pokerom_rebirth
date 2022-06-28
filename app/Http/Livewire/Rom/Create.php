@@ -41,16 +41,15 @@ class Create extends Component
 
     public function submit()
     {
+        $this->validate();
         try {
-            $this->validate();
             Rom::create([
                 'rom_name' => $this->rom_name,
                 'rom_size' => $this->rom_size,
                 'rom_type' => $this->rom_type
             ]);
-            $this->reset();
 
-            return redirect()->to(route('roms.index'))->banner('rom created!');
+            return redirect()->to(route('roms.index'));
         } catch (Exception $e) {
             session()->flash('message', $e->getMessage());
         }

@@ -2,12 +2,10 @@
 
 namespace App\Http\Livewire\Rom;
 
-use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Illuminate\Http\RedirectResponse;
 use Livewire\Component;
 use RomRepo;
 
@@ -27,14 +25,12 @@ class Delete extends Component
         return view('livewire.rom.delete', ['romId' => $this->romId]);
     }
 
-    /**
-     * @throws AuthorizationException
-     */
-    public function delete(int $romId): RedirectResponse
+
+    public function delete(int $romId)
     {
         $rom = RomRepo::findRomIfExists($romId);
         $this->authorize('delete', $rom);
         $rom->delete();
-        return redirect()->to(route('roms.index'))->banner("$rom->rom_name successfully deleted!");
+        return redirect()->to(route('roms.index'));
     }
 }
