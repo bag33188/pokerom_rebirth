@@ -28,7 +28,7 @@ class AssociateRomWithGame
         Game::withoutEvents(function () use ($event) {
             $event->rom->refresh();
             $event->game->rom()->associate($event->rom);
-            $event->game->saveQuietly();
+            $event->game->save();
         });
     }
 }
