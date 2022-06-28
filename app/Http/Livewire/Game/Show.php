@@ -10,8 +10,8 @@ use Livewire\Component;
 
 class Show extends Component
 {
-    private $game;
-    private int $gameId;
+    public $game;
+    public $gameId;
 
     public function mount(int $gameId): void
     {
@@ -21,6 +21,11 @@ class Show extends Component
 
     public function render(): Factory|View|Application
     {
-        return view('livewire.game.show', ['game' => $this->game, 'gameId' => $this->gameId]);
+        return view('livewire.game.show');
+    }
+
+    public function edit(int $gameId)
+    {
+        $this->redirect(route('games.edit', ['gameId' => $gameId]));
     }
 }

@@ -48,7 +48,7 @@
                     {{ __('Save!') }}
                 </x-jet-button>
                 <div class="float-left">
-                    <a href="{{route('roms.show', ['romId'=>$romId])}}" {!! BTN_PRIMARY_CLASSES !!}>Cancel</a>
+                    <x-jet-button wire:click="cancel({{$romId}})">Cancel</x-jet-button>
                 </div>
             </div>
         </form>

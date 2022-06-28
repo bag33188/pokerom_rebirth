@@ -72,7 +72,7 @@
                     {{ __('Save!') }}
                 </x-jet-button>
                 <div class="float-left">
-                    <a href="{{route('games.show', ['gameId'=>$gameId])}}" {!! BTN_PRIMARY_CLASSES !!}>Cancel</a>
+                    <x-jet-button wire:click="cancel({{$gameId}})">Cancel</x-jet-button>
                 </div>
             </div>
         </form>

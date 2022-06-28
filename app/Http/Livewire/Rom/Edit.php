@@ -46,6 +46,11 @@ class Edit extends Component
         );
     }
 
+    public function cancel(int $romId)
+    {
+        $this->redirect(route('roms.show', $romId));
+    }
+
     public function render(): Factory|View|Application
     {
         return view('livewire.rom.edit');

@@ -43,6 +43,11 @@ class Edit extends Component
         return view('livewire.game.edit');
     }
 
+    public function cancel(int $gameId)
+    {
+        $this->redirect(route('games.show', $gameId));
+    }
+
     #[ArrayShape(['game_name' => "array", 'date_released' => "array", 'game_type' => "array", 'region' => "array", 'generation' => "array"])]
     public function rules(): array
     {

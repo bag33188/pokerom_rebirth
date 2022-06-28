@@ -17,4 +17,8 @@ class Index extends Component
         $this->games = GameRepo::getAllGamesSorted();
         return view('livewire.game.index');
     }
+
+    public function show(int $gameId) {
+        $this->redirect(route('games.show', $gameId));
+    }
 }

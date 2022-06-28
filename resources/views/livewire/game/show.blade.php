@@ -15,7 +15,7 @@
                 @livewire('game.delete', ['gameId'=>$gameId])
             </div>
             <div class="col-start-1 col-end-1 row-start-2 row-end-2 justify-self-start">
-                <a href="{{route('games.edit', ['gameId'=>$this->game->id])}}" {!! JETSTREAM_BTN_CLASSES !!}>Edit!</a>
+                <x-jet-secondary-button wire:click="edit({{$gameId}})">Edit!</x-jet-secondary-button>
             </div>
         @endif
     </div>
