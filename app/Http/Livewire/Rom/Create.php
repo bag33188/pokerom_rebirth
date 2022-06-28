@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire\Rom;
 
-use App\Http\Requests\StoreRomRequest;
+use App\Actions\Validators\RomValidationRulesTrait;
 use App\Models\Rom;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -12,14 +12,33 @@ use Livewire\Component;
 
 class Create extends Component
 {
+    use RomValidationRulesTrait;
+
+    public $rom_name;
+    public $rom_size;
+    public $rom_type;
+
+    protected function rules()
+    {
+        return [
+            'rom_name' => $this->romNameRules(),
+            'rom_type' => $this->romTypeRules(),
+            'rom_size' => $this->romSizeRules(),
+        ];
+    }
+
     public function render(): Factory|View|Application
     {
         return view('livewire.rom.create');
     }
 
-    public function store(StoreRomRequest $request): RedirectResponse
+    public function submit()
     {
-        Rom::create($request->all());
-        return redirect()->route('roms.index')->banner("$request->rom_name created!");
+        $this->validate();
+        Rom::create([
+            'rom_name' => $this->rom_name,
+            'rom_size' => $this->rom_size,
+            'rom_type' => $this->rom_type
+        ]);
     }
 }
