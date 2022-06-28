@@ -19,23 +19,24 @@ class Connection
     private const GFS_CONF_PREFIX = 'gridfs';
     private const MONGO_CONF_PREFIX = 'gridfs.connection';
 
-    public function __construct()
+    public function __construct(string $databaseName = null, string $bucketName = null, int $chunkSize = null)
     {
         self::$mongoConfig = Config::get(self::MONGO_CONF_PREFIX);
         self::$gfsConfig = Config::get(self::GFS_CONF_PREFIX);
+        $this->setDatabaseValues($databaseName, $bucketName, $chunkSize);
     }
 
     /**
      * Order: **_Database Name_ (`string`), _Bucket Name_ (`string`), _Chunk Size_ (`int`)**
      *
-     * @param string|null $databaseName Name of desired MongoDB database
-     * @param string|null $bucketName Name of the bucket for grid file storage
-     * @param int|null $chunkSize Size of chunked files to be stored in the grid
+     * @param string $databaseName Name of desired MongoDB database
+     * @param string $bucketName Name of the bucket for grid file storage
+     * @param int $chunkSize Size of chunked files to be stored in the grid
      * @return void
      */
-    public final function setDatabaseValues(string $databaseName = null,
-                                            string $bucketName = null,
-                                            int    $chunkSize = null): void
+    public final function setDatabaseValues(string $databaseName,
+                                            string $bucketName,
+                                            int    $chunkSize): void
     {
         $this->databaseName = $databaseName ?? self::$mongoConfig['database'];
         $this->bucketName = $bucketName ?? self::$gfsConfig['bucketName'];

@@ -6,7 +6,6 @@ use App\Services\GridFS\RomFilesBucket;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Support\ServiceProvider;
-use GfsRomFile;
 
 class GridFsServiceProvider extends ServiceProvider implements DeferrableProvider
 {
@@ -17,24 +16,14 @@ class GridFsServiceProvider extends ServiceProvider implements DeferrableProvide
      */
     public function register(): void
     {
-        // use singleton since only admin user will be invoking this logic
-        $this->app->singleton(RomFilesBucket::class,
-            fn(Application $app): RomFilesBucket => new RomFilesBucket());
-    }
-
-    /**
-     * Bootstrap any application services.
-     *
-     * @return void
-     */
-    public function boot(): void
-    {
         $dbProps = array(
             config('gridfs.connection.database'),
             config('gridfs.bucketName'),
             config('gridfs.chunkSize'),
         );
-        GfsRomFile::setDatabaseValues(...$dbProps);
+        // use singleton since only admin user will be invoking this logic
+        $this->app->singleton(RomFilesBucket::class,
+            fn(Application $app): RomFilesBucket => new RomFilesBucket(...$dbProps));
     }
 
     /**
