@@ -79,7 +79,9 @@ abstract class AbstractApplicationException extends Exception
             return $response->renderResponse();
         } else {
             if (!$this->viewName()) {
-                return redirect()->to(url()->previous())->dangerBanner($message);
+                session()->flash('message', $message);
+
+                return redirect()->to(url()->previous());
             }
             return response()->view($this->viewName(), ['message' => $message], $code);
         }
