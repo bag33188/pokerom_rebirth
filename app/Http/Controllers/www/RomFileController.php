@@ -3,21 +3,43 @@
 namespace App\Http\Controllers\www;
 
 use App\Http\Controllers\Controller as ViewController;
+use App\Http\Requests\StoreRomFileRequest;
+use App\Interfaces\RomFileDataServiceInterface;
 use App\Models\RomFile;
-use Illuminate\Http\Request;
-use GfsRomFile;
+use Gate;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
+use RomFileRepo;
+
+// TODO:  implement better file upload
+//https://laracasts.com/discuss/channels/laravel/advice-on-solutions-for-very-large-file-uploads?page=1&replyId=774409
+//https://github.com/pionl/laravel-chunk-upload
+//https://github.com/23/resumable.js
+//        if (!\Storage::directoryExists('photos')) {
+//            \Storage::makeDirectory('photos');
+//            \Storage::putFile('photos', $file, 'private');
+//        }
 
 class RomFileController extends ViewController
 {
+    private RomFileDataServiceInterface $romFileDataService;
+
+    public function __construct(RomFileDataServiceInterface $romFileDataService)
+    {
+        $this->romFileDataService = $romFileDataService;
+    }
+
     /**
      * Display a listing of the resource.
      *
      * @return Response
+     * @throws AuthorizationException
      */
     public function index()
     {
-        //
+        Gate::authorize('viewAny-romFile');
+        return response()->view('rom-files.index', ['romFiles' => RomFileRepo::getAllFilesSorted()]);
     }
 
     /**
@@ -33,21 +55,14 @@ class RomFileController extends ViewController
     /**
      * Store a newly created resource in storage.
      *
-     * @param Request $request
+     * @param StoreRomFileRequest $request
      * @return Response
      */
-    public function store(Request $request)
+    public function store(StoreRomFileRequest $request)
     {
-        // TODO:  implement better file upload
-        //https://laracasts.com/discuss/channels/laravel/advice-on-solutions-for-very-large-file-uploads?page=1&replyId=774409
-        //https://github.com/pionl/laravel-chunk-upload
-        //https://github.com/23/resumable.js
         $file = $request->file(FILE_FORM_KEY);
-        GfsRomFile::upload($file);
-//        if (!\Storage::directoryExists('photos')) {
-//            \Storage::makeDirectory('photos');
-//            \Storage::putFile('photos', $file, 'private');
-//        }
+        $this->romFileDataService->uploadFile($file);
+
         return response()->redirectTo(url()->previous())->banner("file uploaded!");
     }
 
@@ -59,40 +74,21 @@ class RomFileController extends ViewController
      */
     public function show(RomFile $romFile)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param RomFile $romFile
-     * @return Response
-     */
-    public function edit(RomFile $romFile)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param Request $request
-     * @param RomFile $romFile
-     * @return Response
-     */
-    public function update(Request $request, RomFile $romFile)
-    {
-        //
+        return response()->view('rom-files.show', ['romFile' => $romFile]);
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param RomFile $romFile
-     * @return Response
+     * @return RedirectResponse
+     * @throws AuthorizationException
      */
     public function destroy(RomFile $romFile)
     {
-        //
+        $this->authorize('delete', $romFile);
+        $this->romFileDataService->deleteFile($romFile);
+        return response()->redirectTo(route('files.index'))->banner("$romFile->filename deleted!");
     }
 }
+
