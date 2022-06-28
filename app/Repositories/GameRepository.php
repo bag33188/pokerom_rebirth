@@ -31,8 +31,8 @@ class GameRepository implements GameRepositoryInterface
 
     public function getProperGameTypeString(string $gameType): string
     {
-        $sql = /** @lang MariaDB */
-            "SELECT GetProperGameTypeString(?) AS gameType;";
+        $sql =
+            DB::raw(/** @lang MariaDB */ "SELECT GetProperGameTypeString(?) AS gameType;");
         return DB::selectOne($sql, [$gameType])->gameType;
     }
 

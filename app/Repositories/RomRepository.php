@@ -3,9 +3,9 @@
 namespace App\Repositories;
 
 use App\Interfaces\RomRepositoryInterface;
-use App\Models\RomFile;
 use App\Models\Game;
 use App\Models\Rom;
+use App\Models\RomFile;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
 
@@ -55,8 +55,8 @@ class RomRepository implements RomRepositoryInterface
 
     public function getReadableRomSize(int $size): string
     {
-        $sql = /** @lang MariaDB */
-            "SELECT CalcReadableRomSize(?) AS readable_size;";
+        $sql = DB::raw(/** @lang MariaDB */
+            "SELECT CalcReadableRomSize(?) AS readable_size;");
         return DB::selectOne($sql, [$size])->readable_size;
     }
 }

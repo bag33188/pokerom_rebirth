@@ -3,8 +3,8 @@
 namespace App\Services\Data;
 
 use App\Interfaces\RomDataServiceInterface;
-use App\Models\RomFile;
 use App\Models\Rom;
+use App\Models\RomFile;
 use Illuminate\Support\Facades\DB;
 use RomRepo;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
@@ -34,8 +34,8 @@ class RomDataService implements RomDataServiceInterface
 
     private function setRomDataFromFile(Rom $rom, RomFile $file): void
     {
-        $sql = /** @lang MariaDB */
-            "CALL LinkRomToFile(:fileId, :fileSize, :romId);";
+        $sql =
+            DB::raw(/** @lang MariaDB */ "CALL LinkRomToFile(:fileId, :fileSize, :romId);");
         DB::statement($sql, [
             'fileId' => $file->getKey(),
             'fileSize' => $file->length,
