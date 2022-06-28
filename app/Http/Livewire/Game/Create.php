@@ -6,6 +6,7 @@ use App\Actions\Validators\GameValidationRulesTrait;
 use App\Interfaces\GameDataServiceInterface;
 use GameRepo;
 use Illuminate\Contracts\{Foundation\Application, View\Factory, View\View};
+use Illuminate\Database\QueryException;
 use JetBrains\PhpStorm\ArrayShape;
 use Livewire\Component;
 
@@ -48,16 +49,20 @@ class Create extends Component
 
     public function submit(GameDataServiceInterface $gameDataService)
     {
-        $this->validate();
-        $gameDataService->createGameFromRomId($this->rom_id, [
-            'game_name' => $this->game_name,
-            'game_type' => $this->game_type,
-            'region' => $this->region,
-            'date_released' => $this->date_released,
-            'generation' => $this->generation
-        ]);
-        $this->reset();
-        session()->flash('message', 'Game created successfully.');
+        try {
+            $this->validate();
+            $gameDataService->createGameFromRomId($this->rom_id, [
+                'game_name' => $this->game_name,
+                'game_type' => $this->game_type,
+                'region' => $this->region,
+                'date_released' => $this->date_released,
+                'generation' => $this->generation
+            ]);
+            $this->reset();
+            session()->flash('message', 'Game created successfully.');
 
+        } catch (QueryException $e) {
+            session()->flash('message', $e->getMessage());
+        }
     }
 }
