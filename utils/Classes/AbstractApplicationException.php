@@ -70,7 +70,6 @@ abstract class AbstractApplicationException extends Exception
             if ($this->viewName()) {
                 return response()->view($this->viewName(), ['message' => $message], $code);
             }
-            session()->flash('message', $message);
             return false;
         }
     }
