@@ -20,7 +20,8 @@
                 <x-form-select wire:model="rom_id" html-id="availableRoms" element-name="rom_id" autofocus required>
                     @php
                         foreach ($availableRoms as $rom) {
-                            echo "<option value='{$rom->id}'>$rom->rom_name</option>";
+                            $rom = json_decode(json_encode($rom));
+                            echo "<option value='$rom->id'>$rom->rom_name</option>";
                         }
                     @endphp
                 </x-form-select>
