@@ -15,7 +15,7 @@ abstract class AbstractGridFsFile extends MongoDbModel
 {
     public readonly string $_id;
     public readonly int $chunkSize;
-    public string $filename;
+    public readonly string $filename;
     public readonly int $length;
     public readonly string $uploadDate;
     public readonly string $md5;
