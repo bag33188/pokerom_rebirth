@@ -5,10 +5,10 @@ namespace App\Services\GridFS;
 use MongoDB\Client as MongoClient;
 use MongoDB\Database;
 use MongoDB\GridFS\Bucket;
-use Utils\Classes\AbstractGridFSConnection;
+use Utils\Classes\AbstractGridFSConnection as GridFSConnection;
 use Utils\Modules\GridFsMethods;
 
-class RomFilesGridFSConnection extends AbstractGridFSConnection
+class RomFilesGridFSConnection extends GridFSConnection
 {
     protected string $bucketName;
     protected string $databaseName;
@@ -22,7 +22,7 @@ class RomFilesGridFSConnection extends AbstractGridFSConnection
         $this->databaseName = $databaseName;
         $this->bucketName = $bucketName;
         $this->chunkSize = $chunkSize;
-        $this->setBucket();
+        $this->selectBucket();
     }
 
     protected function connectToMongoClient(): Database
@@ -32,13 +32,18 @@ class RomFilesGridFSConnection extends AbstractGridFSConnection
         return $db->selectDatabase($this->databaseName);
     }
 
-    protected function setBucket(): void
+    protected function selectBucket(): Bucket
     {
         $mongodb = $this->connectToMongoClient();
-        $this->bucket = $mongodb->selectGridFSBucket([
+        return $mongodb->selectGridFSBucket([
             'chunkSizeBytes' => $this->chunkSize,
             'bucketName' => $this->bucketName
         ]);
+    }
+
+    protected function setBucket(): void
+    {
+        $this->bucket = $this->selectBucket();
     }
 
     public function getBucket(): Bucket

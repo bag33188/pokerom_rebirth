@@ -33,7 +33,7 @@ compile() {
     git status
     git add . && git commit -m "update code base" && git push
 
-    echo -e "\nfinished!"
+    echo -e "\nFinished!"
 }
 
 compile
