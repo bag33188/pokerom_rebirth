@@ -2,21 +2,18 @@
 
 namespace App\Jobs;
 
-use GfsRomFile;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use Utils\Modules\FileDownloader;
 use Utils\Modules\GridFsMethods;
 
-class ProcessRomFileDownload implements ShouldQueue
+class ProcessRomFileDeletion implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     private string $fileId;
-    protected const DOWNLOAD_CHUNK_SIZE = 0xFF000;
 
     /**
      * Create a new job instance.
@@ -35,8 +32,7 @@ class ProcessRomFileDownload implements ShouldQueue
      */
     public function handle(): void
     {
-        $stream = GfsRomFile::getBucket()->openDownloadStream(GridFsMethods::parseObjectId($this->fileId));
-        $fileDownloader = new FileDownloader($stream, self::DOWNLOAD_CHUNK_SIZE);
-        $fileDownloader->downloadFile();
+        $bsonObjectId = GridFsMethods::parseObjectId($this->fileId);
+        GfsRomFile::getBucket()->delete($bsonObjectId);
     }
 }
