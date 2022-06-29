@@ -6,10 +6,10 @@
         <div class="w-full flex justify-center">
             <button type="button" @click="open = !open"
                     class="bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-2 px-4 my-4 shadow-md rounded">
-                @include("ui.show-hide", ['text'=>'ROMs'])
+                @include("ui.show-hide", ['text'=>'ROMs', 'initialState'=>'show'])
             </button>
         </div>
-        <table class="w-full text-sm text-left text-gray-500 light:text-gray-400" x-show="open">
+        <table class="w-full text-sm text-left text-gray-500 light:text-gray-400" x-show="open" x-cloak>
             <thead class="bg-gray-50">
             <tr class="text-xs text-gray-700 uppercase light:bg-gray-700 light:text-gray-400">
                 @for($i = 0; $i < count($romsTableColumns); $i++)

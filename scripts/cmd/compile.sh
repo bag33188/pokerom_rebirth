@@ -30,6 +30,8 @@ compile() {
     npm run development
     git status
     git add . && git commit -m "update code base" && git push
+
+    echo finished!
 }
 
 compile

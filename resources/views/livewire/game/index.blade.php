@@ -6,11 +6,11 @@
         <div class="w-full flex justify-center">
             <button type="button" @click="open = !open"
                     class="bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-2 px-4 my-4 shadow-md rounded">
-                @include("ui.show-hide", ['text'=>'Games'])
+                @include("ui.show-hide", ['text'=>'Games','initialState'=>'show'])
             </button>
         </div>
         <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4 justify-items-center my-1.5 pb-4"
-             x-show="open">
+             x-show="open" x-cloak>
             @foreach($games as $game)
                 <div class="p-6 w-full bg-white rounded-lg border border-gray-200 shadow-md">
                     <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">{{$game->game_name}}</h5>
