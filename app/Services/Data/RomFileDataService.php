@@ -7,7 +7,6 @@ use App\Events\FileDeleted;
 use App\Events\FileUploaded;
 use App\Interfaces\RomFileDataServiceInterface;
 use App\Models\RomFile;
-use Illuminate\Http\UploadedFile;
 use GfsRomFile;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 use Symfony\Component\HttpFoundation\StreamedResponse;

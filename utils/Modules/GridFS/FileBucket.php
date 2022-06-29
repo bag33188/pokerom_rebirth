@@ -2,6 +2,7 @@
 
 namespace Utils\Modules\GridFS;
 
+use Config;
 use MongoDB\BSON\ObjectId;
 
 class FileBucket extends Connection
@@ -46,7 +47,7 @@ class FileBucket extends Connection
     {
         self::normalizeFileName($fileName);
         $this->filename = $fileName;
-        $this->filepath = \Config::get('gridfs.fileUploadPath') . '/' . $fileName;
+        $this->filepath = sprintf("%s/%s", Config::get('gridfs.fileUploadPath'), $fileName);
     }
 
     private static function normalizeFileName(string &$filename): void

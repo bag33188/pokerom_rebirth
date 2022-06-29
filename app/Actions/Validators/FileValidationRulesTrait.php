@@ -2,17 +2,17 @@
 
 namespace App\Actions\Validators;
 
-use App\Exceptions\UnsupportedRomTypeException;
 use App\Rules\ValidFilename;
+use JetBrains\PhpStorm\ArrayShape;
 
 trait FileValidationRulesTrait
 {
-
-    protected function fileRules( array $rules = ['required']): array
+    #[ArrayShape(['filename' => "array"])]
+    protected function fileRules(array $rules = ['required']): array
     {
 
         return [
-            'filename'=>['required', new ValidFilename]
+            'filename' => [...$rules, new ValidFilename]
         ];
     }
 }

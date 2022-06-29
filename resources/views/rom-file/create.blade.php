@@ -3,9 +3,7 @@
         <h2 class="text-center text-lg">Upload a ROM File</h2>
     </x-slot>
     <div class="p-6">
-        @php
-            $files = Storage::disk('local')->files('rom_files');
-        @endphp
+
         <x-jet-validation-errors class="mb-4"/>
         <form action="{{route('rom-files.store')}}" method="POST" enctype="multipart/form-data">
             @csrf
@@ -14,7 +12,7 @@
             <div class="flex flex-col">
                 <label for="romFile">Rom File</label>
                 <select name="filename" id="romFile">
-                    @foreach($files as $file)
+                    @foreach($romFiles as $file)
                         <option value="{{$file}}">{{$file}}</option>
                     @endforeach
                 </select>

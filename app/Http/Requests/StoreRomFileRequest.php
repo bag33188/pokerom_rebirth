@@ -3,10 +3,9 @@
 namespace App\Http\Requests;
 
 use App\Actions\Validators\FileValidationRulesTrait;
-use App\Exceptions\UnsupportedRomTypeException;
 use App\Models\RomFile;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Str;
+use JetBrains\PhpStorm\ArrayShape;
 
 class StoreRomFileRequest extends FormRequest
 {
@@ -23,14 +22,16 @@ class StoreRomFileRequest extends FormRequest
     {
         return $this->user()->can('create', RomFile::class);
     }
+
     protected function prepareForValidation(): void
     {
         $this->merge([
-            'filename' =>str_replace('rom_files/', '', $this->filename),
+            'filename' => str_replace('rom_files/', '', $this['filename']),
         ]);
     }
 
 
+    #[ArrayShape(['filename' => "array"])]
     public function rules(): array
     {
         return $this->fileRules();

@@ -12,6 +12,7 @@ use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
 use RomFileRepo;
+use Storage;
 
 // TODO:  implement better file upload
 //https://laracasts.com/discuss/channels/laravel/advice-on-solutions-for-very-large-file-uploads?page=1&replyId=774409
@@ -50,7 +51,10 @@ class RomFileController extends ViewController
      */
     public function create()
     {
-        return response()->view('rom-file.create');
+        $romFiles = array_filter(Storage::disk('local')->files('rom_files'), function ($var) {
+            return preg_match(ROM_FILE_NAME_PATTERN, str_replace('rom_files/', '', $var));
+        });
+        return response()->view('rom-file.create', ['romFiles' => $romFiles]);
     }
 
     /**

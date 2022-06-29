@@ -2,7 +2,6 @@
 
 namespace Utils\Modules\GridFS;
 
-use Illuminate\Http\UploadedFile;
 use Jenssegers\Mongodb\Eloquent\Model;
 
 abstract class AbstractGridFsBucket extends FileBucket implements GridFileResourcing
