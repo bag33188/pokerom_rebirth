@@ -7,7 +7,7 @@
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('welcome') }}">
                         {{-- <x-jet-application-mark class="block h-9 w-auto" /> --}}
-                        @include('ui.app-logo')
+                        @include('partials._app-logo')
                     </a>
                 </div>
 
@@ -66,7 +66,7 @@
                                              viewBox="0 0 20 20" fill="currentColor">
                                             <path fill-rule="evenodd"
                                                   d="M10 3a1 1 0 01.707.293l3 3a1 1 0 01-1.414 1.414L10 5.414 7.707 7.707a1 1 0 01-1.414-1.414l3-3A1 1 0 0110 3zm-3.707 9.293a1 1 0 011.414 0L10 14.586l2.293-2.293a1 1 0 011.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
-                                                  clip-rule="evenodd"/>
+                                                  clip-rule="evenodd" />
                                         </svg>
                                     </button>
                                 </span>
@@ -99,7 +99,7 @@
                                     </div>
 
                                     @foreach (Auth::user()->allTeams() as $team)
-                                        <x-jet-switchable-team :team="$team"/>
+                                        <x-jet-switchable-team :team="$team" />
                                     @endforeach
                                 </div>
                             </x-slot>
@@ -115,7 +115,7 @@
                                 <button
                                     class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition">
                                     <img class="h-8 w-8 rounded-full object-cover"
-                                         src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}"/>
+                                         src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
                                 </button>
                             @else
                                 <span class="inline-flex rounded-md">
@@ -127,7 +127,7 @@
                                              viewBox="0 0 20 20" fill="currentColor">
                                             <path fill-rule="evenodd"
                                                   d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                                  clip-rule="evenodd"/>
+                                                  clip-rule="evenodd" />
                                         </svg>
                                     </button>
                                 </span>
@@ -173,9 +173,9 @@
                     <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                         <path :class="{'hidden': open, 'inline-flex': ! open }" class="inline-flex"
                               stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                              d="M4 6h16M4 12h16M4 18h16"/>
+                              d="M4 6h16M4 12h16M4 18h16" />
                         <path :class="{'hidden': ! open, 'inline-flex': open }" class="hidden" stroke-linecap="round"
-                              stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                              stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                     </svg>
                 </button>
             </div>
@@ -201,22 +201,26 @@
         </div>
         @if(auth()->user()->isAdmin())
             <div class="pt-2 pb-3 space-y-1">
-                <x-jet-responsive-nav-link href="{{ route('files.index') }}" :active="request()->routeIs('files.index')">
+                <x-jet-responsive-nav-link href="{{ route('files.index') }}"
+                                           :active="request()->routeIs('files.index')">
                     {{ __('ROM Files') }}
                 </x-jet-responsive-nav-link>
             </div>
             <div class="pt-2 pb-3 space-y-1">
-                <x-jet-responsive-nav-link href="{{ route('roms.create') }}" :active="request()->routeIs('roms.create')">
+                <x-jet-responsive-nav-link href="{{ route('roms.create') }}"
+                                           :active="request()->routeIs('roms.create')">
                     {{ __('Add ROM') }}
                 </x-jet-responsive-nav-link>
             </div>
             <div class="pt-2 pb-3 space-y-1">
-                <x-jet-responsive-nav-link href="{{ route('games.create') }}" :active="request()->routeIs('games.create')">
+                <x-jet-responsive-nav-link href="{{ route('games.create') }}"
+                                           :active="request()->routeIs('games.create')">
                     {{ __('Add Game') }}
                 </x-jet-responsive-nav-link>
             </div>
             <div class="pt-2 pb-3 space-y-1">
-                <x-jet-responsive-nav-link href="{{ route('files.create') }}" :active="request()->routeIs('files.create')">
+                <x-jet-responsive-nav-link href="{{ route('files.create') }}"
+                                           :active="request()->routeIs('files.create')">
                     {{ __('Add ROM File') }}
                 </x-jet-responsive-nav-link>
             </div>
@@ -228,7 +232,7 @@
                 @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
                     <div class="shrink-0 mr-3">
                         <img class="h-10 w-10 rounded-full object-cover" src="{{ Auth::user()->profile_photo_url }}"
-                             alt="{{ Auth::user()->name }}"/>
+                             alt="{{ Auth::user()->name }}" />
                     </div>
                 @endif
 
@@ -291,7 +295,7 @@
                     </div>
 
                     @foreach (Auth::user()->allTeams() as $team)
-                        <x-jet-switchable-team :team="$team" component="jet-responsive-nav-link"/>
+                        <x-jet-switchable-team :team="$team" component="jet-responsive-nav-link" />
                     @endforeach
                 @endif
             </div>

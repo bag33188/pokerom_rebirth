@@ -10,6 +10,6 @@
         <span x-show="open">Hide</span>
         <span x-show="!open" x-cloak>Show</span>
     </p>
-    <span>&nbsp;</span>
+    <span>{!! "&nbsp;" !!}</span>
     <p class="inline">{{$text}}</p>
 </div>

@@ -35,7 +35,7 @@
                     </div>
                     <button type="button"
                             class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300"
-                            wire:click="show({{$game->id}})">More Info @include('ui.more-info-arrow')</button>
+                            wire:click="show({{$game->id}})">More Info @include('partials._more-info-arrow')</button>
                 </div>
             @endforeach
         </div>
