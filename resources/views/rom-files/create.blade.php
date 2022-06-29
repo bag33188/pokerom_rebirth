@@ -6,7 +6,8 @@
 
             <div class="flex flex-col">
                 <label for="romFile">RomFile</label>
-                <input id="romFile" name="{{FILE_FORM_KEY}}" type="file" required />
+                <input id="romFile" name="{{FILE_FORM_KEY}}" type="file" accept="{{'.' . join(',.', ROM_TYPES )}}"
+                       required />
             </div>
 
             <div class="my-4">
