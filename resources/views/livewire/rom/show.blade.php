@@ -19,7 +19,7 @@
 
         @if(Auth::user()->isAdmin())
             <div class="col-start-2 col-end-2 row-start-2 row-end-2 justify-self-end h-auto">
-                @livewire('rom.delete', ['romId' => $romId])
+                <livewire:rom.delete class="delete" :romId="$romId" />
             </div>
             <div class="col-start-1 col-end-1 row-start-2 row-end-2 justify-self-start h-auto">
                 <x-jet-secondary-button type="button" wire:click="edit({{$romId}})">Edit!</x-jet-secondary-button>

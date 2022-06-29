@@ -12,7 +12,7 @@
         </ul>
         @if(Auth::user()->isAdmin())
             <div class="row-start-2 row-end-2 ml-1 col-start-2 col-end-2 justify-self-end">
-                @livewire('game.delete', ['gameId'=>$gameId])
+                <livewire:game.delete :gameId="$gameId" />
             </div>
             <div class="col-start-1 col-end-1 row-start-2 row-end-2 justify-self-start">
                 <x-jet-button type="button" wire:click="edit({{$gameId}})">Edit!</x-jet-button>
