@@ -5,6 +5,8 @@ namespace App\Http\Requests;
 use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 use App\Actions\Validators\UserValidationRulesTrait;
+use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\Password;
 use JetBrains\PhpStorm\ArrayShape;
 
 /** @mixin User */
@@ -34,8 +36,10 @@ class StoreUserRequest extends FormRequest
     {
         return [
             'name' => $this->userNameRules(),
-            'email' => $this->userEmailRules(),
-            'password' => $this->userPasswordRules(['required', 'confirmed'])
+            'email' => $this->userEmailRules(['required', Rule::unique("users", "email")]),
+            'password' => $this->userPasswordRules(['required', 'confirmed', Password::defaults(function () {
+                return Password::min(MIN_USER_PASSWORD)->uncompromised();
+            })])
         ];
     }
 }

@@ -1,6 +1,5 @@
 #!/usr/bin/bash
 
-
 # ==============
 # Compile Script
 # ==============

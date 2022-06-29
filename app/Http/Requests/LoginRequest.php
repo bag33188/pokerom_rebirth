@@ -2,13 +2,14 @@
 
 namespace App\Http\Requests;
 
-use App\Rules\MaxLength;
-use App\Rules\MinLength;
 use Illuminate\Foundation\Http\FormRequest;
 use JetBrains\PhpStorm\ArrayShape;
+use App\Actions\Validators\UserValidationRulesTrait;
+
 
 class LoginRequest extends FormRequest
 {
+    use UserValidationRulesTrait;
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -28,8 +29,8 @@ class LoginRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => ['required', 'string', new MaxLength(MAX_USER_EMAIL), 'email'],
-            'password' => ['required', 'string', new MinLength(MIN_USER_PASSWORD), new MaxLength(MAX_USER_PASSWORD)]
+            'email' => $this->userEmailRules(),
+            'password' => $this->userPasswordRules()
         ];
     }
 }
