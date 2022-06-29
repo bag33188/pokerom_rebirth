@@ -1,5 +1,6 @@
 <?php
 
+use App\Actions\RomFileActions;
 use App\Http\Controllers\api\GameController;
 use App\Http\Controllers\api\RomController;
 use App\Http\Controllers\api\RomFileController;
@@ -48,9 +49,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/logout', [UserController::class, 'logout']);
     });
     Route::prefix('files/grid')->group(function () {
-        Route::get('/list', function () {
-            return Storage::disk(ROM_FILES_DIRNAME)->files('/');
-        })->middleware('admin');
+        Route::get('/list', [RomFileActions::class, 'listStorageFiles'])->middleware('admin');
         Route::post('/upload', [RomFileController::class, 'upload']);
         Route::get('/{fileId}/download', [RomFileController::class, 'download']);
     });
