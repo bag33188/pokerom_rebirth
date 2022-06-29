@@ -1,4 +1,5 @@
-#!/usr/bin/env bash
+#!/usr/bin/bash
+
 
 # ==============
 # Compile Script
@@ -15,6 +16,12 @@ $ chmod +x ./compile.sh
 set current permissions
 $ cd scripts/cmd
 $ chmod 755 ./compile.sh
+--MULTILINE-COMMENT--
+
+:<< --MULTILINE-COMMENT--
+Make sure you are in Bash.
+$ echo $0
+/usr/bin/bash # bash
 --MULTILINE-COMMENT--
 
 compile() {
@@ -36,6 +43,8 @@ compile() {
 
     bold=$(tput bold)
     normal=$(tput sgr0)
+
+    # printf "\n${bold}%s${normal}\n" "Finished!"
 
     echo -e "\n${bold}Finished!${normal}"
 }
