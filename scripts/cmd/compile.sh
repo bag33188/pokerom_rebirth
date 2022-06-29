@@ -26,12 +26,14 @@ compile() {
     if [[ "$current_folder" = "cmd" ]]; then
         cd ../..
     fi
+
     composer install && composer update
-    npm run development
+    npm install && npm run development
+
     git status
     git add . && git commit -m "update code base" && git push
 
-    echo finished!
+    echo -e "\nfinished!"
 }
 
 compile

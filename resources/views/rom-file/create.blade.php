@@ -12,8 +12,8 @@
             <div class="flex flex-col">
                 <label for="romFile">Rom File</label>
                 <select name="filename" id="romFile">
-                    @foreach($romFiles as $file)
-                        <option value="{{$file}}">{{$file}}</option>
+                    @foreach($romFiles as $romFilename)
+                        <option value="{{$romFilename}}">{{$romFilename}}</option>
                     @endforeach
                 </select>
             </div>
