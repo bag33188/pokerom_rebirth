@@ -7,4 +7,5 @@
     START "" https://laravel-livewire.com/docs/2.x/making-components
     START "" https://laravel.com/docs/9.x/eloquent-resources
     START "" https://laravel.com/docs/9.x/eloquent-serialization
+    START "" https://www.sitepoint.com/laravel-livewire-getting-started/
 EXIT /B 0
