@@ -15,7 +15,7 @@ use RomFileRepo;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use Utils\Classes\JsonDataResponse;
-use Utils\Modules\GfsMethods;
+use Utils\Modules\GridFsMethods;
 
 class RomFileDataService implements RomFileDataServiceInterface
 {
@@ -40,7 +40,7 @@ class RomFileDataService implements RomFileDataServiceInterface
     public function deleteFile(RomFile $file): JsonDataResponse
     {
         FileDeleted::dispatch($file);
-        GfsRomFile::gfsBucket()->delete(GfsMethods::parseObjectId($file->getKey()));
+        GfsRomFile::getBucket()->delete(GridFsMethods::parseObjectId($file->getKey()));
         return new JsonDataResponse(['message' => "$file->filename deleted!"], ResponseAlias::HTTP_OK);
     }
 }

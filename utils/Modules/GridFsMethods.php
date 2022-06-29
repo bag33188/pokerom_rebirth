@@ -5,17 +5,8 @@ namespace Utils\Modules;
 use Illuminate\Support\Facades\Config;
 use MongoDB\BSON\ObjectId;
 
-class GfsMethods
+class GridFsMethods
 {
-    public static function normalizeFileName(string &$filename): void
-    {
-        // explode function's limit param can be used to check for single occurrence of the `.` (period) character
-        [$name, $ext] = explode('.', $filename, 2);
-        $name = trim($name);
-        $ext = strtolower($ext);
-        $filename = "$name.$ext";
-    }
-
     public static function parseObjectId(string $fileId): ObjectId
     {
         return new ObjectId($fileId);
@@ -35,8 +26,4 @@ class GfsMethods
             $mongoConfig['auth']['source'];
     }
 
-    public static function makeFilepathFromFilename(string $filename): string
-    {
-        return sprintf("%s/%s", Config::get('gridfs.fileUploadPath'), $filename);
-    }
 }

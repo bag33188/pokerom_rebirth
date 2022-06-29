@@ -6,13 +6,12 @@ use App\Http\Controllers\Controller as ViewController;
 use App\Http\Requests\StoreRomFileRequest;
 use App\Interfaces\RomFileDataServiceInterface;
 use App\Models\RomFile;
-use Exception;
 use Gate;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
 use RomFileRepo;
-use Storage;
+use Utils\Modules\FileMethods;
 
 // TODO:  implement better file upload
 //https://laracasts.com/discuss/channels/laravel/advice-on-solutions-for-very-large-file-uploads?page=1&replyId=774409
@@ -51,8 +50,8 @@ class RomFileController extends ViewController
      */
     public function create()
     {
-        $romFiles = array_filter(Storage::disk('local')->files('rom_files'), function ($var) {
-            return preg_match(ROM_FILE_NAME_PATTERN, str_replace('rom_files/', '', $var));
+        $romFiles = array_filter(FileMethods::getAllFilesInDirectoryAsArray('rom_files/'), function ($var) {
+            return preg_match(ROM_FILE_NAME_PATTERN, $var);
         });
         return response()->view('rom-file.create', ['romFiles' => $romFiles]);
     }
@@ -65,8 +64,8 @@ class RomFileController extends ViewController
      */
     public function store(StoreRomFileRequest $request)
     {
-            $this->romFileDataService->uploadFile($request['filename']);
-            return response()->redirectTo(url()->previous())->banner("file uploaded!");
+        $this->romFileDataService->uploadFile($request['filename']);
+        return response()->redirectTo(url()->previous())->banner("file uploaded!");
     }
 
     /**

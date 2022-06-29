@@ -5,7 +5,7 @@ namespace App\Services\GridFS;
 use MongoDB\Client as MongoClient;
 use MongoDB\Database;
 use MongoDB\GridFS\Bucket;
-use Utils\Modules\GfsMethods;
+use Utils\Modules\GridFsMethods;
 
 class GridFSConnection
 {
@@ -28,7 +28,7 @@ class GridFSConnection
 
     private function connectToMongoClient(): Database
     {
-        $dsn = GfsMethods::GFS_MONGO_URI();
+        $dsn = GridFsMethods::GFS_MONGO_URI();
         $db = new MongoClient($dsn);
         return $db->selectDatabase($this->databaseName);
     }
@@ -42,7 +42,7 @@ class GridFSConnection
         ]);
     }
 
-    public function gfsBucket(): Bucket
+    public function getBucket(): Bucket
     {
         return $this->gfsBucket;
     }
