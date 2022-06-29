@@ -2,14 +2,13 @@
 
 namespace App\Facades;
 
-use App\Services\GridFS\RomFilesBucket;
+use App\Services\GridFS\GridFSConnection;
 use Illuminate\Support\Facades\Facade;
-use Utils\Modules\GridFS\Connection;
 
-class RomFileBucketFacade extends Facade
+class GridFSConnectionFacade extends Facade
 {
     protected static function getFacadeAccessor(): string
     {
-        return Connection::class;
+        return GridFSConnection::class;
     }
 }

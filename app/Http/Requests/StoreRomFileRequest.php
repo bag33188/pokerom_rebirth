@@ -25,8 +25,10 @@ class StoreRomFileRequest extends FormRequest
 
     protected function prepareForValidation(): void
     {
+        $filename = str_replace('rom_files/', '', $this['filename']);
+        normalizeFileName($filename);
         $this->merge([
-            'filename' => str_replace('rom_files/', '', $this['filename']),
+            'filename' => $filename,
         ]);
     }
 

@@ -1,19 +1,19 @@
 <?php
 
-namespace Utils\Modules\GridFS;
+namespace App\Services\GridFS;
 
 use Illuminate\Support\Facades\Config;
 use MongoDB\Client as MongoClient;
 use MongoDB\Database;
 use MongoDB\GridFS\Bucket;
 
-class Connection
+class GridFSConnection
 {
     protected string $bucketName;
     protected string $databaseName;
     protected int $chunkSize;
     /** @var Bucket GridFS bucket object */
-    public Bucket $gfsBucket;
+    protected Bucket $gfsBucket;
     private static array $mongoConfig;
     private static array $gfsConfig;
 
@@ -73,7 +73,8 @@ class Connection
         ]);
     }
 
-    public function gfsBucket(){
+    public function gfsBucket(): Bucket
+    {
         return $this->gfsBucket;
     }
 }
