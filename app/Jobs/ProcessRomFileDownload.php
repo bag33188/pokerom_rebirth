@@ -3,6 +3,7 @@
 namespace App\Jobs;
 
 use GfsRomFile;
+use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Utils\Modules\FileDownloader;
@@ -10,7 +11,7 @@ use Utils\Modules\GridFsMethods;
 
 class ProcessRomFileDownload implements ShouldQueue
 {
-    use Dispatchable;
+    use Dispatchable, Queueable;
 
     private string $fileId;
     protected const DOWNLOAD_CHUNK_SIZE = 0xFF000;
@@ -23,7 +24,6 @@ class ProcessRomFileDownload implements ShouldQueue
     public function __construct(string $fileId)
     {
         $this->fileId = $fileId;
-
     }
 
     /**

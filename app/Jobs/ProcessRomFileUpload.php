@@ -6,14 +6,11 @@ use GfsRomFile;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Queue\SerializesModels;
 use Utils\Modules\FileMethods;
-use Utils\Modules\GridFsMethods;
 
 class ProcessRomFileUpload implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+    use Dispatchable, Queueable;
 
 
     private string $filename;
@@ -26,7 +23,6 @@ class ProcessRomFileUpload implements ShouldQueue
     public function __construct(string $filename)
     {
         $this->filename = $filename;
-
     }
 
     /**
