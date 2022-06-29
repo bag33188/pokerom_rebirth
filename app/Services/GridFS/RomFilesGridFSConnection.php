@@ -22,7 +22,7 @@ class RomFilesGridFSConnection extends GridFSConnection
         $this->databaseName = $databaseName;
         $this->bucketName = $bucketName;
         $this->chunkSize = $chunkSize;
-        $this->selectBucket();
+        $this->setBucket();
     }
 
     protected function connectToMongoClient(): Database
