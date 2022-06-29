@@ -2,7 +2,9 @@
     @method('DELETE')
     @csrf
 
-    <x-jet-danger-button type="submit">
-        Delete {{$romFile->filename}}
-    </x-jet-danger-button>
+    <div class="flex justify-end">
+        <x-jet-danger-button type="submit">
+            Delete{!! "&nbsp;" !!}<span class="font-bold">{{$romFile->filename}}</span>
+        </x-jet-danger-button>
+    </div>
 </form>

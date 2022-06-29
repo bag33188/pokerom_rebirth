@@ -25,6 +25,10 @@ class ListGroup extends Component
      */
     public function render(): View|string|Closure
     {
-        return view('components.list-group');
+        return <<<'blade'
+            <ul class="bg-white rounded-lg border border-gray-200 text-gray-900 col-span-full row-start-1 row-end-1">
+                {{$slot}}
+            </ul>
+        blade;
     }
 }

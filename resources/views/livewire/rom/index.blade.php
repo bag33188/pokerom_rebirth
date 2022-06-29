@@ -6,7 +6,7 @@
         <div class="w-full flex justify-center">
             <button type="button" @click="open = !open"
                     class="bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-2 px-4 my-4 shadow-md rounded">
-                @include("ui.show-hide", ['text'=>'ROMs', 'initialState'=>'show'])
+                @include("ui.show-hide", ['text'=>'ROMs', 'initialState'=>\App\Enums\DisplayStatesEnum::SHOW->value])
             </button>
         </div>
         <table class="w-full text-sm text-left text-gray-500 light:text-gray-400" x-show="open" x-cloak>
@@ -30,7 +30,7 @@
                             <a class="inline-flex items-center py-2 px-4 bg-blue-500 hover:bg-blue-400 text-white font-bold
                                     p-0 border-b-4 border-blue-700 hover:border-blue-500 rounded active:border-t-4
                                     active:border-b-0 active:bg-blue-400"
-                               href="{{$this->getRomDownloadUrl($rom->file->_id, dev: true)}}"
+                               href="{{$this->getRomDownloadUrl($rom->romFile->_id, dev: true)}}"
                                target="_blank"
                                title="{{$rom->getRomFileName()}}">
                                 @include('partials._download-icon')
