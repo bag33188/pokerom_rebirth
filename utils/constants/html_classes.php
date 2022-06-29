@@ -31,5 +31,3 @@ uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900
 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300
 disabled:opacity-25 transition"
 EOS;
-
-const LIST_ITEM_CLASSES = 'class="px-6 py-2 border-b border-gray-200 w-full"';
