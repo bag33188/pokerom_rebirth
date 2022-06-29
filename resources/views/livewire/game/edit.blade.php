@@ -22,7 +22,7 @@
                 <label for="gameType" class="block font-medium text-sm text-gray-700">{{__('Game Type')}}</label>
                 <x-form-select
                     wire:model="game_type"
-                    element-name="game_type" html-id="gameType"
+                    name="game_type" id="gameType"
                     required autofocus>
                     @foreach(GAME_TYPES as $gameType)
                         <option
@@ -36,7 +36,7 @@
                 <label for="gameRegion" class="block font-medium text-sm text-gray-700">{{__('Region')}}</label>
                 <x-form-select
                     wire:model="region"
-                    element-name="region" html-id="gameRegion"
+                    name="region" id="gameRegion"
                     required autofocus>
                     @foreach(REGIONS as $gameRegion)
                         <option

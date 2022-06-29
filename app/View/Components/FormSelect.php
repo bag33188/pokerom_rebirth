@@ -8,19 +8,7 @@ use Illuminate\View\Component;
 
 class FormSelect extends Component
 {
-    private string $htmlId;
-    private string $elementName;
 
-    /**
-     * Create a new component instance.
-     *
-     * @return void
-     */
-    public function __construct(string $htmlId, string $elementName)
-    {
-        $this->htmlId = $htmlId;
-        $this->elementName = $elementName;
-    }
 
     /**
      * Get the view / contents that represent the component.
@@ -29,6 +17,6 @@ class FormSelect extends Component
      */
     public function render(): View|string|Closure
     {
-        return view('components.form-select', ['htmlId' => $this->htmlId, 'elementName' => $this->elementName]);
+        return view('components.form-select');
     }
 }
