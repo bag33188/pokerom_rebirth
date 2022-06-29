@@ -8,6 +8,4 @@ use Utils\Classes\JsonDataResponse;
 interface RomDataServiceInterface
 {
     public function attemptToLinkRomToFile(Rom $rom): JsonDataResponse;
-
-    public function linkRomToFileIfExists(Rom $rom): void;
 }

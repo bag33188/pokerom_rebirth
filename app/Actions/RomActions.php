@@ -20,4 +20,11 @@ class RomActions implements RomActionsInterface
         ]);
         $rom->refresh();
     }
+
+
+    public function linkRomToFileIfExists(Rom $rom): void
+    {
+        $file = RomRepo::searchForFileMatchingRom($rom->id);
+        if (isset($file)) $this->setRomDataFromFile($rom, $file);
+    }
 }

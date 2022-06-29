@@ -31,11 +31,4 @@ class RomDataService implements RomDataServiceInterface
             return new JsonDataResponse(['message' => "File not found with name of {$rom->getRomFileName()}"], ResponseAlias::HTTP_NOT_FOUND);
         }
     }
-
-    public function linkRomToFileIfExists(Rom $rom): void
-    {
-        $file = RomRepo::searchForFileMatchingRom($rom->id);
-        if (isset($file)) $this->romActions->setRomDataFromFile($rom, $file);
-    }
-
 }

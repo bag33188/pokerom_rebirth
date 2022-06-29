@@ -2,32 +2,32 @@
 
 namespace App\Observers;
 
-use App\Interfaces\RomDataServiceInterface;
+use App\Interfaces\RomActionsInterface;
 use App\Models\Rom;
 
 class RomObserver
 {
-    private RomDataServiceInterface $romDataService;
+    private RomActionsInterface $romActions;
 
     /** @var bool Use database relationships to update models */
     private static bool $use_db_logic = true;
 
-    public function __construct(RomDataServiceInterface $romDataService)
+    public function __construct(RomActionsInterface $romActions)
     {
-        $this->romDataService = $romDataService;
+        $this->romActions = $romActions;
     }
 
     public bool $afterCommit = false;
 
     public function created(Rom $rom): void
     {
-        $this->romDataService->linkRomToFileIfExists($rom);
+        $this->romActions->linkRomToFileIfExists($rom);
     }
 
     public function updated(Rom $rom): void
     {
         if (!$rom->has_file || $rom->file_id == null) {
-            $this->romDataService->linkRomToFileIfExists($rom);
+            $this->romActions->linkRomToFileIfExists($rom);
         }
     }
 
