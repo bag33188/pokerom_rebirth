@@ -14,7 +14,7 @@
 
             <x-jet-validation-errors class="mb-4"/>
 
-            <form wire:submit.prevent="submit">
+            <form wire:submit.prevent="store">
                 <label for="availableRoms">Select ROM</label>
                 <x-form-select wire:model="rom_id" html-id="availableRoms" element-name="rom_id" autofocus required>
                     @php
@@ -71,7 +71,7 @@
                                  min="{{MIN_GAME_GENERATION}}" max="{{MAX_GAME_GENERATION}}" required autofocus/>
                 </div>
                 <div class="mt-4">
-                    <x-jet-button class="float-right" wire:click="submit">
+                    <x-jet-button class="float-right" wire:click="store">
                         {{ __('Save!') }}
                     </x-jet-button>
                 </div>

@@ -6,7 +6,7 @@
         <x-jet-validation-errors class="mb-4"/>
         @include('ui.session-error')
 
-        <form wire:submit.prevent="submit">
+        <form wire:submit.prevent="store">
 
             <div class="mt-2.5">
                 <x-jet-label for="romName" value="{{ __('Rom Name') }}"/>
@@ -42,7 +42,7 @@
                              required autofocus/>
             </div>
             <div class="mt-4">
-                <x-jet-button class="float-right" wire:click="submit">
+                <x-jet-button class="float-right" wire:click="store">
                     {{ __('Save!') }}
                 </x-jet-button>
             </div>

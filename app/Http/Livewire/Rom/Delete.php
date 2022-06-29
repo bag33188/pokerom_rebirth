@@ -30,7 +30,7 @@ class Delete extends Component
     /**
      * @throws AuthorizationException
      */
-    public function delete(int $romId)
+    public function destroy(int $romId)
     {
         $rom = RomRepo::findRomIfExists($romId);
         $this->authorize('delete', $rom);

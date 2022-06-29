@@ -39,7 +39,7 @@ class Create extends Component
         return view('livewire.rom.create');
     }
 
-    public function submit()
+    public function store()
     {
         $this->validate();
         try {

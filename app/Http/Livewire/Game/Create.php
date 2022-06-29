@@ -53,7 +53,7 @@ class Create extends Component
     }
 
 
-    public function submit(GameDataServiceInterface $gameDataService)
+    public function store(GameDataServiceInterface $gameDataService)
     {
         $this->validate();
         try {

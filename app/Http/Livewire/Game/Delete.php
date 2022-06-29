@@ -29,7 +29,7 @@ class Delete extends Component
     /**
      * @throws AuthorizationException
      */
-    public function delete(int $gameId)
+    public function destroy(int $gameId)
     {
         $game = GameRepo::findGameIfExists($gameId);
         $this->authorize('delete', $game);
