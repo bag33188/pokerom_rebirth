@@ -2,7 +2,7 @@
 
 //--- GLOBAL HELPER FUNCTIONS ---//
 
-$functions_path = 'functions'; // preg_replace("/\\\+/", "/", join('/', [__DIR__, 'functions']));
+$functions_path = 'functions'; # preg_replace("/\\\+/", "/", join('/', [__DIR__, 'functions']));
 
 require_once "$functions_path/str_capitalize.php";
 require_once "$functions_path/parse_date_as_readable_string.php";
