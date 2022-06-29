@@ -29,6 +29,12 @@ class RomFilesBucket extends GfsBucket
         return RomFileRepo::getFileByFilename($this->filename);
     }
 
+    /**
+     * Make sure the file to be uploaded is placed in the **`rom_files`** path in the **`storage`** folder
+     *
+     * @param UploadedFile $file
+     * @return void
+     */
     public function upload(UploadedFile $file): void
     {
         $this->setUploadFileData($file);
