@@ -1,7 +1,7 @@
 <?php
 
 /** the field name for file uploading */
-const FILE_FORM_KEY = 'file';
+const FILE_FORM_KEY = 'rom_file';
 /** the key name for sanctum personal access token */
 const API_TOKEN_KEY = 'auth_token';
 /** the special _**`e`**_ character in the Pokemon logo */

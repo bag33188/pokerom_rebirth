@@ -18,7 +18,7 @@ class RomRepository implements RomRepositoryInterface
 
     public function getRomsWithGameAndFileInfo(): Collection
     {
-        return Rom::with(['game', 'file'])->get();
+        return Rom::with(['game', 'romFile'])->get();
     }
 
     public function findRomIfExists(int $romId): Rom
@@ -38,7 +38,7 @@ class RomRepository implements RomRepositoryInterface
 
     public function getFileAssociatedWithRom(int $romId): RomFile
     {
-        return $this->findRomIfExists($romId)->file()->firstOrFail();
+        return $this->findRomIfExists($romId)->romFile()->firstOrFail();
     }
 
     /**

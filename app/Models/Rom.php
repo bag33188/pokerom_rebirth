@@ -40,7 +40,7 @@ class Rom extends Model
         return $this->hasOne(Game::class, 'rom_id', 'id');
     }
 
-    public final function file(): HasOneDocument
+    public final function romFile(): HasOneDocument
     {
         return $this->hasOne(RomFile::class, '_id', 'file_id');
     }

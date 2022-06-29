@@ -19,7 +19,7 @@ class Index extends Component
 
     public function render(): Factory|View|Application
     {
-        $this->roms = Rom::with(['game', 'file'])->get();
+        $this->roms = Rom::with(['game', 'romFile'])->get();
         $sql = /** @lang MariaDB */
             "CALL GetTotalSizeOfAllRoms;";
         $sum_total_size = DB::selectOne($sql);
