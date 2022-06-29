@@ -8,22 +8,24 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use MongoDB\BSON\ObjectId;
+use Illuminate\Support\Facades\Config;
 
-class DeleteRomFile implements ShouldQueue
+class ProcessRomFileUpload implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    private string $fileId;
+
+    private string $filename;
 
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct(string $fileId)
+    public function __construct(string $filename)
     {
-        $this->fileId = $fileId;
+        $this->filename = $filename;
+
     }
 
     /**
@@ -33,6 +35,8 @@ class DeleteRomFile implements ShouldQueue
      */
     public function handle(): void
     {
-        GfsRomFile::gfsBucket()->delete(new ObjectId($this->fileId));
+        $stream = fopen(sprintf("%s/%s", Config::get('gridfs.fileUploadPath'), $this->filename), 'rb');
+        GfsRomFile::gfsBucket()->uploadFromStream($this->filename, $stream);
+        fclose($stream);
     }
 }
