@@ -9,11 +9,11 @@ use Utils\Modules\GridFsMethods;
 
 class GridFSConnection
 {
-    protected string $bucketName;
-    protected string $databaseName;
-    protected int $chunkSize;
+    private string $bucketName;
+    private string $databaseName;
+    private int $chunkSize;
     /** @var Bucket GridFS bucket object */
-    protected Bucket $gfsBucket;
+    private Bucket $gfsBucket;
 
     public function __construct(string $databaseName, string $bucketName, int $chunkSize)
     {
