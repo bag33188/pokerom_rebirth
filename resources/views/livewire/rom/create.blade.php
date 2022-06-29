@@ -1,6 +1,6 @@
 <div class="container mx-auto w-full">
     <x-slot name="header">
-        <h2 class="text-center">Add a ROM</h2>
+        <h2 class="text-center text-lg">Add a ROM</h2>
     </x-slot>
     <div class="p-3">
         <x-jet-validation-errors class="mb-4"/>

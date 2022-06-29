@@ -1,6 +1,6 @@
 <div>
     <x-slot name="header">
-        <h2 class="text-center text-lg" id="hey">Pok&eacute;mon ROMs Library</h2>
+        <h2 class="text-center text-lg">Pok&eacute;mon ROMs Library</h2>
     </x-slot>
     <div x-data="{ open: true }">
         <div class="w-full flex justify-center">

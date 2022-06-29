@@ -1,6 +1,6 @@
 <div class="p-2.5">
     <x-slot name="header">
-        <h2 class="text-center">{{$game->game_name}} Information</h2>
+        <h2 class="text-center text-lg">{{$game->game_name}} Information</h2>
     </x-slot>
     <div class="w-full grid grid-cols-2 grid-rows-[minmax(0,_1fr)_auto] gap-y-4">
         <x-list-group>

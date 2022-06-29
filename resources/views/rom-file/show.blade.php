@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="text-center">{{$romFile->filename}} Information</h2>
+        <h2 class="text-center text-lg">{{$romFile->filename}} Information</h2>
     </x-slot>
     <div class="m-2.5">
         <x-list-group>

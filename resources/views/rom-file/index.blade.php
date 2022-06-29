@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="text-center">Pok&eacute;mon ROM Files</h2>
+        <h2 class="text-center text-lg">Pok&eacute;mon ROM Files</h2>
     </x-slot>
     <div class="grid md:grid-cols-2 sm:grid-cols-1 gap-4 m-4 items-center">
         @foreach($romFiles as $romFile)

@@ -1,6 +1,6 @@
 <div>
     <x-slot name="header">
-        <h2 class="text-center">Edit {{$game->game_name}} Version</h2>
+        <h2 class="text-center text-lg">Edit {{$game->game_name}} Version</h2>
     </x-slot>
     <div class="p-3">
         @include('ui.session-error')

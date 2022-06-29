@@ -1,6 +1,6 @@
 <div class="container mx-auto w-full">
     <x-slot name="header">
-        <h2 class="text-center">Add Game</h2>
+        <h2 class="text-center text-lg">Add Game</h2>
     </x-slot>
     <div class="mt-3.5">
         @include('ui.session-error')
