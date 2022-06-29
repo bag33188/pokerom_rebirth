@@ -10,7 +10,6 @@ class WelcomeController extends ViewController
     // todo: change to renderSplash in future??
     public function index()
     {
-        $appName = Config::get('app.name');
-        return view('welcome', ['title' => $appName]);
+        return view('welcome');
     }
 }
