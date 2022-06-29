@@ -3,16 +3,14 @@
 namespace App\Actions\Validators;
 
 use App\Rules\ValidRomFilename;
-use JetBrains\PhpStorm\ArrayShape;
+use JetBrains\PhpStorm\Pure;
 
 trait RomFileValidationRulesTrait
 {
-    #[ArrayShape(['filename' => "array"])]
+    #[Pure]
     protected function romFileRules(array $rules = ['required']): array
     {
 
-        return [
-            'filename' => [...$rules, new ValidRomFilename]
-        ];
+        return [...$rules, new ValidRomFilename];
     }
 }

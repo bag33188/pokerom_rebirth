@@ -28,12 +28,16 @@ compile() {
     fi
 
     composer install && composer update
-    npm install && npm run development
+    npm install && npm update
+    npm run development
 
     git status
     git add . && git commit -m "update code base" && git push
 
-    echo -e "\nFinished!"
+    bold=$(tput bold)
+    normal=$(tput sgr0)
+
+    echo -e "\n${bold}Finished!${normal}"
 }
 
 compile
