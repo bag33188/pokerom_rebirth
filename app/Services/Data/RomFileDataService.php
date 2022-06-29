@@ -25,9 +25,9 @@ class RomFileDataService implements RomFileDataServiceInterface
             'Content-Disposition' => "attachment; filename=\"$file->filename\""));
     }
 
-    public function uploadFile(UploadedFile $file): JsonDataResponse
+    public function uploadFile(string $filename): JsonDataResponse
     {
-        GfsRomFile::upload($file);
+        GfsRomFile::upload($filename);
         FileUploaded::dispatch(GfsRomFile::getFileDocument());
         return new JsonDataResponse(['message' => "file '" . GfsRomFile::getFilename() . "' created!"], ResponseAlias::HTTP_CREATED, ['X-Content-Transfer-Type', FileTypes::X_BINARY->value]);
     }

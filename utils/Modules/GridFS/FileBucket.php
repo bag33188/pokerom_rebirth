@@ -2,9 +2,7 @@
 
 namespace Utils\Modules\GridFS;
 
-use Illuminate\Http\UploadedFile;
 use MongoDB\BSON\ObjectId;
-use Utils\Modules\FileFactory\FileInfoResolver;
 
 class FileBucket extends Connection
 {
@@ -43,16 +41,20 @@ class FileBucket extends Connection
         $this->gfsBucket->delete(self::parseObjectId($fileId));
     }
 
-    /**
-     * Sets all needed file information for uploading to database
-     *
-     * @param UploadedFile $file
-     * @return void
-     */
-    protected function setUploadFileData(UploadedFile $file): void
+
+    protected function setUploadFileData(string $fileName): void
     {
-        $fileInfo = new FileInfoResolver($file);
-        $this->filename = $fileInfo->getFilename();
-        $this->filepath = $fileInfo->getFilePath();
+        self::normalizeFileName($fileName);
+        $this->filename = $fileName;
+        $this->filepath = \Config::get('gridfs.fileUploadPath') . '/' . $fileName;
+    }
+
+    private static function normalizeFileName(string &$filename): void
+    {
+        // explode function's limit param can be used to check for single occurrence of the `.` (period) character
+        [$name, $ext] = explode('.', $filename, 2);
+        $name = trim($name);
+        $ext = strtolower($ext);
+        $filename = "$name.$ext";
     }
 }

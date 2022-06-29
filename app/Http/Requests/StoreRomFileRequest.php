@@ -6,6 +6,7 @@ use App\Actions\Validators\FileValidationRulesTrait;
 use App\Exceptions\UnsupportedRomTypeException;
 use App\Models\RomFile;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Str;
 
 class StoreRomFileRequest extends FormRequest
 {
@@ -22,21 +23,16 @@ class StoreRomFileRequest extends FormRequest
     {
         return $this->user()->can('create', RomFile::class);
     }
-
-    private function getFileNameIfExists(): string
+    protected function prepareForValidation(): void
     {
-        $file = @$this[FILE_FORM_KEY] ?? null;
-        return isset($file) ? @$file->getClientOriginalName() : __NO_FILENAME__;
+        $this->merge([
+            'filename' =>str_replace('rom_files/', '', $this->filename),
+        ]);
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, mixed>
-     * @throws UnsupportedRomTypeException
-     */
+
     public function rules(): array
     {
-        return $this->fileRules($this->getFileNameIfExists());
+        return $this->fileRules();
     }
 }

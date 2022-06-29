@@ -11,7 +11,7 @@ interface RomFileDataServiceInterface
 {
     public function downloadFile(RomFile $file): StreamedResponse;
 
-    public function uploadFile(UploadedFile $file): JsonDataResponse;
+    public function uploadFile(string $filename): JsonDataResponse;
 
     public function deleteFile(RomFile $file): JsonDataResponse;
 }

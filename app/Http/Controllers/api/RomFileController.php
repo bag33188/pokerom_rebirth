@@ -69,9 +69,8 @@ class RomFileController extends ApiController
     public function upload(StoreRomFileRequest $request): JsonResponse
     {
         $this->authorize('create', RomFile::class);
-        $file = $request->file(FILE_FORM_KEY);
 
-        return $this->romFileDataService->uploadFile($file)->renderResponse();
+        return $this->romFileDataService->uploadFile($request['filename'])->renderResponse();
     }
 
     /**

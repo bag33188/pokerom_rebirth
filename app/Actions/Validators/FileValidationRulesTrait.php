@@ -7,28 +7,12 @@ use App\Rules\ValidFilename;
 
 trait FileValidationRulesTrait
 {
-    /**
-     * @throws UnsupportedRomTypeException
-     */
-    private static function checkForUnsupportedMediaType(string $filename): void
-    {
-        if (!preg_match(ROM_FILE_TYPES_PATTERN, $filename)) {
-            throw new UnsupportedRomTypeException($filename);
-        }
-    }
 
-    /**
-     * @throws UnsupportedRomTypeException
-     */
-    protected function fileRules(string $filename, array $rules = ['required']): array
+    protected function fileRules( array $rules = ['required']): array
     {
-        self::checkForUnsupportedMediaType($filename);
 
-        $fileRules = [];
-        $fileRules[FILE_FORM_KEY] = array(
-            ...$rules,
-            new ValidFilename($filename),
-        );
-        return $fileRules;
+        return [
+            'filename'=>['required', new ValidFilename]
+        ];
     }
 }

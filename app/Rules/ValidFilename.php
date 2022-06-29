@@ -6,22 +6,9 @@ use Illuminate\Contracts\Validation\Rule;
 
 class ValidFilename implements Rule
 {
-    private string $filename;
 
     /** array of valid file extensions */
     private const FILE_EXTENSIONS = array('.gb', '.gbc', '.gba', '.nds', '.3ds', '.xci');
-
-
-    /**
-     * Create a new rule instance.
-     *
-     * @param string $filename Pass in filename for validation
-     * @return void
-     */
-    public function __construct(string $filename)
-    {
-        $this->filename = $filename;
-    }
 
 
     /**
@@ -31,9 +18,9 @@ class ValidFilename implements Rule
      * @param mixed $value
      * @return bool
      */
-    public function passes($attribute, $value = __NO_FILENAME__): bool
+    public function passes($attribute, $value): bool
     {
-        return preg_match(ROM_FILE_NAME_PATTERN, $this->filename ?? $value);
+        return preg_match(ROM_FILE_NAME_PATTERN,  $value);
     }
 
     /**

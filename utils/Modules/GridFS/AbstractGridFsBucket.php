@@ -10,13 +10,8 @@ abstract class AbstractGridFsBucket extends FileBucket implements GridFileResour
     /** @var int Size of chunks interval(s) to download */
     protected const DOWNLOAD_CHUNK_SIZE = 0x3FC00;
 
-    /**
-     * Upload file to GridFS
-     *
-     * @param UploadedFile $file
-     * @return void
-     */
-    abstract public function upload(UploadedFile $file): void;
+
+    abstract public function upload(string $filename): void;
 
     /**
      * Download File from GridFS

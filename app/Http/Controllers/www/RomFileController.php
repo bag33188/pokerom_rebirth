@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller as ViewController;
 use App\Http\Requests\StoreRomFileRequest;
 use App\Interfaces\RomFileDataServiceInterface;
 use App\Models\RomFile;
+use Exception;
 use Gate;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\RedirectResponse;
@@ -60,10 +61,15 @@ class RomFileController extends ViewController
      */
     public function store(StoreRomFileRequest $request)
     {
-        $file = $request->file(FILE_FORM_KEY);
-        $this->romFileDataService->uploadFile($file);
+        try {
+            $this->romFileDataService->uploadFile($request['filename']);
+            return response()->redirectTo(url()->previous())->banner("file uploaded!");
 
-        return response()->redirectTo(url()->previous())->banner("file uploaded!");
+        } catch (Exception $e) {
+            return response()->redirectTo(url()->previous())->dangerBanner($e->getMessage());
+
+        }
+
     }
 
     /**

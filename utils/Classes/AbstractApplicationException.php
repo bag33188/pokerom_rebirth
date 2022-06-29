@@ -68,7 +68,7 @@ abstract class AbstractApplicationException extends Exception
             return $response->renderResponse();
         } else {
             $isLivewire = $request->header('X-Livewire');
-            if ($this->viewName() || !$isLivewire) {
+            if ($this->viewName()/* || !$isLivewire*/) {
                 return response()->view($this->viewName() ?? self::DEFAULT_ERROR_VIEW, ['message' => $message], $code);
             }
             return false;
