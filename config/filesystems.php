@@ -36,6 +36,13 @@ return [
             'throw' => false,
         ],
 
+        'rom_files' => [
+            'driver' => 'local',
+            'root' => storage_path('app/rom_files'),
+            'visibility' => 'private',
+            'throw' => false,
+        ],
+
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),

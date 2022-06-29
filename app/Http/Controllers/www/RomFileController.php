@@ -13,14 +13,6 @@ use Illuminate\Http\Response;
 use RomFileRepo;
 use Utils\Modules\FileMethods;
 
-// TODO:  implement better file upload
-//https://laracasts.com/discuss/channels/laravel/advice-on-solutions-for-very-large-file-uploads?page=1&replyId=774409
-//https://github.com/pionl/laravel-chunk-upload
-//https://github.com/23/resumable.js
-//        if (!\Storage::directoryExists('photos')) {
-//            \Storage::makeDirectory('photos');
-//            \Storage::putFile('photos', $file, 'private');
-//        }
 
 class RomFileController extends ViewController
 {
@@ -50,9 +42,8 @@ class RomFileController extends ViewController
      */
     public function create()
     {
-        $romFiles = array_filter(FileMethods::getAllFilesInDirectoryAsArray(ROM_FILES_DIRNAME), function ($var) {
-            return preg_match(ROM_FILE_NAME_PATTERN, $var);
-        });
+        $romFiles = FileMethods::filterUndesiredFilesFromPattern(ROM_FILE_NAME_PATTERN,
+            FileMethods::getAllFilesInDirectoryAsArray(ROM_FILES_DIRNAME));
         return response()->view('rom-file.create', ['romFiles' => $romFiles]);
     }
 

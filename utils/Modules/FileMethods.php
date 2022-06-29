@@ -37,4 +37,16 @@ class FileMethods
     {
         $dirname = preg_replace("/\//", '', $dirname);
     }
+
+    /**
+     * @param string $pattern
+     * @param string[] $files
+     * @return string[]
+     */
+    public static function filterUndesiredFilesFromPattern(string $pattern, array $files): array
+    {
+        return array_filter($files, function ($var) use ($pattern) {
+            return preg_match($pattern, $var);
+        });
+    }
 }
