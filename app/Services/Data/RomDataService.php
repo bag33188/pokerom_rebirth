@@ -2,21 +2,27 @@
 
 namespace App\Services\Data;
 
+use App\Interfaces\RomActionsInterface;
 use App\Interfaces\RomDataServiceInterface;
 use App\Models\Rom;
-use App\Models\RomFile;
-use Illuminate\Support\Facades\DB;
 use RomRepo;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 use Utils\Classes\JsonDataResponse;
 
 class RomDataService implements RomDataServiceInterface
 {
+    private RomActionsInterface $romActions;
+
+    public function __construct(RomActionsInterface $romActions)
+    {
+        $this->romActions = $romActions;
+    }
+
     public function attemptToLinkRomToFile(Rom $rom): JsonDataResponse
     {
         $file = RomRepo::searchForFileMatchingRom($rom->id);
         if (isset($file)) {
-            $this->setRomDataFromFile($rom, $file);
+            $this->romActions->setRomDataFromFile($rom, $file);
             return new JsonDataResponse([
                 'message' => "file found and linked! file id: {$file->getKey()}",
                 'data' => $rom->refresh()
@@ -29,18 +35,7 @@ class RomDataService implements RomDataServiceInterface
     public function linkRomToFileIfExists(Rom $rom): void
     {
         $file = RomRepo::searchForFileMatchingRom($rom->id);
-        if (isset($file)) $this->setRomDataFromFile($rom, $file);
+        if (isset($file)) $this->romActions->setRomDataFromFile($rom, $file);
     }
 
-    private function setRomDataFromFile(Rom $rom, RomFile $file): void
-    {
-        $sql =
-            DB::raw(/** @lang MariaDB */ "CALL LinkRomToFile(:fileId, :fileSize, :romId);");
-        DB::statement($sql, [
-            'fileId' => $file->getKey(),
-            'fileSize' => $file->length,
-            'romId' => $rom->getKey()
-        ]);
-        $rom->refresh();
-    }
 }

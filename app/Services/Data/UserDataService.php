@@ -2,6 +2,7 @@
 
 namespace App\Services\Data;
 
+use App\Interfaces\UserActionsInterface;
 use App\Interfaces\UserDataServiceInterface;
 use App\Models\User;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
@@ -9,26 +10,23 @@ use Utils\Classes\JsonDataResponse;
 
 class UserDataService implements UserDataServiceInterface
 {
-    private static function generateUserApiToken(User $user): string
-    {
-        return $user->createToken(API_TOKEN_KEY)->plainTextToken;
-    }
+    private UserActionsInterface $userActions;
 
-    private function revokeUserTokens(): void
+    public function __construct(UserActionsInterface $userActions)
     {
-        auth()->user()->tokens()->delete();
+        $this->userActions = $userActions;
     }
 
     public function deleteUser(User $user): JsonDataResponse
     {
-        $this->revokeUserTokens();
+        $this->userActions->revokeUserTokens();
         $user->delete();
         return new JsonDataResponse(['message' => "user $user->name deleted!"], ResponseAlias::HTTP_OK);
     }
 
     public function registerUserToken(User $user): JsonDataResponse
     {
-        $token = self::generateUserApiToken($user);
+        $token = $this->userActions->generateUserApiToken($user);
         return new JsonDataResponse([
             'user' => $user,
             'token' => $token
@@ -37,7 +35,7 @@ class UserDataService implements UserDataServiceInterface
 
     public function logoutCurrentUser(): JsonDataResponse
     {
-        $this->revokeUserTokens();
+        $this->userActions->revokeUserTokens();
         return new JsonDataResponse(['message' => 'logged out!'], ResponseAlias::HTTP_OK);
     }
 
@@ -48,7 +46,7 @@ class UserDataService implements UserDataServiceInterface
             return new JsonDataResponse(['message' => 'Bad credentials'], ResponseAlias::HTTP_UNAUTHORIZED);
         }
 
-        $token = self::generateUserApiToken($user);
+        $token = $this->userActions->generateUserApiToken($user);
         return new JsonDataResponse([
             'user' => $user,
             'token' => $token
