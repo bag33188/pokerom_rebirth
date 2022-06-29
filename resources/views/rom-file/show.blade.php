@@ -3,11 +3,13 @@
         <h2 class="text-center">{{$romFile->filename}} Information</h2>
     </x-slot>
     <div class="m-2.5">
-        <ul class="bg-white rounded-lg shadow-lg border border-gray-200 text-gray-900 col-span-full row-start-1 row-end-1">
-            <li {!! LIST_ITEM_CLASSES !!}>{{$romFile->filename}}</li>
-            <li {!! LIST_ITEM_CLASSES !!}>{{$romFile->length}}</li>
-            <li {!! LIST_ITEM_CLASSES !!}>{{$romFile->_id}}</li>
-            <li {!! LIST_ITEM_CLASSES !!}>@include('rom-file.delete', $romFile)</li>
-        </ul>
+        <x-list-group>
+            <x-list-item>BSON Object ID: {{$romFile->_id}}</x-list-item>
+            <x-list-item>Filename: {{$romFile->filename}}</x-list-item>
+            <x-list-item>Filesize: {{$romFile->length}} Bytes</x-list-item>
+            <x-list-item>Chunk Size: {{$romFile->chunkSize}}</x-list-item>
+            <x-list-item>MD5 Hash: {{$romFile->md5}}</x-list-item>
+            <x-list-item>@include('rom-file.delete', $romFile)</x-list-item>
+        </x-list-group>
     </div>
 </x-app-layout>

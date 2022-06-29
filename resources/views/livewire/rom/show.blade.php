@@ -3,20 +3,19 @@
         <h2 class="text-center">{{$rom->getRomFileName()}} Information</h2>
     </x-slot>
     <div class="w-full grid grid-cols-2 grid-rows-[minmax(0,_1fr)_auto] gap-y-4">
-        <ul class="bg-white rounded-lg border border-gray-200 text-gray-900 col-span-full row-start-1 row-end-1">
-            <li {!! LIST_ITEM_CLASSES !!}>Rom Name: {{$rom->rom_name}}</li>
-            <li {!! LIST_ITEM_CLASSES !!}>Rom Size: {{RomRepo::getReadableRomSize($rom->rom_size)}}</li>
-            <li {!! LIST_ITEM_CLASSES !!}>Rom Type: {{$rom->rom_type}}</li>
-            <li {!! LIST_ITEM_CLASSES !!}>Game Name: {{@$rom->game->game_name . ' Version' ?? 'no game'}}</li>
+        <x-list-group>
+            <x-list-item>Rom Name: {{$rom->rom_name}}</x-list-item>
+            <x-list-item>Rom Size: {{RomRepo::getReadableRomSize($rom->rom_size)}}</x-list-item>
+            <x-list-item>Rom Type: {{$rom->rom_type}}</x-list-item>
+            <x-list-item>Game Name: {{@$rom->game->game_name . ' Version' ?? 'no game'}}</x-list-item>
             @if($rom->has_game)
-                <li {!! LIST_ITEM_CLASSES !!}>Game Region: {{$rom->game->region}}</li>
-                <li {!! LIST_ITEM_CLASSES !!}>Generation: {{number_to_roman($rom->game->generation)}}</li>
-                <li {!! LIST_ITEM_CLASSES !!}>Date
-                    Released: {{parse_date_as_readable_string($rom->game->date_released, addDayName: false)}}</li>
-                <li {!! LIST_ITEM_CLASSES !!}>Game Type: {{$rom->game->game_type}}</li>
+                <x-list-item>Game Region: {{$rom->game->region}}</x-list-item>
+                <x-list-item>Generation: {{number_to_roman($rom->game->generation)}}</x-list-item>
+                <x-list-item>Date
+                    Released: {{parse_date_as_readable_string($rom->game->date_released, addDayName: false)}}</x-list-item>
+                <x-list-item>Game Type: {{$rom->game->game_type}}</x-list-item>
             @endif
-        </ul>
-
+        </x-list-group>
         @if(Auth::user()->isAdmin())
             <div class="col-start-2 col-end-2 row-start-2 row-end-2 justify-self-end h-auto">
                 <livewire:rom.delete class="delete" :romId="$romId" />
