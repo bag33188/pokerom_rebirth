@@ -4,6 +4,7 @@ namespace Utils\Classes;
 
 use Exception;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -59,7 +60,7 @@ abstract class AbstractApplicationException extends Exception
         return $this->status() ?: (int)$this->getCode();
     }
 
-    public final function render(Request $request): Response|bool|JsonResponse
+    public final function render(Request $request): Response|bool|JsonResponse|RedirectResponse
     {
         $message = $this->getErrorMessageIfNotNull();
         $code = $this->getStatusCodeIfNotNull();
@@ -68,8 +69,12 @@ abstract class AbstractApplicationException extends Exception
             return $response->renderResponse();
         } else {
             $isLivewire = $request->header('X-Livewire');
-            if ($this->viewName()/* || !$isLivewire*/) {
-                return response()->view($this->viewName() ?? self::DEFAULT_ERROR_VIEW, ['message' => $message], $code);
+            if (!$isLivewire) {
+                if ($this->viewName()) {
+                    return response()->view($this->viewName(), ['message' => $message], $code);
+                } else {
+                    return redirect()->to(url()->previous())->dangerBanner($message);
+                }
             }
             return false;
         }

@@ -6,6 +6,8 @@ use App\Enums\FileTypesEnum as FileTypes;
 use App\Events\FileDeleted;
 use App\Events\FileUploaded;
 use App\Interfaces\RomFileDataServiceInterface;
+use App\Jobs\DownloadRomFile;
+use App\Jobs\UploadRomFile;
 use App\Models\RomFile;
 use GfsRomFile;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
@@ -17,7 +19,7 @@ class RomFileDataService implements RomFileDataServiceInterface
     public function downloadFile(RomFile $file): StreamedResponse
     {
         return new StreamedResponse(function () use ($file) {
-            GfsRomFile::download($file->getKey());
+            dispatch(new DownloadRomFile($file->getKey()));
         }, ResponseAlias::HTTP_ACCEPTED, array(
             'Content-Type' => FileTypes::OCTET_STREAM->value,
             'Content-Transfer-Encoding' => 'chunked',
@@ -26,9 +28,11 @@ class RomFileDataService implements RomFileDataServiceInterface
 
     public function uploadFile(string $filename): JsonDataResponse
     {
-        GfsRomFile::upload($filename);
-        FileUploaded::dispatch(GfsRomFile::getFileDocument());
-        return new JsonDataResponse(['message' => "file '" . GfsRomFile::getFilename() . "' created!"], ResponseAlias::HTTP_CREATED, ['X-Content-Transfer-Type', FileTypes::X_BINARY->value]);
+        normalizeFileName($filename);
+        dispatch(new UploadRomFile($filename));
+        $fileDoc = \RomFileRepo::getFileByFilename($filename);
+        FileUploaded::dispatch($fileDoc);
+        return new JsonDataResponse(['message' => "file '" . $fileDoc->filename . "' created!"], ResponseAlias::HTTP_CREATED, ['X-Content-Transfer-Type', FileTypes::X_BINARY->value]);
     }
 
     public function deleteFile(RomFile $file): JsonDataResponse

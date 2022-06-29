@@ -10,5 +10,6 @@ require_once "$functions_path/string_to_bool.php";
 require_once "$functions_path/jsondata.php";
 require_once "$functions_path/number_to_roman.php";
 require_once "$functions_path/unicode_poke.php";
+require_once "$functions_path/normalize_filename.php";
 
 //--- END GLOBAL HELPER FUNCTIONS ---//

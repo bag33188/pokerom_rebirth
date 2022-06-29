@@ -13,7 +13,7 @@ class Connection
     protected string $databaseName;
     protected int $chunkSize;
     /** @var Bucket GridFS bucket object */
-    protected Bucket $gfsBucket;
+    public Bucket $gfsBucket;
     private static array $mongoConfig;
     private static array $gfsConfig;
 
@@ -71,5 +71,9 @@ class Connection
             'chunkSizeBytes' => $this->chunkSize,
             'bucketName' => $this->bucketName
         ]);
+    }
+
+    public function gfsBucket(){
+        return $this->gfsBucket;
     }
 }
