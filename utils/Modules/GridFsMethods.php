@@ -2,7 +2,7 @@
 
 namespace Utils\Modules;
 
-use Illuminate\Support\Facades\Config;
+use Config;
 use MongoDB\BSON\ObjectId;
 
 class GridFsMethods
@@ -24,6 +24,11 @@ class GridFsMethods
             $mongoConfig['port'] . '/?authMechanism=' .
             $mongoConfig['auth']['mechanism'] . '&authSource=' .
             $mongoConfig['auth']['source'];
+    }
+
+    public static function getGfsUploadFilepath()
+    {
+        return Config::get('gridfs.fileUploadPath');
     }
 
 }

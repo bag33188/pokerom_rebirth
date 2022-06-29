@@ -50,7 +50,7 @@ class RomFileController extends ViewController
      */
     public function create()
     {
-        $romFiles = array_filter(FileMethods::getAllFilesInDirectoryAsArray('rom_files/'), function ($var) {
+        $romFiles = array_filter(FileMethods::getAllFilesInDirectoryAsArray(ROM_FILES_DIRNAME), function ($var) {
             return preg_match(ROM_FILE_NAME_PATTERN, $var);
         });
         return response()->view('rom-file.create', ['romFiles' => $romFiles]);

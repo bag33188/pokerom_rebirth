@@ -1,12 +1,13 @@
 <?php
 
-use App\Http\Controllers\api\RomFileController;
 use App\Http\Controllers\api\GameController;
 use App\Http\Controllers\api\RomController;
+use App\Http\Controllers\api\RomFileController;
 use App\Http\Controllers\api\UserController;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
+use Utils\Modules\FileMethods;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,6 +47,9 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/logout', [UserController::class, 'logout']);
     });
     Route::prefix('files')->group(function () {
+        Route::get('/get/list', function () {
+            return FileMethods::getAllFilesInDirectoryAsArray(ROM_FILES_DIRNAME);
+        });
         Route::post('/upload', [RomFileController::class, 'upload']);
         Route::get('/{fileId}/download', [RomFileController::class, 'download']);
     });

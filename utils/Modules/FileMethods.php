@@ -2,7 +2,6 @@
 
 namespace Utils\Modules;
 
-use Illuminate\Support\Facades\Config;
 use Storage;
 
 class FileMethods
@@ -14,9 +13,9 @@ class FileMethods
      * @param string|null $prefix Specify custom filepath prefix
      * @return string
      */
-    public static function makeFilepathFromFilename(string $filename, ?string $prefix): string
+    public static function makeFilepathFromFilename(string $filename, ?string $prefix = null): string
     {
-        return sprintf("%s/%s", $prefix ?? Config::get('gridfs.fileUploadPath'), $filename);
+        return sprintf("%s/%s", $prefix ?? GridFsMethods::getGfsUploadFilepath(), $filename);
     }
 
     public static function normalizeFileName(string &$filename): void
