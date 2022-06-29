@@ -9,6 +9,8 @@
 **[use sanctum with angular][angular-sanctum]** 
 
 
+
+[laravel-exception-handling]: https://dev.to/jackmiras/laravels-exceptions-part-3-findorfail-exception-automated-4kci
 [angular-sanctum]: https://stackoverflow.com/questions/61160012/laravel-sanctum-authsanctum-middleware-with-angular-spa-unauthenticated-respons "use sanctum with angular"
 [xdebug install wizard]: https://xdebug.org/wizard
 [php-debugging-session]: https://www.jetbrains.com/help/phpstorm/php-debugging-session.html

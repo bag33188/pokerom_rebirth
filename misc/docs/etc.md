@@ -32,3 +32,39 @@ Listen 5000
 </VirtualHost>
 
 ```
+
+
+# mariadb triggers for games table
+
+```mysql
+--
+-- Triggers `games`
+--
+DROP TRIGGER IF EXISTS `games_after_delete`;
+DELIMITER $$
+CREATE TRIGGER `games_after_delete` AFTER DELETE ON `games` FOR EACH ROW BEGIN
+  UPDATE `roms`
+  SET `roms`.`has_game` = FALSE, `roms`.`game_id` = NULL
+  WHERE `roms`.`id` = OLD.`rom_id`;
+END
+$$
+DELIMITER ;
+DROP TRIGGER IF EXISTS `games_after_insert`;
+DELIMITER $$
+CREATE TRIGGER `games_after_insert` AFTER INSERT ON `games` FOR EACH ROW BEGIN
+  DECLARE `rom_already_has_game` BOOL;
+  SELECT `has_game`
+  INTO @`rom_already_has_game`
+  FROM `roms`
+  WHERE `roms`.`id` = NEW.`rom_id`;
+  IF @`rom_already_has_game` = FALSE
+  THEN
+    UPDATE `roms`
+    SET `roms`.`has_game` = TRUE, `roms`.`game_id` = NEW.`id`
+    WHERE `roms`.`id` = NEW.`rom_id`;
+  END IF;
+END
+$$
+DELIMITER ;
+```
+

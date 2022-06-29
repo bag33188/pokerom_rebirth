@@ -147,7 +147,7 @@ LoadModule php_module "C:/xampp/php/php8apache2_4.dll"
 
 ### Mailhog
 
-[download](https://github.com/mailhog/MailHog/releases/v1.0.0 "download mailhog")
+[download][mailhog download]
 
 access on: `http://127.0.0.1:8025`
 
@@ -180,19 +180,9 @@ xdebug.client_port=9003
 xdebug.idekey=phpstorm
 ```
 
-install: [xdebug installation wizard](https://xdebug.org/wizard "install xdebug for php")
+install: [xdebug installation wizard]
 
-chrome ext: [xdebug chrome extension](https://chrome.google.com/webstore/detail/xdebug-helper/eadndfjplgieldjbigjakmdgkmoaaaoc?hl=en)
-
-##### PHPStorm
-
-Links and references
-
-* [php debugging session](https://www.jetbrains.com/help/phpstorm/php-debugging-session.html)
-* [zero configuration debugging](https://www.jetbrains.com/help/phpstorm/zero-configuration-debugging.html#start-debugging-session)
-* [debugging a php cli script](https://www.jetbrains.com/help/phpstorm/debugging-a-php-cli-script.html)
-* [debugging quick start](https://www.jetbrains.com/phpstorm/documentation/debugging/#quick-start)
-* [php debugging](https://www.jetbrains.com/phpstorm/documentation/debugging)
+chrome ext: [xdebug chrome extension]
 
 ##### Postman
 
@@ -220,14 +210,22 @@ debugger: xdebug
 
 [xdebug with postman](https://lukashajdu.com/post/usign-xdebug-with-postman/ "use xdebug with postman")
 
+##### PHPStorm
+
+Links and references
+
+* [php debugging session]
+* [zero configuration debugging]
+* [debugging a php cli script]
+* [debugging quick start]
+* [php debugging]
+
 ### Install MongoDB
 
-> https://www.mongodb.com/try/download/community?tck=docs_server
-> https://www.mongodb.com/try/download/database-tools
++ [mongodb community edition download][mongodb-community]
++ [download mongodb server tools][mongodb-server-tools]
 
-### PHPMyAdmin MaraiDB Shell
 
-http://www.learnwebtech.in/mysql-command-line/#:~:text=MySql%20Query%20explaination-,use%20mysql%20command%20%E2%80%9Cmysql%20%2Duroot%20%2Dp%E2%80%9D%20to%20login,mysql%20and%20%2Dp%20for%20password.&text=to%20create%20database%20in%20mysql,database%20run%20command%20use%20learn_php.
 
 ### Other
 
@@ -236,3 +234,14 @@ http://www.learnwebtech.in/mysql-command-line/#:~:text=MySql%20Query%20explainat
 
 ---------
 
+
+[php debugging session]: https://www.jetbrains.com/help/phpstorm/php-debugging-session.html
+[zero configuration debugging]: https://www.jetbrains.com/help/phpstorm/zero-configuration-debugging.html#start-debugging-session
+[debugging a php cli script]: https://www.jetbrains.com/help/phpstorm/debugging-a-php-cli-script.html
+[debugging quick start]: https://www.jetbrains.com/phpstorm/documentation/debugging/#quick-start
+[php debugging]: https://www.jetbrains.com/phpstorm/documentation/debugging
+[xdebug chrome extension]: https://chrome.google.com/webstore/detail/xdebug-helper/eadndfjplgieldjbigjakmdgkmoaaaoc?hl=en
+[xdebug installation wizard]: https://xdebug.org/wizard "install xdebug for php"
+[mailhog download]: https://github.com/mailhog/MailHog/releases/v1.0.0 "download mailhog"
+[mongodb-community]: https://www.mongodb.com/try/download/community?tck=docs_server
+[mongodb-server-tools]: https://www.mongodb.com/try/download/database-tools

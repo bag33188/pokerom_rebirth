@@ -14,8 +14,6 @@ use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
 
-#! https://dev.to/jackmiras/laravels-exceptions-part-3-findorfail-exception-automated-4kci
-
 class Handler extends ExceptionHandler
 {
     /**
