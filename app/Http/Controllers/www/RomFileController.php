@@ -4,6 +4,7 @@ namespace App\Http\Controllers\www;
 
 use App\Http\Controllers\Controller as ViewController;
 use App\Http\Requests\StoreRomFileRequest;
+use App\Interfaces\RomFileActionsInterface;
 use App\Interfaces\RomFileDataServiceInterface;
 use App\Models\RomFile;
 use Gate;
@@ -11,8 +12,6 @@ use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
 use RomFileRepo;
-use Utils\Modules\FileMethods;
-
 
 class RomFileController extends ViewController
 {
@@ -40,11 +39,9 @@ class RomFileController extends ViewController
      *
      * @return Response
      */
-    public function create()
+    public function create(RomFileActionsInterface $romFileActions)
     {
-        $romFiles = FileMethods::filterUndesiredFilesFromPattern(ROM_FILENAME_PATTERN,
-            FileMethods::getAllFilesInDirectoryAsArray(ROM_FILES_DIRNAME));
-        return response()->view('rom-file.create', ['romFiles' => $romFiles]);
+        return response()->view('rom-file.create', ['romFiles' => $romFileActions->romFilesList()]);
     }
 
     /**
