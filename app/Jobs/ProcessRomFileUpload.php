@@ -8,7 +8,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Facades\Config;
+use Utils\Modules\GfsMethods;
 
 class ProcessRomFileUpload implements ShouldQueue
 {
@@ -35,7 +35,7 @@ class ProcessRomFileUpload implements ShouldQueue
      */
     public function handle(): void
     {
-        $stream = fopen(sprintf("%s/%s", Config::get('gridfs.fileUploadPath'), $this->filename), 'rb');
+        $stream = fopen(GfsMethods::makeFilepathFromFilename($this->filename), 'rb');
         GfsRomFile::gfsBucket()->uploadFromStream($this->filename, $stream);
         fclose($stream);
     }

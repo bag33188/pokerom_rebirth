@@ -7,6 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use MongoDB\BSON\ObjectId;
 use Utils\Modules\FileDownloader;
+use Utils\Modules\GfsMethods;
 
 class ProcessRomFileDownload implements ShouldQueue
 {
@@ -33,7 +34,7 @@ class ProcessRomFileDownload implements ShouldQueue
      */
     public function handle(): void
     {
-        $stream = GfsRomFile::gfsBucket()->openDownloadStream(new ObjectId($this->fileId));
+        $stream = GfsRomFile::gfsBucket()->openDownloadStream(GfsMethods::parseObjectId($this->fileId));
         $fileDownloader = new FileDownloader($stream, self::DOWNLOAD_CHUNK_SIZE);
         $fileDownloader->downloadFile();
     }

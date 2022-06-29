@@ -6,6 +6,7 @@ use App\Actions\Validators\FileValidationRulesTrait;
 use App\Models\RomFile;
 use Illuminate\Foundation\Http\FormRequest;
 use JetBrains\PhpStorm\ArrayShape;
+use Utils\Modules\GfsMethods;
 
 class StoreRomFileRequest extends FormRequest
 {
@@ -26,7 +27,7 @@ class StoreRomFileRequest extends FormRequest
     protected function prepareForValidation(): void
     {
         $filename = str_replace('rom_files/', '', $this['filename']);
-        normalizeFileName($filename);
+        GfsMethods::normalizeFileName($filename);
         $this->merge([
             'filename' => $filename,
         ]);
