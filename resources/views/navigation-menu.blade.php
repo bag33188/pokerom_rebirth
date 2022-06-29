@@ -29,7 +29,7 @@
                 </div>
                 @if(Auth::user()->isAdmin())
                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                        <x-jet-nav-link href="{{ route('files.index') }}" :active="request()->routeIs('files.index')">
+                        <x-jet-nav-link href="{{ route('rom-files.index') }}" :active="request()->routeIs('rom-files.index')">
                             {{ __('ROM Files') }}
                         </x-jet-nav-link>
                     </div>
@@ -44,7 +44,7 @@
                         </x-jet-nav-link>
                     </div>
                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                        <x-jet-nav-link href="{{ route('files.create') }}" :active="request()->routeIs('files.create')">
+                        <x-jet-nav-link href="{{ route('rom-files.create') }}" :active="request()->routeIs('rom-files.create')">
                             {{ __('Add ROM File') }}
                         </x-jet-nav-link>
                     </div>
@@ -201,8 +201,8 @@
         </div>
         @if(auth()->user()->isAdmin())
             <div class="pt-2 pb-3 space-y-1">
-                <x-jet-responsive-nav-link href="{{ route('files.index') }}"
-                                           :active="request()->routeIs('files.index')">
+                <x-jet-responsive-nav-link href="{{ route('rom-files.index') }}"
+                                           :active="request()->routeIs('rom-files.index')">
                     {{ __('ROM Files') }}
                 </x-jet-responsive-nav-link>
             </div>
@@ -219,8 +219,8 @@
                 </x-jet-responsive-nav-link>
             </div>
             <div class="pt-2 pb-3 space-y-1">
-                <x-jet-responsive-nav-link href="{{ route('files.create') }}"
-                                           :active="request()->routeIs('files.create')">
+                <x-jet-responsive-nav-link href="{{ route('rom-files.create') }}"
+                                           :active="request()->routeIs('rom-files.create')">
                     {{ __('Add ROM File') }}
                 </x-jet-responsive-nav-link>
             </div>

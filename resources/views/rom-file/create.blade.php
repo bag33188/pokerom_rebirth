@@ -1,6 +1,6 @@
 <x-app-layout>
     <div class="p-6">
-        <form action="{{route('files.store')}}" method="POST" enctype="multipart/form-data">
+        <form action="{{route('rom-files.store')}}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('POST')
 

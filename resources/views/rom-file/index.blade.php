@@ -47,7 +47,7 @@
             <div class="files-grid-item">
                 <p title="{{$romFile->_id}}">{{$romFile->filename}}</p>
                 <div class="files-actions-wrapper">
-                    <a href="{{route('files.show', $romFile)}}" {!! JETSTREAM_BTN_CLASSES !!}>Actions</a>
+                    <a href="{{route('rom-files.show', $romFile)}}" {!! JETSTREAM_BTN_CLASSES !!}>Actions</a>
                 </div>
             </div>
         @endforeach

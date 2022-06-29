@@ -39,7 +39,7 @@ class RomFileController extends ViewController
     public function index()
     {
         Gate::authorize('viewAny-romFile');
-        return response()->view('rom-files.index', ['romFiles' => RomFileRepo::getAllFilesSorted()]);
+        return response()->view('rom-file.index', ['romFiles' => RomFileRepo::getAllFilesSorted()]);
     }
 
     /**
@@ -49,7 +49,7 @@ class RomFileController extends ViewController
      */
     public function create()
     {
-        return response()->view('rom-files.create');
+        return response()->view('rom-file.create');
     }
 
     /**
@@ -74,7 +74,7 @@ class RomFileController extends ViewController
      */
     public function show(RomFile $romFile)
     {
-        return response()->view('rom-files.show', ['romFile' => $romFile]);
+        return response()->view('rom-file.show', ['romFile' => $romFile]);
     }
 
     /**
@@ -88,7 +88,7 @@ class RomFileController extends ViewController
     {
         $this->authorize('delete', $romFile);
         $this->romFileDataService->deleteFile($romFile);
-        return response()->redirectTo(route('files.index'))->banner("$romFile->filename deleted!");
+        return response()->redirectTo(route('rom-files.index'))->banner("$romFile->filename deleted!");
     }
 }
 

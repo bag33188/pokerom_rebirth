@@ -7,7 +7,7 @@
             <li {!! LIST_ITEM_CLASSES !!}>{{$romFile->filename}}</li>
             <li {!! LIST_ITEM_CLASSES !!}>{{$romFile->length}}</li>
             <li {!! LIST_ITEM_CLASSES !!}>{{$romFile->_id}}</li>
-            <li {!! LIST_ITEM_CLASSES !!}>@include('rom-files.delete', $romFile)</li>
+            <li {!! LIST_ITEM_CLASSES !!}>@include('rom-file.delete', $romFile)</li>
         </ul>
     </div>
 </x-app-layout>
