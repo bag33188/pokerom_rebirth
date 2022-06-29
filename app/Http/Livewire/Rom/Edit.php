@@ -5,16 +5,18 @@ namespace App\Http\Livewire\Rom;
 use App\Actions\Validators\RomValidationRulesTrait;
 use App\Models\Rom;
 use Exception;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use JetBrains\PhpStorm\ArrayShape;
 use Livewire\Component;
 use RomRepo;
 
 class Edit extends Component
 {
-    use RomValidationRulesTrait;
+    use RomValidationRulesTrait, AuthorizesRequests;
 
     /** @var Rom */
     public $rom;
@@ -56,11 +58,14 @@ class Edit extends Component
         return view('livewire.rom.edit');
     }
 
+    /**
+     * @throws AuthorizationException
+     */
     public function update()
     {
+        $this->authorize('update', $this->rom);
         $this->validate();
         try {
-            $this->rom = RomRepo::findRomIfExists($this->romId);
             $this->rom->update([
                 'rom_type' => $this->rom_type,
                 'rom_name' => $this->rom_name,

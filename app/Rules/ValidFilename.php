@@ -6,11 +6,6 @@ use Illuminate\Contracts\Validation\Rule;
 
 class ValidFilename implements Rule
 {
-
-    /** array of valid file extensions */
-    private const FILE_EXTENSIONS = array('.gb', '.gbc', '.gba', '.nds', '.3ds', '.xci');
-
-
     /**
      * Determine if the validation rule passes.
      *
@@ -20,7 +15,7 @@ class ValidFilename implements Rule
      */
     public function passes($attribute, $value): bool
     {
-        return preg_match(ROM_FILE_NAME_PATTERN,  $value);
+        return preg_match(ROM_FILENAME_PATTERN, $value);
     }
 
     /**
@@ -32,6 +27,6 @@ class ValidFilename implements Rule
     {
         return 'Invalid file name. Filename must be: ' .
             'between 3 and 32 characters and only contain letters, numbers, hyphens and/or underscores. ' .
-            'File extension must be one of: ' . implode(', ', self::FILE_EXTENSIONS) . '.';
+            'File extension must be one of: ' . implode(', ', FILE_EXTENSIONS) . '.';
     }
 }

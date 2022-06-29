@@ -38,8 +38,11 @@ class FileMethods
         $dirname = preg_replace("/\//", '', $dirname);
     }
 
+
     /**
-     * @param string $pattern
+     * Filters an array of filenames and removes the ones that don't match a given pattern.
+     *
+     * @param string $pattern Regular Expression pattern
      * @param string[] $files
      * @return string[]
      */

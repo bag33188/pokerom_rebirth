@@ -64,13 +64,14 @@ abstract class AbstractApplicationException extends Exception
     {
         $message = $this->getErrorMessageIfNotNull();
         $code = $this->getStatusCodeIfNotNull();
+        $viewName = $this->viewName();
         if ($request->is('api/*') || $request->expectsJson()) {
             $response = new JsonDataResponse(['message' => $message], $code);
             return $response->renderResponse();
         } else {
             $isLivewire = $request->header('X-Livewire');
             if (!$isLivewire) {
-                if ($this->viewName()) {
+                if (isset($viewName)) {
                     return response()->view($this->viewName(), ['message' => $message], $code);
                 } else {
                     return redirect()->to(url()->previous())->dangerBanner($message);

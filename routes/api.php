@@ -33,6 +33,8 @@ Route::prefix('auth')->group(function () {
 
 // auth
 Route::middleware('auth:sanctum')->group(function () {
+
+
     // general api routes
     Route::apiResources(['/roms' => RomController::class, '/games' => GameController::class]);
     Route::apiResource('/users', UserController::class)->only('index', 'show', 'destroy')
@@ -40,15 +42,15 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('/files', RomFileController::class)->only('index', 'show', 'destroy')
         ->parameter('file', 'fileId');
 
-    // custom api routes
+    // api route groups
     Route::prefix('auth')->group(function () {
         Route::get('/me', [UserController::class, 'showMe']);
         Route::post('/logout', [UserController::class, 'logout']);
     });
-    Route::prefix('files')->group(function () {
-        Route::get('/get/list', function () {
+    Route::prefix('files/grid')->group(function () {
+        Route::get('/list', function () {
             return Storage::disk(ROM_FILES_DIRNAME)->files('/');
-        });
+        })->middleware('admin');
         Route::post('/upload', [RomFileController::class, 'upload']);
         Route::get('/{fileId}/download', [RomFileController::class, 'download']);
     });
@@ -64,7 +66,7 @@ Route::middleware('auth:sanctum')->group(function () {
 if (App::environment('local')) {
     Route::prefix('dev')->group(function () {
         // todo: find/add a way to send token to download link (in order to authenticate) (maybe use a POST request???)
-        Route::get('/files/{fileId}/download', [RomFileController::class, 'download']);
+        Route::get('/files/grid/{fileId}/download', [RomFileController::class, 'download']);
         // Route::post('/files/{fileId}/download', [FileController::class, 'download']);
     });
 }

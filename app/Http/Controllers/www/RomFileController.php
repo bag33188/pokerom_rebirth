@@ -42,7 +42,7 @@ class RomFileController extends ViewController
      */
     public function create()
     {
-        $romFiles = FileMethods::filterUndesiredFilesFromPattern(ROM_FILE_NAME_PATTERN,
+        $romFiles = FileMethods::filterUndesiredFilesFromPattern(ROM_FILENAME_PATTERN,
             FileMethods::getAllFilesInDirectoryAsArray(ROM_FILES_DIRNAME));
         return response()->view('rom-file.create', ['romFiles' => $romFiles]);
     }

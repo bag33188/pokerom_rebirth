@@ -4,27 +4,32 @@ namespace App\Http\Livewire\Game;
 
 use App\Actions\Validators\GameValidationRulesTrait;
 use App\Interfaces\GameDataServiceInterface;
+use App\Models\Game;
 use Exception;
 use GameRepo;
 use Illuminate\Contracts\{Foundation\Application, View\Factory, View\View};
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use JetBrains\PhpStorm\ArrayShape;
 use Livewire\Component;
 
 class Create extends Component
 {
-    use GameValidationRulesTrait;
+    use GameValidationRulesTrait, AuthorizesRequests;
 
-    public $availableRoms = [];
-    public $availableRomsCount = 0;
+    public $availableRoms;
+    public $availableRomsCount;
     public $game_name;
-    public $game_type = GAME_TYPES[0];
+    public $game_type;
     public $generation;
     public $date_released;
-    public $region = REGIONS[0];
+    public $region;
     public $rom_id;
 
     public function boot()
     {
+        $this->region = REGIONS[0];
+        $this->game_type = GAME_TYPES[0];
         $this->availableRoms = GameRepo::getAllRomsWithNoGame();
         $this->availableRomsCount = count($this->availableRoms);
         $this->rom_id = $this->availableRomsCount > 0 ? $this->availableRoms[0]->id : 0;
@@ -53,8 +58,13 @@ class Create extends Component
     }
 
 
+    /**
+     * @throws AuthorizationException
+     */
     public function store(GameDataServiceInterface $gameDataService)
     {
+        $this->authorize('create', Game::class);
+
         $this->validate();
         try {
             $gameDataService->createGameFromRomId($this->rom_id, [

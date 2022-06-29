@@ -6,15 +6,17 @@ use App\Actions\Validators\GameValidationRulesTrait;
 use App\Models\Game;
 use Exception;
 use GameRepo;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use JetBrains\PhpStorm\ArrayShape;
 use Livewire\Component;
 
 class Edit extends Component
 {
-    use GameValidationRulesTrait;
+    use GameValidationRulesTrait, AuthorizesRequests;
 
     /** @var Game */
     public $game;
@@ -60,8 +62,12 @@ class Edit extends Component
         ];
     }
 
+    /**
+     * @throws AuthorizationException
+     */
     public function update()
     {
+        $this->authorize('update', $this->game);
         $this->validate();
         try {
             $this->game->update([

@@ -12,8 +12,9 @@ class GridFSConnection
     private string $bucketName;
     private string $databaseName;
     private int $chunkSize;
+
     /** @var Bucket GridFS bucket object */
-    private Bucket $gfsBucket;
+    private Bucket $bucket;
 
     public function __construct(string $databaseName, string $bucketName, int $chunkSize)
     {
@@ -21,7 +22,7 @@ class GridFSConnection
         $this->databaseName = $databaseName;
         $this->bucketName = $bucketName;
         $this->chunkSize = $chunkSize;
-        $this->setGfsBucket();
+        $this->setBucket();
 
     }
 
@@ -33,10 +34,10 @@ class GridFSConnection
         return $db->selectDatabase($this->databaseName);
     }
 
-    private function setGfsBucket(): void
+    private function setBucket(): void
     {
         $mongodb = $this->connectToMongoClient();
-        $this->gfsBucket = $mongodb->selectGridFSBucket([
+        $this->bucket = $mongodb->selectGridFSBucket([
             'chunkSizeBytes' => $this->chunkSize,
             'bucketName' => $this->bucketName
         ]);
@@ -44,6 +45,6 @@ class GridFSConnection
 
     public function getBucket(): Bucket
     {
-        return $this->gfsBucket;
+        return $this->bucket;
     }
 }

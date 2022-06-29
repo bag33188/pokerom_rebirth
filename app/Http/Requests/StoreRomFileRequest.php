@@ -6,8 +6,10 @@ use App\Actions\Validators\FileValidationRulesTrait;
 use App\Models\RomFile;
 use Illuminate\Foundation\Http\FormRequest;
 use JetBrains\PhpStorm\ArrayShape;
+use Utils\Classes\AbstractGridFsFile;
 use Utils\Modules\FileMethods;
 
+/** @mixin AbstractGridFsFile */
 class StoreRomFileRequest extends FormRequest
 {
     use FileValidationRulesTrait;
@@ -26,10 +28,9 @@ class StoreRomFileRequest extends FormRequest
 
     protected function prepareForValidation(): void
     {
-        $filename = $this['filename'];
-        FileMethods::normalizeFileName($filename);
+        FileMethods::normalizeFileName($this->filename);
         $this->merge([
-            'filename' => $filename,
+            'filename' => $this->filename,
         ]);
     }
 
