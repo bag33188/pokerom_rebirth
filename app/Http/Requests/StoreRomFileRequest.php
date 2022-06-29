@@ -2,17 +2,17 @@
 
 namespace App\Http\Requests;
 
-use App\Actions\Validators\FileValidationRulesTrait;
+use App\Actions\Validators\RomFileValidationRulesTrait;
 use App\Models\RomFile;
 use Illuminate\Foundation\Http\FormRequest;
 use JetBrains\PhpStorm\ArrayShape;
-use Utils\Classes\AbstractGridFsFile;
+use Utils\Classes\AbstractGridFsFile as GfsFile;
 use Utils\Modules\FileMethods;
 
-/** @mixin AbstractGridFsFile */
+/** @mixin GfsFile */
 class StoreRomFileRequest extends FormRequest
 {
-    use FileValidationRulesTrait;
+    use RomFileValidationRulesTrait;
 
     protected $stopOnFirstFailure = true;
 
@@ -34,10 +34,9 @@ class StoreRomFileRequest extends FormRequest
         ]);
     }
 
-
     #[ArrayShape(['filename' => "array"])]
     public function rules(): array
     {
-        return $this->fileRules();
+        return $this->romFileRules();
     }
 }

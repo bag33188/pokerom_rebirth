@@ -4,7 +4,7 @@ namespace App\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
 
-class ValidFilename implements Rule
+class ValidRomFilename implements Rule
 {
     /**
      * Determine if the validation rule passes.

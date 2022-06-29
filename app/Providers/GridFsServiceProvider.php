@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Services\GridFS\GridFSConnection;
+use App\Services\GridFS\RomFilesGridFSConnection;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Support\ServiceProvider;
@@ -18,13 +18,13 @@ class GridFsServiceProvider extends ServiceProvider implements DeferrableProvide
     {
 
         // use scoped singleton since only admin user will be invoking this logic
-        $this->app->scoped(GridFSConnection::class, function (Application $app) {
+        $this->app->scoped(RomFilesGridFSConnection::class, function (Application $app) {
             $dbProps = [
                 config('gridfs.connection.database'),
                 config('gridfs.bucketName'),
                 config('gridfs.chunkSize'),
             ];
-            return new GridFSConnection(...$dbProps);
+            return new RomFilesGridFSConnection(...$dbProps);
         });
     }
 
@@ -37,6 +37,6 @@ class GridFsServiceProvider extends ServiceProvider implements DeferrableProvide
      */
     public function provides(): array
     {
-        return [GridFSConnection::class];
+        return [RomFilesGridFSConnection::class];
     }
 }

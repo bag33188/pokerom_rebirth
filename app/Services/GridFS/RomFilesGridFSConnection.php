@@ -5,36 +5,34 @@ namespace App\Services\GridFS;
 use MongoDB\Client as MongoClient;
 use MongoDB\Database;
 use MongoDB\GridFS\Bucket;
+use Utils\Classes\AbstractGridFSConnection;
 use Utils\Modules\GridFsMethods;
 
-class GridFSConnection
+class RomFilesGridFSConnection extends AbstractGridFSConnection
 {
-    private string $bucketName;
-    private string $databaseName;
-    private int $chunkSize;
+    protected string $bucketName;
+    protected string $databaseName;
+    protected int $chunkSize;
 
     /** @var Bucket GridFS bucket object */
-    private Bucket $bucket;
+    protected Bucket $bucket;
 
     public function __construct(string $databaseName, string $bucketName, int $chunkSize)
     {
-
         $this->databaseName = $databaseName;
         $this->bucketName = $bucketName;
         $this->chunkSize = $chunkSize;
         $this->setBucket();
-
     }
 
-
-    private function connectToMongoClient(): Database
+    protected function connectToMongoClient(): Database
     {
         $dsn = GridFsMethods::GFS_MONGO_URI();
         $db = new MongoClient($dsn);
         return $db->selectDatabase($this->databaseName);
     }
 
-    private function setBucket(): void
+    protected function setBucket(): void
     {
         $mongodb = $this->connectToMongoClient();
         $this->bucket = $mongodb->selectGridFSBucket([
