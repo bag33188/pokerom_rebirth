@@ -1,9 +1,6 @@
-<?php /** @noinspection PhpDefineCanBeReplacedWithConstInspection */
+<?php
 
 use Illuminate\Support\Facades\Date;
-
-define('WITH_DAY_NAME', 'l, F jS, Y');
-define('WITHOUT_DAY_NAME', 'F jS, Y');
 
 if (!function_exists('parse_date_as_readable_string')) {
     /**
