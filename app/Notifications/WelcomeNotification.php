@@ -41,12 +41,11 @@ class WelcomeNotification extends Notification
      */
     public function toMail(mixed $notifiable): MailMessage
     {
-        $lnMsg = sprintf("%s to the world of Pok%sROM!",
-            isset($this->username) ? "$this->username, welcome" : 'Welcome', _EACUTE);
+        $lnMsg = (isset($this->username) ? "Hello $this->username, welcome" : 'Welcome') . " to the world of PokeROM!";
         return (new MailMessage)
             ->subject('Thank you for joining ' . config('app.name') . '!!')
             ->from(config('mail.from.address'))
-            ->line($lnMsg)
+            ->line(unicode_eacute($lnMsg))
             ->action('Check it out!', route('roms.index'))
             ->line('Enjoy!');
     }
