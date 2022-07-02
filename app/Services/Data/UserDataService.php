@@ -2,8 +2,8 @@
 
 namespace App\Services\Data;
 
-use App\Interfaces\UserActionsInterface;
-use App\Interfaces\UserDataServiceInterface;
+use App\Interfaces\Action\UserActionsInterface;
+use App\Interfaces\Service\UserDataServiceInterface;
 use App\Models\User;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 use Utils\Modules\JsonDataResponse;

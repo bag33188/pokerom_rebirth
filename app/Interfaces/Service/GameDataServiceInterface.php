@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Interfaces;
+namespace App\Interfaces\Service;
 
 use App\Models\Game;
 use Illuminate\Database\Eloquent\Model;

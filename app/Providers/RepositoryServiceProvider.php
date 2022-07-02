@@ -2,12 +2,12 @@
 
 namespace App\Providers;
 
-use App\Interfaces\RomFileRepositoryInterface;
-use App\Interfaces\GameRepositoryInterface;
-use App\Interfaces\RomRepositoryInterface;
-use App\Interfaces\UserRepositoryInterface;
-use App\Repositories\RomFileRepository;
+use App\Interfaces\Repository\GameRepositoryInterface;
+use App\Interfaces\Repository\RomFileRepositoryInterface;
+use App\Interfaces\Repository\RomRepositoryInterface;
+use App\Interfaces\Repository\UserRepositoryInterface;
 use App\Repositories\GameRepository;
+use App\Repositories\RomFileRepository;
 use App\Repositories\RomRepository;
 use App\Repositories\UserRepository;
 use Illuminate\Support\ServiceProvider;

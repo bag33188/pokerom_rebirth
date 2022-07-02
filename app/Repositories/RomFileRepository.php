@@ -2,7 +2,7 @@
 
 namespace App\Repositories;
 
-use App\Interfaces\RomFileRepositoryInterface;
+use App\Interfaces\Repository\RomFileRepositoryInterface;
 use App\Models\Rom;
 use App\Models\RomFile;
 use Illuminate\Database\Eloquent\Collection;

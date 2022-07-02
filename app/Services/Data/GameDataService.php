@@ -3,7 +3,7 @@
 namespace App\Services\Data;
 
 use App\Events\GameCreated;
-use App\Interfaces\GameDataServiceInterface;
+use App\Interfaces\Service\GameDataServiceInterface;
 use App\Models\Game;
 use RomRepo;
 

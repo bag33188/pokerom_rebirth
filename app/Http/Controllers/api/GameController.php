@@ -5,7 +5,7 @@ namespace App\Http\Controllers\api;
 use App\Http\Controllers\Controller as ApiController;
 use App\Http\Requests\{StoreGameRequest, UpdateGameRequest};
 use App\Http\Resources\{GameCollection, GameResource, RomResource};
-use App\Interfaces\GameDataServiceInterface;
+use App\Interfaces\Service\GameDataServiceInterface;
 use App\Models\Game;
 use GameRepo;
 use Illuminate\{Auth\Access\AuthorizationException, Http\JsonResponse};

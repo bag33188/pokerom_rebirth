@@ -2,7 +2,7 @@
 
 namespace App\Actions;
 
-use App\Interfaces\RomFileActionsInterface;
+use App\Interfaces\Action\RomFileActionsInterface;
 use Storage;
 
 class RomFileActions implements RomFileActionsInterface

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Interfaces;
+namespace App\Interfaces\Action;
 
 use App\Models\Rom;
 use App\Models\RomFile;

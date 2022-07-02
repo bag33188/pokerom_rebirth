@@ -2,7 +2,7 @@
 
 namespace App\Repositories;
 
-use App\Interfaces\GameRepositoryInterface;
+use App\Interfaces\Repository\GameRepositoryInterface;
 use App\Models\Game;
 use App\Models\Rom;
 use Illuminate\Database\Eloquent\Collection;

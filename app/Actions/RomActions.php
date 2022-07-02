@@ -2,7 +2,7 @@
 
 namespace App\Actions;
 
-use App\Interfaces\RomActionsInterface;
+use App\Interfaces\Action\RomActionsInterface;
 use App\Models\Rom;
 use App\Models\RomFile;
 use Illuminate\Support\Facades\DB;

@@ -5,9 +5,9 @@ namespace App\Providers;
 use App\Actions\RomActions;
 use App\Actions\RomFileActions;
 use App\Actions\UserActions;
-use App\Interfaces\RomActionsInterface;
-use App\Interfaces\RomFileActionsInterface;
-use App\Interfaces\UserActionsInterface;
+use App\Interfaces\Action\RomActionsInterface;
+use App\Interfaces\Action\RomFileActionsInterface;
+use App\Interfaces\Action\UserActionsInterface;
 use Illuminate\Support\ServiceProvider;
 
 class ActionServiceProvider extends ServiceProvider

@@ -5,7 +5,7 @@ namespace App\Services\Data;
 use App\Enums\FileTypesEnum as FileTypes;
 use App\Events\FileDeleted;
 use App\Events\FileUploaded;
-use App\Interfaces\RomFileDataServiceInterface;
+use App\Interfaces\Service\RomFileDataServiceInterface;
 use App\Jobs\ProcessRomFileDeletion;
 use App\Jobs\ProcessRomFileDownload;
 use App\Jobs\ProcessRomFileUpload;

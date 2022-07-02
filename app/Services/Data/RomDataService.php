@@ -2,8 +2,8 @@
 
 namespace App\Services\Data;
 
-use App\Interfaces\RomActionsInterface;
-use App\Interfaces\RomDataServiceInterface;
+use App\Interfaces\Action\RomActionsInterface;
+use App\Interfaces\Service\RomDataServiceInterface;
 use App\Models\Rom;
 use RomRepo;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;

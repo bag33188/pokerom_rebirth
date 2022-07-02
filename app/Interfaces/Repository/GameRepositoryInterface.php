@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Interfaces;
+namespace App\Interfaces\Repository;
 
 use App\Models\Game;
 use App\Models\Rom;

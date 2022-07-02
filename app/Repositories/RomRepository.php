@@ -2,7 +2,7 @@
 
 namespace App\Repositories;
 
-use App\Interfaces\RomRepositoryInterface;
+use App\Interfaces\Repository\RomRepositoryInterface;
 use App\Models\Game;
 use App\Models\Rom;
 use App\Models\RomFile;

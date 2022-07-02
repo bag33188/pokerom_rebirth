@@ -4,8 +4,8 @@ namespace App\Http\Controllers\www;
 
 use App\Http\Controllers\Controller as ViewController;
 use App\Http\Requests\StoreRomFileRequest;
-use App\Interfaces\RomFileActionsInterface;
-use App\Interfaces\RomFileDataServiceInterface;
+use App\Interfaces\Action\RomFileActionsInterface;
+use App\Interfaces\Service\RomFileDataServiceInterface;
 use App\Models\RomFile;
 use Gate;
 use Illuminate\Auth\Access\AuthorizationException;

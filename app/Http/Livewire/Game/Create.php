@@ -3,12 +3,12 @@
 namespace App\Http\Livewire\Game;
 
 use App\Actions\Validators\GameValidationRulesTrait;
-use App\Interfaces\GameDataServiceInterface;
+use App\Interfaces\Service\GameDataServiceInterface;
 use App\Models\Game;
 use Exception;
 use GameRepo;
-use Illuminate\Contracts\{Foundation\Application, View\Factory, View\View};
 use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Contracts\{Foundation\Application, View\Factory, View\View};
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use JetBrains\PhpStorm\ArrayShape;
 use Livewire\Component;

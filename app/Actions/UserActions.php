@@ -2,7 +2,7 @@
 
 namespace App\Actions;
 
-use App\Interfaces\UserActionsInterface;
+use App\Interfaces\Action\UserActionsInterface;
 use App\Models\User;
 
 class UserActions implements UserActionsInterface

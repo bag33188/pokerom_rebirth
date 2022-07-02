@@ -2,13 +2,13 @@
 
 namespace App\Providers;
 
-use App\Interfaces\RomFileDataServiceInterface as IRomFileDataService;
-use App\Interfaces\GameDataServiceInterface as IGameDataService;
-use App\Interfaces\RomDataServiceInterface as IRomDataService;
-use App\Interfaces\UserDataServiceInterface as IUserDataService;
-use App\Services\Data\RomFileDataService;
+use App\Interfaces\Service\GameDataServiceInterface as IGameDataService;
+use App\Interfaces\Service\RomDataServiceInterface as IRomDataService;
+use App\Interfaces\Service\RomFileDataServiceInterface as IRomFileDataService;
+use App\Interfaces\Service\UserDataServiceInterface as IUserDataService;
 use App\Services\Data\GameDataService;
 use App\Services\Data\RomDataService;
+use App\Services\Data\RomFileDataService;
 use App\Services\Data\UserDataService;
 use Illuminate\Support\ServiceProvider;
 

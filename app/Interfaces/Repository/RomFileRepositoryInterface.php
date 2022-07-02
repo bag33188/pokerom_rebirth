@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Interfaces;
+namespace App\Interfaces\Repository;
 
-use App\Models\RomFile;
 use App\Models\Rom;
+use App\Models\RomFile;
 use Illuminate\Database\Eloquent\Collection;
 
 interface RomFileRepositoryInterface

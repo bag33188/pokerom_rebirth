@@ -2,7 +2,7 @@
 
 namespace App\Observers;
 
-use App\Interfaces\RomActionsInterface;
+use App\Interfaces\Action\RomActionsInterface;
 use App\Models\Rom;
 
 class RomObserver
