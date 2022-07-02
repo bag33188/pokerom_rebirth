@@ -13,16 +13,16 @@ class FileUploaded
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public RomFile $file;
+    public RomFile $romFile;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct(RomFile $file)
+    public function __construct(RomFile $romFile)
     {
-        $this->file = $file;
+        $this->romFile = $romFile;
     }
 
     /**

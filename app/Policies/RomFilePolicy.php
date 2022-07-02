@@ -21,7 +21,7 @@ class RomFilePolicy
         return $user->isAdmin();
     }
 
-    public function view(User $user, RomFile $file): bool
+    public function view(User $user, RomFile $romFile): bool
     {
         return $user->isAdmin();
     }
@@ -30,10 +30,10 @@ class RomFilePolicy
      * Determine whether the user can delete the model.
      *
      * @param User $user
-     * @param RomFile $file
+     * @param RomFile $romFile
      * @return bool
      */
-    public function delete(User $user, RomFile $file): bool
+    public function delete(User $user, RomFile $romFile): bool
     {
         return $user->isAdmin();
     }

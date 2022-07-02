@@ -17,14 +17,14 @@ use Utils\Classes\JsonDataResponse;
 
 class RomFileDataService implements RomFileDataServiceInterface
 {
-    public function downloadFile(RomFile $file): StreamedResponse
+    public function downloadFile(RomFile $romFile): StreamedResponse
     {
-        return new StreamedResponse(function () use ($file) {
-            ProcessRomFileDownload::dispatch($file->getObjectId());
+        return new StreamedResponse(function () use ($romFile) {
+            ProcessRomFileDownload::dispatch($romFile->getObjectId());
         }, ResponseAlias::HTTP_ACCEPTED, array(
             'Content-Type' => FileTypes::OCTET_STREAM->value,
             'Content-Transfer-Encoding' => 'chunked',
-            'Content-Disposition' => "attachment; filename=\"$file->filename\""));
+            'Content-Disposition' => "attachment; filename=\"$romFile->filename\""));
     }
 
     public function uploadFile(string $filename): JsonDataResponse
@@ -35,10 +35,10 @@ class RomFileDataService implements RomFileDataServiceInterface
         return new JsonDataResponse(['message' => "file '" . $fileDoc->filename . "' created!"], ResponseAlias::HTTP_CREATED, ['X-Content-Transfer-Type', FileTypes::X_BINARY->value]);
     }
 
-    public function deleteFile(RomFile $file): JsonDataResponse
+    public function deleteFile(RomFile $romFile): JsonDataResponse
     {
-        FileDeleted::dispatch($file);
-        ProcessRomFileDeletion::dispatch($file->getObjectId());
-        return new JsonDataResponse(['message' => "$file->filename deleted!"], ResponseAlias::HTTP_OK);
+        FileDeleted::dispatch($romFile);
+        ProcessRomFileDeletion::dispatch($romFile->getObjectId());
+        return new JsonDataResponse(['message' => "$romFile->filename deleted!"], ResponseAlias::HTTP_OK);
     }
 }

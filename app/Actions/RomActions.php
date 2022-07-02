@@ -10,13 +10,13 @@ use RomRepo;
 
 class RomActions implements RomActionsInterface
 {
-    public function setRomDataFromFile(Rom $rom, RomFile $file): void
+    public function setRomDataFromFile(Rom $rom, RomFile $romFile): void
     {
         $sql =
             DB::raw(/** @lang MariaDB */ "CALL LinkRomToFile(:fileId, :fileSize, :romId);");
         DB::statement($sql, [
-            'fileId' => $file->getKey(),
-            'fileSize' => $file->length,
+            'fileId' => $romFile->getKey(),
+            'fileSize' => $romFile->length,
             'romId' => $rom->getKey()
         ]);
         $rom->refresh();
@@ -25,7 +25,7 @@ class RomActions implements RomActionsInterface
 
     public function linkRomToFileIfExists(Rom $rom): void
     {
-        $file = RomRepo::searchForFileMatchingRom($rom->id);
-        if (isset($file)) $this->setRomDataFromFile($rom, $file);
+        $romFile = RomRepo::searchForFileMatchingRom($rom->id);
+        if (isset($romFile)) $this->setRomDataFromFile($rom, $romFile);
     }
 }

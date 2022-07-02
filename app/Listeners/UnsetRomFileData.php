@@ -15,7 +15,7 @@ class UnsetRomFileData implements ShouldQueue
 
     public function shouldQueue(FileDeleted $event): bool
     {
-        return $event->file->rom()->exists();
+        return $event->romFile->rom()->exists();
     }
 
     /**
@@ -27,7 +27,7 @@ class UnsetRomFileData implements ShouldQueue
     public function handle(FileDeleted $event): void
     {
         Rom::withoutEvents(function () use ($event) {
-            $rom = $event->file->rom()->first();
+            $rom = $event->romFile->rom()->first();
             $rom['has_file'] = false;
             $rom['file_id'] = null;
             $rom->save();

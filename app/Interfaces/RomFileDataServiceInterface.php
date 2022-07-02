@@ -8,9 +8,9 @@ use Utils\Classes\JsonDataResponse;
 
 interface RomFileDataServiceInterface
 {
-    public function downloadFile(RomFile $file): StreamedResponse;
+    public function downloadFile(RomFile $romFile): StreamedResponse;
 
     public function uploadFile(string $filename): JsonDataResponse;
 
-    public function deleteFile(RomFile $file): JsonDataResponse;
+    public function deleteFile(RomFile $romFile): JsonDataResponse;
 }

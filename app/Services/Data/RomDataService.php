@@ -20,11 +20,11 @@ class RomDataService implements RomDataServiceInterface
 
     public function attemptToLinkRomToFile(Rom $rom): JsonDataResponse
     {
-        $file = RomRepo::searchForFileMatchingRom($rom->id);
-        if (isset($file)) {
-            $this->romActions->setRomDataFromFile($rom, $file);
+        $romFile = RomRepo::searchForFileMatchingRom($rom->id);
+        if (isset($romFile)) {
+            $this->romActions->setRomDataFromFile($rom, $romFile);
             return new JsonDataResponse([
-                'message' => "file found and linked! file id: {$file->getKey()}",
+                'message' => "file found and linked! file id: {$romFile->getKey()}",
                 'data' => $rom->refresh()
             ], ResponseAlias::HTTP_OK);
         } else {
