@@ -224,7 +224,7 @@ return [
         'GfsRomFile' => \App\Facades\RomFilesConnectionFacade::class,
         'RomRepo'=>\App\Facades\RomRepositoryFacade::class,
         'GameRepo'=>\App\Facades\GameRepositoryFacade::class,
-        'RomFileRepo'=>\App\Facades\FileRepositoryFacade::class,
+        'RomFileRepo'=>\App\Facades\RomFileRepositoryFacade::class,
         'UserRepo'=>\App\Facades\UserRepositoryFacade::class,
     ])->toArray(),
 

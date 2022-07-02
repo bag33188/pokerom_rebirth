@@ -9,7 +9,7 @@ class MongoBulkException extends ApplicationException
 {
     public function viewName(): ?string
     {
-        return null; //'errors.query-exception';
+        return null;
     }
 
     public function status(): int
