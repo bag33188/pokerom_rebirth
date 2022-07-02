@@ -20,12 +20,13 @@ if (!function_exists('unicode_eacute')) {
      *
      * @param string $text
      * @param bool $useUppercase replace with uppercase eacute
+     * @param string $prefix Uses the word "Pok" by default
      * @return string
      */
-    function unicode_eacute(string $text, bool $useUppercase = false): string
+    function unicode_eacute(string $text, bool $useUppercase = false, string $prefix = "Pok"): string
     {
-        $replacement = "Pok" . ($useUppercase ? _U_EACUTE : _EACUTE);
-        return preg_replace("/Poke/i", $replacement, $text);
+        $replacement = $prefix . ($useUppercase ? _U_EACUTE : _EACUTE);
+        return preg_replace("/{$prefix}e/i", $replacement, $text);
     }
 }
 
@@ -35,13 +36,14 @@ if (!function_exists('un_unicode_eacute')) {
      *
      * @param string $text
      * @param bool $useUppercase search for uppercase eacute
+     * @param string $prefix Uses the word "Pok" by default
      * @return string
      */
-    function un_unicode_eacute(string $text, bool $useUppercase = false): string
+    function un_unicode_eacute(string $text, bool $useUppercase = false, string $prefix = "Pok"): string
     {
         $pattern = !$useUppercase ? /** @lang RegExp */
-            "/Pok\x{E9}/iu" : /** @lang RegExp */
-            "/Pok\x{C9}/iu";
-        return preg_replace($pattern, "Poke", $text);
+            "/$prefix\x{E9}/iu" : /** @lang RegExp */
+            "/$prefix\x{C9}/iu";
+        return preg_replace($pattern, "{$prefix}e", $text);
     }
 }

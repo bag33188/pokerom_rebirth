@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', unicode_eacute('PokeROM')),
+    'name' => unicode_eacute(env('APP_NAME', 'PokeROM')),
 
     'version' => (float)env('APP_VERSION', 4.0),
 
@@ -201,7 +201,7 @@ return [
         App\Providers\JetstreamServiceProvider::class,
         App\Providers\RepositoryServiceProvider::class,
         App\Providers\DataServiceProvider::class,
-        App\Providers\GridFsServiceProvider::class,
+        App\Providers\GridFSServiceProvider::class,
         App\Providers\ActionServiceProvider::class,
 
         // Laravel IDE Helper
