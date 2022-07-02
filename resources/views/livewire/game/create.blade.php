@@ -7,7 +7,7 @@
 
         @if($availableRomsCount > 0)
 
-            <x-jet-validation-errors class="mb-4" />
+            <x-jet-validation-errors class="mb-4"/>
 
             <form wire:submit.prevent="store">
                 <label for="availableRoms">Select ROM</label>
@@ -16,12 +16,13 @@
                         for($i = 0; $i < $availableRomsCount; $i++) {
                             $rom = json_decode(json_encode($availableRoms[$i]), associative: false);
                             $html = "<option value='$rom->id'>$rom->rom_name</option>";
-                            echo preg_replace("/'/m", '"', $html);
+                            $html = preg_replace("/'/m", '"', $html);
+                            print $html;
                         }
                     @endphp
                 </x-form-select>
                 <div class="mt-2.5">
-                    <x-jet-label for="gameName" value="{{__('Game Name')}}" />
+                    <x-jet-label for="gameName" value="{{__('Game Name')}}"/>
                     <x-jet-input wire:model="game_name" id="gameName" class="block mt-1 w-full" type="text"
                                  name="game_name"
                                  minlength="{{MIN_GAME_NAME}}"
@@ -52,18 +53,18 @@
                     </x-form-select>
                 </div>
                 <div class="mt-2.5">
-                    <x-jet-label for="dateReleased" value="{{__('Date Released')}}" />
+                    <x-jet-label for="dateReleased" value="{{__('Date Released')}}"/>
                     <x-jet-input type="date"
                                  wire:model="date_released"
                                  class="block mt-1 w-full"
-                                 id="dateReleased" name="date_released" required autofocus />
+                                 id="dateReleased" name="date_released" required autofocus/>
                 </div>
                 <div class="mt-2.5">
-                    <x-jet-label for="generation" value="{{__('Generation')}}" />
+                    <x-jet-label for="generation" value="{{__('Generation')}}"/>
                     <x-jet-input type="number" id="generation" name="generation"
                                  wire:model="generation"
                                  class="block mt-1 w-full"
-                                 min="{{MIN_GAME_GENERATION}}" max="{{MAX_GAME_GENERATION}}" required autofocus />
+                                 min="{{MIN_GAME_GENERATION}}" max="{{MAX_GAME_GENERATION}}" required autofocus/>
                 </div>
                 <div class="mt-4">
                     <x-jet-button class="float-right" wire:click="store">
