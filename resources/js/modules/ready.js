@@ -31,3 +31,5 @@ var $ = function (documentObject) {
         throw err;
     }
 };
+
+window.$ = $;
