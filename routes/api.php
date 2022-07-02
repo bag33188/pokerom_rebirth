@@ -23,7 +23,7 @@ use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 Route::get('/version', fn() => response()
     ->json([
         'version' => config('app.version')
-    ], ResponseAlias::HTTP_ACCEPTED))
+    ], ResponseAlias::HTTP_OK))
     ->name('api.version');
 
 // no auth
