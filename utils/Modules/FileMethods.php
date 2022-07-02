@@ -2,8 +2,6 @@
 
 namespace Utils\Modules;
 
-use Storage;
-
 class FileMethods
 {
     /**
