@@ -2,8 +2,8 @@
 
 :OPEN_PAGES
     SET FIREFOX=C:\Program Files\Mozilla Firefox\firefox.exe
-    SET REPO_URL=https://github.com/bag33188/pokerom_rebirth
-    START "" "%FIREFOX%" %REPO_URL%
+    REM SET REPO_URL=https://github.com/bag33188/pokerom_rebirth
+    REM START "" /B  "%FIREFOX%" %REPO_URL%
     START "" "%FIREFOX%" https://jetstream.laravel.com/2.x/building-your-app.html
     START "" "%FIREFOX%" https://laravel-livewire.com/docs/2.x/making-components
     START "" "%FIREFOX%" https://laravel.com/docs/9.x/eloquent-resources
