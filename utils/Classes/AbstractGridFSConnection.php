@@ -23,8 +23,6 @@ abstract class AbstractGridFSConnection
     /**
      * Set all connection values (`bucketName`, `chunkSize`, `databaseName`, `dsn`)
      *
-     * _Call in constructor_
-     *
      * @return void
      */
     abstract protected function setConnectionValues(): void;
