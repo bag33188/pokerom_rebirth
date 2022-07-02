@@ -17,7 +17,7 @@ class UpdateMatchingRom implements ShouldQueue
     /**
      * Needs to be static since RomFile bucket connection is scoped singleton
      *
-     * @var ?Rom
+     * @var Rom|null
      */
     private static ?Rom $matchingRom;
 

@@ -20,7 +20,7 @@ class RomFileDataService implements RomFileDataServiceInterface
     public function downloadFile(RomFile $file): StreamedResponse
     {
         return new StreamedResponse(function () use ($file) {
-            ProcessRomFileDownload::dispatch($file->getKey());
+            ProcessRomFileDownload::dispatch($file->getObjectId());
         }, ResponseAlias::HTTP_ACCEPTED, array(
             'Content-Type' => FileTypes::OCTET_STREAM->value,
             'Content-Transfer-Encoding' => 'chunked',
@@ -38,7 +38,7 @@ class RomFileDataService implements RomFileDataServiceInterface
     public function deleteFile(RomFile $file): JsonDataResponse
     {
         FileDeleted::dispatch($file);
-        ProcessRomFileDeletion::dispatch($file->getKey());
+        ProcessRomFileDeletion::dispatch($file->getObjectId());
         return new JsonDataResponse(['message' => "$file->filename deleted!"], ResponseAlias::HTTP_OK);
     }
 }

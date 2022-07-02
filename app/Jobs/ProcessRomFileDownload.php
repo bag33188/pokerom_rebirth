@@ -9,7 +9,6 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Utils\Modules\FileDownloader;
-use Utils\Modules\GridFsMethods;
 
 class ProcessRomFileDownload implements ShouldQueue
 {
@@ -35,7 +34,7 @@ class ProcessRomFileDownload implements ShouldQueue
      */
     public function handle(): void
     {
-        $stream = GfsRomFile::getBucket()->openDownloadStream(GridFsMethods::parseObjectId($this->fileId));
+        $stream = GfsRomFile::getBucket()->openDownloadStream($this->fileId);
         $fileDownloader = new FileDownloader($stream, self::DOWNLOAD_CHUNK_SIZE);
         $fileDownloader->downloadFile();
     }

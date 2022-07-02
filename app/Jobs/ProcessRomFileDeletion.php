@@ -8,7 +8,6 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use Utils\Modules\GridFsMethods;
 
 class ProcessRomFileDeletion implements ShouldQueue
 {
@@ -33,7 +32,6 @@ class ProcessRomFileDeletion implements ShouldQueue
      */
     public function handle(): void
     {
-        $bsonObjectId = GridFsMethods::parseObjectId($this->fileId);
-        GfsRomFile::getBucket()->delete($bsonObjectId);
+        GfsRomFile::getBucket()->delete($this->fileId);
     }
 }
