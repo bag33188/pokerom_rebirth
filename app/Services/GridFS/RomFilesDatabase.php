@@ -2,8 +2,8 @@
 
 namespace App\Services\GridFS;
 
-use Config;
 use Utils\Classes\AbstractGridFSDatabase;
+use Utils\Modules\MongoMethods;
 
 class RomFilesDatabase extends AbstractGridFSDatabase
 {
@@ -13,22 +13,22 @@ class RomFilesDatabase extends AbstractGridFSDatabase
 
     public function __construct()
     {
-        $this->databaseName = Config::get('gridfs.connection.database');
-        $this->bucketName = Config::get('gridfs.bucketName');
-        $this->chunkSize = Config::get('gridfs.chunkSize');
+        $gfsConf = MongoMethods::getGfsConfig();
+        $this->databaseName = $gfsConf['connection']['database'];
+        $this->bucketName = $gfsConf['bucketName'];
+        $this->chunkSize = $gfsConf['chunkSize'];
     }
 
     public final static function getMongoURI(): string
     {
-        $mongoConfig = Config::get('gridfs.connection');
-        $gfsConfig = Config::get('gridfs');
+        $mongoConfig = MongoMethods::getMongoConfig();
         return '' .
-            $gfsConfig['driver'] . '://' .
+            $mongoConfig['driver'] . '://' .
             $mongoConfig['username'] . ':' .
             $mongoConfig['password'] . '@' .
             $mongoConfig['host'] . ':' .
             $mongoConfig['port'] . '/?authMechanism=' .
-            $mongoConfig['auth']['mechanism'] . '&authSource=' .
-            $mongoConfig['auth']['source'];
+            $mongoConfig['options']['authMechanism'] . '&authSource=' .
+            $mongoConfig['options']['authSource'];
     }
 }

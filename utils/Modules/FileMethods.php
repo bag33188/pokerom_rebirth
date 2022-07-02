@@ -15,7 +15,7 @@ class FileMethods
      */
     public static function makeFilepathFromFilename(string $filename, ?string $prefix = null): string
     {
-        return sprintf("%s/%s", $prefix ?? GridFsMethods::getGfsUploadFilepath(), $filename);
+        return sprintf("%s/%s", $prefix ?? MongoMethods::getGfsUploadFilepath(), $filename);
     }
 
     /**

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Jenssegers\Mongodb\Eloquent\Model as MongoDbModel;
 use MongoDB\BSON\ObjectId;
 use Utils\Classes\AbstractGridFsFile as GfsFile;
-use Utils\Modules\GridFsMethods;
+use Utils\Modules\MongoMethods;
 
 /** @mixin GfsFile */
 class RomFile extends MongoDbModel
@@ -22,7 +22,7 @@ class RomFile extends MongoDbModel
 
     public function getObjectId(): ObjectId
     {
-        return GridFsMethods::parseObjectId($this->getKey());
+        return MongoMethods::parseObjectId($this->getKey());
     }
 
     public final function rom(): BelongsTo

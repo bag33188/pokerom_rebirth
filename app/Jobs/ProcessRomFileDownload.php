@@ -8,13 +8,14 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use MongoDB\BSON\ObjectId;
 use Utils\Modules\FileDownloader;
 
 class ProcessRomFileDownload implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    private string $fileId;
+    private ObjectId $fileId;
     protected const DOWNLOAD_CHUNK_SIZE = 0xFF000;
 
     /**
@@ -22,7 +23,7 @@ class ProcessRomFileDownload implements ShouldQueue
      *
      * @return void
      */
-    public function __construct(string $fileId)
+    public function __construct(ObjectId $fileId)
     {
         $this->fileId = $fileId;
     }

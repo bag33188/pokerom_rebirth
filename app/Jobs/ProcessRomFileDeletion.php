@@ -8,19 +8,20 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use MongoDB\BSON\ObjectId;
 
 class ProcessRomFileDeletion implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    private string $fileId;
+    private ObjectId $fileId;
 
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct(string $fileId)
+    public function __construct(ObjectId $fileId)
     {
         $this->fileId = $fileId;
     }
