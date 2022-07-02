@@ -32,18 +32,13 @@ class RomFilesGridFSConnection extends GridFSConnection
         return $db->selectDatabase($this->databaseName);
     }
 
-    protected function selectBucket(): Bucket
+    protected function setBucket(): void
     {
         $mongodb = $this->connectToMongoClient();
-        return $mongodb->selectGridFSBucket([
+        $this->bucket = $mongodb->selectGridFSBucket([
             'chunkSizeBytes' => $this->chunkSize,
             'bucketName' => $this->bucketName
         ]);
-    }
-
-    protected function setBucket(): void
-    {
-        $this->bucket = $this->selectBucket();
     }
 
     public function getBucket(): Bucket

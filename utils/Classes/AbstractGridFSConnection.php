@@ -16,7 +16,5 @@ abstract class AbstractGridFSConnection
 
     abstract protected function setBucket(): void;
 
-    abstract protected function selectBucket(): Bucket;
-
     abstract public function getBucket(): Bucket;
 }

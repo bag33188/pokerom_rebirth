@@ -6,6 +6,7 @@ use App\Interfaces\RomActionsInterface;
 use App\Models\Rom;
 use App\Models\RomFile;
 use Illuminate\Support\Facades\DB;
+use RomRepo;
 
 class RomActions implements RomActionsInterface
 {
