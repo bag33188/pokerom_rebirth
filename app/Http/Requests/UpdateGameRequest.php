@@ -14,11 +14,9 @@ class UpdateGameRequest extends FormRequest
 {
     use GameValidationRulesTrait;
 
-    private RequiredIfPutRequest $requiredIfPutRequest;
 
-    public function __construct(RequiredIfPutRequest $requiredIfPutRequest)
+    public function __construct(private readonly RequiredIfPutRequest $requiredIfPutRequest)
     {
-        $this->requiredIfPutRequest = $requiredIfPutRequest;
         parent::__construct();
     }
 
