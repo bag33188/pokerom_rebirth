@@ -34,7 +34,3 @@
 [never-triggers-?]: https://salesforce.stackexchange.com/a/367977 "interesting, take a look"
 [mongodb-divide-agg]: https://www.mongodb.com/docs/manual/reference/operator/aggregation/divide/
 [laravel-eloquent-jessengers-hybrid-db-relationship]: https://zappysys.com/blog/ssis-loading-data-into-mongodb-upsert-update-delete-insert/
-
-```php
-preg_replace("/\\\+/", "/", join('/', [__DIR__, 'functions']));
-```

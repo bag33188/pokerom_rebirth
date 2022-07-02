@@ -2,13 +2,15 @@
 
 //--- GLOBAL CONSTANTS ---//
 
-$constants_pathname = "constants";
+$constants_path = __DIR__ . "/constants";
 
-require_once "$constants_pathname/enums.php";
-require_once "$constants_pathname/patterns.php";
-require_once "$constants_pathname/entities.php";
-require_once "$constants_pathname/sizes.php";
-require_once "$constants_pathname/lengths.php";
-require_once "$constants_pathname/chars.php";
+if (!empty($constants_path)) {
+    require_once $constants_path . "/enums.php";
+    require_once $constants_path . "/entities.php";
+    require_once $constants_path . "/sizes.php";
+    require_once $constants_path . "/lengths.php";
+    require_once $constants_path . "/chars.php";
+    require_once $constants_path . "/patterns.php";
+}
 
 //--- END GLOBAL CONSTANTS ---//
