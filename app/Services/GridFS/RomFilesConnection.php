@@ -20,7 +20,8 @@ class RomFilesConnection extends AbstractGridFSConnection
     public function __construct(RomFilesDatabase $romFilesDatabase)
     {
         $this->romFilesDatabase = $romFilesDatabase;
-        $this->setConnectionValues();
+
+        parent::__construct();
     }
 
     protected function setConnectionValues(): void

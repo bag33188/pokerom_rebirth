@@ -14,6 +14,11 @@ abstract class AbstractGridFSConnection
     protected string $dsn;
     protected Bucket $bucket;
 
+    public function __construct()
+    {
+        $this->setConnectionValues();
+    }
+
     /**
      * Set all connection values (`bucketName`, `chunkSize`, `databaseName`, `dsn`, `$this->setBucket()`)
      *
