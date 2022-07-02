@@ -3,8 +3,8 @@
 namespace App\Repositories;
 
 use App\Interfaces\RomFileRepositoryInterface;
-use App\Models\RomFile;
 use App\Models\Rom;
+use App\Models\RomFile;
 use Illuminate\Database\Eloquent\Collection;
 
 class RomFileRepository implements RomFileRepositoryInterface
@@ -33,10 +33,12 @@ class RomFileRepository implements RomFileRepositoryInterface
     {
         [$name, $ext] = explode('.',
             $this->findFileIfExists($fileId)['filename'], 2);
+        // todo: make sure this doesn't cause issues
         return Rom::where([
             ['rom_name', '=', $name, 'and'],
-            ['rom_type', '=', $ext, 'and'],
-            ['has_file', '=', false, 'and'],
+            ['rom_type', '=', $ext, 'and']
+        ])->where([
+            ['has_file', '=', false, 'or'],
             ['file_id', '=', null]
         ])->first();
     }
