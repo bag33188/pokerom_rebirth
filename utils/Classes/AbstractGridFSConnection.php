@@ -2,6 +2,7 @@
 
 namespace Utils\Classes;
 
+use MongoDB\Client as MongoClient;
 use MongoDB\Database;
 use MongoDB\GridFS\Bucket;
 
@@ -13,24 +14,23 @@ abstract class AbstractGridFSConnection
     protected string $dsn;
     protected Bucket $bucket;
 
-    /**
-     * Connect to MongoDB Client
-     *
-     * @return Database
-     */
-    abstract protected function connectToMongoClient(): Database;
+    protected function connectToMongoClient(): Database
+    {
+        $db = new MongoClient($this->dsn);
+        return $db->selectDatabase($this->databaseName);
+    }
 
-    /**
-     * Set GridFS {@see Bucket Bucket} object.
-     *
-     * @return void
-     */
-    abstract protected function setBucket(): void;
+    protected function setBucket(): void
+    {
+        $mongodb = $this->connectToMongoClient();
+        $this->bucket = $mongodb->selectGridFSBucket([
+            'chunkSizeBytes' => $this->chunkSize,
+            'bucketName' => $this->bucketName
+        ]);
+    }
 
-    /**
-     * Get GridFS {@see Bucket Bucket} object.
-     *
-     * @return Bucket
-     */
-    abstract public function getBucket(): Bucket;
+    public function getBucket(): Bucket
+    {
+        return $this->bucket;
+    }
 }

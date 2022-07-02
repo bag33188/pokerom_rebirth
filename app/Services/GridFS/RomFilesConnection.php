@@ -2,8 +2,6 @@
 
 namespace App\Services\GridFS;
 
-use MongoDB\Client as MongoClient;
-use MongoDB\Database;
 use MongoDB\GridFS\Bucket;
 use Utils\Classes\AbstractGridFSConnection;
 
@@ -26,23 +24,4 @@ class RomFilesConnection extends AbstractGridFSConnection
         $this->setBucket();
     }
 
-    protected function connectToMongoClient(): Database
-    {
-        $db = new MongoClient($this->dsn);
-        return $db->selectDatabase($this->databaseName);
-    }
-
-    protected function setBucket(): void
-    {
-        $mongodb = $this->connectToMongoClient();
-        $this->bucket = $mongodb->selectGridFSBucket([
-            'chunkSizeBytes' => $this->chunkSize,
-            'bucketName' => $this->bucketName
-        ]);
-    }
-
-    public function getBucket(): Bucket
-    {
-        return $this->bucket;
-    }
 }
