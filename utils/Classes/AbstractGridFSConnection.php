@@ -14,6 +14,15 @@ abstract class AbstractGridFSConnection
     protected string $dsn;
     protected Bucket $bucket;
 
+    /**
+     * Set all connection values (`bucketName`, `chunkSize`, `databaseName`, `dsn`, `$this->setBucket()`)
+     *
+     * _Call in constructor_
+     *
+     * @return void
+     */
+    abstract protected function setConnectionValues(): void;
+
     protected function connectToMongoClient(): Database
     {
         $db = new MongoClient($this->dsn);

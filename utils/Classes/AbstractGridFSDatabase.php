@@ -16,7 +16,11 @@ abstract class AbstractGridFSDatabase
     abstract protected function setDatabaseProperties(): void;
 
     /**
-     * Construct a MongoDB connection string (mongoURI)
+     * Construct a MongoDB connection string (mongoURI).
+     *
+     * Example Mongo URI:
+     *
+     * **`mongodb://<username>:<password>@<host>:<port>/?authMechanism=SCRAM-SHA-256&authSource=admin`**
      *
      * @return string
      */

@@ -12,16 +12,23 @@ class RomFilesConnection extends AbstractGridFSConnection
     protected int $chunkSize;
     protected string $dsn;
 
+    private RomFilesDatabase $romFilesDatabase;
+
     /** @var Bucket GridFS bucket object */
     protected Bucket $bucket;
 
-    public function __construct(RomFilesDatabase $romFilesConnection)
+    public function __construct(RomFilesDatabase $romFilesDatabase)
     {
-        $this->databaseName = $romFilesConnection->databaseName;
-        $this->bucketName = $romFilesConnection->bucketName;
-        $this->chunkSize = $romFilesConnection->chunkSize;
+        $this->romFilesDatabase = $romFilesDatabase;
+        $this->setConnectionValues();
+    }
+
+    protected function setConnectionValues(): void
+    {
+        $this->databaseName = $this->romFilesDatabase->databaseName;
+        $this->bucketName = $this->romFilesDatabase->bucketName;
+        $this->chunkSize = $this->romFilesDatabase->chunkSize;
         $this->dsn = RomFilesDatabase::getMongoURI();
         $this->setBucket();
     }
-
 }
