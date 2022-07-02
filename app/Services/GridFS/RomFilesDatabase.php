@@ -13,7 +13,7 @@ class RomFilesDatabase extends AbstractGridFSDatabase
 
     protected function setDatabaseProperties(): void
     {
-        $gfsConfig = MongoMethods::getGfsConfig();
+        $gfsConfig = MongoMethods::getGridFSConfig();
 
         $this->databaseName = $gfsConfig['connection']['database'];
         $this->bucketName = $gfsConfig['bucketName'];

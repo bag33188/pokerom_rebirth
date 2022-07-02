@@ -2,6 +2,9 @@
 
 namespace Utils\Modules;
 
+/**
+ * This class contains a variety of methods that are useful when dealing with files and file metadata.
+ */
 class FileMethods
 {
     /**
@@ -33,8 +36,13 @@ class FileMethods
         $filename = "$name.$ext";
     }
 
-    private static function getServerFilesUploadPath(): string
+    /**
+     * Retrieves the upload path for grid server files
+     *
+     * @return string
+     */
+    public static function getServerFilesUploadPath(): string
     {
-        return MongoMethods::getGfsConfig()['fileUploadPath'];
+        return MongoMethods::getGridFSConfig()['fileUploadPath'];
     }
 }

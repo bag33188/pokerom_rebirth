@@ -34,7 +34,7 @@ class JsonDataResponse implements Jsonable
         return json_encode($this->data);
     }
 
-    public function renderResponse(): JsonResponse
+    public final function renderResponse(): JsonResponse
     {
         return response()->json($this->data, $this->code, $this->headers);
     }
