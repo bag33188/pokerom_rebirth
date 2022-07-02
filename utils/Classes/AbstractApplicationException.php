@@ -43,14 +43,14 @@ abstract class AbstractApplicationException extends Exception
 
 
     /**
-     * Set custom message in case default inherited error message's string length is 0
+     * Set custom message in case default inherited error message's string length is `0`
      *
      * @param string $customMessage
      * @return string
      */
     protected final function makeCustomMessageIfDefaultIsNull(string $customMessage): string
     {
-        return ($this->lengthOfMessageIsNotZero()) ? $this->getMessage() : $customMessage;
+        return $this->lengthOfMessageIsNotZero() ? $this->getMessage() : $customMessage;
     }
 
     private function lengthOfMessageIsNotZero(): bool
@@ -68,9 +68,9 @@ abstract class AbstractApplicationException extends Exception
         return $this->status() ?: (int)$this->getCode();
     }
 
-    private function renderWebException(string|array|null $isLivewire): false|Response
+    private function renderWebException(string|array|null $isLivewireRequest): false|Response
     {
-        if (!$isLivewire) {
+        if (!$isLivewireRequest) {
             if (isset($this->_viewName)) {
                 return response()->view($this->viewName(), ['message' => $this->_message], $this->_code);
             } else {
@@ -100,8 +100,8 @@ abstract class AbstractApplicationException extends Exception
         if ($isApiRequest) {
             return $this->renderApiException();
         } else {
-            $isLivewire = $request->header('X-Livewire');
-            return $this->renderWebException($isLivewire);
+            $isLivewireRequest = $request->header('X-Livewire');
+            return $this->renderWebException($isLivewireRequest);
         }
     }
 }
