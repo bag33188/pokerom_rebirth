@@ -1,6 +1,9 @@
-<?php
+<?php /** @noinspection PhpDefineCanBeReplacedWithConstInspection */
 
 use Illuminate\Support\Facades\Date;
+
+define('WITH_DAY_NAME', 'l, F jS, Y');
+define('WITHOUT_DAY_NAME', 'F jS, Y');
 
 if (!function_exists('parse_date_as_readable_string')) {
     /**
@@ -19,7 +22,7 @@ if (!function_exists('parse_date_as_readable_string')) {
      */
     function parse_date_as_readable_string(DateTime|Date $dateTime, bool $addDayName = true, string $customFormat = null): string
     {
-        $formatString = $addDayName ? 'l, F jS, Y' : 'F jS, Y';
-        return date_format($dateTime, $customFormat ?? $formatString);
+        $formatString = $customFormat ?? ($addDayName ? WITH_DAY_NAME : WITHOUT_DAY_NAME);
+        return date_format($dateTime, $formatString);
     }
 }
