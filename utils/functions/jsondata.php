@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Http\JsonResponse;
-use Utils\Classes\JsonDataResponse;
+use Utils\Modules\JsonDataResponse;
 
 if (!function_exists('jsondata')) {
     /**

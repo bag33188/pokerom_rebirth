@@ -2,6 +2,9 @@
 
 namespace Utils\Classes;
 
+/**
+ * GridFS Database Class for defining a MongoDB Database
+ */
 abstract class AbstractGridFSDatabase
 {
     public readonly string $bucketName;
@@ -16,6 +19,14 @@ abstract class AbstractGridFSDatabase
     /**
      * Set `bucketName`, `databaseName`, `chunkSize` properties for database
      *
+     * ### Intended Usage
+     *
+     * ```php
+     * $this->bucketName = Config::get("gridfs.bucketName");
+     * $this->chunkSize = Config::get("gridfs.chunkSize");
+     * $this->databaseName = Config::get("gridfs.connection.database");
+     * ```
+     *
      * @return void
      */
     abstract protected function setDatabaseProperties(): void;
@@ -23,9 +34,16 @@ abstract class AbstractGridFSDatabase
     /**
      * Construct a MongoDB connection string (mongoURI).
      *
-     * Example Mongo URI:
+     * ### Example Mongo URI:
      *
      * **`mongodb://<username>:<password>@<host>:<port>/?authMechanism=SCRAM-SHA-256&authSource=admin`**
+     *
+     * ### Intended Usage:
+     *
+     * ```php
+     * $dsn = "mongodb://localhost:27017";
+     * return $dsn;
+     * ```
      *
      * @link https://www.mongodb.com/docs/manual/reference/connection-string/ MongoDB Connection String
      *

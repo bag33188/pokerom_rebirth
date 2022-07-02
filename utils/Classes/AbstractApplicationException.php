@@ -7,6 +7,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Utils\Modules\JsonDataResponse;
 
 abstract class AbstractApplicationException extends Exception
 {

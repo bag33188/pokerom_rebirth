@@ -23,6 +23,7 @@ class RomFilesDatabase extends AbstractGridFSDatabase
     public final static function getMongoURI(): string
     {
         $mongoConfig = MongoMethods::getMongoConfig();
+
         return '' .
             $mongoConfig['driver'] . '://' .
             $mongoConfig['username'] . ':' .

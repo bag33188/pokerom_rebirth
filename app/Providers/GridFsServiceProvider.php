@@ -17,7 +17,7 @@ class GridFsServiceProvider extends ServiceProvider implements DeferrableProvide
      */
     public function register(): void
     {
-        // use scoped singleton since only admin user will be invoking this logic
+        //! use scoped singleton since only admin user will be invoking this logic
         $this->app->scoped(RomFilesConnection::class, function (Application $app) {
             return new RomFilesConnection($app->make(RomFilesDatabase::class));
         });
