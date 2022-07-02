@@ -11,7 +11,7 @@ use Jenssegers\Mongodb\Eloquent\Model as MongoDbModel;
  *
  * @see \App\Models\RomFile File
  */
-abstract class AbstractGridFsFile extends MongoDbModel
+abstract class AbstractGridFSFile extends MongoDbModel
 {
     public readonly string $_id;
     public readonly int $chunkSize;

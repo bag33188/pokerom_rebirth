@@ -12,6 +12,12 @@ use Utils\Modules\JsonDataResponse;
 abstract class AbstractApplicationException extends Exception
 {
     protected final const DEFAULT_ERROR_VIEW = 'errors.generic';
+    protected final const DEFAULT_STATUS_CODE = 500;
+
+    private readonly string $_message;
+    private readonly int $_code;
+    private readonly string $_viewName;
+
 
     /**
      * Return desired http status code (if none, default inherited error status code will be used)
@@ -34,6 +40,7 @@ abstract class AbstractApplicationException extends Exception
      * @return string
      */
     abstract protected function errorMessage(): string;
+
 
     /**
      * Set custom message in case default inherited error message's string length is 0
@@ -61,24 +68,40 @@ abstract class AbstractApplicationException extends Exception
         return $this->status() ?: (int)$this->getCode();
     }
 
+    private function renderWebException(string|array|null $isLivewire): false|Response
+    {
+        if (!$isLivewire) {
+            if (isset($this->_viewName)) {
+                return response()->view($this->viewName(), ['message' => $this->_message], $this->_code);
+            } else {
+                return redirect()->to(url()->previous())->dangerBanner($this->_message);
+            }
+        }
+        return false;
+    }
+
+    private function renderApiException(): JsonResponse
+    {
+        $response = new JsonDataResponse(['message' => $this->_message], $this->_code);
+        return $response->renderResponse();
+    }
+
+    private function setRenderValues(): void
+    {
+        $this->_message = $this->getErrorMessageIfNotNull();
+        $this->_code = $this->getStatusCodeIfNotNull();
+        $this->_viewName = $this->viewName();
+    }
+
     public final function render(Request $request): Response|bool|JsonResponse|RedirectResponse
     {
-        $message = $this->getErrorMessageIfNotNull();
-        $code = $this->getStatusCodeIfNotNull();
-        if ($request->is('api/*') || $request->expectsJson()) {
-            $response = new JsonDataResponse(['message' => $message], $code);
-            return $response->renderResponse();
+        $this->setRenderValues();
+        $isApiRequest = $request->is('api/*') || $request->expectsJson();
+        if ($isApiRequest) {
+            return $this->renderApiException();
         } else {
             $isLivewire = $request->header('X-Livewire');
-            if (!$isLivewire) {
-                $viewName = $this->viewName();
-                if (isset($viewName)) {
-                    return response()->view($this->viewName(), ['message' => $message], $code);
-                } else {
-                    return redirect()->to(url()->previous())->dangerBanner($message);
-                }
-            }
-            return false;
+            return $this->renderWebException($isLivewire);
         }
     }
 }

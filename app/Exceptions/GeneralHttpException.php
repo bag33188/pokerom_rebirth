@@ -9,7 +9,7 @@ class GeneralHttpException extends ApplicationException
 
     protected function status(): int
     {
-        return $this->getCode();
+        return $this->getCode() ?? self::DEFAULT_STATUS_CODE;
     }
 
     protected function viewName(): ?string

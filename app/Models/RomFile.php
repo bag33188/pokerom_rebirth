@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Jenssegers\Mongodb\Eloquent\Model as MongoDbModel;
 use MongoDB\BSON\ObjectId;
-use Utils\Classes\AbstractGridFsFile as GfsFile;
+use Utils\Classes\AbstractGridFSFile as GfsFile;
 use Utils\Modules\MongoMethods;
 
 /** @mixin GfsFile */

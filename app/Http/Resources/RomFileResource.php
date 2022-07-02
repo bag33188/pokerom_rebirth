@@ -2,7 +2,7 @@
 
 namespace App\Http\Resources;
 
-use Utils\Classes\AbstractGridFsFile as GfsFile;
+use Utils\Classes\AbstractGridFSFile as GfsFile;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use JetBrains\PhpStorm\ArrayShape;
