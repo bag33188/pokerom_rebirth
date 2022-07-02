@@ -8,5 +8,7 @@ abstract class AbstractGridFSDatabase
     public readonly string $databaseName;
     public readonly int $chunkSize;
 
+    abstract protected function setDatabaseProperties(): void;
+
     abstract public static function getMongoURI(): string;
 }
