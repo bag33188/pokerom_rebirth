@@ -11,10 +11,10 @@ String.prototype.capitalize = function (
     depth = 0,
     separator = null
 ) {
-    let val = this.trim();
-    if (!val.length) return null;
+    let strVal = this.trim();
+    if (!strVal.length) return null;
     const wordsSeparator = separator ? separator : " ";
-    let strArr = val.split(wordsSeparator);
+    let strArr = strVal.split(wordsSeparator);
     if (deep === true && depth > 0) {
         let strWordCount = strArr.length;
         if (depth > strWordCount) depth = strWordCount;
@@ -30,6 +30,6 @@ String.prototype.capitalize = function (
             .map((word) => word[0].toUpperCase() + word.slice(1).toLowerCase())
             .join(wordsSeparator);
     } else {
-        return val[0].toUpperCase() + val.slice(1).toLowerCase();
+        return strVal[0].toUpperCase() + strVal.slice(1).toLowerCase();
     }
 };

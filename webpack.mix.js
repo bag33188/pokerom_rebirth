@@ -14,7 +14,8 @@ const mix = require("laravel-mix");
 mix.js("resources/js/app.js", "public/js")
     .postCss("resources/css/app.css", "public/css", [require("tailwindcss")])
     .css("resources/css/punch.css", "public/css")
-    .js("resources/js/capitalize.js", "public/js/modules");
+    .js("resources/js/modules/capitalize.js", "public/js/modules")
+    .js("resources/js/modules/ready.js", "public/js/modules");
 
 if (mix.inProduction()) {
     mix.version();
