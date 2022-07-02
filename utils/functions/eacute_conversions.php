@@ -9,6 +9,8 @@
  *
  * > {@link un_unicode_eacute}: _Pok&eacute;mon => Pokemon_
  *
+ * ### Notes:
+ * Use string mods after using these functions if lowercase or uppercase is needed.
  */
 
 
