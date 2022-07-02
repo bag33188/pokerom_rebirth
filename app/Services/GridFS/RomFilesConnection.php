@@ -12,15 +12,11 @@ class RomFilesConnection extends AbstractGridFSConnection
     protected int $chunkSize;
     protected string $dsn;
 
-    private RomFilesDatabase $romFilesDatabase;
-
     /** @var Bucket GridFS bucket object */
     protected Bucket $bucket;
 
-    public function __construct(RomFilesDatabase $romFilesDatabase)
+    public function __construct(private readonly RomFilesDatabase $romFilesDatabase)
     {
-        $this->romFilesDatabase = $romFilesDatabase;
-
         parent::__construct();
     }
 

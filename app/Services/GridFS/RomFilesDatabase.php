@@ -11,11 +11,6 @@ class RomFilesDatabase extends AbstractGridFSDatabase
     public readonly string $databaseName;
     public readonly int $chunkSize;
 
-    public function __construct()
-    {
-        $this->setDatabaseProperties();
-    }
-
     protected function setDatabaseProperties(): void
     {
         $gfsConfig = MongoMethods::getGfsConfig();

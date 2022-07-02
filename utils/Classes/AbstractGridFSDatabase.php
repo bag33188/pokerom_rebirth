@@ -8,6 +8,11 @@ abstract class AbstractGridFSDatabase
     public readonly string $databaseName;
     public readonly int $chunkSize;
 
+    public function __construct()
+    {
+        $this->setDatabaseProperties();
+    }
+
     /**
      * Set `bucketName`, `databaseName`, `chunkSize` properties for database
      *
