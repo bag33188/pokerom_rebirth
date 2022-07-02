@@ -13,7 +13,7 @@ class FileMethods
      */
     public static function makeFilepathFromFilename(string $filename, ?string $prefix = null): string
     {
-        return sprintf("%s/%s", $prefix ?? MongoMethods::getGfsUploadFilepath(), $filename);
+        return sprintf("%s/%s", $prefix ?? self::getServerFilesUploadPath(), $filename);
     }
 
     /**
@@ -31,5 +31,10 @@ class FileMethods
         $name = trim($name);
         $ext = strtolower($ext);
         $filename = "$name.$ext";
+    }
+
+    private static function getServerFilesUploadPath(): string
+    {
+        return MongoMethods::getGfsConfig()['fileUploadPath'];
     }
 }

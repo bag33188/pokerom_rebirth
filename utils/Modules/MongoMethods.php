@@ -12,11 +12,6 @@ class MongoMethods
         return new ObjectId($fileId);
     }
 
-    public static function getGfsUploadFilepath(): string
-    {
-        return self::getGfsConfig()['fileUploadPath'];
-    }
-
     public static function getMongoConfig(): array
     {
         return Config::get('database.connections.mongodb');
