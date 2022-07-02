@@ -26,7 +26,7 @@ class GridFsServiceProvider extends ServiceProvider implements DeferrableProvide
     /**
      * Get the services provided by the provider.
      *
-     * _Does not bootstrap until service provider is needed_.
+     * _Does not bootstrap until service provider is needed._
      *
      * @return string[]
      */
