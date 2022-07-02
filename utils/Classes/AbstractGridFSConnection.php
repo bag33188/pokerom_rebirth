@@ -17,10 +17,11 @@ abstract class AbstractGridFSConnection
     public function __construct()
     {
         $this->setConnectionValues();
+        $this->setBucket();
     }
 
     /**
-     * Set all connection values (`bucketName`, `chunkSize`, `databaseName`, `dsn`, `$this->setBucket()`)
+     * Set all connection values (`bucketName`, `chunkSize`, `databaseName`, `dsn`)
      *
      * _Call in constructor_
      *

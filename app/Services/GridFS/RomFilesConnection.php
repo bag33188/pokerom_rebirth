@@ -26,6 +26,5 @@ class RomFilesConnection extends AbstractGridFSConnection
         $this->bucketName = $this->romFilesDatabase->bucketName;
         $this->chunkSize = $this->romFilesDatabase->chunkSize;
         $this->dsn = RomFilesDatabase::getMongoURI();
-        $this->setBucket();
     }
 }

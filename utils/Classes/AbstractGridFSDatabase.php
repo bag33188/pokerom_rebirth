@@ -27,6 +27,8 @@ abstract class AbstractGridFSDatabase
      *
      * **`mongodb://<username>:<password>@<host>:<port>/?authMechanism=SCRAM-SHA-256&authSource=admin`**
      *
+     * @link https://www.mongodb.com/docs/manual/reference/connection-string/ MongoDB Connection String
+     *
      * @return string
      */
     abstract public static function getMongoURI(): string;
