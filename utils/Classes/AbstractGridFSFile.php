@@ -7,9 +7,9 @@ use Jenssegers\Mongodb\Eloquent\Model as MongoDbModel;
 /**
  * Laravel IDEA Helper does not support MongoDB objects (at least not very well).
  * The purpose of this abstract class is to provider easier hinting and implementation
- * of this app's {@link \App\Models\RomFile File} model.
+ * of this app's {@see \App\Models\RomFile RomFile} model.
  *
- * @see \App\Models\RomFile File
+ * @see \App\Models\RomFile RomFile
  */
 abstract class AbstractGridFSFile extends MongoDbModel
 {
