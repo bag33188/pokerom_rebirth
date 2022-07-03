@@ -2,16 +2,19 @@
 
 namespace Utils\Classes;
 
+use MongoDB\BSON\ObjectId;
 use MongoDB\Client as MongoClient;
 use MongoDB\Database;
 use MongoDB\GridFS\Bucket;
+use Utils\Modules\FileDownloader;
+use Utils\Modules\FileMethods;
 
 /**
  * GridFS Connection Class for connection to a GridFS MongoDB Database
  *
  * _Constructor can accept a {@see AbstractGridFSDatabase GridFSDatabase} Object_
  */
-abstract class AbstractGridFSConnection
+abstract class AbstractGridFSConnection implements GridFSBucketMethods
 {
     /** @var string name of gridfs bucket (default is `fs`) */
     protected string $bucketName;
@@ -59,5 +62,23 @@ abstract class AbstractGridFSConnection
     public final function getBucket(): Bucket
     {
         return $this->bucket;
+    }
+
+    public function upload(string $filename): void
+    {
+        $stream = fopen(FileMethods::makeFilepathFromFilename($filename), 'rb');
+        $this->bucket->uploadFromStream($filename, $stream);
+        fclose($stream);
+    }
+
+    public function download(ObjectId $fileId, int $downloadTransferSize = null): void
+    {
+        $stream = $this->bucket->openDownloadStream($fileId);
+        (new FileDownloader($stream, $downloadTransferSize))();
+    }
+
+    public function delete(ObjectId $fileId): void
+    {
+        $this->bucket->delete($fileId);
     }
 }

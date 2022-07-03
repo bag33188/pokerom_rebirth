@@ -9,14 +9,12 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use MongoDB\BSON\ObjectId;
-use Utils\Modules\FileDownloader;
 
 class ProcessRomFileDownload implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     private ObjectId $fileId;
-    protected const DOWNLOAD_CHUNK_SIZE = 0xFF000;
 
     /**
      * Create a new job instance.
@@ -35,8 +33,6 @@ class ProcessRomFileDownload implements ShouldQueue
      */
     public function handle(): void
     {
-        $stream = GfsRomFile::getBucket()->openDownloadStream($this->fileId);
-        $fileDownloader = new FileDownloader($stream, self::DOWNLOAD_CHUNK_SIZE);
-        $fileDownloader->downloadFile();
+        GfsRomFile::download($this->fileId, 0xFF000);
     }
 }

@@ -42,4 +42,27 @@ class RomFileRepository implements RomFileRepositoryInterface
             ['file_id', '=', null]
         ])->first();
     }
+
+    public function getFileLengthsKibibytes()
+    {
+        return RomFile::project([
+            'length' => ['$toInt' => ['$ceil' => ['$divide' => ['$length', 1024]]]]])->get();
+    }
+
+    public function getFileLengthsGibibytes()
+    {
+        return RomFile::project([
+            'length' => ['$toDecimal' => ['$divide' => ['$length', ['$pow' => [1024, 3]]]]]])->get();
+    }
+
+    public function getFileLengthsMebibytes()
+    {
+        return RomFile::project([
+            'length' => ['$toDecimal' => ['$divide' => ['$length', ['$pow' => [1024, 2]]]]]])->get();
+    }
+
+    public function getTotalSizeOfAllRomFiles()
+    {
+        return RomFile::sum('length');
+    }
 }

@@ -4,8 +4,8 @@ namespace App\Http\Livewire\Rom;
 
 use App\Models\Rom;
 use Illuminate\Contracts\{Foundation\Application, View\Factory, View\View};
-use Illuminate\Support\Facades\DB;
 use Livewire\Component;
+use RomFileRepo;
 
 class Index extends Component
 {
@@ -20,10 +20,8 @@ class Index extends Component
     public function render(): Factory|View|Application
     {
         $this->roms = Rom::with(['game', 'romFile'])->get();
-        $sql = /** @lang MariaDB */
-            "CALL GetTotalSizeOfAllRoms;";
-        $sum_total_size = DB::selectOne($sql);
-        return view('livewire.rom.index', ['roms_total_size' => $sum_total_size->total_size]);
+
+        return view('livewire.rom.index', ['roms_total_size' => RomFileRepo::getTotalSizeOfAllRomFiles()]);
     }
 
     public function getRomDownloadUrl(string $fileId, bool $dev = false): string

@@ -9,13 +9,18 @@ class FileDownloader
 {
     /** @var resource */
     private $fileStream;
-    /** @var int  */
+    /** @var int */
     private int $readyBytesChunkSize;
 
     public function __construct(/** @var resource */ $fileStream, int $readyBytesChunkSize = 0x3FC00)
     {
         $this->fileStream = $fileStream;
         $this->readyBytesChunkSize = $readyBytesChunkSize;
+    }
+
+    public function __invoke(): void
+    {
+        $this->downloadFile();
     }
 
     private function isEndOfFile(): bool

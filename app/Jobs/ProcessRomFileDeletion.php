@@ -33,6 +33,6 @@ class ProcessRomFileDeletion implements ShouldQueue
      */
     public function handle(): void
     {
-        GfsRomFile::getBucket()->delete($this->fileId);
+        GfsRomFile::delete($this->fileId);
     }
 }

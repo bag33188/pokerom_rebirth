@@ -17,4 +17,12 @@ interface RomFileRepositoryInterface
     public function getFileByFilename(string $filename): RomFile;
 
     public function searchForRomMatchingFile(string $fileId): ?Rom;
+
+    public function getFileLengthsKibibytes();
+
+    public function getFileLengthsGibibytes();
+
+    public function getFileLengthsMebibytes();
+
+    public function getTotalSizeOfAllRomFiles();
 }
