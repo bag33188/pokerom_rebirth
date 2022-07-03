@@ -54,7 +54,8 @@ trait RomFilesAggregationsTrait
                     ' ',
                     'KB'
                 ]
-            ]];
+            ]
+        ];
     }
 
     #[ArrayShape(['length' => "array[]"])]
