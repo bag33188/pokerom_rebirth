@@ -22,9 +22,9 @@ abstract class AbstractApplicationException extends Exception
     /**
      * Return desired http status code (if none, default inherited error status code will be used)
      *
-     * @return int
+     * @return int|null
      */
-    abstract protected function status(): int;
+    abstract protected function status(): ?int;
 
     /**
      * Return name of view to be rendered.
@@ -37,9 +37,9 @@ abstract class AbstractApplicationException extends Exception
     /**
      * Return desired error message (if none, default inherited error message will be used)
      *
-     * @return string
+     * @return string|null
      */
-    abstract protected function errorMessage(): string;
+    abstract protected function errorMessage(): ?string;
 
 
     /**
