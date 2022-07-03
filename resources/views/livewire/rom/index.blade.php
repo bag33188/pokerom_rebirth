@@ -1,8 +1,11 @@
+@push('scripts')
+    <script <?= 'type="text/javascript"'; ?> src="{{mix('js/roms.js')}}"></script>
+@endpush
 <div>
     <x-slot name="header">
         <h2 class="text-center text-lg">Pok&eacute;mon ROMs Library</h2>
     </x-slot>
-    <div x-data="{ open: true }">
+    <div x-data="{ open: true }" id="roms-container">
         <div class="w-full flex justify-center">
             @php
                 $romsTableInitDispState=\App\Enums\DisplayStatesEnum::SHOW->value;
