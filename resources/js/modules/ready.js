@@ -1,3 +1,5 @@
+"use strict";
+
 var $ = function (callbackDocumentObj) {
     var ready = function (callback) {
         var docObj = callbackDocumentObj;
