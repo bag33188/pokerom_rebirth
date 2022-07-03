@@ -18,11 +18,11 @@ interface RomFileRepositoryInterface
 
     public function searchForRomMatchingFile(string $fileId): ?Rom;
 
-    public function getFileLengthsKibibytes();
+    public function getFileLengthsKibibytes(): Collection;
 
-    public function getFileLengthsGibibytes();
+    public function getFileLengthsGibibytes(): Collection;
 
-    public function getFileLengthsMebibytes();
+    public function getFileLengthsMebibytes(): Collection;
 
-    public function getTotalSizeOfAllRomFiles();
+    public function calcTotalSizeOfAllRomFiles(): int;
 }

@@ -46,22 +46,22 @@ class RomFileRepository implements RomFileRepositoryInterface
         ])->first();
     }
 
-    public function getFileLengthsKibibytes()
+    public function getFileLengthsKibibytes(): Collection
     {
         return RomFile::project($this->calcLengthKibibytes())->get();
     }
 
-    public function getFileLengthsGibibytes()
+    public function getFileLengthsGibibytes(): Collection
     {
         return RomFile::project($this->calcLengthGibibytes())->get();
     }
 
-    public function getFileLengthsMebibytes()
+    public function getFileLengthsMebibytes(): Collection
     {
         return RomFile::project($this->calcLengthMebibytes())->get();
     }
 
-    public function getTotalSizeOfAllRomFiles()
+    public function calcTotalSizeOfAllRomFiles(): int
     {
         return RomFile::sum('length');
     }

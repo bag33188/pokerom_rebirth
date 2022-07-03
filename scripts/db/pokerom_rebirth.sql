@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 04, 2022 at 12:07 AM
+-- Generation Time: Jul 04, 2022 at 12:27 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -318,7 +318,7 @@ TRUNCATE TABLE `password_resets`;
 -- Table structure for table `personal_access_tokens`
 --
 -- Creation: Jun 05, 2022 at 04:47 PM
--- Last update: Jul 03, 2022 at 09:59 PM
+-- Last update: Jul 03, 2022 at 10:26 PM
 --
 
 DROP TABLE IF EXISTS `personal_access_tokens`;
@@ -348,7 +348,7 @@ TRUNCATE TABLE `personal_access_tokens`;
 --
 
 INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `name`, `token`, `abilities`, `last_used_at`, `created_at`, `updated_at`) VALUES
-(1, 'App\\Models\\User', 1, 'auth_token', 'decfe681ade402403c92ee62493bc85118f6260b48409bafb060afe67e12a78a', '[\"*\"]', '2022-07-04 04:59:51', '2022-07-04 02:35:33', '2022-07-04 04:59:51');
+(1, 'App\\Models\\User', 1, 'auth_token', 'decfe681ade402403c92ee62493bc85118f6260b48409bafb060afe67e12a78a', '[\"*\"]', '2022-07-04 05:26:14', '2022-07-04 02:35:33', '2022-07-04 05:26:14');
 
 -- --------------------------------------------------------
 
@@ -434,7 +434,7 @@ INSERT INTO `roms` (`id`, `file_id`, `game_id`, `rom_name`, `rom_size`, `rom_typ
 -- Table structure for table `sessions`
 --
 -- Creation: Jun 05, 2022 at 04:47 PM
--- Last update: Jul 03, 2022 at 10:05 PM
+-- Last update: Jul 03, 2022 at 10:25 PM
 --
 
 DROP TABLE IF EXISTS `sessions`;
@@ -461,7 +461,7 @@ TRUNCATE TABLE `sessions`;
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('sC2Trn1PBkdYNOsA4ddqPnNh5a19SYVp28PrurmG', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiTzIwSFMyWE5Ta05TWWc3R3FJWGQ4Q2hpSXM0d05DMDlQUnBoSzVBNSI7czozOiJ1cmwiO2E6MDp7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjQwOiJodHRwOi8vcG9rZXJvbV9yZWJpcnRoLnRlc3QvcHVibGljL2dhbWVzIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjIxOiJwYXNzd29yZF9oYXNoX3NhbmN0dW0iO3M6NjA6IiQyeSQxMCR3aXAzcXg5MVBsWERrcmouekVqb0MuL3dsSW50Z0lLM1EuckFKZ2d3UWhmWFJGaUlubURabSI7fQ==', 1656885912);
+('sC2Trn1PBkdYNOsA4ddqPnNh5a19SYVp28PrurmG', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiTzIwSFMyWE5Ta05TWWc3R3FJWGQ4Q2hpSXM0d05DMDlQUnBoSzVBNSI7czozOiJ1cmwiO2E6MDp7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjQ2OiJodHRwOi8vcG9rZXJvbV9yZWJpcnRoLnRlc3QvcHVibGljL2FwaS92ZXJzaW9uIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjIxOiJwYXNzd29yZF9oYXNoX3NhbmN0dW0iO3M6NjA6IiQyeSQxMCR3aXAzcXg5MVBsWERrcmouekVqb0MuL3dsSW50Z0lLM1EuckFKZ2d3UWhmWFJGaUlubURabSI7fQ==', 1656887158);
 
 -- --------------------------------------------------------
 

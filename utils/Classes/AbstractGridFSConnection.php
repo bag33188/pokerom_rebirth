@@ -14,7 +14,7 @@ use Utils\Modules\FileMethods;
  *
  * _Constructor can accept a {@see AbstractGridFSDatabase GridFSDatabase} Object_
  */
-abstract class AbstractGridFSConnection implements GridFSBucketMethods
+abstract class AbstractGridFSConnection implements GridFSBucketMethodsInterface
 {
     /** @var string name of gridfs bucket (default is `fs`) */
     protected string $bucketName;
