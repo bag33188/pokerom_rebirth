@@ -16,7 +16,7 @@
                         for($i = 0; $i < $availableRomsCount; $i++) {
                             $rom = json_decode(json_encode($availableRoms[$i]), associative: false);
                             $option = "<option value='$rom->id'>$rom->rom_name</option>";
-                            $html = preg_replace("/'/m", '"', $option);
+                            $html = str_replace("'", '"', $option);
                             print $html;
                         }
                     @endphp
