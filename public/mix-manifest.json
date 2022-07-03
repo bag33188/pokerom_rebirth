@@ -2,8 +2,8 @@
     "/js/app.js": "/js/app.js",
     "/js/modules/capitalize.js": "/js/modules/capitalize.js",
     "/js/modules/ready.js": "/js/modules/ready.js",
-    "/js/dashboard.js": "/js/dashboard.js",
-    "/js/roms.js": "/js/roms.js",
+    "/js/dashboard.index.js": "/js/dashboard.index.js",
+    "/js/roms.index.js": "/js/roms.index.js",
     "/css/app.css": "/css/app.css",
     "/css/punch.css": "/css/punch.css"
 }

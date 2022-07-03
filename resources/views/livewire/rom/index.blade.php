@@ -1,5 +1,5 @@
 @push('scripts')
-    <script <?= 'type="text/javascript"'; ?> src="{{mix('js/roms.js')}}" defer></script>
+    <script <?= 'type="text/javascript"'; ?> src="{{mix('js/roms.index.js')}}" defer></script>
 @endpush
 <div>
     <x-slot name="header">
