@@ -19,7 +19,12 @@ trait RomFilesAggregationsTrait
                                     '$toDecimal' => [
                                         '$divide' => [
                                             '$length',
-                                            ['$pow' => [1024, 3]]
+                                            [
+                                                '$pow' => [
+                                                    1024,
+                                                    2
+                                                ]
+                                            ]
                                         ]
                                     ]
                                 ],
@@ -71,7 +76,12 @@ trait RomFilesAggregationsTrait
                                     '$toDouble' => [
                                         '$divide' => [
                                             '$length',
-                                            ['$pow' => [1024, 3]]
+                                            [
+                                                '$pow' => [
+                                                    1024,
+                                                    3
+                                                ]
+                                            ]
                                         ]
                                     ]
                                 ],
