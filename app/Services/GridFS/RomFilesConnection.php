@@ -3,9 +3,9 @@
 namespace App\Services\GridFS;
 
 use MongoDB\GridFS\Bucket;
-use Utils\Classes\AbstractGridFSConnection;
+use Utils\Classes\AbstractGridFSConnection as GridFSConnection;
 
-class RomFilesConnection extends AbstractGridFSConnection
+class RomFilesConnection extends GridFSConnection
 {
     protected string $bucketName;
     protected string $databaseName;

@@ -1,16 +1,28 @@
 /**
+ * Capitalization Options Object Type Definition (JSDoc)
+ * @typedef {{deep: boolean, depth: number, separator: string}} capitalizationOptions
+ */
+
+/**
+ * Space Character Unicode Entity
+ * @type {string}
+ */
+const spaceChar = "\u0020";
+
+/**
  * @summary Capitalizes a string
  * @description By default this method capitalizes only the first word in a string.
- * @param {boolean} [deep] whether to capitalize all words in the string or not (defaults to false).
- * @param {number} [depth] amount of words to capitalize in string
- * @param {string} [separator] Set to any string value if you wish to distinguish the words in your string by a character other than space (default: space char)
+ * @param {capitalizationOptions} options
  * @returns {string|null} capitalized string
  */
 String.prototype.capitalize = function (
-    deep = false,
-    depth = 0,
-    separator = "\u0020"
+    options = {
+        deep: false,
+        depth: 0,
+        separator: spaceChar,
+    }
 ) {
+    let { deep, depth, separator } = options;
     let strVal = this.trim();
     if (!strVal.length) return null;
     let strArr = strVal.split(separator);
@@ -32,3 +44,29 @@ String.prototype.capitalize = function (
         return strVal[0].toUpperCase() + strVal.slice(1).toLowerCase();
     }
 };
+
+/**
+ * @summary Capitalization Options Object
+ * @description Use this ES5 function/class to make a new options object for the **capitalize** function.
+ * @param {boolean} [deep] whether to capitalize all words in the string or not (defaults to false).
+ * @param {number} [depth] amount of words to capitalize in string
+ * @param {string} [separator] Set to any string value if you wish to distinguish the words in your string by a character other than space (default: space char)
+ * @returns {capitalizationOptions}
+ * @constructor
+ */
+const CapitalizationOptions = function (
+    deep = false,
+    depth = 0,
+    separator = spaceChar
+) {
+    this.deep = deep;
+    this.depth = depth;
+    this.separator = separator;
+    return {
+        deep: this.deep,
+        depth: this.depth,
+        separator: this.separator,
+    };
+};
+
+window.CapitalizationOptions = CapitalizationOptions;

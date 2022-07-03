@@ -20,7 +20,6 @@
         <!-- Scripts -->
         <script <?= 'type="text/javascript"'; ?> src="{{ mix('js/app.js') }}" defer></script>
         <script <?= 'type="text/javascript"'; ?> src="{{ mix('js/modules/ready.js') }}"></script>
-        <script <?= 'type="text/javascript"'; ?> src="{{ mix('js/modules/capitalize.js') }}"></script>
         @stack('scripts')
     </head>
     <body class="font-sans antialiased">

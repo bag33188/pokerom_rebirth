@@ -14,11 +14,9 @@ use Symfony\Component\HttpKernel\Exception\PreconditionRequiredHttpException;
 
 class GameController extends ApiController
 {
-    private GameDataServiceInterface $gameDataService;
 
-    public function __construct(GameDataServiceInterface $gameDataService)
+    public function __construct(private readonly GameDataServiceInterface $gameDataService)
     {
-        $this->gameDataService = $gameDataService;
     }
 
     /**

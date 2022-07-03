@@ -15,11 +15,9 @@ use RomFileRepo;
 
 class RomFileController extends ViewController
 {
-    private RomFileDataServiceInterface $romFileDataService;
 
-    public function __construct(RomFileDataServiceInterface $romFileDataService)
+    public function __construct(private readonly RomFileDataServiceInterface $romFileDataService)
     {
-        $this->romFileDataService = $romFileDataService;
     }
 
     /**

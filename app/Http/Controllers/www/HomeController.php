@@ -8,6 +8,7 @@ class HomeController extends ViewController
 {
     public function index()
     {
-        return view('dashboard');
+        $username = auth()->user()->name;
+        return view('dashboard', ['username' => $username]);
     }
 }

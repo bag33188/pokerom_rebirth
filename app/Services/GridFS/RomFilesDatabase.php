@@ -2,10 +2,10 @@
 
 namespace App\Services\GridFS;
 
-use Utils\Classes\AbstractGridFSDatabase;
+use Utils\Classes\AbstractGridFSDatabase as GridFSDatabase;
 use Utils\Modules\MongoMethods;
 
-class RomFilesDatabase extends AbstractGridFSDatabase
+class RomFilesDatabase extends GridFSDatabase
 {
     public readonly string $bucketName;
     public readonly string $databaseName;

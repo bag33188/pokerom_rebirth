@@ -19,11 +19,8 @@ use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 class RomController extends ApiController
 {
-    private RomDataServiceInterface $romDataService;
-
-    public function __construct(RomDataServiceInterface $romDataService)
+    public function __construct(private readonly RomDataServiceInterface $romDataService)
     {
-        $this->romDataService = $romDataService;
     }
 
     /**

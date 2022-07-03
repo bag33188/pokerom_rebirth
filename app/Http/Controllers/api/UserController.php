@@ -17,11 +17,9 @@ use UserRepo;
 
 class UserController extends ApiController
 {
-    private UserDataServiceInterface $userDataService;
 
-    public function __construct(UserDataServiceInterface $userDataService)
+    public function __construct(private readonly UserDataServiceInterface $userDataService)
     {
-        $this->userDataService = $userDataService;
     }
 
     /**
