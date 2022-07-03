@@ -2,9 +2,10 @@
     <script <?= 'type="text/javascript"'; ?> src="{{ mix('js/modules/capitalize.js') }}"></script>
     <script <?php echo 'type="text/javascript"'; ?>>
         $(document).ready(() => {
-            const welcomeEl = document.getElementById('welcome-username');
+            const welcomeUsername = document.getElementById('welcome-username');
+            const welcomeMessage = "welcome, {{$username}}!";
             const capOpts = new CapitalizationOptions(true);
-            welcomeEl.textContent = welcomeEl.textContent.capitalize(capOpts);
+            welcomeUsername.textContent = welcomeMessage.capitalize(capOpts);
         });
     </script>
 @endpush
@@ -13,7 +14,7 @@
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             <div class="inline-flex flex-row w-full justify-between">
                 <span>{{ __('Dashboard') }}</span>
-                <span id="welcome-username">Welcome, {{$username}}!</span>
+                <span id="welcome-username"></span>
             </div>
         </h2>
     </x-slot>
