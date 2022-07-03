@@ -24,6 +24,8 @@ $ echo $0
 --MULTILINE-COMMENT--
 
 compile() {
+    bold=$(tput bold)
+    normal=$(tput sgr0)
     target_PWD=$(readlink -f .)
     current_folder="${target_PWD##*/}"
     if [[ "$current_folder" = "scripts" ]]; then
@@ -39,9 +41,6 @@ compile() {
 
     git status
     git add . && git commit -m "update code base" && git push
-
-    bold=$(tput bold)
-    normal=$(tput sgr0)
 
     # printf "\n${bold}%s${normal}\n" "Finished!"
 
