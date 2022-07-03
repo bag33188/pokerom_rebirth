@@ -1,36 +1,30 @@
-var $ = function (documentObject) {
+var $ = function (callbackDocumentObj) {
     var ready = function (callback) {
-        let a = documentObject;
-        if (typeof a !== "object") {
-            a = document;
+        var docObj = callbackDocumentObj;
+        if (typeof docObj !== "object") {
+            docObj = document;
         }
-        if (a.readyState !== "loading") {
+        if (docObj.readyState !== "loading") {
             callback();
         } else if (
-            a.addEventListener !== null &&
-            a.addEventListener !== undefined
+            docObj.addEventListener !== null &&
+            docObj.addEventListener !== undefined
         ) {
-            a.addEventListener(
-                "DOMContentLoaded",
-                callback,
-                false
-            );
+            docObj.addEventListener("DOMContentLoaded", callback, false);
         } else {
-            a.attachEvent("onreadystatechange", function () {
-                if (a.readyState === "complete") {
+            docObj.attachEvent("onreadystatechange", function () {
+                if (docObj.readyState === "complete") {
                     callback();
                 }
             });
         }
     };
-    if (typeof documentObject === "object") {
+    if (typeof callbackDocumentObj === "object") {
         return {
             ready: ready,
         };
     } else {
-        console.log('hi')
-
-        return ready(documentObject);
+        return ready(callbackDocumentObj);
     }
 };
 

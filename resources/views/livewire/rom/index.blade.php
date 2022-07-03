@@ -1,16 +1,7 @@
-@push('scripts')
-    <script>
-        $(function() {
-            console.log(13);
-            document.getElementById('hello').innerText = 'hih';
-        })
-    </script>
-@endpush
 <div>
     <x-slot name="header">
         <h2 class="text-center text-lg">Pok&eacute;mon ROMs Library</h2>
     </x-slot>
-    <span id="hello"></span>
     <div x-data="{ open: true }">
         <div class="w-full flex justify-center">
             @php
