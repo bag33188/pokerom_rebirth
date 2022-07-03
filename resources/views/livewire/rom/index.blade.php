@@ -8,11 +8,11 @@
     <div x-data="{ open: true }" id="roms-container">
         <div class="w-full flex justify-center">
             @php
-                $romsTableInitDispState=\App\Enums\DisplayStatesEnum::SHOW->value;
+                $romsTableInitDispState = \App\Enums\DisplayStatesEnum::SHOW;
             @endphp
             <button type="button" @click="open = !open"
                     class="bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-2 px-4 my-4 shadow-md rounded">
-                @include("ui.show-hide", ['text'=>'ROMs', 'initialState'=>$romsTableInitDispState])
+                @include("ui.show-hide", ['text'=>'ROMs', 'initialState'=>$romsTableInitDispState->value])
             </button>
         </div>
         <table class="w-full text-sm text-left text-gray-500 light:text-gray-400" x-show="open" x-cloak>
