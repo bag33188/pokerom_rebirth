@@ -5,10 +5,13 @@ namespace App\Repositories;
 use App\Interfaces\Repository\RomFileRepositoryInterface;
 use App\Models\Rom;
 use App\Models\RomFile;
+use App\Services\GridFS\RomFilesAggregationsTrait;
 use Illuminate\Database\Eloquent\Collection;
 
 class RomFileRepository implements RomFileRepositoryInterface
 {
+    use RomFilesAggregationsTrait;
+
     public function findFileIfExists(string $fileId): RomFile
     {
         return RomFile::findOrFail($fileId);
@@ -45,44 +48,17 @@ class RomFileRepository implements RomFileRepositoryInterface
 
     public function getFileLengthsKibibytes()
     {
-        return RomFile::project([
-            'length' => [
-                '$concat' => [
-                    ['$toString' => ['$toInt' => ['$ceil' => ['$divide' => ['$length', 1024]]]]],
-                    ' ',
-                    'KB'
-                ]
-            ]])->get();
+        return RomFile::project($this->calcLengthKibibytes())->get();
     }
 
     public function getFileLengthsGibibytes()
     {
-        return RomFile::project([
-            'length' => [
-                '$concat' => [
-                    ['$toString' => [
-                        '$round' => [['$toDecimal' => ['$divide' => ['$length', ['$pow' => [1024, 3]]]]], 2]
-                    ]],
-                    ' ',
-                    'GB'
-                ]
-            ]
-        ])->get();
+        return RomFile::project($this->calcLengthGibibytes())->get();
     }
 
     public function getFileLengthsMebibytes()
     {
-        return RomFile::project([
-            'length' => [
-                '$concat' => [
-                    ['$toString' => [
-                        '$round' => [['$toDouble' => ['$divide' => ['$length', ['$pow' => [1024, 3]]]]], 2]
-                    ]],
-                    ' ',
-                    'MB'
-                ]
-            ]
-        ])->get();
+        return RomFile::project($this->calcLengthMebibytes())->get();
     }
 
     public function getTotalSizeOfAllRomFiles()
