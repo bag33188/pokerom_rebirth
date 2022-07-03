@@ -1,9 +1,10 @@
 @push('scripts')
     <script <?= 'type="text/javascript"'; ?> src="{{ mix('js/modules/capitalize.js') }}"></script>
-    <script <?= 'type="text/javascript"'; ?>>
-        $(document).ready(function() {
+    <script <?php echo 'type="text/javascript"'; ?>>
+        $(document).ready(() => {
             const welcomeEl = document.getElementById('welcome-username');
-            welcomeEl.textContent = welcomeEl.textContent.capitalize(new CapitalizationOptions(true));
+            const capOpts = new CapitalizationOptions(true);
+            welcomeEl.textContent = welcomeEl.textContent.capitalize(capOpts);
         });
     </script>
 @endpush
