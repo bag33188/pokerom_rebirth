@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 03, 2022 at 10:49 PM
+-- Generation Time: Jul 04, 2022 at 12:07 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -31,11 +31,6 @@ DELIMITER $$
 --
 -- Procedures
 --
-DROP PROCEDURE IF EXISTS `FindRomsWithNoFile`$$
-CREATE DEFINER=`bag33188`@`%` PROCEDURE `FindRomsWithNoFile` ()   BEGIN
-SELECT `id`, `rom_name`, `rom_type`, IF (0 = FALSE, 'false', 'true') AS `has_file`, `file_id` FROM `roms` WHERE `has_file` = FALSE AND `file_id` IS NULL ORDER BY `rom_name` DESC;
-END$$
-
 DROP PROCEDURE IF EXISTS `FindRomsWithNoGame`$$
 CREATE DEFINER=`bag33188`@`%` PROCEDURE `FindRomsWithNoGame` ()   BEGIN
 SELECT `id`, `rom_name`, `rom_type`, IF (0 = FALSE, 'false', 'true') AS `has_game`, `game_id` FROM `roms` WHERE `has_game` = FALSE AND `game_id` IS NULL ORDER BY `rom_name` DESC;
@@ -43,41 +38,6 @@ END$$
 
 DROP PROCEDURE IF EXISTS `GetAllPokeROMData`$$
 CREATE DEFINER=`bag33188`@`%` PROCEDURE `GetAllPokeROMData` ()   SELECT `games`.`id` AS `games_id`, `games`.`game_name`, `games`.`game_type`, `games`.`date_released`, `games`.`generation`, `games`.`region`, `roms`.`id` AS `roms_id`, `roms`.`file_id`, KbToB(`roms`.`rom_size`) AS `rom_size_bytes`,  CONCAT(`roms`.`rom_name`, '.', UCASE(`roms`.`rom_type`)) AS `rom_fullname` FROM `games` RIGHT JOIN `roms` ON `roms`.`id` = `games`.`rom_id` ORDER BY `roms_id` DESC$$
-
-DROP PROCEDURE IF EXISTS `GetAllUnlinkedRoms`$$
-CREATE DEFINER=`bag33188`@`localhost` PROCEDURE `GetAllUnlinkedRoms` ()  COMMENT 'checks for both unlinked games and/or files' BEGIN
-  SELECT `id` AS `rom_id`, `file_id`, `rom_name`, `rom_type`, IF (0 = FALSE, 'false', 'true') AS `has_game`, IF (0 = FALSE, 'false', 'true') AS `has_file`
-  FROM `roms`
-  WHERE `has_game` = FALSE OR `has_file` = FALSE OR `file_id` IS NULL OR `game_id` IS NULL ORDER BY `rom_size` DESC;
-END$$
-
-DROP PROCEDURE IF EXISTS `GetTotalSizeOfAllRoms`$$
-CREATE DEFINER=`bag33188`@`%` PROCEDURE `GetTotalSizeOfAllRoms` ()   BEGIN
-  SET @`size_val` = CAST(CalcSumOfAllRomSize() AS VARCHAR(14));
-  SELECT CONCAT(@`size_val`, ' ', 'Bytes') AS `total_size`;
-/** !important:
-Right now the total length of bytes (as a string) is less than 14 (11 currently `82401764352`)
-
-may need to increase varchar limit in the future
-*/
-END$$
-
-DROP PROCEDURE IF EXISTS `LinkAllRomGameIDsToGames`$$
-CREATE DEFINER=`bag33188`@`%` PROCEDURE `LinkAllRomGameIDsToGames` ()  SQL SECURITY INVOKER BEGIN
-START TRANSACTION;
-    SET @`game_id_null_count` = (SELECT COUNT(*) FROM `roms` WHERE `game_id` IS NULL);
-    IF @`game_id_null_count` = 0 THEN
-        SELECT 'All ROM\'s Game IDs are already Linked' AS 'Status Message';
-        ROLLBACK WORK;
-    ELSE
-        UPDATE `roms` LEFT JOIN `games`
-        ON `games`.`rom_id` = `roms`.`id`
-        SET `roms`.`game_id` = `games`.`id`;
-        SELECT COUNT(*) AS 'Linked Game ID ROMs' FROM `roms` WHERE `game_id` IS NOT NULL;
-        SELECT COUNT(*) AS 'Total ROMs' FROM `roms`;
-    END IF;
-COMMIT;
-END$$
 
 DROP PROCEDURE IF EXISTS `LinkRomToFile`$$
 CREATE DEFINER=`bag33188`@`%` PROCEDURE `LinkRomToFile` (IN `FILE_OBJ_ID` CHAR(24), IN `FILE_LENGTH` BIGINT, IN `ROM_ID` BIGINT)  SQL SECURITY INVOKER BEGIN
@@ -93,13 +53,6 @@ notes:
  * rom size is stored in kilobytes
  * mongodb uses raw bytes as file length value
 */
-END$$
-
-DROP PROCEDURE IF EXISTS `UnlinkAllRomFiles`$$
-CREATE DEFINER=`bag33188`@`%` PROCEDURE `UnlinkAllRomFiles` ()  SQL SECURITY INVOKER COMMENT 'Use for mobile when rom files don''t exist in gridfs' BEGIN
-START TRANSACTION;
-UPDATE `roms` SET `roms`.`file_id` = NULL, `roms`.`has_file` = FALSE;
-COMMIT;
 END$$
 
 --
@@ -135,22 +88,6 @@ max rounded size value is 5 digits (plus a . character), so 6 (min, 3);
 and the fixed string length of size type is 2; .... pluse
 the space in between, 6 + 2 + 1 = 9 .....
 thus varchar(9)
-*/
-END$$
-
-DROP FUNCTION IF EXISTS `CalcSumOfAllRomSize`$$
-CREATE DEFINER=`bag33188`@`%` FUNCTION `CalcSumOfAllRomSize` () RETURNS BIGINT(14) UNSIGNED DETERMINISTIC BEGIN
-    DECLARE `total_value` BIGINT UNSIGNED;
-    SET `total_value` = 0;
-    SELECT SUM(`rom_size`) INTO `total_value`
-    FROM `roms` LIMIT 1;
-    SET  @`total_value_bytes` = `total_value` * 1024;
-    RETURN @`total_value_bytes`;
-/** !important:
-Right now the total length of bytes (as a string) of
-all ROMs is less than 14 (11 currently, `82401764352`)
-
-May need to increase varchar limit in the future
 */
 END$$
 
@@ -381,7 +318,7 @@ TRUNCATE TABLE `password_resets`;
 -- Table structure for table `personal_access_tokens`
 --
 -- Creation: Jun 05, 2022 at 04:47 PM
--- Last update: Jul 03, 2022 at 08:48 PM
+-- Last update: Jul 03, 2022 at 09:59 PM
 --
 
 DROP TABLE IF EXISTS `personal_access_tokens`;
@@ -411,7 +348,7 @@ TRUNCATE TABLE `personal_access_tokens`;
 --
 
 INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `name`, `token`, `abilities`, `last_used_at`, `created_at`, `updated_at`) VALUES
-(1, 'App\\Models\\User', 1, 'auth_token', 'decfe681ade402403c92ee62493bc85118f6260b48409bafb060afe67e12a78a', '[\"*\"]', '2022-07-04 03:48:37', '2022-07-04 02:35:33', '2022-07-04 03:48:37');
+(1, 'App\\Models\\User', 1, 'auth_token', 'decfe681ade402403c92ee62493bc85118f6260b48409bafb060afe67e12a78a', '[\"*\"]', '2022-07-04 04:59:51', '2022-07-04 02:35:33', '2022-07-04 04:59:51');
 
 -- --------------------------------------------------------
 
@@ -497,6 +434,7 @@ INSERT INTO `roms` (`id`, `file_id`, `game_id`, `rom_name`, `rom_size`, `rom_typ
 -- Table structure for table `sessions`
 --
 -- Creation: Jun 05, 2022 at 04:47 PM
+-- Last update: Jul 03, 2022 at 10:05 PM
 --
 
 DROP TABLE IF EXISTS `sessions`;
@@ -518,13 +456,20 @@ CREATE TABLE `sessions` (
 --
 
 TRUNCATE TABLE `sessions`;
+--
+-- Dumping data for table `sessions`
+--
+
+INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
+('sC2Trn1PBkdYNOsA4ddqPnNh5a19SYVp28PrurmG', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiTzIwSFMyWE5Ta05TWWc3R3FJWGQ4Q2hpSXM0d05DMDlQUnBoSzVBNSI7czozOiJ1cmwiO2E6MDp7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjQwOiJodHRwOi8vcG9rZXJvbV9yZWJpcnRoLnRlc3QvcHVibGljL2dhbWVzIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjIxOiJwYXNzd29yZF9oYXNoX3NhbmN0dW0iO3M6NjA6IiQyeSQxMCR3aXAzcXg5MVBsWERrcmouekVqb0MuL3dsSW50Z0lLM1EuckFKZ2d3UWhmWFJGaUlubURabSI7fQ==', 1656885912);
+
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `users`
 --
 -- Creation: Jun 05, 2022 at 04:47 PM
--- Last update: Jul 03, 2022 at 07:35 PM
+-- Last update: Jul 03, 2022 at 09:02 PM
 --
 
 DROP TABLE IF EXISTS `users`;
@@ -559,7 +504,7 @@ TRUNCATE TABLE `users`;
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `two_factor_secret`, `two_factor_recovery_codes`, `two_factor_confirmed_at`, `role`, `remember_token`, `current_team_id`, `profile_photo_path`, `created_at`, `updated_at`) VALUES
-(1, 'Brock', 'bglatman@outlook.com', NULL, '$2y$10$wip3qx91PlXDkrj.zEjoC./wlIntgIK3Q.rAJggwQhfXRFiInmDZm', NULL, NULL, NULL, 'admin', NULL, NULL, NULL, '2022-07-04 02:35:33', '2022-07-04 02:35:33');
+(1, 'Brock', 'bglatman@outlook.com', NULL, '$2y$10$wip3qx91PlXDkrj.zEjoC./wlIntgIK3Q.rAJggwQhfXRFiInmDZm', NULL, NULL, NULL, 'admin', 'iiasAtq8sw4z3OC23pG3wTvSNHUv2p0JvOgmEDbIuE6Vi3yd8lDGqNry2odk', NULL, NULL, '2022-07-04 02:35:33', '2022-07-04 02:35:33');
 
 --
 -- Indexes for dumped tables
