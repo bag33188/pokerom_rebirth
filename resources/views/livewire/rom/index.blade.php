@@ -1,5 +1,5 @@
 @push('scripts')
-    <script <?= 'type="text/javascript"'; ?> src="{{mix('js/roms.js')}}"></script>
+    <script <?= 'type="text/javascript"'; ?> src="{{mix('js/roms.js')}}" defer></script>
 @endpush
 <div>
     <x-slot name="header">
@@ -17,11 +17,11 @@
         </div>
         <table class="w-full text-sm text-left text-gray-500 light:text-gray-400" x-show="open" x-cloak>
             <thead class="bg-gray-50">
-            <tr class="text-xs text-gray-700 uppercase light:bg-gray-700 light:text-gray-400">
-                @for($i = 0; $i < count($romsTableColumns); $i++)
-                    <th scope="col" class="px-6 py-3">{{$romsTableColumns[$i]}}</th>
-                @endfor
-            </tr>
+                <tr class="text-xs text-gray-700 uppercase light:bg-gray-700 light:text-gray-400">
+                    @for($i = 0; $i < count($romsTableColumns); $i++)
+                        <th scope="col" class="px-6 py-3">{{$romsTableColumns[$i]}}</th>
+                    @endfor
+                </tr>
             </thead>
             <tbody class="light:bg-gray-800">
             @foreach($roms as $rom)
@@ -55,10 +55,10 @@
             @endforeach
             </tbody>
             <tfoot>
-            <tr class="text-sm text-gray-700 uppercase light:bg-gray-700 light:text-gray-400">
-                <td class="px-6 py-3">Total Count:&nbsp;<span class="font-semibold">{{count($roms)}}</span></td>
-                <td class="px-6 py-3">Total Size:&nbsp;<span class="font-semibold">{{$roms_total_size}}</span></td>
-            </tr>
+                <tr class="text-sm text-gray-700 uppercase light:bg-gray-700 light:text-gray-400">
+                    <td class="px-6 py-3">Total Count:&nbsp;<span class="font-semibold">{{count($roms)}}</span></td>
+                    <td class="px-6 py-3">Total Size:&nbsp;<span class="font-semibold">{{$roms_total_size}}</span></td>
+                </tr>
             </tfoot>
         </table>
     </div>

@@ -7,7 +7,7 @@ async function getApiVersion() {
     return response.json();
 }
 
-$(async () => {
+const loadApiVersionAttr = async () => {
     try {
         const { version: apiVersion } = await getApiVersion();
         const romsContainer = document.getElementById("roms-container");
@@ -15,4 +15,6 @@ $(async () => {
     } catch (e) {
         console.error(e);
     }
-});
+};
+
+loadApiVersionAttr();
