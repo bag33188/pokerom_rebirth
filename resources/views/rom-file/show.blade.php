@@ -27,7 +27,7 @@
                             target="_self"
                             title="{{$romFile->filename}}">
                                 @include('partials._download-icon')
-                                <span>DOWNLOAD</span>
+                                <span class="order-0">DOWNLOAD</span>
                         </a>
                     </span>
                     <span class="order-1">@include('rom-file.delete', $romFile)</span>

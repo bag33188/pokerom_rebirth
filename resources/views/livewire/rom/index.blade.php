@@ -40,7 +40,7 @@
                                target="_blank"
                                title="{{$rom->getRomFileName()}}">
                                 @include('partials._download-icon')
-                                <span>download!</span></a>
+                                <span class="order-0">Download!</span></a>
                         @else
                             <p class="font-normal text-lg">No File yet :(</p>
                         @endif
