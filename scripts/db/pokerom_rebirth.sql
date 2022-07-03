@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 28, 2022 at 06:00 AM
+-- Generation Time: Jul 03, 2022 at 10:49 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -206,7 +206,8 @@ TRUNCATE TABLE `failed_jobs`;
 --
 -- Table structure for table `games`
 --
--- Creation: Jun 15, 2022 at 04:16 AM
+-- Creation: Jul 03, 2022 at 07:31 PM
+-- Last update: Jul 03, 2022 at 08:48 PM
 --
 
 DROP TABLE IF EXISTS `games`;
@@ -239,46 +240,46 @@ TRUNCATE TABLE `games`;
 --
 
 INSERT INTO `games` (`id`, `rom_id`, `game_name`, `game_type`, `date_released`, `generation`, `region`, `slug`, `created_at`, `updated_at`) VALUES
-(1, 1, 'Pokemon Red', 'core', '1998-09-28', 1, 'kanto', 'pokemon-red', '2022-06-04 15:30:44', '2022-06-04 15:30:44'),
-(2, 2, 'Pokemon Blue', 'core', '1998-09-28', 1, 'kanto', 'pokemon-blue', '2022-06-04 15:31:29', '2022-06-04 15:31:29'),
-(3, 3, 'Pokemon Yellow', 'core', '1999-10-18', 1, 'kanto', 'pokemon-yellow', '2022-06-04 15:31:59', '2022-06-04 15:31:59'),
-(4, 4, 'Pokemon Green (JP)', 'core', '1996-02-27', 1, 'kanto', 'pokemon-green-jp', '2022-06-04 15:43:16', '2022-06-04 15:43:16'),
-(5, 5, 'Pokemon Gold', 'core', '2000-10-15', 2, 'johto', 'pokemon-gold', '2022-06-04 15:32:16', '2022-06-04 15:32:16'),
-(6, 6, 'Pokemon Silver', 'core', '2000-10-15', 2, 'johto', 'pokemon-silver', '2022-06-04 15:32:38', '2022-06-04 15:32:38'),
-(7, 7, 'Pokemon Crystal', 'core', '2001-08-29', 2, 'johto', 'pokemon-crystal', '2022-06-04 15:32:49', '2022-06-04 15:32:49'),
-(8, 8, 'Pokemon Ruby', 'core', '2003-03-19', 3, 'hoenn', 'pokemon-ruby', '2022-06-04 15:33:10', '2022-06-04 15:33:10'),
-(9, 9, 'Pokemon Sapphire', 'core', '2003-03-19', 3, 'hoenn', 'pokemon-sapphire', '2022-06-04 15:33:29', '2022-06-04 15:33:29'),
-(10, 10, 'Pokemon FireRed', 'core', '2004-09-09', 3, 'kanto', 'pokemon-firered', '2022-06-04 15:34:05', '2022-06-04 15:34:05'),
-(11, 11, 'Pokemon LeafGreen', 'core', '2004-09-09', 3, 'kanto', 'pokemon-leafgreen', '2022-06-04 15:34:19', '2022-06-04 15:34:19'),
-(12, 12, 'Pokemon Emerald', 'core', '2005-05-01', 3, 'hoenn', 'pokemon-emerald', '2022-06-04 15:34:48', '2022-06-04 15:34:48'),
-(13, 13, 'Pokemon Diamond', 'core', '2007-04-22', 4, 'sinnoh', 'pokemon-diamond', '2022-06-04 15:35:02', '2022-06-04 15:35:02'),
-(14, 14, 'Pokemon Pearl', 'core', '2007-04-22', 4, 'sinnoh', 'pokemon-pearl', '2022-06-04 15:35:25', '2022-06-04 15:35:25'),
-(15, 15, 'Pokemon Platinum', 'core', '2009-03-22', 4, 'sinnoh', 'pokemon-platinum', '2022-06-04 15:35:39', '2022-06-04 15:35:39'),
-(16, 16, 'Pokemon HeartGold', 'core', '2010-03-14', 4, 'johto', 'pokemon-heartgold', '2022-06-04 15:35:56', '2022-06-04 15:35:56'),
-(17, 17, 'Pokemon SoulSilver', 'core', '2010-03-14', 4, 'johto', 'pokemon-soulsilver', '2022-06-04 15:36:09', '2022-06-04 15:36:09'),
-(18, 18, 'Pokemon Black', 'core', '2011-03-06', 5, 'unova', 'pokemon-black', '2022-06-04 15:36:24', '2022-06-04 15:36:24'),
-(19, 19, 'Pokemon White', 'core', '2011-03-06', 5, 'unova', 'pokemon-white', '2022-06-04 15:36:37', '2022-06-04 15:36:37'),
-(20, 20, 'Pokemon Black 2', 'core', '2012-10-07', 5, 'unova', 'pokemon-black-2', '2022-06-04 15:37:06', '2022-06-04 15:37:06'),
-(21, 21, 'Pokemon White 2', 'core', '2012-10-07', 5, 'unova', 'pokemon-white-2', '2022-06-04 15:37:18', '2022-06-04 15:37:18'),
-(22, 22, 'Pokemon X', 'core', '2013-10-12', 6, 'kalos', 'pokemon-x', '2022-06-04 15:37:47', '2022-06-04 15:37:47'),
-(23, 23, 'Pokemon Y', 'core', '2013-10-12', 6, 'kalos', 'pokemon-y', '2022-06-04 15:38:29', '2022-06-04 15:38:29'),
-(24, 24, 'Pokemon Omega Ruby', 'core', '2014-11-21', 6, 'hoenn', 'pokemon-omega-ruby', '2022-06-04 15:38:47', '2022-06-04 15:38:47'),
-(25, 25, 'Pokemon Alpha Sapphire', 'core', '2014-11-21', 6, 'hoenn', 'pokemon-alpha-sapphire', '2022-06-04 15:38:59', '2022-06-04 15:38:59'),
-(26, 26, 'Pokemon Sun', 'core', '2016-11-18', 7, 'alola', 'pokemon-sun', '2022-06-04 15:39:28', '2022-06-04 15:39:28'),
-(27, 27, 'Pokemon Moon', 'core', '2016-11-18', 7, 'alola', 'pokemon-moon', '2022-06-04 15:39:45', '2022-06-04 15:39:45'),
-(28, 28, 'Pokemon Ultra Sun', 'core', '2017-11-17', 7, 'alola', 'pokemon-ultra-sun', '2022-06-04 15:39:59', '2022-06-04 15:39:59'),
-(29, 29, 'Pokemon Ultra Moon', 'core', '2017-11-17', 7, 'alola', 'pokemon-ultra-moon', '2022-06-04 15:40:17', '2022-06-04 15:40:17'),
-(30, 30, 'Pokemon Sword', 'core', '2019-11-15', 8, 'galar', 'pokemon-sword', '2022-06-04 15:40:51', '2022-06-04 15:40:51'),
-(31, 31, 'Pokemon Shield', 'core', '2019-11-15', 8, 'galar', 'pokemon-shield', '2022-06-04 15:41:05', '2022-06-04 15:41:05'),
-(32, 32, 'Pokemon Brilliant Diamond', 'core', '2021-11-19', 8, 'sinnoh', 'pokemon-brilliant-diamond', '2022-06-04 15:41:20', '2022-06-04 15:41:20'),
-(33, 33, 'Pokemon Shining Pearl', 'core', '2021-11-19', 8, 'sinnoh', 'pokemon-shining-pearl', '2022-06-04 15:41:47', '2022-06-04 15:41:47'),
-(34, 34, 'Pokemon Let\'s Go Pikachu', 'spin-off', '2018-11-16', 7, 'kanto', 'pokemon-lets-go-pikachu', '2022-06-04 15:42:24', '2022-06-04 15:42:24'),
-(35, 35, 'Pokemon Let\'s Go Eevee', 'spin-off', '2018-11-16', 7, 'kanto', 'pokemon-lets-go-eevee', '2022-06-04 15:42:45', '2022-06-27 01:31:03'),
-(36, 36, 'Pokemon Brown', 'hack', '2012-06-15', 0, 'other', 'pokemon-brown', '2022-06-04 15:43:34', '2022-06-04 15:43:34'),
-(37, 37, 'Pokemon Genesis', 'hack', '2019-08-23', 0, 'other', 'pokemon-genesis', '2022-06-04 15:43:52', '2022-06-04 15:43:52'),
-(38, 38, 'Pokemon Prism', 'hack', '2016-12-25', 0, 'other', 'pokemon-prism', '2022-06-04 15:44:07', '2022-06-04 15:44:07'),
-(39, 39, 'Pokemon Ash Gray', 'hack', '2009-05-31', 1, 'kanto', 'pokemon-ash-gray', '2022-06-04 15:44:19', '2022-06-04 15:44:19'),
-(40, 40, 'Pokemon Renegade Platinum', 'hack', '2019-04-16', 4, 'sinnoh', 'pokemon-renegade-platinum', '2022-06-04 15:44:32', '2022-06-04 15:44:32');
+(1, 1, 'Pokemon Red', 'core', '1998-09-28', 1, 'kanto', 'pokemon-red', '2022-07-04 03:31:25', '2022-07-04 03:31:25'),
+(2, 2, 'Pokemon Blue', 'core', '1998-09-28', 1, 'kanto', 'pokemon-blue', '2022-07-04 03:31:32', '2022-07-04 03:31:32'),
+(3, 3, 'Pokemon Green (JP)', 'core', '1996-02-27', 1, 'kanto', 'pokemon-green-jp', '2022-07-04 03:31:52', '2022-07-04 03:31:52'),
+(4, 4, 'Pokemon Yellow', 'core', '1999-10-18', 1, 'kanto', 'pokemon-yellow', '2022-07-04 03:32:14', '2022-07-04 03:32:14'),
+(5, 5, 'Pokemon Gold', 'core', '2000-10-15', 2, 'johto', 'pokemon-gold', '2022-07-04 03:32:40', '2022-07-04 03:32:40'),
+(6, 6, 'Pokemon Silver', 'core', '2000-10-15', 2, 'johto', 'pokemon-silver', '2022-07-04 03:32:49', '2022-07-04 03:32:49'),
+(7, 7, 'Pokemon Crystal', 'core', '2001-08-29', 2, 'johto', 'pokemon-crystal', '2022-07-04 03:33:03', '2022-07-04 03:33:03'),
+(8, 8, 'Pokemon Ruby', 'core', '2003-03-19', 3, 'hoenn', 'pokemon-ruby', '2022-07-04 03:34:07', '2022-07-04 03:34:07'),
+(9, 9, 'Pokemon Sapphire', 'core', '2003-03-19', 3, 'hoenn', 'pokemon-sapphire', '2022-07-04 03:34:23', '2022-07-04 03:34:23'),
+(10, 10, 'Pokemon Emerald', 'core', '2005-05-01', 3, 'hoenn', 'pokemon-emerald', '2022-07-04 03:34:51', '2022-07-04 03:34:51'),
+(11, 11, 'Pokemon FireRed', 'core', '2004-09-09', 3, 'kanto', 'pokemon-firered', '2022-07-04 03:35:20', '2022-07-04 03:35:20'),
+(12, 12, 'Pokemon LeafGreen', 'core', '2004-09-09', 3, 'kanto', 'pokemon-leafgreen', '2022-07-04 03:35:32', '2022-07-04 03:35:32'),
+(13, 13, 'Pokemon Diamond', 'core', '2007-04-22', 4, 'sinnoh', 'pokemon-diamond', '2022-07-04 03:36:11', '2022-07-04 03:36:11'),
+(14, 14, 'Pokemon Pearl', 'core', '2007-04-22', 4, 'sinnoh', 'pokemon-pearl', '2022-07-04 03:36:17', '2022-07-04 03:36:17'),
+(15, 15, 'Pokemon Platinum', 'core', '2009-03-22', 4, 'sinnoh', 'pokemon-platinum', '2022-07-04 03:36:44', '2022-07-04 03:36:44'),
+(16, 16, 'Pokemon HeartGold', 'core', '2010-03-14', 4, 'johto', 'pokemon-heartgold', '2022-07-04 03:37:11', '2022-07-04 03:37:11'),
+(17, 17, 'Pokemon SoulSilver', 'core', '2010-03-14', 4, 'johto', 'pokemon-soulsilver', '2022-07-04 03:37:19', '2022-07-04 03:37:19'),
+(18, 18, 'Pokemon Black', 'core', '2011-03-06', 5, 'unova', 'pokemon-black', '2022-07-04 03:37:53', '2022-07-04 03:37:53'),
+(19, 19, 'Pokemon White', 'core', '2011-03-06', 5, 'unova', 'pokemon-white', '2022-07-04 03:38:01', '2022-07-04 03:38:01'),
+(20, 20, 'Pokemon Black 2', 'core', '2012-10-07', 5, 'unova', 'pokemon-black-2', '2022-07-04 03:38:27', '2022-07-04 03:38:27'),
+(21, 21, 'Pokemon White 2', 'core', '2012-10-07', 5, 'unova', 'pokemon-white-2', '2022-07-04 03:38:36', '2022-07-04 03:38:36'),
+(22, 22, 'Pokemon X', 'core', '2013-10-12', 6, 'kalos', 'pokemon-x', '2022-07-04 03:39:02', '2022-07-04 03:39:02'),
+(23, 23, 'Pokemon Y', 'core', '2013-10-12', 6, 'kalos', 'pokemon-y', '2022-07-04 03:39:08', '2022-07-04 03:39:08'),
+(24, 24, 'Pokemon Omega Ruby', 'core', '2014-11-21', 6, 'hoenn', 'pokemon-omega-ruby', '2022-07-04 03:39:36', '2022-07-04 03:39:36'),
+(25, 25, 'Pokemon Alpha Sapphire', 'core', '2014-11-21', 6, 'hoenn', 'pokemon-alpha-sapphire', '2022-07-04 03:40:04', '2022-07-04 03:40:04'),
+(26, 26, 'Pokemon Sun', 'core', '2016-11-18', 7, 'alola', 'pokemon-sun', '2022-07-04 03:40:40', '2022-07-04 03:40:40'),
+(27, 27, 'Pokemon Moon', 'core', '2016-11-18', 7, 'alola', 'pokemon-moon', '2022-07-04 03:40:51', '2022-07-04 03:40:51'),
+(28, 28, 'Pokemon Ultra Sun', 'core', '2017-11-17', 7, 'alola', 'pokemon-ultra-sun', '2022-07-04 03:41:14', '2022-07-04 03:41:14'),
+(29, 29, 'Pokemon Ultra Moon', 'core', '2017-11-17', 7, 'alola', 'pokemon-ultra-moon', '2022-07-04 03:41:20', '2022-07-04 03:41:20'),
+(30, 30, 'Pokemon Sword', 'core', '2019-11-15', 8, 'galar', 'pokemon-sword', '2022-07-04 03:42:01', '2022-07-04 03:42:01'),
+(31, 31, 'Pokemon Shield', 'core', '2019-11-15', 8, 'galar', 'pokemon-shield', '2022-07-04 03:42:13', '2022-07-04 03:42:13'),
+(32, 32, 'Pokemon Brilliant Diamond', 'core', '2021-11-19', 8, 'sinnoh', 'pokemon-brilliant-diamond', '2022-07-04 03:42:46', '2022-07-04 03:42:46'),
+(33, 33, 'Pokemon Shining Pearl', 'core', '2021-11-19', 8, 'sinnoh', 'pokemon-shining-pearl', '2022-07-04 03:42:58', '2022-07-04 03:42:58'),
+(34, 34, 'Pokemon Let\'s Go Pikachu', 'spin-off', '2018-11-16', 7, 'kanto', 'pokemon-lets-go-pikachu', '2022-07-04 03:43:32', '2022-07-04 03:43:32'),
+(35, 35, 'Pokemon Let\'s Go Eevee', 'spin-off', '2018-11-16', 7, 'kanto', 'pokemon-lets-go-eevee', '2022-07-04 03:43:38', '2022-07-04 03:43:38'),
+(36, 36, 'Pokemon Prism', 'hack', '2016-12-25', 0, 'other', 'pokemon-prism', '2022-07-04 03:44:25', '2022-07-04 03:44:25'),
+(37, 37, 'Pokemon Brown', 'hack', '2012-06-15', 0, 'other', 'pokemon-brown', '2022-07-04 03:44:50', '2022-07-04 03:44:50'),
+(38, 38, 'Pokemon Genesis', 'hack', '2019-08-23', 0, 'other', 'pokemon-genesis', '2022-07-04 03:47:31', '2022-07-04 03:47:31'),
+(39, 39, 'Pokemon Ash Gray', 'hack', '2009-05-31', 1, 'kanto', 'pokemon-ash-gray', '2022-07-04 03:48:07', '2022-07-04 03:48:07'),
+(40, 40, 'Pokemon Renegade Platinum', 'hack', '2019-04-16', 4, 'sinnoh', 'pokemon-renegade-platinum', '2022-07-04 03:48:37', '2022-07-04 03:48:37');
 
 --
 -- Triggers `games`
@@ -316,6 +317,7 @@ DELIMITER ;
 -- Table structure for table `migrations`
 --
 -- Creation: Jun 05, 2022 at 04:47 PM
+-- Last update: Jul 03, 2022 at 07:33 PM
 --
 
 DROP TABLE IF EXISTS `migrations`;
@@ -344,7 +346,7 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (3, '2014_10_12_200000_add_two_factor_columns_to_users_table', 1),
 (4, '2019_08_19_000000_create_failed_jobs_table', 1),
 (5, '2019_12_14_000001_create_personal_access_tokens_table', 1),
-(6, '2022_06_02_000001_create_files_collection', 1),
+(6, '2022_06_02_000001_create_rom_files_collection', 1),
 (7, '2022_06_05_162238_create_sessions_table', 1),
 (8, '2022_06_15_025832_create_roms_table', 1),
 (9, '2022_06_15_040939_create_games_table', 1);
@@ -379,6 +381,7 @@ TRUNCATE TABLE `password_resets`;
 -- Table structure for table `personal_access_tokens`
 --
 -- Creation: Jun 05, 2022 at 04:47 PM
+-- Last update: Jul 03, 2022 at 08:48 PM
 --
 
 DROP TABLE IF EXISTS `personal_access_tokens`;
@@ -408,15 +411,15 @@ TRUNCATE TABLE `personal_access_tokens`;
 --
 
 INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `name`, `token`, `abilities`, `last_used_at`, `created_at`, `updated_at`) VALUES
-(1, 'App\\Models\\User', 1, 'auth_token', '1662a4096e795ca20c6d5ccee5bd7e9e7933b1a452eabf0d2de0073b2bec7422', '[\"*\"]', '2022-06-23 11:24:29', '2022-06-23 11:21:23', '2022-06-23 11:24:29'),
-(2, 'App\\Models\\User', 1, 'auth_token', '687d0fbe322bb7bfe3310925d772995a6efc61df3b1c13b8f562753e6b0bbefe', '[\"*\"]', '2022-06-28 01:03:53', '2022-06-23 11:26:08', '2022-06-28 01:03:53');
+(1, 'App\\Models\\User', 1, 'auth_token', 'decfe681ade402403c92ee62493bc85118f6260b48409bafb060afe67e12a78a', '[\"*\"]', '2022-07-04 03:48:37', '2022-07-04 02:35:33', '2022-07-04 03:48:37');
 
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `roms`
 --
--- Creation: Jun 15, 2022 at 04:16 AM
+-- Creation: Jul 03, 2022 at 07:21 PM
+-- Last update: Jul 03, 2022 at 08:48 PM
 --
 
 DROP TABLE IF EXISTS `roms`;
@@ -447,46 +450,46 @@ TRUNCATE TABLE `roms`;
 --
 
 INSERT INTO `roms` (`id`, `file_id`, `game_id`, `rom_name`, `rom_size`, `rom_type`, `has_game`, `has_file`, `created_at`, `updated_at`) VALUES
-(1, '6292fd825a0d65bff6068e71', 1, 'POKEMON_RED01', 1024, 'gb', 1, 1, '2022-06-04 08:20:25', '2022-06-26 23:40:03'),
-(2, '6292fd79a11b7b48600157a1', 2, 'POKEMON_BLUE01', 1024, 'gb', 1, 1, '2022-06-04 08:20:25', '2022-06-04 15:31:29'),
-(3, '62929c5483f6032a7d0ceb41', 3, 'POKEMON_YELLOW01', 1024, 'gb', 1, 1, '2022-06-04 08:20:25', '2022-06-04 15:31:59'),
-(4, '6292fd7d22122e0b5f077bf1', 4, 'POKEMON_GREEN01', 1024, 'gb', 1, 1, '2022-06-04 08:20:25', '2022-06-04 15:43:16'),
-(5, '6292fdbdc5898918900ec701', 5, 'POKEMON_GLDAAUE01', 2048, 'gbc', 1, 1, '2022-06-04 08:20:25', '2022-06-04 15:32:16'),
-(6, '6292fe2a569beb5025003291', 6, 'POKEMON_SLVAAXE01', 2048, 'gbc', 1, 1, '2022-06-04 08:20:25', '2022-06-04 15:32:38'),
-(7, '6292fdc1bd29353d25028ed1', 7, 'PM_CRYSTAL_BYTE01', 2048, 'gbc', 1, 1, '2022-06-04 08:20:25', '2022-06-04 15:32:49'),
-(8, '629267c77a73cde1d1069071', 8, 'POKEMON_RUBYAXVE01', 16384, 'gba', 1, 1, '2022-06-04 08:20:25', '2022-06-04 15:33:10'),
-(9, '629050d19bc398a16c0f75f1', 9, 'POKEMON_SAPPAXPE01', 16384, 'gba', 1, 1, '2022-06-04 08:20:25', '2022-06-04 15:33:29'),
-(10, '6292fdd4cc6a265115018231', 10, 'POKEMON_FIREBPRE01', 16384, 'gba', 1, 1, '2022-06-04 08:20:25', '2022-06-04 15:34:05'),
-(11, '6292fdda7b76e3ef190b4641', 11, 'POKEMON_LEAFBPGE01', 16384, 'gba', 1, 1, '2022-06-04 08:20:25', '2022-06-04 15:34:19'),
-(12, '6292e893aaf3f70dae0bf6a1', 12, 'POKEMON_EMERBPEE01', 16384, 'gba', 1, 1, '2022-06-04 08:20:25', '2022-06-04 15:34:48'),
-(13, '6292fd72f6ebc3e28103afe1', 13, 'POKEMON_D_ADAE01', 65536, 'nds', 1, 1, '2022-06-04 08:20:25', '2022-06-04 15:35:02'),
-(14, '6292dba9766f34b73a0ed961', 14, 'POKEMON_P_APAE', 65536, 'nds', 1, 1, '2022-06-04 08:20:25', '2022-06-04 15:35:25'),
-(15, '6291268c1b9fd763720ba8e1', 15, 'POKEMON_PL_CPUE01', 131072, 'nds', 1, 1, '2022-06-04 08:20:25', '2022-06-04 15:35:39'),
-(16, '6292fd6ad36bee9ff60473e1', 16, 'POKEMON_HG_IPKE01', 131072, 'nds', 1, 1, '2022-06-04 08:20:25', '2022-06-04 15:35:56'),
-(17, '6292fd5350ce2367dd0f43c1', 17, 'POKEMON_SS_IPGE01', 131072, 'nds', 1, 1, '2022-06-04 08:20:25', '2022-06-04 15:36:09'),
-(18, '6292fdaf9a1544e094007e81', 18, 'POKEMON_B_IRBO01', 262144, 'nds', 1, 1, '2022-06-04 08:20:25', '2022-06-04 15:36:24'),
-(19, '6292fd88999fc3ecbe0f6ae1', 19, 'POKEMON_W_IRAO01', 262144, 'nds', 1, 1, '2022-06-04 08:20:25', '2022-06-04 15:36:37'),
-(20, '6292fd3f9719292277008401', 20, 'POKEMON_B2_IREO01', 524288, 'nds', 1, 1, '2022-06-04 08:20:25', '2022-06-04 15:37:06'),
-(21, '6292fd3422dd3caf81007701', 21, 'POKEMON_W2_IRDO01', 524288, 'nds', 1, 1, '2022-06-04 08:20:25', '2022-06-04 15:37:18'),
-(22, '6292fbe7107e168f5b0cc581', 22, '0004000000055D00_v00', 2097152, '3ds', 1, 1, '2022-06-04 08:20:25', '2022-06-04 15:37:47'),
-(23, '6292fbaec5d2d71b000e37b1', 23, '0004000000055E00_v00', 2097152, '3ds', 1, 1, '2022-06-04 08:20:25', '2022-06-04 15:38:29'),
-(24, '6292f7bf421c4ebbfc0aa251', 24, '000400000011C400_v00', 2097152, '3ds', 1, 1, '2022-06-04 08:20:25', '2022-06-04 15:38:47'),
-(25, '6292f7821c5a67f637028e51', 25, '000400000011C500_v00', 2097152, '3ds', 1, 1, '2022-06-04 08:20:25', '2022-06-04 15:38:59'),
-(26, '6292fb1c0332b9f7de073871', 26, '0004000000164800_v00', 4194304, '3ds', 1, 1, '2022-06-04 08:20:25', '2022-06-04 15:39:28'),
-(27, '6292f9709fad08ca500a7271', 27, '0004000000175E00_v00', 4194304, '3ds', 1, 1, '2022-06-04 08:20:25', '2022-06-04 15:39:45'),
-(28, '6292661b96ecb348db04b5b1', 28, '00040000001B5000_v00', 4194304, '3ds', 1, 1, '2022-06-04 08:20:25', '2022-06-04 15:39:59'),
-(29, '62904b8a7a67066776014901', 29, '00040000001B5100_v00', 4194304, '3ds', 1, 1, '2022-06-04 08:20:25', '2022-06-04 15:40:17'),
-(30, '62912766c7beff061c0e75d1', 30, '0100ABF008968000', 15597568, 'xci', 1, 1, '2022-06-04 08:20:25', '2022-06-04 15:40:51'),
-(31, '629264b1c00b0492df0ea2a1', 31, '01008DB008C2C000', 15597568, 'xci', 1, 1, '2022-06-04 08:20:25', '2022-06-04 15:41:05'),
-(32, '62904ead5f9bd647b1001111', 32, '0100000011D90000', 4880601, 'xci', 1, 1, '2022-06-04 08:20:25', '2022-06-04 15:41:20'),
-(33, '6292f8f0308be34f36025401', 33, '010018E011D92000', 7798784, 'xci', 1, 1, '2022-06-04 08:20:25', '2022-06-04 15:41:47'),
-(34, '6292fc660d54f4a3a70e05b1', 34, '010003F003A34000', 4737727, 'xci', 1, 1, '2022-06-04 08:20:25', '2022-06-04 15:42:24'),
-(35, '629266bd4da5ece47e0fcba1', 35, '0100187003A36000', 4363761, 'xci', 1, 1, '2022-06-04 08:20:25', '2022-06-04 15:42:45'),
-(36, '62af59c78253e5fb360a27a1', 36, 'pokemon_brown_2014-red_hack', 2048, 'gb', 1, 1, '2022-06-04 08:20:25', '2022-06-20 07:15:51'),
-(37, '6292fdffad6b83da060e9b91', 37, 'genesis-final-2019-08-23', 16384, 'gba', 1, 1, '2022-06-04 08:20:25', '2022-06-04 15:43:52'),
-(38, '6292fde23bcc58a48f0cc451', 38, 'pokeprism', 2048, 'gbc', 1, 1, '2022-06-04 08:20:25', '2022-06-04 15:44:07'),
-(39, '6292fdb85c7bfd3e3903dd71', 39, 'Pokemon_Ash_Gray_4-5-3', 16384, 'gba', 1, 1, '2022-06-04 08:20:25', '2022-06-04 15:44:19'),
-(40, '6292fd925630ef3ecf06f0b1', 40, 'RenegadePlatinum', 102464, 'nds', 1, 1, '2022-06-04 08:20:25', '2022-06-04 15:44:32');
+(1, '62c1f859f80501a0830fdd51', 1, 'POKEMON_RED01', 1024, 'gb', 1, 1, '2022-07-04 03:15:17', '2022-07-04 03:15:17'),
+(2, '62c1f8553fc0765cf90218b1', 2, 'POKEMON_BLUE01', 1024, 'gb', 1, 1, '2022-07-04 03:15:28', '2022-07-04 03:15:28'),
+(3, '62c1f85078ebd701720e71b1', 3, 'POKEMON_GREEN01', 1024, 'gb', 1, 1, '2022-07-04 03:15:39', '2022-07-04 03:15:39'),
+(4, '62c1f84857a678cc7d0e2b51', 4, 'POKEMON_YELLOW01', 1024, 'gb', 1, 1, '2022-07-04 03:15:44', '2022-07-04 03:15:44'),
+(5, '62c1f83543c584b6e3008491', 5, 'POKEMON_GLDAAUE01', 2048, 'gbc', 1, 1, '2022-07-04 03:15:56', '2022-07-04 03:15:56'),
+(6, '62c1f83ad868d1a2d40692b1', 6, 'POKEMON_SLVAAXE01', 2048, 'gbc', 1, 1, '2022-07-04 03:16:03', '2022-07-04 03:16:03'),
+(7, '62c1f83010c6d73c6908c841', 7, 'PM_CRYSTAL_BYTE01', 2048, 'gbc', 1, 1, '2022-07-04 03:16:10', '2022-07-04 03:16:10'),
+(8, '62c1f822e6d1f33ef20719d1', 8, 'POKEMON_RUBYAXVE01', 16384, 'gba', 1, 1, '2022-07-04 03:16:22', '2022-07-04 03:16:22'),
+(9, '62c1f827f6e3ba8d990035d1', 9, 'POKEMON_SAPPAXPE01', 16384, 'gba', 1, 1, '2022-07-04 03:16:27', '2022-07-04 03:16:27'),
+(10, '62c1f80c199b08211c0e0b91', 10, 'POKEMON_EMERBPEE01', 16384, 'gba', 1, 1, '2022-07-04 03:16:32', '2022-07-04 03:16:32'),
+(11, '62c1f81672b9730b0704c171', 11, 'POKEMON_FIREBPRE01', 16384, 'gba', 1, 1, '2022-07-04 03:16:38', '2022-07-04 03:16:38'),
+(12, '62c1f81cebac46eb8c087c51', 12, 'POKEMON_LEAFBPGE01', 16384, 'gba', 1, 1, '2022-07-04 03:16:44', '2022-07-04 03:16:44'),
+(13, '62c1f7f7032feb564f0014e1', 13, 'POKEMON_D_ADAE01', 65536, 'nds', 1, 1, '2022-07-04 03:16:55', '2022-07-04 03:16:55'),
+(14, '62c1f7fdb7e80025ec04af01', 14, 'POKEMON_P_APAE', 65536, 'nds', 1, 1, '2022-07-04 03:17:01', '2022-07-04 03:17:01'),
+(15, '62c1f7ee7debe6e99e028611', 15, 'POKEMON_PL_CPUE01', 131072, 'nds', 1, 1, '2022-07-04 03:17:09', '2022-07-04 03:17:09'),
+(16, '62c1f7db235ab0b7e405b001', 16, 'POKEMON_HG_IPKE01', 131072, 'nds', 1, 1, '2022-07-04 03:17:15', '2022-07-04 03:17:15'),
+(17, '62c1f7e4146b9ad6a9064351', 17, 'POKEMON_SS_IPGE01', 131072, 'nds', 1, 1, '2022-07-04 03:17:19', '2022-07-04 03:17:19'),
+(18, '62c1f7b9e373f2f86f0fbbe1', 18, 'POKEMON_B_IRBO01', 262144, 'nds', 1, 1, '2022-07-04 03:17:24', '2022-07-04 03:17:24'),
+(19, '62c1f7cdf92a4a0a14075881', 19, 'POKEMON_W_IRAO01', 262144, 'nds', 1, 1, '2022-07-04 03:17:28', '2022-07-04 03:17:28'),
+(20, '62c1f7a69e801668070cba11', 20, 'POKEMON_B2_IREO01', 524288, 'nds', 1, 1, '2022-07-04 03:17:34', '2022-07-04 03:17:34'),
+(21, '62c1f7b02b2fe7984b0af731', 21, 'POKEMON_W2_IRDO01', 524288, 'nds', 1, 1, '2022-07-04 03:17:38', '2022-07-04 03:17:38'),
+(22, '62c1f730345182b6c0067e41', 22, '0004000000055D00_v00', 2097152, '3ds', 1, 1, '2022-07-04 03:18:06', '2022-07-04 03:18:06'),
+(23, '62c1f767449aa5235402b601', 23, '0004000000055E00_v00', 2097152, '3ds', 1, 1, '2022-07-04 03:18:15', '2022-07-04 03:18:15'),
+(24, '62c1f6890903d19032057d61', 24, '000400000011C400_v00', 2097152, '3ds', 1, 1, '2022-07-04 03:18:24', '2022-07-04 03:18:24'),
+(25, '62c1f6f541d4a0bb3d0ee5e1', 25, '000400000011C500_v00', 2097152, '3ds', 1, 1, '2022-07-04 03:18:29', '2022-07-04 03:18:29'),
+(26, '62c1f5b3c1565ea1660e89a1', 26, '0004000000164800_v00', 4194304, '3ds', 1, 1, '2022-07-04 03:18:40', '2022-07-04 03:18:40'),
+(27, '62c1f53f3a9494578d0b1161', 27, '0004000000175E00_v00', 4194304, '3ds', 1, 1, '2022-07-04 03:18:48', '2022-07-04 03:18:48'),
+(28, '62c1f44459a40296ea057eb1', 28, '00040000001B5000_v00', 4194304, '3ds', 1, 1, '2022-07-04 03:18:54', '2022-07-04 03:18:54'),
+(29, '62c1f4c0e4946f662b0452e1', 29, '00040000001B5100_v00', 4194304, '3ds', 1, 1, '2022-07-04 03:18:59', '2022-07-04 03:18:59'),
+(30, '62c1f0b3124383f348009521', 30, '0100ABF008968000', 15597568, 'xci', 1, 1, '2022-07-04 03:19:32', '2022-07-04 03:19:32'),
+(31, '62c1f17fab8651d95f0013c1', 31, '01008DB008C2C000', 15597568, 'xci', 1, 1, '2022-07-04 03:19:38', '2022-07-04 03:19:38'),
+(32, '62c1f2feee76382f4702d5c1', 32, '0100000011D90000', 4880601, 'xci', 1, 1, '2022-07-04 03:19:59', '2022-07-04 03:19:59'),
+(33, '62c1f28977ab05bb03073041', 33, '010018E011D92000', 7798784, 'xci', 1, 1, '2022-07-04 03:20:06', '2022-07-04 03:20:06'),
+(34, '62c1f35f048436717d0219e1', 34, '010003F003A34000', 4737727, 'xci', 1, 1, '2022-07-04 03:20:28', '2022-07-04 03:20:28'),
+(35, '62c1f3cb17c7e0692e0e3101', 35, '0100187003A36000', 4363761, 'xci', 1, 1, '2022-07-04 03:20:38', '2022-07-04 03:20:38'),
+(36, '62c1f860f8ff95e09f094bf1', 36, 'pokeprism', 2048, 'gbc', 1, 1, '2022-07-04 03:21:13', '2022-07-04 03:21:13'),
+(37, '62c1f866133b94ba3a0ccc91', 37, 'pokemon_brown_2014-red_hack', 2048, 'gb', 1, 1, '2022-07-04 03:21:42', '2022-07-04 03:21:42'),
+(38, '62c1f86e73d95a1cf70f7bd1', 38, 'genesis-final-2019-08-23', 16384, 'gba', 1, 1, '2022-07-04 03:21:58', '2022-07-04 03:21:58'),
+(39, '62c1f874529b5091fb0e5481', 39, 'Pokemon_Ash_Gray_4-5-3', 16384, 'gba', 1, 1, '2022-07-04 03:22:16', '2022-07-04 03:22:16'),
+(40, '62c1f87d2c665156bd0f3071', 40, 'RenegadePlatinum', 102464, 'nds', 1, 1, '2022-07-04 03:22:28', '2022-07-04 03:22:28');
 
 -- --------------------------------------------------------
 
@@ -515,19 +518,13 @@ CREATE TABLE `sessions` (
 --
 
 TRUNCATE TABLE `sessions`;
---
--- Dumping data for table `sessions`
---
-
-INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('rJqg39BprksYhRiWXyNEwkAxOj8EJ5bFiNvFGnDq', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiWVhZcmUyeUdjaUJzT09yTG1kYjFaOElqa1E4eHpRU3dWZ2FJcmc3TCI7czozOiJ1cmwiO2E6MDp7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjQ3OiJodHRwOi8vcG9rZXJvbV9yZWJpcnRoLnRlc3QvcHVibGljL2ZpbGVzL2NyZWF0ZSI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7czoyMToicGFzc3dvcmRfaGFzaF9zYW5jdHVtIjtzOjYwOiIkMnkkMTAkVGM5aEc2TloyYjZLaFhnN05lWGVqT2dXSlNETWsxUnU2TEpmMTNWMnQ2SnM3RnN2eXF2ajIiO30=', 1656352880);
-
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `users`
 --
 -- Creation: Jun 05, 2022 at 04:47 PM
+-- Last update: Jul 03, 2022 at 07:35 PM
 --
 
 DROP TABLE IF EXISTS `users`;
@@ -562,8 +559,7 @@ TRUNCATE TABLE `users`;
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `two_factor_secret`, `two_factor_recovery_codes`, `two_factor_confirmed_at`, `role`, `remember_token`, `current_team_id`, `profile_photo_path`, `created_at`, `updated_at`) VALUES
-(1, 'Brock', 'bglatman@outlook.com', NULL, '$2y$10$Tc9hG6NZ2b6KhXg7NeXejOgWJSDMk1Ru6LJf13V2t6Js7Fsvyqvj2', NULL, NULL, NULL, 'admin', 'cAOxB21i9uiuqZvv7CwuaOTO3PYjK9yVkzCjgHcqHloB2v9zs6TfShWq8Sk3', NULL, NULL, '2022-06-23 11:20:17', '2022-06-23 11:20:17'),
-(2, 'John Doe', 'jdoe123@gmail.com', NULL, '$2y$10$1oWabvlrdF6fT9qPTVJXdeem/SQ7PDERCPsd0P20rtdVcsPejkpm2', NULL, NULL, NULL, 'user', NULL, NULL, NULL, '2022-06-24 10:07:54', '2022-06-24 10:07:54');
+(1, 'Brock', 'bglatman@outlook.com', NULL, '$2y$10$wip3qx91PlXDkrj.zEjoC./wlIntgIK3Q.rAJggwQhfXRFiInmDZm', NULL, NULL, NULL, 'admin', NULL, NULL, NULL, '2022-07-04 02:35:33', '2022-07-04 02:35:33');
 
 --
 -- Indexes for dumped tables
@@ -654,7 +650,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `roms`
@@ -666,7 +662,7 @@ ALTER TABLE `roms`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables
