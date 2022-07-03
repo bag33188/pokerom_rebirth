@@ -1,3 +1,6 @@
+@push('styles')
+    <link rel="stylesheet" <?= 'type="text/css"'; ?> href="{{ mix('css/punch.css') }}"/>
+@endpush
 <x-app-layout>
     <x-slot name="header">
         <h2 class="text-center text-lg">Upload a ROM File</h2>
