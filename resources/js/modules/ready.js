@@ -1,19 +1,23 @@
 var $ = function (documentObject) {
     var ready = function (callback) {
-        if (documentObject.readyState !== "loading") {
+        let a = documentObject;
+        if (typeof a !== "object") {
+            a = document;
+        }
+        if (a.readyState !== "loading") {
             callback();
         } else if (
-            documentObject.addEventListener !== null &&
-            documentObject.addEventListener !== undefined
+            a.addEventListener !== null &&
+            a.addEventListener !== undefined
         ) {
-            documentObject.addEventListener(
+            a.addEventListener(
                 "DOMContentLoaded",
                 callback,
                 false
             );
         } else {
-            documentObject.attachEvent("onreadystatechange", function () {
-                if (documentObject.readyState === "complete") {
+            a.attachEvent("onreadystatechange", function () {
+                if (a.readyState === "complete") {
                     callback();
                 }
             });
@@ -29,6 +33,5 @@ var $ = function (documentObject) {
         return ready(documentObject);
     }
 };
-console.log('hi')
 
 window.$ = $;

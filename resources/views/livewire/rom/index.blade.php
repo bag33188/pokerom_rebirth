@@ -2,7 +2,7 @@
     <script>
         $(function() {
             console.log(13);
-            // document.getElementById('hello').innerText = 'hih';
+            document.getElementById('hello').innerText = 'hih';
         })
     </script>
 @endpush
