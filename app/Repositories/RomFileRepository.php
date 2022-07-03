@@ -46,19 +46,43 @@ class RomFileRepository implements RomFileRepositoryInterface
     public function getFileLengthsKibibytes()
     {
         return RomFile::project([
-            'length' => ['$toInt' => ['$ceil' => ['$divide' => ['$length', 1024]]]]])->get();
+            'length' => [
+                '$concat' => [
+                    ['$toString' => ['$toInt' => ['$ceil' => ['$divide' => ['$length', 1024]]]]],
+                    ' ',
+                    'KB'
+                ]
+            ]])->get();
     }
 
     public function getFileLengthsGibibytes()
     {
         return RomFile::project([
-            'length' => ['$toDecimal' => ['$divide' => ['$length', ['$pow' => [1024, 3]]]]]])->get();
+            'length' => [
+                '$concat' => [
+                    ['$toString' => [
+                        '$round' => [['$toDecimal' => ['$divide' => ['$length', ['$pow' => [1024, 3]]]]], 2]
+                    ]],
+                    ' ',
+                    'GB'
+                ]
+            ]
+        ])->get();
     }
 
     public function getFileLengthsMebibytes()
     {
         return RomFile::project([
-            'length' => ['$toDecimal' => ['$divide' => ['$length', ['$pow' => [1024, 2]]]]]])->get();
+            'length' => [
+                '$concat' => [
+                    ['$toString' => [
+                        '$round' => [['$toDouble' => ['$divide' => ['$length', ['$pow' => [1024, 3]]]]], 2]
+                    ]],
+                    ' ',
+                    'MB'
+                ]
+            ]
+        ])->get();
     }
 
     public function getTotalSizeOfAllRomFiles()
