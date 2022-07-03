@@ -60,12 +60,12 @@ abstract class AbstractApplicationException extends Exception
 
     private function getErrorMessageIfNotNull(): string
     {
-        return $this->errorMessage() ?: $this->getMessage();
+        return $this->errorMessage() ?? $this->getMessage();
     }
 
     private function getStatusCodeIfNotNull(): int
     {
-        return $this->status() ?: (int)$this->getCode();
+        return $this->status() ?? (int)$this->getCode();
     }
 
     private function renderWebException(string|array|null $isLivewireRequest): Response|false|RedirectResponse
