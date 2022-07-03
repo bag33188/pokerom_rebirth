@@ -8,13 +8,9 @@ async function getApiVersion() {
 }
 
 const loadApiVersionAttr = async () => {
-    try {
-        const { version: apiVersion } = await getApiVersion();
-        const romsContainer = document.getElementById("roms-container");
-        romsContainer.setAttribute("data-api-version", apiVersion);
-    } catch (e) {
-        console.error(e);
-    }
+    const { version: apiVersion } = await getApiVersion();
+    const romsContainer = document.getElementById("roms-container");
+    romsContainer.setAttribute("data-api-version", apiVersion);
 };
 
-loadApiVersionAttr();
+loadApiVersionAttr().catch((e) => console.error(e));
