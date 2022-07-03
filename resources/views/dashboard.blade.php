@@ -1,5 +1,4 @@
 @push('scripts')
-    <script <?= 'type="text/javascript"'; ?> src="{{ mix('js/modules/capitalize.js') }}"></script>
     <script <?= 'type="text/javascript"'; ?> src="{{ mix('js/dashboard.js') }}"></script>
     <script <?php echo 'type="text/javascript"'; ?>>
         $(document).ready(() => {
