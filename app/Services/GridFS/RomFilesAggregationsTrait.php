@@ -18,8 +18,8 @@ trait RomFilesAggregationsTrait
                                 [
                                     '$toDecimal' => [
                                         '$divide' => [
-                                            '$length', ['$pow' => [1024, 3]
-                                            ]
+                                            '$length',
+                                            ['$pow' => [1024, 3]]
                                         ]
                                     ]
                                 ],
@@ -40,7 +40,17 @@ trait RomFilesAggregationsTrait
         return [
             'length' => [
                 '$concat' => [
-                    ['$toString' => ['$toInt' => ['$ceil' => ['$divide' => ['$length', 1024]]]]],
+                    [
+                        '$toString' => [
+                            '$toInt' => [
+                                '$ceil' => [
+                                    '$divide' => [
+                                        '$length', 1024
+                                    ]
+                                ]
+                            ]
+                        ]
+                    ],
                     ' ',
                     'KB'
                 ]
@@ -53,9 +63,21 @@ trait RomFilesAggregationsTrait
         return [
             'length' => [
                 '$concat' => [
-                    ['$toString' => [
-                        '$round' => [['$toDouble' => ['$divide' => ['$length', ['$pow' => [1024, 3]]]]], 2]
-                    ]],
+                    [
+                        '$toString' => [
+                            '$round' => [
+                                [
+                                    '$toDouble' => [
+                                        '$divide' => [
+                                            '$length',
+                                            ['$pow' => [1024, 3]]
+                                        ]
+                                    ]
+                                ],
+                                2
+                            ]
+                        ]
+                    ],
                     ' ',
                     'MB'
                 ]
