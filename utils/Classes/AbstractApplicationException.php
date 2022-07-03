@@ -14,9 +14,9 @@ abstract class AbstractApplicationException extends Exception
     protected final const DEFAULT_ERROR_VIEW = 'errors.generic';
     protected final const DEFAULT_STATUS_CODE = 500;
 
-    private readonly string $_message;
-    private readonly int $_code;
-    private readonly string $_viewName;
+    private readonly ?string $_message;
+    private readonly ?int $_code;
+    private readonly ?string $_viewName;
 
 
     /**
@@ -68,7 +68,7 @@ abstract class AbstractApplicationException extends Exception
         return $this->status() ?: (int)$this->getCode();
     }
 
-    private function renderWebException(string|array|null $isLivewireRequest): false|Response
+    private function renderWebException(string|array|null $isLivewireRequest): Response|false|RedirectResponse
     {
         if (!$isLivewireRequest) {
             if (isset($this->_viewName)) {
