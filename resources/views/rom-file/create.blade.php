@@ -6,7 +6,13 @@
         <h2 class="text-center text-lg">Upload a ROM File</h2>
     </x-slot>
     <div class="p-6">
-
+        @php
+            function strLenDesc(string $a, string $b): int {
+                return strlen($b) - strlen($a);
+            }
+            // sort files by string length (descending)
+            usort($romFiles, 'strLenDesc');
+        @endphp
         <x-jet-validation-errors class="mb-4"/>
         <form action="{{route('rom-files.store')}}" method="POST" enctype="multipart/form-data">
             @csrf
