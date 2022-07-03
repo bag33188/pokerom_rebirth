@@ -4,7 +4,7 @@ async function getApiVersion() {
     if (!response.ok) {
         throw new Error(`An error has occurred: ${response.status}`);
     }
-    return await response.json();
+    return response.json();
 }
 
 $(async () => {
