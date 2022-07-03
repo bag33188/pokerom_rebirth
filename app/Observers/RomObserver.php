@@ -7,14 +7,12 @@ use App\Models\Rom;
 
 class RomObserver
 {
-    private RomActionsInterface $romActions;
 
     /** @var bool Use database relationships to update models */
     private static bool $USE_DATABASE_LOGIC = true;
 
-    public function __construct(RomActionsInterface $romActions)
+    public function __construct(private readonly RomActionsInterface $romActions)
     {
-        $this->romActions = $romActions;
     }
 
     public bool $afterCommit = false;

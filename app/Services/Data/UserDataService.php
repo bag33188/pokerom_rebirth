@@ -10,11 +10,8 @@ use Utils\Modules\JsonDataResponse;
 
 class UserDataService implements UserDataServiceInterface
 {
-    private UserActionsInterface $userActions;
-
-    public function __construct(UserActionsInterface $userActions)
+    public function __construct(private readonly UserActionsInterface $userActions)
     {
-        $this->userActions = $userActions;
     }
 
     public function deleteUser(User $user): JsonDataResponse
