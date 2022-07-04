@@ -2,7 +2,7 @@
 
 namespace App\Services\Data;
 
-use App\Enums\FileContentTypes as ContentTypes;
+use App\Enums\FileContentTypesEnum as ContentTypes;
 use App\Events\RomFileDeleted;
 use App\Events\RomFileUploaded;
 use App\Interfaces\Service\RomFileDataServiceInterface;
