@@ -1,6 +1,6 @@
 const fs = require("fs");
 
-console.log("parsing mongo dump...");
+console.log("formatting mongo dump...");
 
 const filePath = "../../misc/data/dump/roms.files.json";
 

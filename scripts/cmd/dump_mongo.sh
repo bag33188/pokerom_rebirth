@@ -33,7 +33,7 @@ dump_mongo() {
     mongoexport -d $database -c $collection --jsonArray --jsonFormat=relaxed --pretty --fields length,filename,chunkSize -o $output_dir
 
     cd scripts/helpers || exit
-    node parse-mongo-dump.js
+    node format-mongo-dump.js
     cd ../..
 }
 

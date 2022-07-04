@@ -19,7 +19,8 @@
         "hot": "mix watch --hot",
         "prod": "npm run production",
         "production": "mix --production",
-        "gen-pw": "bash scripts/cmd/gen_pw.sh"
+        "gen-pw": "bash scripts/cmd/gen_pw.sh",
+        "cc": "bash scripts/cmd/compile.sh"
     },
     "devDependencies": {
         "@tailwindcss/forms": "^0.5.0",
