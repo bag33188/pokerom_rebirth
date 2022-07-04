@@ -18,13 +18,14 @@ class Create extends Component
     use GameValidationRulesTrait, AuthorizesRequests;
 
     public $availableRoms;
+    public $romsAreAvailable;
+
     public $game_name;
     public $game_type;
     public $generation;
     public $date_released;
     public $region;
     public $rom_id;
-    public $romsAreAvailable;
 
     public function boot()
     {
