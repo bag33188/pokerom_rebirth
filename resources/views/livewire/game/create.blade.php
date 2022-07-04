@@ -13,8 +13,11 @@
                 <label for="availableRoms">Select ROM</label>
                 <x-form-select wire:model="rom_id" id="availableRoms" name="rom_id" autofocus required>
                     @php
+                        function convertObjectToJson(mixed $object): mixed {
+                            return json_decode(json_encode($object), associative: false);
+                        }
                         for($i = 0; $i < $availableRomsCount; $i++) {
-                            $rom = json_decode(json_encode($availableRoms[$i]), associative: false);
+                            $rom = convertObjectToJson($availableRoms[$i]);
                             $option = "<option value='$rom->id'>$rom->rom_name</option>";
                             $html = str_replace("'", '"', $option);
                             print $html;
