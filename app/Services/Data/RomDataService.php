@@ -25,7 +25,9 @@ class RomDataService implements RomDataServiceInterface
                 'data' => $rom->refresh()
             ], ResponseAlias::HTTP_OK);
         } else {
-            return new JsonDataResponse(['message' => "File not found with name of {$rom->getRomFileName()}"], ResponseAlias::HTTP_NOT_FOUND);
+            return new JsonDataResponse([
+                'message' => "File not found with name of {$rom->getRomFileName()}"
+            ], ResponseAlias::HTTP_NOT_FOUND);
         }
     }
 }

@@ -17,7 +17,9 @@ abstract class AbstractApplicationException extends Exception
     private readonly ?string $_message;
     private readonly ?int $_code;
     private readonly ?string $_viewName;
+    private readonly ?Request $_request;
 
+    // ABSTRACT METHODS //
 
     /**
      * Return desired http status code (if none, default inherited error status code will be used)
@@ -53,55 +55,139 @@ abstract class AbstractApplicationException extends Exception
         return $this->lengthOfMessageIsNotZero() ? $this->getMessage() : $customMessage;
     }
 
+    // PRIVATE METHODS //
+
     private function lengthOfMessageIsNotZero(): bool
     {
         return strlen($this->getMessage()) != 0;
     }
 
+    /**
+     * Returns default exception message for given exception if defined-message is null.
+     *
+     * @return string
+     */
     private function getErrorMessageIfNotNull(): string
     {
         return $this->errorMessage() ?? $this->getMessage();
     }
 
+    /**
+     * Returns default exception code for given exception if defined-code is null.
+     *
+     * @return int
+     */
     private function getStatusCodeIfNotNull(): int
     {
         return $this->status() ?? (int)$this->getCode();
     }
 
-    private function renderWebException(string|array|null $isLivewireRequest): Response|false|RedirectResponse
+    /**
+     * Redirects to previous request url and renders a danger banner in the UI containing
+     * exception message.
+     *
+     * @return RedirectResponse
+     */
+    private function redirectAndRenderBanner(): RedirectResponse
     {
-        if (!$isLivewireRequest) {
-            if (isset($this->_viewName)) {
-                return response()->view($this->viewName(), ['message' => $this->_message], $this->_code);
-            } else {
-                return redirect()->to(url()->previous())->dangerBanner($this->_message);
-            }
+        return redirect()->to(url()->previous())->dangerBanner($this->_message);
+    }
+
+    /**
+     * Renders a view template containing exception message.
+     *
+     * @return Response
+     */
+    private function renderViewResponse(): Response
+    {
+        return response()->view($this->viewName(), ['message' => $this->_message], $this->_code);
+    }
+
+    /**
+     * Checks if viewName global is initiated (or has value).
+     *
+     * @return bool
+     */
+    private function viewNameIsNotNull(): bool
+    {
+        return isset($this->_viewName);
+    }
+
+    /**
+     * Renders exception on website-based request/response
+     *
+     * @return Response|false|RedirectResponse
+     */
+    private function renderWebException(): Response|false|RedirectResponse
+    {
+        if (!$this->isLivewireRequest()) {
+            return $this->viewNameIsNotNull() ? $this->renderViewResponse() : $this->redirectAndRenderBanner();
         }
         return false;
     }
 
+    /**
+     * Renders exception on api-based request/response
+     *
+     * @return JsonResponse
+     */
     private function renderApiException(): JsonResponse
     {
         $response = new JsonDataResponse(['message' => $this->_message], $this->_code);
         return $response->renderResponse();
     }
 
-    private function setRenderValues(): void
+    /**
+     * Checks if request is API request
+     *  + uses the `Accept: application/json` header
+     *  + is sent from uri containing `api/`
+     *
+     * @return bool
+     */
+    private function isApiRequest(): bool
     {
+        return $this->_request->is("api/*") || $this->_request->expectsJson();
+    }
+
+    /**
+     * Checks if request is livewire request
+     *  + references the `X-Livewire` header
+     *
+     * @return bool
+     */
+    private function isLivewireRequest(): bool
+    {
+        return $this->_request->header('X-Livewire');
+    }
+
+    /**
+     * Sets all nullable globals for exception rendering/handling
+     *
+     * Takes in request object (non-injectable)
+     *
+     * @param Request $request
+     * @return void
+     */
+    private function setRenderValues(Request $request): void
+    {
+        $this->_request = $request;
         $this->_message = $this->getErrorMessageIfNotNull();
         $this->_code = $this->getStatusCodeIfNotNull();
         $this->_viewName = $this->viewName();
     }
 
+    // RENDER METHOD //
+
+    /**
+     * Renders the exception response appropriately
+     *
+     * @param Request $request
+     * @return Response|bool|JsonResponse|RedirectResponse
+     */
     public final function render(Request $request): Response|bool|JsonResponse|RedirectResponse
     {
-        $this->setRenderValues();
-        $isApiRequest = $request->is('api/*') || $request->expectsJson();
-        if ($isApiRequest) {
-            return $this->renderApiException();
-        } else {
-            $isLivewireRequest = $request->header('X-Livewire');
-            return $this->renderWebException($isLivewireRequest);
-        }
+        $this->setRenderValues($request);
+        return $this->isApiRequest() ? $this->renderApiException() : $this->renderWebException();
     }
+
 }
