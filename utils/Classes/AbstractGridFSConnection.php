@@ -74,7 +74,8 @@ abstract class AbstractGridFSConnection implements GridFSBucketMethodsInterface
     public function download(ObjectId $fileId, int $downloadTransferSize = null): void
     {
         $stream = $this->bucket->openDownloadStream($fileId);
-        (new FileDownloader($stream, $downloadTransferSize))();
+        $downloader = new FileDownloader($stream, $downloadTransferSize);
+        $downloader->downloadFile();
     }
 
     public function delete(ObjectId $fileId): void
