@@ -16,11 +16,6 @@ db.createCollection("roms.files", {
             bsonType: "object",
             required: ["filename", "length", "chunkSize", "uploadDate", "md5"],
             properties: {
-                _id: {
-                    bsonType: "objectId",
-                    minLength: 24,
-                    maxLength: 24,
-                },
                 filename: {
                     bsonType: "string",
                     pattern:
@@ -65,9 +60,6 @@ db.createCollection("roms.chunks", {
             bsonType: "object",
             /* required: ["files_id", "n", "data"], */
             properties: {
-                _id: {
-                    bsonType: "objectId",
-                },
                 files_id: {
                     bsonType: "objectId",
                 },
@@ -90,11 +82,12 @@ db.createCollection("rom_files_data", {
         $jsonSchema: {
             bsonType: "object",
             properties: {
-                filesize: {
-                    bsonType: ["int", "long"],
-                },
                 filename: {
                     bsonType: "string",
+                },
+                filesize: {
+                    bsonType: ["int", "long"],
+                    description: "Size of file measured in raw Bytes",
                 },
             },
         },
