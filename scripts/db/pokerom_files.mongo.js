@@ -92,8 +92,8 @@ db.createCollection("rom_files_data", {
             },
         },
     },
-    validationLevel: "strict",
-    validationAction: "moderate",
+    validationLevel: "moderate",
+    validationAction: "warn",
 });
 db.rom_files_data.createIndex({ filename: -1 }, { unique: true });
 
