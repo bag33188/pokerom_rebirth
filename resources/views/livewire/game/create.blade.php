@@ -19,8 +19,7 @@
                         $availableRomsCount = count($availableRoms);
                         for ($i = 0; $i < $availableRomsCount; $i++) {
                             $rom = normalizeObjectFromJSON($availableRoms[$i]);
-                            $option = "<option value='$rom->id'>$rom->rom_name</option>";
-                            $html = str_replace("'", '"', $option);
+                            $html = "<option value=\"$rom->id\">$rom->rom_name</option>";
                             print $html;
                         }
                     @endphp
