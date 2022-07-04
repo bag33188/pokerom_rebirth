@@ -9,12 +9,12 @@
     <p class="inline">
         @php
             $displayStates = [
-              'show'=>\App\Enums\DisplayStatesEnum::SHOW,
-              'hide'=>\App\Enums\DisplayStatesEnum::HIDE
+              'show'=>\App\Enums\DisplayStatesEnum::SHOW->value,
+              'hide'=>\App\Enums\DisplayStatesEnum::HIDE->value
             ];
         @endphp
-        <span x-show="open" {!!$initialState == $displayStates['hide']->value ? 'x-cloak' : ''!!}>Hide</span>
-        <span x-show="!open" {!!$initialState == $displayStates['show']->value ? 'x-cloak' : ''!!}>Show</span>
+        <span x-show="open" {!!$initialState == $displayStates['hide'] ? 'x-cloak' : ''!!}>Hide</span>
+        <span x-show="!open" {!!$initialState == $displayStates['show'] ? 'x-cloak' : ''!!}>Show</span>
     </p>
     <span>{!! "&nbsp;" !!}</span>
     <p class="inline">{{$text}}</p>

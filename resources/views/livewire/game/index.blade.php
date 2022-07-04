@@ -5,11 +5,11 @@
     <div class="container mx-auto" x-data="{ open: true }">
         <div class="w-full flex justify-center">
             @php
-                $gamesGridInitDisplayState = \App\Enums\DisplayStatesEnum::SHOW;
+                $gamesGridInitDisplayState = \App\Enums\DisplayStatesEnum::SHOW->value;
             @endphp
             <button type="button" @click="open = !open"
                     class="bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-2 px-4 my-4 shadow-md rounded">
-                @include("ui.show-hide", ['text'=>'Games','initialState'=>$gamesGridInitDisplayState->value])
+                @include("ui.show-hide", ['text'=>'Games','initialState'=>$gamesGridInitDisplayState])
             </button>
         </div>
         <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4 justify-items-center my-1.5 pb-4"
