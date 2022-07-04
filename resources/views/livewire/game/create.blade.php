@@ -13,7 +13,7 @@
                 <label for="availableRoms">Select ROM</label>
                 <x-form-select wire:model="rom_id" id="availableRoms" name="rom_id" autofocus required>
                     @php
-                        function normalizeObjectFromJSON(mixed $object): mixed {
+                        function normalizeObjectFromJSON(stdClass|array $object): stdClass {
                             return json_decode(json_encode($object), associative: false);
                         }
                         $availableRomsCount = count($availableRoms);
