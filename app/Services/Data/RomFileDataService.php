@@ -2,7 +2,7 @@
 
 namespace App\Services\Data;
 
-use App\Enums\FileTypesEnum as FileTypes;
+use App\Enums\RomFileTypesEnum as RomFileTypes;
 use App\Events\RomFileDeleted;
 use App\Events\RomFileUploaded;
 use App\Interfaces\Service\RomFileDataServiceInterface;
@@ -22,7 +22,7 @@ class RomFileDataService implements RomFileDataServiceInterface
         return new StreamedResponse(function () use ($romFile) {
             ProcessRomFileDownload::dispatch($romFile->getObjectId());
         }, ResponseAlias::HTTP_ACCEPTED, array(
-            'Content-Type' => FileTypes::OCTET_STREAM->value,
+            'Content-Type' => RomFileTypes::OCTET_STREAM->value,
             'Content-Transfer-Encoding' => 'chunked',
             'Content-Disposition' => "attachment; filename=\"$romFile->filename\""));
     }
@@ -32,7 +32,7 @@ class RomFileDataService implements RomFileDataServiceInterface
         ProcessRomFileUpload::dispatch($filename);
         $fileDoc = RomFileRepo::getFileByFilename($filename);
         RomFileUploaded::dispatch($fileDoc);
-        return new JsonDataResponse(['message' => "file '" . $fileDoc->filename . "' created!"], ResponseAlias::HTTP_CREATED, ['X-Content-Transfer-Type', FileTypes::X_BINARY->value]);
+        return new JsonDataResponse(['message' => "file '" . $fileDoc->filename . "' created!"], ResponseAlias::HTTP_CREATED, ['X-Content-Transfer-Type', RomFileTypes::X_BINARY->value]);
     }
 
     public function deleteRomFile(RomFile $romFile): JsonDataResponse
