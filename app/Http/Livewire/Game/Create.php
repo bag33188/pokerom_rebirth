@@ -18,21 +18,21 @@ class Create extends Component
     use GameValidationRulesTrait, AuthorizesRequests;
 
     public $availableRoms;
-    public $availableRomsCount;
     public $game_name;
     public $game_type;
     public $generation;
     public $date_released;
     public $region;
     public $rom_id;
+    public $romsAreAvailable;
 
     public function boot()
     {
         $this->region = REGIONS[0];
         $this->game_type = GAME_TYPES[0];
         $this->availableRoms = GameRepo::getAllRomsWithNoGame();
-        $this->availableRomsCount = count($this->availableRoms);
-        $this->rom_id = $this->availableRomsCount > 0 ? $this->availableRoms[0]->id : 0;
+        $this->romsAreAvailable = count($this->availableRoms) > 0;
+        $this->rom_id = $this->romsAreAvailable ? $this->availableRoms[0]->id : 0;
     }
 
     public function render(): Factory|View|Application

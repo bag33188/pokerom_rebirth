@@ -5,7 +5,7 @@
     <div class="mt-3.5">
         @include('ui.session-error')
 
-        @if($availableRomsCount > 0)
+        @if($romsAreAvailable)
 
             <x-jet-validation-errors class="mb-4"/>
 
@@ -16,7 +16,7 @@
                         function convertObjectToJson(mixed $object): mixed {
                             return json_decode(json_encode($object), associative: false);
                         }
-                        for($i = 0; $i < $availableRomsCount; $i++) {
+                        for($i = 0; $i < count($availableRoms); $i++) {
                             $rom = convertObjectToJson($availableRoms[$i]);
                             $option = "<option value='$rom->id'>$rom->rom_name</option>";
                             $html = str_replace("'", '"', $option);
