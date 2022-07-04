@@ -24,14 +24,6 @@ class Index extends Component
         return view('livewire.rom.index', ['roms_total_size' => RomFileRepo::calcTotalSizeOfAllRomFiles()]);
     }
 
-    public function getRomDownloadUrl(string $fileId, bool $dev = false): string
-    {
-        $baseUrl = "/public/api";
-        $baseFilesEndpoint = "rom-files/grid/$fileId/download";
-        if ($dev) return "$baseUrl/dev/$baseFilesEndpoint";
-        return "$baseUrl/$baseFilesEndpoint";
-    }
-
     public function show(int $romId)
     {
         $this->redirect(route('roms.show', $romId));
