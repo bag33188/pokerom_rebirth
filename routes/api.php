@@ -36,8 +36,6 @@ Route::middleware('guest')->group(function () {
 
 // auth
 Route::middleware('auth:sanctum')->group(function () {
-
-
     // general api routes
     Route::apiResources(['/roms' => RomController::class, '/games' => GameController::class]);
     Route::apiResource('/users', UserController::class)->only('index', 'show', 'destroy')
@@ -68,6 +66,6 @@ if (App::environment('local')) {
     Route::prefix('dev')->group(function () {
         // todo: find/add a way to send token to download link (in order to authenticate) (maybe use a POST request???)
         Route::get('/rom-files/grid/{fileId}/download', [RomFileController::class, 'download']);
-        // Route::post('/rom-files/{fileId}/download', [FileController::class, 'download']);
+        // Route::post('/rom-files/{fileId}/download', [RomFileController::class, 'download']);
     });
 }
