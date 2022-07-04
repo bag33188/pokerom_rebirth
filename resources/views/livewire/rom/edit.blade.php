@@ -19,7 +19,7 @@
                              required autofocus/>
             </div>
             <div class="mt-2.5">
-                <label for="romType" class="block font-medium text-sm text-gray-700">{{__('Rom Type')}}</label>
+                <x-jet-label for="romType" :value="__('Rom Type')"/>
                 <x-form-select
                     wire:model="rom_type"
                     name="rom_type" id="romType"
@@ -46,7 +46,9 @@
                     {{ __('Save!') }}
                 </x-jet-button>
                 <div class="float-left">
-                    <x-jet-secondary-button type="button" wire:click="cancel({{$romId}})">Cancel</x-jet-secondary-button>
+                    <x-jet-secondary-button type="button" wire:click="cancel({{$romId}})">
+                        {{__('Cancel')}}
+                    </x-jet-secondary-button>
                 </div>
             </div>
         </form>

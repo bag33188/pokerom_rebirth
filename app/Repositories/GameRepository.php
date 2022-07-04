@@ -42,6 +42,7 @@ class GameRepository implements GameRepositoryInterface
     {
         $sql = /** @lang MariaDB */
             "CALL FindRomsWithNoGame";
-        return DB::select($sql);
+        $query = DB::raw($sql);
+        return DB::select($query);
     }
 }

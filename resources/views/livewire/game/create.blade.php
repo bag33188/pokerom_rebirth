@@ -10,12 +10,13 @@
             <x-jet-validation-errors class="mb-4"/>
 
             <form wire:submit.prevent="store">
-                <label for="availableRoms">Select ROM</label>
+                <x-jet-label for="availableRoms" :value="__('Select ROM')"/>
                 <x-form-select wire:model="rom_id" id="availableRoms" name="rom_id" autofocus required>
                     @php
                         $availableRomsCount = count($availableRoms);
                         for ($i = 0; $i < $availableRomsCount; $i++) {
                             $rom = normalizeObjectFromStdClassOrArray($availableRoms[$i]);
+                            $rom->has_game = (bool)$rom->has_game;
                             $html = "<option value=\"$rom->id\">$rom->rom_name</option>";
                             print $html . "\n";
                         }
@@ -31,7 +32,7 @@
                     />
                 </div>
                 <div class="mt-2.5">
-                    <label for="gameType" class="block font-medium text-sm text-gray-700">{{__('Game Type')}}</label>
+                    <x-jet-label for="gameType" :value="__('Game Type')"/>
                     <x-form-select wire:model="game_type" name="game_type" id="gameType"
                                    required autofocus>
                         @foreach(GAME_TYPES as $gameType)
@@ -42,7 +43,7 @@
                     </x-form-select>
                 </div>
                 <div class="mt-2.5">
-                    <label for="gameRegion" class="block font-medium text-sm text-gray-700">{{__('Region')}}</label>
+                    <x-jet-label for="gameRegion" :value="__('Region')"/>
                     <x-form-select
                         wire:model="region"
                         name="region" id="gameRegion"

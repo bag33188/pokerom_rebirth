@@ -19,7 +19,7 @@
                 />
             </div>
             <div class="mt-2.5">
-                <label for="gameType" class="block font-medium text-sm text-gray-700">{{__('Game Type')}}</label>
+                <x-jet-label for="gameType" :value="__('Game Type')"/>
                 <x-form-select
                     wire:model="game_type"
                     name="game_type" id="gameType"
@@ -28,12 +28,13 @@
                         <option
                             value="{{$gameType}}"
                             id="game-type-{{array_search($gameType, GAME_TYPES) + 1}}">
-                            {{ str_capitalize($gameType, true, 2, '-') }}</option>
+                            {{ str_capitalize($gameType, true, 2, '-') }}
+                        </option>
                     @endforeach
                 </x-form-select>
             </div>
             <div class="mt-2.5">
-                <label for="gameRegion" class="block font-medium text-sm text-gray-700">{{__('Region')}}</label>
+                <x-jet-label for="gameRegion" :value="__('Region')"/>
                 <x-form-select
                     wire:model="region"
                     name="region" id="gameRegion"
@@ -67,7 +68,9 @@
                     </x-jet-button>
                 </div>
                 <div class="float-left">
-                    <x-jet-secondary-button type="button" wire:click="cancel({{$gameId}})">Cancel</x-jet-secondary-button>
+                    <x-jet-secondary-button type="button" wire:click="cancel({{$gameId}})">
+                        {{__('Cancel')}}
+                    </x-jet-secondary-button>
                 </div>
             </div>
         </form>

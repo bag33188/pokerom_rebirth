@@ -33,7 +33,7 @@ DELIMITER $$
 --
 DROP PROCEDURE IF EXISTS `FindRomsWithNoGame`$$
 CREATE DEFINER=`bag33188`@`%` PROCEDURE `FindRomsWithNoGame` ()   BEGIN
-SELECT `id`, `rom_name`, `rom_type`, IF (0 = FALSE, 'false', 'true') AS `has_game`, `game_id` FROM `roms` WHERE `has_game` = FALSE AND `game_id` IS NULL ORDER BY `rom_name` DESC;
+SELECT `id`, `rom_name`, `rom_type`, /* IF (0 = FALSE, 'false', 'true') AS */`has_game`, `game_id` FROM `roms` WHERE `has_game` = FALSE AND `game_id` IS NULL ORDER BY `rom_name` DESC;
 END$$
 
 DROP PROCEDURE IF EXISTS `GetAllPokeROMData`$$

@@ -20,7 +20,7 @@
                              required autofocus/>
             </div>
             <div class="mt-2.5">
-                <label for="romType" class="block font-medium text-sm text-gray-700">{{__('Rom Type')}}</label>
+                <x-jet-label for="romType" :value="__('Rom Type')"/>
                 <x-form-select
                     wire:model="rom_type"
                     name="rom_type" id="romType"
