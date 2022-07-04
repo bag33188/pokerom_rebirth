@@ -153,9 +153,9 @@ abstract class AbstractApplicationException extends Exception
      * Checks if request is livewire request
      *  + references the `X-Livewire` header
      *
-     * @return bool
+     * @return array|null|string
      */
-    private function isLivewireRequest(): bool
+    private function isLivewireRequest(): array|null|string
     {
         return $this->_request->header('X-Livewire');
     }
