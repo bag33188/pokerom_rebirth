@@ -1,10 +1,13 @@
 <?php
 
+/*
+ * Custom module for downloading large files.
+ *
+ * Uses proper streaming to download excessively long files with mass binary content.
+ */
+
 namespace Utils\Modules;
 
-/**
- * Only use this module if you need to download large files (IE. in excess of 2 Gigabytes)
- */
 class FileDownloader
 {
     /** @var resource */
