@@ -17,6 +17,7 @@ const [objectIdPattern, lengthPattern, chunkSizePattern] = [
 ];
 
 let newData = data
+    .valueOf()
     .toString()
     .replace(objectIdPattern, "")
     .replace(lengthPattern, '"filesize": ')
