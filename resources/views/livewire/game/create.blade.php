@@ -25,7 +25,7 @@
                     @endphp
                 </x-form-select>
                 <div class="mt-2.5">
-                    <x-jet-label for="gameName" value="{{__('Game Name')}}"/>
+                    <x-jet-label for="gameName" :value="__('Game Name')"/>
                     <x-jet-input wire:model="game_name" id="gameName" class="block mt-1 w-full" type="text"
                                  name="game_name"
                                  minlength="{{MIN_GAME_NAME}}"
@@ -56,14 +56,14 @@
                     </x-form-select>
                 </div>
                 <div class="mt-2.5">
-                    <x-jet-label for="dateReleased" value="{{__('Date Released')}}"/>
+                    <x-jet-label for="dateReleased" :value="__('Date Released')"/>
                     <x-jet-input type="date"
                                  wire:model="date_released"
                                  class="block mt-1 w-full"
                                  id="dateReleased" name="date_released" required autofocus/>
                 </div>
                 <div class="mt-2.5">
-                    <x-jet-label for="generation" value="{{__('Generation')}}"/>
+                    <x-jet-label for="generation" :value="__('Generation')"/>
                     <x-jet-input type="number" id="generation" name="generation"
                                  wire:model="generation"
                                  class="block mt-1 w-full"

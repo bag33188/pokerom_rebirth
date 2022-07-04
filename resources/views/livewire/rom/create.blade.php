@@ -9,7 +9,7 @@
         <form wire:submit.prevent="store">
 
             <div class="mt-2.5">
-                <x-jet-label for="romName" value="{{ __('Rom Name') }}"/>
+                <x-jet-label for="romName" :value="__('Rom Name')"/>
                 <x-jet-input id="romName"
                              wire:model="rom_name"
                              class="block mt-1 w-full"
@@ -32,7 +32,7 @@
                 </x-form-select>
             </div>
             <div class="mt-2.5">
-                <x-jet-label for="romSize" value="{{ __('Rom Size') }}"/>
+                <x-jet-label for="romSize" :value="__('Rom Size')"/>
                 <x-jet-input id="romSize"
                              wire:model="rom_size"
                              name="rom_size"
