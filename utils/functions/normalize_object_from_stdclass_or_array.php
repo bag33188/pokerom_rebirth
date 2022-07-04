@@ -7,10 +7,10 @@ if (!function_exists('normalizeObjectFromStdClassOrArray')) {
      * Useful for livewire pages that are constantly updating data/server-side state
      *
      * @param stdClass|array $object
-     * @return stdClass
+     * @return void
      */
-    function normalizeObjectFromStdClassOrArray(stdClass|array $object): stdClass
+    function normalizeObjectFromStdClassOrArray(stdClass|array &$object): void
     {
-        return json_decode(json_encode($object), associative: false);
+        $object = json_decode(json_encode($object), associative: false);
     }
 }

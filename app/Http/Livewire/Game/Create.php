@@ -31,9 +31,16 @@ class Create extends Component
     {
         $this->region = REGIONS[0];
         $this->game_type = GAME_TYPES[0];
+        $this->rom_id = 0;
+    }
+
+    public function mount()
+    {
         $this->availableRoms = GameRepo::getAllRomsWithNoGame();
         $this->romsAreAvailable = count($this->availableRoms) > 0;
-        $this->rom_id = $this->romsAreAvailable ? $this->availableRoms[0]->id : 0;
+        if ($this->romsAreAvailable) {
+            $this->rom_id = $this->availableRoms[0]->id;
+        }
     }
 
     public function render(): Factory|View|Application
