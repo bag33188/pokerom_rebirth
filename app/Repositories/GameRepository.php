@@ -31,9 +31,11 @@ class GameRepository implements GameRepositoryInterface
 
     public function getProperGameTypeString(string $gameType): string
     {
-        $sql =
-            DB::raw(/** @lang MariaDB */ "SELECT GetProperGameTypeString(?) AS gameType;");
-        return DB::selectOne($sql, [$gameType])->gameType;
+        $sql = /** @lang MariaDB */
+            "SELECT GetProperGameTypeString(?) AS gameType;";
+        $query =
+            DB::raw($sql);
+        return DB::selectOne($query, [$gameType])->gameType;
     }
 
     public function getAllRomsWithNoGame(): array

@@ -55,8 +55,9 @@ class RomRepository implements RomRepositoryInterface
 
     public function getReadableRomSize(int $size): string
     {
-        $sql = DB::raw(/** @lang MariaDB */
-            "SELECT CalcReadableRomSize(?) AS readable_size;");
-        return DB::selectOne($sql, [$size])->readable_size;
+        $sql = /** @lang MariaDB */
+            "SELECT CalcReadableRomSize(?) AS readable_size;";
+        $query = DB::raw($sql);
+        return DB::selectOne($query, [$size])->readable_size;
     }
 }

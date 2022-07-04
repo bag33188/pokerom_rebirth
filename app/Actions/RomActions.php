@@ -13,8 +13,10 @@ class RomActions implements RomActionsInterface
     public function setRomDataFromFile(Rom $rom, RomFile $romFile): void
     {
         $sql =
-            DB::raw(/** @lang MariaDB */ "CALL LinkRomToFile(:fileId, :fileSize, :romId);");
-        DB::statement($sql, [
+            /** @lang MariaDB */
+            "CALL LinkRomToFile(:fileId, :fileSize, :romId);";
+        $query = DB::raw($sql);
+        DB::statement($query, [
             'fileId' => $romFile->getKey(),
             'fileSize' => $romFile->length,
             'romId' => $rom->getKey()
