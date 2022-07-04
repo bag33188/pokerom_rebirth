@@ -11,7 +11,7 @@ try {
 }
 
 const [objectIdPattern, lengthPattern, chunkSizePattern] = [
-    /("_id":)([\s\t\n\v]*)(\{[\s\t\n\v]*)("\$oid":)([\s\t\n\v]*)("[\w\d]+")([\s\t\n\v]*)(})([\s\t\n\v]*)(,?)/gim,
+    /("_id":)([\s\t\n\v]*)(\{[\s\t\n\v]*)("\$oid":)([\s\t\n\v]*)("[\da-fA-F]+")([\s\t\n\v]*)(})([\s\t\n\v]*)(,?)/gim,
     /("length":)([\s\t\n\v]*)/gim,
     /("chunkSize":)([\s\t\n\v]*)(\d+)(,?)/gim,
 ];
