@@ -34,11 +34,11 @@ class RomFileRepository implements RomFileRepositoryInterface
 
     public function searchForRomMatchingFile(string $fileId): ?Rom
     {
-        [$name, $ext] = explode('.',
+        [$romName, $romExtension] = explode('.',
             $this->findFileIfExists($fileId)['filename'], 2);
         return Rom::where([
-            ['rom_name', '=', $name, 'and'],
-            ['rom_type', '=', $ext, 'and']
+            ['rom_name', '=', $romName, 'and'],
+            ['rom_type', '=', $romExtension, 'and']
         ])->where([
             ['has_file', '=', false, 'or'],
             ['file_id', '=', null]
