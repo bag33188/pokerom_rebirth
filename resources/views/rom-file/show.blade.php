@@ -14,7 +14,7 @@
                     function getRomFileDownloadUrl(string $fileId): string
                     {
                        $baseUrl = "/public/api";
-                       $baseFilesEndpoint = "files/grid/$fileId/download";
+                       $baseFilesEndpoint = "rom-files/grid/$fileId/download";
                        if (App::isLocal()) return "$baseUrl/dev/$baseFilesEndpoint";
                        return "$baseUrl/$baseFilesEndpoint";
                     }

@@ -40,7 +40,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResources(['/roms' => RomController::class, '/games' => GameController::class]);
     Route::apiResource('/users', UserController::class)->only('index', 'show', 'destroy')
         ->parameter('user', 'userId');
-    Route::apiResource('/files', RomFileController::class)->only('index', 'show', 'destroy')
+    Route::apiResource('/rom-files', RomFileController::class)->only('index', 'show', 'destroy')
         ->parameter('file', 'fileId');
 
     // api route groups
@@ -48,7 +48,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/me', [UserController::class, 'showMe']);
         Route::post('/logout', [UserController::class, 'logout']);
     });
-    Route::prefix('files/grid')->group(function () {
+    Route::prefix('rom-files/grid')->group(function () {
         Route::get('/list', [RomFileActions::class, 'listStorageFiles'])->middleware('admin');
         Route::post('/upload', [RomFileController::class, 'upload']);
         Route::get('/{fileId}/download', [RomFileController::class, 'download']);
@@ -57,7 +57,7 @@ Route::middleware('auth:sanctum')->group(function () {
     // relationships
     Route::get('/roms/{romId}/game', [RomController::class, 'indexGame']);
     Route::get('/roms/{romId}/file', [RomController::class, 'indexFile']);
-    Route::get('/files/{fileId}/rom', [RomFileController::class, 'indexRom']);
+    Route::get('/rom-files/{fileId}/rom', [RomFileController::class, 'indexRom']);
     Route::get('/games/{gameId}/rom', [GameController::class, 'indexRom']);
     Route::patch('/roms/{romId}/linkFile', [RomController::class, 'linkRomToFile']);
 });
@@ -65,7 +65,7 @@ Route::middleware('auth:sanctum')->group(function () {
 if (App::environment('local')) {
     Route::prefix('dev')->group(function () {
         // todo: find/add a way to send token to download link (in order to authenticate) (maybe use a POST request???)
-        Route::get('/files/grid/{fileId}/download', [RomFileController::class, 'download']);
-        // Route::post('/files/{fileId}/download', [FileController::class, 'download']);
+        Route::get('/rom-files/grid/{fileId}/download', [RomFileController::class, 'download']);
+        // Route::post('/rom-files/{fileId}/download', [FileController::class, 'download']);
     });
 }

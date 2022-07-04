@@ -31,7 +31,7 @@ Route::middleware([
 ])->group(function () {
     // laravel routes
     Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
-    Route::prefix('files')->group(function () {
+    Route::prefix('rom-files')->group(function () {
         Route::get('/', [RomFileController::class, 'index'])->name('rom-files.index');
         Route::get('/info/{romFile}', [RomFileController::class, 'show'])->name('rom-files.show');
         Route::get('/create', [RomFileController::class, 'create'])->name('rom-files.create')->middleware('admin');
