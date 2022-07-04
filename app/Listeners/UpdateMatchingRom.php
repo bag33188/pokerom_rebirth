@@ -31,7 +31,7 @@ class UpdateMatchingRom implements ShouldQueue
     /**
      * be sure to rap in an instance method since even has multiple instances
      *
-     * @param ?Rom $rom
+     * @param Rom|null $rom
      * @return void
      */
     private function setMatchingRom(?Rom $rom): void
