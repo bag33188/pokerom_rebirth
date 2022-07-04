@@ -13,12 +13,12 @@
                 <label for="availableRoms">Select ROM</label>
                 <x-form-select wire:model="rom_id" id="availableRoms" name="rom_id" autofocus required>
                     @php
-                        function normalizeObjectFromJSON(stdClass|array $object): stdClass {
+                        function normalizeObjectFromStdClassOrArray(stdClass|array $object): stdClass {
                             return json_decode(json_encode($object), associative: false);
                         }
                         $availableRomsCount = count($availableRoms);
                         for ($i = 0; $i < $availableRomsCount; $i++) {
-                            $rom = normalizeObjectFromJSON($availableRoms[$i]);
+                            $rom = normalizeObjectFromStdClassOrArray($availableRoms[$i]);
                             $html = "<option value=\"$rom->id\">$rom->rom_name</option>";
                             print $html . "\n";
                         }
