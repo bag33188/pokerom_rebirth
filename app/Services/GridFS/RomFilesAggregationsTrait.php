@@ -32,7 +32,7 @@ trait RomFilesAggregationsTrait
                             ]
                         ]
                     ],
-                    ' ',
+                    _SPACE,
                     'GB'
                 ]
             ]
@@ -57,7 +57,7 @@ trait RomFilesAggregationsTrait
                             ]
                         ]
                     ],
-                    ' ',
+                    _SPACE,
                     'KB'
                 ]
             ]
@@ -90,7 +90,7 @@ trait RomFilesAggregationsTrait
                             ]
                         ]
                     ],
-                    ' ',
+                    _SPACE,
                     'MB'
                 ]
             ]
