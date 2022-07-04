@@ -16,7 +16,8 @@
                         function convertObjectToJson(mixed $object): mixed {
                             return json_decode(json_encode($object), associative: false);
                         }
-                        for($i = 0; $i < count($availableRoms); $i++) {
+                        $availableRomsCount = count($availableRoms);
+                        for ($i = 0; $i < $availableRomsCount; $i++) {
                             $rom = convertObjectToJson($availableRoms[$i]);
                             $option = "<option value='$rom->id'>$rom->rom_name</option>";
                             $html = str_replace("'", '"', $option);
