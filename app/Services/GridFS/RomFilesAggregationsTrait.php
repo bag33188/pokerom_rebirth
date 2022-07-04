@@ -50,7 +50,8 @@ trait RomFilesAggregationsTrait
                             '$toInt' => [
                                 '$ceil' => [
                                     '$divide' => [
-                                        '$length', 1024
+                                        '$length',
+                                        1024
                                     ]
                                 ]
                             ]
