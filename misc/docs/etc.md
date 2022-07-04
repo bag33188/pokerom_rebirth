@@ -8,7 +8,7 @@
 
 ### MongoExport ObjectID Replace Regexp
 ```regexp
-/("_id"\:)([\s\t\n\v]*)(\{[\s\t\n\v]*)(\"\$oid"\:)([\s\t\n\v]*)(\"[\w\d]+\")([\s\t\n\v]*)(\})([\s\t\n\v]*)(,?)/gim
+/("_id":)([\s\t\n\v]*)(\{[\s\t\n\v]*)("\$oid":)([\s\t\n\v]*)("[\da-fA-F]+")([\s\t\n\v]*)(})([\s\t\n\v]*)(,?)/gim
 ```
 
 

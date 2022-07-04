@@ -1,8 +1,15 @@
 const fs = require("fs");
+const path = require("path");
 
 console.log("formatting mongo dump...");
 
-const filePath = "../../misc/data/dump/roms.files.json";
+const filePath = path.join(
+    __dirname.replace(/([\/\\]scripts)([\/\\]helpers)/i, ""),
+    "misc",
+    "data",
+    "dump",
+    "roms.files.json"
+);
 
 let data;
 
@@ -24,7 +31,8 @@ let newData = data
     .toString()
     .replace(objectIdPattern, "")
     .replace(lengthPattern, '"filesize": ')
-    .replace(chunkSizePattern, "");
+    .replace(chunkSizePattern, "")
+    .replace(/\n\t/g, "");
 
 try {
     fs.writeFileSync(filePath, newData);

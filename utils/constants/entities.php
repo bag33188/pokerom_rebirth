@@ -7,7 +7,7 @@ const API_TOKEN_KEY = 'auth_token';
 /** size of chunks for streaming downloads */
 const CONTENT_TRANSFER_SIZE = 0xFF000;
 /** concat: Pok, &eacute; ... output: Pok&eacute; */
-const POKE_EACUTE = "Pok" . _EACUTE;
+const POKE_EACUTE = "Pok" . _EACUTE; // <-- make sure "chars.php" is loaded prior (in "../constants.php")
 
 // Date Formatting entities
 
