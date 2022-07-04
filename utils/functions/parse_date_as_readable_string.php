@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Date;
 
-if (!function_exists('parse_date_as_readable_string')) {
+if (!function_exists('parseDateAsReadableString')) {
     /**
      * Converts a date/datetime object to a human-readable string
      *
@@ -17,7 +17,7 @@ if (!function_exists('parse_date_as_readable_string')) {
      *
      * @see https://www.php.net/manual/en/datetime.createfromformat.php
      */
-    function parse_date_as_readable_string(DateTime|Date $dateTime, bool $addDayName = true, string $customFormat = null): string
+    function parseDateAsReadableString(DateTime|Date $dateTime, bool $addDayName = true, string $customFormat = null): string
     {
         $formatString = $customFormat ?? ($addDayName ? WITH_DAY_NAME : WITHOUT_DAY_NAME);
         return date_format($dateTime, $formatString);

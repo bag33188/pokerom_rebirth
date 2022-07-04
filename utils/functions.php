@@ -7,11 +7,10 @@ $functions_path = __DIR__ . '/functions';
 if (!empty($functions_path)) {
     require_once $functions_path . "/parse_date_as_readable_string.php";
     require_once $functions_path . "/string_to_bool.php";
-    require_once $functions_path . "/jsondata.php";
+    require_once $functions_path . "/json_data.php";
     require_once $functions_path . "/number_to_roman.php";
-    require_once $functions_path . "/eacute_conversions.php";
     require_once $functions_path . "/str_capitalize.php";
-    require_once $functions_path . "/normalize_object.php";
+    require_once $functions_path . "/normalize_object_from_stdclass_or_array.php";
 }
 
 //--- END GLOBAL HELPER FUNCTIONS ---//

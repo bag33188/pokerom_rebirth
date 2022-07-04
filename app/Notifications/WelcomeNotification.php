@@ -45,7 +45,7 @@ class WelcomeNotification extends Notification
         return (new MailMessage)
             ->subject('Thank you for joining ' . config('app.name') . '!!')
             ->from(config('mail.from.address'))
-            ->line(unicode_eacute($lnMsg))
+            ->line(preg_replace("/Poke/i", POKE_EACUTE, $lnMsg))
             ->action('Check it out!', route('roms.index'))
             ->line('Enjoy!');
     }

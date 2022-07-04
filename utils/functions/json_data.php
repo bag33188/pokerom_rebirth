@@ -3,7 +3,7 @@
 use Illuminate\Http\JsonResponse;
 use Utils\Modules\JsonDataResponse;
 
-if (!function_exists('jsondata')) {
+if (!function_exists('jsonData')) {
     /**
      * Use this function to return a new {@see JsonDataResponse} object for use with methods
      * that do not explicitly return a resource and/or collection
@@ -14,7 +14,7 @@ if (!function_exists('jsondata')) {
      * @param array $headers
      * @return JsonResponse
      */
-    function jsondata(array $data, int $code, array $headers = []): JsonResponse
+    function jsonData(array $data, int $code, array $headers = []): JsonResponse
     {
         // (new JsonDataResponse($data, $code, $headers))();
         $response = new JsonDataResponse($data, $code, $headers);

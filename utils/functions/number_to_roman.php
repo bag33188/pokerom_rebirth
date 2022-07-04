@@ -1,6 +1,6 @@
 <?php
 
-if (!function_exists('number_to_roman')) {
+if (!function_exists('numberToRoman')) {
     /**
      * Converts a given integer into a roman numeral
      *
@@ -13,7 +13,7 @@ if (!function_exists('number_to_roman')) {
      * @param int $number
      * @return string
      */
-    function number_to_roman(int $number): string
+    function numberToRoman(int $number): string
     {
         if ($number === 0) {
             return "N/A";

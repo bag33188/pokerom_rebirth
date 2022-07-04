@@ -6,6 +6,8 @@ const ROM_FILES_DIRNAME = 'rom_files';
 const API_TOKEN_KEY = 'auth_token';
 /** size of chunks for streaming downloads */
 const CONTENT_TRANSFER_SIZE = 0xFF000;
+/** concat: Pok, &eacute; ... output: Pok&eacute; */
+const POKE_EACUTE = "Pok" . _EACUTE;
 
 // Date Formatting entities
 

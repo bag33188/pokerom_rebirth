@@ -36,7 +36,7 @@ class Edit extends Component
             'generation' => $this->game->generation,
             'region' => strtolower($this->game->region),
             'game_type' => strtolower($this->game->game_type),
-            'game_name' => un_unicode_eacute($this->game->game_name)
+            'game_name' => preg_replace("/Pok\x{E9}/iu", "Poke", $this->game->game_name)
         ]);
     }
 

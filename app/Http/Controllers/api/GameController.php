@@ -76,6 +76,6 @@ class GameController extends ApiController
         $game = GameRepo::findGameIfExists($gameId);
         $this->authorize('delete', $game);
         Game::destroy($gameId);
-        return jsondata(['message' => "game $game->game_name deleted!"], ResponseAlias::HTTP_OK);
+        return jsonData(['message' => "game $game->game_name deleted!"], ResponseAlias::HTTP_OK);
     }
 }
