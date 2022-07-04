@@ -31,7 +31,10 @@ dump_mongo() {
     output_dir="misc/data/dump/roms.files.json"
 
     mongoexport -d $database -c $collection --jsonArray --jsonFormat=relaxed --pretty --fields length,filename,chunkSize -o $output_dir
+
+    cd scripts/helpers || exit
+    node parse-mongo-dump.js
+    cd ../..
 }
 
 dump_mongo
-# /("_id"\:)([\s\t\n\v]*)(\{[\s\t\n\v]*)(\"\$oid"\:)([\s\t\n\v]*)(\"[\w\d]+\")([\s\t\n\v]*)(\})([\s\t\n\v]*)(,?)/gim
