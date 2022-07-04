@@ -76,7 +76,7 @@
                 </div>
             </form>
         @else
-            <h2 class="text-center text-lg mt-3">Sorry, there are no available roms to add a game to :(</h2>
+            <h2 class="text-center text-lg mt-7">Sorry, there are no available roms to add a game to :(</h2>
         @endif
     </div>
 </div>
