@@ -20,7 +20,7 @@
                         for ($i = 0; $i < $availableRomsCount; $i++) {
                             $rom = normalizeObjectFromJSON($availableRoms[$i]);
                             $html = "<option value=\"$rom->id\">$rom->rom_name</option>";
-                            print $html;
+                            print $html . "\n";
                         }
                     @endphp
                 </x-form-select>
