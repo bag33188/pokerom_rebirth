@@ -3,6 +3,8 @@
 // required as a dependency for these definitions
 include_once "chars.php";
 
+// General Entities
+
 /** directory that contains all bin rom files */
 const ROM_FILES_DIRNAME = 'rom_files';
 /** the key name for sanctum personal access token */
@@ -15,7 +17,6 @@ const POKE_EACUTE = "Pok" . _EACUTE;
 // Date Formatting entities
 
 /** ex. _Monday, September 28th, 1998_ */
-const WITH_DAY_NAME = 'l, F jS, Y';
+const DATE_WITH_DAY_NAME = 'l, F jS, Y';
 /** ex. _September 28th, 1998_ */
-const WITHOUT_DAY_NAME = 'F jS, Y';
-
+const DATE_WITHOUT_DAY_NAME = 'F jS, Y';

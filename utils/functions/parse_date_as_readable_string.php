@@ -19,7 +19,7 @@ if (!function_exists('parseDateAsReadableString')) {
      */
     function parseDateAsReadableString(DateTime|Date $dateTime, bool $addDayName = true, string $customFormat = null): string
     {
-        $formatString = $customFormat ?? ($addDayName ? WITH_DAY_NAME : WITHOUT_DAY_NAME);
+        $formatString = $customFormat ?? ($addDayName ? DATE_WITH_DAY_NAME : DATE_WITHOUT_DAY_NAME);
         return date_format($dateTime, $formatString);
     }
 }
