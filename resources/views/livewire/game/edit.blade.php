@@ -67,7 +67,7 @@
                     </x-jet-button>
                 </div>
                 <div class="float-left">
-                    <x-jet-button type="button" wire:click="cancel({{$gameId}})">Cancel</x-jet-button>
+                    <x-jet-secondary-button type="button" wire:click="cancel({{$gameId}})">Cancel</x-jet-secondary-button>
                 </div>
             </div>
         </form>

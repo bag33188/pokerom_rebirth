@@ -21,7 +21,7 @@
                 <livewire:rom.delete class="delete" :romId="$romId" />
             </div>
             <div class="col-start-1 col-end-1 row-start-2 row-end-2 justify-self-start h-auto">
-                <x-jet-secondary-button type="button" wire:click="edit({{$romId}})">Edit!</x-jet-secondary-button>
+                <x-jet-button type="button" wire:click="edit({{$romId}})">Edit!</x-jet-button>
             </div>
         @endif
     </div>
