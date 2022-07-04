@@ -36,7 +36,6 @@ class RomFileRepository implements RomFileRepositoryInterface
     {
         [$name, $ext] = explode('.',
             $this->findFileIfExists($fileId)['filename'], 2);
-        // todo: make sure this doesn't cause issues
         return Rom::where([
             ['rom_name', '=', $name, 'and'],
             ['rom_type', '=', $ext, 'and']

@@ -40,7 +40,6 @@ class GameRepository implements GameRepositoryInterface
 
     public function getAllRomsWithNoGame(): array
     {
-        // todo: implement toJson and arrayable??
         $sql = /** @lang MariaDB */
             "CALL FindRomsWithNoGame";
         return DB::select($sql);
