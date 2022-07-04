@@ -1,11 +1,14 @@
 const fs = require("fs");
 
+console.log("parsing mongo dump...");
+
 const filePath = "../../misc/data/dump/roms.files.json";
 
 let data;
 
 try {
     data = fs.readFileSync(filePath);
+    console.log("file read successfully!");
 } catch (err) {
     console.error(err);
 }
@@ -25,6 +28,7 @@ let newData = data
 
 try {
     fs.writeFileSync(filePath, newData);
+    console.log("file written successfully!");
 } catch (err) {
     console.error(err);
 }
