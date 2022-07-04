@@ -3,8 +3,8 @@
 namespace App\Services\Data;
 
 use App\Enums\FileTypesEnum as FileTypes;
-use App\Events\FileDeleted;
-use App\Events\FileUploaded;
+use App\Events\RomFileDeleted;
+use App\Events\RomFileUploaded;
 use App\Interfaces\Service\RomFileDataServiceInterface;
 use App\Jobs\ProcessRomFileDeletion;
 use App\Jobs\ProcessRomFileDownload;
@@ -31,13 +31,13 @@ class RomFileDataService implements RomFileDataServiceInterface
     {
         ProcessRomFileUpload::dispatch($filename);
         $fileDoc = RomFileRepo::getFileByFilename($filename);
-        FileUploaded::dispatch($fileDoc);
+        RomFileUploaded::dispatch($fileDoc);
         return new JsonDataResponse(['message' => "file '" . $fileDoc->filename . "' created!"], ResponseAlias::HTTP_CREATED, ['X-Content-Transfer-Type', FileTypes::X_BINARY->value]);
     }
 
     public function deleteRomFile(RomFile $romFile): JsonDataResponse
     {
-        FileDeleted::dispatch($romFile);
+        RomFileDeleted::dispatch($romFile);
         ProcessRomFileDeletion::dispatch($romFile->getObjectId());
         return new JsonDataResponse(['message' => "$romFile->filename deleted!"], ResponseAlias::HTTP_OK);
     }

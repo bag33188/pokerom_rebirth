@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
-use App\Events\FileDeleted;
-use App\Events\FileUploaded;
+use App\Events\RomFileDeleted;
+use App\Events\RomFileUploaded;
 use App\Events\GameCreated;
 use App\Listeners\AssociateRomWithGame;
 use App\Listeners\UnsetRomFileData;
@@ -29,10 +29,10 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
-        FileDeleted::class => [
+        RomFileDeleted::class => [
             UnsetRomFileData::class
         ],
-        FileUploaded::class => [
+        RomFileUploaded::class => [
             UpdateMatchingRom::class
         ],
         GameCreated::class => [

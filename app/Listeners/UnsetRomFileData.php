@@ -2,7 +2,7 @@
 
 namespace App\Listeners;
 
-use App\Events\FileDeleted;
+use App\Events\RomFileDeleted;
 use App\Models\Rom;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
@@ -13,7 +13,7 @@ class UnsetRomFileData implements ShouldQueue
 
     public bool $afterCommit = false;
 
-    public function shouldQueue(FileDeleted $event): bool
+    public function shouldQueue(RomFileDeleted $event): bool
     {
         return $event->romFile->rom()->exists();
     }
@@ -21,10 +21,10 @@ class UnsetRomFileData implements ShouldQueue
     /**
      * Handle the event.
      *
-     * @param FileDeleted $event
+     * @param RomFileDeleted $event
      * @return void
      */
-    public function handle(FileDeleted $event): void
+    public function handle(RomFileDeleted $event): void
     {
         Rom::withoutEvents(function () use ($event) {
             $rom = $event->romFile->rom()->first();
