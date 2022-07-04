@@ -1,5 +1,9 @@
 <?php
 
+/*
+ * Validation Length Values
+ */
+
 // Validation //
 
 const MAX_GAME_NAME = 40;

@@ -1,5 +1,9 @@
 <?php
 
+/*
+ * Application Entity Values
+ */
+
 // required as a dependency for these definitions
 include_once "chars.php";
 

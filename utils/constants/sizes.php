@@ -1,5 +1,9 @@
 <?php
 
+/*
+ * Validation Size Values
+ */
+
 /** Unit: _`KB/1024`_, value: **`17` Gibibytes** */
 const MAX_ROM_SIZE = 17825792;
 const MIN_ROM_SIZE = 1020;
@@ -12,6 +16,7 @@ const MAX_FILE_SIZE = 0x440000000;
 /** Unit: _`Bytes`_, value: **`1020` Kibibytes** */
 const MIN_FILE_SIZE = 0xFF000;
 
+// Other filesize max entity representations
 # 100 0100 0000 0000 0000 0000 0000 0000 0000
 # 0b10001000000000000000000000000000000
 

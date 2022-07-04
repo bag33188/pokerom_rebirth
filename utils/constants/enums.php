@@ -1,5 +1,9 @@
 <?php
 
+/*
+ * Database Enum Values
+ */
+
 /** array of valid game types */
 const GAME_TYPES = array('core', 'spin-off', 'hack');
 /** array of valid game regions */

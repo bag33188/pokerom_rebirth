@@ -1,5 +1,9 @@
 <?php
 
+/*
+ * Validation Pattern Regular Expressions
+ */
+
 /** rom filename regular expression */
 const ROM_FILENAME_PATTERN = /** @lang RegExp */
 "/^([\w\d\-_]{3,32})\.(3ds|xci|nds|gbc|gb|gba)$/i";
