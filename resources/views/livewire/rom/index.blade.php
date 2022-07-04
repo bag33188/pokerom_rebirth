@@ -42,7 +42,7 @@
                                    href="{{$this->getRomDownloadUrl($rom->romFile->_id, dev: true)}}"
                                    target="_blank"
                                    title="{{$rom->getRomFileName()}}">
-                                    <span class="order-0">Download!</span>
+                                    <span>Download!</span>
                                     @include('partials._download-icon')
                                 </a>
                             @else

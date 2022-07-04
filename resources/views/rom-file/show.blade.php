@@ -26,8 +26,8 @@
                             href="{{getRomFileDownloadUrl($romFile->_id)}}"
                             target="_self"
                             title="{{$romFile->filename}}">
+                                <span>DOWNLOAD</span>
                                 @include('partials._download-icon')
-                                <span class="order-0">DOWNLOAD</span>
                         </a>
                     </span>
                     <span class="order-1">@include('rom-file.delete', $romFile)</span>
