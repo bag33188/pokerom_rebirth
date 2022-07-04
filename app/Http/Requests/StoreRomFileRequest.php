@@ -27,10 +27,10 @@ class StoreRomFileRequest extends FormRequest
 
     protected function prepareForValidation(): void
     {
-        $filename = $this->filename;
-        FileMethods::normalizeFileName($filename);
+        $romFilename = $this->filename;
+        FileMethods::normalizeFileName($romFilename);
         $this->merge([
-            'filename' => $filename,
+            'filename' => $romFilename,
         ]);
     }
 

@@ -43,8 +43,10 @@ class JsonDataResponse implements Jsonable
     /**
      * Sets the success state depending on the status code.
      *
+     * > _This method is static since instance properties are readonly; they can only be set once._
+     *
      * <code>
-     * success => true|false
+     *  success => true|false
      * </code>
      *
      * @param array $data

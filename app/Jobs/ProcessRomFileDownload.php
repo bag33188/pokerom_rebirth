@@ -14,16 +14,16 @@ class ProcessRomFileDownload implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    private ObjectId $fileId;
+    private ObjectId $romFileId;
 
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct(ObjectId $fileId)
+    public function __construct(ObjectId $romFileId)
     {
-        $this->fileId = $fileId;
+        $this->romFileId = $romFileId;
     }
 
     /**
@@ -33,6 +33,6 @@ class ProcessRomFileDownload implements ShouldQueue
      */
     public function handle(): void
     {
-        GfsRomFile::download($this->fileId, CONTENT_TRANSFER_SIZE);
+        GfsRomFile::download($this->romFileId, CONTENT_TRANSFER_SIZE);
     }
 }

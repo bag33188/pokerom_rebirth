@@ -14,16 +14,16 @@ class ProcessRomFileUpload implements ShouldQueue
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
 
-    private string $filename;
+    private string $romFilename;
 
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct(string $filename)
+    public function __construct(string $romFilename)
     {
-        $this->filename = $filename;
+        $this->romFilename = $romFilename;
     }
 
     /**
@@ -33,6 +33,6 @@ class ProcessRomFileUpload implements ShouldQueue
      */
     public function handle(): void
     {
-        GfsRomFile::upload($this->filename);
+        GfsRomFile::upload($this->romFilename);
     }
 }

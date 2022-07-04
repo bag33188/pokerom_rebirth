@@ -33,7 +33,11 @@ class UpdateGameRequest extends FormRequest
 
     private function getGameIdParamValue(): object|string|null
     {
-        return $this->route()->parameter('game') ?: $this->route()->parameter('gameId');
+        if ($this->is("api/*")) {
+            return $this->route()->parameter('gameId');
+        } else {
+            return $this->route()->parameter('game');
+        }
     }
 
     /**

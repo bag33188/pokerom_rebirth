@@ -41,7 +41,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('/users', UserController::class)->only('index', 'show', 'destroy')
         ->parameter('user', 'userId');
     Route::apiResource('/rom-files', RomFileController::class)->only('index', 'show', 'destroy')
-        ->parameter('file', 'fileId');
+        ->parameter('file', 'romFileId');
 
     // api route groups
     Route::prefix('auth')->group(function () {
@@ -51,13 +51,13 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('rom-files/grid')->group(function () {
         Route::get('/list', [RomFileActions::class, 'listStorageFiles'])->middleware('admin');
         Route::post('/upload', [RomFileController::class, 'upload']);
-        Route::get('/{fileId}/download', [RomFileController::class, 'download']);
+        Route::get('/{romFileId}/download', [RomFileController::class, 'download']);
     });
 
     // relationships
     Route::get('/roms/{romId}/game', [RomController::class, 'indexGame']);
     Route::get('/roms/{romId}/file', [RomController::class, 'indexFile']);
-    Route::get('/rom-files/{fileId}/rom', [RomFileController::class, 'indexRom']);
+    Route::get('/rom-files/{romFileId}/rom', [RomFileController::class, 'indexRom']);
     Route::get('/games/{gameId}/rom', [GameController::class, 'indexRom']);
     Route::patch('/roms/{romId}/linkFile', [RomController::class, 'linkRomToFile']);
 });
@@ -65,7 +65,7 @@ Route::middleware('auth:sanctum')->group(function () {
 if (App::environment('local')) {
     Route::prefix('dev')->group(function () {
         // todo: find/add a way to send token to download link (in order to authenticate) (maybe use a POST request???)
-        Route::get('/rom-files/grid/{fileId}/download', [RomFileController::class, 'download']);
+        Route::get('/rom-files/grid/{romFileId}/download', [RomFileController::class, 'download']);
         // Route::post('/rom-files/{fileId}/download', [RomFileController::class, 'download']);
     });
 }

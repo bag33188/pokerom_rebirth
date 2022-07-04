@@ -27,10 +27,10 @@ class RomFileDataService implements RomFileDataServiceInterface
             'Content-Disposition' => "attachment; filename=\"$romFile->filename\""));
     }
 
-    public function uploadRomFile(string $filename): JsonDataResponse
+    public function uploadRomFile(string $romFilename): JsonDataResponse
     {
-        ProcessRomFileUpload::dispatch($filename);
-        $fileDoc = RomFileRepo::getFileByFilename($filename);
+        ProcessRomFileUpload::dispatch($romFilename);
+        $fileDoc = RomFileRepo::getFileByFilename($romFilename);
         RomFileUploaded::dispatch($fileDoc);
         return new JsonDataResponse(['message' => "file '" . $fileDoc->filename . "' created!"], ResponseAlias::HTTP_CREATED, ['X-Content-Transfer-Type', ContentTypes::X_BINARY->value]);
     }

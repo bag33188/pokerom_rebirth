@@ -35,30 +35,30 @@ class RomFileController extends ApiController
     /**
      * @throws AuthorizationException
      */
-    public function indexRom(string $fileId): RomResource
+    public function indexRom(string $romFileId): RomResource
     {
-        $romFile = RomFileRepo::findFileIfExists($fileId);
+        $romFile = RomFileRepo::findFileIfExists($romFileId);
         $this->authorize('view', $romFile);
-        return new RomResource(RomFileRepo::getRomAssociatedWithFile($fileId));
+        return new RomResource(RomFileRepo::getRomAssociatedWithFile($romFileId));
     }
 
     /**
      * @throws AuthorizationException
      */
-    public function show(string $fileId)
+    public function show(string $romFileId)
     {
-        $romFile = RomFileRepo::findFileIfExists($fileId);
+        $romFile = RomFileRepo::findFileIfExists($romFileId);
         $this->authorize('view', $romFile);
         return new RomFileResource($romFile);
     }
 
     /**
-     * @param string $fileId
+     * @param string $romFileId
      * @return StreamedResponse
      */
-    public function download(string $fileId): StreamedResponse
+    public function download(string $romFileId): StreamedResponse
     {
-        $romFile = RomFileRepo::findFileIfExists($fileId);
+        $romFile = RomFileRepo::findFileIfExists($romFileId);
         return $this->romFileDataService->downloadRomFile($romFile);
     }
 
@@ -75,9 +75,9 @@ class RomFileController extends ApiController
     /**
      * @throws AuthorizationException
      */
-    public function destroy(string $fileId): JsonResponse
+    public function destroy(string $romFileId): JsonResponse
     {
-        $romFile = RomFileRepo::findFileIfExists($fileId);
+        $romFile = RomFileRepo::findFileIfExists($romFileId);
         $this->authorize('delete', $romFile);
         return $this->romFileDataService->deleteRomFile($romFile)->renderResponse();
     }

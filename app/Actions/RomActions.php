@@ -14,11 +14,11 @@ class RomActions implements RomActionsInterface
     {
         $sql =
             /** @lang MariaDB */
-            "CALL LinkRomToFile(:fileId, :fileSize, :romId);";
+            "CALL LinkRomToFile(:romFileId, :romFileSize, :romId);";
         $query = DB::raw($sql);
         DB::statement($query, [
-            'fileId' => $romFile->getKey(),
-            'fileSize' => $romFile->length,
+            'romFileId' => $romFile->getKey(),
+            'romFileSize' => $romFile->length,
             'romId' => $rom->getKey()
         ]);
         $rom->refresh();

@@ -12,14 +12,14 @@ class RomFileRepository implements RomFileRepositoryInterface
 {
     use RomFilesAggregationsTrait;
 
-    public function findFileIfExists(string $fileId): RomFile
+    public function findFileIfExists(string $romFileId): RomFile
     {
-        return RomFile::findOrFail($fileId);
+        return RomFile::findOrFail($romFileId);
     }
 
-    public function getRomAssociatedWithFile(string $fileId): Rom
+    public function getRomAssociatedWithFile(string $romFileId): Rom
     {
-        return $this->findFileIfExists($fileId)->rom()->firstOrFail();
+        return $this->findFileIfExists($romFileId)->rom()->firstOrFail();
     }
 
     public function getAllFilesSorted(): Collection
@@ -27,15 +27,15 @@ class RomFileRepository implements RomFileRepositoryInterface
         return RomFile::all()->sortBy([['length', 'asc'], ['filename', 'asc']]);
     }
 
-    public function getFileByFilename(string $filename): RomFile
+    public function getFileByFilename(string $romFilename): RomFile
     {
-        return RomFile::where('filename', '=', $filename)->first();
+        return RomFile::where('filename', '=', $romFilename)->first();
     }
 
-    public function searchForRomMatchingFile(string $fileId): ?Rom
+    public function searchForRomMatchingFile(string $romFileId): ?Rom
     {
         [$romName, $romExtension] = explode('.',
-            $this->findFileIfExists($fileId)->filename, 2);
+            $this->findFileIfExists($romFileId)->filename, 2);
         return Rom::where([
             ['rom_name', '=', $romName, 'and'],
             ['rom_type', '=', $romExtension, 'and']
