@@ -28,9 +28,10 @@ dump_mongo() {
     fi
     database="pokerom_files"
     collection="roms.files"
+    output_dir="misc/data/dump/roms.files.json"
 
-    mongoexport -d $database -c $collection --jsonArray --pretty -o misc/data/dump/roms.files.json
-    # mongoexport --db=$database --collection=$collection --type=csv --fields=filename,length --out=data/dump/file_info.csv
+    mongoexport -d $database -c $collection --jsonArray --jsonFormat=relaxed --pretty --fields length,filename,chunkSize -o $output_dir
 }
 
 dump_mongo
+# /("_id"\:)([\s\t\n\v]*)(\{[\s\t\n\v]*)(\"\$oid"\:)([\s\t\n\v]*)(\"[\w\d]+\")([\s\t\n\v]*)(\})([\s\t\n\v]*)(,?)/gim
