@@ -51,7 +51,7 @@ class RomFileController extends ViewController
      */
     public function store(StoreRomFileRequest $request)
     {
-        $this->romFileDataService->uploadFile($request['filename']);
+        $this->romFileDataService->uploadRomFile($request['filename']);
         return response()->redirectTo(url()->previous())->banner("file uploaded!");
     }
 
@@ -76,7 +76,7 @@ class RomFileController extends ViewController
     public function destroy(RomFile $romFile)
     {
         $this->authorize('delete', $romFile);
-        $this->romFileDataService->deleteFile($romFile);
+        $this->romFileDataService->deleteRomFile($romFile);
         return response()->redirectTo(route('rom-files.index'))->banner("$romFile->filename deleted!");
     }
 }

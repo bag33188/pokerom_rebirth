@@ -17,7 +17,7 @@ use Utils\Modules\JsonDataResponse;
 
 class RomFileDataService implements RomFileDataServiceInterface
 {
-    public function downloadFile(RomFile $romFile): StreamedResponse
+    public function downloadRomFile(RomFile $romFile): StreamedResponse
     {
         return new StreamedResponse(function () use ($romFile) {
             ProcessRomFileDownload::dispatch($romFile->getObjectId());
@@ -27,7 +27,7 @@ class RomFileDataService implements RomFileDataServiceInterface
             'Content-Disposition' => "attachment; filename=\"$romFile->filename\""));
     }
 
-    public function uploadFile(string $filename): JsonDataResponse
+    public function uploadRomFile(string $filename): JsonDataResponse
     {
         ProcessRomFileUpload::dispatch($filename);
         $fileDoc = RomFileRepo::getFileByFilename($filename);
@@ -35,7 +35,7 @@ class RomFileDataService implements RomFileDataServiceInterface
         return new JsonDataResponse(['message' => "file '" . $fileDoc->filename . "' created!"], ResponseAlias::HTTP_CREATED, ['X-Content-Transfer-Type', FileTypes::X_BINARY->value]);
     }
 
-    public function deleteFile(RomFile $romFile): JsonDataResponse
+    public function deleteRomFile(RomFile $romFile): JsonDataResponse
     {
         FileDeleted::dispatch($romFile);
         ProcessRomFileDeletion::dispatch($romFile->getObjectId());

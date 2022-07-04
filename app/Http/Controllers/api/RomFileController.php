@@ -59,7 +59,7 @@ class RomFileController extends ApiController
     public function download(string $fileId): StreamedResponse
     {
         $romFile = RomFileRepo::findFileIfExists($fileId);
-        return $this->romFileDataService->downloadFile($romFile);
+        return $this->romFileDataService->downloadRomFile($romFile);
     }
 
     /**
@@ -69,7 +69,7 @@ class RomFileController extends ApiController
     {
         $this->authorize('create', RomFile::class);
 
-        return $this->romFileDataService->uploadFile($request['filename'])->renderResponse();
+        return $this->romFileDataService->uploadRomFile($request['filename'])->renderResponse();
     }
 
     /**
@@ -79,6 +79,6 @@ class RomFileController extends ApiController
     {
         $romFile = RomFileRepo::findFileIfExists($fileId);
         $this->authorize('delete', $romFile);
-        return $this->romFileDataService->deleteFile($romFile)->renderResponse();
+        return $this->romFileDataService->deleteRomFile($romFile)->renderResponse();
     }
 }
