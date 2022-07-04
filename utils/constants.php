@@ -5,8 +5,7 @@
 $constants_path = __DIR__ . "/constants";
 
 if (!empty($constants_path)) {
-    require_once $constants_path . "/chars.php"; // <-- must be loaded before "entities.php"
-    require_once $constants_path . "/entities.php";
+    require_once $constants_path . "/entities.php"; // loads `chars.php` as a dependency
     require_once $constants_path . "/enums.php";
     require_once $constants_path . "/sizes.php";
     require_once $constants_path . "/lengths.php";
