@@ -41,7 +41,7 @@ class FileMethods
      *
      * @return string
      */
-    public static function getServerFilesUploadPath(): string
+    private static function getServerFilesUploadPath(): string
     {
         return MongoMethods::getGridFSConfig()['fileUploadPath'];
     }
