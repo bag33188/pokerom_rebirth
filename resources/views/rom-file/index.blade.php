@@ -12,7 +12,7 @@
         <h2 class="text-center text-lg">Pok&eacute;mon ROM Files</h2>
     </x-slot>
     @unless(sizeof($romFiles) > 0)
-        <h2 class="text-center text-lg mt-4">No ROM Files Exist in database</h2>
+        <h2 class="text-center text-lg mt-7">No ROM Files Exist in database</h2>
     @endunless
     <div class="grid md:grid-cols-2 sm:grid-cols-1 gap-4 m-4 items-center">
         @foreach($romFiles as $romFile)
