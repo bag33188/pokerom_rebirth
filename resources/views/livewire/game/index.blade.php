@@ -18,7 +18,8 @@
             <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4 justify-items-center my-1.5 pb-4"
                  x-show="open" x-cloak>
                 @foreach($games as $game)
-                    <div class="p-6 w-full bg-white rounded-lg border border-gray-200 shadow-md">
+                    <div class="p-6 w-full bg-white rounded-lg border border-gray-200 shadow-md"
+                         data-game-id="{{$game->getKey()}}">
                         <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">{{$game->game_name}}</h5>
                         <div class="w-full bg-white rounded-lg my-2.5">
                             <ul class="divide-y-2 divide-gray-100">

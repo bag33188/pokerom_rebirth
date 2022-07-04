@@ -17,8 +17,9 @@
         <div class="grid md:grid-cols-2 sm:grid-cols-1 gap-4 m-4 items-center">
             @foreach($romFiles as $romFile)
                 <div
+                    data-rom-file-id="{{$romFile->_id}}"
                     class="border border-teal-500 bg-white shadow-lg rounded w-full h-full inline-grid grid-cols-1 grid-rows-[auto_auto] gap-y-2 justify-self-center p-2">
-                    <p title="{{$romFile->_id}}">{{$romFile->filename}}</p>
+                    <p>{{$romFile->filename}}</p>
                     <p>{{$romFile->length}} Bytes</p>
                     <div class="justify-self-start align-self-end">
                         <a href="{{route('rom-files.show', $romFile)}}" {!! $btnClasses !!}>Actions</a>
