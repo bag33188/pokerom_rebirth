@@ -10,19 +10,16 @@
             <h2 class="text-center text-lg mt-7">No ROMs Exist in database</h2>
         @else
             <div class="w-full flex justify-center">
-                @php
-                    $romsTableInitDisplayState = \App\Enums\DisplayStatesEnum::SHOW->value;
-                @endphp
                 <button type="button" @click="open = !open"
                         class="bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-2 px-4 my-4 shadow-md rounded">
-                    @include("ui.show-hide", ['text' => 'ROMs', 'initialState' => $romsTableInitDisplayState])
+                    @include("ui.show-hide", ['text' => 'ROMs', 'initialState' => \App\Enums\DisplayStatesEnum::SHOW->value])
                 </button>
             </div>
             <table class="w-full text-sm text-left text-gray-500 light:text-gray-400" x-show="open" x-cloak>
                 <thead class="bg-gray-50">
                 <tr class="text-xs text-gray-700 uppercase light:bg-gray-700 light:text-gray-400">
                     @for($i = 0; $i < count($romsTableColumns); $i++)
-                        <th scope="col" class="px-6 py-3" id="column-{{$i+1}}">{{$romsTableColumns[$i]}}</th>
+                        <th scope="col" class="px-6 py-3" id="column-{{ $i+1 }}">{{ $romsTableColumns[$i] }}</th>
                     @endfor
                 </tr>
                 </thead>
@@ -52,8 +49,8 @@
                 </tbody>
                 <tfoot>
                 <tr class="text-sm text-gray-700 uppercase light:bg-gray-700 light:text-gray-400">
-                    <td class="px-6 py-3">Total Count:&nbsp;<span class="font-semibold">{{count($roms)}}</span></td>
-                    <td class="px-6 py-3">Total Size:&nbsp;<span class="font-semibold">{{$roms_total_size}} Bytes</span>
+                    <td class="px-6 py-3">Total Count: <span class="font-semibold">{{count($roms)}}</span></td>
+                    <td class="px-6 py-3">Total Size: <span class="font-semibold">{{$roms_total_size}} Bytes</span>
                     </td>
                 </tr>
                 </tfoot>
