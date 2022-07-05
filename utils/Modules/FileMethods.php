@@ -16,7 +16,7 @@ class FileMethods
      */
     public static function makeFilepathFromFilename(string $filename, ?string $prefix = null): string
     {
-        return sprintf("%s/%s", $prefix ?? self::getServerFilesUploadPath(), $filename);
+        return sprintf("%s/%s", $prefix ?? config('gridfs.fileUploadPath'), $filename);
     }
 
     /**
@@ -29,20 +29,21 @@ class FileMethods
      */
     public static function normalizeFileName(string &$filename): void
     {
-        // explode function's limit param can be used to check for single occurrence of the `.` (period) character
-        [$name, $ext] = explode('.', $filename, 2);
+        [$name, $ext] = self::splitFilenameIntoParts($filename);
         $name = trim($name);
         $ext = strtolower($ext);
         $filename = "$name.$ext";
     }
 
     /**
-     * Retrieves the upload path for grid server files
+     * Separates a file name and file extension within a `filename` string
      *
-     * @return string
+     * @param string $filename
+     * @return string[]
      */
-    private static function getServerFilesUploadPath(): string
+    public static function splitFilenameIntoParts(string $filename): array
     {
-        return MongoMethods::getGridFSConfig()['fileUploadPath'];
+        // explode function's limit param can be used to check for single occurrence of the `.` (period) character
+        return explode('.', $filename, 2);
     }
 }

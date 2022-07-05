@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 05, 2022 at 03:01 AM
+-- Generation Time: Jul 05, 2022 at 08:38 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -31,6 +31,9 @@ DELIMITER $$
 --
 -- Procedures
 --
+DROP PROCEDURE IF EXISTS `FindMatchingRomFromFilename`$$
+CREATE DEFINER=`bag33188`@`%` PROCEDURE `FindMatchingRomFromFilename` (IN `ROM_FILENAME` VARCHAR(32))   SELECT * FROM `roms` WHERE `rom_name` = SPLIT_STRING(`ROM_FILENAME`, '.', 1) AND `rom_type` = SPLIT_STRING(`ROM_FILENAME`, '.', 2) AND (`has_file` = 0 OR `file_id` IS NULL) LIMIT 1$$
+
 DROP PROCEDURE IF EXISTS `FindRomsWithNoGame`$$
 CREATE DEFINER=`bag33188`@`%` PROCEDURE `FindRomsWithNoGame` ()   BEGIN
 SELECT `id`, `rom_name`, `rom_type`, /* IF (0 = FALSE, 'false', 'true') AS */ `has_game`, `game_id` FROM `roms` WHERE `has_game` = FALSE AND `game_id` IS NULL ORDER BY `rom_name` DESC;
@@ -59,7 +62,7 @@ END$$
 -- Functions
 --
 DROP FUNCTION IF EXISTS `CalcReadableRomSize`$$
-CREATE DEFINER=`bag33188`@`%` FUNCTION `CalcReadableRomSize` (`rom_length` INT) RETURNS VARCHAR(9) CHARSET utf8mb4 DETERMINISTIC BEGIN
+CREATE DEFINER=`bag33188`@`%` FUNCTION `CalcReadableRomSize` (`rom_length` INT) RETURNS VARCHAR(9) CHARSET utf8mb4 DETERMINISTIC SQL SECURITY INVOKER BEGIN
 /** !important:
 Note: these calculations and measurements are based on the standard units of data.
 Ie. 1 Gigabyte = 1000 MegaBytes = 1000 Kilobytes
@@ -108,6 +111,22 @@ END CASE$$
 DROP FUNCTION IF EXISTS `KbToB`$$
 CREATE DEFINER=`bag33188`@`%` FUNCTION `KbToB` (`kilobytes` INT) RETURNS BIGINT(10) UNSIGNED  RETURN `kilobytes` * 1024$$
 
+DROP FUNCTION IF EXISTS `SPLIT_STRING`$$
+CREATE DEFINER=`bag33188`@`%` FUNCTION `SPLIT_STRING` (`s` VARCHAR(32), `del` VARCHAR(1), `i` INT) RETURNS VARCHAR(32) CHARSET utf8mb4 DETERMINISTIC SQL SECURITY INVOKER BEGIN
+
+        DECLARE n INT ;
+
+        -- get max number of items
+        SET n = LENGTH(s) - LENGTH(REPLACE(s, del, '')) + 1;
+
+        IF i > n THEN
+            RETURN NULL ;
+        ELSE
+            RETURN SUBSTRING_INDEX(SUBSTRING_INDEX(s, del, i) , del , -1 ) ;
+        END IF;
+
+    END$$
+
 DELIMITER ;
 
 -- --------------------------------------------------------
@@ -144,7 +163,6 @@ TRUNCATE TABLE `failed_jobs`;
 -- Table structure for table `games`
 --
 -- Creation: Jul 03, 2022 at 07:31 PM
--- Last update: Jul 04, 2022 at 11:04 PM
 --
 
 DROP TABLE IF EXISTS `games`;
@@ -317,7 +335,7 @@ TRUNCATE TABLE `password_resets`;
 -- Table structure for table `personal_access_tokens`
 --
 -- Creation: Jun 05, 2022 at 04:47 PM
--- Last update: Jul 04, 2022 at 11:54 PM
+-- Last update: Jul 05, 2022 at 05:34 PM
 --
 
 DROP TABLE IF EXISTS `personal_access_tokens`;
@@ -347,7 +365,7 @@ TRUNCATE TABLE `personal_access_tokens`;
 --
 
 INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `name`, `token`, `abilities`, `last_used_at`, `created_at`, `updated_at`) VALUES
-(1, 'App\\Models\\User', 1, 'auth_token', 'decfe681ade402403c92ee62493bc85118f6260b48409bafb060afe67e12a78a', '[\"*\"]', '2022-07-05 06:54:38', '2022-07-04 02:35:33', '2022-07-05 06:54:38');
+(1, 'App\\Models\\User', 1, 'auth_token', 'decfe681ade402403c92ee62493bc85118f6260b48409bafb060afe67e12a78a', '[\"*\"]', '2022-07-06 00:34:40', '2022-07-04 02:35:33', '2022-07-06 00:34:40');
 
 -- --------------------------------------------------------
 
@@ -355,7 +373,7 @@ INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `n
 -- Table structure for table `roms`
 --
 -- Creation: Jul 03, 2022 at 07:21 PM
--- Last update: Jul 05, 2022 at 12:56 AM
+-- Last update: Jul 05, 2022 at 06:38 PM
 --
 
 DROP TABLE IF EXISTS `roms`;
@@ -433,7 +451,7 @@ INSERT INTO `roms` (`id`, `file_id`, `game_id`, `rom_name`, `rom_size`, `rom_typ
 -- Table structure for table `sessions`
 --
 -- Creation: Jun 05, 2022 at 04:47 PM
--- Last update: Jul 05, 2022 at 12:56 AM
+-- Last update: Jul 05, 2022 at 06:38 PM
 --
 
 DROP TABLE IF EXISTS `sessions`;
@@ -460,7 +478,7 @@ TRUNCATE TABLE `sessions`;
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('OUONrf4XLCSwN9wBZ7IdPlWlOSJ5p3HZzixGFbJ9', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiblNNRTJiclpnVzNyRkFMR0oyZXQ4cDl0Q2tTaThTbXdYcHVPOGZYUiI7czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjIxOiJwYXNzd29yZF9oYXNoX3NhbmN0dW0iO3M6NjA6IiQyeSQxMCR3aXAzcXg5MVBsWERrcmouekVqb0MuL3dsSW50Z0lLM1EuckFKZ2d3UWhmWFJGaUlubURabSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDY6Imh0dHA6Ly9wb2tlcm9tX3JlYmlydGgudGVzdC9wdWJsaWMvYXBpL3ZlcnNpb24iO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1656982615);
+('536XYJxlTqFrNIZMn7llL82LZDKL4qruDHZ87TPX', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoidWtvSkdhdUpoMWI0Zkp5Smt4V3hvbnNoT28xb3lKVGZ1WjdiRzVkbiI7czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjIxOiJwYXNzd29yZF9oYXNoX3NhbmN0dW0iO3M6NjA6IiQyeSQxMCR3aXAzcXg5MVBsWERrcmouekVqb0MuL3dsSW50Z0lLM1EuckFKZ2d3UWhmWFJGaUlubURabSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDY6Imh0dHA6Ly9wb2tlcm9tX3JlYmlydGgudGVzdC9wdWJsaWMvYXBpL3ZlcnNpb24iO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1657046300);
 
 -- --------------------------------------------------------
 
