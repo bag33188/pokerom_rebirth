@@ -22,16 +22,16 @@
                         // sort files by string length (descending)
                         usort($romFiles, 'strLenDesc');
                     @endphp
-                    <label for="romFile">Rom File</label>
-                    <select name="filename" id="romFile">
+                    <x-jet-label for="romFile" :value="__('ROM Fle')" />
+                    <x-form-select name="filename" id="romFile">
                         @foreach($romFiles as $romFilename)
                             <option value="{{$romFilename}}">{{$romFilename}}</option>
                         @endforeach
-                    </select>
+                    </x-form-select>
                 </div>
 
                 <div class="my-4">
-                    <button type="submit" class="punch">Upload!</button>
+                    <x-punch-button type="submit" text="Upload!" />
                 </div>
             </form>
         @endunless
