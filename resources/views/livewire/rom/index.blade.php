@@ -36,7 +36,7 @@
                         <td class="px-6 py-4">{{$rom->has_game ? $rom->game->game_name : 'N/A'}}</td>
                         <td class="px-6 py-4">
                             @if($rom->has_file)
-                                <x-rom-file-download :rom-file-id="$rom->romFile->_id"/>
+                                <x-rom-file-download :use-popup-button-style="true" :rom-file-id="$rom->romFile->_id"/>
                             @else
                                 <p class="font-normal text-lg">No File yet :(</p>
                             @endif

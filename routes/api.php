@@ -60,15 +60,18 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/rom-files/{romFileId}/rom', [RomFileController::class, 'indexRom']);
     Route::get('/games/{gameId}/rom', [GameController::class, 'indexRom']);
     Route::patch('/roms/{romId}/linkFile', [RomController::class, 'linkRomToFile']);
-
 });
+
+
+Route::post('/rom-files/grid/{romFileId}/download', [RomFileController::class, 'download'])
+    ->middleware([
+        'auth:sanctum',
+        config('jetstream.auth_session'),
+        'verified'
+    ])->name('api.rom-files.download');
 
 if (App::environment('local')) {
     Route::prefix('dev')->group(function () {
         Route::get('/rom-files/grid/{romFileId}/download', [RomFileController::class, 'download']);
     });
 }
-
-Route::post('/rom-files/{romFileId}/download', [RomFileController::class, 'download'])->middleware(['auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified'])->name('rom-file.download');
