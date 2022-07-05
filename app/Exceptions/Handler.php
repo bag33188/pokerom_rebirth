@@ -63,7 +63,7 @@ class Handler extends ExceptionHandler
         $this->renderable(fn(QueryException $e) => throw App::make(SqlQueryException::class,
             ['message' => $e->getMessage(), 'code' => ResponseAlias::HTTP_CONFLICT]));
         $this->renderable(function (HttpException $e, Request $request) {
-            if ($request->is("api/*") || $request->acceptsJson()) {
+            if ($request->is("api/*")) {
                 return response()->json(['message' => $e->getMessage(), 'success' => false], $e->getStatusCode());
             }
         });
