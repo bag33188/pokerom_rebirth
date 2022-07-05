@@ -29,7 +29,7 @@ class FileMethods
      */
     public static function normalizeFileName(string &$filename): void
     {
-        [$name, $ext] = self::splitFilenameIntoParts($filename);
+        list($name, $ext) = self::splitFilenameIntoParts($filename);
         $name = trim($name);
         $ext = strtolower($ext);
         $filename = "$name.$ext";

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 05, 2022 at 08:38 PM
+-- Generation Time: Jul 05, 2022 at 09:47 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -112,17 +112,17 @@ DROP FUNCTION IF EXISTS `KbToB`$$
 CREATE DEFINER=`bag33188`@`%` FUNCTION `KbToB` (`kilobytes` INT) RETURNS BIGINT(10) UNSIGNED  RETURN `kilobytes` * 1024$$
 
 DROP FUNCTION IF EXISTS `SPLIT_STRING`$$
-CREATE DEFINER=`bag33188`@`%` FUNCTION `SPLIT_STRING` (`s` VARCHAR(32), `del` VARCHAR(1), `i` INT) RETURNS VARCHAR(32) CHARSET utf8mb4 DETERMINISTIC SQL SECURITY INVOKER BEGIN
+CREATE DEFINER=`bag33188`@`%` FUNCTION `SPLIT_STRING` (`str_val` VARCHAR(255), `separator` VARCHAR(1), `position` INT) RETURNS VARCHAR(255) CHARSET utf8mb4 DETERMINISTIC SQL SECURITY INVOKER BEGIN
 
-        DECLARE n INT ;
+        DECLARE `n` INT ;
 
         -- get max number of items
-        SET n = LENGTH(s) - LENGTH(REPLACE(s, del, '')) + 1;
+        SET `n` = LENGTH(`str_val`) - LENGTH(REPLACE(`str_val`, `separator`, '')) + 1;
 
-        IF i > n THEN
+        IF `position` > `n` THEN
             RETURN NULL ;
         ELSE
-            RETURN SUBSTRING_INDEX(SUBSTRING_INDEX(s, del, i) , del , -1 ) ;
+            RETURN SUBSTRING_INDEX(SUBSTRING_INDEX(`str_val`, `separator`, `position`), `separator` , -1) ;
         END IF;
 
     END$$
