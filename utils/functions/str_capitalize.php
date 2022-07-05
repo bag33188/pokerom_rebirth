@@ -2,15 +2,20 @@
 
 if (!function_exists('str_capitalize')) {
     /**
-     * This function is a more advanced version of the **`ucfirst`** function included with PHP
+     * This function is a more advanced version of the {@see ucfirst} function included with PHP
      *
-     * @param string $value
+     * This function gives you the following options:
+     *  + capitalize all words in a string with multiple words
+     *  + choose how many words to capitalize in a string with multiple words
+     *  + define the delimiter to separate the words you wish to capitalize
+     *
+     * @param string $value String to capitalize
      * @param bool $deep Set to true if you have a string with more than 1 word, and you want to capitalize ALL the words in that string.
      * @param int $depth Set to any value greater than 0 if you wish to only capitalize a string of words up until a certain word
      * @param string $separator Set to any string value if you wish to distinguish the words in your string **by a character other than space**
      * @return string|null
      */
-    function str_capitalize(string $value, bool $deep = false, int $depth = 0, string $separator = "\u{0020}"): ?string
+    function str_capitalize(string $value, bool $deep = false, int $depth = 0, string $separator = _SPACE): ?string
     {
         $value = trim($value);
         if (!strlen($value) || !$value) return null;
