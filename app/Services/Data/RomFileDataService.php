@@ -4,7 +4,7 @@ namespace App\Services\Data;
 
 use App\Enums\FileContentTypesEnum as ContentTypes;
 use App\Events\RomFileDeleted;
-use App\Events\RomFileUploaded;
+use App\Events\RomFileCreated;
 use App\Interfaces\Service\RomFileDataServiceInterface;
 use App\Jobs\ProcessRomFileDeletion;
 use App\Jobs\ProcessRomFileDownload;
@@ -31,7 +31,7 @@ class RomFileDataService implements RomFileDataServiceInterface
     {
         ProcessRomFileUpload::dispatch($romFilename);
         $fileDoc = RomFileRepo::getFileByFilename($romFilename);
-        RomFileUploaded::dispatch($fileDoc);
+        RomFileCreated::dispatch($fileDoc);
         return new JsonDataResponse(['message' => "file '" . $fileDoc->filename . "' created!"], ResponseAlias::HTTP_CREATED, ['X-Content-Transfer-Type', ContentTypes::X_BINARY->value]);
     }
 

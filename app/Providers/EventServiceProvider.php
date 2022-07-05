@@ -3,7 +3,7 @@
 namespace App\Providers;
 
 use App\Events\RomFileDeleted;
-use App\Events\RomFileUploaded;
+use App\Events\RomFileCreated;
 use App\Events\GameCreated;
 use App\Listeners\AssociateRomWithGame;
 use App\Listeners\UnsetRomFileData;
@@ -32,7 +32,7 @@ class EventServiceProvider extends ServiceProvider
         RomFileDeleted::class => [
             UnsetRomFileData::class
         ],
-        RomFileUploaded::class => [
+        RomFileCreated::class => [
             UpdateMatchingRom::class
         ],
         GameCreated::class => [
