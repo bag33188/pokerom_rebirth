@@ -2,22 +2,20 @@
 
 namespace App\Exceptions;
 
-use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
+use Utils\Classes\AbstractApplicationException as ApplicationException;
 
-class MongoWriteException extends Exception
+class MongoWriteException extends ApplicationException
 {
     public function render(Request $request): bool|JsonResponse|RedirectResponse
     {
-        $isApiRequest = $request->is("api/*");
-        $isLivewireRequest = $request->header('X-Livewire');
-        if (!$isApiRequest && !$isLivewireRequest) {
+        if (!self::isApiRequest($request) && !self::isLivewireRequest($request)) {
             return redirect()->to(url()->previous())->dangerBanner($this->getMessage());
         }
-        if ($isApiRequest) {
+        if (self::isApiRequest($request) || $request->acceptsJson()) {
             return response()->json(['message' => $this->getMessage()], ResponseAlias::HTTP_CONFLICT);
         }
         return false;
