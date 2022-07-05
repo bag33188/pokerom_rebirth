@@ -64,7 +64,7 @@ class User extends Authenticatable # implements MustVerifyEmail
 
     public function isAdmin(): bool
     {
-        return $this->attributes['role'] == UserRoleEnum::ADMIN;
+        return $this->attributes['role'] == UserRoleEnum::ADMIN->value;
     }
 
     public function checkPassword(string $currentPassword): bool
