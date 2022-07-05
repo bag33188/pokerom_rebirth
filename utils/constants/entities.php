@@ -2,12 +2,15 @@
 
 /*
  * Application Entity Values
+ *
+ * Notes:
+ *  + Loads `chars.php` as a dependency
  */
 
-// required as a dependency for these definitions
+// load `chars.php` constants
 include_once "chars.php";
 
-// General Entities
+// General Entities //
 
 /** directory that contains all bin rom files */
 const ROM_FILES_DIRNAME = 'rom_files';
@@ -18,7 +21,7 @@ const CONTENT_TRANSFER_SIZE = 0xFF000;
 /** concat: Pok, &eacute; ... output: Pok&eacute; */
 const POKE_EACUTE = "Pok" . _EACUTE;
 
-// Date Formatting entities
+// Date Formatting entities //
 
 /** ex. _Monday, September 28th, 1998_ */
 const DATE_WITH_DAY_NAME = 'l, F jS, Y';

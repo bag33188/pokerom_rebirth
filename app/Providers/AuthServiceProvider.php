@@ -40,7 +40,7 @@ class AuthServiceProvider extends ServiceProvider
 
         // give admin user complete access to all endpoints and actions
         Gate::before(function (User $user, string $ability) {
-            # dd($ability); ddd($ability);
+            /* dd($ability); ddd($ability); */
             if ($user->isAdmin()) {
                 return true;
             }

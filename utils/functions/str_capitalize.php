@@ -34,7 +34,11 @@ if (!function_exists('str_capitalize')) {
             }
             return join($separator, $str_arr);
         } else {
-            return ucfirst($value); # strtoupper($value[0]) . strtolower(substr($value, 1, strlen($value) - 1));
+            $conversions = (object)[
+                'php' => strtoupper($value[0]) . strtolower(substr($value, 1, strlen($value) - 1)),
+                'c' => ucfirst($value)
+            ];
+            return $conversions->c;
         }
     }
 }

@@ -4,9 +4,6 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\Schema;
 use Jenssegers\Mongodb\Schema\Blueprint;
 
-# php artisan migrate:refresh --path=database/migrations/2022_05_31_000001_create_rom_files_collection.php
-# !!! php artisan migrate:rollback
-
 return new class extends Migration {
 
     /**
