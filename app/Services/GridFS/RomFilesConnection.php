@@ -3,7 +3,7 @@
 namespace App\Services\GridFS;
 
 use MongoDB\GridFS\Bucket;
-use Utils\Classes\AbstractGridFSConnection as GridFSConnection;
+use Utils\Modules\GridFS\AbstractGridFSConnection as GridFSConnection;
 
 class RomFilesConnection extends GridFSConnection
 {

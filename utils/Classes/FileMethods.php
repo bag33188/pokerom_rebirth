@@ -1,6 +1,6 @@
 <?php
 
-namespace Utils\Modules;
+namespace Utils\Classes;
 
 /**
  * This class contains a variety of methods that are useful when dealing with files and file metadata.

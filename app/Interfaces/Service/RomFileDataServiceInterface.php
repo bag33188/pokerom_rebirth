@@ -4,7 +4,7 @@ namespace App\Interfaces\Service;
 
 use App\Models\RomFile;
 use Symfony\Component\HttpFoundation\StreamedResponse;
-use Utils\Modules\JsonDataResponse;
+use Utils\Classes\JsonDataResponse;
 
 interface RomFileDataServiceInterface
 {

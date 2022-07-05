@@ -3,8 +3,8 @@
 namespace App\Services\Data;
 
 use App\Enums\FileContentTypeEnum as ContentType;
-use App\Events\RomFileDeleted;
 use App\Events\RomFileCreated;
+use App\Events\RomFileDeleted;
 use App\Interfaces\Service\RomFileDataServiceInterface;
 use App\Jobs\ProcessRomFileDeletion;
 use App\Jobs\ProcessRomFileDownload;
@@ -13,7 +13,7 @@ use App\Models\RomFile;
 use RomFileRepo;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 use Symfony\Component\HttpFoundation\StreamedResponse;
-use Utils\Modules\JsonDataResponse;
+use Utils\Classes\JsonDataResponse;
 
 class RomFileDataService implements RomFileDataServiceInterface
 {

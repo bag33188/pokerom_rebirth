@@ -2,10 +2,10 @@
 
 namespace App\Http\Resources;
 
-use Utils\Classes\AbstractGridFSFile as GfsFile;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use JetBrains\PhpStorm\ArrayShape;
+use Utils\Modules\GridFS\AbstractGridFSFile as GfsFile;
 
 /** @mixin GfsFile */
 class RomFileResource extends JsonResource

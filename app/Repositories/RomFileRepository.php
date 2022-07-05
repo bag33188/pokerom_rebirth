@@ -5,10 +5,10 @@ namespace App\Repositories;
 use App\Interfaces\Repository\RomFileRepositoryInterface;
 use App\Models\Rom;
 use App\Models\RomFile;
-use App\Services\GridFS\RomFilesAggregationsTrait;
+use App\Services\GridFS\Queries\RomFilesAggregationsTrait;
 use Illuminate\Database\Eloquent\Collection;
 use Jenssegers\Mongodb\Helpers\EloquentBuilder;
-use Utils\Modules\FileMethods;
+use Utils\Classes\FileMethods;
 
 class RomFileRepository implements RomFileRepositoryInterface
 {

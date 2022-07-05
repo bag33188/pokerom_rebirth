@@ -1,6 +1,6 @@
 <?php
 
-namespace Utils\Classes;
+namespace Utils\Modules\GridFS;
 
 /**
  * GridFS Database Class for defining a MongoDB Database

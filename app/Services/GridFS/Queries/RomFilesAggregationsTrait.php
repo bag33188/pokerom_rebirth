@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\GridFS;
+namespace App\Services\GridFS\Queries;
 
 use JetBrains\PhpStorm\ArrayShape;
 

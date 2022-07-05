@@ -5,8 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Jenssegers\Mongodb\Eloquent\Model as MongoDbModel;
 use MongoDB\BSON\ObjectId;
-use Utils\Classes\AbstractGridFSFile as GfsFile;
-use Utils\Modules\MongoMethods;
+use Utils\Classes\MongoMethods;
+use Utils\Modules\GridFS\AbstractGridFSFile as GfsFile;
 
 /** @mixin GfsFile */
 class RomFile extends MongoDbModel
