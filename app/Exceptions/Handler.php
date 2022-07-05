@@ -6,6 +6,7 @@ use App;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\Request;
 use MongoDB\Driver\Exception\BulkWriteException;
 use MongoDB\Driver\Exception\WriteException;
 use PDOException;
@@ -61,5 +62,10 @@ class Handler extends ExceptionHandler
             ['message' => $e->getMessage(), 'code' => ResponseAlias::HTTP_CONFLICT]));
         $this->renderable(fn(QueryException $e) => throw App::make(SqlQueryException::class,
             ['message' => $e->getMessage(), 'code' => ResponseAlias::HTTP_CONFLICT]));
+        $this->renderable(function (HttpException $e, Request $request) {
+            if ($request->is("api/*")) {
+                return response()->json(['message' => $e->getMessage(), 'success' => false], $e->getStatusCode());
+            }
+        });
     }
 }
