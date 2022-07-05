@@ -123,7 +123,7 @@ CREATE DEFINER=`bag33188`@`%` FUNCTION `SPLIT_STRING` (`str_val` VARCHAR(255), `
             RETURN NULL ;
         ELSE
         	SET @`sub_index1` := SUBSTRING_INDEX(`str_val`, `separator`, `position`);
-            RETURN SUBSTRING_INDEX(@`sub_index1`, `separator` , -1) ;        
+            RETURN SUBSTRING_INDEX(@`sub_index1`, `separator` , -1) ;
         END IF;
 
     END$$
@@ -600,7 +600,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `games`
 --
 ALTER TABLE `games`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -618,7 +618,7 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `roms`
 --
 ALTER TABLE `roms`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `users`
