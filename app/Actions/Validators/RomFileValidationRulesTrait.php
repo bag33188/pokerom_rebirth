@@ -8,9 +8,8 @@ use JetBrains\PhpStorm\Pure;
 trait RomFileValidationRulesTrait
 {
     #[Pure]
-    protected function romFileRules(array $rules = ['required']): array
+    protected function romFilenameRules(array $rules = ['required']): array
     {
-
         return [...$rules, new ValidRomFilename];
     }
 }

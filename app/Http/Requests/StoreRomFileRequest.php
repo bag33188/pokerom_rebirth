@@ -38,7 +38,7 @@ class StoreRomFileRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'filename' => $this->romFileRules()
+            'filename' => $this->romFilenameRules()
         ];
     }
 }
