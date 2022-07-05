@@ -14,7 +14,7 @@
                     <span class="order-0">
                         <a
                             class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-teal-600 rounded-lg hover:bg-teal-500 focus:ring-4 focus:outline-none focus:ring-teal-400"
-                            href="{{RomRepo::getRomFileDownloadUrl($romFile->_id)}}"
+                            href="{{RomFileRepo::getRomFileDownloadUrl($romFile->_id)}}"
                             target="_self"
                             title="{{$romFile->filename}}">
                                 <span>DOWNLOAD</span>

@@ -39,7 +39,7 @@
                                 <a class="inline-flex items-center py-2 px-4 bg-blue-500 hover:bg-blue-400 text-white font-bold
                                     p-0 border-b-4 border-blue-700 hover:border-blue-500 rounded active:border-t-4
                                     active:border-b-0 active:bg-blue-400"
-                                   href="{{RomRepo::getRomFileDownloadUrl($rom->romFile->_id)}}"
+                                   href="{{RomFileRepo::getRomFileDownloadUrl($rom->romFile->_id)}}"
                                    target="_blank"
                                    title="{{$rom->getRomFileName()}}">
                                     <span>Download!</span>
