@@ -35,12 +35,12 @@ class Rom extends Model
         return sprintf("%s.%s", $this->rom_name, strtolower($this->rom_type));
     }
 
-    public final function game(): HasOne
+    public function game(): HasOne
     {
         return $this->hasOne(Game::class, 'rom_id', 'id');
     }
 
-    public final function romFile(): HasOneDocument
+    public function romFile(): HasOneDocument
     {
         return $this->hasOne(RomFile::class, '_id', 'file_id');
     }

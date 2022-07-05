@@ -17,12 +17,12 @@ abstract class AbstractApplicationException extends Exception
         parent::__construct($message, $code, $previous);
     }
 
-    protected function isApiRequest(): bool
+    protected final function isApiRequest(): bool
     {
         return $this->request->is("api/*");
     }
 
-    protected function isLivewireRequest(): bool
+    protected final function isLivewireRequest(): bool
     {
         $livewireHttpHeader = $this->request->header('X-Livewire');
         return isset($livewireHttpHeader);

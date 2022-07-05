@@ -25,7 +25,7 @@ class RomFile extends MongoDbModel
         return MongoMethods::parseObjectId($this->getKey());
     }
 
-    public final function rom(): BelongsTo
+    public function rom(): BelongsTo
     {
         return $this->belongsTo(Rom::class, '_id', 'file_id');
     }
