@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 
 abstract class AbstractApplicationException extends Exception
 {
-    public function __construct(protected readonly Request $request, string $message, int $code = 0, ?Throwable $previous = null)
+    public function __construct(private readonly Request $request, string $message, int $code = 0, ?Throwable $previous = null)
     {
         parent::__construct($message, $code, $previous);
     }
