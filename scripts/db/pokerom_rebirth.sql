@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 05, 2022 at 10:28 PM
+-- Generation Time: Jul 06, 2022 at 01:42 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -40,7 +40,9 @@ SELECT `id`, `rom_name`, `rom_type`, /* IF (0 = FALSE, 'false', 'true') AS */ `h
 END$$
 
 DROP PROCEDURE IF EXISTS `GetAllPokeROMData`$$
-CREATE DEFINER=`bag33188`@`%` PROCEDURE `GetAllPokeROMData` ()  SQL SECURITY INVOKER SELECT `games`.`id` AS `games_id`, `games`.`game_name`, `games`.`game_type`, `games`.`date_released`, `games`.`generation`, `games`.`region`, `roms`.`id` AS `roms_id`, `roms`.`file_id`, KbToB(`roms`.`rom_size`) AS `rom_size_bytes`,  CONCAT(`roms`.`rom_name`, '.', UCASE(`roms`.`rom_type`)) AS `rom_fullname` FROM `games` RIGHT JOIN `roms` ON `roms`.`id` = `games`.`rom_id` ORDER BY `roms_id` DESC$$
+CREATE DEFINER=`bag33188`@`%` PROCEDURE `GetAllPokeROMData` ()  SQL SECURITY INVOKER SELECT `roms`.`id` AS `rom_id`, `roms`.`rom_name` AS `rom_name`, `roms`.`rom_type` AS `rom_type`, KbToB(`roms`.`rom_size`) AS `rom_size`, CONCAT(`roms`.`rom_name`, '.', UCASE(`roms`.`rom_type`)) AS `rom_filename`, `roms`.`file_id` AS `rom_file_id`,
+`games`.`id` AS `game_id`, `games`.`game_name` AS `game_name`, `games`.`game_type` AS `game_type`, `games`.`region` AS `region`, `games`.`generation` AS `generation`, `games`.`date_released` AS `date_released`
+FROM `roms` RIGHT JOIN `games` ON `roms`.`id` = `games`.`rom_id` WHERE `roms`.`has_game` = 1 AND `roms`.`has_file` = 1 AND `roms`.`game_id` IS NOT NULL AND `roms`.`file_id` IS NOT NULL ORDER BY `game_id` ASC$$
 
 DROP PROCEDURE IF EXISTS `LinkRomToFile`$$
 CREATE DEFINER=`bag33188`@`%` PROCEDURE `LinkRomToFile` (IN `ROM_FILE_ID` CHAR(24), IN `ROM_FILE_SIZE` BIGINT, IN `ROM_ID` BIGINT)  MODIFIES  DATA BEGIN
@@ -336,7 +338,7 @@ TRUNCATE TABLE `password_resets`;
 -- Table structure for table `personal_access_tokens`
 --
 -- Creation: Jun 05, 2022 at 04:47 PM
--- Last update: Jul 05, 2022 at 05:34 PM
+-- Last update: Jul 05, 2022 at 10:29 PM
 --
 
 DROP TABLE IF EXISTS `personal_access_tokens`;
@@ -366,7 +368,7 @@ TRUNCATE TABLE `personal_access_tokens`;
 --
 
 INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `name`, `token`, `abilities`, `last_used_at`, `created_at`, `updated_at`) VALUES
-(1, 'App\\Models\\User', 1, 'auth_token', 'decfe681ade402403c92ee62493bc85118f6260b48409bafb060afe67e12a78a', '[\"*\"]', '2022-07-06 00:34:40', '2022-07-04 02:35:33', '2022-07-06 00:34:40');
+(1, 'App\\Models\\User', 1, 'auth_token', 'decfe681ade402403c92ee62493bc85118f6260b48409bafb060afe67e12a78a', '[\"*\"]', '2022-07-06 05:29:22', '2022-07-04 02:35:33', '2022-07-06 05:29:22');
 
 -- --------------------------------------------------------
 
@@ -452,7 +454,7 @@ INSERT INTO `roms` (`id`, `file_id`, `game_id`, `rom_name`, `rom_size`, `rom_typ
 -- Table structure for table `sessions`
 --
 -- Creation: Jun 05, 2022 at 04:47 PM
--- Last update: Jul 05, 2022 at 08:12 PM
+-- Last update: Jul 05, 2022 at 10:36 PM
 --
 
 DROP TABLE IF EXISTS `sessions`;
@@ -479,7 +481,7 @@ TRUNCATE TABLE `sessions`;
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('536XYJxlTqFrNIZMn7llL82LZDKL4qruDHZ87TPX', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoidWtvSkdhdUpoMWI0Zkp5Smt4V3hvbnNoT28xb3lKVGZ1WjdiRzVkbiI7czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjIxOiJwYXNzd29yZF9oYXNoX3NhbmN0dW0iO3M6NjA6IiQyeSQxMCR3aXAzcXg5MVBsWERrcmouekVqb0MuL3dsSW50Z0lLM1EuckFKZ2d3UWhmWFJGaUlubURabSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDY6Imh0dHA6Ly9wb2tlcm9tX3JlYmlydGgudGVzdC9wdWJsaWMvYXBpL3ZlcnNpb24iO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1657051921);
+('536XYJxlTqFrNIZMn7llL82LZDKL4qruDHZ87TPX', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoidWtvSkdhdUpoMWI0Zkp5Smt4V3hvbnNoT28xb3lKVGZ1WjdiRzVkbiI7czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjIxOiJwYXNzd29yZF9oYXNoX3NhbmN0dW0iO3M6NjA6IiQyeSQxMCR3aXAzcXg5MVBsWERrcmouekVqb0MuL3dsSW50Z0lLM1EuckFKZ2d3UWhmWFJGaUlubURabSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDY6Imh0dHA6Ly9wb2tlcm9tX3JlYmlydGgudGVzdC9wdWJsaWMvYXBpL3ZlcnNpb24iO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1657060614);
 
 -- --------------------------------------------------------
 
@@ -635,196 +637,7 @@ ALTER TABLE `users`
 --
 ALTER TABLE `games`
   ADD CONSTRAINT `games_rom_id_foreign` FOREIGN KEY (`rom_id`) REFERENCES `roms` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
-
---
--- Metadata
---
-USE `phpmyadmin`;
-
---
--- Metadata for table failed_jobs
---
-
---
--- Truncate table before insert `pma__column_info`
---
-
-TRUNCATE TABLE `pma__column_info`;
---
--- Truncate table before insert `pma__table_uiprefs`
---
-
-TRUNCATE TABLE `pma__table_uiprefs`;
---
--- Truncate table before insert `pma__tracking`
---
-
-TRUNCATE TABLE `pma__tracking`;
---
--- Metadata for table games
---
-
---
--- Truncate table before insert `pma__column_info`
---
-
-TRUNCATE TABLE `pma__column_info`;
---
--- Truncate table before insert `pma__table_uiprefs`
---
-
-TRUNCATE TABLE `pma__table_uiprefs`;
---
--- Truncate table before insert `pma__tracking`
---
-
-TRUNCATE TABLE `pma__tracking`;
---
--- Metadata for table migrations
---
-
---
--- Truncate table before insert `pma__column_info`
---
-
-TRUNCATE TABLE `pma__column_info`;
---
--- Truncate table before insert `pma__table_uiprefs`
---
-
-TRUNCATE TABLE `pma__table_uiprefs`;
---
--- Truncate table before insert `pma__tracking`
---
-
-TRUNCATE TABLE `pma__tracking`;
---
--- Metadata for table password_resets
---
-
---
--- Truncate table before insert `pma__column_info`
---
-
-TRUNCATE TABLE `pma__column_info`;
---
--- Truncate table before insert `pma__table_uiprefs`
---
-
-TRUNCATE TABLE `pma__table_uiprefs`;
---
--- Truncate table before insert `pma__tracking`
---
-
-TRUNCATE TABLE `pma__tracking`;
---
--- Metadata for table personal_access_tokens
---
-
---
--- Truncate table before insert `pma__column_info`
---
-
-TRUNCATE TABLE `pma__column_info`;
---
--- Truncate table before insert `pma__table_uiprefs`
---
-
-TRUNCATE TABLE `pma__table_uiprefs`;
---
--- Truncate table before insert `pma__tracking`
---
-
-TRUNCATE TABLE `pma__tracking`;
---
--- Metadata for table roms
---
-
---
--- Truncate table before insert `pma__column_info`
---
-
-TRUNCATE TABLE `pma__column_info`;
---
--- Truncate table before insert `pma__table_uiprefs`
---
-
-TRUNCATE TABLE `pma__table_uiprefs`;
---
--- Dumping data for table `pma__table_uiprefs`
---
-
-INSERT INTO `pma__table_uiprefs` (`username`, `db_name`, `table_name`, `prefs`, `last_update`) VALUES
-('bag33188', 'pokerom_rebirth', 'roms', '{\"sorted_col\":\"`id` ASC\"}', '2022-07-05 18:32:38');
-
---
--- Truncate table before insert `pma__tracking`
---
-
-TRUNCATE TABLE `pma__tracking`;
---
--- Metadata for table sessions
---
-
---
--- Truncate table before insert `pma__column_info`
---
-
-TRUNCATE TABLE `pma__column_info`;
---
--- Truncate table before insert `pma__table_uiprefs`
---
-
-TRUNCATE TABLE `pma__table_uiprefs`;
---
--- Truncate table before insert `pma__tracking`
---
-
-TRUNCATE TABLE `pma__tracking`;
---
--- Metadata for table users
---
-
---
--- Truncate table before insert `pma__column_info`
---
-
-TRUNCATE TABLE `pma__column_info`;
---
--- Truncate table before insert `pma__table_uiprefs`
---
-
-TRUNCATE TABLE `pma__table_uiprefs`;
---
--- Truncate table before insert `pma__tracking`
---
-
-TRUNCATE TABLE `pma__tracking`;
---
--- Metadata for database pokerom_rebirth
---
-
---
--- Truncate table before insert `pma__bookmark`
---
-
-TRUNCATE TABLE `pma__bookmark`;
---
--- Truncate table before insert `pma__relation`
---
-
-TRUNCATE TABLE `pma__relation`;
---
--- Truncate table before insert `pma__savedsearches`
---
-
-TRUNCATE TABLE `pma__savedsearches`;
---
--- Truncate table before insert `pma__central_columns`
---
-
-TRUNCATE TABLE `pma__central_columns`;COMMIT;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
