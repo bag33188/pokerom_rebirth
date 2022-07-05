@@ -19,21 +19,12 @@
                 </button>
             </div>
             <table class="w-full text-sm text-left text-gray-500 light:text-gray-400" x-show="open" x-cloak>
-                @php
-                    function getRomDownloadUrl(string $fileId): string
-                    {
-                        $baseUrl = "/public/api";
-                        $baseFilesEndpoint = "rom-files/grid/$fileId/download";
-                        if (App::isLocal()) return "$baseUrl/dev/$baseFilesEndpoint";
-                        return "$baseUrl/$baseFilesEndpoint";
-                    }
-                @endphp
                 <thead class="bg-gray-50">
-                    <tr class="text-xs text-gray-700 uppercase light:bg-gray-700 light:text-gray-400">
-                        @for($i = 0; $i < count($romsTableColumns); $i++)
-                            <th scope="col" class="px-6 py-3">{{$romsTableColumns[$i]}}</th>
-                        @endfor
-                    </tr>
+                <tr class="text-xs text-gray-700 uppercase light:bg-gray-700 light:text-gray-400">
+                    @for($i = 0; $i < count($romsTableColumns); $i++)
+                        <th scope="col" class="px-6 py-3">{{$romsTableColumns[$i]}}</th>
+                    @endfor
+                </tr>
                 </thead>
                 <tbody class="light:bg-gray-800">
                 @foreach($roms as $rom)
@@ -48,7 +39,7 @@
                                 <a class="inline-flex items-center py-2 px-4 bg-blue-500 hover:bg-blue-400 text-white font-bold
                                     p-0 border-b-4 border-blue-700 hover:border-blue-500 rounded active:border-t-4
                                     active:border-b-0 active:bg-blue-400"
-                                   href="{{getRomDownloadUrl($rom->romFile->_id)}}"
+                                   href="{{RomRepo::getRomFileDownloadUrl($rom->romFile->_id)}}"
                                    target="_blank"
                                    title="{{$rom->getRomFileName()}}">
                                     <span>Download!</span>
@@ -68,11 +59,11 @@
                 @endforeach
                 </tbody>
                 <tfoot>
-                    <tr class="text-sm text-gray-700 uppercase light:bg-gray-700 light:text-gray-400">
-                        <td class="px-6 py-3">Total Count:&nbsp;<span class="font-semibold">{{count($roms)}}</span></td>
-                        <td class="px-6 py-3">Total Size:&nbsp;<span class="font-semibold">{{$roms_total_size}} Bytes</span>
-                        </td>
-                    </tr>
+                <tr class="text-sm text-gray-700 uppercase light:bg-gray-700 light:text-gray-400">
+                    <td class="px-6 py-3">Total Count:&nbsp;<span class="font-semibold">{{count($roms)}}</span></td>
+                    <td class="px-6 py-3">Total Size:&nbsp;<span class="font-semibold">{{$roms_total_size}} Bytes</span>
+                    </td>
+                </tr>
                 </tfoot>
             </table>
         @endif

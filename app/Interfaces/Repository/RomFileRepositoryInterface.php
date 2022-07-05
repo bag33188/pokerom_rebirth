@@ -25,4 +25,6 @@ interface RomFileRepositoryInterface
     public function getFileLengthsMebibytes(): Collection;
 
     public function calcTotalSizeOfAllRomFiles(): int;
+
+    public static function getRomFileDownloadUrl(string $romFileId): string;
 }

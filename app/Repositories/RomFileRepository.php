@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App;
 use App\Interfaces\Repository\RomFileRepositoryInterface;
 use App\Models\Rom;
 use App\Models\RomFile;
@@ -63,5 +64,13 @@ class RomFileRepository implements RomFileRepositoryInterface
     public function calcTotalSizeOfAllRomFiles(): int
     {
         return RomFile::sum('length');
+    }
+
+    public static function getRomFileDownloadUrl(string $romFileId): string
+    {
+        $baseUrl = "/public/api";
+        $baseFilesEndpoint = "rom-files/grid/$romFileId/download";
+        if (App::isLocal()) return "$baseUrl/dev/$baseFilesEndpoint";
+        return "$baseUrl/$baseFilesEndpoint";
     }
 }

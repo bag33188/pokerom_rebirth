@@ -66,6 +66,6 @@ if (App::environment('local')) {
     Route::prefix('dev')->group(function () {
         // todo: find/add a way to send token to download link (in order to authenticate) (maybe use a POST request???)
         Route::get('/rom-files/grid/{romFileId}/download', [RomFileController::class, 'download']);
-        // Route::post('/rom-files/{fileId}/download', [RomFileController::class, 'download']);
+        // Route::post('/rom-files/{romFileId}/download', [RomFileController::class, 'download']);
     });
 }

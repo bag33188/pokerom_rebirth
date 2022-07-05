@@ -10,20 +10,11 @@
             <x-list-item>Chunk Size: {{$romFile->chunkSize * 8}} Bits</x-list-item>
             <x-list-item>MD5 Hash: {{$romFile->md5}}</x-list-item>
             <x-list-item>
-                @php
-                    function getRomFileDownloadUrl(string $fileId): string
-                    {
-                       $baseUrl = "/public/api";
-                       $baseFilesEndpoint = "rom-files/grid/$fileId/download";
-                       if (App::isLocal()) return "$baseUrl/dev/$baseFilesEndpoint";
-                       return "$baseUrl/$baseFilesEndpoint";
-                    }
-                @endphp
                 <div class="inline-flex flex-row justify-between w-full">
                     <span class="order-0">
                         <a
                             class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-teal-600 rounded-lg hover:bg-teal-500 focus:ring-4 focus:outline-none focus:ring-teal-400"
-                            href="{{getRomFileDownloadUrl($romFile->_id)}}"
+                            href="{{RomRepo::getRomFileDownloadUrl($romFile->_id)}}"
                             target="_self"
                             title="{{$romFile->filename}}">
                                 <span>DOWNLOAD</span>
