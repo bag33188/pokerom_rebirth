@@ -12,7 +12,7 @@
             <x-list-item>
                 <div class="inline-flex flex-row justify-between w-full">
                     <span class="order-0">
-                        <x-rom-file-download :rom-file-id="$romFile->_id"/>
+                        <x-rom-file-download :rom-file="$romFile" />
                     </span>
                     <span class="order-1">@include('rom-file.delete', $romFile)</span>
                 </div>

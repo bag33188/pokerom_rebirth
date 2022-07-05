@@ -79,5 +79,10 @@ class RomFileController extends ViewController
         $this->romFileDataService->deleteRomFile($romFile);
         return response()->redirectTo(route('rom-files.index'))->banner("$romFile->filename deleted!");
     }
+
+    public function download(RomFile $romFile)
+    {
+        return $this->romFileDataService->downloadRomFile($romFile);
+    }
 }
 

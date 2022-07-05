@@ -2,6 +2,7 @@
 
 namespace App\View\Components;
 
+use App\Models\RomFile;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -9,7 +10,7 @@ use Illuminate\View\Component;
 
 class RomFileDownload extends Component
 {
-    public string $romFileId;
+    public RomFile $romFile;
     public bool $usePopupButtonStyle;
 
     /**
@@ -17,9 +18,9 @@ class RomFileDownload extends Component
      *
      * @return void
      */
-    public function __construct(string $romFileId, bool $usePopupButtonStyle = false)
+    public function __construct(RomFile $romFile, bool $usePopupButtonStyle = false)
     {
-        $this->romFileId = $romFileId;
+        $this->romFile = $romFile;
         $this->usePopupButtonStyle = $usePopupButtonStyle;
     }
 

@@ -1,5 +1,5 @@
 <form {{$attributes->merge(['class'=>'inline'])}}
-      action="{{ route('api.rom-files.download', ['romFileId' => $romFileId]) }}"
+      action="{{ route('rom-files.download', ['romFile' => $romFile]) }}"
       method="POST">
     @method('POST')
     @csrf

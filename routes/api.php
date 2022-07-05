@@ -38,10 +38,8 @@ Route::middleware('guest')->group(function () {
 Route::middleware('auth:sanctum')->group(function () {
     // general api routes
     Route::apiResources(['/roms' => RomController::class, '/games' => GameController::class]);
-    Route::apiResource('/users', UserController::class)->only('index', 'show', 'destroy')
-        ->parameter('user', 'userId');
-    Route::apiResource('/rom-files', RomFileController::class)->only('index', 'show', 'destroy')
-        ->parameter('file', 'romFileId');
+    Route::apiResource('/users', UserController::class)->only('index', 'show', 'destroy');
+    Route::apiResource('/rom-files', RomFileController::class)->only('index', 'show', 'destroy');
 
     // api route groups
     Route::prefix('auth')->group(function () {
@@ -61,14 +59,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/games/{gameId}/rom', [GameController::class, 'indexRom']);
     Route::patch('/roms/{romId}/linkFile', [RomController::class, 'linkRomToFile']);
 });
-
-
-Route::post('/rom-files/grid/{romFileId}/download', [RomFileController::class, 'download'])
-    ->middleware([
-        'auth:sanctum',
-        config('jetstream.auth_session'),
-        'verified'
-    ])->name('api.rom-files.download');
 
 if (App::environment('local')) {
     Route::prefix('dev')->group(function () {

@@ -36,6 +36,7 @@ Route::middleware([
         Route::get('/info/{romFile}', [RomFileController::class, 'show'])->name('rom-files.show');
         Route::get('/create', [RomFileController::class, 'create'])->name('rom-files.create')->middleware('admin');
         Route::post('/store', [RomFileController::class, 'store'])->name('rom-files.store');
+        Route::post('/{romFile}/download', [RomFileController::class, 'download'])->name('rom-files.download');
         Route::delete('/delete/{romFile}', [RomFileController::class, 'destroy'])->name('rom-files.delete');
     });
     // livewire routes
@@ -52,3 +53,4 @@ Route::middleware([
         Route::get('/edit/{gameId}', EditGame::class)->name('games.edit')->middleware('admin');
     });
 });
+
