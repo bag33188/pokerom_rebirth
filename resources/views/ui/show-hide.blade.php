@@ -5,6 +5,7 @@
         }
     </style>
 @endpush
+{{-- variables: text, initialState --}}
 <div class="inline-flex flex-row">
     <p class="inline">
         @php
