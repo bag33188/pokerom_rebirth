@@ -1,10 +1,10 @@
 <?php
 
-namespace Utils\Modules\GridFS;
-
 /*
  * GridFS Vendor Config
  */
+
+namespace Utils\Modules\GridFS\Vendor;
 
 $template = <<<'php'
 return [

@@ -5,14 +5,14 @@ namespace App\Repositories;
 use App\Interfaces\Repository\RomFileRepositoryInterface;
 use App\Models\Rom;
 use App\Models\RomFile;
-use App\Services\GridFS\Queries\RomFilesAggregationsTrait;
+use App\Services\GridFS\Queries\RomFiles;
 use Illuminate\Database\Eloquent\Collection;
 use Jenssegers\Mongodb\Helpers\EloquentBuilder;
 use Utils\Classes\FileMethods;
 
 class RomFileRepository implements RomFileRepositoryInterface
 {
-    use RomFilesAggregationsTrait;
+    use RomFiles\CalcLengthGibibytes, RomFiles\CalcLengthKibibytes, RomFiles\CalcLengthMebibytes;
 
     public function findFileIfExists(string $romFileId): RomFile
     {

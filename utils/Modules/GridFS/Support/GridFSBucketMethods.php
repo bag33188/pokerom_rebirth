@@ -1,11 +1,12 @@
 <?php
 
-namespace Utils\Modules\GridFS;
+namespace Utils\Modules\GridFS\Support;
 
 use MongoDB\BSON\ObjectId;
 use MongoDB\GridFS\Bucket;
 use Utils\Classes\FileMethods;
 use Utils\Modules\FileDownloader;
+use Utils\Modules\GridFS\GridFS;
 
 class GridFSBucketMethods extends GridFS implements GridFSBucketMethodsInterface
 {

@@ -1,10 +1,12 @@
 <?php
 
-namespace Utils\Modules\GridFS;
+namespace Utils\Modules\GridFS\Database;
 
 use MongoDB\Client as MongoClient;
 use MongoDB\Database;
 use MongoDB\GridFS\Bucket;
+use Utils\Modules\GridFS\GridFS;
+use Utils\Modules\GridFS\Support\GridFSBucketMethods;
 
 /**
  * GridFS Connection Class for connection to a GridFS MongoDB Database

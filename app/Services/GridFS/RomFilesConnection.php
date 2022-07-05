@@ -2,7 +2,7 @@
 
 namespace App\Services\GridFS;
 
-use Utils\Modules\GridFS\AbstractGridFSConnection as GridFSConnection;
+use Utils\Modules\GridFS\Database\AbstractGridFSConnection as GridFSConnection;
 
 class RomFilesConnection extends GridFSConnection
 {
