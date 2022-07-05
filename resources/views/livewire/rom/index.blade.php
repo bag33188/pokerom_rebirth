@@ -12,7 +12,7 @@
             <div class="w-full flex justify-center">
                 <button type="button" @click="open = !open"
                         class="bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-2 px-4 my-4 shadow-md rounded">
-                    @include("ui.show-hide", ['text' => 'ROMs', 'initialState' => \App\Enums\DisplayStatesEnum::SHOW->value])
+                    @include("ui.show-hide", ['text' => 'ROMs', 'initialState' => \App\Enums\DisplayStateEnum::SHOW->value])
                 </button>
             </div>
             <table class="w-full text-sm text-left text-gray-500 light:text-gray-400" x-show="open" x-cloak>
@@ -33,7 +33,7 @@
                         <td class="px-6 py-4">{{$rom->has_game ? $rom->game->game_name : 'N/A'}}</td>
                         <td class="px-6 py-4">
                             @if($rom->has_file)
-                                <x-rom-file-download :use-popup-button-style="true" :rom-file="$rom->romFile" />
+                                <x-rom-file-download :use-popup-button-style="true" :rom-file="$rom->romFile"/>
                             @else
                                 <p class="font-normal text-lg">No File yet :(</p>
                             @endif

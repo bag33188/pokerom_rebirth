@@ -2,7 +2,7 @@
 
 namespace App\Enums;
 
-enum DisplayStatesEnum: string
+enum DisplayStateEnum: string
 {
     /** ui-state : show */
     case SHOW = 'show';

@@ -10,8 +10,8 @@
     <p class="inline">
         @php
             $displayStates = [
-              'show'=>\App\Enums\DisplayStatesEnum::SHOW->value,
-              'hide'=>\App\Enums\DisplayStatesEnum::HIDE->value
+              'show'=>\App\Enums\DisplayStateEnum::SHOW->value,
+              'hide'=>\App\Enums\DisplayStateEnum::HIDE->value
             ];
         @endphp
         <span x-show="open" {!!$initialState == $displayStates['hide'] ? 'x-cloak' : ''!!}>Hide</span>
