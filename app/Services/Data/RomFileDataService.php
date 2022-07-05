@@ -13,7 +13,7 @@ use App\Models\RomFile;
 use RomFileRepo;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 use Symfony\Component\HttpFoundation\StreamedResponse;
-use Utils\Modules\JsonDataResponse;
+use Utils\Classes\JsonDataResponse;
 
 class RomFileDataService implements RomFileDataServiceInterface
 {

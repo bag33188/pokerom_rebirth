@@ -7,7 +7,7 @@ use App\Interfaces\Service\RomDataServiceInterface;
 use App\Models\Rom;
 use RomRepo;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
-use Utils\Modules\JsonDataResponse;
+use Utils\Classes\JsonDataResponse;
 
 class RomDataService implements RomDataServiceInterface
 {
