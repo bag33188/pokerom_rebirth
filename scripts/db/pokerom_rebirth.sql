@@ -40,11 +40,11 @@ DROP PROCEDURE IF EXISTS `GetAllPokeROMData`$$
 CREATE DEFINER=`bag33188`@`%` PROCEDURE `GetAllPokeROMData` ()   SELECT `games`.`id` AS `games_id`, `games`.`game_name`, `games`.`game_type`, `games`.`date_released`, `games`.`generation`, `games`.`region`, `roms`.`id` AS `roms_id`, `roms`.`file_id`, KbToB(`roms`.`rom_size`) AS `rom_size_bytes`,  CONCAT(`roms`.`rom_name`, '.', UCASE(`roms`.`rom_type`)) AS `rom_fullname` FROM `games` RIGHT JOIN `roms` ON `roms`.`id` = `games`.`rom_id` ORDER BY `roms_id` DESC$$
 
 DROP PROCEDURE IF EXISTS `LinkRomToFile`$$
-CREATE DEFINER=`bag33188`@`%` PROCEDURE `LinkRomToFile` (IN `FILE_OBJ_ID` CHAR(24), IN `FILE_LENGTH` BIGINT, IN `ROM_ID` BIGINT)  SQL SECURITY INVOKER BEGIN
+CREATE DEFINER=`bag33188`@`%` PROCEDURE `LinkRomToFile` (IN ROM_FILE_ID CHAR(24), IN ROM_FILE_SIZE BIGINT, IN `ROM_ID` BIGINT)  SQL SECURITY INVOKER BEGIN
 START TRANSACTION;
   UPDATE `roms`
-  SET `file_id` = `FILE_OBJ_ID`,
-      `rom_size` = CEIL(`FILE_LENGTH` / 1024), -- get kilobytes value from bytes
+  SET `file_id` = ROM_FILE_ID,
+      `rom_size` = CEIL(ROM_FILE_SIZE / 1024), -- get kilobytes value from bytes
       `has_file` = TRUE
   WHERE `id` = `ROM_ID`;
 COMMIT;
