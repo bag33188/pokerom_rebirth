@@ -2,6 +2,7 @@
 
 namespace App\Exceptions;
 
+use App;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
@@ -9,6 +10,7 @@ use MongoDB\Driver\Exception\BulkWriteException;
 use MongoDB\Driver\Exception\WriteException;
 use PDOException;
 use Psr\Log\LogLevel;
+use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Throwable;
 
@@ -55,7 +57,9 @@ class Handler extends ExceptionHandler
         $this->reportable(function (Throwable $e) {
             //
         });
-        $this->renderable(fn(QueryException $e) => throw new SqlQueryException($e->getMessage()));
-        $this->renderable(fn(BulkWriteException $e) => throw new MongoWriteException($e->getMessage()));
+        $this->renderable(fn(BulkWriteException $e) => throw App::make(MongoWriteException::class,
+            ['message' => $e->getMessage(), 'code' => ResponseAlias::HTTP_CONFLICT]));
+        $this->renderable(fn(QueryException $e) => throw App::make(SqlQueryException::class,
+            ['message' => $e->getMessage(), 'code' => ResponseAlias::HTTP_CONFLICT]));
     }
 }

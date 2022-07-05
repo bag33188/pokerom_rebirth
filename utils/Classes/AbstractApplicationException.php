@@ -7,16 +7,23 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
+# use JetBrains\PhpStorm\Internal\LanguageLevelTypeAware;
+
 abstract class AbstractApplicationException extends Exception
 {
-    protected static function isApiRequest(Request $request): bool
+    public function __construct(protected readonly Request $request, string $message, int $code = 0, ?Throwable $previous = null)
     {
-        return $request->is("api/*");
+        parent::__construct($message, $code, $previous);
     }
 
-    protected static function isLivewireRequest(Request $request): bool
+    protected function isApiRequest(): bool
     {
-        $livewireHttpHeader = $request->header('X-Livewire');
+        return $this->request->is("api/*");
+    }
+
+    protected function isLivewireRequest(): bool
+    {
+        $livewireHttpHeader = $this->request->header('X-Livewire');
         return isset($livewireHttpHeader);
     }
 
