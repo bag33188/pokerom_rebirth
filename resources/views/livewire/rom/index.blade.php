@@ -36,15 +36,7 @@
                         <td class="px-6 py-4">{{$rom->has_game ? $rom->game->game_name : 'N/A'}}</td>
                         <td class="px-6 py-4">
                             @if($rom->has_file)
-                                <a class="inline-flex items-center py-2 px-4 bg-blue-500 hover:bg-blue-400 text-white font-bold
-                                    p-0 border-b-4 border-blue-700 hover:border-blue-500 rounded active:border-t-4
-                                    active:border-b-0 active:bg-blue-400"
-                                   href="{{RomFileRepo::getRomFileDownloadUrl($rom->romFile->_id)}}"
-                                   target="_blank"
-                                   title="{{$rom->getRomFileName()}}">
-                                    <span>Download!</span>
-                                    @include('partials._download-icon')
-                                </a>
+                                <x-rom-file-download :rom-file-id="$rom->romFile->_id"/>
                             @else
                                 <p class="font-normal text-lg">No File yet :(</p>
                             @endif

@@ -60,12 +60,15 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/rom-files/{romFileId}/rom', [RomFileController::class, 'indexRom']);
     Route::get('/games/{gameId}/rom', [GameController::class, 'indexRom']);
     Route::patch('/roms/{romId}/linkFile', [RomController::class, 'linkRomToFile']);
+
 });
 
 if (App::environment('local')) {
     Route::prefix('dev')->group(function () {
-        // todo: find/add a way to send token to download link (in order to authenticate) (maybe use a POST request???)
         Route::get('/rom-files/grid/{romFileId}/download', [RomFileController::class, 'download']);
-        // Route::post('/rom-files/{romFileId}/download', [RomFileController::class, 'download']);
     });
 }
+
+Route::post('/rom-files/{romFileId}/download', [RomFileController::class, 'download'])->middleware(['auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified'])->name('rom-file.download');

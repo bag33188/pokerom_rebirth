@@ -12,14 +12,7 @@
             <x-list-item>
                 <div class="inline-flex flex-row justify-between w-full">
                     <span class="order-0">
-                        <a
-                            class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-teal-600 rounded-lg hover:bg-teal-500 focus:ring-4 focus:outline-none focus:ring-teal-400"
-                            href="{{RomFileRepo::getRomFileDownloadUrl($romFile->_id)}}"
-                            target="_self"
-                            title="{{$romFile->filename}}">
-                                <span>DOWNLOAD</span>
-                                @include('partials._download-icon')
-                        </a>
+                        <x-rom-file-download :rom-file-id="$romFile->_id"/>
                     </span>
                     <span class="order-1">@include('rom-file.delete', $romFile)</span>
                 </div>
