@@ -3,8 +3,7 @@
 namespace App\View\Components;
 
 use App\Models\RomFile;
-use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\View\Factory;
+use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
@@ -27,9 +26,9 @@ class RomFileDownload extends Component
     /**
      * Get the view / contents that represent the component.
      *
-     * @return Application|Factory|View
+     * @return View|string|Closure
      */
-    public function render(): View|Factory|Application
+    public function render(): View|string|Closure
     {
         return view('components.rom-file-download');
     }
