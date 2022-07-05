@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 04, 2022 at 12:27 AM
+-- Generation Time: Jul 05, 2022 at 03:01 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -33,18 +33,18 @@ DELIMITER $$
 --
 DROP PROCEDURE IF EXISTS `FindRomsWithNoGame`$$
 CREATE DEFINER=`bag33188`@`%` PROCEDURE `FindRomsWithNoGame` ()   BEGIN
-SELECT `id`, `rom_name`, `rom_type`, /* IF (0 = FALSE, 'false', 'true') AS */`has_game`, `game_id` FROM `roms` WHERE `has_game` = FALSE AND `game_id` IS NULL ORDER BY `rom_name` DESC;
+SELECT `id`, `rom_name`, `rom_type`, /* IF (0 = FALSE, 'false', 'true') AS */ `has_game`, `game_id` FROM `roms` WHERE `has_game` = FALSE AND `game_id` IS NULL ORDER BY `rom_name` DESC;
 END$$
 
 DROP PROCEDURE IF EXISTS `GetAllPokeROMData`$$
 CREATE DEFINER=`bag33188`@`%` PROCEDURE `GetAllPokeROMData` ()   SELECT `games`.`id` AS `games_id`, `games`.`game_name`, `games`.`game_type`, `games`.`date_released`, `games`.`generation`, `games`.`region`, `roms`.`id` AS `roms_id`, `roms`.`file_id`, KbToB(`roms`.`rom_size`) AS `rom_size_bytes`,  CONCAT(`roms`.`rom_name`, '.', UCASE(`roms`.`rom_type`)) AS `rom_fullname` FROM `games` RIGHT JOIN `roms` ON `roms`.`id` = `games`.`rom_id` ORDER BY `roms_id` DESC$$
 
 DROP PROCEDURE IF EXISTS `LinkRomToFile`$$
-CREATE DEFINER=`bag33188`@`%` PROCEDURE `LinkRomToFile` (IN ROM_FILE_ID CHAR(24), IN ROM_FILE_SIZE BIGINT, IN `ROM_ID` BIGINT)  SQL SECURITY INVOKER BEGIN
+CREATE DEFINER=`bag33188`@`%` PROCEDURE `LinkRomToFile` (IN `ROM_FILE_ID` CHAR(24), IN `ROM_FILE_SIZE` BIGINT, IN `ROM_ID` BIGINT)  SQL SECURITY INVOKER BEGIN
 START TRANSACTION;
   UPDATE `roms`
-  SET `file_id` = ROM_FILE_ID,
-      `rom_size` = CEIL(ROM_FILE_SIZE / 1024), -- get kilobytes value from bytes
+  SET `file_id` = `ROM_FILE_ID`,
+      `rom_size` = CEIL(`ROM_FILE_SIZE` / 1024), -- get kilobytes value from bytes
       `has_file` = TRUE
   WHERE `id` = `ROM_ID`;
 COMMIT;
@@ -144,7 +144,7 @@ TRUNCATE TABLE `failed_jobs`;
 -- Table structure for table `games`
 --
 -- Creation: Jul 03, 2022 at 07:31 PM
--- Last update: Jul 03, 2022 at 08:48 PM
+-- Last update: Jul 04, 2022 at 11:04 PM
 --
 
 DROP TABLE IF EXISTS `games`;
@@ -254,7 +254,6 @@ DELIMITER ;
 -- Table structure for table `migrations`
 --
 -- Creation: Jun 05, 2022 at 04:47 PM
--- Last update: Jul 03, 2022 at 07:33 PM
 --
 
 DROP TABLE IF EXISTS `migrations`;
@@ -318,7 +317,7 @@ TRUNCATE TABLE `password_resets`;
 -- Table structure for table `personal_access_tokens`
 --
 -- Creation: Jun 05, 2022 at 04:47 PM
--- Last update: Jul 03, 2022 at 10:26 PM
+-- Last update: Jul 04, 2022 at 11:54 PM
 --
 
 DROP TABLE IF EXISTS `personal_access_tokens`;
@@ -348,7 +347,7 @@ TRUNCATE TABLE `personal_access_tokens`;
 --
 
 INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `name`, `token`, `abilities`, `last_used_at`, `created_at`, `updated_at`) VALUES
-(1, 'App\\Models\\User', 1, 'auth_token', 'decfe681ade402403c92ee62493bc85118f6260b48409bafb060afe67e12a78a', '[\"*\"]', '2022-07-04 05:26:14', '2022-07-04 02:35:33', '2022-07-04 05:26:14');
+(1, 'App\\Models\\User', 1, 'auth_token', 'decfe681ade402403c92ee62493bc85118f6260b48409bafb060afe67e12a78a', '[\"*\"]', '2022-07-05 06:54:38', '2022-07-04 02:35:33', '2022-07-05 06:54:38');
 
 -- --------------------------------------------------------
 
@@ -356,7 +355,7 @@ INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `n
 -- Table structure for table `roms`
 --
 -- Creation: Jul 03, 2022 at 07:21 PM
--- Last update: Jul 03, 2022 at 08:48 PM
+-- Last update: Jul 05, 2022 at 12:56 AM
 --
 
 DROP TABLE IF EXISTS `roms`;
@@ -434,7 +433,7 @@ INSERT INTO `roms` (`id`, `file_id`, `game_id`, `rom_name`, `rom_size`, `rom_typ
 -- Table structure for table `sessions`
 --
 -- Creation: Jun 05, 2022 at 04:47 PM
--- Last update: Jul 03, 2022 at 10:25 PM
+-- Last update: Jul 05, 2022 at 12:56 AM
 --
 
 DROP TABLE IF EXISTS `sessions`;
@@ -461,7 +460,7 @@ TRUNCATE TABLE `sessions`;
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('sC2Trn1PBkdYNOsA4ddqPnNh5a19SYVp28PrurmG', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiTzIwSFMyWE5Ta05TWWc3R3FJWGQ4Q2hpSXM0d05DMDlQUnBoSzVBNSI7czozOiJ1cmwiO2E6MDp7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjQ2OiJodHRwOi8vcG9rZXJvbV9yZWJpcnRoLnRlc3QvcHVibGljL2FwaS92ZXJzaW9uIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjIxOiJwYXNzd29yZF9oYXNoX3NhbmN0dW0iO3M6NjA6IiQyeSQxMCR3aXAzcXg5MVBsWERrcmouekVqb0MuL3dsSW50Z0lLM1EuckFKZ2d3UWhmWFJGaUlubURabSI7fQ==', 1656887158);
+('OUONrf4XLCSwN9wBZ7IdPlWlOSJ5p3HZzixGFbJ9', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiblNNRTJiclpnVzNyRkFMR0oyZXQ4cDl0Q2tTaThTbXdYcHVPOGZYUiI7czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjIxOiJwYXNzd29yZF9oYXNoX3NhbmN0dW0iO3M6NjA6IiQyeSQxMCR3aXAzcXg5MVBsWERrcmouekVqb0MuL3dsSW50Z0lLM1EuckFKZ2d3UWhmWFJGaUlubURabSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDY6Imh0dHA6Ly9wb2tlcm9tX3JlYmlydGgudGVzdC9wdWJsaWMvYXBpL3ZlcnNpb24iO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1656982615);
 
 -- --------------------------------------------------------
 
@@ -469,7 +468,6 @@ INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, 
 -- Table structure for table `users`
 --
 -- Creation: Jun 05, 2022 at 04:47 PM
--- Last update: Jul 03, 2022 at 09:02 PM
 --
 
 DROP TABLE IF EXISTS `users`;
