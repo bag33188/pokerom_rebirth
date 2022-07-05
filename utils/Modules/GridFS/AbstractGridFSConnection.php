@@ -11,16 +11,13 @@ use MongoDB\GridFS\Bucket;
  *
  * _Constructor can accept a {@see AbstractGridFSDatabase GridFSDatabase} Object_
  */
-abstract class AbstractGridFSConnection
+abstract class AbstractGridFSConnection extends GridFS
 {
-    /** @var string name of gridfs bucket (default is `fs`) */
-    protected readonly string $bucketName;
+    public readonly string $bucketName;
 
-    /** @var string name of mongodb database */
-    protected readonly string $databaseName;
+    public readonly string $databaseName;
 
-    /** @var int size to store chunked files as */
-    protected readonly int $chunkSize;
+    public readonly int $chunkSize;
 
     /** @var string mongodb connection string */
     protected readonly string $dsn;

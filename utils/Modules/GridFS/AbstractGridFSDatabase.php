@@ -5,7 +5,7 @@ namespace Utils\Modules\GridFS;
 /**
  * GridFS Database Class for defining a MongoDB Database
  */
-abstract class AbstractGridFSDatabase
+abstract class AbstractGridFSDatabase extends GridFS
 {
     public readonly string $bucketName;
     public readonly string $databaseName;

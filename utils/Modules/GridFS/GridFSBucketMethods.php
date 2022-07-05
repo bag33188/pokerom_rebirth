@@ -7,7 +7,7 @@ use MongoDB\GridFS\Bucket;
 use Utils\Classes\FileMethods;
 use Utils\Modules\FileDownloader;
 
-class GridFSBucketMethods implements GridFSBucketMethodsInterface
+class GridFSBucketMethods extends GridFS implements GridFSBucketMethodsInterface
 {
     private readonly Bucket $bucket;
 

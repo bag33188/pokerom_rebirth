@@ -3,7 +3,7 @@
 namespace App\Interfaces\Service;
 
 use App\Models\Rom;
-use Utils\Classes\JsonDataResponse;
+use Utils\Modules\JsonDataResponse;
 
 interface RomDataServiceInterface
 {

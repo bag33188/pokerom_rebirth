@@ -6,7 +6,7 @@ use App\Interfaces\Action\UserActionsInterface;
 use App\Interfaces\Service\UserDataServiceInterface;
 use App\Models\User;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
-use Utils\Classes\JsonDataResponse;
+use Utils\Modules\JsonDataResponse;
 
 class UserDataService implements UserDataServiceInterface
 {

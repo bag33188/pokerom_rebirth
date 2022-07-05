@@ -8,7 +8,7 @@
  */
 
 // load `chars.php` constants
-include_once "chars.php";
+include_once "chars.inc.php";
 
 // General Entities //
 

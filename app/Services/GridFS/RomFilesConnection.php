@@ -6,9 +6,9 @@ use Utils\Modules\GridFS\AbstractGridFSConnection as GridFSConnection;
 
 class RomFilesConnection extends GridFSConnection
 {
-    protected readonly string $bucketName;
-    protected readonly string $databaseName;
-    protected readonly int $chunkSize;
+    public readonly string $bucketName;
+    public readonly string $databaseName;
+    public readonly int $chunkSize;
     protected readonly string $dsn;
 
     public function __construct(private readonly RomFilesDatabase $romFilesDatabase)
