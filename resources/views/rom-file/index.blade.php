@@ -9,7 +9,7 @@
 @endphp
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="text-center text-lg">Pok&eacute;mon ROM Files</h2>
+        <h2 class="text-center text-lg">Pok&#xE9;mon ROM Files</h2>
     </x-slot>
     @unless(sizeof($romFiles) > 0)
         <h2 class="text-center text-lg mt-7">No ROM Files Exist in database</h2>
