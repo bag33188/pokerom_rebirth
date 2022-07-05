@@ -10,8 +10,6 @@ use MongoDB\Driver\Exception\WriteException;
 use PDOException;
 use Psr\Log\LogLevel;
 use Symfony\Component\HttpKernel\Exception\HttpException;
-use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -57,11 +55,7 @@ class Handler extends ExceptionHandler
         $this->reportable(function (Throwable $e) {
             //
         });
-
-        $this->renderable(fn(NotFoundHttpException $e) => throw new NotFoundException($e->getMessage()));
         $this->renderable(fn(QueryException $e) => throw new SqlQueryException($e->getMessage()));
-        $this->renderable(fn(BulkWriteException $e) => throw new MongoBulkException($e->getMessage()));
-        $this->renderable(fn(MethodNotAllowedHttpException $e) => throw new MethodNotAllowedException($e->getMessage()));
-        $this->renderable(fn(HttpException $e) => throw new GeneralHttpException($e->getMessage(), $e->getStatusCode()));
+        $this->renderable(fn(BulkWriteException $e) => throw new MongoWriteException($e->getMessage()));
     }
 }

@@ -6,7 +6,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
-class SqlQueryException extends Exception
+class MongoWriteException extends Exception
 {
     public function render(Request $request)
     {
