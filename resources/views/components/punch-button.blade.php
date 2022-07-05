@@ -1,2 +1,4 @@
 @props(['type', 'text'])
-<button type="{{$type}}" {{$attributes->merge(['class'=>'punch'])}}>{{$text}}</button>
+<div {{$attributes->merge(['class'=>'inline-block'])}}>
+    <button type="{{$type}}" class="punch">{{$text}}</button>
+</div>
