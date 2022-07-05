@@ -28,7 +28,7 @@ abstract class AbstractApplicationException extends Exception
         return isset($livewireHttpHeader);
     }
 
-    abstract public function render(Request $request): bool|JsonResponse|RedirectResponse;
+    abstract public function render(Request $request): false|JsonResponse|RedirectResponse;
 
     abstract public function report(): bool|null;
 }

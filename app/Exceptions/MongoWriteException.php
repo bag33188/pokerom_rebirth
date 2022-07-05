@@ -9,7 +9,7 @@ use Utils\Classes\AbstractApplicationException as ApplicationException;
 
 class MongoWriteException extends ApplicationException
 {
-    public function render(Request $request): bool|JsonResponse|RedirectResponse
+    public function render(Request $request): false|JsonResponse|RedirectResponse
     {
         if (!$this->isApiRequest() && !$this->isLivewireRequest()) {
             return redirect()->to(url()->previous())->dangerBanner($this->getMessage());
