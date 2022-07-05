@@ -19,4 +19,9 @@ class SqlQueryException extends ApplicationException
         }
         return false;
     }
+
+    public function report(): ?bool
+    {
+        return false;
+    }
 }

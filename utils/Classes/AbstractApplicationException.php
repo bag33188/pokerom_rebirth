@@ -29,4 +29,6 @@ abstract class AbstractApplicationException extends Exception
     }
 
     abstract public function render(Request $request): bool|JsonResponse|RedirectResponse;
+
+    abstract public function report(): bool|null;
 }
