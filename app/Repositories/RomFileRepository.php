@@ -7,7 +7,7 @@ use App\Models\Rom;
 use App\Models\RomFile;
 use App\Services\GridFS\RomFilesAggregationsTrait;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Query\Builder;
+use Jenssegers\Mongodb\Helpers\EloquentBuilder;
 use Utils\Modules\FileMethods;
 
 class RomFileRepository implements RomFileRepositoryInterface
@@ -36,14 +36,16 @@ class RomFileRepository implements RomFileRepositoryInterface
 
     public function searchForRomMatchingFile(string $romFileId): ?Rom
     {
-        list($romName, $romExtension) = FileMethods::splitFilenameIntoParts($this->findFileIfExists($romFileId)->filename);
+        list($romName, $romExtension) =
+            FileMethods::splitFilenameIntoParts($this->findFileIfExists($romFileId)->filename);
         return Rom::where([
             ['rom_name', '=', $romName, 'and'],
             ['rom_type', '=', $romExtension, 'and']
-        ])->where(function (Builder $query) {
-            $query->where('has_file', '=', FALSE)
+        ])->where(function (EloquentBuilder $query) {
+            $query
+                ->where('has_file', '=', FALSE)
                 ->orWhere('file_id', '=', NULL);
-        })->first();
+        })->limit(1)->first();
     }
 
     public function getFileLengthsKibibytes(): Collection
