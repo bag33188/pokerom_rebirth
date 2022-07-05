@@ -49,5 +49,5 @@ abstract class AbstractGridFSDatabase
      *
      * @return string
      */
-    abstract public static function getMongoURI(): string;
+    abstract public static function mongoURI(): string;
 }

@@ -20,7 +20,7 @@ class RomFilesDatabase extends GridFSDatabase
         $this->chunkSize = $gfsConfig['chunkSize'];
     }
 
-    public final static function getMongoURI(): string
+    public final static function mongoURI(): string
     {
         $mongoConfig = MongoMethods::getMongoConfig();
 

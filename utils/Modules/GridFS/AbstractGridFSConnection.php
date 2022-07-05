@@ -14,15 +14,19 @@ use MongoDB\GridFS\Bucket;
 abstract class AbstractGridFSConnection
 {
     /** @var string name of gridfs bucket (default is `fs`) */
-    protected string $bucketName;
+    protected readonly string $bucketName;
+
     /** @var string name of mongodb database */
-    protected string $databaseName;
+    protected readonly string $databaseName;
+
     /** @var int size to store chunked files as */
-    protected int $chunkSize;
+    protected readonly int $chunkSize;
+
     /** @var string mongodb connection string */
-    protected string $dsn;
+    protected readonly string $dsn;
+
     /** @var Bucket gridfs bucket object */
-    protected Bucket $bucket;
+    private Bucket $bucket;
 
     public function __construct()
     {
@@ -32,10 +36,12 @@ abstract class AbstractGridFSConnection
 
     /**
      * Set all connection values
-     *  + {@link bucketName bucketName}
-     *  + {@link chunkSize chunkSize}
-     *  + {@link databaseName databaseName}
-     *  + {@link dsn dsn}, see {@see AbstractGridFSDatabase::getMongoURI MongoURI}
+     *  + {@see bucketName bucketName}
+     *  + {@see chunkSize chunkSize}
+     *  + {@see databaseName databaseName}
+     *  + {@see dsn dsn}, see {@see AbstractGridFSDatabase::mongoURI MongoURI}
+     *
+     * @link https://www.mongodb.com/docs/manual/reference/connection-string/
      *
      * @return void
      */
