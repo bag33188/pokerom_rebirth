@@ -77,6 +77,273 @@ db.createCollection("roms.chunks", {
 });
 db.roms.chunks.createIndex({ files_id: 1, n: 1 }, { unique: true });
 
+let aggregations = [
+    {
+        name: "",
+        pipeline: [
+            {
+                $group: {
+                    _id: null,
+                    total_length: {
+                        $sum: "$length",
+                    },
+                },
+            },
+            {
+                $addFields: {
+                    total_size: {
+                        $toString: {
+                            $toLong: "$total_length",
+                        },
+                    },
+                },
+            },
+            {
+                $project: {
+                    _id: 0,
+                    total_length: 1,
+                    total_size: {
+                        $concat: ["$total_size", " ", "Bytes"],
+                    },
+                },
+            },
+            {
+                $limit: 1,
+            },
+        ],
+    },
+    {
+        name: "Calc Total File Size Gibibytes",
+        pipeline: [
+            {
+                $group: {
+                    _id: null,
+                    total_length: {
+                        $sum: "$length",
+                    },
+                },
+            },
+            {
+                $addFields: {
+                    total_size: {
+                        $toString: {
+                            $round: [
+                                {
+                                    $toDouble: {
+                                        $divide: [
+                                            "$total_length",
+                                            {
+                                                $pow: [1024, 3],
+                                            },
+                                        ],
+                                    },
+                                },
+                                2,
+                            ],
+                        },
+                    },
+                },
+            },
+            {
+                $project: {
+                    _id: 0,
+                    total_length: {
+                        $toDecimal: {
+                            $divide: [
+                                "$total_length",
+                                {
+                                    $pow: [1024, 3],
+                                },
+                            ],
+                        },
+                    },
+                    total_size: {
+                        $concat: ["$total_size", " ", "Gibibytes"],
+                    },
+                },
+            },
+            {
+                $limit: 1,
+            },
+        ],
+    },
+    {
+        name: "Find 3DS ROMs",
+        pipeline: [
+            {
+                $sort: {
+                    length: -1,
+                    filename: 1,
+                    uploadDate: 1,
+                },
+            },
+            {
+                $match: {
+                    filename: {
+                        $regex: "^[\\w\\d\\-_]+\\.3ds$",
+                        $options: "i",
+                    },
+                },
+            },
+        ],
+    },
+    {
+        name: "Find GB ROMs",
+        pipeline: [
+            {
+                $sort: {
+                    length: -1,
+                    filename: 1,
+                    uploadDate: 1,
+                },
+            },
+            {
+                $match: {
+                    filename: {
+                        $regex: "^[\\w\\d\\-_]+\\.gb$",
+                        $options: "i",
+                    },
+                },
+            },
+        ],
+    },
+    {
+        name: "Find GBA ROMs",
+        pipeline: [
+            {
+                $sort: {
+                    length: -1,
+                    filename: 1,
+                    uploadDate: 1,
+                },
+            },
+            {
+                $match: {
+                    filename: {
+                        $regex: "^[\\w\\d\\-_]+\\.gba$",
+                        $options: "i",
+                    },
+                },
+            },
+        ],
+    },
+    {
+        name: "Find GBC ROMs",
+        pipeline: [
+            {
+                $sort: {
+                    length: -1,
+                    filename: 1,
+                    uploadDate: 1,
+                },
+            },
+            {
+                $match: {
+                    filename: {
+                        $regex: "^[\\w\\d\\-_]+\\.gbc$",
+                        $options: "i",
+                    },
+                },
+            },
+        ],
+    },
+    {
+        name: "Find NDS ROMs",
+        pipeline: [
+            {
+                $sort: {
+                    length: -1,
+                    filename: 1,
+                    uploadDate: 1,
+                },
+            },
+            {
+                $match: {
+                    filename: {
+                        $regex: "^[\\w\\d\\-_]+\\.nds$",
+                        $options: "i",
+                    },
+                },
+            },
+        ],
+    },
+    {
+        name: "Find XCI ROMs",
+        pipeline: [
+            {
+                $sort: {
+                    length: -1,
+                    filename: 1,
+                    uploadDate: 1,
+                },
+            },
+            {
+                $match: {
+                    filename: {
+                        $regex: "^[\\w\\d\\-_]+\\.xci$",
+                        $options: "i",
+                    },
+                },
+            },
+        ],
+    },
+    {
+        name: "Proper Rom Files Sort",
+        pipeline: [
+            {
+                $addFields: {
+                    field_length: {
+                        $strLenCP: "$filename",
+                    },
+                },
+            },
+            {
+                $sort: {
+                    length: 1,
+                    field_length: 1,
+                },
+            },
+            {
+                $unset: "field_length",
+            },
+        ],
+    },
+    {
+        name: "Show Rom Sizes (KB)",
+        pipeline: [
+            {
+                $addFields: {
+                    rom_size: {
+                        $ceil: {
+                            $divide: ["$length", 1024],
+                        },
+                    },
+                },
+            },
+            {
+                $project: {
+                    filename: 1,
+                    length: 1,
+                    chunkSize: 1,
+                    uploadDate: 1,
+                    md5: 1,
+                    rom_size: {
+                        $concat: [
+                            {
+                                $toString: {
+                                    $toLong: "$rom_size",
+                                },
+                            },
+                            " ",
+                            "KB",
+                        ],
+                    },
+                },
+            },
+        ],
+    },
+];
+
 db.createCollection("rom_files_data", {
     validator: {
         $jsonSchema: {
