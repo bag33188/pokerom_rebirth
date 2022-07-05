@@ -2,19 +2,16 @@
 
 namespace Utils\Classes;
 
-use MongoDB\BSON\ObjectId;
 use MongoDB\Client as MongoClient;
 use MongoDB\Database;
 use MongoDB\GridFS\Bucket;
-use Utils\Modules\FileDownloader;
-use Utils\Modules\FileMethods;
 
 /**
  * GridFS Connection Class for connection to a GridFS MongoDB Database
  *
  * _Constructor can accept a {@see AbstractGridFSDatabase GridFSDatabase} Object_
  */
-abstract class AbstractGridFSConnection implements GridFSBucketMethodsInterface
+abstract class AbstractGridFSConnection
 {
     /** @var string name of gridfs bucket (default is `fs`) */
     protected string $bucketName;
@@ -30,7 +27,7 @@ abstract class AbstractGridFSConnection implements GridFSBucketMethodsInterface
     public function __construct()
     {
         $this->setConnectionValues();
-        $this->setBucket();
+        $this->selectFileBucket();
     }
 
     /**
@@ -44,13 +41,13 @@ abstract class AbstractGridFSConnection implements GridFSBucketMethodsInterface
      */
     abstract protected function setConnectionValues(): void;
 
-    protected final function connectToMongoClient(): Database
+    private function connectToMongoClient(): Database
     {
         $db = new MongoClient($this->dsn);
         return $db->selectDatabase($this->databaseName);
     }
 
-    protected final function setBucket(): void
+    private function selectFileBucket(): void
     {
         $mongodb = $this->connectToMongoClient();
         $this->bucket = $mongodb->selectGridFSBucket([
@@ -59,27 +56,8 @@ abstract class AbstractGridFSConnection implements GridFSBucketMethodsInterface
         ]);
     }
 
-    public final function getBucket(): Bucket
+    public final function actions(): GridFSBucketMethods
     {
-        return $this->bucket;
-    }
-
-    public function upload(string $filename): void
-    {
-        $stream = fopen(FileMethods::makeFilepathFromFilename($filename), 'rb');
-        $this->bucket->uploadFromStream($filename, $stream);
-        fclose($stream);
-    }
-
-    public function download(ObjectId $fileId, int $downloadTransferSize): void
-    {
-        $stream = $this->bucket->openDownloadStream($fileId);
-        $downloader = new FileDownloader($stream, $downloadTransferSize);
-        $downloader->downloadFile();
-    }
-
-    public function delete(ObjectId $fileId): void
-    {
-        $this->bucket->delete($fileId);
+        return new GridFSBucketMethods($this->bucket);
     }
 }

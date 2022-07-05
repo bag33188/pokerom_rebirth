@@ -33,6 +33,6 @@ class ProcessRomFileUpload implements ShouldQueue
      */
     public function handle(): void
     {
-        GfsRomFile::upload($this->romFilename);
+        GfsRomFile::actions()->upload($this->romFilename);
     }
 }

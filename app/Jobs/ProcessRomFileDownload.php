@@ -33,6 +33,6 @@ class ProcessRomFileDownload implements ShouldQueue
      */
     public function handle(): void
     {
-        GfsRomFile::download($this->romFileId, CONTENT_TRANSFER_SIZE);
+        GfsRomFile::actions()->download($this->romFileId, CONTENT_TRANSFER_SIZE);
     }
 }
