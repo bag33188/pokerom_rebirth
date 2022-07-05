@@ -6,6 +6,7 @@ use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Throwable;
 
 # use JetBrains\PhpStorm\Internal\LanguageLevelTypeAware;
 
