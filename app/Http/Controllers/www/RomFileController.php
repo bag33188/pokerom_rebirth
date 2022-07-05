@@ -12,6 +12,7 @@ use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
 use RomFileRepo;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class RomFileController extends ViewController
 {
@@ -80,7 +81,7 @@ class RomFileController extends ViewController
         return response()->redirectTo(route('rom-files.index'))->banner("$romFile->filename deleted!");
     }
 
-    public function download(RomFile $romFile)
+    public function download(RomFile $romFile): StreamedResponse
     {
         return $this->romFileDataService->downloadRomFile($romFile);
     }
