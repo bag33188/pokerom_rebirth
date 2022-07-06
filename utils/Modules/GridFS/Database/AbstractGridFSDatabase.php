@@ -43,8 +43,7 @@ abstract class AbstractGridFSDatabase extends GridFS
      * ### Intended Usage:
      *
      * ```php
-     * $dsn = "mongodb://localhost:27017";
-     * return $dsn;
+     * return "mongodb://localhost:12707/?authSource=admin";
      * ```
      *
      * @link https://www.mongodb.com/docs/manual/reference/connection-string/ MongoDB Connection String

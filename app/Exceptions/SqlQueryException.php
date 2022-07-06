@@ -5,7 +5,7 @@ namespace App\Exceptions;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Utils\Classes\AbstractApplicationException as ApplicationException;
+use Utils\Classes\_Abstract\AbstractApplicationException as ApplicationException;
 
 class SqlQueryException extends ApplicationException
 {

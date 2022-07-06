@@ -40,6 +40,14 @@ abstract class AbstractGridFSConnection extends GridFS
      *  + {@see databaseName databaseName}
      *  + {@see dsn dsn}, see {@see AbstractGridFSDatabase::mongoURI MongoURI}
      *
+     * ### Intended Use
+     * ```php
+     * $this->dsn = "mongodb://localhost:12707/";
+     * $this->chunkSize = config("gridfs.chunkSize");
+     * $this->bucketName = config("gridfs.bucketName");
+     * $this->databaseName = config("gridfs.connection.database");
+     * ```
+     *
      * @link https://www.mongodb.com/docs/manual/reference/connection-string/
      *
      * @return void

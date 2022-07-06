@@ -6,7 +6,7 @@ use App\Actions\Validators\RomFileValidationRulesTrait;
 use App\Models\RomFile;
 use Illuminate\Foundation\Http\FormRequest;
 use JetBrains\PhpStorm\ArrayShape;
-use Utils\Classes\FileMethods;
+use Utils\Classes\_Static\FileMethods;
 
 /** @mixin RomFile */
 class StoreRomFileRequest extends FormRequest

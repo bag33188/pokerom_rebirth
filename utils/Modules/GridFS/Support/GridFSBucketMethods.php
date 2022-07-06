@@ -4,7 +4,7 @@ namespace Utils\Modules\GridFS\Support;
 
 use MongoDB\BSON\ObjectId;
 use MongoDB\GridFS\Bucket;
-use Utils\Classes\FileMethods;
+use Utils\Classes\_Static\FileMethods;
 use Utils\Modules\FileDownloader;
 use Utils\Modules\GridFS\GridFS;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Utils\Classes;
+namespace Utils\Classes\_Static;
 
 use Config;
 use MongoDB\BSON\ObjectId;
