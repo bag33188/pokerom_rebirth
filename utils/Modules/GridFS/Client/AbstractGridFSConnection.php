@@ -21,7 +21,13 @@ abstract class AbstractGridFSConnection extends GridFS
 
     public readonly int $chunkSize;
 
-    /** @var string mongodb connection string {@link https://www.mongodb.com/docs/manual/reference/connection-string/ Mongo URI} */
+    /**
+     * MongoDB Connection string
+     *
+     * @link https://www.mongodb.com/docs/manual/reference/connection-string/ Mongo URI
+     *
+     * @var string
+     */
     protected readonly string $dsn;
 
     /** @var Bucket gridfs bucket object */
