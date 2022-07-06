@@ -16,49 +16,49 @@ abstract class AbstractGridFSDatabase extends GridFS
     protected bool $useAuth = false;
 
     /** @var string[] */
-    private static array $gfsConfig;
+    private array $gfsConfig;
     /** @var string[] */
-    private static array $mongoConfig;
+    private array $mongoConfig;
 
     public function __construct(string $databaseName = null, string $bucketName = null, int $chunkSize = null)
     {
         $this->setConfigVars();
 
         if (empty($this->databaseName)) {
-            $this->databaseName = $databaseName ?? self::$gfsConfig['connection']['database'];
+            $this->databaseName = $databaseName ?? $this->gfsConfig['connection']['database'];
         }
         if (empty($this->bucketName)) {
-            $this->bucketName = $bucketName ?? self::$gfsConfig['bucketName'];
+            $this->bucketName = $bucketName ?? $this->gfsConfig['bucketName'];
         }
         if (empty($this->chunkSize)) {
-            $this->chunkSize = $chunkSize ?? self::$gfsConfig['chunkSize'];
+            $this->chunkSize = $chunkSize ?? $this->gfsConfig['chunkSize'];
         }
     }
 
     private function setConfigVars(): void
     {
-        self::$gfsConfig = MongoMethods::getGridFSConfig();
-        self::$mongoConfig = MongoMethods::getMongoConfig();
+        $this->gfsConfig = MongoMethods::getGridFSConfig();
+        $this->mongoConfig = MongoMethods::getMongoConfig();
     }
 
     public function mongoURI(): string
     {
         if ($this->useAuth === true) {
             return '' .
-                self::$mongoConfig['driver'] . '://' .
-                self::$mongoConfig['username'] . ':' .
-                self::$mongoConfig['password'] . '@' .
-                self::$mongoConfig['host'] . ':' .
-                self::$mongoConfig['port'] . '/?authMechanism=' .
-                self::$mongoConfig['options']['authMechanism'] . '&authSource=' .
-                self::$mongoConfig['options']['authSource'];
+                $this->mongoConfig['driver'] . '://' .
+                $this->mongoConfig['username'] . ':' .
+                $this->mongoConfig['password'] . '@' .
+                $this->mongoConfig['host'] . ':' .
+                $this->mongoConfig['port'] . '/?authMechanism=' .
+                $this->mongoConfig['options']['authMechanism'] . '&authSource=' .
+                $this->mongoConfig['options']['authSource'];
         } else {
             return '' .
-                self::$mongoConfig['driver'] . '://' .
-                self::$mongoConfig['username'] . ':' .
-                self::$mongoConfig['password'] . '@' .
-                self::$mongoConfig['host'] . ':' .
-                self::$mongoConfig['port'] . '/';
+                $this->mongoConfig['driver'] . '://' .
+                $this->mongoConfig['username'] . ':' .
+                $this->mongoConfig['password'] . '@' .
+                $this->mongoConfig['host'] . ':' .
+                $this->mongoConfig['port'] . '/';
         }
     }
 }

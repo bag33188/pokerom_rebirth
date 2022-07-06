@@ -6,7 +6,6 @@
 
 namespace Utils\Modules\GridFS\Vendor;
 
-
 $template = <<<'env'
 DB_CONNECTION_SECOND=mongodb
 DB_HOST_SECOND=127.0.0.1
