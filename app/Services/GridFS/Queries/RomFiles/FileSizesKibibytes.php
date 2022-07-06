@@ -4,10 +4,10 @@ namespace App\Services\GridFS\Queries\RomFiles;
 
 use JetBrains\PhpStorm\ArrayShape;
 
-trait FileSizeKibibytes
+trait FileSizesKibibytes
 {
     #[ArrayShape(['length' => "array[]"])]
-    protected function calcLengthOfRomFilesKibibytes(): array
+    protected function calcLengthsOfRomFilesKibibytes(): array
     {
         return [
             'length' => [

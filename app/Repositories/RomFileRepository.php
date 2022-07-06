@@ -12,7 +12,7 @@ use Utils\Classes\FileMethods;
 
 class RomFileRepository implements RomFileRepositoryInterface
 {
-    use RomFiles\FileSizeGibibytes, RomFiles\FileSizeKibibytes, RomFiles\FileSizeMebibytes, RomFiles\TotalSizeBytes;
+    use RomFiles\FileSizesGibibytes, RomFiles\FileSizesKibibytes, RomFiles\FileSizesMebibytes, RomFiles\TotalSizeBytes;
 
     public function findFileIfExists(string $romFileId): RomFile
     {
@@ -50,17 +50,17 @@ class RomFileRepository implements RomFileRepositoryInterface
 
     public function getFileLengthsKibibytes(): Collection
     {
-        return RomFile::project($this->calcLengthOfRomFilesKibibytes())->get();
+        return RomFile::project($this->calcLengthsOfRomFilesKibibytes())->get();
     }
 
     public function getFileLengthsGibibytes(): Collection
     {
-        return RomFile::project($this->calcLengthOfRomFilesGibibytes())->get();
+        return RomFile::project($this->calcLengthsOfRomFilesGibibytes())->get();
     }
 
     public function getFileLengthsMebibytes(): Collection
     {
-        return RomFile::project($this->calcLengthOfRomFilesMebibytes())->get();
+        return RomFile::project($this->calcLengthsOfRomFilesMebibytes())->get();
     }
 
     public function getTotalSizeOfAllRomFiles(): int
