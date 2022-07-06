@@ -6,10 +6,16 @@
  * Uses proper streaming to download excessively long files with mass binary content.
  */
 
-namespace Utils\Modules\Download;
+namespace Utils\Modules;
 
-class FileDownloader extends Downloader
+class FileDownloader
 {
+    /** @var resource */
+    protected $fileStream;
+
+    /** @var int */
+    protected int $readyBytesChunkSize;
+
     public function __construct(/** @var resource */ $fileStream, int $readyBytesChunkSize = 0x3FC00)
     {
         $this->fileStream = $fileStream;

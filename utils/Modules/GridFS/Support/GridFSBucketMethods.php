@@ -5,7 +5,7 @@ namespace Utils\Modules\GridFS\Support;
 use MongoDB\BSON\ObjectId;
 use MongoDB\GridFS\Bucket;
 use Utils\Classes\FileMethods;
-use Utils\Modules\Download\FileDownloader;
+use Utils\Modules\FileDownloader;
 use Utils\Modules\GridFS\GridFS;
 
 class GridFSBucketMethods extends GridFS implements GridFSBucketMethodsInterface
