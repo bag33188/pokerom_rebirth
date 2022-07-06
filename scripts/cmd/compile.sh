@@ -48,3 +48,5 @@ compile() {
 }
 
 compile
+
+exit 0;
