@@ -30,7 +30,7 @@ trait FileSizesMebibytes
                                         ]
                                     ]
                                 ],
-                                2
+                                3
                             ]
                         ]
                     ],
