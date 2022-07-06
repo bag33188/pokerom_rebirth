@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 06, 2022 at 01:42 AM
+-- Generation Time: Jul 06, 2022 at 02:20 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -42,7 +42,7 @@ END$$
 DROP PROCEDURE IF EXISTS `GetAllPokeROMData`$$
 CREATE DEFINER=`bag33188`@`%` PROCEDURE `GetAllPokeROMData` ()  SQL SECURITY INVOKER SELECT `roms`.`id` AS `rom_id`, `roms`.`rom_name` AS `rom_name`, `roms`.`rom_type` AS `rom_type`, KbToB(`roms`.`rom_size`) AS `rom_size`, CONCAT(`roms`.`rom_name`, '.', UCASE(`roms`.`rom_type`)) AS `rom_filename`, `roms`.`file_id` AS `rom_file_id`,
 `games`.`id` AS `game_id`, `games`.`game_name` AS `game_name`, `games`.`game_type` AS `game_type`, `games`.`region` AS `region`, `games`.`generation` AS `generation`, `games`.`date_released` AS `date_released`
-FROM `roms` RIGHT JOIN `games` ON `roms`.`id` = `games`.`rom_id` WHERE `roms`.`has_game` = 1 AND `roms`.`has_file` = 1 AND `roms`.`game_id` IS NOT NULL AND `roms`.`file_id` IS NOT NULL ORDER BY `game_id` ASC$$
+FROM `roms` RIGHT JOIN `games` ON `roms`.`id` = `games`.`rom_id` WHERE `roms`.`has_game` = TRUE AND `roms`.`has_file` = TRUE AND `roms`.`game_id` IS NOT NULL AND `roms`.`file_id` IS NOT NULL ORDER BY `game_id` ASC$$
 
 DROP PROCEDURE IF EXISTS `LinkRomToFile`$$
 CREATE DEFINER=`bag33188`@`%` PROCEDURE `LinkRomToFile` (IN `ROM_FILE_ID` CHAR(24), IN `ROM_FILE_SIZE` BIGINT, IN `ROM_ID` BIGINT)  MODIFIES  DATA BEGIN
@@ -256,10 +256,10 @@ DELIMITER $$
 CREATE TRIGGER `games_after_insert` AFTER INSERT ON `games` FOR EACH ROW BEGIN
   DECLARE `rom_already_has_game` BOOL;
   SELECT `has_game`
-  INTO @`rom_already_has_game`
+  INTO `rom_already_has_game`
   FROM `roms`
   WHERE `roms`.`id` = NEW.`rom_id`;
-  IF @`rom_already_has_game` = FALSE
+  IF `rom_already_has_game` = FALSE
   THEN
     UPDATE `roms`
     SET `roms`.`has_game` = TRUE, `roms`.`game_id` = NEW.`id`
@@ -454,7 +454,7 @@ INSERT INTO `roms` (`id`, `file_id`, `game_id`, `rom_name`, `rom_size`, `rom_typ
 -- Table structure for table `sessions`
 --
 -- Creation: Jun 05, 2022 at 04:47 PM
--- Last update: Jul 05, 2022 at 10:36 PM
+-- Last update: Jul 06, 2022 at 12:10 AM
 --
 
 DROP TABLE IF EXISTS `sessions`;
@@ -481,7 +481,7 @@ TRUNCATE TABLE `sessions`;
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('536XYJxlTqFrNIZMn7llL82LZDKL4qruDHZ87TPX', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoidWtvSkdhdUpoMWI0Zkp5Smt4V3hvbnNoT28xb3lKVGZ1WjdiRzVkbiI7czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjIxOiJwYXNzd29yZF9oYXNoX3NhbmN0dW0iO3M6NjA6IiQyeSQxMCR3aXAzcXg5MVBsWERrcmouekVqb0MuL3dsSW50Z0lLM1EuckFKZ2d3UWhmWFJGaUlubURabSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDY6Imh0dHA6Ly9wb2tlcm9tX3JlYmlydGgudGVzdC9wdWJsaWMvYXBpL3ZlcnNpb24iO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1657060614);
+('536XYJxlTqFrNIZMn7llL82LZDKL4qruDHZ87TPX', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoidWtvSkdhdUpoMWI0Zkp5Smt4V3hvbnNoT28xb3lKVGZ1WjdiRzVkbiI7czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjIxOiJwYXNzd29yZF9oYXNoX3NhbmN0dW0iO3M6NjA6IiQyeSQxMCR3aXAzcXg5MVBsWERrcmouekVqb0MuL3dsSW50Z0lLM1EuckFKZ2d3UWhmWFJGaUlubURabSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDY6Imh0dHA6Ly9wb2tlcm9tX3JlYmlydGgudGVzdC9wdWJsaWMvYXBpL3ZlcnNpb24iO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1657066236);
 
 -- --------------------------------------------------------
 
