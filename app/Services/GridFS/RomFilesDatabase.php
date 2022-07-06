@@ -2,35 +2,17 @@
 
 namespace App\Services\GridFS;
 
-use Utils\Classes\_Static\MongoMethods;
 use Utils\Modules\GridFS\Client\AbstractGridFSDatabase as GridFSDatabase;
 
 class RomFilesDatabase extends GridFSDatabase
 {
-    public readonly string $databaseName;
-    public readonly string $bucketName;
-    public readonly int $chunkSize;
+    protected bool $useAuth = true;
 
-    protected function setDatabaseProperties(): void
+    /**
+     * Create new GridFS Database Instance
+     */
+    public function __construct()
     {
-        $gfsConfig = MongoMethods::getGridFSConfig();
-
-        $this->databaseName = $gfsConfig['connection']['database'];
-        $this->bucketName = $gfsConfig['bucketName'];
-        $this->chunkSize = $gfsConfig['chunkSize'];
-    }
-
-    public final static function mongoURI(): string
-    {
-        $mongoConfig = MongoMethods::getMongoConfig();
-
-        return '' .
-            $mongoConfig['driver'] . '://' .
-            $mongoConfig['username'] . ':' .
-            $mongoConfig['password'] . '@' .
-            $mongoConfig['host'] . ':' .
-            $mongoConfig['port'] . '/?authMechanism=' .
-            $mongoConfig['options']['authMechanism'] . '&authSource=' .
-            $mongoConfig['options']['authSource'];
+        parent::__construct();
     }
 }

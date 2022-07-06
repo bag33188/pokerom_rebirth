@@ -2,6 +2,7 @@
 
 namespace Utils\Modules\GridFS\Client;
 
+use Utils\Classes\_Static\MongoMethods;
 use Utils\Modules\GridFS\GridFS;
 
 /**
@@ -9,51 +10,45 @@ use Utils\Modules\GridFS\GridFS;
  */
 abstract class AbstractGridFSDatabase extends GridFS
 {
-    public readonly string $databaseName;
-    public readonly string $bucketName;
-    public readonly int $chunkSize;
+    public string $databaseName;
+    public string $bucketName;
+    public int $chunkSize;
+    protected bool $useAuth = false;
 
-    public function __construct()
+    public function __construct(string $databaseName = null, string $bucketName = null, int $chunkSize = null)
     {
-        $this->setDatabaseProperties();
+        $gfsConfig = MongoMethods::getGridFSConfig();
+        if (empty($this->databaseName)) {
+            $this->databaseName = $databaseName ?? $gfsConfig['connection']['database'];
+        }
+        if (empty($this->bucketName)) {
+            $this->bucketName = $bucketName ?? $gfsConfig['bucketName'];
+        }
+        if (empty($this->chunkSize)) {
+            $this->chunkSize = $chunkSize ?? $gfsConfig['chunkSize'];
+        }
     }
 
-    /**
-     * # Set database values
-     *
-     * Set
-     *  + {@see bucketName}
-     *  + {@see databaseName}
-     *  + {@see chunkSize}
-     *
-     * ## Intended Usage
-     *
-     * ```php
-     * $this->bucketName = Config::get("gridfs.bucketName");
-     * $this->chunkSize = Config::get("gridfs.chunkSize");
-     * $this->databaseName = Config::get("gridfs.connection.database");
-     * ```
-     *
-     * @return void
-     */
-    abstract protected function setDatabaseProperties(): void;
+    public function mongoURI(): string
+    {
+        $mongoConfig = MongoMethods::getMongoConfig();
 
-    /**
-     * # Construct a MongoDB connection string
-     *
-     * ## Example Mongo URI:
-     * ```
-     * mongodb://<username>:<password>@<host>:<port>/?authMechanism=SCRAM-SHA-256&authSource=admin
-     * ```
-     *
-     * ## Intended Usage:
-     * ```php
-     * return "mongodb://localhost:12707/?authSource=admin";
-     * ```
-     *
-     * @link https://www.mongodb.com/docs/manual/reference/connection-string/ MongoDB Connection String
-     *
-     * @return string
-     */
-    abstract public static function mongoURI(): string;
+        if ($this->useAuth === true) {
+            return '' .
+                $mongoConfig['driver'] . '://' .
+                $mongoConfig['username'] . ':' .
+                $mongoConfig['password'] . '@' .
+                $mongoConfig['host'] . ':' .
+                $mongoConfig['port'] . '/?authMechanism=' .
+                $mongoConfig['options']['authMechanism'] . '&authSource=' .
+                $mongoConfig['options']['authSource'];
+        } else {
+            return '' .
+                $mongoConfig['driver'] . '://' .
+                $mongoConfig['username'] . ':' .
+                $mongoConfig['password'] . '@' .
+                $mongoConfig['host'] . ':' .
+                $mongoConfig['port'] . '/';
+        }
+    }
 }

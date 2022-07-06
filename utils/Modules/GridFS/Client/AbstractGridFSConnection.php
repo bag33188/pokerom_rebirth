@@ -15,55 +15,31 @@ use Utils\Modules\GridFS\Support\GridFSBucketMethods;
  */
 abstract class AbstractGridFSConnection extends GridFS
 {
-    public readonly string $databaseName;
+    protected string $databaseName;
 
-    public readonly string $bucketName;
+    protected string $bucketName;
 
-    public readonly int $chunkSize;
+    protected int $chunkSize;
 
-    /**
-     * # MongoDB Connection string
-     *
-     * **Mongo URI**
-     *
-     * @link https://www.mongodb.com/docs/manual/reference/connection-string/ Mongo URI
-     *
-     * @var string
-     */
-    protected readonly string $dsn;
+    private readonly string $dsn;
 
     /** @var Bucket gridfs bucket object */
     private Bucket $bucket;
 
-    public function __construct()
+    public function __construct(private readonly AbstractGridFSDatabase $databaseObj)
     {
         $this->setConnectionValues();
         $this->selectFileBucket();
     }
 
-    /**
-     * # Set all connection values
-     *
-     * Values that need to be set:
-     *
-     *  + {@see bucketName bucketName}
-     *  + {@see chunkSize chunkSize}
-     *  + {@see databaseName databaseName}
-     *  + {@see dsn dsn}, see {@see AbstractGridFSDatabase::mongoURI MongoURI}
-     *
-     * ## Intended Use
-     * ```php
-     * $this->dsn = "mongodb://localhost:12707/";
-     * $this->chunkSize = config("gridfs.chunkSize");
-     * $this->bucketName = config("gridfs.bucketName");
-     * $this->databaseName = config("gridfs.connection.database");
-     * ```
-     *
-     * @link https://www.mongodb.com/docs/manual/reference/connection-string/
-     *
-     * @return void
-     */
-    abstract protected function setConnectionValues(): void;
+
+    protected function setConnectionValues(): void
+    {
+        $this->databaseName = $this->databaseObj->databaseName;
+        $this->bucketName = $this->databaseObj->bucketName;
+        $this->chunkSize = $this->databaseObj->chunkSize;
+        $this->dsn = $this->databaseObj->mongoURI();
+    }
 
     private function connectToMongoClient(): Database
     {
