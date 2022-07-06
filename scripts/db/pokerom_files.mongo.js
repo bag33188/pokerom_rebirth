@@ -100,7 +100,10 @@ db.createCollection("rom_files", {
     validationLevel: "moderate",
     validationAction: "warn",
 });
-db.rom_files.createIndex({ filename: -1 }, { unique: true });
+db.rom_files.createIndex(
+    { filename: -1, filetype: -1 },
+    { unique: true, partialFilterExpression: { filename: { $exists: true } } }
+);
 
 let seeds = [
     {
