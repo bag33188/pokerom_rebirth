@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 06, 2022 at 04:33 AM
+-- Generation Time: Jul 06, 2022 at 06:06 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -40,7 +40,7 @@ SELECT `id`, `rom_name`, `rom_type`, /* IF (0 = FALSE, 'false', 'true') AS */ `h
 END$$
 
 DROP PROCEDURE IF EXISTS `GetAllPokeROMData`$$
-CREATE DEFINER=`bag33188`@`%` PROCEDURE `GetAllPokeROMData` ()  SQL SECURITY INVOKER SELECT `roms`.`id` AS `rom_id`, `roms`.`rom_name` AS `rom_name`, `roms`.`rom_type` AS `rom_type`, KB_TO_B(`roms`.`rom_size`) AS `rom_size`, CONCAT_ROM_FILENAME(`roms`.`rom_name`, `roms`.`rom_type`) AS `rom_filename`, `roms`.`file_id` AS `rom_file_id`,
+CREATE DEFINER=`bag33188`@`%` PROCEDURE `GetAllPokeROMData` ()  SQL SECURITY INVOKER SELECT `roms`.`id` AS `rom_id`, `roms`.`rom_name` AS `rom_name`, `roms`.`rom_type` AS `rom_type`, `roms`.`rom_size` * 1024 AS `rom_size`, CONCAT_ROM_FILENAME(`roms`.`rom_name`, `roms`.`rom_type`) AS `rom_filename`, `roms`.`file_id` AS `rom_file_id`,
 `games`.`id` AS `game_id`, `games`.`game_name` AS `game_name`, `games`.`game_type` AS `game_type`, `games`.`region` AS `region`, `games`.`generation` AS `generation`, `games`.`date_released` AS `date_released`
 FROM `roms` RIGHT JOIN `games` ON `roms`.`id` = `games`.`rom_id` WHERE `roms`.`has_game` = TRUE AND `roms`.`has_file` = TRUE AND `roms`.`game_id` IS NOT NULL AND `roms`.`file_id` IS NOT NULL ORDER BY `game_id` ASC$$
 
@@ -112,9 +112,6 @@ The max input value length is 8 since the max str-len of an input option
 which is 'spin-off' is excactly 8 chars
 */
 END CASE$$
-
-DROP FUNCTION IF EXISTS `KB_TO_B`$$
-CREATE DEFINER=`bag33188`@`%` FUNCTION `KB_TO_B` (`KIBIBYTES` INT UNSIGNED) RETURNS BIGINT(10) UNSIGNED DETERMINISTIC SQL SECURITY INVOKER COMMENT 'converts kibibytes value to bytes' RETURN `KIBIBYTES` * 1024$$
 
 DROP FUNCTION IF EXISTS `SPLIT_STRING`$$
 CREATE DEFINER=`bag33188`@`%` FUNCTION `SPLIT_STRING` (`STR_VAL` VARCHAR(255), `SEPARATOR` VARCHAR(1), `POSITION` INT) RETURNS VARCHAR(255) CHARSET utf8mb4 DETERMINISTIC COMMENT 'splits a string based on delimiter ' BEGIN
@@ -382,6 +379,7 @@ INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `n
 -- Table structure for table `roms`
 --
 -- Creation: Jul 06, 2022 at 02:20 AM
+-- Last update: Jul 06, 2022 at 04:06 AM
 --
 
 DROP TABLE IF EXISTS `roms`;
@@ -461,6 +459,7 @@ INSERT INTO `roms` (`id`, `file_id`, `game_id`, `rom_name`, `rom_size`, `rom_typ
 -- Table structure for table `sessions`
 --
 -- Creation: Jul 06, 2022 at 02:20 AM
+-- Last update: Jul 06, 2022 at 04:06 AM
 --
 
 DROP TABLE IF EXISTS `sessions`;
@@ -489,7 +488,7 @@ TRUNCATE TABLE `sessions`;
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('536XYJxlTqFrNIZMn7llL82LZDKL4qruDHZ87TPX', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoidWtvSkdhdUpoMWI0Zkp5Smt4V3hvbnNoT28xb3lKVGZ1WjdiRzVkbiI7czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjIxOiJwYXNzd29yZF9oYXNoX3NhbmN0dW0iO3M6NjA6IiQyeSQxMCR3aXAzcXg5MVBsWERrcmouekVqb0MuL3dsSW50Z0lLM1EuckFKZ2d3UWhmWFJGaUlubURabSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDY6Imh0dHA6Ly9wb2tlcm9tX3JlYmlydGgudGVzdC9wdWJsaWMvYXBpL3ZlcnNpb24iO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1657067793);
+('PolmowLaKd6hys2UY2qUbidSA2wWEoayLzkDQHO2', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiVGpnOENOVkRHTVg0UEZlcmVLR09QZWJ4cjdCSVphdVpMb2U3RThuRCI7czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjIxOiJwYXNzd29yZF9oYXNoX3NhbmN0dW0iO3M6NjA6IiQyeSQxMCR3aXAzcXg5MVBsWERrcmouekVqb0MuL3dsSW50Z0lLM1EuckFKZ2d3UWhmWFJGaUlubURabSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDY6Imh0dHA6Ly9wb2tlcm9tX3JlYmlydGgudGVzdC9wdWJsaWMvYXBpL3ZlcnNpb24iO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1657080363);
 
 -- --------------------------------------------------------
 
