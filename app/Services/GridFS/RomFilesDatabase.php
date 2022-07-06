@@ -3,7 +3,7 @@
 namespace App\Services\GridFS;
 
 use Utils\Classes\_Static\MongoMethods;
-use Utils\Modules\GridFS\Database\AbstractGridFSDatabase as GridFSDatabase;
+use Utils\Modules\GridFS\Client\AbstractGridFSDatabase as GridFSDatabase;
 
 class RomFilesDatabase extends GridFSDatabase
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Utils\Modules\GridFS\Database;
+namespace Utils\Modules\GridFS\Client;
 
 use MongoDB\Client as MongoClient;
 use MongoDB\Database;
@@ -15,13 +15,13 @@ use Utils\Modules\GridFS\Support\GridFSBucketMethods;
  */
 abstract class AbstractGridFSConnection extends GridFS
 {
-    public readonly string $bucketName;
-
     public readonly string $databaseName;
+
+    public readonly string $bucketName;
 
     public readonly int $chunkSize;
 
-    /** @var string mongodb connection string */
+    /** @var string mongodb connection string {@link https://www.mongodb.com/docs/manual/reference/connection-string/ Mongo URI} */
     protected readonly string $dsn;
 
     /** @var Bucket gridfs bucket object */

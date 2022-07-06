@@ -1,6 +1,6 @@
 <?php
 
-namespace Utils\Modules\GridFS\Database;
+namespace Utils\Modules\GridFS\Client;
 
 use Utils\Modules\GridFS\GridFS;
 
