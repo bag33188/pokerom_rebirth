@@ -9,8 +9,8 @@ use Utils\Modules\GridFS\GridFS;
  */
 abstract class AbstractGridFSDatabase extends GridFS
 {
-    public readonly string $bucketName;
     public readonly string $databaseName;
+    public readonly string $bucketName;
     public readonly int $chunkSize;
 
     public function __construct()
@@ -19,9 +19,14 @@ abstract class AbstractGridFSDatabase extends GridFS
     }
 
     /**
-     * Set `bucketName`, `databaseName`, `chunkSize` properties for database
+     * # Set database values
      *
-     * ### Intended Usage
+     * Set
+     *  + {@see bucketName}
+     *  + {@see databaseName}
+     *  + {@see chunkSize}
+     *
+     * ## Intended Usage
      *
      * ```php
      * $this->bucketName = Config::get("gridfs.bucketName");
@@ -34,14 +39,14 @@ abstract class AbstractGridFSDatabase extends GridFS
     abstract protected function setDatabaseProperties(): void;
 
     /**
-     * Construct a MongoDB connection string (mongoURI).
+     * # Construct a MongoDB connection string
      *
-     * ### Example Mongo URI:
+     * ## Example Mongo URI:
+     * ```
+     * mongodb://<username>:<password>@<host>:<port>/?authMechanism=SCRAM-SHA-256&authSource=admin
+     * ```
      *
-     * **`mongodb://<username>:<password>@<host>:<port>/?authMechanism=SCRAM-SHA-256&authSource=admin`**
-     *
-     * ### Intended Usage:
-     *
+     * ## Intended Usage:
      * ```php
      * return "mongodb://localhost:12707/?authSource=admin";
      * ```

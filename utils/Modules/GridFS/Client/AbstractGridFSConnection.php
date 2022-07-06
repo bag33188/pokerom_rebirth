@@ -22,7 +22,9 @@ abstract class AbstractGridFSConnection extends GridFS
     public readonly int $chunkSize;
 
     /**
-     * MongoDB Connection string
+     * # MongoDB Connection string
+     *
+     * **Mongo URI**
      *
      * @link https://www.mongodb.com/docs/manual/reference/connection-string/ Mongo URI
      *
@@ -40,13 +42,16 @@ abstract class AbstractGridFSConnection extends GridFS
     }
 
     /**
-     * Set all connection values
+     * # Set all connection values
+     *
+     * Values that need to be set:
+     *
      *  + {@see bucketName bucketName}
      *  + {@see chunkSize chunkSize}
      *  + {@see databaseName databaseName}
      *  + {@see dsn dsn}, see {@see AbstractGridFSDatabase::mongoURI MongoURI}
      *
-     * ### Intended Use
+     * ## Intended Use
      * ```php
      * $this->dsn = "mongodb://localhost:12707/";
      * $this->chunkSize = config("gridfs.chunkSize");

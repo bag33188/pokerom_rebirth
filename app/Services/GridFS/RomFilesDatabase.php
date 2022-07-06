@@ -7,8 +7,8 @@ use Utils\Modules\GridFS\Client\AbstractGridFSDatabase as GridFSDatabase;
 
 class RomFilesDatabase extends GridFSDatabase
 {
-    public readonly string $bucketName;
     public readonly string $databaseName;
+    public readonly string $bucketName;
     public readonly int $chunkSize;
 
     protected function setDatabaseProperties(): void

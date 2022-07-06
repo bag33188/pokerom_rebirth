@@ -6,8 +6,8 @@ use Utils\Modules\GridFS\Client\AbstractGridFSConnection as GridFSConnection;
 
 class RomFilesConnection extends GridFSConnection
 {
-    public readonly string $bucketName;
     public readonly string $databaseName;
+    public readonly string $bucketName;
     public readonly int $chunkSize;
     protected readonly string $dsn;
 
