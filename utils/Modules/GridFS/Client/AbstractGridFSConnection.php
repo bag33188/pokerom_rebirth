@@ -26,7 +26,7 @@ abstract class AbstractGridFSConnection extends GridFS
     /** @var Bucket gridfs bucket object */
     private Bucket $bucket;
 
-    public function __construct(private readonly AbstractGridFSDatabase $databaseObj)
+    public function __construct(private readonly AbstractGridFSDatabase $gridFSDatabase)
     {
         $this->setConnectionValues();
         $this->selectFileBucket();
@@ -35,10 +35,10 @@ abstract class AbstractGridFSConnection extends GridFS
 
     protected function setConnectionValues(): void
     {
-        $this->databaseName = $this->databaseObj->databaseName;
-        $this->bucketName = $this->databaseObj->bucketName;
-        $this->chunkSize = $this->databaseObj->chunkSize;
-        $this->dsn = $this->databaseObj->mongoURI();
+        $this->databaseName = $this->gridFSDatabase->databaseName;
+        $this->bucketName = $this->gridFSDatabase->bucketName;
+        $this->chunkSize = $this->gridFSDatabase->chunkSize;
+        $this->dsn = $this->gridFSDatabase->mongoURI();
     }
 
     private function connectToMongoClient(): Database
