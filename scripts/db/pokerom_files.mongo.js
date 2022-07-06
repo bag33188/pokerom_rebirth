@@ -77,9 +77,29 @@ db.createCollection("roms.chunks", {
 });
 db.roms.chunks.createIndex({ files_id: 1, n: 1 }, { unique: true });
 
+db.createCollection("rom_files_data", {
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            properties: {
+                filename: {
+                    bsonType: "string",
+                },
+                filesize: {
+                    bsonType: ["int", "long"],
+                    description: "Size of file measured in raw Bytes",
+                },
+            },
+        },
+    },
+    validationLevel: "moderate",
+    validationAction: "warn",
+});
+db.rom_files_data.createIndex({ filename: -1 }, { unique: true });
+
 let aggregations = [
     {
-        name: "",
+        name: "Calc Total File Size Bytes",
         pipeline: [
             {
                 $group: {
@@ -344,27 +364,7 @@ let aggregations = [
     },
 ];
 
-db.createCollection("rom_files_data", {
-    validator: {
-        $jsonSchema: {
-            bsonType: "object",
-            properties: {
-                filename: {
-                    bsonType: "string",
-                },
-                filesize: {
-                    bsonType: ["int", "long"],
-                    description: "Size of file measured in raw Bytes",
-                },
-            },
-        },
-    },
-    validationLevel: "moderate",
-    validationAction: "warn",
-});
-db.rom_files_data.createIndex({ filename: -1 }, { unique: true });
-
-db.rom_files_data.insertMany([
+let seeds = [
     {
         filename: "0100ABF008968000.xci",
         filesize: 15971909632,
@@ -525,4 +525,8 @@ db.rom_files_data.insertMany([
         filename: "RenegadePlatinum.nds",
         filesize: 104923028,
     },
-]);
+];
+
+db.rom_files_data.insertMany(seeds);
+
+db.roms.files.aggregate([...aggregations[0].pipeline]);
