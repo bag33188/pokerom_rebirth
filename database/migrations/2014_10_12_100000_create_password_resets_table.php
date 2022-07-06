@@ -18,7 +18,7 @@ return new class extends Migration {
         Schema::create('password_resets', function (Blueprint $table) {
             $table->string('email', MAX_USER_EMAIL)->index();
             $table->foreign('email')->references('email')->on('users')
-                ->onDelete('NO ACTION')->onUpdate('NO ACTION');
+                ->cascadeOnDelete()->onUpdate('NO ACTION');
             $table->char('token', PASSWORD_RESET_TOKEN_LENGTH);
             $table->timestamp('created_at')->nullable();
         });

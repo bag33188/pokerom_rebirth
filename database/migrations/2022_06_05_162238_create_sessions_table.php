@@ -19,7 +19,7 @@ return new class extends Migration {
             $table->char('id', SESSION_ID_LENGTH)->primary();
             $table->foreignId('user_id')->nullable()->index()
                 ->references('id')->on('users')
-                ->onDelete('NO ACTION')->onUpdate('NO ACTION');
+                ->cascadeOnDelete()->onUpdate('NO ACTION');
             $table->string('ip_address', IP_ADDRESS_LENGTH)->nullable()->comment("45 characters because of ipv6");
             $table->text('user_agent')->nullable();
             $table->text('payload');

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 06, 2022 at 04:01 AM
+-- Generation Time: Jul 06, 2022 at 04:09 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -316,7 +316,7 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 --
 -- Table structure for table `password_resets`
 --
--- Creation: Jun 05, 2022 at 04:47 PM
+-- Creation: Jul 06, 2022 at 02:07 AM
 --
 
 DROP TABLE IF EXISTS `password_resets`;
@@ -400,6 +400,8 @@ CREATE TABLE `roms` (
 
 --
 -- RELATIONSHIPS FOR TABLE `roms`:
+--   `game_id`
+--       `games` -> `id`
 --
 
 --
@@ -458,7 +460,7 @@ INSERT INTO `roms` (`id`, `file_id`, `game_id`, `rom_name`, `rom_size`, `rom_typ
 --
 -- Table structure for table `sessions`
 --
--- Creation: Jul 06, 2022 at 01:56 AM
+-- Creation: Jul 06, 2022 at 02:07 AM
 --
 
 DROP TABLE IF EXISTS `sessions`;
@@ -648,13 +650,13 @@ ALTER TABLE `games`
 -- Constraints for table `password_resets`
 --
 ALTER TABLE `password_resets`
-  ADD CONSTRAINT `password_resets_email_foreign` FOREIGN KEY (`email`) REFERENCES `users` (`email`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `password_resets_email_foreign` FOREIGN KEY (`email`) REFERENCES `users` (`email`) ON DELETE CASCADE ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `sessions`
 --
 ALTER TABLE `sessions`
-  ADD CONSTRAINT `sessions_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `sessions_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
