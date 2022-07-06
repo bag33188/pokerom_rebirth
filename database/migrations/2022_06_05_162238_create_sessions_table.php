@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     protected $connection = 'mysql';
     public $withinTransaction = true;
+
     /**
      * Run the migrations.
      *
@@ -16,7 +17,9 @@ return new class extends Migration {
     {
         Schema::create('sessions', function (Blueprint $table) {
             $table->char('id', SESSION_ID_LENGTH)->primary();
-            $table->foreignId('user_id')->nullable()->index();
+            $table->foreignId('user_id')->nullable()->index()
+                ->references('id')->on('users')
+                ->onDelete('NO ACTION')->onUpdate('NO ACTION');
             $table->string('ip_address', IP_ADDRESS_LENGTH)->nullable()->comment("45 characters because of ipv6");
             $table->text('user_agent')->nullable();
             $table->text('payload');
