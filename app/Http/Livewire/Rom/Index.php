@@ -21,7 +21,7 @@ class Index extends Component
     {
         $this->roms = Rom::with(['game', 'romFile'])->get();
 
-        return view('livewire.rom.index', ['roms_total_size' => RomFileRepo::calcTotalSizeOfAllRomFiles()]);
+        return view('livewire.rom.index', ['roms_total_size' => RomFileRepo::getTotalSizeOfAllRomFiles()]);
     }
 
     public function show(int $romId)
