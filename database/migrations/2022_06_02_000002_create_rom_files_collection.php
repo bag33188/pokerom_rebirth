@@ -33,15 +33,9 @@ return new class extends Migration {
     {
         //!! never execute. current data is intended to be permanent !!//
         if (self::ALLOW_MIGRATIONS === true) {
-            Schema::connection($this->connection)->create('roms.files', function (Blueprint $collection) {
-                $collection->index(['length', 'filename'], 'length_1_filename_1',
-                    options: ['unique' => true, 'partialFilterExpression' => ['filename' => ['$exists' => true]]]);
-            });
-            Schema::connection($this->connection)->create('roms.chunks', function (Blueprint $collection) {
-                $collection->index(['files_id', 'n'], 'files_id_1_n_1', options: ['unique' => true]);
-            });
+
             Schema::connection($this->connection)->create('rom_files', function (Blueprint $collection) {
-                $collection->index(['filename', 'filetype'], 'filename_-1_filetype_-1',
+                $collection->index(['filename', 'filetype'], 'filename_1_filetype_1',
                     options: ['unique' => true, 'partialFilterExpression' =>
                         ['filename' => ['$exists' => true], 'filetype' => ['$exists' => true]]]);
             });
@@ -58,11 +52,7 @@ return new class extends Migration {
         /*! don't use down methods as it could overwrite current files in db */
         if (self::ALLOW_MIGRATIONS === true) {
             Schema::connection($this->connection)
-                ->table('roms.files', function (Blueprint $collection) {
-                    $collection->drop();
-                });
-            Schema::connection($this->connection)
-                ->table('roms.chunks', function (Blueprint $collection) {
+                ->table('rom_files', function (Blueprint $collection) {
                     $collection->drop();
                 });
         }
