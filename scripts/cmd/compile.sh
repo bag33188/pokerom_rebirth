@@ -28,6 +28,7 @@ compile() {
     normal=$(tput sgr0)
     target_PWD=$(readlink -f .)
     current_folder="${target_PWD##*/}"
+
     if [[ "$current_folder" = "scripts" ]]; then
         cd ..
     fi
