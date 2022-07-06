@@ -40,8 +40,12 @@ return new class extends Migration {
             Schema::connection($this->connection)->create('roms.chunks', function (Blueprint $collection) {
                 $collection->index(['files_id', 'n'], 'files_id_1_n_1', options: ['unique' => true]);
             });
+            Schema::connection($this->connection)->create('rom_files', function (Blueprint $collection) {
+                $collection->index(['filename', 'filetype'], 'filename_-1_filetype_-1',
+                    options: ['unique' => true, 'partialFilterExpression' =>
+                        ['filename' => ['$exists' => true], 'filetype' => ['$exists' => true]]]);
+            });
         }
-
     }
 
     /**

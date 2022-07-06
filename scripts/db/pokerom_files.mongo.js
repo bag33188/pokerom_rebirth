@@ -102,7 +102,13 @@ db.createCollection("rom_files", {
 });
 db.rom_files.createIndex(
     { filename: -1, filetype: -1 },
-    { unique: true, partialFilterExpression: { filename: { $exists: true } } }
+    {
+        unique: true,
+        partialFilterExpression: {
+            filename: { $exists: true },
+            filetype: { $exists: true },
+        },
+    }
 );
 
 let seeds = [
