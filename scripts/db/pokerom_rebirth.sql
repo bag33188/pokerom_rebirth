@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 06, 2022 at 02:20 AM
+-- Generation Time: Jul 06, 2022 at 02:39 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -40,7 +40,7 @@ SELECT `id`, `rom_name`, `rom_type`, /* IF (0 = FALSE, 'false', 'true') AS */ `h
 END$$
 
 DROP PROCEDURE IF EXISTS `GetAllPokeROMData`$$
-CREATE DEFINER=`bag33188`@`%` PROCEDURE `GetAllPokeROMData` ()  SQL SECURITY INVOKER SELECT `roms`.`id` AS `rom_id`, `roms`.`rom_name` AS `rom_name`, `roms`.`rom_type` AS `rom_type`, KbToB(`roms`.`rom_size`) AS `rom_size`, CONCAT(`roms`.`rom_name`, '.', UCASE(`roms`.`rom_type`)) AS `rom_filename`, `roms`.`file_id` AS `rom_file_id`,
+CREATE DEFINER=`bag33188`@`%` PROCEDURE `GetAllPokeROMData` ()  SQL SECURITY INVOKER SELECT `roms`.`id` AS `rom_id`, `roms`.`rom_name` AS `rom_name`, `roms`.`rom_type` AS `rom_type`, KB_TO_B(`roms`.`rom_size`) AS `rom_size`, CONCAT_ROM_FILENAME(`roms`.`rom_name`, `roms`.`rom_type`) AS `rom_filename`, `roms`.`file_id` AS `rom_file_id`,
 `games`.`id` AS `game_id`, `games`.`game_name` AS `game_name`, `games`.`game_type` AS `game_type`, `games`.`region` AS `region`, `games`.`generation` AS `generation`, `games`.`date_released` AS `date_released`
 FROM `roms` RIGHT JOIN `games` ON `roms`.`id` = `games`.`rom_id` WHERE `roms`.`has_game` = TRUE AND `roms`.`has_file` = TRUE AND `roms`.`game_id` IS NOT NULL AND `roms`.`file_id` IS NOT NULL ORDER BY `game_id` ASC$$
 
@@ -63,8 +63,8 @@ END$$
 --
 -- Functions
 --
-DROP FUNCTION IF EXISTS `CalcReadableRomSize`$$
-CREATE DEFINER=`bag33188`@`%` FUNCTION `CalcReadableRomSize` (`rom_length` INT) RETURNS VARCHAR(9) CHARSET utf8mb4 DETERMINISTIC SQL SECURITY INVOKER BEGIN
+DROP FUNCTION IF EXISTS `CALC_READABLE_ROM_SIZE`$$
+CREATE DEFINER=`bag33188`@`%` FUNCTION `CALC_READABLE_ROM_SIZE` (`ROM_LENGTH` INT) RETURNS VARCHAR(9) CHARSET utf8mb4 DETERMINISTIC SQL SECURITY INVOKER BEGIN
 /** !important:
 Note: these calculations and measurements are based on the standard units of data.
 Ie. 1 Gigabyte = 1000 MegaBytes = 1000 Kilobytes
@@ -73,18 +73,18 @@ Ie. 1 Gibibyte = 1024 Mebibytes = 1024 Kibibytes = 1024 = 1048576 Standard Bytes
 */
   DECLARE `size_val` FLOAT;
   DECLARE `size_type` CHAR(2);
-  IF `rom_length` > 1024 AND `rom_length` < 1000000 THEN
+  IF `ROM_LENGTH` > 1024 AND `ROM_LENGTH` < 1000000 THEN
     SET `size_type` = 'MB';
-    SET `size_val` = ROUND(`rom_length` / 1000, 2);
-  ELSEIF `rom_length` >= 1000000 THEN
+    SET `size_val` = ROUND(`ROM_LENGTH` / 1000, 2);
+  ELSEIF `ROM_LENGTH` >= 1000000 THEN
     SET `size_type` = 'GB';
-    SET `size_val`= ROUND(`rom_length` / 1000000, 2);
-  ELSEIF `rom_length` > 1020 AND `rom_length` <= 1024 THEN
+    SET `size_val`= ROUND(`ROM_LENGTH` / 1000000, 2);
+  ELSEIF `ROM_LENGTH` > 1020 AND `ROM_LENGTH` <= 1024 THEN
     SET `size_type` = 'KB';
-    SET `size_val` = CAST(`rom_length` AS FLOAT);
+    SET `size_val` = CAST(`ROM_LENGTH` AS FLOAT);
   ELSE
     SET `size_type` = 'B ';
-    SET `size_val` = CAST(`rom_length` * 1024 AS FLOAT);
+    SET `size_val` = CAST(`ROM_LENGTH` * 1024 AS FLOAT);
   END IF;
   SET @`size_str` = CAST(`size_val` AS VARCHAR(6));
   RETURN CONCAT(@`size_str`, ' ', `size_type`);
@@ -96,8 +96,11 @@ thus varchar(9)
 */
 END$$
 
-DROP FUNCTION IF EXISTS `GetProperGameTypeString`$$
-CREATE DEFINER=`bag33188`@`%` FUNCTION `GetProperGameTypeString` (`G_TYPE` VARCHAR(8)) RETURNS VARCHAR(23) CHARSET utf8mb4 SQL SECURITY INVOKER CASE LOWER(`G_TYPE`)
+DROP FUNCTION IF EXISTS `CONCAT_ROM_FILENAME`$$
+CREATE DEFINER=`bag33188`@`%` FUNCTION `CONCAT_ROM_FILENAME` (`ROM_NAME` VARCHAR(30), `ROM_TYPE` ENUM('gb','gbc','gba','nds','3ds','xci')) RETURNS VARCHAR(35) CHARSET utf8mb4 SQL SECURITY INVOKER COMMENT 'concats rom name and rom type with period char' RETURN CONCAT(`ROM_NAME`, '.', UCASE(`ROM_TYPE`))$$
+
+DROP FUNCTION IF EXISTS `GET_PROPER_GAME_TYPE_STRING`$$
+CREATE DEFINER=`bag33188`@`%` FUNCTION `GET_PROPER_GAME_TYPE_STRING` (`GAME_TYPE` VARCHAR(8)) RETURNS VARCHAR(23) CHARSET utf8mb4 SQL SECURITY INVOKER CASE LOWER(`GAME_TYPE`)
 WHEN 'core' THEN RETURN 'Core Pokémon Game';
 WHEN 'hack' THEN RETURN 'Pokémon ROM Hack';
 WHEN 'spin-off' THEN RETURN 'Spin-Off Pokémon Game';
@@ -110,22 +113,22 @@ which is 'spin-off' is excactly 8 chars
 */
 END CASE$$
 
-DROP FUNCTION IF EXISTS `KbToB`$$
-CREATE DEFINER=`bag33188`@`%` FUNCTION `KbToB` (`kilobytes` INT) RETURNS BIGINT(10) UNSIGNED DETERMINISTIC SQL SECURITY INVOKER COMMENT 'converts kibibytes value to bytes' RETURN `kilobytes` * 1024$$
+DROP FUNCTION IF EXISTS `KB_TO_B`$$
+CREATE DEFINER=`bag33188`@`%` FUNCTION `KB_TO_B` (`KIBIBYTES` INT) RETURNS BIGINT(10) UNSIGNED DETERMINISTIC SQL SECURITY INVOKER COMMENT 'converts kibibytes value to bytes' RETURN `KIBIBYTES` * 1024$$
 
 DROP FUNCTION IF EXISTS `SPLIT_STRING`$$
-CREATE DEFINER=`bag33188`@`%` FUNCTION `SPLIT_STRING` (`str_val` VARCHAR(255), `separator` VARCHAR(1), `position` INT) RETURNS VARCHAR(255) CHARSET utf8mb4 DETERMINISTIC COMMENT 'splits a string based on delimiter ' BEGIN
+CREATE DEFINER=`bag33188`@`%` FUNCTION `SPLIT_STRING` (`STR_VAL` VARCHAR(255), `SEPARATOR` VARCHAR(1), `POSITION` INT) RETURNS VARCHAR(255) CHARSET utf8mb4 DETERMINISTIC COMMENT 'splits a string based on delimiter ' BEGIN
 
         DECLARE `max_results` INT ;
 
         -- get max number of items
-        SET `max_results` = LENGTH(`str_val`) - LENGTH(REPLACE(`str_val`, `separator`, '')) + 1;
+        SET `max_results` = LENGTH(`STR_VAL`) - LENGTH(REPLACE(`STR_VAL`, `SEPARATOR`, '')) + 1;
 
-        IF `position` > `max_results` THEN
+        IF `SEPARATOR` > `max_results` THEN
             RETURN NULL ;
         ELSE
-        	SET @`sub_index1` := SUBSTRING_INDEX(`str_val`, `separator`, `position`);
-            RETURN SUBSTRING_INDEX(@`sub_index1`, `separator` , -1) ;
+        	SET @`sub_index1` := SUBSTRING_INDEX(`STR_VAL`, `SEPARATOR`, `SEPARATOR`);
+            RETURN SUBSTRING_INDEX(@`sub_index1`, `SEPARATOR` , -1) ;
         END IF;
 
     END$$
@@ -338,7 +341,6 @@ TRUNCATE TABLE `password_resets`;
 -- Table structure for table `personal_access_tokens`
 --
 -- Creation: Jun 05, 2022 at 04:47 PM
--- Last update: Jul 05, 2022 at 10:29 PM
 --
 
 DROP TABLE IF EXISTS `personal_access_tokens`;
@@ -376,7 +378,6 @@ INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `n
 -- Table structure for table `roms`
 --
 -- Creation: Jul 03, 2022 at 07:21 PM
--- Last update: Jul 05, 2022 at 08:11 PM
 --
 
 DROP TABLE IF EXISTS `roms`;
@@ -454,7 +455,7 @@ INSERT INTO `roms` (`id`, `file_id`, `game_id`, `rom_name`, `rom_size`, `rom_typ
 -- Table structure for table `sessions`
 --
 -- Creation: Jun 05, 2022 at 04:47 PM
--- Last update: Jul 06, 2022 at 12:10 AM
+-- Last update: Jul 06, 2022 at 12:36 AM
 --
 
 DROP TABLE IF EXISTS `sessions`;
@@ -481,7 +482,7 @@ TRUNCATE TABLE `sessions`;
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('536XYJxlTqFrNIZMn7llL82LZDKL4qruDHZ87TPX', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoidWtvSkdhdUpoMWI0Zkp5Smt4V3hvbnNoT28xb3lKVGZ1WjdiRzVkbiI7czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjIxOiJwYXNzd29yZF9oYXNoX3NhbmN0dW0iO3M6NjA6IiQyeSQxMCR3aXAzcXg5MVBsWERrcmouekVqb0MuL3dsSW50Z0lLM1EuckFKZ2d3UWhmWFJGaUlubURabSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDY6Imh0dHA6Ly9wb2tlcm9tX3JlYmlydGgudGVzdC9wdWJsaWMvYXBpL3ZlcnNpb24iO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1657066236);
+('536XYJxlTqFrNIZMn7llL82LZDKL4qruDHZ87TPX', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoidWtvSkdhdUpoMWI0Zkp5Smt4V3hvbnNoT28xb3lKVGZ1WjdiRzVkbiI7czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjIxOiJwYXNzd29yZF9oYXNoX3NhbmN0dW0iO3M6NjA6IiQyeSQxMCR3aXAzcXg5MVBsWERrcmouekVqb0MuL3dsSW50Z0lLM1EuckFKZ2d3UWhmWFJGaUlubURabSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDY6Imh0dHA6Ly9wb2tlcm9tX3JlYmlydGgudGVzdC9wdWJsaWMvYXBpL3ZlcnNpb24iO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1657067793);
 
 -- --------------------------------------------------------
 
