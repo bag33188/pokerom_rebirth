@@ -77,16 +77,21 @@ db.createCollection("roms.chunks", {
 });
 db.roms.chunks.createIndex({ files_id: 1, n: 1 }, { unique: true });
 
-db.createCollection("rom_files_data", {
+db.createCollection("rom_files", {
     validator: {
         $jsonSchema: {
             bsonType: "object",
+            required: ["filename", "filesize", "filetype"],
             properties: {
                 filename: {
                     bsonType: "string",
+                    pattern: "^[\\d\\w\\-\\_]+$",
+                },
+                filetype: {
+                    enum: ["gb", "gbc", "gba", "nds", "3ds", "xci"],
                 },
                 filesize: {
-                    bsonType: ["int", "long"],
+                    bsonType: ["int", "double"],
                     description: "Size of file measured in raw Bytes",
                 },
             },
@@ -95,7 +100,212 @@ db.createCollection("rom_files_data", {
     validationLevel: "moderate",
     validationAction: "warn",
 });
-db.rom_files_data.createIndex({ filename: -1 }, { unique: true });
+db.rom_files.createIndex({ filename: -1 }, { unique: true });
+
+let seeds = [
+    {
+        filename: "0100ABF008968000",
+        filesize: 15971909632,
+        filetype: "xci",
+    },
+    {
+        filename: "01008DB008C2C000",
+        filesize: 15971909632,
+        filetype: "xci",
+    },
+    {
+        filename: "010018E011D92000",
+        filesize: 7985954816,
+        filetype: "xci",
+    },
+    {
+        filename: "0100000011D90000",
+        filesize: 4997734912,
+        filetype: "xci",
+    },
+    {
+        filename: "010003F003A34000",
+        filesize: 4851431936,
+        filetype: "xci",
+    },
+    {
+        filename: "0100187003A36000",
+        filesize: 4468491264,
+        filetype: "xci",
+    },
+    {
+        filename: "00040000001B5000_v00",
+        filesize: 4294967295,
+        filetype: "3ds",
+    },
+    {
+        filename: "00040000001B5100_v00",
+        filesize: 4294967295,
+        filetype: "3ds",
+    },
+    {
+        filename: "0004000000175E00_v00",
+        filesize: 4294967295,
+        filetype: "3ds",
+    },
+    {
+        filename: "0004000000164800_v00",
+        filesize: 4294967295,
+        filetype: "3ds",
+    },
+    {
+        filename: "000400000011C400_v00",
+        filesize: 2147483648,
+        filetype: "3ds",
+    },
+    {
+        filename: "000400000011C500_v00",
+        filesize: 2147483648,
+        filetype: "3ds",
+    },
+    {
+        filename: "0004000000055D00_v00",
+        filesize: 2147483648,
+        filetype: "3ds",
+    },
+    {
+        filename: "0004000000055E00_v00",
+        filesize: 2147483648,
+        filetype: "3ds",
+    },
+    {
+        filename: "POKEMON_B2_IREO01",
+        filesize: 536870912,
+        filetype: "nds",
+    },
+    {
+        filename: "POKEMON_W2_IRDO01",
+        filesize: 536870912,
+        filetype: "nds",
+    },
+    {
+        filename: "POKEMON_B_IRBO01",
+        filesize: 268435456,
+        filetype: "nds",
+    },
+    {
+        filename: "POKEMON_W_IRAO01",
+        filesize: 268435456,
+        filetype: "nds",
+    },
+    {
+        filename: "POKEMON_HG_IPKE01",
+        filesize: 134217728,
+        filetype: "nds",
+    },
+    {
+        filename: "POKEMON_SS_IPGE01",
+        filesize: 134217728,
+        filetype: "nds",
+    },
+    {
+        filename: "POKEMON_PL_CPUE01",
+        filesize: 134217728,
+        filetype: "nds",
+    },
+    {
+        filename: "POKEMON_D_ADAE01",
+        filesize: 67108864,
+        filetype: "nds",
+    },
+    {
+        filename: "POKEMON_P_APAE",
+        filesize: 67108864,
+        filetype: "nds",
+    },
+    {
+        filename: "POKEMON_EMERBPEE01",
+        filesize: 16777216,
+        filetype: "gba",
+    },
+    {
+        filename: "POKEMON_FIREBPRE01",
+        filesize: 16777216,
+        filetype: "gba",
+    },
+    {
+        filename: "POKEMON_LEAFBPGE01",
+        filesize: 16777216,
+        filetype: "gba",
+    },
+    {
+        filename: "POKEMON_RUBYAXVE01",
+        filesize: 16777216,
+        filetype: "gba",
+    },
+    {
+        filename: "POKEMON_SAPPAXPE01",
+        filesize: 16777216,
+        filetype: "gba",
+    },
+    {
+        filename: "PM_CRYSTAL_BYTE01",
+        filesize: 2097152,
+        filetype: "gbc",
+    },
+    {
+        filename: "POKEMON_GLDAAUE01",
+        filesize: 2097152,
+        filetype: "gbc",
+    },
+    {
+        filename: "POKEMON_SLVAAXE01",
+        filesize: 2097152,
+        filetype: "gbc",
+    },
+    {
+        filename: "POKEMON_YELLOW01",
+        filesize: 1048576,
+        filetype: "gb",
+    },
+    {
+        filename: "POKEMON_GREEN01",
+        filesize: 1048576,
+        filetype: "gb",
+    },
+    {
+        filename: "POKEMON_BLUE01",
+        filesize: 1048576,
+        filetype: "gb",
+    },
+    {
+        filename: "POKEMON_RED01",
+        filesize: 1048576,
+        filetype: "gb",
+    },
+    {
+        filename: "pokeprism",
+        filesize: 2097152,
+        filetype: "gbc",
+    },
+    {
+        filename: "pokemon_brown_2014-red_hack",
+        filesize: 2097152,
+        filetype: "gb",
+    },
+    {
+        filename: "genesis-final-2019-08-23",
+        filesize: 16777216,
+        filetype: "gba",
+    },
+    {
+        filename: "Pokemon_Ash_Gray_4-5-3",
+        filesize: 16777216,
+        filetype: "gba",
+    },
+    {
+        filename: "RenegadePlatinum",
+        filesize: 104923028,
+        filetype: "nds",
+    },
+];
+
+db.rom_files.insertMany(seeds);
 
 let aggregations = [
     {
@@ -363,170 +573,5 @@ let aggregations = [
         ],
     },
 ];
-
-let seeds = [
-    {
-        filename: "0100ABF008968000.xci",
-        filesize: 15971909632,
-    },
-    {
-        filename: "01008DB008C2C000.xci",
-        filesize: 15971909632,
-    },
-    {
-        filename: "010018E011D92000.xci",
-        filesize: 7985954816,
-    },
-    {
-        filename: "0100000011D90000.xci",
-        filesize: 4997734912,
-    },
-    {
-        filename: "010003F003A34000.xci",
-        filesize: 4851431936,
-    },
-    {
-        filename: "0100187003A36000.xci",
-        filesize: 4468491264,
-    },
-    {
-        filename: "00040000001B5000_v00.3ds",
-        filesize: 4294967295,
-    },
-    {
-        filename: "00040000001B5100_v00.3ds",
-        filesize: 4294967295,
-    },
-    {
-        filename: "0004000000175E00_v00.3ds",
-        filesize: 4294967295,
-    },
-    {
-        filename: "0004000000164800_v00.3ds",
-        filesize: 4294967295,
-    },
-    {
-        filename: "000400000011C400_v00.3ds",
-        filesize: 2147483648,
-    },
-    {
-        filename: "000400000011C500_v00.3ds",
-        filesize: 2147483648,
-    },
-    {
-        filename: "0004000000055D00_v00.3ds",
-        filesize: 2147483648,
-    },
-    {
-        filename: "0004000000055E00_v00.3ds",
-        filesize: 2147483648,
-    },
-    {
-        filename: "POKEMON_B2_IREO01.nds",
-        filesize: 536870912,
-    },
-    {
-        filename: "POKEMON_W2_IRDO01.nds",
-        filesize: 536870912,
-    },
-    {
-        filename: "POKEMON_B_IRBO01.nds",
-        filesize: 268435456,
-    },
-    {
-        filename: "POKEMON_W_IRAO01.nds",
-        filesize: 268435456,
-    },
-    {
-        filename: "POKEMON_HG_IPKE01.nds",
-        filesize: 134217728,
-    },
-    {
-        filename: "POKEMON_SS_IPGE01.nds",
-        filesize: 134217728,
-    },
-    {
-        filename: "POKEMON_PL_CPUE01.nds",
-        filesize: 134217728,
-    },
-    {
-        filename: "POKEMON_D_ADAE01.nds",
-        filesize: 67108864,
-    },
-    {
-        filename: "POKEMON_P_APAE.nds",
-        filesize: 67108864,
-    },
-    {
-        filename: "POKEMON_EMERBPEE01.gba",
-        filesize: 16777216,
-    },
-    {
-        filename: "POKEMON_FIREBPRE01.gba",
-        filesize: 16777216,
-    },
-    {
-        filename: "POKEMON_LEAFBPGE01.gba",
-        filesize: 16777216,
-    },
-    {
-        filename: "POKEMON_RUBYAXVE01.gba",
-        filesize: 16777216,
-    },
-    {
-        filename: "POKEMON_SAPPAXPE01.gba",
-        filesize: 16777216,
-    },
-    {
-        filename: "PM_CRYSTAL_BYTE01.gbc",
-        filesize: 2097152,
-    },
-    {
-        filename: "POKEMON_GLDAAUE01.gbc",
-        filesize: 2097152,
-    },
-    {
-        filename: "POKEMON_SLVAAXE01.gbc",
-        filesize: 2097152,
-    },
-    {
-        filename: "POKEMON_YELLOW01.gb",
-        filesize: 1048576,
-    },
-    {
-        filename: "POKEMON_GREEN01.gb",
-        filesize: 1048576,
-    },
-    {
-        filename: "POKEMON_BLUE01.gb",
-        filesize: 1048576,
-    },
-    {
-        filename: "POKEMON_RED01.gb",
-        filesize: 1048576,
-    },
-    {
-        filename: "pokeprism.gbc",
-        filesize: 2097152,
-    },
-    {
-        filename: "pokemon_brown_2014-red_hack.gb",
-        filesize: 2097152,
-    },
-    {
-        filename: "genesis-final-2019-08-23.gba",
-        filesize: 16777216,
-    },
-    {
-        filename: "Pokemon_Ash_Gray_4-5-3.gba",
-        filesize: 16777216,
-    },
-    {
-        filename: "RenegadePlatinum.nds",
-        filesize: 104923028,
-    },
-];
-
-db.rom_files_data.insertMany(seeds);
 
 db.roms.files.aggregate([...aggregations[0].pipeline]);
