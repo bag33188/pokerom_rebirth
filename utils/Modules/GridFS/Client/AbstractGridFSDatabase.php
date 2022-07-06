@@ -15,7 +15,9 @@ abstract class AbstractGridFSDatabase extends GridFS
     public int $chunkSize;
     protected bool $useAuth = false;
 
+    /** @var string[] */
     private static array $gfsConfig;
+    /** @var string[] */
     private static array $mongoConfig;
 
     public function __construct(string $databaseName = null, string $bucketName = null, int $chunkSize = null)
