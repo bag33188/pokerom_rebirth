@@ -20,7 +20,7 @@
         "prod": "npm run production",
         "production": "mix --production",
         "gen-pw": "bash scripts/cmd/gen_pw.sh",
-        "compile-app": "bash scripts/cmd/compile.sh"
+        "compile-app": ".\\scripts\\cmd\\compile.bat"
     },
     "devDependencies": {
         "@tailwindcss/forms": "^0.5.0",
