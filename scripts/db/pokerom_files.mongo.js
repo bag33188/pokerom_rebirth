@@ -318,7 +318,7 @@ db.rom_files.insertMany(seeds);
 
 let aggregations = [
     {
-        name: "Calc Total ROM Size Bytes",
+        name: "Calc Total ROMs Size Bytes",
         pipeline: [
             {
                 $group: {
@@ -352,7 +352,7 @@ let aggregations = [
         ],
     },
     {
-        name: "Calc Total ROM Size Gibibytes",
+        name: "Calc Total ROMs Size Gibibytes",
         pipeline: [
             {
                 $group: {
