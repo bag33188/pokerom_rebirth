@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 06, 2022 at 04:09 AM
+-- Generation Time: Jul 06, 2022 at 04:33 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -168,7 +168,7 @@ TRUNCATE TABLE `failed_jobs`;
 --
 -- Table structure for table `games`
 --
--- Creation: Jul 06, 2022 at 01:56 AM
+-- Creation: Jul 06, 2022 at 02:20 AM
 --
 
 DROP TABLE IF EXISTS `games`;
@@ -381,7 +381,7 @@ INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `n
 --
 -- Table structure for table `roms`
 --
--- Creation: Jul 06, 2022 at 01:56 AM
+-- Creation: Jul 06, 2022 at 02:20 AM
 --
 
 DROP TABLE IF EXISTS `roms`;
@@ -460,7 +460,7 @@ INSERT INTO `roms` (`id`, `file_id`, `game_id`, `rom_name`, `rom_size`, `rom_typ
 --
 -- Table structure for table `sessions`
 --
--- Creation: Jul 06, 2022 at 02:07 AM
+-- Creation: Jul 06, 2022 at 02:20 AM
 --
 
 DROP TABLE IF EXISTS `sessions`;
