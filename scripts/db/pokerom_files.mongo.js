@@ -12,7 +12,7 @@ db.createUser({
 
 db = db.getSiblingDb("pokerom_files");
 
-db.createCollection("roms.files", {
+db.createCollection("rom.files", {
     validator: {
         $jsonSchema: {
             bsonType: "object",
@@ -50,13 +50,13 @@ db.createCollection("roms.files", {
     validationLevel: "strict",
     validationAction: "error",
 });
-db.roms.files.createIndex({ filename: 1, uploadDate: 1 });
-db.roms.files.createIndex(
+db.rom.files.createIndex({ filename: 1, uploadDate: 1 });
+db.rom.files.createIndex(
     { filename: 1 },
     { unique: true, partialFilterExpression: { filename: { $exists: true } } }
 );
 
-db.createCollection("roms.chunks", {
+db.createCollection("rom.chunks", {
     validator: {
         $jsonSchema: {
             bsonType: "object",
@@ -77,7 +77,7 @@ db.createCollection("roms.chunks", {
     validationLevel: "off",
     validationAction: "warn",
 });
-db.roms.chunks.createIndex({ files_id: 1, n: 1 }, { unique: true });
+db.rom.chunks.createIndex({ files_id: 1, n: 1 }, { unique: true });
 
 db.createCollection("rom_files.info", {
     validator: {
@@ -585,4 +585,4 @@ let aggregations = [
     },
 ];
 
-db.roms.files.aggregate([...aggregations[0].pipeline]);
+db.rom.files.aggregate([...aggregations[0].pipeline]);

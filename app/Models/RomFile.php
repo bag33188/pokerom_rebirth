@@ -12,8 +12,8 @@ use Utils\Classes\_Static\MongoMethods;
 class RomFile extends MongoDbModel
 {
     protected $connection = 'mongodb';
-    protected $collection = 'roms.files';
-    protected $table = 'roms.files'; //! don't delete!! use for eloquent helper code
+    protected $collection = 'rom.files';
+    protected $table = 'rom.files'; //! don't delete!! use for eloquent helper code
     protected $primaryKey = '_id';
     protected $keyType = 'string';
     protected $casts = [

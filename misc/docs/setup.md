@@ -147,7 +147,7 @@ LoadModule php_module "C:/xampp/php/php8apache2_4.dll"
 
 ### Mailhog
 
-[download][mailhog download]
+[download mailhog][mailhog download]
 
 access on: `http://127.0.0.1:8025`
 
