@@ -19,7 +19,47 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                <x-jet-welcome/>
+                {{--                                <x-jet-welcome/>--}}
+
+                <div class="p-6 sm:px-20 bg-white border-b border-gray-200">
+                    <div>
+                        <span class="block h-12 w-auto">
+                            @include('partials._app-logo')
+                        </span>
+                    </div>
+                </div>
+                <div class="bg-gray-200 bg-opacity-25 grid grid-rows-2">
+                    <div class="p-6 border-b border-gray-200">
+                        <div class="flex items-center">
+                            <div class="order-0 w-8 h-8 text-gray-400"></div>
+                            <div class="ml-4 text-lg order-1 text-gray-600 leading-7 font-semibold">About</div>
+                        </div>
+                        <div class="ml-12">
+                            <div class="mt-2 text-sm text-gray-500">
+                                Lorem ipsum dolor sit amet, consectetur adipisicing
+                                elit. A accusantium cupiditate delectus,
+                                dicta ducimus eveniet, fuga ipsum maxime minus nostrum nulla officiis possimus quod
+                                tempore
+                                temporibus? Facilis molestias nostrum tenetur!
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center">
+                            <div class="order-0 w-8 h-8 text-gray-400"></div>
+                            <div class="ml-4 text-lg order-1 text-gray-600 leading-7 font-semibold">Roms</div>
+                        </div>
+                        <div class="ml-12">
+                            <div class="mt-2 text-sm text-gray-500">
+                                Lorem ipsum dolor sit amet, consectetur adipisicing
+                                elit. A accusantium cupiditate delectus,
+                                dicta ducimus eveniet, fuga ipsum maxime minus nostrum nulla officiis possimus quod
+                                tempore
+                                temporibus? Facilis molestias nostrum tenetur!
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
