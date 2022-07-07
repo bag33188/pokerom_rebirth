@@ -26,7 +26,7 @@
                         <span class="block h-12 w-auto">@include('partials._app-logo')</span>
                     </div>
                     <div class="mt-3 text-2xl">
-                        {{config('app.name')}}
+                        {!! str_replace('Poke', 'Pok&eacute;', config('app.name')) !!}
                     </div>
                 </div>
                 <div class="bg-gray-200 bg-opacity-25 grid grid-rows-2 grid-cols-2">
