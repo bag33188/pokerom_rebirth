@@ -22,10 +22,10 @@
                 {{--<x-jet-welcome/>--}}
 
                 <div class="p-6 sm:px-20 bg-white border-b border-gray-200">
-                        <span class="block h-12 w-auto">
-                            @include('partials._app-logo')
-                        </span>
-                    <div class="mt-5 text-2xl">
+                    <div>
+                        <span class="block h-12 w-auto">@include('partials._app-logo')</span>
+                    </div>
+                    <div class="mt-3 text-2xl">
                         {{config('app.name')}}
                     </div>
                 </div>
