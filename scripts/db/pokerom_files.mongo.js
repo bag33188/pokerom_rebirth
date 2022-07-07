@@ -1,3 +1,6 @@
+const mongoURI =
+    "mongodb://brock:3931Sunflower!@localhost:27017/?authMechanism=SCRAM-SHA-256&authSource=admin";
+
 conn = new Mongo("localhost:27017");
 
 db = conn.getDB("admin");
@@ -76,7 +79,7 @@ db.createCollection("roms.chunks", {
 });
 db.roms.chunks.createIndex({ files_id: 1, n: 1 }, { unique: true });
 
-db.createCollection("rom_files", {
+db.createCollection("rom_files.info", {
     validator: {
         $jsonSchema: {
             bsonType: "object",
@@ -99,7 +102,7 @@ db.createCollection("rom_files", {
     validationLevel: "moderate",
     validationAction: "warn",
 });
-db.rom_files.createIndex(
+db.rom_files.info.createIndex(
     { filename: -1, filetype: -1 },
     {
         unique: true,
@@ -313,7 +316,7 @@ let seeds = [
     },
 ];
 
-db.rom_files.insertMany(seeds);
+db.rom_files.info.insertMany(seeds);
 
 let aggregations = [
     {

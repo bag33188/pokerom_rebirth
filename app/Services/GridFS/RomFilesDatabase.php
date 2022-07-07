@@ -6,7 +6,7 @@ use Utils\Modules\GridFS\Client\AbstractGridFSDatabase as GridFSDatabase;
 
 class RomFilesDatabase extends GridFSDatabase
 {
-    protected string $entityName = 'rom_files';
+    protected string $entityName = 'rom_files.info';
     protected bool $useAuth = true;
 
     /**

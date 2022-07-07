@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 06, 2022 at 06:06 AM
+-- Generation Time: Jul 08, 2022 at 12:01 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -379,7 +379,6 @@ INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `n
 -- Table structure for table `roms`
 --
 -- Creation: Jul 06, 2022 at 02:20 AM
--- Last update: Jul 06, 2022 at 04:06 AM
 --
 
 DROP TABLE IF EXISTS `roms`;
@@ -459,7 +458,7 @@ INSERT INTO `roms` (`id`, `file_id`, `game_id`, `rom_name`, `rom_size`, `rom_typ
 -- Table structure for table `sessions`
 --
 -- Creation: Jul 06, 2022 at 02:20 AM
--- Last update: Jul 06, 2022 at 04:06 AM
+-- Last update: Jul 07, 2022 at 09:13 PM
 --
 
 DROP TABLE IF EXISTS `sessions`;
@@ -488,7 +487,7 @@ TRUNCATE TABLE `sessions`;
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('PolmowLaKd6hys2UY2qUbidSA2wWEoayLzkDQHO2', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiVGpnOENOVkRHTVg0UEZlcmVLR09QZWJ4cjdCSVphdVpMb2U3RThuRCI7czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjIxOiJwYXNzd29yZF9oYXNoX3NhbmN0dW0iO3M6NjA6IiQyeSQxMCR3aXAzcXg5MVBsWERrcmouekVqb0MuL3dsSW50Z0lLM1EuckFKZ2d3UWhmWFJGaUlubURabSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDY6Imh0dHA6Ly9wb2tlcm9tX3JlYmlydGgudGVzdC9wdWJsaWMvYXBpL3ZlcnNpb24iO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1657080363);
+('g4moZi82Gy8luCVRo0uwa0Ujz98VQFC1Jd2q2pGm', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoidDdnT3I0d3NCWmpLb2k0OTVKdzdPWjdKQlhSTlNEMWZjb2gxYWdvNyI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDY6Imh0dHA6Ly9wb2tlcm9tX3JlYmlydGgudGVzdC9wdWJsaWMvYXBpL3ZlcnNpb24iO31zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO3M6MjE6InBhc3N3b3JkX2hhc2hfc2FuY3R1bSI7czo2MDoiJDJ5JDEwJHdpcDNxeDkxUGxYRGtyai56RWpvQy4vd2xJbnRnSUszUS5yQUpnZ3dRaGZYUkZpSW5tRFptIjt9', 1657228392);
 
 -- --------------------------------------------------------
 
@@ -496,6 +495,7 @@ INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, 
 -- Table structure for table `users`
 --
 -- Creation: Jun 05, 2022 at 04:47 PM
+-- Last update: Jul 07, 2022 at 07:51 PM
 --
 
 DROP TABLE IF EXISTS `users`;
@@ -530,7 +530,8 @@ TRUNCATE TABLE `users`;
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `two_factor_secret`, `two_factor_recovery_codes`, `two_factor_confirmed_at`, `role`, `remember_token`, `current_team_id`, `profile_photo_path`, `created_at`, `updated_at`) VALUES
-(1, 'Brock', 'bglatman@outlook.com', NULL, '$2y$10$wip3qx91PlXDkrj.zEjoC./wlIntgIK3Q.rAJggwQhfXRFiInmDZm', NULL, NULL, NULL, 'admin', 'iiasAtq8sw4z3OC23pG3wTvSNHUv2p0JvOgmEDbIuE6Vi3yd8lDGqNry2odk', NULL, NULL, '2022-07-04 02:35:33', '2022-07-04 02:35:33');
+(1, 'Brock', 'bglatman@outlook.com', NULL, '$2y$10$wip3qx91PlXDkrj.zEjoC./wlIntgIK3Q.rAJggwQhfXRFiInmDZm', NULL, NULL, NULL, 'admin', 'CxBdQbNzKzBP3rYibbZcpd2qBUzDoPyQaY6jRNFMOVAS6tRCunPbsXqwbDRW', NULL, NULL, '2022-07-04 02:35:33', '2022-07-04 02:35:33'),
+(2, 'John Doe', 'jdoe123@gmail.com', NULL, '$2y$10$aGTR8A9VdeQ/P96Uun9oJO9sowLpJM9p3zqcGubHWDcgAzIF/xSJu', NULL, NULL, NULL, 'user', NULL, NULL, NULL, '2022-07-08 02:51:47', '2022-07-08 02:51:47');
 
 --
 -- Indexes for dumped tables
@@ -633,7 +634,7 @@ ALTER TABLE `roms`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables

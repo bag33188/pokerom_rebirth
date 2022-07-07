@@ -232,6 +232,13 @@ Links and references
 > https://httpd.apache.org/docs/2.4/howto/http2.html
 > https://www.mongodb.com/docs/drivers/php/
 
+#### lint
+install sass-lint in phpstorm
+
+`npm install --save-dev sass-lint`
+
+configure node exec and sass-lint npm cmd exec and config file...
+
 ---------
 
 

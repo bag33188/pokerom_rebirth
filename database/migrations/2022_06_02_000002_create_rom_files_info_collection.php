@@ -16,7 +16,7 @@ return new class extends Migration {
     public function up(): void
     {
         if (self::ALLOW_MIGRATIONS === true) {
-            Schema::connection($this->connection)->create('rom_files', function (Blueprint $collection) {
+            Schema::connection($this->connection)->create('rom_files.info', function (Blueprint $collection) {
                 $collection->index(['filename', 'filetype'], 'filename_1_filetype_1',
                     options: ['unique' => true, 'partialFilterExpression' =>
                         ['filename' => ['$exists' => true], 'filetype' => ['$exists' => true]]]);
