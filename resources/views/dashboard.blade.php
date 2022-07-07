@@ -29,7 +29,7 @@
                         {!! str_replace('Poke', 'Pok&eacute;', config('app.name')) !!}
                     </div>
                 </div>
-                <div class="bg-gray-200 bg-opacity-25 grid grid-rows-2 grid-cols-2">
+                <div class="bg-gray-200 bg-opacity-25 grid grid-rows-3 grid-cols-2 md:grid-rows-2">
                     <div class="p-6 border-b border-gray-200 col-span-2 row-span-1">
                         <div class="flex items-center">
                             <div class="order-0 w-8 h-8 text-gray-400"><!-- insert icon --></div>
@@ -45,7 +45,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="p-6 border-r border-gray-200 col-start-1 col-end-1 row-start-2 row-end-2 md:col-span-2">
+                    <div
+                        class="p-6 border-r border-gray-200 row-start-2 row-end-2 col-span-full md:col-start-1 md:col-end-1">
                         <div class="flex items-center">
                             <div class="order-0 w-8 h-8 text-gray-400"><!-- insert icon --></div>
                             <div class="ml-4 text-lg order-1 text-gray-600 leading-7 font-semibold">Roms</div>
@@ -60,7 +61,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="p-6 col-start-2 col-end-2 row-start-2 row-end-2 md:col-span-2">
+                    <div
+                        class="p-6 md:row-start-2 md:row-end-2 row-start-3 row-end-3 col-span-full md:col-start-2 md:col-end-2">
                         <div class="flex items-center">
                             <div class="order-0 w-8 h-8 text-gray-400"><!-- insert icon --></div>
                             <div class="ml-4 text-lg order-1 text-gray-600 leading-7 font-semibold">Games</div>
