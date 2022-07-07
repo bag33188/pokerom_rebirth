@@ -10,7 +10,7 @@
             <x-list-item>{{GameRepo::getProperGameTypeString($game->game_type)}}</x-list-item>
             <x-list-item>Released on: {{parseDateAsReadableString($game->date_released)}}</x-list-item>
         </x-list-group>
-        @if(Auth::user()->isAdmin())
+        @if(auth()->user()->isAdmin())
             <div class="row-start-2 row-end-2 ml-1 col-start-2 col-end-2 justify-self-end">
                 <livewire:game.delete :gameId="$gameId"/>
             </div>
