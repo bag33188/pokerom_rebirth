@@ -45,7 +45,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="p-6 border-r border-gray-200 col-start-1 col-end-1 row-start-2 row-end-2">
+                    <div class="p-6 border-r border-gray-200 col-start-1 col-end-1 row-start-2 row-end-2 md:col-span-2">
                         <div class="flex items-center">
                             <div class="order-0 w-8 h-8 text-gray-400"><!-- insert icon --></div>
                             <div class="ml-4 text-lg order-1 text-gray-600 leading-7 font-semibold">Roms</div>
@@ -60,7 +60,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="p-6 col-start-2 col-end-2 row-start-2 row-end-2">
+                    <div class="p-6 col-start-2 col-end-2 row-start-2 row-end-2 md:col-span-2">
                         <div class="flex items-center">
                             <div class="order-0 w-8 h-8 text-gray-400"><!-- insert icon --></div>
                             <div class="ml-4 text-lg order-1 text-gray-600 leading-7 font-semibold">Games</div>
