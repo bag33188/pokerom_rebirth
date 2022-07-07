@@ -2,6 +2,8 @@
 
 namespace Utils\Classes\_Static;
 
+use Config;
+
 /**
  * This class contains a variety of methods that are useful when dealing with files and file metadata.
  */
@@ -16,8 +18,10 @@ class FileMethods
      */
     public static function makeFilepathFromFilename(string $filename, ?string $storagePathPrefix = null): string
     {
-        $storagePath = $storagePathPrefix ? storage_path($storagePathPrefix) : config('gridfs.fileUploadPath');
-        return "$storagePath/{$filename}";
+        $storagePath = $storagePathPrefix
+            ? storage_path($storagePathPrefix)
+            : Config::get('gridfs.fileUploadPath');
+        return "$storagePath/$filename";
     }
 
     /**
