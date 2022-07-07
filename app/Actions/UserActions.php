@@ -4,6 +4,7 @@ namespace App\Actions;
 
 use App\Interfaces\Action\UserActionsInterface;
 use App\Models\User;
+use Auth;
 
 class UserActions implements UserActionsInterface
 {
@@ -14,6 +15,6 @@ class UserActions implements UserActionsInterface
 
     public function revokeUserTokens(): void
     {
-        auth()->user()->tokens()->delete();
+        Auth::user()->tokens()->delete();
     }
 }

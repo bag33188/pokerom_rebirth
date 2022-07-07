@@ -27,7 +27,7 @@
                         {{ __('Games') }}
                     </x-jet-nav-link>
                 </div>
-                @if(Auth::user()->isAdmin())
+                @if(auth()->user()->isAdmin())
                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                         <x-jet-nav-link href="{{ route('rom-files.index') }}"
                                         :active="request()->routeIs('rom-files.index')">
