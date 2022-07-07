@@ -32,7 +32,7 @@
                 <div class="bg-gray-200 bg-opacity-25 grid grid-rows-2 grid-cols-2">
                     <div class="p-6 border-b border-gray-200 col-span-2 row-span-1">
                         <div class="flex items-center">
-                            <div class="order-0 w-8 h-8 text-gray-400"></div>
+                            <div class="order-0 w-8 h-8 text-gray-400"><!-- insert icon --></div>
                             <div class="ml-4 text-lg order-1 text-gray-600 leading-7 font-semibold">About</div>
                         </div>
                         <div class="ml-12">
@@ -45,9 +45,9 @@
                             </div>
                         </div>
                     </div>
-                    <div class="p-6 border-b border-r border-gray-200 col-start-1 col-end-1 row-start-2 row-end-2">
+                    <div class="p-6 border-r border-gray-200 col-start-1 col-end-1 row-start-2 row-end-2">
                         <div class="flex items-center">
-                            <div class="order-0 w-8 h-8 text-gray-400"></div>
+                            <div class="order-0 w-8 h-8 text-gray-400"><!-- insert icon --></div>
                             <div class="ml-4 text-lg order-1 text-gray-600 leading-7 font-semibold">Roms</div>
                         </div>
                         <div class="ml-12">
@@ -62,7 +62,7 @@
                     </div>
                     <div class="p-6 col-start-2 col-end-2 row-start-2 row-end-2">
                         <div class="flex items-center">
-                            <div class="order-0 w-8 h-8 text-gray-400"></div>
+                            <div class="order-0 w-8 h-8 text-gray-400"><!-- insert icon --></div>
                             <div class="ml-4 text-lg order-1 text-gray-600 leading-7 font-semibold">Games</div>
                         </div>
                         <div class="ml-12">
