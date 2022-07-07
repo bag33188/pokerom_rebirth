@@ -19,7 +19,8 @@ class GridFSBucketMethods extends GridFS implements GridFSBucketMethodsInterface
 
     public final function upload(string $filename): void
     {
-        $stream = fopen(FileMethods::makeFilepathFromFilename($filename), 'rb');
+        $filepath = FileMethods::makeFilepathFromFilename($filename);
+        $stream = fopen($filepath, 'rb');
         $this->bucket->uploadFromStream($filename, $stream);
         fclose($stream);
     }

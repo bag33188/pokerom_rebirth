@@ -7,6 +7,7 @@
 namespace Utils\Modules\GridFS\Vendor;
 
 $template = <<<'php'
+'connections' => [
     'mongodb' => [
         'driver' => 'mongodb',
         'host' => env('DB_HOST_SECOND', 'localhost'),
@@ -20,6 +21,7 @@ $template = <<<'php'
             'authSource' => env('DB_AUTHENTICATION_DATABASE'),
         ],
     ],
+]
 php;
 
 return $template;
