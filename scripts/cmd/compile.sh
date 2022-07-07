@@ -37,7 +37,7 @@ compile() {
     fi
 
     composer install && composer update
-    npm install #&& npm update
+    npm install && npm update
     npm run dev
 
     git status
