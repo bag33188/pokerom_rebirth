@@ -11,12 +11,13 @@ class FileMethods
      * _Note: by default this uses `gridfs.fileUploadPath` from `config` as path prefix._
      *
      * @param string $filename
-     * @param string|null $prefix Specify custom filepath prefix
+     * @param string|null $storagePathPrefix Specify custom app-storage filepath prefix
      * @return string
      */
-    public static function makeFilepathFromFilename(string $filename, ?string $prefix = null): string
+    public static function makeFilepathFromFilename(string $filename, ?string $storagePathPrefix = null): string
     {
-        return sprintf("%s/%s", $prefix ?? config('gridfs.fileUploadPath'), $filename);
+        $storagePath = $storagePathPrefix ? storage_path($storagePathPrefix) : config('gridfs.fileUploadPath');
+        return "$storagePath/{$filename}";
     }
 
     /**

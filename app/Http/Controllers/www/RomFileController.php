@@ -53,7 +53,7 @@ class RomFileController extends ViewController
     public function store(StoreRomFileRequest $request)
     {
         $this->romFileDataService->uploadRomFile($request['filename']);
-        return response()->redirectTo(url()->previous())->banner("file uploaded!");
+        return response()->redirectTo(url()->previous())->banner("file {$request['filename']} uploaded!");
     }
 
     /**
