@@ -9,10 +9,13 @@ use RomFileRepo;
 
 class Index extends Component
 {
+    // wire models
     public $roms;
+
+    // props
     public $romsTableColumns;
 
-    public function mount()
+    public function booted()
     {
         $this->romsTableColumns = array('ROM Name', 'ROM Size', 'ROM Type', 'Game Name', 'Download', 'Information');
     }

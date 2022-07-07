@@ -20,7 +20,11 @@ class Edit extends Component
 
     /** @var Rom */
     public $rom;
+
+    // route params
     public $romId;
+
+    // wire models
     public $rom_name;
     public $rom_size;
     public $rom_type;

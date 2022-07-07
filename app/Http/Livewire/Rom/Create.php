@@ -17,6 +17,7 @@ class Create extends Component
 {
     use RomValidationRulesTrait, AuthorizesRequests;
 
+    // wire models
     public $rom_name;
     public $rom_size;
     public $rom_type;

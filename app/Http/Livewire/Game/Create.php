@@ -17,9 +17,11 @@ class Create extends Component
 {
     use GameValidationRulesTrait, AuthorizesRequests;
 
+    // props
     public $availableRoms;
     public $romsAreAvailable;
 
+    // wire models
     public $game_name;
     public $game_type;
     public $generation;

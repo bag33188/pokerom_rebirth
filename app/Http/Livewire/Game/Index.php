@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Game;
 
+use App\Models\Game;
 use GameRepo;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -10,6 +11,7 @@ use Livewire\Component;
 
 class Index extends Component
 {
+    /** @var Game[] */
     public $games;
 
     public function render(): Factory|View|Application

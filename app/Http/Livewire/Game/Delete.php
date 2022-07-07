@@ -14,6 +14,7 @@ class Delete extends Component
 {
     use AuthorizesRequests;
 
+    // route params
     public $gameId;
 
     public function mount(int $gameId)

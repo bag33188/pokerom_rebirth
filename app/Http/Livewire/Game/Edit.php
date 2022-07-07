@@ -20,7 +20,11 @@ class Edit extends Component
 
     /** @var Game */
     public $game;
+
+    // route params
     public $gameId;
+
+    // wire models
     public $game_name;
     public $game_type;
     public $generation;

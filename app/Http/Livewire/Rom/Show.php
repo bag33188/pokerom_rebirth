@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Rom;
 
+use App\Models\Rom;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -10,7 +11,10 @@ use RomRepo;
 
 class Show extends Component
 {
+    /** @var Rom */
     public $rom;
+
+    // route params
     public $romId;
 
     public function mount(int $romId)
