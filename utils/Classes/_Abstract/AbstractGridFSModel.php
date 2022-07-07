@@ -9,7 +9,7 @@ use Jenssegers\Mongodb\Eloquent\Model as MongoDbModel;
  * The purpose of this abstract class is to provider easier hinting and implementation
  * for GridFS-related models.
  */
-abstract class AbstractGridFSFile extends MongoDbModel
+abstract class AbstractGridFSModel extends MongoDbModel
 {
     /**
      * BSON Type: ObjectID (`objectId`)
