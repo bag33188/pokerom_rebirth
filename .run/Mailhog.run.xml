@@ -4,7 +4,7 @@
     <option name="INTERPRETER_OPTIONS" value="" />
     <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
     <option name="PARENT_ENVS" value="true" />
-    <option name="SCRIPT_NAME" value="./scripts/cmd/run_mailhog.cmd" />
+    <option name="SCRIPT_NAME" value="./scripts/cmd/launch_mailhog.cmd" />
     <option name="PARAMETERS" value="" />
     <method v="2" />
   </configuration>
