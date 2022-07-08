@@ -2,13 +2,15 @@
 
 namespace App\Services\GridFS;
 
-use MongoDB\GridFS\Bucket;
+use GfsRomFile;
 use Utils\Modules\GridFS\Support\GridFSBucketMethods;
 
 class RomFileProcessor extends GridFSBucketMethods
 {
-    public function __construct(Bucket $bucket)
+    protected string $entityName = 'rom_files.processor';
+
+    public function __construct()
     {
-        parent::__construct($bucket);
+        parent::__construct(GfsRomFile::getBucket());
     }
 }
