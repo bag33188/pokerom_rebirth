@@ -10,14 +10,33 @@ use Utils\Modules\GridFS\GridFS;
  */
 abstract class AbstractGridFSDatabase extends GridFS
 {
-    // chance accessors on inherited properties
+    // change accessors on inherited properties
     // protected => public
 
+    /** @var string name of mongodb database */
     public string $databaseName;
+
+    /**
+     * name of gridfs file bucket (default is `fs`)
+     *
+     * @var string
+     */
     public string $bucketName;
+
+    /**
+     * size of chunks to store files as (default is `261120`, `255kb`)
+     *
+     * @var int
+     */
     public int $chunkSize;
 
-    /** @var bool specify whether to use authenticate when connecting to mongodb. _only allows username/password auth_ */
+    /**
+     * specify whether to use authenticate when connecting to mongodb.
+     *
+     * _note: only allows username/password auth_
+     *
+     * @var bool
+     */
     protected bool $useAuth = false;
 
     /** @var string[] */
@@ -59,7 +78,7 @@ abstract class AbstractGridFSDatabase extends GridFS
                 'authMechanism=' .
                 (@$this->mongoConfig['options']['authMechanism'] ?? 'DEFAULT') .
                 '&authSource=' .
-                @$this->mongoConfig['options']['authSource'] ?? 'admin';
+                (@$this->mongoConfig['options']['authSource'] ?? 'admin');
         }
         return $dsnBuilder;
     }
