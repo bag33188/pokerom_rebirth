@@ -48,15 +48,16 @@ Route::middleware('auth:sanctum')->group(function () {
     });
     Route::prefix('rom-files/grid')->group(function () {
         Route::get('/list', [RomFileActions::class, 'listStorageFiles'])->middleware('admin');
-        Route::post('/upload', [RomFileController::class, 'upload']);
         Route::get('/{romFileId}/download', [RomFileController::class, 'download']);
+        Route::post('/upload', [RomFileController::class, 'upload']);
     });
 
     // relationships
     Route::get('/roms/{romId}/game', [RomController::class, 'indexGame']);
     Route::get('/roms/{romId}/file', [RomController::class, 'indexFile']);
-    Route::get('/rom-files/{romFileId}/rom', [RomFileController::class, 'indexRom']);
     Route::get('/games/{gameId}/rom', [GameController::class, 'indexRom']);
+    Route::get('/rom-files/{romFileId}/rom', [RomFileController::class, 'indexRom']);
+    // relationship actions
     Route::patch('/roms/{romId}/linkFile', [RomController::class, 'linkRomToFile']);
 });
 

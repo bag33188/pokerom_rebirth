@@ -3,8 +3,15 @@ const path = require("path");
 
 console.log("formatting mongo dump...");
 
+const [dirnamePattern, objectIdPattern, lengthPattern, chunkSizePattern] = [
+    /([\/\\]scripts)([\/\\]helpers)/i,
+    /("_id":)([\s\t\n\v]*)(\{[\s\t\n\v]*)("\$oid":)([\s\t\n\v]*)("[\da-fA-F]+")([\s\t\n\v]*)(})([\s\t\n\v]*)(,?)/gim,
+    /("length":)([\s\t\n\v]*)/gim,
+    /("chunkSize":)([\s\t\n\v]*)(\d+)(,?)/gim,
+];
+
 const filePath = path.join(
-    __dirname.replace(/([\/\\]scripts)([\/\\]helpers)/i, ""),
+    __dirname.replace(dirnamePattern, ""),
     "misc",
     "data",
     "dump",
@@ -19,12 +26,6 @@ try {
 } catch (err) {
     console.error(err);
 }
-
-const [objectIdPattern, lengthPattern, chunkSizePattern] = [
-    /("_id":)([\s\t\n\v]*)(\{[\s\t\n\v]*)("\$oid":)([\s\t\n\v]*)("[\da-fA-F]+")([\s\t\n\v]*)(})([\s\t\n\v]*)(,?)/gim,
-    /("length":)([\s\t\n\v]*)/gim,
-    /("chunkSize":)([\s\t\n\v]*)(\d+)(,?)/gim,
-];
 
 let newData = data
     .valueOf()

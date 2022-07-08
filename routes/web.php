@@ -36,8 +36,8 @@ Route::middleware([
         Route::get('/info/{romFile}', [RomFileController::class, 'show'])->name('rom-files.show');
         Route::get('/create', [RomFileController::class, 'create'])->name('rom-files.create')->middleware('admin');
         Route::post('/store', [RomFileController::class, 'store'])->name('rom-files.store');
-        Route::post('/{romFile}/download', [RomFileController::class, 'download'])->name('rom-files.download');
         Route::delete('/delete/{romFile}', [RomFileController::class, 'destroy'])->name('rom-files.delete');
+        Route::post('/{romFile}/download', [RomFileController::class, 'download'])->name('rom-files.download');
     });
     // livewire routes
     Route::prefix('roms')->group(function () {
