@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\GridFS\Queries\RomFiles;
+namespace App\Repositories\Queries\RomFiles;
 
 use JetBrains\PhpStorm\ArrayShape;
 use JetBrains\PhpStorm\Pure;

@@ -12,7 +12,7 @@ use Utils\Classes\_Static\FileMethods;
 
 class RomFileRepository implements RomFileRepositoryInterface
 {
-    use RomFiles\FileSizesGibibytes, RomFiles\FileSizesKibibytes, RomFiles\FileSizesMebibytes;
+    use Queries\RomFiles\FileSizesGibibytes, Queries\RomFiles\FileSizesKibibytes, Queries\RomFiles\FileSizesMebibytes;
 
     public function findFileIfExists(string $romFileId): RomFile
     {
