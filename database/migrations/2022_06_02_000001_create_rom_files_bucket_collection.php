@@ -34,13 +34,24 @@ return new class extends Migration {
         //!! never execute. current data is intended to be permanent !!//
         if (self::ALLOW_MIGRATIONS === true) {
             Schema::connection($this->connection)->create('rom.files', function (Blueprint $collection) {
-                $collection->index(['length', 'filename'], 'length_1_filename_1',
-                    options: ['unique' => true, 'partialFilterExpression' => ['filename' => ['$exists' => true]]]);
+                $collection->index(
+                    columns: ['length', 'filename'],
+                    name: 'length_1_filename_1',
+                    options: [
+                        'unique' => true,
+                        'partialFilterExpression' => [
+                            'filename' => ['$exists' => true]
+                        ]
+                    ]
+                );
             });
             Schema::connection($this->connection)->create('rom.chunks', function (Blueprint $collection) {
-                $collection->index(['files_id', 'n'], 'files_id_1_n_1', options: ['unique' => true]);
+                $collection->index(
+                    columns: ['files_id', 'n'],
+                    name: 'files_id_1_n_1',
+                    options: ['unique' => true]
+                );
             });
-
         }
     }
 

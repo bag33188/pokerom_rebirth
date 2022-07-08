@@ -17,9 +17,20 @@ return new class extends Migration {
     {
         if (self::ALLOW_MIGRATIONS === true) {
             Schema::connection($this->connection)->create('rom_files.info', function (Blueprint $collection) {
-                $collection->index(['filename', 'filetype'], 'filename_1_filetype_1',
-                    options: ['unique' => true, 'partialFilterExpression' =>
-                        ['filename' => ['$exists' => true], 'filetype' => ['$exists' => true]]]);
+                // compound index
+                // filename and filetype fields are unique if they already exist together on the same document
+                // at the time of querying
+                $collection->index(
+                    columns: ['filename', 'filetype'],
+                    name: 'filename_1_filetype_1',
+                    options: [
+                        'unique' => true,
+                        'partialFilterExpression' => [
+                            'filename' => ['$exists' => true],
+                            'filetype' => ['$exists' => true]
+                        ]
+                    ]
+                );
             });
         }
     }
