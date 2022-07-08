@@ -26,5 +26,5 @@ interface RomFileRepositoryInterface
 
     public function getTotalSizeOfAllRomFiles(): int;
 
-    public function getRomFileWithMaxFileSize(): mixed;
+    public function getRomFileWithLargestFileSize(): int;
 }

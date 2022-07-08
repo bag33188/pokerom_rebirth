@@ -6,7 +6,7 @@ use App\Models\RomFile;
 
 trait MaxFileSize
 {
-    protected function romFileWithMaxFileSize(): mixed
+    protected function romFileWithGreatestFileSize(): int
     {
         return RomFile::max('length');
     }

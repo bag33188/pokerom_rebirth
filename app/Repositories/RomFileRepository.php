@@ -69,8 +69,8 @@ class RomFileRepository implements RomFileRepositoryInterface
         return $this->sumLengthOfAllRomFilesBytes();
     }
 
-    public function getRomFileWithMaxFileSize(): mixed
+    public function getRomFileWithLargestFileSize(): int
     {
-        return $this->romFileWithMaxFileSize();
+        return $this->romFileWithGreatestFileSize();
     }
 }
