@@ -21,7 +21,6 @@ class FarewellNotification extends Notification
     public function __construct(User $user)
     {
         $this->user = $user;
-        //
     }
 
     /**
