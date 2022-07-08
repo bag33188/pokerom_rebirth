@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use JetBrains\PhpStorm\ArrayShape;
 
 class WelcomeNotification extends Notification
 {
@@ -40,12 +41,30 @@ class WelcomeNotification extends Notification
      */
     public function toMail(mixed $notifiable): MailMessage
     {
-        $lnMsg = (isset($this->user->name) ? "Hello {$this->user->name}, welcome" : 'Welcome') . " to the world of PokeROM!";
+        $lnMsg = "Hello {$this->user->name}, welcome to the world of PokeROM!";
         return (new MailMessage)
             ->subject('Thank you for joining ' . config('app.name') . '!!')
             ->from(config('mail.from.address'))
             ->line(preg_replace("/Poke/i", POKE_EACUTE, $lnMsg))
             ->action('Check it out!', route('roms.index'))
             ->line('Enjoy!');
+    }
+
+    /**
+     * Get the array representation of the notification.
+     *
+     * @param mixed $notifiable
+     * @return array
+     */
+    #[ArrayShape(['subject' => "string", 'from' => "\Illuminate\Config\Repository|\Illuminate\Contracts\Foundation\Application|mixed", 'line1' => "mixed", 'line2' => "string"])]
+    public function toArray(mixed $notifiable): array
+    {
+        return [
+            'subject' => 'Thank you for joining ' . config('app.name') . '!!',
+            'from' => config('mail.from.address'),
+            'line1' => preg_replace("/Poke/i", POKE_EACUTE,
+                "Hello {$this->user->name}, welcome to the world of PokeROM!"),
+            'line2' => 'Enjoy!'
+        ];
     }
 }

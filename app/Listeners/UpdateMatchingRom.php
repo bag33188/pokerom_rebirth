@@ -19,7 +19,7 @@ class UpdateMatchingRom implements ShouldQueue
      *
      * @var Rom|null
      */
-    private static ?Rom $matchingRom;
+    public static ?Rom $matchingRom;
 
     public function shouldQueue(RomFileCreated $event): bool
     {
