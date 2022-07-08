@@ -14,4 +14,13 @@
     <envs />
     <method v="2" />
   </configuration>
+  <configuration default="false" name="Compile" type="BatchConfigurationType" factoryName="Batch">
+    <module name="pokerom_rebirth" />
+    <option name="INTERPRETER_OPTIONS" value="" />
+    <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+    <option name="PARENT_ENVS" value="true" />
+    <option name="SCRIPT_NAME" value="./scripts/cmd/compile.bat" />
+    <option name="PARAMETERS" value="" />
+    <method v="2" />
+  </configuration>
 </component>
