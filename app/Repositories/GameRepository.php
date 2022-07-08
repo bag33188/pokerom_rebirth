@@ -34,7 +34,7 @@ class GameRepository implements GameRepositoryInterface
 
     public function getFormattedGameType(string $gameType): string
     {
-        [$query, $bindings] = $this->formatGameTypeString($gameType)->getValues();
+        [$query, $bindings] = $this->formatGameType($gameType)->getValues();
         return DB::selectOne($query, $bindings)->gameType;
     }
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 08, 2022 at 04:51 AM
+-- Generation Time: Jul 08, 2022 at 06:37 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -66,8 +66,8 @@ END$$
 DROP FUNCTION IF EXISTS `CONCAT_ROM_FILENAME`$$
 CREATE DEFINER=`bag33188`@`%` FUNCTION `CONCAT_ROM_FILENAME` (`ROM_NAME` VARCHAR(30), `ROM_TYPE` ENUM('gb','gbc','gba','nds','3ds','xci')) RETURNS VARCHAR(35) CHARSET utf8mb4 SQL SECURITY INVOKER COMMENT 'concats rom name and rom type with period char' RETURN CONCAT(`ROM_NAME`, '.', UCASE(`ROM_TYPE`))$$
 
-DROP FUNCTION IF EXISTS `FORMAT_GAME_TYPE_STRING`$$
-CREATE DEFINER=`bag33188`@`%` FUNCTION `FORMAT_GAME_TYPE_STRING` (`GAME_TYPE` VARCHAR(8)) RETURNS VARCHAR(23) CHARSET utf8mb4 SQL SECURITY INVOKER CASE LOWER(`GAME_TYPE`)
+DROP FUNCTION IF EXISTS `FORMAT_GAME_TYPE`$$
+CREATE DEFINER=`bag33188`@`%` FUNCTION `FORMAT_GAME_TYPE` (`GAME_TYPE` VARCHAR(8)) RETURNS VARCHAR(23) CHARSET utf8mb4 SQL SECURITY INVOKER CASE LOWER(`GAME_TYPE`)
 WHEN 'core' THEN RETURN 'Core Pokémon Game';
 WHEN 'hack' THEN RETURN 'Pokémon ROM Hack';
 WHEN 'spin-off' THEN RETURN 'Spin-Off Pokémon Game';
@@ -340,7 +340,7 @@ TRUNCATE TABLE `password_resets`;
 -- Table structure for table `personal_access_tokens`
 --
 -- Creation: Jul 06, 2022 at 01:56 AM
--- Last update: Jul 08, 2022 at 02:12 AM
+-- Last update: Jul 08, 2022 at 03:59 AM
 --
 
 DROP TABLE IF EXISTS `personal_access_tokens`;
@@ -372,7 +372,7 @@ TRUNCATE TABLE `personal_access_tokens`;
 --
 
 INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `name`, `token`, `abilities`, `last_used_at`, `created_at`, `updated_at`) VALUES
-(1, 'App\\Models\\User', 1, 'auth_token', 'decfe681ade402403c92ee62493bc85118f6260b48409bafb060afe67e12a78a', '[\"*\"]', '2022-07-08 09:12:35', '2022-07-04 02:35:33', '2022-07-08 09:12:35');
+(1, 'App\\Models\\User', 1, 'auth_token', 'decfe681ade402403c92ee62493bc85118f6260b48409bafb060afe67e12a78a', '[\"*\"]', '2022-07-08 10:59:27', '2022-07-04 02:35:33', '2022-07-08 10:59:27');
 
 -- --------------------------------------------------------
 
@@ -460,7 +460,7 @@ INSERT INTO `roms` (`id`, `file_id`, `game_id`, `rom_name`, `rom_size`, `rom_typ
 -- Table structure for table `sessions`
 --
 -- Creation: Jul 06, 2022 at 02:20 AM
--- Last update: Jul 08, 2022 at 12:06 AM
+-- Last update: Jul 08, 2022 at 04:19 AM
 --
 
 DROP TABLE IF EXISTS `sessions`;
@@ -489,6 +489,7 @@ TRUNCATE TABLE `sessions`;
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
+('ecZaMfyiflSUf1jaSw9WkX2mrEYd4IMoOn98aOHB', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoibWF1ZFpmOWN4djJMNzNWVlRkODd0SHg5c1dNWjRXc2NucGdKTW1mYSI7czozOiJ1cmwiO2E6MDp7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjQ2OiJodHRwOi8vcG9rZXJvbV9yZWJpcnRoLnRlc3QvcHVibGljL2FwaS92ZXJzaW9uIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjIxOiJwYXNzd29yZF9oYXNoX3NhbmN0dW0iO3M6NjA6IiQyeSQxMCR3aXAzcXg5MVBsWERrcmouekVqb0MuL3dsSW50Z0lLM1EuckFKZ2d3UWhmWFJGaUlubURabSI7fQ==', 1657253987),
 ('uJMIdPdeBNwZFWI13tGJP4suhDjdY4w0PD7Q9PLe', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiVGh0aTJUeFVGalBCSmREYm03S3BLOGJ3WnpFOThWbE5DanpiSXVVWCI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDY6Imh0dHA6Ly9wb2tlcm9tX3JlYmlydGgudGVzdC9wdWJsaWMvYXBpL3ZlcnNpb24iO31zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO3M6MjE6InBhc3N3b3JkX2hhc2hfc2FuY3R1bSI7czo2MDoiJDJ5JDEwJHdpcDNxeDkxUGxYRGtyai56RWpvQy4vd2xJbnRnSUszUS5yQUpnZ3dRaGZYUkZpSW5tRFptIjt9', 1657238779);
 
 -- --------------------------------------------------------

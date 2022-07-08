@@ -20,10 +20,10 @@ trait GameQueries
      * @param string $gameType
      * @return QueryObject
      */
-    protected function formatGameTypeString(string $gameType): QueryObject
+    protected function formatGameType(string $gameType): QueryObject
     {
         $sql = /** @lang MariaDB */
-            "SELECT FORMAT_GAME_TYPE_STRING(?) AS gameType;";
+            "SELECT FORMAT_GAME_TYPE(?) AS gameType;";
         $params = [$gameType];
         return new QueryObject(DB::raw($sql), $params);
     }
