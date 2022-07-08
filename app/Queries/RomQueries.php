@@ -4,6 +4,7 @@ namespace App\Queries;
 
 use Illuminate\Support\Facades\DB;
 use JetBrains\PhpStorm\ArrayShape;
+use Utils\Classes\_Object\QueryObject;
 
 trait RomQueries
 {
@@ -23,6 +24,7 @@ trait RomQueries
             /** @lang MariaDB */
             "CALL LinkRomToFile(:romFileId, :romFileSize, :romId);";
         $params = ['romFileId' => $romFileId, 'romFileSize' => $romFileSize, 'romId' => $romId];
+        new QueryObject(DB::raw($sql), $params);
         return ['query' => DB::raw($sql), 'bindings' => $params];
     }
 }
