@@ -4,15 +4,12 @@ namespace App\Listeners;
 
 use App\Events\UserDeleted;
 use App\Notifications\FarewellNotification;
-use Illuminate\Support\Facades\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Support\Facades\Notification;
 
 
 class SendFarewellNotification implements ShouldQueue
 {
-    use InteractsWithQueue;
-
     public bool $afterCommit = true;
 
     /**

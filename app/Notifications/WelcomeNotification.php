@@ -66,7 +66,7 @@ class WelcomeNotification extends Notification
                 "Hello {$this->user->name}, welcome to the world of PokeROM!"),
             'action' => [
                 'text' => 'Check it out!',
-                'url' => route('roms.index')
+                'hyperlink' => route('roms.index')
             ],
             'line2' => 'Enjoy!'
         ];

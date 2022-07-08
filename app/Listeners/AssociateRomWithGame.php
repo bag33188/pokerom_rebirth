@@ -7,6 +7,8 @@ use App\Models\Game;
 
 class AssociateRomWithGame
 {
+    protected bool $afterCommit = false;
+
     /**
      * Create the event listener.
      *
