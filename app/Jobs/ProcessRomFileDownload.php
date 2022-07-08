@@ -39,7 +39,6 @@ class ProcessRomFileDownload implements ShouldQueue
      */
     public function handle(RomFileProcessor $romFileProcessor): void
     {
-
         $romFileProcessor->download($this->romFileId, CONTENT_TRANSFER_SIZE);
     }
 }
