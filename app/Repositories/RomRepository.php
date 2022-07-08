@@ -53,6 +53,7 @@ class RomRepository implements RomRepositoryInterface
      */
     public function searchForFileMatchingRom(int $romId): ?RomFile
     {
+        // @ symbol is needed since using `findOrFail` (which throws exception on fail)
         $romFileName = @$this->findRomIfExists($romId)->getRomFileName();
         return RomFile::where('filename', '=', $romFileName)
             ->first();
@@ -61,6 +62,6 @@ class RomRepository implements RomRepositoryInterface
     public function getFormattedRomSize(int $romSize): string
     {
         [$query, $bindings] = $this->formatRomSize($romSize)->getValues();
-        return DB::selectOne($query, $bindings)->readable_size;
+        return DB::selectOne($query, $bindings)->romSize;
     }
 }

@@ -8,7 +8,7 @@ use Utils\Modules\QueryObject;
 trait RomQueries
 {
     /**
-     * Property accessor: **romSize**
+     * ### Property accessor: **romSize**
      *
      * @param int $romSize
      * @return QueryObject
