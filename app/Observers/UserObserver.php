@@ -18,6 +18,6 @@ class UserObserver
 
     public function deleted(User $user): void
     {
-        UserDeleted::dispatch($user);
+        UserDeleted::dispatchUnless($user->isAdmin(), $user);
     }
 }
