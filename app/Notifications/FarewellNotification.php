@@ -44,6 +44,7 @@ class FarewellNotification extends Notification
     public function toMail(mixed $notifiable): MailMessage
     {
         return (new MailMessage)
+            ->subject("I guess it's goodbye for now...")
             ->line($this->user->name . ", we're sad to see you leave.")
             ->line('Thank you for using ' . config('app.name') . '!');
     }
