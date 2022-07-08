@@ -20,7 +20,7 @@ class QueryObject implements Arrayable
     #[ArrayShape(['query' => "\Illuminate\Database\Query\Expression", 'bindings' => "mixed"])]
     public function toArray(): array
     {
-        return ['query' => $this->query, 'bindings' => $this->bindings];
+        return array('query' => $this->query, 'bindings' => $this->bindings);
     }
 
     public function getValues(): array
