@@ -1,6 +1,6 @@
 @ECHO ON
 
-:LAUNCH_MAILHOG
+:MAILHOG
 
     CD %PKR% REM %USERPROFILE%\PhpstormProjects\pokerom_rebirth
 
