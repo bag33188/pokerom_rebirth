@@ -56,7 +56,7 @@ class WelcomeNotification extends Notification
      * @param mixed $notifiable
      * @return array
      */
-    #[ArrayShape(['subject' => "string", 'from' => "\Illuminate\Config\Repository|\Illuminate\Contracts\Foundation\Application|mixed", 'line1' => "mixed", 'line2' => "string"])]
+    #[ArrayShape(['subject' => "string", 'from' => "\Illuminate\Config\Repository|\Illuminate\Contracts\Foundation\Application|mixed", 'line1' => "mixed", 'action' => "array", 'line2' => "string"])]
     public function toArray(mixed $notifiable): array
     {
         return [
@@ -64,6 +64,10 @@ class WelcomeNotification extends Notification
             'from' => config('mail.from.address'),
             'line1' => preg_replace("/Poke/i", POKE_EACUTE,
                 "Hello {$this->user->name}, welcome to the world of PokeROM!"),
+            'action' => [
+                'text' => 'Check it out!',
+                'url' => route('roms.index')
+            ],
             'line2' => 'Enjoy!'
         ];
     }
