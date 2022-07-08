@@ -2,12 +2,12 @@
 
 namespace App\Http\Resources;
 
+use App\Models\RomFile;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 use JetBrains\PhpStorm\ArrayShape;
-use Utils\Classes\_Abstract\AbstractGridFSModel as GridFSModel;
 
-/** @mixin GridFSModel */
+/** @mixin RomFile */
 class RomFileCollection extends ResourceCollection
 {
     public $additional = ['success' => true];
