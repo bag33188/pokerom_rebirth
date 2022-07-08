@@ -24,3 +24,10 @@ const ROM_TYPES = array('gb', 'gbc', 'gba', 'nds', '3ds', 'xci');
 const USER_ROLES = array('user', 'admin', 'guest');
 /** array of valid file extensions */
 const FILE_EXTENSIONS = array('.gb', '.gbc', '.gba', '.nds', '.3ds', '.xci');
+/** options for cascade operations in RDBMS */
+const CASCADE_OPTIONS = array(
+    'NO_ACTION' => 'NO ACTION',
+    'DELETE' => 'DELETE',
+    'SET_NULL' => 'SET NULL',
+    'RESTRICT' => 'RESTRICT'
+);

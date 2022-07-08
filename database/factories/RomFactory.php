@@ -11,6 +11,9 @@ use JetBrains\PhpStorm\ArrayShape;
  */
 class RomFactory extends Factory
 {
+    /** @var int 1024 */
+    private const BYTE_FACTOR = 0x400;
+
     /**
      * Define the model's default state.
      *
@@ -21,11 +24,11 @@ class RomFactory extends Factory
     {
         return [
             'rom_name' => strtoupper($this->faker->lastName()),
-            'rom_size' => rand((MIN_FILE_SIZE / 0x400) + 1, (MAX_FILE_SIZE / 0x400) - 1),
+            'rom_size' => rand((MIN_FILE_SIZE / self::BYTE_FACTOR) + 2, (MAX_FILE_SIZE / self::BYTE_FACTOR) - 2),
             'rom_type' => ROM_TYPES[rand(0, sizeof(ROM_TYPES) - 1)],
-            'has_file' => false,
-            'has_game' => false,
-            'file_id' => null
+            'has_file' => FALSE,
+            'has_game' => FALSE,
+            'file_id' => NULL
         ];
     }
 }

@@ -21,6 +21,7 @@ class UserFactory extends Factory
      */
     protected $model = User::class;
 
+    /** @var string[] */
     private const USER_PASSWORDS = [
         '1234567890',
         '123456789',
