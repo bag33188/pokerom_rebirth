@@ -12,8 +12,7 @@ use Utils\Classes\_Static\FileMethods;
 
 class RomFileRepository implements RomFileRepositoryInterface
 {
-    use RomFiles\FileSizesGibibytes, RomFiles\FileSizesKibibytes, RomFiles\FileSizesMebibytes,
-        RomFiles\TotalSizeBytes, RomFiles\MaxFileSize;
+    use RomFiles\FileSizesGibibytes, RomFiles\FileSizesKibibytes, RomFiles\FileSizesMebibytes;
 
     public function findFileIfExists(string $romFileId): RomFile
     {
@@ -64,13 +63,13 @@ class RomFileRepository implements RomFileRepositoryInterface
         return RomFile::project($this->calcLengthsOfRomFilesMebibytes())->get();
     }
 
-    public function getTotalSizeOfAllRomFiles(): int
-    {
-        return $this->sumLengthOfAllRomFilesBytes();
-    }
-
     public function getLengthOfRomFileWithLargestFileSize(): int
     {
-        return $this->largestRomFileLength();
+        return RomFile::max('length');
+    }
+
+    public function getTotalSizeOfAllRomFiles(): int
+    {
+        return RomFile::sum('length');
     }
 }
