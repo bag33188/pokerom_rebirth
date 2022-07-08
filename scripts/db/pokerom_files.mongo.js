@@ -409,7 +409,7 @@ let aggregations = [
         ],
     },
     {
-        name: "Find 3DS ROMs",
+        name: "Filter 3DS ROMs",
         pipeline: [
             {
                 $sort: {
@@ -429,7 +429,7 @@ let aggregations = [
         ],
     },
     {
-        name: "Find GB ROMs",
+        name: "Filter GB ROMs",
         pipeline: [
             {
                 $sort: {
@@ -449,7 +449,7 @@ let aggregations = [
         ],
     },
     {
-        name: "Find GBA ROMs",
+        name: "Filter GBA ROMs",
         pipeline: [
             {
                 $sort: {
@@ -469,7 +469,7 @@ let aggregations = [
         ],
     },
     {
-        name: "Find GBC ROMs",
+        name: "Filter GBC ROMs",
         pipeline: [
             {
                 $sort: {
@@ -489,7 +489,7 @@ let aggregations = [
         ],
     },
     {
-        name: "Find NDS ROMs",
+        name: "Filter NDS ROMs",
         pipeline: [
             {
                 $sort: {
@@ -509,7 +509,7 @@ let aggregations = [
         ],
     },
     {
-        name: "Find XCI ROMs",
+        name: "Filter XCI ROMs",
         pipeline: [
             {
                 $sort: {
