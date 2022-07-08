@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Repositories\Queries;
+namespace App\Queries;
 
 use JetBrains\PhpStorm\ArrayShape;
 use JetBrains\PhpStorm\Pure;

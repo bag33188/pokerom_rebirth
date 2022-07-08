@@ -5,7 +5,7 @@ namespace App\Repositories;
 use App\Interfaces\Repository\GameRepositoryInterface;
 use App\Models\Game;
 use App\Models\Rom;
-use App\Repositories\Queries\GameQueries;
+use App\Queries\GameQueries;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
 
@@ -32,16 +32,15 @@ class GameRepository implements GameRepositoryInterface
     }
 
 
-    public function getProperGameTypeString(string $gameType): string
+    public function getFormattedGameType(string $gameType): string
     {
-
-        $query =$this->parseProperGameTypeString();
-        return DB::selectOne($query, [$gameType])->gameType;
+        [$query, $bindings] = array_values($this->formatGameTypeString($gameType));
+        return DB::selectOne($query, $bindings)->gameType;
     }
 
     public function getAllRomsWithNoGame(): array
     {
-        $query = $this->findRomsWithNoGame();
+        [$query] = array_values($this->findRomsWithNoGame()['query']);
         return DB::select($query);
     }
 }

@@ -6,7 +6,7 @@ use App\Interfaces\Repository\RomRepositoryInterface;
 use App\Models\Game;
 use App\Models\Rom;
 use App\Models\RomFile;
-use App\Repositories\Queries\RomQueries;
+use App\Queries\RomQueries;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
 
@@ -53,13 +53,14 @@ class RomRepository implements RomRepositoryInterface
      */
     public function searchForFileMatchingRom(int $romId): ?RomFile
     {
-        return RomFile::where('filename', '=', @$this->findRomIfExists($romId)->getRomFileName())
+        $romFileName = @$this->findRomIfExists($romId)->getRomFileName();
+        return RomFile::where('filename', '=', $romFileName)
             ->first();
     }
 
-    public function getReadableRomSize(int $size): string
+    public function getFormattedRomSize(int $romSize): string
     {
-        $query = $this->generateReadableRomSize();
-        return DB::selectOne($query, [$size])->readable_size;
+        [$query, $bindings] = array_values($this->formatRomSize($romSize));
+        return DB::selectOne($query, $bindings)->readable_size;
     }
 }

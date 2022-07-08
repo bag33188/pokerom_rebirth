@@ -11,7 +11,7 @@ use Utils\Classes\_Static\FileMethods;
 
 class RomFileRepository implements RomFileRepositoryInterface
 {
-    use Queries\RomFileQueries;
+    use \App\Queries\RomFileQueries;
 
     public function findFileIfExists(string $romFileId): RomFile
     {

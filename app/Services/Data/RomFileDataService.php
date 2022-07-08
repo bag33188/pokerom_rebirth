@@ -32,7 +32,11 @@ class RomFileDataService implements RomFileDataServiceInterface
         ProcessRomFileUpload::dispatch($romFilename);
         $fileDoc = RomFileRepo::getFileByFilename($romFilename);
         RomFileCreated::dispatch($fileDoc);
-        return new JsonDataResponse(['message' => "file '" . $fileDoc->filename . "' created!"], ResponseAlias::HTTP_CREATED, ['X-Content-Transfer-Type', ContentType::X_BINARY->value]);
+        return new JsonDataResponse(
+            ['message' => "file '" . $fileDoc->filename . "' created!"],
+            ResponseAlias::HTTP_CREATED,
+            ['X-Content-Transfer-Type', ContentType::X_BINARY->value]
+        );
     }
 
     public function deleteRomFile(RomFile $romFile): JsonDataResponse
