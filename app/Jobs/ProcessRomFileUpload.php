@@ -2,7 +2,7 @@
 
 namespace App\Jobs;
 
-use GfsRomFile;
+use App\Services\GridFS\RomFilesConnection as RomFileProcessor;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -34,10 +34,11 @@ class ProcessRomFileUpload implements ShouldQueue
     /**
      * Execute the job.
      *
+     * @param RomFileProcessor $romFileProcessor
      * @return void
      */
-    public function handle(): void
+    public function handle(RomFileProcessor $romFileProcessor): void
     {
-        GfsRomFile::actions()->upload($this->romFilename);
+        $romFileProcessor->actions()->upload($this->romFilename);
     }
 }
