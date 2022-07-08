@@ -60,7 +60,7 @@ class RomRepository implements RomRepositoryInterface
 
     public function getFormattedRomSize(int $romSize): string
     {
-        [$query, $bindings] = array_values($this->formatRomSize($romSize));
+        [$query, $bindings] = $this->formatRomSize($romSize)->getValues();
         return DB::selectOne($query, $bindings)->readable_size;
     }
 }

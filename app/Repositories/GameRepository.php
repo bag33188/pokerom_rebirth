@@ -34,13 +34,13 @@ class GameRepository implements GameRepositoryInterface
 
     public function getFormattedGameType(string $gameType): string
     {
-        [$query, $bindings] = array_values($this->formatGameTypeString($gameType));
+        [$query, $bindings] = $this->formatGameTypeString($gameType)->getValues();
         return DB::selectOne($query, $bindings)->gameType;
     }
 
     public function getAllRomsWithNoGame(): array
     {
-        [$query] = array_values($this->findRomsWithNoGame()['query']);
+        [$query] = $this->findRomsWithNoGame()->getValues();
         return DB::select($query);
     }
 }

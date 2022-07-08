@@ -3,25 +3,22 @@
 namespace App\Queries;
 
 use Illuminate\Support\Facades\DB;
-use JetBrains\PhpStorm\ArrayShape;
+use Utils\Modules\QueryObject;
 
 trait GameQueries
 {
-    #[ArrayShape(['query' => "\Illuminate\Database\Query\Expression", 'bindings' => "null"])]
-    protected function findRomsWithNoGame(): array
+    protected function findRomsWithNoGame(): QueryObject
     {
         $sql = /** @lang MariaDB */
             "CALL FindRomsWithNoGame";
-        $params = null;
-        return ['query' => DB::raw($sql), 'bindings' => $params];
+        return new QueryObject(DB::raw($sql));
     }
 
-    #[ArrayShape(['query' => "\Illuminate\Database\Query\Expression", 'bindings' => "string[]"])]
-    protected function formatGameTypeString(string $gameType): array
+    protected function formatGameTypeString(string $gameType): QueryObject
     {
         $sql = /** @lang MariaDB */
             "SELECT FORMAT_GAME_TYPE_STRING(?) AS gameType;";
         $params = [$gameType];
-        return ['query' => DB::raw($sql), 'bindings' => $params];
+        return new QueryObject(DB::raw($sql), $params);
     }
 }

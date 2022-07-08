@@ -1,6 +1,6 @@
 <?php
 
-namespace Utils\Classes\_Object;
+namespace Utils\Modules;
 
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Database\Query\Expression;
@@ -11,7 +11,7 @@ class QueryObject implements Arrayable
     public Expression $query;
     public array $bindings;
 
-    public function __construct(Expression $query, array $bindings)
+    public function __construct(Expression $query, array $bindings = [])
     {
         $this->bindings = $bindings;
         $this->query = $query;
