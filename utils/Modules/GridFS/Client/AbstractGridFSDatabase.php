@@ -17,7 +17,7 @@ abstract class AbstractGridFSDatabase extends GridFS
     public string $bucketName;
     public int $chunkSize;
 
-    /** @var bool specify whether to use authenticate when connecting to mongodb */
+    /** @var bool specify whether to use authenticate when connecting to mongodb. _only allows username/password auth_ */
     protected bool $useAuth = false;
 
     /** @var string[] */
@@ -48,32 +48,19 @@ abstract class AbstractGridFSDatabase extends GridFS
 
     public function mongoURI(): string
     {
+        $dsnBuilder = '' .
+            $this->mongoConfig['driver'] . '://' .
+            $this->mongoConfig['username'] . ':' .
+            $this->mongoConfig['password'] . '@' .
+            $this->mongoConfig['host'] . ':' .
+            $this->mongoConfig['port'] . '/';
         if ($this->useAuth === true) {
-            if (isset($this->mongoConfig['options']['authMechanism'])) {
-                return '' .
-                    $this->mongoConfig['driver'] . '://' .
-                    $this->mongoConfig['username'] . ':' .
-                    $this->mongoConfig['password'] . '@' .
-                    $this->mongoConfig['host'] . ':' .
-                    $this->mongoConfig['port'] . '/?authMechanism=' .
-                    $this->mongoConfig['options']['authMechanism'] . '&authSource=' .
-                    $this->mongoConfig['options']['authSource'];
-            } else {
-                return '' .
-                    $this->mongoConfig['driver'] . '://' .
-                    $this->mongoConfig['username'] . ':' .
-                    $this->mongoConfig['password'] . '@' .
-                    $this->mongoConfig['host'] . ':' .
-                    $this->mongoConfig['port'] . '/?authSource=' .
-                    $this->mongoConfig['options']['authSource'];
-            }
-        } else {
-            return '' .
-                $this->mongoConfig['driver'] . '://' .
-                $this->mongoConfig['username'] . ':' .
-                $this->mongoConfig['password'] . '@' .
-                $this->mongoConfig['host'] . ':' .
-                $this->mongoConfig['port'] . '/';
+            $dsnBuilder .= '?' .
+                'authMechanism=' .
+                (@$this->mongoConfig['options']['authMechanism'] ?? 'DEFAULT') .
+                '&authSource=' .
+                @$this->mongoConfig['options']['authSource'] ?? 'admin';
         }
+        return $dsnBuilder;
     }
 }

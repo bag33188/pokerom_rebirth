@@ -17,8 +17,11 @@ use Symfony\Component\HttpFoundation\StreamedResponse;
 class RomFileController extends ViewController
 {
 
-    public function __construct(private readonly RomFileDataServiceInterface $romFileDataService)
+    private readonly RomFileDataServiceInterface $romFileDataService;
+
+    public function __construct(RomFileDataServiceInterface $romFileDataService)
     {
+        $this->romFileDataService = $romFileDataService;
     }
 
     /**

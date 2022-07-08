@@ -11,10 +11,11 @@ use Utils\Modules\GridFS\Support\GridFSBucketMethods;
 /**
  * GridFS Connection Class for connection to a GridFS MongoDB Database
  *
- * _Constructor can accept a {@see AbstractGridFSDatabase GridFSDatabase} Object_
+ * _Constructor requires a {@see AbstractGridFSDatabase GridFSDatabase} Object_
  */
 abstract class AbstractGridFSConnection extends GridFS
 {
+    /** @var string {@link https://www.mongodb.com/docs/manual/reference/connection-string/ MongoDB Connection String} */
     private readonly string $dsn;
 
     /** @var Bucket gridfs bucket object */
