@@ -27,13 +27,19 @@ class RomFileDataService implements RomFileDataServiceInterface
             'Content-Disposition' => "attachment; filename=\"$romFile->filename\""));
     }
 
+    /**
+     * Only pass in the filename as rom files are already need to be stored on the system.
+     *
+     * @param string $romFilename
+     * @return JsonDataResponse
+     */
     public function uploadRomFile(string $romFilename): JsonDataResponse
     {
-        ProcessRomFileUpload::dispatch($romFilename);
-        $fileDoc = RomFileRepo::getFileByFilename($romFilename);
-        RomFileCreated::dispatch($fileDoc);
+        ProcessRomFileUpload::dispatchSync($romFilename);
+        $romFileDocument = RomFileRepo::getFileByFilename($romFilename);
+        RomFileCreated::dispatch($romFileDocument);
         return new JsonDataResponse(
-            ['message' => "file '" . $fileDoc->filename . "' created!"],
+            ['message' => "file '" . $romFileDocument->filename . "' created!"],
             ResponseAlias::HTTP_CREATED,
             ['X-Content-Transfer-Type', ContentType::X_BINARY->value]
         );

@@ -5,7 +5,11 @@ namespace App\Providers;
 use App\Events\RomFileDeleted;
 use App\Events\RomFileCreated;
 use App\Events\GameCreated;
+use App\Events\UserDeleted;
+use App\Events\UserRegistered;
 use App\Listeners\AssociateRomWithGame;
+use App\Listeners\SendFarewellNotification;
+use App\Listeners\SendWelcomeNotification;
 use App\Listeners\UnsetRomFileData;
 use App\Listeners\UpdateMatchingRom;
 use App\Models\Game;
@@ -28,6 +32,12 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         Registered::class => [
             SendEmailVerificationNotification::class,
+        ],
+        UserRegistered::class => [
+            SendWelcomeNotification::class
+        ],
+        UserDeleted::class => [
+          SendFarewellNotification::class
         ],
         RomFileDeleted::class => [
             UnsetRomFileData::class

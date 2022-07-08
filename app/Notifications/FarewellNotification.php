@@ -7,18 +7,21 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class WelcomeNotification extends Notification
+class FarewellNotification extends Notification
 {
     use Queueable;
 
+    public User $user;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct(public User $user)
+    public function __construct(User $user)
     {
+        $this->user = $user;
+        //
     }
 
     /**
@@ -40,12 +43,21 @@ class WelcomeNotification extends Notification
      */
     public function toMail(mixed $notifiable): MailMessage
     {
-        $lnMsg = (isset($this->user->name) ? "Hello {$this->user->name}, welcome" : 'Welcome') . " to the world of PokeROM!";
         return (new MailMessage)
-            ->subject('Thank you for joining ' . config('app.name') . '!!')
-            ->from(config('mail.from.address'))
-            ->line(preg_replace("/Poke/i", POKE_EACUTE, $lnMsg))
-            ->action('Check it out!', route('roms.index'))
-            ->line('Enjoy!');
+            ->line($this->user->name . ", we're sad to see you leave.")
+            ->line('Thank you for using ' . config('app.name') . '!');
+    }
+
+    /**
+     * Get the array representation of the notification.
+     *
+     * @param mixed $notifiable
+     * @return array
+     */
+    public function toArray(mixed $notifiable): array
+    {
+        return [
+            //
+        ];
     }
 }

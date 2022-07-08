@@ -14,7 +14,12 @@ class ProcessRomFileUpload implements ShouldQueue
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
 
-    private string $romFilename;
+    /**
+     * Rom Filename Instance
+     *
+     * @var string
+     */
+    public string $romFilename;
 
     /**
      * Create a new job instance.

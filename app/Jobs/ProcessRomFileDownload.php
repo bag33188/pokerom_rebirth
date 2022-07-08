@@ -14,7 +14,12 @@ class ProcessRomFileDownload implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    private ObjectId $romFileId;
+    /**
+     * Rom File Object ID Instance
+     *
+     * @var ObjectId
+     */
+    public ObjectId $romFileId;
 
     /**
      * Create a new job instance.

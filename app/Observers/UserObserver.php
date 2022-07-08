@@ -2,9 +2,10 @@
 
 namespace App\Observers;
 
+use App\Events\UserDeleted;
+use App\Events\UserRegistered;
 use App\Models\User;
-use App\Notifications\WelcomeNotification;
-use Illuminate\Support\Facades\Notification;
+
 
 class UserObserver
 {
@@ -12,6 +13,11 @@ class UserObserver
 
     public function created(User $user): void
     {
-        Notification::send($user, new WelcomeNotification($user->name));
+        UserRegistered::dispatch($user);
+    }
+
+    public function deleted(User $user): void
+    {
+        UserDeleted::dispatch($user);
     }
 }
