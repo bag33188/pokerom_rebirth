@@ -21,7 +21,7 @@ class RomFactory extends Factory
     {
         return [
             'rom_name' => strtoupper($this->faker->lastName()),
-            'rom_size' => rand((MIN_FILE_SIZE / 1024) + 1, (MAX_FILE_SIZE / 1024) - 1),
+            'rom_size' => rand((MIN_FILE_SIZE / 0x400) + 1, (MAX_FILE_SIZE / 0x400) - 1),
             'rom_type' => ROM_TYPES[rand(0, sizeof(ROM_TYPES) - 1)],
             'has_file' => false,
             'has_game' => false,
