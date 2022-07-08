@@ -2,7 +2,6 @@
 
 namespace Utils\Classes\_Static;
 
-use Config;
 use MongoDB\BSON\ObjectId;
 
 /**
@@ -28,7 +27,7 @@ class MongoMethods
      */
     public static function getMongoConfig(): array
     {
-        return Config::get('database.connections.mongodb');
+        return config('database.connections.mongodb');
     }
 
     /**
@@ -38,6 +37,6 @@ class MongoMethods
      */
     public static function getGridFSConfig(): array
     {
-        return Config::get('gridfs');
+        return config('gridfs');
     }
 }
