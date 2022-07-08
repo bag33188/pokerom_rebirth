@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Services\GridFS\RomFileProcessor;
 use App\Services\GridFS\RomFilesConnection;
 use App\Services\GridFS\RomFilesDatabase;
+use GfsRomFile;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Support\ServiceProvider;
@@ -25,9 +26,14 @@ class GridFSServiceProvider extends ServiceProvider implements DeferrableProvide
 
     }
 
-    public function boot()
+    /**
+     * Bootstrap any application services.
+     *
+     * @return void
+     */
+    public function boot(): void
     {
-        $this->app->bind(RomFileProcessor::class, fn() => new RomFileProcessor());
+        $this->app->bind(RomFileProcessor::class, fn() => new RomFileProcessor(GfsRomFile::getBucket()));
     }
 
     /**
