@@ -5,7 +5,7 @@
     <div class="w-full grid grid-cols-2 grid-rows-[minmax(0,_1fr)_auto] gap-y-4">
         <x-list-group>
             <x-list-item>Rom Name: {{$rom->rom_name}}</x-list-item>
-            <x-list-item>Rom Size: {{RomRepo::getReadableRomSize($rom->rom_size)}}</x-list-item>
+            <x-list-item>Rom Size: {{RomRepo::getFormattedRomSize($rom->rom_size)}}</x-list-item>
             <x-list-item>Rom Type: {{$rom->rom_type}}</x-list-item>
             <x-list-item>Game Name: {{@$rom->game->game_name . ' Version' ?? 'no game'}}</x-list-item>
             @if($rom->has_game)

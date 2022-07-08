@@ -14,6 +14,12 @@ trait GameQueries
         return new QueryObject(DB::raw($sql));
     }
 
+    /**
+     * Property accessor: **gameType**
+     *
+     * @param string $gameType
+     * @return QueryObject
+     */
     protected function formatGameTypeString(string $gameType): QueryObject
     {
         $sql = /** @lang MariaDB */

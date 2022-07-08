@@ -7,7 +7,7 @@
             <x-list-item>{{$game->game_name}} Version</x-list-item>
             <x-list-item>Generation {{numberToRoman($game->generation)}}</x-list-item>
             <x-list-item>{{$game->region}} Region</x-list-item>
-            <x-list-item>{{GameRepo::getProperGameTypeString($game->game_type)}}</x-list-item>
+            <x-list-item>{{GameRepo::getFormattedGameType($game->game_type)}}</x-list-item>
             <x-list-item>Released on: {{parseDateAsReadableString($game->date_released)}}</x-list-item>
         </x-list-group>
         @if(auth()->user()->isAdmin())

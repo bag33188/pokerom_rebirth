@@ -7,10 +7,16 @@ use Utils\Modules\QueryObject;
 
 trait RomQueries
 {
+    /**
+     * Property accessor: **romSize**
+     *
+     * @param int $romSize
+     * @return QueryObject
+     */
     protected function formatRomSize(int $romSize): QueryObject
     {
         $sql = /** @lang MariaDB */
-            "SELECT HIGH_PRIORITY FORMAT_ROM_SIZE(?) AS readable_size;";
+            "SELECT HIGH_PRIORITY FORMAT_ROM_SIZE(?) AS romSize;";
         $params = [$romSize];
         return new QueryObject(DB::raw($sql), $params);
     }

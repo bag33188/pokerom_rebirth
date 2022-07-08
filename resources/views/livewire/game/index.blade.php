@@ -30,7 +30,7 @@
                                     {{$game->region}} Region
                                 </li>
                                 <li class="p-3 hover:bg-blue-600 hover:text-blue-200">
-                                    {{GameRepo::getProperGameTypeString($game->game_type)}}
+                                    {{GameRepo::getFormattedGameType($game->game_type)}}
                                 </li>
                                 <li class="p-3 hover:bg-blue-600 hover:text-blue-200">
                                     Released on {{parseDateAsReadableString($game->date_released, false)}}
