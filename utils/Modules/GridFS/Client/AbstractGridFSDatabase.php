@@ -10,6 +10,9 @@ use Utils\Modules\GridFS\GridFS;
  */
 abstract class AbstractGridFSDatabase extends GridFS
 {
+    // chance accessors on inherited properties
+    // protected => public
+
     public string $databaseName;
     public string $bucketName;
     public int $chunkSize;
