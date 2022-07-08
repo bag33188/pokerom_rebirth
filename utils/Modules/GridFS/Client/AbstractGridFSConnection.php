@@ -6,7 +6,6 @@ use MongoDB\Client as MongoClient;
 use MongoDB\Database;
 use MongoDB\GridFS\Bucket;
 use Utils\Modules\GridFS\GridFS;
-use Utils\Modules\GridFS\Support\GridFSBucketMethods;
 
 /**
  * GridFS Connection Class for connection to a GridFS MongoDB Database
@@ -25,6 +24,11 @@ abstract class AbstractGridFSConnection extends GridFS
     {
         $this->setConnectionValues();
         $this->selectFileBucket();
+    }
+
+    public function getBucket(): Bucket
+    {
+        return $this->bucket;
     }
 
     protected function setConnectionValues(): void
@@ -48,10 +52,5 @@ abstract class AbstractGridFSConnection extends GridFS
             'chunkSizeBytes' => $this->chunkSize,
             'bucketName' => $this->bucketName
         ]);
-    }
-
-    public final function actions(): GridFSBucketMethods
-    {
-        return new GridFSBucketMethods($this->bucket);
     }
 }

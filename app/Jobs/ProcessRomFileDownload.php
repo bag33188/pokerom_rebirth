@@ -2,7 +2,7 @@
 
 namespace App\Jobs;
 
-use App\Services\GridFS\RomFilesConnection as RomFileProcessor;
+use App\Services\GridFS\RomFileProcessor;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -39,6 +39,7 @@ class ProcessRomFileDownload implements ShouldQueue
      */
     public function handle(RomFileProcessor $romFileProcessor): void
     {
-        $romFileProcessor->actions()->download($this->romFileId, CONTENT_TRANSFER_SIZE);
+
+        $romFileProcessor->download($this->romFileId, CONTENT_TRANSFER_SIZE);
     }
 }

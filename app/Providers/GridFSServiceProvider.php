@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Services\GridFS\RomFileProcessor;
 use App\Services\GridFS\RomFilesConnection;
 use App\Services\GridFS\RomFilesDatabase;
 use Illuminate\Contracts\Foundation\Application;
@@ -21,6 +22,12 @@ class GridFSServiceProvider extends ServiceProvider implements DeferrableProvide
         $this->app->scoped(RomFilesConnection::class, function (Application $app) {
             return new RomFilesConnection($app->make(RomFilesDatabase::class));
         });
+
+    }
+
+    public function boot()
+    {
+        $this->app->bind(RomFileProcessor::class, fn() => new RomFileProcessor());
     }
 
     /**
@@ -32,6 +39,6 @@ class GridFSServiceProvider extends ServiceProvider implements DeferrableProvide
      */
     public function provides(): array
     {
-        return [RomFilesConnection::class];
+        return [RomFilesConnection::class, RomFileProcessor::class];
     }
 }
