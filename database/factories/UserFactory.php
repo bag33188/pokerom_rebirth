@@ -9,6 +9,9 @@ use Illuminate\Support\Str;
 use JetBrains\PhpStorm\ArrayShape;
 use Laravel\Jetstream\Features;
 
+/**
+ * @extends Factory<User>
+ */
 class UserFactory extends Factory
 {
     /**

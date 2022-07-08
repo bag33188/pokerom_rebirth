@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Jenssegers\Mongodb\Eloquent\HybridRelations;
@@ -10,7 +11,7 @@ use Jenssegers\Mongodb\Relations\HasOne as HasOneDocument;
 
 class Rom extends Model
 {
-    use HybridRelations;
+    use HybridRelations, HasFactory;
 
     protected $connection = 'mysql';
     protected $table = 'roms';
