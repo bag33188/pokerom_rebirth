@@ -12,4 +12,7 @@ abstract class GridFS
 
     /** @var int size of chunks to store files as (default is `261120`, `255kb`) */
     protected int $chunkSize;
+
+    /** @var string unique name identifier for each instance of module */
+    protected string $entityName;
 }

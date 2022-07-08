@@ -15,12 +15,6 @@ use Utils\Modules\GridFS\Support\GridFSBucketMethods;
  */
 abstract class AbstractGridFSConnection extends GridFS
 {
-    protected string $databaseName;
-
-    protected string $bucketName;
-
-    protected int $chunkSize;
-
     private readonly string $dsn;
 
     /** @var Bucket gridfs bucket object */

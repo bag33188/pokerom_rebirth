@@ -6,6 +6,8 @@ use Utils\Modules\GridFS\Client\AbstractGridFSConnection as GridFSConnection;
 
 class RomFilesConnection extends GridFSConnection
 {
+    protected string $entityName = 'pokerom_files.gridfs';
+
     /**
      * Create new GridFS Connection Instance
      *

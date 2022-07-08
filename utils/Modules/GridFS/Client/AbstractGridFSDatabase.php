@@ -10,10 +10,11 @@ use Utils\Modules\GridFS\GridFS;
  */
 abstract class AbstractGridFSDatabase extends GridFS
 {
-    protected string $entityName;
     public string $databaseName;
     public string $bucketName;
     public int $chunkSize;
+
+    /** @var bool specify whether to use authenticate when connecting to mongodb */
     protected bool $useAuth = false;
 
     /** @var string[] */
@@ -45,14 +46,24 @@ abstract class AbstractGridFSDatabase extends GridFS
     public function mongoURI(): string
     {
         if ($this->useAuth === true) {
-            return '' .
-                $this->mongoConfig['driver'] . '://' .
-                $this->mongoConfig['username'] . ':' .
-                $this->mongoConfig['password'] . '@' .
-                $this->mongoConfig['host'] . ':' .
-                $this->mongoConfig['port'] . '/?authMechanism=' .
-                $this->mongoConfig['options']['authMechanism'] . '&authSource=' .
-                $this->mongoConfig['options']['authSource'];
+            if (isset($this->mongoConfig['options']['authMechanism'])) {
+                return '' .
+                    $this->mongoConfig['driver'] . '://' .
+                    $this->mongoConfig['username'] . ':' .
+                    $this->mongoConfig['password'] . '@' .
+                    $this->mongoConfig['host'] . ':' .
+                    $this->mongoConfig['port'] . '/?authMechanism=' .
+                    $this->mongoConfig['options']['authMechanism'] . '&authSource=' .
+                    $this->mongoConfig['options']['authSource'];
+            } else {
+                return '' .
+                    $this->mongoConfig['driver'] . '://' .
+                    $this->mongoConfig['username'] . ':' .
+                    $this->mongoConfig['password'] . '@' .
+                    $this->mongoConfig['host'] . ':' .
+                    $this->mongoConfig['port'] . '/?authSource=' .
+                    $this->mongoConfig['options']['authSource'];
+            }
         } else {
             return '' .
                 $this->mongoConfig['driver'] . '://' .
