@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 08, 2022 at 12:01 AM
+-- Generation Time: Jul 08, 2022 at 04:51 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -63,8 +63,25 @@ END$$
 --
 -- Functions
 --
-DROP FUNCTION IF EXISTS `CALC_READABLE_ROM_SIZE`$$
-CREATE DEFINER=`bag33188`@`%` FUNCTION `CALC_READABLE_ROM_SIZE` (`ROM_LENGTH` INT UNSIGNED) RETURNS VARCHAR(9) CHARSET utf8mb4 DETERMINISTIC SQL SECURITY INVOKER BEGIN
+DROP FUNCTION IF EXISTS `CONCAT_ROM_FILENAME`$$
+CREATE DEFINER=`bag33188`@`%` FUNCTION `CONCAT_ROM_FILENAME` (`ROM_NAME` VARCHAR(30), `ROM_TYPE` ENUM('gb','gbc','gba','nds','3ds','xci')) RETURNS VARCHAR(35) CHARSET utf8mb4 SQL SECURITY INVOKER COMMENT 'concats rom name and rom type with period char' RETURN CONCAT(`ROM_NAME`, '.', UCASE(`ROM_TYPE`))$$
+
+DROP FUNCTION IF EXISTS `FORMAT_GAME_TYPE_STRING`$$
+CREATE DEFINER=`bag33188`@`%` FUNCTION `FORMAT_GAME_TYPE_STRING` (`GAME_TYPE` VARCHAR(8)) RETURNS VARCHAR(23) CHARSET utf8mb4 SQL SECURITY INVOKER CASE LOWER(`GAME_TYPE`)
+WHEN 'core' THEN RETURN 'Core Pokémon Game';
+WHEN 'hack' THEN RETURN 'Pokémon ROM Hack';
+WHEN 'spin-off' THEN RETURN 'Spin-Off Pokémon Game';
+ELSE RETURN 'N/A';
+/** !important
+The return value length is 21 since the max str-len return option
+which is 'Spin-Off Pokemon Game' is 21 characters extactly.
+The max input value length is 8 since the max str-len of an input option
+which is 'spin-off' is excactly 8 chars
+*/
+END CASE$$
+
+DROP FUNCTION IF EXISTS `FORMAT_ROM_SIZE`$$
+CREATE DEFINER=`bag33188`@`%` FUNCTION `FORMAT_ROM_SIZE` (`ROM_LENGTH` INT UNSIGNED) RETURNS VARCHAR(9) CHARSET utf8mb4 DETERMINISTIC SQL SECURITY INVOKER BEGIN
 /** !important:
 Note: these calculations and measurements are based on the standard units of data.
 Ie. 1 Gigabyte = 1000 MegaBytes = 1000 Kilobytes
@@ -95,23 +112,6 @@ the space in between, 6 + 2 + 1 = 9 .....
 thus varchar(9)
 */
 END$$
-
-DROP FUNCTION IF EXISTS `CONCAT_ROM_FILENAME`$$
-CREATE DEFINER=`bag33188`@`%` FUNCTION `CONCAT_ROM_FILENAME` (`ROM_NAME` VARCHAR(30), `ROM_TYPE` ENUM('gb','gbc','gba','nds','3ds','xci')) RETURNS VARCHAR(35) CHARSET utf8mb4 SQL SECURITY INVOKER COMMENT 'concats rom name and rom type with period char' RETURN CONCAT(`ROM_NAME`, '.', UCASE(`ROM_TYPE`))$$
-
-DROP FUNCTION IF EXISTS `GET_PROPER_GAME_TYPE_STRING`$$
-CREATE DEFINER=`bag33188`@`%` FUNCTION `GET_PROPER_GAME_TYPE_STRING` (`GAME_TYPE` VARCHAR(8)) RETURNS VARCHAR(23) CHARSET utf8mb4 SQL SECURITY INVOKER CASE LOWER(`GAME_TYPE`)
-WHEN 'core' THEN RETURN 'Core Pokémon Game';
-WHEN 'hack' THEN RETURN 'Pokémon ROM Hack';
-WHEN 'spin-off' THEN RETURN 'Spin-Off Pokémon Game';
-ELSE RETURN 'N/A';
-/** !important
-The return value length is 21 since the max str-len return option
-which is 'Spin-Off Pokemon Game' is 21 characters extactly.
-The max input value length is 8 since the max str-len of an input option
-which is 'spin-off' is excactly 8 chars
-*/
-END CASE$$
 
 DROP FUNCTION IF EXISTS `SPLIT_STRING`$$
 CREATE DEFINER=`bag33188`@`%` FUNCTION `SPLIT_STRING` (`STR_VAL` VARCHAR(255), `SEPARATOR` VARCHAR(1), `POSITION` INT) RETURNS VARCHAR(255) CHARSET utf8mb4 DETERMINISTIC COMMENT 'splits a string based on delimiter ' BEGIN
@@ -340,6 +340,7 @@ TRUNCATE TABLE `password_resets`;
 -- Table structure for table `personal_access_tokens`
 --
 -- Creation: Jul 06, 2022 at 01:56 AM
+-- Last update: Jul 08, 2022 at 02:12 AM
 --
 
 DROP TABLE IF EXISTS `personal_access_tokens`;
@@ -371,7 +372,7 @@ TRUNCATE TABLE `personal_access_tokens`;
 --
 
 INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `name`, `token`, `abilities`, `last_used_at`, `created_at`, `updated_at`) VALUES
-(1, 'App\\Models\\User', 1, 'auth_token', 'decfe681ade402403c92ee62493bc85118f6260b48409bafb060afe67e12a78a', '[\"*\"]', '2022-07-06 05:29:22', '2022-07-04 02:35:33', '2022-07-06 05:29:22');
+(1, 'App\\Models\\User', 1, 'auth_token', 'decfe681ade402403c92ee62493bc85118f6260b48409bafb060afe67e12a78a', '[\"*\"]', '2022-07-08 09:12:35', '2022-07-04 02:35:33', '2022-07-08 09:12:35');
 
 -- --------------------------------------------------------
 
@@ -379,6 +380,7 @@ INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `n
 -- Table structure for table `roms`
 --
 -- Creation: Jul 06, 2022 at 02:20 AM
+-- Last update: Jul 08, 2022 at 01:46 AM
 --
 
 DROP TABLE IF EXISTS `roms`;
@@ -458,7 +460,7 @@ INSERT INTO `roms` (`id`, `file_id`, `game_id`, `rom_name`, `rom_size`, `rom_typ
 -- Table structure for table `sessions`
 --
 -- Creation: Jul 06, 2022 at 02:20 AM
--- Last update: Jul 07, 2022 at 09:13 PM
+-- Last update: Jul 08, 2022 at 12:06 AM
 --
 
 DROP TABLE IF EXISTS `sessions`;
@@ -487,7 +489,7 @@ TRUNCATE TABLE `sessions`;
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('g4moZi82Gy8luCVRo0uwa0Ujz98VQFC1Jd2q2pGm', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoidDdnT3I0d3NCWmpLb2k0OTVKdzdPWjdKQlhSTlNEMWZjb2gxYWdvNyI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDY6Imh0dHA6Ly9wb2tlcm9tX3JlYmlydGgudGVzdC9wdWJsaWMvYXBpL3ZlcnNpb24iO31zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO3M6MjE6InBhc3N3b3JkX2hhc2hfc2FuY3R1bSI7czo2MDoiJDJ5JDEwJHdpcDNxeDkxUGxYRGtyai56RWpvQy4vd2xJbnRnSUszUS5yQUpnZ3dRaGZYUkZpSW5tRFptIjt9', 1657228392);
+('uJMIdPdeBNwZFWI13tGJP4suhDjdY4w0PD7Q9PLe', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiVGh0aTJUeFVGalBCSmREYm03S3BLOGJ3WnpFOThWbE5DanpiSXVVWCI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDY6Imh0dHA6Ly9wb2tlcm9tX3JlYmlydGgudGVzdC9wdWJsaWMvYXBpL3ZlcnNpb24iO31zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO3M6MjE6InBhc3N3b3JkX2hhc2hfc2FuY3R1bSI7czo2MDoiJDJ5JDEwJHdpcDNxeDkxUGxYRGtyai56RWpvQy4vd2xJbnRnSUszUS5yQUpnZ3dRaGZYUkZpSW5tRFptIjt9', 1657238779);
 
 -- --------------------------------------------------------
 
@@ -495,7 +497,7 @@ INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, 
 -- Table structure for table `users`
 --
 -- Creation: Jun 05, 2022 at 04:47 PM
--- Last update: Jul 07, 2022 at 07:51 PM
+-- Last update: Jul 07, 2022 at 10:54 PM
 --
 
 DROP TABLE IF EXISTS `users`;
@@ -530,7 +532,7 @@ TRUNCATE TABLE `users`;
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `two_factor_secret`, `two_factor_recovery_codes`, `two_factor_confirmed_at`, `role`, `remember_token`, `current_team_id`, `profile_photo_path`, `created_at`, `updated_at`) VALUES
-(1, 'Brock', 'bglatman@outlook.com', NULL, '$2y$10$wip3qx91PlXDkrj.zEjoC./wlIntgIK3Q.rAJggwQhfXRFiInmDZm', NULL, NULL, NULL, 'admin', 'CxBdQbNzKzBP3rYibbZcpd2qBUzDoPyQaY6jRNFMOVAS6tRCunPbsXqwbDRW', NULL, NULL, '2022-07-04 02:35:33', '2022-07-04 02:35:33'),
+(1, 'Brock', 'bglatman@outlook.com', NULL, '$2y$10$wip3qx91PlXDkrj.zEjoC./wlIntgIK3Q.rAJggwQhfXRFiInmDZm', NULL, NULL, NULL, 'admin', 'EqHPCS0whJMeZ0i22o18R0FNHHgvkcpO7mm4vbunH23n7t51pbCrzU5vFUK2', NULL, NULL, '2022-07-04 02:35:33', '2022-07-04 02:35:33'),
 (2, 'John Doe', 'jdoe123@gmail.com', NULL, '$2y$10$aGTR8A9VdeQ/P96Uun9oJO9sowLpJM9p3zqcGubHWDcgAzIF/xSJu', NULL, NULL, NULL, 'user', NULL, NULL, NULL, '2022-07-08 02:51:47', '2022-07-08 02:51:47');
 
 --

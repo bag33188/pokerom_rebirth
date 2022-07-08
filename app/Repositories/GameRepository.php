@@ -5,11 +5,14 @@ namespace App\Repositories;
 use App\Interfaces\Repository\GameRepositoryInterface;
 use App\Models\Game;
 use App\Models\Rom;
+use App\Repositories\Queries\GameQueries;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
 
 class GameRepository implements GameRepositoryInterface
 {
+    use GameQueries;
+
     public function findGameIfExists(int $gameId): Game
     {
         return Game::findOrFail($gameId);
@@ -31,18 +34,14 @@ class GameRepository implements GameRepositoryInterface
 
     public function getProperGameTypeString(string $gameType): string
     {
-        $sql = /** @lang MariaDB */
-            "SELECT GET_PROPER_GAME_TYPE_STRING(?) AS gameType;";
-        $query =
-            DB::raw($sql);
+
+        $query =$this->parseProperGameTypeString();
         return DB::selectOne($query, [$gameType])->gameType;
     }
 
     public function getAllRomsWithNoGame(): array
     {
-        $sql = /** @lang MariaDB */
-            "CALL FindRomsWithNoGame";
-        $query = DB::raw($sql);
+        $query = $this->findRomsWithNoGame();
         return DB::select($query);
     }
 }

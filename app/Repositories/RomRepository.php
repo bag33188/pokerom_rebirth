@@ -6,11 +6,14 @@ use App\Interfaces\Repository\RomRepositoryInterface;
 use App\Models\Game;
 use App\Models\Rom;
 use App\Models\RomFile;
+use App\Repositories\Queries\RomQueries;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
 
 class RomRepository implements RomRepositoryInterface
 {
+    use RomQueries;
+
     public function getSingleRomWithGameInfo(int $romId): Rom
     {
         return Rom::with('game')->where('id', '=', $romId)->firstOrFail();
@@ -56,9 +59,7 @@ class RomRepository implements RomRepositoryInterface
 
     public function getReadableRomSize(int $size): string
     {
-        $sql = /** @lang MariaDB */
-            "SELECT HIGH_PRIORITY CALC_READABLE_ROM_SIZE(?) AS readable_size;";
-        $query = DB::raw($sql);
+        $query = $this->generateReadableRomSize();
         return DB::selectOne($query, [$size])->readable_size;
     }
 }
