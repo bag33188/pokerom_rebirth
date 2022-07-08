@@ -15,7 +15,7 @@ trait GameQueries
     }
 
     /**
-     * ### Property accessor: **gameType**
+     * ### Property accessor: **`gameType`**
      *
      * @param string $gameType
      * @return QueryObject
