@@ -583,6 +583,16 @@ let aggregations = [
             },
         ],
     },
+    {
+        name: "Sort ROM Files By Length (Descending)",
+        pipeline: [
+            {
+                $sort: {
+                    length: -1,
+                },
+            },
+        ],
+    },
 ];
 
 db.rom.files.aggregate([...aggregations[0].pipeline]);
