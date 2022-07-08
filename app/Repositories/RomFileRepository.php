@@ -5,13 +5,14 @@ namespace App\Repositories;
 use App\Interfaces\Repository\RomFileRepositoryInterface;
 use App\Models\Rom;
 use App\Models\RomFile;
+use App\Queries\RomFileQueries;
 use Illuminate\Database\Eloquent\Collection;
 use Jenssegers\Mongodb\Helpers\EloquentBuilder;
 use Utils\Classes\_Static\FileMethods;
 
 class RomFileRepository implements RomFileRepositoryInterface
 {
-    use \App\Queries\RomFileQueries;
+    use RomFileQueries;
 
     public function findFileIfExists(string $romFileId): RomFile
     {
@@ -46,6 +47,10 @@ class RomFileRepository implements RomFileRepositoryInterface
                 ->orWhere('file_id', '=', NULL);
         })->limit(1)->first();
     }
+
+    /*
+     * Aggregations
+     */
 
     public function getFileLengthsKibibytes(): Collection
     {

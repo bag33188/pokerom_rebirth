@@ -24,7 +24,7 @@ class RomFileDataService implements RomFileDataServiceInterface
         }, ResponseAlias::HTTP_ACCEPTED, array(
             'Content-Type' => ContentType::OCTET_STREAM->value,
             'Content-Transfer-Encoding' => 'chunked',
-            'Content-Disposition' => "attachment; filename=\"$romFile->filename\""));
+            'Content-Disposition' => "attachment; filename=\"" . $romFile->filename . "\""));
     }
 
     /**
@@ -49,6 +49,6 @@ class RomFileDataService implements RomFileDataServiceInterface
     {
         RomFileDeleted::dispatch($romFile);
         ProcessRomFileDeletion::dispatch($romFile->getObjectId());
-        return new JsonDataResponse(['message' => "$romFile->filename deleted!"], ResponseAlias::HTTP_OK);
+        return new JsonDataResponse(['message' => "file '" . $romFile->filename . "' deleted!"], ResponseAlias::HTTP_OK);
     }
 }
