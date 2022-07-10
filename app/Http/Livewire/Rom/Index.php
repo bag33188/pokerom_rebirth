@@ -14,6 +14,7 @@ class Index extends Component
     public $roms;
 
     // props
+    /** @var string[] */
     public $romsTableColumns;
 
     public function boot()
