@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\Actions\Validators\RomValidationRulesTrait;
+use App\Http\Validators\RomValidationRulesTrait;
 use App\Models\Rom;
 use App\Rules\RequiredIfPutRequest;
 use Illuminate\Foundation\Http\FormRequest;
@@ -35,9 +35,9 @@ class UpdateRomRequest extends FormRequest
         $params = $this->route()->parameters;
 
         return
-            $params('rom')
-                ?: $params('romId')
-                ?: $params('id');
+            $params['rom']
+                ?: $params['romId']
+                ?: $params['id'];
     }
 
     /**

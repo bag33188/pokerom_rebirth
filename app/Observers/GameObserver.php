@@ -11,7 +11,7 @@ class GameObserver
     public bool $afterCommit = false;
 
     /** @var bool Use database relationships to update models */
-    private static bool $useDbLogic = true;
+    private const USE_DB_LOGIC = true;
 
     public function __construct(private readonly GameActionsInterface $gameActions)
     {
@@ -19,7 +19,7 @@ class GameObserver
 
     public function creating(Game $game): void
     {
-        $this->gameActions->slugifyGameNameFromGameObject($game);
+        $this->gameActions->slugifyGameName($game);
     }
 
     public function created(Game $game): void
@@ -27,7 +27,7 @@ class GameObserver
         $rom = $game->rom()->first();
         GameCreated::dispatch($game, $rom);
 
-        if (self::$useDbLogic === false) {
+        if (self::USE_DB_LOGIC === false) {
             $rom->has_game = true;
             $rom->game_id = $game->id;
             $rom->saveQuietly();
@@ -36,12 +36,12 @@ class GameObserver
 
     public function updating(Game $game): void
     {
-        $this->gameActions->slugifyGameNameFromGameObject($game);
+        $this->gameActions->slugifyGameName($game);
     }
 
     public function deleted(Game $game): void
     {
-        if (self::$useDbLogic === false) {
+        if (self::USE_DB_LOGIC === false) {
             $rom = $game->rom()->first();
             $rom->game_id = null;
             $rom->has_game = false;

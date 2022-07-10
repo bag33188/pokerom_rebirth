@@ -40,46 +40,46 @@ abstract class AbstractGridFSDatabase extends GridFS
     protected bool $useAuth = false;
 
     /** @var string[] */
-    private array $gfsConfig;
+    private static array $gfsConfig;
     /** @var string[] */
-    private array $mongoConfig;
+    private static array $mongoConfig;
 
     public function __construct(string $databaseName = null, string $bucketName = null, int $chunkSize = null)
     {
         $this->setConfigVars();
 
         if (empty($this->databaseName)) {
-            $this->databaseName = $databaseName ?? $this->gfsConfig['connection']['database'];
+            $this->databaseName = $databaseName ?? self::$gfsConfig['connection']['database'];
         }
         if (empty($this->bucketName)) {
-            $this->bucketName = $bucketName ?? $this->gfsConfig['bucketName'];
+            $this->bucketName = $bucketName ?? self::$gfsConfig['bucketName'];
         }
         if (empty($this->chunkSize)) {
-            $this->chunkSize = $chunkSize ?? $this->gfsConfig['chunkSize'];
+            $this->chunkSize = $chunkSize ?? self::$gfsConfig['chunkSize'];
         }
     }
 
     private function setConfigVars(): void
     {
-        $this->gfsConfig = MongoUtil::getGridFSConfigArray();
-        $this->mongoConfig = MongoUtil::getMongoConfigArray();
+        self::$gfsConfig = MongoUtil::getGridFSConfigArray();
+        self::$mongoConfig = MongoUtil::getMongoConfigArray();
     }
 
     public function mongoURI(): string
     {
-        $dsnBuilder = '' .
-            $this->mongoConfig['driver'] . '://' .
-            $this->mongoConfig['username'] . ':' .
-            $this->mongoConfig['password'] . '@' .
-            $this->mongoConfig['host'] . ':' .
-            $this->mongoConfig['port'] . '/';
+        $dsnBuilder = _SPACE .
+            self::$mongoConfig['driver'] . '://' .
+            self::$mongoConfig['username'] . ':' .
+            self::$mongoConfig['password'] . '@' .
+            self::$mongoConfig['host'] . ':' .
+            self::$mongoConfig['port'] . '/';
         if ($this->useAuth === true) {
             $dsnBuilder .= '?' .
                 'authMechanism=' .
-                (@$this->mongoConfig['options']['authMechanism'] ?? 'DEFAULT') .
+                (@self::$mongoConfig['options']['authMechanism'] ?? 'DEFAULT') .
                 '&authSource=' .
-                (@$this->mongoConfig['options']['authSource'] ?? 'admin');
+                (@self::$mongoConfig['options']['authSource'] ?? 'admin');
         }
-        return $dsnBuilder;
+        return ltrim($dsnBuilder);
     }
 }

@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\Actions\Validators\GameValidationRulesTrait;
+use App\Http\Validators\GameValidationRulesTrait;
 use App\Models\Game;
 use App\Rules\RequiredIfPutRequest;
 use Illuminate\Foundation\Http\FormRequest;
@@ -36,8 +36,8 @@ class UpdateGameRequest extends FormRequest
         $params = $this->route()->parameters;
         return
             $params['game']
-                ?: $params('gameId')
-                ?: $params('id');
+                ?: $params['gameId']
+                ?: $params['id'];
     }
 
     /**

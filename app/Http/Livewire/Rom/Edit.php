@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire\Rom;
 
-use App\Actions\Validators\RomValidationRulesTrait;
+use App\Http\Validators\RomValidationRulesTrait;
 use App\Models\Rom;
 use Exception;
 use Illuminate\Auth\Access\AuthorizationException;

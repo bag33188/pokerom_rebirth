@@ -19,7 +19,7 @@ class RomService implements RomServiceInterface
     {
         $romFile = RomRepo::searchForRomFileMatchingRom($rom->id);
         if (isset($romFile)) {
-            $this->romActions->setRomDataFromFile($rom, $romFile);
+            $this->romActions->setRomDataFromRomFileData($rom, $romFile);
             return new JsonDataResponse([
                 'message' => "file found and linked! file id: {$romFile->getKey()}",
                 'data' => $rom->refresh()

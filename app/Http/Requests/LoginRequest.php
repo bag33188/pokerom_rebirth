@@ -2,9 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Http\Validators\UserValidationRulesTrait;
 use Illuminate\Foundation\Http\FormRequest;
 use JetBrains\PhpStorm\ArrayShape;
-use App\Actions\Validators\UserValidationRulesTrait;
 
 
 class LoginRequest extends FormRequest

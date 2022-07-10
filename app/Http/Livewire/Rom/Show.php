@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Rom;
 
+use App\Interfaces\Action\RomActionsInterface;
 use App\Models\Rom;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -31,5 +32,11 @@ class Show extends Component
     public function edit(int $romId)
     {
         $this->redirect(route('roms.edit', $romId));
+    }
+
+    public function link(RomActionsInterface $romActions)
+    {
+        $romActions->linkRomToFileIfExists($this->rom);
+        $this->redirect(route('roms.show', $this->romId));
     }
 }

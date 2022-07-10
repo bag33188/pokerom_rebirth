@@ -9,9 +9,15 @@ class UserPolicy
 {
     use HandlesAuthorization;
 
-    private static function restrictUserToSelf(User $user, User $model): bool
+    /**
+     * Check if Current user's ID is equal to that of the User being authenticated.
+     *
+     * @param User $user
+     * @param User $model
+     * @return bool
+     */
+    private static function currentUserIdIsAuthUserId(User $user, User $model): bool
     {
-        // validate user id against current req/auth user id
         return $user->getAttributeValue('id') == $model->getAttributeValue('id');
     }
 
@@ -24,7 +30,7 @@ class UserPolicy
      */
     public function view(User $user, User $model): bool
     {
-        return self::restrictUserToSelf($user, $model);
+        return self::currentUserIdIsAuthUserId($user, $model);
     }
 
     /**
@@ -36,7 +42,7 @@ class UserPolicy
      */
     public function update(User $user, User $model): bool
     {
-        return self::restrictUserToSelf($user, $model);
+        return self::currentUserIdIsAuthUserId($user, $model);
     }
 
     /**
@@ -48,6 +54,6 @@ class UserPolicy
      */
     public function delete(User $user, User $model): bool
     {
-        return self::restrictUserToSelf($user, $model);
+        return self::currentUserIdIsAuthUserId($user, $model);
     }
 }

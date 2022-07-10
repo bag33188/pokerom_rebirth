@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Actions\Validators;
+namespace App\Http\Validators;
 
 use App\Rules\ValidRomFilename;
 use JetBrains\PhpStorm\Pure;

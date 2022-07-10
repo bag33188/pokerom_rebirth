@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire\Game;
 
-use App\Actions\Validators\GameValidationRulesTrait;
+use App\Http\Validators\GameValidationRulesTrait;
 use App\Models\Game;
 use Exception;
 use GameRepo;

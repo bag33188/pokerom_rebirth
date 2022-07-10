@@ -8,7 +8,7 @@ use Illuminate\Support\Str;
 
 class GameActions implements GameActionsInterface
 {
-    public function slugifyGameNameFromGameObject(Game &$game): void
+    public function slugifyGameName(Game &$game): void
     {
         $gameName = $game->getAttributeValue('game_name');
         $game = $game->setAttribute('slug', Str::slug($gameName));
