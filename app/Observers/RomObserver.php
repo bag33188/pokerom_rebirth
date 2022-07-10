@@ -7,7 +7,6 @@ use App\Models\Rom;
 
 class RomObserver
 {
-
     /** @var bool Use database relationships to update models */
     private static bool $USE_DATABASE_LOGIC = true;
 
@@ -32,7 +31,7 @@ class RomObserver
     public function deleting(Rom $rom): void
     {
         // for unique constraint purposes
-        $rom['file_id'] = null;
+        $rom->file_id = null;
     }
 
     public function deleted(Rom $rom): void

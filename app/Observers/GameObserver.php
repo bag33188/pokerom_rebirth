@@ -25,11 +25,12 @@ class GameObserver
 
     public function created(Game $game): void
     {
+        // use attribute syntax for proper non-fillable updating
+
         if (self::$USE_DATABASE_LOGIC === false) {
             $rom = $game->rom()->first();
-            // use attribute syntax for proper non-fillable updating
-            $rom['has_game'] = true;
-            $rom['game_id'] = $game->getKey();
+            $rom->has_game = true;
+            $rom->game_id = $game->id;
             $rom->saveQuietly();
         }
     }
@@ -43,8 +44,8 @@ class GameObserver
     {
         if (self::$USE_DATABASE_LOGIC === false) {
             $rom = $game->rom()->first();
-            $rom['game_id'] = null;
-            $rom['has_game'] = false;
+            $rom->game_id = null;
+            $rom->has_game = false;
             $rom->saveQuietly();
         }
     }
