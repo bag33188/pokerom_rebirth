@@ -2,6 +2,7 @@
     <x-slot name="header">
         <h2 class="text-center text-lg">{{$rom->getRomFileName()}} Information</h2>
     </x-slot>
+    @include('ui.session-error')
     <div class="w-full grid grid-cols-2 grid-rows-[minmax(0,_1fr)_auto] gap-y-4">
         <x-list-group>
             <x-list-item>Rom Name: {{$rom->rom_name}}</x-list-item>
@@ -22,7 +23,9 @@
             </div>
             <div class="col-start-1 col-end-1 row-start-2 row-end-2 justify-self-start h-auto">
                 <x-jet-button type="button" wire:click="edit({{$romId}})">Edit!</x-jet-button>
-                <x-jet-button wire:click="attemptLinkIfNeeded">try to link me</x-jet-button>
+                @unless($rom->has_file || isset($rom->file_id))
+                    <x-jet-button wire:click="attemptLinkIfNeeded">try to link me</x-jet-button>
+                @endunless
             </div>
         @endif
     </div>

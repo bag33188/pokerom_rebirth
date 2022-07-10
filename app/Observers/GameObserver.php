@@ -8,10 +8,17 @@ use App\Models\Game;
 
 class GameObserver
 {
-    public bool $afterCommit = false;
-
     /** @var bool Use database relationships to update models */
     private const USE_DB_LOGIC = true;
+
+
+    /**
+     * Handle events after all transactions are committed.
+     *
+     * @var bool
+     */
+    public bool $afterCommit = false;
+
 
     public function __construct(private readonly GameActionsInterface $gameActions)
     {

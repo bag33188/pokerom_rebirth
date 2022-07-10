@@ -10,9 +10,6 @@ class RomObserver
     /** @var bool Use database relationships to update models */
     private const USE_DB_LOGIC = true;
 
-    public function __construct(private readonly RomActionsInterface $romActions)
-    {
-    }
 
     /**
      * Handle events after all transactions are committed.
@@ -21,6 +18,17 @@ class RomObserver
      */
     public bool $afterCommit = false;
 
+
+    public function __construct(private readonly RomActionsInterface $romActions)
+    {
+    }
+
+    private function currentRequestIsLivewireRequest(): bool
+    {
+        $livewireHttpHeader = request()->header('X-Livewire');
+        return !empty($livewireHttpHeader);
+    }
+
     public function created(Rom $rom): void
     {
         $this->romActions->linkRomToFileIfExists($rom);
@@ -28,8 +36,10 @@ class RomObserver
 
     public function updated(Rom $rom): void
     {
-        if (!$rom->has_file || $rom->file_id == null) {
-            $this->romActions->linkRomToFileIfExists($rom);
+        if (!$this->currentRequestIsLivewireRequest()) {
+            if (!$rom->has_file || empty($rom->file_id)) {
+                $this->romActions->linkRomToFileIfExists($rom);
+            }
         }
     }
 

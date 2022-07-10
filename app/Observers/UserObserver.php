@@ -10,6 +10,11 @@ use App\Models\User;
 
 class UserObserver
 {
+    /**
+     * Handle events after all transactions are committed.
+     *
+     * @var bool
+     */
     public bool $afterCommit = true;
 
     public function __construct(private readonly UserActionsInterface $userActions)

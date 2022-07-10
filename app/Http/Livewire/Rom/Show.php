@@ -38,5 +38,9 @@ class Show extends Component
     {
         $romActions->linkRomToFileIfExists($this->rom);
         $this->redirect(route('roms.show', $this->romId));
+        $this->rom->refresh();
+        if (!$this->rom->has_file || empty($this->rom->file_id)) {
+            session()->flash('message', 'No matching ROM File found');
+        }
     }
 }
