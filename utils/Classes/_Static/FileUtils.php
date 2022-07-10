@@ -5,7 +5,7 @@ namespace Utils\Classes\_Static;
 /**
  * This class contains a variety of methods that are useful when dealing with files and file metadata.
  */
-class FileMethods
+class FileUtils
 {
     /**
      * _Note: by default this uses `gridfs.fileUploadPath` from `config` as path prefix._

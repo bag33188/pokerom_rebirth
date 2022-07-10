@@ -2,7 +2,7 @@
 
 namespace Utils\Modules\GridFS\Client;
 
-use Utils\Classes\_Static\MongoMethods as MongoUtil;
+use Utils\Classes\_Static\MongoUtils as MongoUtil;
 use Utils\Modules\GridFS\GridFS;
 
 /**

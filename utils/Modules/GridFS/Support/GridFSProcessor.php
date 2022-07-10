@@ -4,7 +4,7 @@ namespace Utils\Modules\GridFS\Support;
 
 use MongoDB\BSON\ObjectId;
 use MongoDB\GridFS\Bucket;
-use Utils\Classes\_Static\FileMethods as FileUtil;
+use Utils\Classes\_Static\FileUtils;
 use Utils\Modules\FileDownloader;
 use Utils\Modules\GridFS\GridFS;
 
@@ -22,7 +22,7 @@ class GridFSProcessor extends GridFS implements GridFSProcessorInterface
 
     public final function upload(string $filename): void
     {
-        $filepath = FileUtil::makeFilepathFromFilename($filename);
+        $filepath = FileUtils::makeFilepathFromFilename($filename);
         $stream = fopen($filepath, 'rb');
         $this->bucket->uploadFromStream($filename, $stream);
         fclose($stream);

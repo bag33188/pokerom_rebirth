@@ -11,7 +11,7 @@ if (!function_exists('isDirEmpty')) {
      */
     function isDirEmpty(string $dir): bool
     {
-        $iterator = new FilesystemIterator($dir, FilesystemIterator::KEY_AS_PATHNAME);
+        $iterator = new FilesystemIterator($dir, FilesystemIterator::KEY_AS_PATHNAME | FilesystemIterator::SKIP_DOTS);
         return !$iterator->valid();
     }
 }

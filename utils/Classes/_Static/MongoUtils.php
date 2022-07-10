@@ -7,7 +7,7 @@ use MongoDB\BSON\ObjectId;
 /**
  * This class contains a few helpful methods when interacting with MongoDB objects or using MongoDB logic.
  */
-class MongoMethods
+class MongoUtils
 {
     /**
      * Converts a MongoDB ID string into a {@see ObjectId BSON Object ID}
