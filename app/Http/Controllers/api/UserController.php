@@ -15,6 +15,7 @@ use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
+use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 use UserRepo;
 
 class UserController extends ApiController
@@ -54,7 +55,7 @@ class UserController extends ApiController
         return $this->userDataService->logoutCurrentUser()->renderResponse();
     }
 
-    public function update(UpdateUserRequest $request, UserActionsInterface $userActions, int $userId)
+    public function update(UpdateUserRequest $request, UserActionsInterface $userActions, int $userId): UserResource
     {
         $user = UserRepo::findUserIfExists($userId);
         $user->update($request->all());
@@ -72,15 +73,15 @@ class UserController extends ApiController
         return new UserResource($user);
     }
 
-    public function showMe(Request $request)
+    public function showMe(Request $request): JsonResponse
     {
-        return response()->json($request->user());
+        return jsonData(['data' => $request->user()], ResponseAlias::HTTP_OK);
     }
 
     /**
      * @throws AuthorizationException
      */
-    public function destroy(int $userId)
+    public function destroy(int $userId): JsonResponse
     {
         $user = UserRepo::findUserIfExists($userId);
         $this->authorize('delete', $user);

@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use App\Actions\Validators\UserValidationRulesTrait;
 use App\Rules\RequiredIfPutRequest;
+use Auth;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password;
@@ -25,7 +26,7 @@ class UpdateUserRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return auth()->user()->can('update', $this->user());
+        return $this->user()->can('update', Auth::user());
     }
 
     /**
@@ -37,11 +38,9 @@ class UpdateUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => $this->userNameRules(),
+            'name' => $this->userNameRules([$this->requiredIfPutRequest]),
             'email' => $this->userEmailRules([$this->requiredIfPutRequest, Rule::unique("users", "email")]),
-            'password' => $this->userPasswordRules([$this->requiredIfPutRequest, 'confirmed', Password::defaults(function () {
-                return Password::min(MIN_USER_PASSWORD)->uncompromised();
-            })])
+            'password' => $this->userPasswordRules([$this->requiredIfPutRequest, 'confirmed', Password::defaults(fn() => Password::min(MIN_USER_PASSWORD)->uncompromised())])
         ];
     }
 }
