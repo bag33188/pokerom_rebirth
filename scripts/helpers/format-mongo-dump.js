@@ -4,7 +4,7 @@ const path = require("path");
 console.log("formatting mongo dump...");
 
 const [dirnamePattern, objectIdPattern, lengthPattern, chunkSizePattern] = [
-    /([\/\\]scripts)([\/\\]helpers)/i,
+    new RegExp("([\\/\\\\]scripts)([\\/\\\\]helpers)", "i"),
     /("_id":)([\s\t\n\v]*)(\{[\s\t\n\v]*)("\$oid":)([\s\t\n\v]*)("[\da-fA-F]+")([\s\t\n\v]*)(})([\s\t\n\v]*)(,?)/gim,
     /("length":)([\s\t\n\v]*)/gim,
     /("chunkSize":)([\s\t\n\v]*)(\d+)(,?)/gim,
@@ -15,7 +15,7 @@ const filePath = path.join(
     "misc",
     "data",
     "dump",
-    "roms.files.json"
+    "rom.files.json"
 );
 
 let data;

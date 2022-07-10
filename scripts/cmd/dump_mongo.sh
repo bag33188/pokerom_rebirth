@@ -27,8 +27,8 @@ dump_mongo() {
         cd ../..
     fi
     database="pokerom_files"
-    collection="roms.files"
-    output_dir="misc/data/dump/roms.files.json"
+    collection="rom.files"
+    output_dir="misc/data/dump/rom.files.json"
 
     mongoexport -d $database -c $collection --jsonArray --jsonFormat=relaxed --pretty --fields length,filename,chunkSize -o $output_dir
 
