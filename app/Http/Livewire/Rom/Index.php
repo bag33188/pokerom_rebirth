@@ -6,14 +6,20 @@ use App\Models\Rom;
 use Illuminate\Contracts\{Foundation\Application, View\Factory, View\View};
 use Livewire\Component;
 use RomFileRepo;
+use RomRepo;
 
 class Index extends Component
 {
-    // wire models
+    /** @var Rom[] */
     public $roms;
 
     // props
     public $romsTableColumns;
+
+    public function boot()
+    {
+        $this->roms = RomRepo::getRomsWithGameAndFileInfo();
+    }
 
     public function booted()
     {
@@ -22,9 +28,8 @@ class Index extends Component
 
     public function render(): Factory|View|Application
     {
-        $this->roms = Rom::with(['game', 'romFile'])->get();
-
-        return view('livewire.rom.index', ['roms_total_size' => RomFileRepo::getTotalSizeOfAllRomFiles()]);
+        $romFileSizeSum = RomFileRepo::getTotalSizeOfAllRomFiles();
+        return view('livewire.rom.index', ['roms_total_size' => $romFileSizeSum]);
     }
 
     public function show(int $romId)
