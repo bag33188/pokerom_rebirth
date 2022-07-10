@@ -3,7 +3,7 @@
 namespace App\Http\Livewire\Game;
 
 use App\Actions\Validators\GameValidationRulesTrait;
-use App\Interfaces\Service\GameDataServiceInterface;
+use App\Interfaces\Service\GameServiceInterface;
 use App\Models\Game;
 use Exception;
 use GameRepo;
@@ -71,13 +71,13 @@ class Create extends Component
     /**
      * @throws AuthorizationException
      */
-    public function store(GameDataServiceInterface $gameDataService)
+    public function store(GameServiceInterface $gameService)
     {
         $this->authorize('create', Game::class);
 
         $this->validate();
         try {
-            $gameDataService->createGameFromRomId($this->rom_id, [
+            $gameService->createGameFromRomId($this->rom_id, [
                 'game_name' => $this->game_name,
                 'game_type' => $this->game_type,
                 'region' => $this->region,

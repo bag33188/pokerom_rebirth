@@ -9,7 +9,7 @@ use App\Http\{Controllers\Controller as ApiController,
     Resources\RomResource
 };
 use App\Interfaces\Action\RomFileActionsInterface;
-use App\Interfaces\Service\RomFileDataServiceInterface;
+use App\Interfaces\Service\RomFileServiceInterface;
 use App\Models\RomFile;
 use Illuminate\{Auth\Access\AuthorizationException, Http\JsonResponse};
 use Illuminate\Support\Facades\Gate;
@@ -19,7 +19,7 @@ use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class RomFileController extends ApiController
 {
-    public function __construct(private readonly RomFileDataServiceInterface $romFileDataService)
+    public function __construct(private readonly RomFileServiceInterface $romFileService)
     {
     }
 
@@ -60,7 +60,7 @@ class RomFileController extends ApiController
     public function download(string $romFileId): StreamedResponse
     {
         $romFile = RomFileRepo::findRomFileIfExists($romFileId);
-        return $this->romFileDataService->downloadRomFile($romFile);
+        return $this->romFileService->downloadRomFile($romFile);
     }
 
     /**
@@ -70,7 +70,7 @@ class RomFileController extends ApiController
     {
         $this->authorize('create', RomFile::class);
 
-        return $this->romFileDataService->uploadRomFile($request['filename'])->renderResponse();
+        return $this->romFileService->uploadRomFile($request['filename'])->renderResponse();
     }
 
     /**
@@ -80,7 +80,7 @@ class RomFileController extends ApiController
     {
         $romFile = RomFileRepo::findRomFileIfExists($romFileId);
         $this->authorize('delete', $romFile);
-        return $this->romFileDataService->deleteRomFile($romFile)->renderResponse();
+        return $this->romFileService->deleteRomFile($romFile)->renderResponse();
     }
 
     /**

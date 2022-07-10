@@ -5,7 +5,7 @@ namespace App\Interfaces\Service;
 use App\Models\Rom;
 use Utils\Modules\JsonDataResponse;
 
-interface RomDataServiceInterface
+interface RomServiceInterface
 {
     public function attemptToLinkRomToFile(Rom $rom): JsonDataResponse;
 }

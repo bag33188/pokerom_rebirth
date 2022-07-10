@@ -6,7 +6,7 @@ use App\Models\RomFile;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use Utils\Modules\JsonDataResponse;
 
-interface RomFileDataServiceInterface
+interface RomFileServiceInterface
 {
     public function downloadRomFile(RomFile $romFile): StreamedResponse;
 

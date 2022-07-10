@@ -5,7 +5,7 @@ namespace App\Http\Controllers\www;
 use App\Http\Controllers\Controller as ViewController;
 use App\Http\Requests\StoreRomFileRequest;
 use App\Interfaces\Action\RomFileActionsInterface;
-use App\Interfaces\Service\RomFileDataServiceInterface;
+use App\Interfaces\Service\RomFileServiceInterface;
 use App\Models\RomFile;
 use Gate;
 use Illuminate\Auth\Access\AuthorizationException;
@@ -17,11 +17,11 @@ use Symfony\Component\HttpFoundation\StreamedResponse;
 class RomFileController extends ViewController
 {
 
-    private readonly RomFileDataServiceInterface $romFileDataService;
+    private readonly RomFileServiceInterface $romFileService;
 
-    public function __construct(RomFileDataServiceInterface $romFileDataService)
+    public function __construct(RomFileServiceInterface $romFileService)
     {
-        $this->romFileDataService = $romFileDataService;
+        $this->romFileService = $romFileService;
     }
 
     /**
@@ -55,7 +55,7 @@ class RomFileController extends ViewController
      */
     public function store(StoreRomFileRequest $request)
     {
-        $this->romFileDataService->uploadRomFile($request['filename']);
+        $this->romFileService->uploadRomFile($request['filename']);
         return response()->redirectTo(url()->previous())->banner("file {$request['filename']} uploaded!");
     }
 
@@ -80,13 +80,13 @@ class RomFileController extends ViewController
     public function destroy(RomFile $romFile)
     {
         $this->authorize('delete', $romFile);
-        $this->romFileDataService->deleteRomFile($romFile);
+        $this->romFileService->deleteRomFile($romFile);
         return response()->redirectTo(route('rom-files.index'))->banner("$romFile->filename deleted!");
     }
 
     public function download(RomFile $romFile): StreamedResponse
     {
-        return $this->romFileDataService->downloadRomFile($romFile);
+        return $this->romFileService->downloadRomFile($romFile);
     }
 }
 

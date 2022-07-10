@@ -3,13 +3,13 @@
 namespace App\Services\Data;
 
 use App\Interfaces\Action\RomActionsInterface;
-use App\Interfaces\Service\RomDataServiceInterface;
+use App\Interfaces\Service\RomServiceInterface;
 use App\Models\Rom;
 use RomRepo;
 use Symfony\Component\HttpFoundation\Response as HttpResponse;
 use Utils\Modules\JsonDataResponse;
 
-class RomDataService implements RomDataServiceInterface
+class RomService implements RomServiceInterface
 {
     public function __construct(private readonly RomActionsInterface $romActions)
     {

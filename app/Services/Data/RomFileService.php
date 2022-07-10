@@ -5,7 +5,7 @@ namespace App\Services\Data;
 use App\Enums\FileContentTypeEnum as ContentType;
 use App\Events\RomFileCreated;
 use App\Events\RomFileDeleted;
-use App\Interfaces\Service\RomFileDataServiceInterface;
+use App\Interfaces\Service\RomFileServiceInterface;
 use App\Jobs\ProcessRomFileDeletion;
 use App\Jobs\ProcessRomFileDownload;
 use App\Jobs\ProcessRomFileUpload;
@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\Response as HttpResponse;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use Utils\Modules\JsonDataResponse;
 
-class RomFileDataService implements RomFileDataServiceInterface
+class RomFileService implements RomFileServiceInterface
 {
     public function downloadRomFile(RomFile $romFile): StreamedResponse
     {

@@ -9,7 +9,7 @@ use App\Http\Resources\GameResource;
 use App\Http\Resources\RomCollection;
 use App\Http\Resources\RomFileResource;
 use App\Http\Resources\RomResource;
-use App\Interfaces\Service\RomDataServiceInterface;
+use App\Interfaces\Service\RomServiceInterface;
 use App\Models\Rom;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\JsonResponse;
@@ -19,7 +19,7 @@ use Symfony\Component\HttpFoundation\Response as HttpResponse;
 
 class RomController extends ApiController
 {
-    public function __construct(private readonly RomDataServiceInterface $romDataService)
+    public function __construct(private readonly RomServiceInterface $romService)
     {
     }
 
@@ -86,7 +86,7 @@ class RomController extends ApiController
     {
         $rom = RomRepo::findRomIfExists($romId);
         $this->authorize('update', $rom);
-        return $this->romDataService->attemptToLinkRomToFile($rom)->renderResponse();
+        return $this->romService->attemptToLinkRomToFile($rom)->renderResponse();
     }
 
     /**

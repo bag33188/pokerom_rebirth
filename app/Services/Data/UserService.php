@@ -3,12 +3,12 @@
 namespace App\Services\Data;
 
 use App\Interfaces\Action\UserActionsInterface;
-use App\Interfaces\Service\UserDataServiceInterface;
+use App\Interfaces\Service\UserServiceInterface;
 use App\Models\User;
 use Symfony\Component\HttpFoundation\Response as HttpResponse;
 use Utils\Modules\JsonDataResponse;
 
-class UserDataService implements UserDataServiceInterface
+class UserService implements UserServiceInterface
 {
     public function __construct(private readonly UserActionsInterface $userActions)
     {

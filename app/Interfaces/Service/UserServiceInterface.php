@@ -5,7 +5,7 @@ namespace App\Interfaces\Service;
 use App\Models\User;
 use Utils\Modules\JsonDataResponse;
 
-interface UserDataServiceInterface
+interface UserServiceInterface
 {
     public function authenticateUserAgainstCredentials(User $user, string $requestPassword): JsonDataResponse;
 
