@@ -45,7 +45,7 @@ class WelcomeNotification extends Notification
         return (new MailMessage)
             ->subject('Thank you for joining ' . config('app.name') . '!!')
             ->from(config('mail.from.address'))
-            ->line(preg_replace("/Poke/i", POKE_EACUTE, $lnMsg))
+            ->line(str_replace("PokeROM!", POKE_EACUTE . 'ROM!', $lnMsg))
             ->action('Check it out!', route('roms.index'))
             ->line('Enjoy!');
     }
@@ -56,16 +56,16 @@ class WelcomeNotification extends Notification
      * @param mixed $notifiable
      * @return array
      */
-    #[ArrayShape(['subject' => "string", 'from' => "\Illuminate\Config\Repository|\Illuminate\Contracts\Foundation\Application|mixed", 'line1' => "mixed", 'action' => "array", 'line2' => "string"])]
+    #[ArrayShape(['subject' => "string", 'from' => "\Illuminate\Config\Repository|\Illuminate\Contracts\Foundation\Application|mixed", 'line1' => "array|string|string[]", 'action' => "array", 'line2' => "string"])]
     public function toArray(mixed $notifiable): array
     {
         return [
             'subject' => 'Thank you for joining ' . config('app.name') . '!!',
             'from' => config('mail.from.address'),
-            'line1' => preg_replace("/Poke/i", POKE_EACUTE,
+            'line1' => str_replace("PokeROM!", POKE_EACUTE . 'ROM!',
                 "Hello {$this->user->name}, welcome to the world of PokeROM!"),
             'action' => [
-                'text' => 'Check it out!',
+                'hypertext' => 'Check it out!',
                 'hyperlink' => route('roms.index')
             ],
             'line2' => 'Enjoy!'

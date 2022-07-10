@@ -17,11 +17,11 @@
             </div>
             <table class="w-full text-sm text-left text-gray-500 light:text-gray-400" x-show="open" x-cloak>
                 <thead class="bg-gray-50">
-                <tr class="text-xs text-gray-700 uppercase light:bg-gray-700 light:text-gray-400">
-                    @for($i = 0; $i < count($romsTableColumns); $i++)
-                        <th scope="col" class="px-6 py-3" id="column-{{ $i+1 }}">{{ $romsTableColumns[$i] }}</th>
-                    @endfor
-                </tr>
+                    <tr class="text-xs text-gray-700 uppercase light:bg-gray-700 light:text-gray-400">
+                        @for($i = 0; $i < count($romsTableColumns); $i++)
+                            <th scope="col" class="px-6 py-3" id="column-{{ $i+1 }}">{{ $romsTableColumns[$i] }}</th>
+                        @endfor
+                    </tr>
                 </thead>
                 <tbody class="light:bg-gray-800">
                 @foreach($roms as $rom)
@@ -48,11 +48,11 @@
                 @endforeach
                 </tbody>
                 <tfoot>
-                <tr class="text-sm text-gray-700 uppercase light:bg-gray-700 light:text-gray-400">
-                    <td class="px-6 py-3">Total Count: <span class="font-semibold">{{count($roms)}}</span></td>
-                    <td class="px-6 py-3">Total Size: <span class="font-semibold">{{$roms_total_size}} Bytes</span>
-                    </td>
-                </tr>
+                    <tr class="text-sm text-gray-700 uppercase light:bg-gray-700 light:text-gray-400">
+                        <td class="px-6 py-3">Total Count: <span class="font-semibold">{{count($roms)}}</span></td>
+                        <td class="px-6 py-3">Total Size: <span class="font-semibold">{{$roms_total_size}} Bytes</span>
+                        </td>
+                    </tr>
                 </tfoot>
             </table>
         @endif
