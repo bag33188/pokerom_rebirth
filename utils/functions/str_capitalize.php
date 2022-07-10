@@ -39,10 +39,10 @@ if (!function_exists('str_capitalize')) {
             }
             return join($separator, $str_arr);
         } else {
-            $conversions = (object)[
+            $conversions = (object)array(
                 'php' => strtoupper($value[0]) . strtolower(substr($value, 1, strlen($value) - 1)),
                 'c' => ucfirst($value)
-            ];
+            );
             return $conversions->c;
         }
     }
