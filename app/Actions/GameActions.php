@@ -8,6 +8,12 @@ use Illuminate\Support\Str;
 
 class GameActions implements GameActionsInterface
 {
+    /**
+     * Modified {@see Game} object and slugify the `game_name` property (set `slug` field value).
+     *
+     * @param Game $game
+     * @return void
+     */
     public function slugifyGameName(Game &$game): void
     {
         $gameName = $game->getAttributeValue('game_name');
