@@ -3,8 +3,8 @@
 namespace App\Observers;
 
 use App\Events\GameCreated;
+use App\Interfaces\Action\GameActionsInterface;
 use App\Models\Game;
-use Illuminate\Support\Str;
 
 class GameObserver
 {
@@ -13,15 +13,13 @@ class GameObserver
     /** @var bool Use database relationships to update models */
     private static bool $USE_DATABASE_LOGIC = true;
 
-    private static function slugifyGameName(Game &$game): void
+    public function __construct(private readonly GameActionsInterface $gameActions)
     {
-        $gameName = $game->getAttributeValue('game_name');
-        $game = $game->setAttribute('slug', Str::slug($gameName));
     }
 
     public function creating(Game $game): void
     {
-        self::slugifyGameName($game);
+        $this->gameActions->slugifyGameName($game);
     }
 
     public function created(Game $game): void
@@ -37,7 +35,7 @@ class GameObserver
 
     public function updating(Game $game): void
     {
-        self::slugifyGameName($game);
+        $this->gameActions->slugifyGameName($game);
     }
 
     public function deleted(Game $game): void
