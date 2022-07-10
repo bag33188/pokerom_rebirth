@@ -10,7 +10,6 @@
 // load `chars.php` constants
 include_once "chars.inc.php";
 
-// General Entities //
 
 /** directory that contains all bin rom files */
 const ROM_FILES_DIRNAME = 'rom_files';
