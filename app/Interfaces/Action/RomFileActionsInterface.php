@@ -5,11 +5,11 @@ namespace App\Interfaces\Action;
 interface RomFileActionsInterface
 {
     /** @return string[] */
-    public function listStorageRomFiles(): array;
+    public function listAllFilesInStorage(): array;
 
     /** @return string[] */
-    public function listRomFiles(): array;
+    public function listRomFilesInStorage(): array;
 
     /** @return string[] */
-    public function listRomFilesSorted(): array;
+    public function listRomFilesInStorageSorted(): array;
 }

@@ -14,6 +14,7 @@ abstract class AbstractApplicationException extends Exception
 {
     public function __construct(private readonly Request $request, string $message, int $code, ?Throwable $previous = null)
     {
+        /*! request helper function is also available for use if dependency injection is not desirable */
         parent::__construct($message, $code, $previous);
     }
 

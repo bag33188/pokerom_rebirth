@@ -49,20 +49,26 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/logout', [UserController::class, 'logout']);
     });
 
-    // gridfs routes
-    Route::prefix('rom-files/grid')->group(function () {
-        Route::get('/list', [RomFileController::class, 'listRomFilesInStorageFolder']);
-        Route::get('/{romFileId}/download', [RomFileController::class, 'download']);
-        Route::post('/upload', [RomFileController::class, 'upload']);
-    });
-
     // relationships
     Route::get('/roms/{romId}/game', [RomController::class, 'indexGame']);
     Route::get('/roms/{romId}/file', [RomController::class, 'indexFile']);
     Route::get('/games/{gameId}/rom', [GameController::class, 'indexRom']);
     Route::get('/rom-files/{romFileId}/rom', [RomFileController::class, 'indexRom']);
     // relationship actions
-    Route::patch('/roms/{romId}/linkFile', [RomController::class, 'linkRomToFile']);
+    Route::patch('/roms/{romId}/link-file', [RomController::class, 'linkRomToFile']);
+
+    Route::prefix('rom-files')->group(function () {
+        // gridfs routes
+        Route::prefix('grid')->group(function () {
+            Route::get('/{romFileId}/download', [RomFileController::class, 'download']);
+            Route::post('/upload', [RomFileController::class, 'upload']);
+        });
+        // storage routes
+        Route::prefix('disk')->group(function () {
+            Route::get('/list-files', [RomFileController::class, 'listFilesInRomFilesStorage']);
+            Route::get('/list-roms', [RomFileController::class, 'listRomsInRomFilesStorage']);
+        });
+    });
 });
 
 

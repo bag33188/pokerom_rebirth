@@ -6,8 +6,7 @@ use App\Http\{Controllers\Controller as ApiController,
     Requests\StoreRomFileRequest,
     Resources\RomFileCollection,
     Resources\RomFileResource,
-    Resources\RomResource
-};
+    Resources\RomResource};
 use App\Interfaces\Action\RomFileActionsInterface;
 use App\Interfaces\Service\RomFileDataServiceInterface;
 use App\Models\RomFile;
@@ -87,10 +86,20 @@ class RomFileController extends ApiController
      * @return string[]
      * @throws AuthorizationException
      */
-    public function listRomFilesInStorageFolder(RomFileActionsInterface $romFileActions): array
+    public function listFilesInRomFilesStorage(RomFileActionsInterface $romFileActions): array
     {
         Gate::authorize('viewAny-romFile');
 
-        return $romFileActions->listStorageRomFiles();
+        return $romFileActions->listAllFilesInStorage();
+    }
+
+    /**
+     * @throws AuthorizationException
+     */
+    public function listRomsInRomFilesStorage(RomFileActionsInterface $romFileActions): array
+    {
+        Gate::authorize('viewAny-romFile');
+
+        return $romFileActions->listRomFilesInStorage();
     }
 }

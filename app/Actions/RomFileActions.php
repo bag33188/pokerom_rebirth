@@ -10,7 +10,7 @@ class RomFileActions implements RomFileActionsInterface
     /**
      * @return array|string[]
      */
-    public function listStorageRomFiles(): array
+    public function listAllFilesInStorage(): array
     {
         return Storage::disk(ROM_FILES_DIRNAME)->files('/');
     }
@@ -18,18 +18,19 @@ class RomFileActions implements RomFileActionsInterface
     /**
      * @return array|string[]
      */
-    public function listRomFiles(): array
+    public function listRomFilesInStorage(): array
     {
-        return array_filter($this->listStorageRomFiles(),
+        $filteredRomFiles = array_filter($this->listAllFilesInStorage(),
             fn(string $romFilename): false|int => preg_match(ROM_FILENAME_PATTERN, $romFilename));
+        return array_values($filteredRomFiles);
     }
 
     /**
      * @return array|string[]
      */
-    public function listRomFilesSorted(): array
+    public function listRomFilesInStorageSorted(): array
     {
-        $romFilesList = $this->listRomFiles();
+        $romFilesList = $this->listRomFilesInStorage();
         usort($romFilesList, fn(string $a, string $b): int => strlen($b) - strlen($a));
         return $romFilesList;
     }
