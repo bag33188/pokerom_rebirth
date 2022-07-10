@@ -227,6 +227,7 @@ return [
         'GameRepo'=>\App\Facades\GameRepositoryFacade::class,
         'RomFileRepo'=>\App\Facades\RomFileRepositoryFacade::class,
         'UserRepo'=>\App\Facades\UserRepositoryFacade::class,
+        'UserActions'=>\App\Facades\UserActionsFacade::class,
     ])->toArray(),
 
 ];

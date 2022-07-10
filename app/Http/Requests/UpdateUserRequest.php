@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Actions\Validators\UserValidationRulesTrait;
+use App\Models\User;
 use App\Rules\RequiredIfPutRequest;
 use Auth;
 use Illuminate\Foundation\Http\FormRequest;
@@ -10,6 +11,7 @@ use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password;
 use JetBrains\PhpStorm\ArrayShape;
 
+/** @mixin User */
 class UpdateUserRequest extends FormRequest
 {
     use UserValidationRulesTrait;
