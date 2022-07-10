@@ -31,7 +31,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        //!! never execute. current data is intended to be permanent !!//
+        /*!! never execute. current data is intended to be permanent !!*/
         if (self::ALLOW_MIGRATIONS === true) {
             Schema::connection($this->connection)->create('rom.files', function (Blueprint $collection) {
                 $collection->index(

@@ -13,7 +13,7 @@ class RomFile extends MongoDbModel
 {
     protected $connection = 'mongodb';
     protected $collection = 'rom.files';
-    protected $table = 'rom.files'; //! don't delete!! use for eloquent helper code
+    protected $table = 'rom.files'; /*! don't delete!! use for eloquent helper code */
     protected $primaryKey = '_id';
     protected $keyType = 'string';
     protected $casts = [
