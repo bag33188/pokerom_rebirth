@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\api;
 
-use App\Http\Controllers\Controller as ApiController;
-use App\Http\Requests\StoreRomFileRequest;
-use App\Http\Resources\RomFileCollection;
-use App\Http\Resources\RomFileResource;
-use App\Http\Resources\RomResource;
+use App\Http\{Controllers\Controller as ApiController,
+    Requests\StoreRomFileRequest,
+    Resources\RomFileCollection,
+    Resources\RomFileResource,
+    Resources\RomResource
+};
 use App\Interfaces\Service\RomFileDataServiceInterface;
 use App\Models\RomFile;
 use Illuminate\{Auth\Access\AuthorizationException, Http\JsonResponse};
@@ -17,7 +18,6 @@ use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class RomFileController extends ApiController
 {
-
     public function __construct(private readonly RomFileDataServiceInterface $romFileDataService)
     {
     }
@@ -29,7 +29,7 @@ class RomFileController extends ApiController
     {
         Gate::authorize('viewAny-romFile');
 
-        return new RomFileCollection(RomFileRepo::getAllFilesSorted());
+        return new RomFileCollection(RomFileRepo::getAllRomFilesSorted());
     }
 
     /**
@@ -37,7 +37,7 @@ class RomFileController extends ApiController
      */
     public function indexRom(string $romFileId): RomResource
     {
-        $romFile = RomFileRepo::findFileIfExists($romFileId);
+        $romFile = RomFileRepo::findRomFileIfExists($romFileId);
         $this->authorize('view', $romFile);
         return new RomResource(RomFileRepo::getRomAssociatedWithFile($romFileId));
     }
@@ -47,7 +47,7 @@ class RomFileController extends ApiController
      */
     public function show(string $romFileId)
     {
-        $romFile = RomFileRepo::findFileIfExists($romFileId);
+        $romFile = RomFileRepo::findRomFileIfExists($romFileId);
         $this->authorize('view', $romFile);
         return new RomFileResource($romFile);
     }
@@ -58,7 +58,7 @@ class RomFileController extends ApiController
      */
     public function download(string $romFileId): StreamedResponse
     {
-        $romFile = RomFileRepo::findFileIfExists($romFileId);
+        $romFile = RomFileRepo::findRomFileIfExists($romFileId);
         return $this->romFileDataService->downloadRomFile($romFile);
     }
 
@@ -77,7 +77,7 @@ class RomFileController extends ApiController
      */
     public function destroy(string $romFileId): JsonResponse
     {
-        $romFile = RomFileRepo::findFileIfExists($romFileId);
+        $romFile = RomFileRepo::findRomFileIfExists($romFileId);
         $this->authorize('delete', $romFile);
         return $this->romFileDataService->deleteRomFile($romFile)->renderResponse();
     }

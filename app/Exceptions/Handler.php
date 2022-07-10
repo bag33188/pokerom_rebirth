@@ -81,7 +81,7 @@ class Handler extends ExceptionHandler
                 return response()->json(
                     data: ['message' => $message, 'success' => false],
                     status: $statusCode,
-                    headers: array('X-HttpError-Request-URI' => $currentRoute)
+                    headers: array('X-Http-Error-Request-URI' => $currentRoute)
                 );
             }
             return null;

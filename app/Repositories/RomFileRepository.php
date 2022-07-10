@@ -14,22 +14,22 @@ class RomFileRepository implements RomFileRepositoryInterface
 {
     use RomFileQueries;
 
-    public function findFileIfExists(string $romFileId): RomFile
+    public function findRomFileIfExists(string $romFileId): RomFile
     {
         return RomFile::findOrFail($romFileId);
     }
 
     public function getRomAssociatedWithFile(string $romFileId): Rom
     {
-        return $this->findFileIfExists($romFileId)->rom()->firstOrFail();
+        return $this->findRomFileIfExists($romFileId)->rom()->firstOrFail();
     }
 
-    public function getAllFilesSorted(): Collection
+    public function getAllRomFilesSorted(): Collection
     {
         return RomFile::all()->sortBy([['length', 'asc'], ['filename', 'asc']]);
     }
 
-    public function getFileByFilename(string $romFilename): RomFile
+    public function getRomFileByFilename(string $romFilename): RomFile
     {
         return RomFile::where('filename', '=', $romFilename)->first();
     }
@@ -37,7 +37,7 @@ class RomFileRepository implements RomFileRepositoryInterface
     public function searchForRomMatchingFile(string $romFileId): ?Rom
     {
         list($romName, $romExtension) =
-            FileUtil::splitFilenameIntoParts($this->findFileIfExists($romFileId)->filename);
+            FileUtil::splitFilenameIntoParts($this->findRomFileIfExists($romFileId)->filename);
         return Rom::where([
             ['rom_name', '=', $romName, 'and'],
             ['rom_type', '=', $romExtension, 'and']
@@ -52,17 +52,17 @@ class RomFileRepository implements RomFileRepositoryInterface
      * Aggregations
      */
 
-    public function getFileLengthsKibibytes(): Collection
+    public function getRomFileLengthsKibibytes(): Collection
     {
         return RomFile::project($this->calcLengthsOfRomFilesKibibytes())->get();
     }
 
-    public function getFileLengthsGibibytes(): Collection
+    public function getRomFileLengthsGibibytes(): Collection
     {
         return RomFile::project($this->calcLengthsOfRomFilesGibibytes())->get();
     }
 
-    public function getFileLengthsMebibytes(): Collection
+    public function getRomFileLengthsMebibytes(): Collection
     {
         return RomFile::project($this->calcLengthsOfRomFilesMebibytes())->get();
     }

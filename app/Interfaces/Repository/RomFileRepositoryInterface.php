@@ -8,21 +8,21 @@ use Illuminate\Database\Eloquent\Collection;
 
 interface RomFileRepositoryInterface
 {
-    public function getAllFilesSorted(): Collection;
+    public function getAllRomFilesSorted(): Collection;
 
-    public function findFileIfExists(string $romFileId): RomFile;
+    public function findRomFileIfExists(string $romFileId): RomFile;
 
     public function getRomAssociatedWithFile(string $romFileId): Rom;
 
-    public function getFileByFilename(string $romFilename): RomFile;
+    public function getRomFileByFilename(string $romFilename): RomFile;
 
     public function searchForRomMatchingFile(string $romFileId): ?Rom;
 
-    public function getFileLengthsKibibytes(): Collection;
+    public function getRomFileLengthsKibibytes(): Collection;
 
-    public function getFileLengthsGibibytes(): Collection;
+    public function getRomFileLengthsGibibytes(): Collection;
 
-    public function getFileLengthsMebibytes(): Collection;
+    public function getRomFileLengthsMebibytes(): Collection;
 
     public function getTotalSizeOfAllRomFiles(): int;
 
