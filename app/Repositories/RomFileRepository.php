@@ -8,7 +8,7 @@ use App\Models\RomFile;
 use App\Queries\RomFileQueries;
 use Illuminate\Database\Eloquent\Collection;
 use Jenssegers\Mongodb\Helpers\EloquentBuilder;
-use Utils\Classes\_Static\FileMethods;
+use Utils\Classes\_Static\FileMethods as FileUtil;
 
 class RomFileRepository implements RomFileRepositoryInterface
 {
@@ -37,7 +37,7 @@ class RomFileRepository implements RomFileRepositoryInterface
     public function searchForRomMatchingFile(string $romFileId): ?Rom
     {
         list($romName, $romExtension) =
-            FileMethods::splitFilenameIntoParts($this->findFileIfExists($romFileId)->filename);
+            FileUtil::splitFilenameIntoParts($this->findFileIfExists($romFileId)->filename);
         return Rom::where([
             ['rom_name', '=', $romName, 'and'],
             ['rom_type', '=', $romExtension, 'and']

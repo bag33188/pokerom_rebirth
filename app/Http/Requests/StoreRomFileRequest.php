@@ -6,7 +6,7 @@ use App\Actions\Validators\RomFileValidationRulesTrait;
 use App\Models\RomFile;
 use Illuminate\Foundation\Http\FormRequest;
 use JetBrains\PhpStorm\ArrayShape;
-use Utils\Classes\_Static\FileMethods;
+use Utils\Classes\_Static\FileMethods as FileUtil;
 
 /** @mixin RomFile */
 class StoreRomFileRequest extends FormRequest
@@ -28,7 +28,7 @@ class StoreRomFileRequest extends FormRequest
     protected function prepareForValidation(): void
     {
         $romFilename = $this->filename;
-        FileMethods::normalizeFileName($romFilename);
+        FileUtil::normalizeFileName($romFilename);
         $this->merge([
             'filename' => $romFilename,
         ]);

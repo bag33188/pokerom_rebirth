@@ -2,7 +2,7 @@
 
 namespace Utils\Modules\GridFS\Client;
 
-use Utils\Classes\_Static\MongoMethods;
+use Utils\Classes\_Static\MongoMethods as MongoUtil;
 use Utils\Modules\GridFS\GridFS;
 
 /**
@@ -61,8 +61,8 @@ abstract class AbstractGridFSDatabase extends GridFS
 
     private function setConfigVars(): void
     {
-        $this->gfsConfig = MongoMethods::getGridFSConfig();
-        $this->mongoConfig = MongoMethods::getMongoConfig();
+        $this->gfsConfig = MongoUtil::getGridFSConfigArray();
+        $this->mongoConfig = MongoUtil::getMongoConfigArray();
     }
 
     public function mongoURI(): string

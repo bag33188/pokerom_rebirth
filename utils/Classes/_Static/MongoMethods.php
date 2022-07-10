@@ -15,7 +15,7 @@ class MongoMethods
      * @param string $fileId
      * @return ObjectId
      */
-    public static function parseObjectId(string $fileId): ObjectId
+    public static function parseStringAsBSONObjectId(string $fileId): ObjectId
     {
         return new ObjectId($fileId);
     }
@@ -25,7 +25,7 @@ class MongoMethods
      *
      * @return array
      */
-    public static function getMongoConfig(): array
+    public static function getMongoConfigArray(): array
     {
         return config('database.connections.mongodb');
     }
@@ -35,7 +35,7 @@ class MongoMethods
      *
      * @return array
      */
-    public static function getGridFSConfig(): array
+    public static function getGridFSConfigArray(): array
     {
         return config('gridfs');
     }
