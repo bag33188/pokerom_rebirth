@@ -1,3 +1,8 @@
+/**
+ * @name format-mongo-dump
+ * @description Format's output JSON file from dumped MongoDB `pokerom_files`.`rom.files` data
+ */
+
 const fs = require("fs");
 const path = require("path");
 

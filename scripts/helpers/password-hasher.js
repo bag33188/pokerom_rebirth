@@ -1,5 +1,5 @@
 /**
- * @name pw-gen
+ * @name password-generator
  * @description NodeJS Password Hash Generator Using BcryptJS
  */
 
@@ -9,9 +9,16 @@ const yargs = require("yargs");
 const bcrypt = require("bcryptjs");
 
 colors.setTheme({
-    error: "red",
+    silly: "rainbow",
+    input: "grey",
+    verbose: "cyan",
+    prompt: "grey",
     info: "green",
-    debug: "yellow",
+    data: "grey",
+    help: "cyan",
+    warn: "yellow",
+    debug: "blue",
+    error: "red",
 });
 
 let argv = yargs(process.argv.slice(2))
@@ -37,7 +44,7 @@ if (argv.salt) saltVal = argv.salt;
 
 if (process.env.NODE_ENV !== "production") {
     console.log("Salt value: ", colors.debug(saltVal));
-    console.log("Argv Salt value: ", colors.debug(argv.salt));
+    console.log("Argv Salt value: ", colors.warn(argv.salt));
 }
 
 rlInterface.question("Enter password: ", async (pw) => {

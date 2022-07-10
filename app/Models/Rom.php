@@ -33,7 +33,7 @@ class Rom extends Model
 
     public function getRomFileName(): string
     {
-        return sprintf("%s.%s", $this->rom_name, strtolower($this->rom_type));
+        return sprintf("%s.%s", $this->attributes['rom_name'], strtolower($this->attributes['rom_type']));
     }
 
     public function game(): HasOne
