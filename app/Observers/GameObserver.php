@@ -29,7 +29,7 @@ class GameObserver
             $rom = $game->rom()->first();
             // use attribute syntax for proper non-fillable updating
             $rom['has_game'] = true;
-            $rom['game_id'] = $game->id;
+            $rom['game_id'] = $game->getKey();
             $rom->saveQuietly();
         }
     }
