@@ -21,7 +21,7 @@
             <div class="mt-2.5">
                 <x-jet-label for="gameType" :value="__('Game Type')" />
                 <x-form-select
-                    wire:model="game_type"
+                    wire:model.lazy="game_type"
                     name="game_type" id="gameType"
                     required autofocus>
                     @foreach(GAME_TYPES as $gameType)

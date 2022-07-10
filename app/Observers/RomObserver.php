@@ -14,6 +14,11 @@ class RomObserver
     {
     }
 
+    /**
+     * Handle events after all transactions are committed.
+     *
+     * @var bool
+     */
     public bool $afterCommit = false;
 
     public function created(Rom $rom): void

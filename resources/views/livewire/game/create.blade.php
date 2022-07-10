@@ -17,7 +17,7 @@
 
             <form wire:submit.prevent="store">
                 <x-jet-label for="availableRoms" :value="__('Select ROM')"/>
-                <x-form-select wire:model="rom_id" id="availableRoms" name="rom_id" autofocus required>
+                <x-form-select wire:model.lazy="rom_id" id="availableRoms" name="rom_id" autofocus required>
                     @php
                         foreach ($availableRoms as $rom) {
                             normalizeObjectFromStdClassOrArray($rom);

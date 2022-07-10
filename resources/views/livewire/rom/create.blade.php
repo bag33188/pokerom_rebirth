@@ -22,7 +22,7 @@
             <div class="mt-2.5">
                 <x-jet-label for="romType" :value="__('Rom Type')"/>
                 <x-form-select
-                    wire:model="rom_type"
+                    wire:model.lazy="rom_type"
                     name="rom_type" id="romType"
                     required autofocus>
                     @foreach(ROM_TYPES as $romType)
