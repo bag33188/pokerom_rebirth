@@ -5,8 +5,10 @@ namespace App\Http\Controllers\api;
 use App\Http\Controllers\Controller as ApiController;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\UpdateUserRequest;
 use App\Http\Resources\UserCollection;
 use App\Http\Resources\UserResource;
+use App\Interfaces\Action\UserActionsInterface;
 use App\Interfaces\Service\UserDataServiceInterface;
 use App\Models\User;
 use Illuminate\Auth\Access\AuthorizationException;
@@ -50,6 +52,14 @@ class UserController extends ApiController
     public function logout(): JsonResponse
     {
         return $this->userDataService->logoutCurrentUser()->renderResponse();
+    }
+
+    public function update(UpdateUserRequest $request, UserActionsInterface $userActions, int $userId)
+    {
+        $user = UserRepo::findUserIfExists($userId);
+        $user->update($request->all());
+        $userActions->revokeUserTokens();
+        return new UserResource($user);
     }
 
     /**

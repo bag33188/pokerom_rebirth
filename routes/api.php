@@ -1,6 +1,5 @@
 <?php
 
-use App\Actions\RomFileActions;
 use App\Http\Controllers\api\GameController;
 use App\Http\Controllers\api\RomController;
 use App\Http\Controllers\api\RomFileController;
@@ -37,8 +36,7 @@ Route::middleware('guest')->group(function () {
 // auth
 Route::middleware('auth:sanctum')->group(function () {
     // general api routes
-    Route::apiResources(['/roms' => RomController::class, '/games' => GameController::class]);
-    Route::apiResource('/users', UserController::class)->only('index', 'show', 'destroy');
+    Route::apiResources(['/roms' => RomController::class, '/games' => GameController::class, '/users' => UserController::class]);
     Route::apiResource('/rom-files', RomFileController::class)->only('index', 'show', 'destroy');
 
     // api route groups
@@ -47,7 +45,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/logout', [UserController::class, 'logout']);
     });
     Route::prefix('rom-files/grid')->group(function () {
-        Route::get('/list', [RomFileActions::class, 'listStorageRomFiles'])->middleware('admin');
+        Route::get('/list', [RomFileController::class, 'listRomFilesInStorageFolder']);
         Route::get('/{romFileId}/download', [RomFileController::class, 'download']);
         Route::post('/upload', [RomFileController::class, 'upload']);
     });

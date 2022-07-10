@@ -88,12 +88,19 @@ db.createCollection("rom_files.info", {
                 filename: {
                     bsonType: "string",
                     pattern: "^[\\d\\w\\-\\_]+$",
+                    minLength: 3,
+                    maxLength: 32,
                 },
                 filetype: {
+                    bsonType: "string",
                     enum: ["gb", "gbc", "gba", "nds", "3ds", "xci"],
+                    minLength: 2,
+                    maxLength: 3,
                 },
                 filesize: {
                     bsonType: ["int", "double"],
+                    minimum: 0xff000, // 1020 Kibibytes
+                    maximum: 0x440000000, // 17 Gibibytes
                     description: "Size of file measured in raw Bytes",
                 },
             },

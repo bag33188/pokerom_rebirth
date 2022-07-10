@@ -8,6 +8,7 @@ use App\Http\{Controllers\Controller as ApiController,
     Resources\RomFileResource,
     Resources\RomResource
 };
+use App\Interfaces\Action\RomFileActionsInterface;
 use App\Interfaces\Service\RomFileDataServiceInterface;
 use App\Models\RomFile;
 use Illuminate\{Auth\Access\AuthorizationException, Http\JsonResponse};
@@ -80,5 +81,16 @@ class RomFileController extends ApiController
         $romFile = RomFileRepo::findRomFileIfExists($romFileId);
         $this->authorize('delete', $romFile);
         return $this->romFileDataService->deleteRomFile($romFile)->renderResponse();
+    }
+
+    /**
+     * @return string[]
+     * @throws AuthorizationException
+     */
+    public function listRomFilesInStorageFolder(RomFileActionsInterface $romFileActions): array
+    {
+        Gate::authorize('viewAny-romFile');
+
+        return $romFileActions->listStorageRomFiles();
     }
 }
