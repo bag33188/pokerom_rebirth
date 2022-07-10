@@ -22,8 +22,8 @@ class ActionServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->bind(RomActionsInterface::class, RomActions::class);
+        $this->app->bind(GameActionsInterface::class, GameActions::class);
         $this->app->bind(UserActionsInterface::class, UserActions::class);
         $this->app->bind(RomFileActionsInterface::class, RomFileActions::class);
-        $this->app->bind(GameActionsInterface::class, GameActions::class);
     }
 }
