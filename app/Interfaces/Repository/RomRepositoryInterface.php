@@ -19,7 +19,7 @@ interface RomRepositoryInterface
 
     public function getGameAssociatedWithRom(int $romId): Game;
 
-    public function searchForFileMatchingRom(int $romId): ?RomFile;
+    public function searchForRomFileMatchingRom(int $romId): ?RomFile;
 
     public function getFileAssociatedWithRom(int $romId): RomFile;
 

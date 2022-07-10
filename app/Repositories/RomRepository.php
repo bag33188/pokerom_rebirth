@@ -51,7 +51,7 @@ class RomRepository implements RomRepositoryInterface
      * @param int $romId
      * @return \App\Models\RomFile|null
      */
-    public function searchForFileMatchingRom(int $romId): ?RomFile
+    public function searchForRomFileMatchingRom(int $romId): ?RomFile
     {
         // @ symbol is needed since using `findOrFail` (which throws exception on fail)
         $romFileName = @$this->findRomIfExists($romId)->getRomFileName();

@@ -22,7 +22,7 @@ class RomActions implements RomActionsInterface
 
     public function linkRomToFileIfExists(Rom $rom): void
     {
-        $romFile = RomRepo::searchForFileMatchingRom($rom->id);
+        $romFile = RomRepo::searchForRomFileMatchingRom($rom->id);
         if (isset($romFile)) $this->setRomDataFromFile($rom, $romFile);
     }
 }
