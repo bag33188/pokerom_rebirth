@@ -4,7 +4,7 @@
 
 $functions_path = __DIR__ . '/functions';
 
-if (!empty($functions_path)) {
+if (!isDirEmpty($functions_path)) {
     require_once $functions_path . "/parse_date_as_readable_string.php";
     require_once $functions_path . "/json_data.php";
     require_once $functions_path . "/number_to_roman.php";

@@ -35,6 +35,7 @@
             "Utils\\": "utils/"
         },
         "files": [
+            "scripts/helpers/is_dir_empty.php",
             "utils/constants.php",
             "utils/functions.php"
         ]
