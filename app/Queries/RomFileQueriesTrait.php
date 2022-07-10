@@ -6,7 +6,7 @@ use JetBrains\PhpStorm\ArrayShape;
 use JetBrains\PhpStorm\Pure;
 
 /** RomFile Aggregations (MongoDB) */
-trait RomFileQueries
+trait RomFileQueriesTrait
 {
     #[Pure]
     #[ArrayShape(['length' => "array[]"])]

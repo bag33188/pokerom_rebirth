@@ -5,7 +5,7 @@ namespace App\Queries;
 use Illuminate\Support\Facades\DB;
 use Utils\Modules\QueryObject;
 
-trait RomQueries
+trait RomQueriesTrait
 {
     /**
      * ### Property accessor: **`romSize`**

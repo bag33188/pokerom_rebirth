@@ -5,13 +5,13 @@ namespace App\Actions;
 use App\Interfaces\Action\RomActionsInterface;
 use App\Models\Rom;
 use App\Models\RomFile;
-use App\Queries\RomQueries;
+use App\Queries\RomQueriesTrait;
 use Illuminate\Support\Facades\DB;
 use RomRepo;
 
 class RomActions implements RomActionsInterface
 {
-    use RomQueries;
+    use RomQueriesTrait;
 
     public function setRomDataFromFile(Rom $rom, RomFile $romFile): void
     {

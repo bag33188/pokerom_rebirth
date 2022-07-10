@@ -5,14 +5,14 @@ namespace App\Repositories;
 use App\Interfaces\Repository\RomFileRepositoryInterface;
 use App\Models\Rom;
 use App\Models\RomFile;
-use App\Queries\RomFileQueries;
+use App\Queries\RomFileQueriesTrait;
 use Illuminate\Database\Eloquent\Collection;
 use Jenssegers\Mongodb\Helpers\EloquentBuilder;
 use Utils\Classes\_Static\FileUtils;
 
 class RomFileRepository implements RomFileRepositoryInterface
 {
-    use RomFileQueries;
+    use RomFileQueriesTrait;
 
     public function findRomFileIfExists(string $romFileId): RomFile
     {

@@ -5,7 +5,7 @@ namespace App\Queries;
 use Illuminate\Support\Facades\DB;
 use Utils\Modules\QueryObject;
 
-trait GameQueries
+trait GameQueriesTrait
 {
     protected function findRomsWithNoGame(): QueryObject
     {
