@@ -24,4 +24,14 @@ class RomFileActions implements RomFileActionsInterface
             return preg_match(ROM_FILENAME_PATTERN, $var);
         });
     }
+
+    /**
+     * @return array|string[]
+     */
+    public function listRomFilesSorted(): array
+    {
+        $romFilesList = $this->listRomFiles();
+        usort($romFilesList, fn(string $a, string $b): int => strlen($b) - strlen($a));
+        return $romFilesList;
+    }
 }

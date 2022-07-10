@@ -43,7 +43,7 @@ class RomFileController extends ViewController
      */
     public function create(RomFileActionsInterface $romFileActions)
     {
-        $romFiles = $romFileActions->listRomFiles();
+        $romFiles = $romFileActions->listRomFilesSorted();
         return response()->view('rom-file.create', ['romFiles' => $romFiles]);
     }
 
