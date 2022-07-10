@@ -49,14 +49,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/logout', [UserController::class, 'logout']);
     });
 
-    // relationships
-    Route::get('/roms/{romId}/game', [RomController::class, 'indexGame']);
-    Route::get('/roms/{romId}/file', [RomController::class, 'indexFile']);
-    Route::get('/games/{gameId}/rom', [GameController::class, 'indexRom']);
-    Route::get('/rom-files/{romFileId}/rom', [RomFileController::class, 'indexRom']);
-    // relationship actions
-    Route::patch('/roms/{romId}/link-file', [RomController::class, 'linkRomToFile']);
-
+    // other rom-file routes
     Route::prefix('rom-files')->group(function () {
         // gridfs routes
         Route::prefix('grid')->group(function () {
@@ -69,6 +62,14 @@ Route::middleware('auth:sanctum')->group(function () {
             Route::get('/list-roms', [RomFileController::class, 'listRomsInRomFilesStorage']);
         });
     });
+
+    // relationships
+    Route::get('/roms/{romId}/game', [RomController::class, 'indexGame']);
+    Route::get('/roms/{romId}/file', [RomController::class, 'indexFile']);
+    Route::get('/games/{gameId}/rom', [GameController::class, 'indexRom']);
+    Route::get('/rom-files/{romFileId}/rom', [RomFileController::class, 'indexRom']);
+    // relationship actions
+    Route::patch('/roms/{romId}/link-file', [RomController::class, 'linkRomToFile']);
 });
 
 
