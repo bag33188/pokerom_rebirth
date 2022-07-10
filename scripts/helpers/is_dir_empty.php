@@ -1,6 +1,9 @@
 <?php
 
 if (!function_exists('isDirEmpty')) {
+
+    define('FSI_FLAGS', FilesystemIterator::KEY_AS_PATHNAME | FilesystemIterator::SKIP_DOTS);
+
     /**
      * Checks if a given directory is empty (devoid of files)
      *
@@ -11,7 +14,7 @@ if (!function_exists('isDirEmpty')) {
      */
     function isDirEmpty(string $dir): bool
     {
-        $iterator = new FilesystemIterator($dir, FilesystemIterator::KEY_AS_PATHNAME | FilesystemIterator::SKIP_DOTS);
+        $iterator = new FilesystemIterator($dir, FSI_FLAGS);
         return !$iterator->valid();
     }
 }

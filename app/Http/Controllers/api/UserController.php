@@ -30,11 +30,10 @@ class UserController extends ApiController
     public function index(Request $request): UserCollection
     {
         Gate::authorize('viewAny-user');
-        if (str_to_bool($request->query('paginate')) === true) {
-            return new UserCollection(UserRepo::paginateUsers((int)$request->query('per_page')));
-        } else {
-            return new UserCollection(UserRepo::getAllUsers());
-        }
+        $paginateQueryIsTruthy = str_to_bool($request->query('paginate')) === true;
+        return $paginateQueryIsTruthy
+            ? new UserCollection(UserRepo::paginateUsers((int)$request->query('per_page')))
+            : new UserCollection(UserRepo::getAllUsers());
     }
 
     public function register(StoreUserRequest $request): JsonResponse
