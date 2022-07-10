@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 08, 2022 at 08:28 AM
+-- Generation Time: Jul 10, 2022 at 11:53 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -166,6 +166,7 @@ TRUNCATE TABLE `failed_jobs`;
 -- Table structure for table `games`
 --
 -- Creation: Jul 06, 2022 at 02:20 AM
+-- Last update: Jul 10, 2022 at 09:49 PM
 --
 
 DROP TABLE IF EXISTS `games`;
@@ -340,7 +341,7 @@ TRUNCATE TABLE `password_resets`;
 -- Table structure for table `personal_access_tokens`
 --
 -- Creation: Jul 06, 2022 at 01:56 AM
--- Last update: Jul 08, 2022 at 03:59 AM
+-- Last update: Jul 10, 2022 at 09:47 PM
 --
 
 DROP TABLE IF EXISTS `personal_access_tokens`;
@@ -372,7 +373,7 @@ TRUNCATE TABLE `personal_access_tokens`;
 --
 
 INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `name`, `token`, `abilities`, `last_used_at`, `created_at`, `updated_at`) VALUES
-(1, 'App\\Models\\User', 1, 'auth_token', 'decfe681ade402403c92ee62493bc85118f6260b48409bafb060afe67e12a78a', '[\"*\"]', '2022-07-08 10:59:27', '2022-07-04 02:35:33', '2022-07-08 10:59:27');
+(4, 'App\\Models\\User', 1, 'auth_token', 'b200ae710c4932db20b99bbae0344eac8e3a7802a9d15181c6d79cfb29e090cb', '[\"*\"]', '2022-07-11 04:47:16', '2022-07-10 23:51:32', '2022-07-11 04:47:16');
 
 -- --------------------------------------------------------
 
@@ -380,7 +381,7 @@ INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `n
 -- Table structure for table `roms`
 --
 -- Creation: Jul 06, 2022 at 02:20 AM
--- Last update: Jul 08, 2022 at 01:46 AM
+-- Last update: Jul 10, 2022 at 09:49 PM
 --
 
 DROP TABLE IF EXISTS `roms`;
@@ -460,7 +461,7 @@ INSERT INTO `roms` (`id`, `file_id`, `game_id`, `rom_name`, `rom_size`, `rom_typ
 -- Table structure for table `sessions`
 --
 -- Creation: Jul 06, 2022 at 02:20 AM
--- Last update: Jul 08, 2022 at 06:18 AM
+-- Last update: Jul 10, 2022 at 09:49 PM
 --
 
 DROP TABLE IF EXISTS `sessions`;
@@ -489,8 +490,7 @@ TRUNCATE TABLE `sessions`;
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('uJMIdPdeBNwZFWI13tGJP4suhDjdY4w0PD7Q9PLe', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiVGh0aTJUeFVGalBCSmREYm03S3BLOGJ3WnpFOThWbE5DanpiSXVVWCI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDY6Imh0dHA6Ly9wb2tlcm9tX3JlYmlydGgudGVzdC9wdWJsaWMvYXBpL3ZlcnNpb24iO31zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO3M6MjE6InBhc3N3b3JkX2hhc2hfc2FuY3R1bSI7czo2MDoiJDJ5JDEwJHdpcDNxeDkxUGxYRGtyai56RWpvQy4vd2xJbnRnSUszUS5yQUpnZ3dRaGZYUkZpSW5tRFptIjt9', 1657238779),
-('W5qUKXjsL8rR9ixnF6wI4bUE4AwL1zhZOlEx4XHm', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiS2pLcE5mN25DbDNRMEE0U241eEJuN3BHeGlOY29tWUR4bVlUbWFzaSI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDY6Imh0dHA6Ly9wb2tlcm9tX3JlYmlydGgudGVzdC9wdWJsaWMvYXBpL3ZlcnNpb24iO31zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO3M6MjE6InBhc3N3b3JkX2hhc2hfc2FuY3R1bSI7czo2MDoiJDJ5JDEwJHdpcDNxeDkxUGxYRGtyai56RWpvQy4vd2xJbnRnSUszUS5yQUpnZ3dRaGZYUkZpSW5tRFptIjt9', 1657261121);
+('AgFap1NBxb02LTEFGS9fjz5qP4h9TClz7Oso6uZo', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiMDNudU9DUEtzbUFQRXVqdG9lTXZOYVhLeGdCS2xpV3RhQnl1QzdYYyI7czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjIxOiJwYXNzd29yZF9oYXNoX3NhbmN0dW0iO3M6NjA6IiQyeSQxMCR3aXAzcXg5MVBsWERrcmouekVqb0MuL3dsSW50Z0lLM1EuckFKZ2d3UWhmWFJGaUlubURabSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDQ6Imh0dHA6Ly9wb2tlcm9tX3JlYmlydGgudGVzdC9wdWJsaWMvcm9tLWZpbGVzIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1657489791);
 
 -- --------------------------------------------------------
 
@@ -498,7 +498,7 @@ INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, 
 -- Table structure for table `users`
 --
 -- Creation: Jun 05, 2022 at 04:47 PM
--- Last update: Jul 08, 2022 at 06:10 AM
+-- Last update: Jul 10, 2022 at 04:32 PM
 --
 
 DROP TABLE IF EXISTS `users`;
@@ -533,7 +533,7 @@ TRUNCATE TABLE `users`;
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `two_factor_secret`, `two_factor_recovery_codes`, `two_factor_confirmed_at`, `role`, `remember_token`, `current_team_id`, `profile_photo_path`, `created_at`, `updated_at`) VALUES
-(1, 'Brock', 'bglatman@outlook.com', NULL, '$2y$10$wip3qx91PlXDkrj.zEjoC./wlIntgIK3Q.rAJggwQhfXRFiInmDZm', NULL, NULL, NULL, 'admin', 'SXbxMOVA0qvHickDmatixL99NZVw5WyPoANtopoOGXmqhVe8nj29UoKSSd75', NULL, NULL, '2022-07-04 02:35:33', '2022-07-04 02:35:33'),
+(1, 'Brock', 'bglatman@outlook.com', NULL, '$2y$10$wip3qx91PlXDkrj.zEjoC./wlIntgIK3Q.rAJggwQhfXRFiInmDZm', NULL, NULL, NULL, 'admin', 'SXbxMOVA0qvHickDmatixL99NZVw5WyPoANtopoOGXmqhVe8nj29UoKSSd75', NULL, NULL, '2022-07-04 02:35:33', '2022-07-10 23:32:39'),
 (4, 'John Doe', 'jdoe123@gmail.com', NULL, '$2y$10$TzzNPZc0JrCcsUyJB4FhQ.khUwfmikQwxpM1ZKneb/QloOTmcFnX2', NULL, NULL, NULL, 'user', NULL, NULL, NULL, '2022-07-08 13:10:55', '2022-07-08 13:10:55');
 
 --
@@ -625,7 +625,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `roms`
