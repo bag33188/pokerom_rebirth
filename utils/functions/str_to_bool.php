@@ -9,7 +9,7 @@ if (!function_exists('str_to_bool')) {
      */
     function str_to_bool(?string $value): bool
     {
-        if (empty($value)) $value = "false";
+        if (empty($value)) $value = 'false';
         return filter_var($value, FILTER_VALIDATE_BOOL);
     }
 }
