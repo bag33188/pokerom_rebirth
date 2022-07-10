@@ -19,7 +19,7 @@ class GameObserver
 
     public function creating(Game $game): void
     {
-        $this->gameActions->slugifyGameName($game);
+        $this->gameActions->slugifyGameNameFromGameObject($game);
     }
 
     public function created(Game $game): void
@@ -36,7 +36,7 @@ class GameObserver
 
     public function updating(Game $game): void
     {
-        $this->gameActions->slugifyGameName($game);
+        $this->gameActions->slugifyGameNameFromGameObject($game);
     }
 
     public function deleted(Game $game): void
