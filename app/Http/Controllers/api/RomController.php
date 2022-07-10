@@ -28,12 +28,12 @@ class RomController extends ApiController
      *
      * @return RomCollection
      */
-    public function index()
+    public function index(): RomCollection
     {
         return new RomCollection(RomRepo::getAllRomsSorted());
     }
 
-    public function indexGame(int $romId)
+    public function indexGame(int $romId): GameResource
     {
         return new GameResource(RomRepo::getGameAssociatedWithRom($romId));
     }
@@ -41,7 +41,7 @@ class RomController extends ApiController
     /**
      * @throws AuthorizationException
      */
-    public function indexFile(int $romId)
+    public function indexFile(int $romId): RomFileResource
     {
         Gate::authorize('viewAny-romFile');
         return new RomFileResource(RomRepo::getFileAssociatedWithRom($romId));
@@ -72,7 +72,7 @@ class RomController extends ApiController
         return new RomResource($rom);
     }
 
-    public function update(UpdateRomRequest $request, int $romId)
+    public function update(UpdateRomRequest $request, int $romId): RomResource
     {
         $rom = RomRepo::findRomIfExists($romId);
         $rom->update($request->all());
@@ -82,7 +82,7 @@ class RomController extends ApiController
     /**
      * @throws AuthorizationException
      */
-    public function linkRomToFile(int $romId)
+    public function linkRomToFile(int $romId): JsonResponse
     {
         $rom = RomRepo::findRomIfExists($romId);
         $this->authorize('update', $rom);

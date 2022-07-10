@@ -24,7 +24,7 @@ class GameController extends ApiController
      *
      * @return GameCollection
      */
-    public function index()
+    public function index(): GameCollection
     {
         return new GameCollection(GameRepo::getAllGamesSorted());
     }
@@ -33,7 +33,7 @@ class GameController extends ApiController
      * @param int $gameId
      * @return RomResource
      */
-    public function indexRom(int $gameId)
+    public function indexRom(int $gameId): RomResource
     {
         return new RomResource(GameRepo::getRomAssociatedWithGame($gameId));
     }
@@ -47,12 +47,15 @@ class GameController extends ApiController
     public function store(StoreGameRequest $request): JsonResponse
     {
         $romId = $request->query('romId') ??
-            throw new PreconditionRequiredHttpException(message: 'No ROM ID was sent.', code: ResponseAlias::HTTP_PRECONDITION_REQUIRED);
+            throw new PreconditionRequiredHttpException(
+                message: 'No ROM ID was sent.',
+                code: ResponseAlias::HTTP_PRECONDITION_REQUIRED
+            );
         $game = $this->gameDataService->createGameFromRomId($romId, $request->all());
         return (new GameResource($game))->response()->setStatusCode(ResponseAlias::HTTP_CREATED);
     }
 
-    public function update(UpdateGameRequest $request, int $gameId)
+    public function update(UpdateGameRequest $request, int $gameId): GameResource
     {
         $game = GameRepo::findGameIfExists($gameId);
         $game->update($request->all());
