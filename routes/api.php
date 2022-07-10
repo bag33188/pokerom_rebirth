@@ -47,7 +47,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/logout', [UserController::class, 'logout']);
     });
     Route::prefix('rom-files/grid')->group(function () {
-        Route::get('/list', [RomFileActions::class, 'listStorageFiles'])->middleware('admin');
+        Route::get('/list', [RomFileActions::class, 'listStorageRomFiles'])->middleware('admin');
         Route::get('/{romFileId}/download', [RomFileController::class, 'download']);
         Route::post('/upload', [RomFileController::class, 'upload']);
     });
