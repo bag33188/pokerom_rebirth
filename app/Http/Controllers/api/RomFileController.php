@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers\api;
 
-use App\Http\{Controllers\Controller as ApiController,
-    Requests\StoreRomFileRequest,
-    Resources\RomFileCollection,
-    Resources\RomFileResource,
-    Resources\RomResource
-};
+use App\Http\Controllers\Controller as ApiController;
+use App\Http\Requests\StoreRomFileRequest;
+use App\Http\Resources\RomFileCollection;
+use App\Http\Resources\RomFileResource;
+use App\Http\Resources\RomResource;
 use App\Interfaces\Action\RomFileActionsInterface;
 use App\Interfaces\Service\RomFileServiceInterface;
 use App\Models\RomFile;

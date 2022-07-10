@@ -71,9 +71,9 @@ class UserController extends ApiController
         return new UserResource($user);
     }
 
-    public function showMe(Request $request): JsonResponse
+    public function showMe(): JsonResponse
     {
-        return jsonData(['data' => $request->user()], HttpResponse::HTTP_OK);
+        return jsonData(['data' => request()->user()], HttpResponse::HTTP_OK);
     }
 
     /**
