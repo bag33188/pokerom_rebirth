@@ -1,7 +1,7 @@
 "use strict";
 
 var apiUrl = "http://pokerom_rebirth.test/public/api";
-var token = "";
+var token = "__API_TOKEN__";
 
 function loadRomsData() {
     var xhr = new XMLHttpRequest();
