@@ -75,6 +75,7 @@ Route::middleware('auth:sanctum')->group(function () {
 // experimental routes (debug only)
 if (App::environment('local')) {
     Route::prefix('dev')->group(function () {
-        Route::get('/rom-files/grid/{romFileId}/download', [RomFileController::class, 'download']);
+        Route::get('/rom-files/grid/{romFileId}/download', [RomFileController::class, 'download'])
+            ->name('api.dev.rom-files.download');
     });
 }

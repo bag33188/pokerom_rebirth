@@ -2,6 +2,7 @@
 
 namespace App\Observers;
 
+use App\Events\GameCreated;
 use App\Models\Game;
 use Illuminate\Support\Str;
 
@@ -25,10 +26,9 @@ class GameObserver
 
     public function created(Game $game): void
     {
-        // use attribute syntax for proper non-fillable updating
-
+        $rom = $game->rom()->first();
+        GameCreated::dispatch($game, $rom);
         if (self::$USE_DATABASE_LOGIC === false) {
-            $rom = $game->rom()->first();
             $rom->has_game = true;
             $rom->game_id = $game->id;
             $rom->saveQuietly();
