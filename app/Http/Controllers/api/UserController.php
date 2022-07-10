@@ -15,7 +15,6 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
-use UserActions;
 use UserRepo;
 
 class UserController extends ApiController
@@ -59,7 +58,6 @@ class UserController extends ApiController
     {
         $user = UserRepo::findUserIfExists($userId);
         $user->update($request->all());
-        UserActions::revokeUserTokens();
         return new UserResource($user);
     }
 
