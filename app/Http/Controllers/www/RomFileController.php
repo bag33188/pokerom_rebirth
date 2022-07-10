@@ -30,7 +30,7 @@ class RomFileController extends ViewController
      * @return Response
      * @throws AuthorizationException
      */
-    public function index()
+    public function index(): Response
     {
         Gate::authorize('viewAny-romFile');
         return response()->view('rom-file.index', ['romFiles' => RomFileRepo::getAllRomFilesSorted()]);
@@ -39,9 +39,10 @@ class RomFileController extends ViewController
     /**
      * Show the form for creating a new resource.
      *
+     * @param RomFileActionsInterface $romFileActions
      * @return Response
      */
-    public function create(RomFileActionsInterface $romFileActions)
+    public function create(RomFileActionsInterface $romFileActions): Response
     {
         $romFiles = $romFileActions->listRomFilesInStorageSorted();
         return response()->view('rom-file.create', ['romFiles' => $romFiles]);
@@ -53,7 +54,7 @@ class RomFileController extends ViewController
      * @param StoreRomFileRequest $request
      * @return Response
      */
-    public function store(StoreRomFileRequest $request)
+    public function store(StoreRomFileRequest $request): Response
     {
         $this->romFileService->uploadRomFile($request['filename']);
         return response()->redirectTo(url()->previous())->banner("file {$request['filename']} uploaded!");
@@ -65,7 +66,7 @@ class RomFileController extends ViewController
      * @param RomFile $romFile
      * @return Response
      */
-    public function show(RomFile $romFile)
+    public function show(RomFile $romFile): Response
     {
         return response()->view('rom-file.show', ['romFile' => $romFile]);
     }
@@ -77,7 +78,7 @@ class RomFileController extends ViewController
      * @return RedirectResponse
      * @throws AuthorizationException
      */
-    public function destroy(RomFile $romFile)
+    public function destroy(RomFile $romFile): RedirectResponse
     {
         $this->authorize('delete', $romFile);
         $this->romFileService->deleteRomFile($romFile);
