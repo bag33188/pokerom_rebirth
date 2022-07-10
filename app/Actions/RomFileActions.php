@@ -20,8 +20,10 @@ class RomFileActions implements RomFileActionsInterface
      */
     public function listRomFilesInStorage(): array
     {
-        $filteredRomFiles = array_filter($this->listAllFilesInStorage(),
-            fn(string $romFilename): false|int => preg_match(ROM_FILENAME_PATTERN, $romFilename));
+        $filteredRomFiles = array_filter(
+            $this->listAllFilesInStorage(),
+            fn(string $romFilename): false|int => preg_match(ROM_FILENAME_PATTERN, $romFilename)
+        );
         return array_values($filteredRomFiles);
     }
 
