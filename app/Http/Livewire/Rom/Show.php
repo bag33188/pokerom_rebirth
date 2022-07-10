@@ -34,7 +34,7 @@ class Show extends Component
         $this->redirect(route('roms.edit', $romId));
     }
 
-    public function link(RomActionsInterface $romActions)
+    public function attemptLinkIfNeeded(RomActionsInterface $romActions)
     {
         $romActions->linkRomToFileIfExists($this->rom);
         $this->redirect(route('roms.show', $this->romId));

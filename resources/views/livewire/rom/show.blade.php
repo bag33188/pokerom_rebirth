@@ -22,7 +22,7 @@
             </div>
             <div class="col-start-1 col-end-1 row-start-2 row-end-2 justify-self-start h-auto">
                 <x-jet-button type="button" wire:click="edit({{$romId}})">Edit!</x-jet-button>
-                <x-jet-button wire:click="link">try to link me</x-jet-button>
+                <x-jet-button wire:click="attemptLinkIfNeeded">try to link me</x-jet-button>
             </div>
         @endif
     </div>
