@@ -58,6 +58,7 @@ return [
 
     'url' => env('APP_URL', 'http://localhost'),
 
+    // use for blade templating engine
     'asset_url' => env('ASSET_URL'),
     'mix_url' => env('MIX_ASSET_URL'),
 
@@ -223,10 +224,10 @@ return [
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
         'GfsRomFile' => \App\Facades\RomFilesConnectionFacade::class,
+        'UserRepo'=>\App\Facades\UserRepositoryFacade::class,
         'RomRepo'=>\App\Facades\RomRepositoryFacade::class,
         'GameRepo'=>\App\Facades\GameRepositoryFacade::class,
         'RomFileRepo'=>\App\Facades\RomFileRepositoryFacade::class,
-        'UserRepo'=>\App\Facades\UserRepositoryFacade::class,
     ])->toArray(),
 
 ];

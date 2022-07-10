@@ -6,7 +6,7 @@ use App\Http\Controllers\api\RomFileController;
 use App\Http\Controllers\api\UserController;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
-use Symfony\Component\HttpFoundation\Response as ResponseAlias;
+use Symfony\Component\HttpFoundation\Response as HttpResponse;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,7 +22,7 @@ use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 Route::get('/version', fn() => response()
     ->json([
         'version' => config('app.version')
-    ], ResponseAlias::HTTP_OK))
+    ], HttpResponse::HTTP_OK))
     ->name('api.version');
 
 // no auth
@@ -35,15 +35,21 @@ Route::middleware('guest')->group(function () {
 
 // auth
 Route::middleware('auth:sanctum')->group(function () {
-    // general api routes
-    Route::apiResources(['/roms' => RomController::class, '/games' => GameController::class, '/users' => UserController::class]);
+    // api resource routes
+    Route::apiResources([
+        '/roms' => RomController::class,
+        '/games' => GameController::class,
+        '/users' => UserController::class
+    ]);
     Route::apiResource('/rom-files', RomFileController::class)->only('index', 'show', 'destroy');
 
-    // api route groups
+    // auth routes
     Route::prefix('auth')->group(function () {
         Route::get('/me', [UserController::class, 'showMe']);
         Route::post('/logout', [UserController::class, 'logout']);
     });
+
+    // gridfs routes
     Route::prefix('rom-files/grid')->group(function () {
         Route::get('/list', [RomFileController::class, 'listRomFilesInStorageFolder']);
         Route::get('/{romFileId}/download', [RomFileController::class, 'download']);
@@ -59,6 +65,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::patch('/roms/{romId}/linkFile', [RomController::class, 'linkRomToFile']);
 });
 
+
+// experimental routes (debug only)
 if (App::environment('local')) {
     Route::prefix('dev')->group(function () {
         Route::get('/rom-files/grid/{romFileId}/download', [RomFileController::class, 'download']);

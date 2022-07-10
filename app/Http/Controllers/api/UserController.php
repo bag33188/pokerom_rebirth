@@ -14,7 +14,7 @@ use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
-use Symfony\Component\HttpFoundation\Response as ResponseAlias;
+use Symfony\Component\HttpFoundation\Response as HttpResponse;
 use UserRepo;
 
 class UserController extends ApiController
@@ -73,7 +73,7 @@ class UserController extends ApiController
 
     public function showMe(Request $request): JsonResponse
     {
-        return jsonData(['data' => $request->user()], ResponseAlias::HTTP_OK);
+        return jsonData(['data' => $request->user()], HttpResponse::HTTP_OK);
     }
 
     /**

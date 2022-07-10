@@ -15,7 +15,7 @@ use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Gate;
 use RomRepo;
-use Symfony\Component\HttpFoundation\Response as ResponseAlias;
+use Symfony\Component\HttpFoundation\Response as HttpResponse;
 
 class RomController extends ApiController
 {
@@ -57,7 +57,7 @@ class RomController extends ApiController
     {
         $rom = Rom::create($request->all());
 
-        return (new RomResource($rom))->response()->setStatusCode(ResponseAlias::HTTP_CREATED);
+        return (new RomResource($rom))->response()->setStatusCode(HttpResponse::HTTP_CREATED);
     }
 
     /**
@@ -101,6 +101,6 @@ class RomController extends ApiController
         $rom = RomRepo::findRomIfExists($romId);
         $this->authorize('delete', $rom);
         Rom::destroy($romId);
-        return jsonData(['message' => "rom $rom->rom_name deleted!"], ResponseAlias::HTTP_OK);
+        return jsonData(['message' => "rom $rom->rom_name deleted!"], HttpResponse::HTTP_OK);
     }
 }

@@ -5,7 +5,7 @@ namespace App\Services\Data;
 use App\Interfaces\Action\UserActionsInterface;
 use App\Interfaces\Service\UserDataServiceInterface;
 use App\Models\User;
-use Symfony\Component\HttpFoundation\Response as ResponseAlias;
+use Symfony\Component\HttpFoundation\Response as HttpResponse;
 use Utils\Modules\JsonDataResponse;
 
 class UserDataService implements UserDataServiceInterface
@@ -18,7 +18,7 @@ class UserDataService implements UserDataServiceInterface
     {
         $this->userActions->revokeUserTokens();
         $user->delete();
-        return new JsonDataResponse(['message' => "user $user->name deleted!"], ResponseAlias::HTTP_OK);
+        return new JsonDataResponse(['message' => "user $user->name deleted!"], HttpResponse::HTTP_OK);
     }
 
     public function registerUserToken(User $user): JsonDataResponse
@@ -27,26 +27,26 @@ class UserDataService implements UserDataServiceInterface
         return new JsonDataResponse([
             'user' => $user,
             'token' => $token
-        ], ResponseAlias::HTTP_CREATED);
+        ], HttpResponse::HTTP_CREATED);
     }
 
     public function logoutCurrentUser(): JsonDataResponse
     {
         $this->userActions->revokeUserTokens();
-        return new JsonDataResponse(['message' => 'logged out!'], ResponseAlias::HTTP_OK);
+        return new JsonDataResponse(['message' => 'logged out!'], HttpResponse::HTTP_OK);
     }
 
     public function authenticateUserAgainstCredentials(User $user, string $requestPassword): JsonDataResponse
     {
         // Check password hash against database
         if (!$user->checkPassword($requestPassword)) {
-            return new JsonDataResponse(['message' => 'Bad credentials'], ResponseAlias::HTTP_UNAUTHORIZED);
+            return new JsonDataResponse(['message' => 'Bad credentials'], HttpResponse::HTTP_UNAUTHORIZED);
         }
 
         $token = $this->userActions->generateUserApiToken($user);
         return new JsonDataResponse([
             'user' => $user,
             'token' => $token
-        ], ResponseAlias::HTTP_OK);
+        ], HttpResponse::HTTP_OK);
     }
 }

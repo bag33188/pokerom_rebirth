@@ -9,7 +9,7 @@ use App\Interfaces\Service\GameDataServiceInterface;
 use App\Models\Game;
 use GameRepo;
 use Illuminate\{Auth\Access\AuthorizationException, Http\JsonResponse};
-use Symfony\Component\HttpFoundation\Response as ResponseAlias;
+use Symfony\Component\HttpFoundation\Response as HttpResponse;
 use Symfony\Component\HttpKernel\Exception\PreconditionRequiredHttpException;
 
 class GameController extends ApiController
@@ -49,10 +49,10 @@ class GameController extends ApiController
         $romId = $request->query('romId') ??
             throw new PreconditionRequiredHttpException(
                 message: 'No ROM ID was sent.',
-                code: ResponseAlias::HTTP_PRECONDITION_REQUIRED
+                code: HttpResponse::HTTP_PRECONDITION_REQUIRED
             );
         $game = $this->gameDataService->createGameFromRomId($romId, $request->all());
-        return (new GameResource($game))->response()->setStatusCode(ResponseAlias::HTTP_CREATED);
+        return (new GameResource($game))->response()->setStatusCode(HttpResponse::HTTP_CREATED);
     }
 
     public function update(UpdateGameRequest $request, int $gameId): GameResource
@@ -79,6 +79,6 @@ class GameController extends ApiController
         $game = GameRepo::findGameIfExists($gameId);
         $this->authorize('delete', $game);
         Game::destroy($gameId);
-        return jsonData(['message' => "game $game->game_name deleted!"], ResponseAlias::HTTP_OK);
+        return jsonData(['message' => "game $game->game_name deleted!"], HttpResponse::HTTP_OK);
     }
 }

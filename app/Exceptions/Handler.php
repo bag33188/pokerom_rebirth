@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use App;
+use Config;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
@@ -12,7 +13,7 @@ use MongoDB\Driver\Exception\BulkWriteException;
 use MongoDB\Driver\Exception\WriteException;
 use PDOException;
 use Psr\Log\LogLevel;
-use Symfony\Component\HttpFoundation\Response as ResponseAlias;
+use Symfony\Component\HttpFoundation\Response as HttpResponse;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Throwable;
 use URL;
@@ -64,17 +65,17 @@ class Handler extends ExceptionHandler
         });
 
         $this->renderable(fn(BulkWriteException $e) => throw App::make(MongoWriteException::class,
-            ['message' => $e->getMessage(), 'code' => ResponseAlias::HTTP_CONFLICT]));
+            ['message' => $e->getMessage(), 'code' => HttpResponse::HTTP_CONFLICT]));
 
         $this->renderable(fn(QueryException $e) => throw App::make(SqlQueryException::class,
-            ['message' => $e->getMessage(), 'code' => ResponseAlias::HTTP_CONFLICT]));
+            ['message' => $e->getMessage(), 'code' => HttpResponse::HTTP_CONFLICT]));
 
         $this->renderable(function (HttpException $e, Request $request): ?JsonResponse {
-            $currentRoute = str_replace(config('app.url'), '', URL::current());
+            $currentRoute = str_replace(Config::get('app.url'), '', URL::current());
             if ($request->is("api/*", "/public/api/*")) {
                 $statusCode = $e->getStatusCode();
                 $message = $e->getMessage();
-                if ($statusCode === ResponseAlias::HTTP_NOT_FOUND && strlen($message) === 0) {
+                if ($statusCode === HttpResponse::HTTP_NOT_FOUND && strlen($message) === 0) {
 
                     $message = "Route not found: $currentRoute";
                 }

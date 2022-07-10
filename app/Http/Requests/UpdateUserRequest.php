@@ -42,7 +42,11 @@ class UpdateUserRequest extends FormRequest
         return [
             'name' => $this->userNameRules([$this->requiredIfPutRequest]),
             'email' => $this->userEmailRules([$this->requiredIfPutRequest, Rule::unique("users", "email")]),
-            'password' => $this->userPasswordRules([$this->requiredIfPutRequest, 'confirmed', Password::defaults(fn() => Password::min(MIN_USER_PASSWORD)->uncompromised())])
+            'password' => $this->userPasswordRules([
+                $this->requiredIfPutRequest,
+                'confirmed',
+                Password::defaults(fn() => Password::min(MIN_USER_PASSWORD)->uncompromised())
+            ])
         ];
     }
 }

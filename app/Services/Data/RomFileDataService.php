@@ -11,7 +11,7 @@ use App\Jobs\ProcessRomFileDownload;
 use App\Jobs\ProcessRomFileUpload;
 use App\Models\RomFile;
 use RomFileRepo;
-use Symfony\Component\HttpFoundation\Response as ResponseAlias;
+use Symfony\Component\HttpFoundation\Response as HttpResponse;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use Utils\Modules\JsonDataResponse;
 
@@ -21,7 +21,7 @@ class RomFileDataService implements RomFileDataServiceInterface
     {
         return new StreamedResponse(function () use ($romFile) {
             ProcessRomFileDownload::dispatch($romFile->getObjectId());
-        }, ResponseAlias::HTTP_ACCEPTED, array(
+        }, HttpResponse::HTTP_ACCEPTED, array(
             'Content-Type' => ContentType::OCTET_STREAM->value,
             'Content-Transfer-Encoding' => 'chunked',
             'Content-Disposition' => "attachment; filename=\"" . $romFile->filename . "\""));
@@ -40,7 +40,7 @@ class RomFileDataService implements RomFileDataServiceInterface
         RomFileCreated::dispatch($romFileDocument);
         return new JsonDataResponse(
             ['message' => "file '" . $romFileDocument->filename . "' created!"],
-            ResponseAlias::HTTP_CREATED,
+            HttpResponse::HTTP_CREATED,
             ['X-Content-Transfer-Type', ContentType::X_BINARY->value]
         );
     }
@@ -49,6 +49,6 @@ class RomFileDataService implements RomFileDataServiceInterface
     {
         RomFileDeleted::dispatch($romFile);
         ProcessRomFileDeletion::dispatch($romFile->getObjectId());
-        return new JsonDataResponse(['message' => "file '" . $romFile->filename . "' deleted!"], ResponseAlias::HTTP_OK);
+        return new JsonDataResponse(['message' => "file '" . $romFile->filename . "' deleted!"], HttpResponse::HTTP_OK);
     }
 }
