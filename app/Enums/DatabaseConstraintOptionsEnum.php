@@ -2,10 +2,10 @@
 
 namespace App\Enums;
 
-enum DatabaseCascadeOptionsEnum: string
+enum DatabaseConstraintOptionsEnum: string
 {
     case NO_ACTION = 'NO ACTION';
-    case DELETE = 'DELETE';
+    case CASCADE = 'CASCADE';
     case SET_NULL = 'SET NULL';
     case RESTRICT = 'RESTRICT';
 }

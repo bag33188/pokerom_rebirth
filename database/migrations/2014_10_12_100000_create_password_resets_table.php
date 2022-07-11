@@ -1,6 +1,6 @@
 <?php
 
-use App\Enums\DatabaseCascadeOptionsEnum as CascadeOptions;
+use App\Enums\DatabaseConstraintOptionsEnum as ConstraintOptions;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -20,7 +20,7 @@ return new class extends Migration {
         Schema::create(self::TABLE_NAME, function (Blueprint $table) {
             $table->string('email', MAX_USER_EMAIL)->index();
             $table->foreign('email')->references('email')->on('users')
-                ->cascadeOnDelete()->onUpdate(CascadeOptions::NO_ACTION->value);
+                ->cascadeOnDelete()->onUpdate(ConstraintOptions::NO_ACTION->value);
             $table->char('token', PASSWORD_RESET_TOKEN_LENGTH);
             $table->timestamp('created_at')->nullable();
         });
