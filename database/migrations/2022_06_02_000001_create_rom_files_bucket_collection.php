@@ -46,6 +46,11 @@ return new class extends Migration {
                         ]
                     ]
                 );
+                $collection->integer('chunkSize');
+                $collection->string('filename', 32);
+                $collection->bigInteger('length', false, true);
+                $collection->dateTime('uploadDate');
+                $collection->char('md5', 32);
             });
         }
     }

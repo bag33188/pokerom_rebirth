@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\UserRoleEnum;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -9,6 +10,11 @@ return new class extends Migration {
     public $withinTransaction = true;
     private const TABLE_NAME = 'users';
 
+    private static function getUserRoleDefinitionIndex(): bool|int|string
+    {
+        return array_search(UserRoleEnum::USER->value, USER_ROLES, true);
+    }
+
     /**
      * Run the migrations.
      *
@@ -16,7 +22,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        $userRoleIndex = array_search('user', USER_ROLES, true);
+        $userRoleIndex = (int)self::getUserRoleDefinitionIndex();
         Schema::create(self::TABLE_NAME, function (Blueprint $table) use ($userRoleIndex) {
             $table->id()->autoIncrement();
             $table->string('name', MAX_USER_NAME);

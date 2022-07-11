@@ -38,6 +38,10 @@ return new class extends Migration {
                     name: 'files_id_1_n_1',
                     options: ['unique' => true]
                 );
+                $collection->integer('n', false, true);
+                $collection->binary('data');
+                $collection->char('files_id', 24);
+                $collection->foreign('files_id')->references('_id')->on('rom.files');
             });
         }
     }

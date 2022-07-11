@@ -88,8 +88,8 @@ db.createCollection("rom_files.info", {
                 filename: {
                     bsonType: "string",
                     pattern: "^[\\d\\w\\-\\_]+$",
-                    minLength: 3,
-                    maxLength: 32,
+                    minLength: 1,
+                    maxLength: 28,
                 },
                 filetype: {
                     bsonType: "string",

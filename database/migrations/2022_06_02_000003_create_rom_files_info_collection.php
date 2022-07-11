@@ -14,6 +14,12 @@ return new class extends Migration {
 
     private const COLLECTION_NAME = 'rom_files.info';
 
+    private static function getFileTypesEnumValues(): array
+    {
+        $fileTypes = [];
+        foreach (FILE_EXTENSIONS as $fileType) $fileTypes[] = str_replace('.', '', $fileType);
+        return $fileTypes;
+    }
 
     public function up(): void
     {
@@ -33,6 +39,9 @@ return new class extends Migration {
                         ]
                     ]
                 );
+                $collection->string('filename', 28);
+                $collection->enum('filetype', self::getFileTypesEnumValues());
+                $collection->double('filesize', total: strlen((string)MAX_FILE_SIZE), places: 0, unsigned: true);
             });
         }
     }
