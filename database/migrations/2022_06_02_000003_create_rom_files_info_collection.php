@@ -10,13 +10,15 @@ return new class extends Migration {
 
     public $withinTransaction = true;
 
-    private const ALLOW_MIGRATIONS = false;
+    protected const ALLOW_MIGRATIONS = false;
+
+    private const COLLECTION_NAME = 'rom_files.info';
 
 
     public function up(): void
     {
         if (self::ALLOW_MIGRATIONS === true) {
-            Schema::connection($this->connection)->create('rom_files.info', function (Blueprint $collection) {
+            Schema::connection($this->connection)->create(self::COLLECTION_NAME, function (Blueprint $collection) {
                 // compound index
                 // filename and filetype fields are unique if they already exist together on the same document
                 // at the time of querying
@@ -38,8 +40,10 @@ return new class extends Migration {
     public function down(): void
     {
         if (self::ALLOW_MIGRATIONS === true) {
+            Schema::dropIfExists(self::COLLECTION_NAME);
+
             Schema::connection($this->connection)
-                ->table('rom_files', function (Blueprint $collection) {
+                ->table(self::COLLECTION_NAME, function (Blueprint $collection) {
                     $collection->drop();
                 });
         }

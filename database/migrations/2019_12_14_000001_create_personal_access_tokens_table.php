@@ -8,6 +8,7 @@ class CreatePersonalAccessTokensTable extends Migration
 {
     protected $connection = 'mysql';
     public $withinTransaction = true;
+    private const TABLE_NAME = 'personal_access_tokens';
 
     /**
      * Run the migrations.
@@ -16,7 +17,7 @@ class CreatePersonalAccessTokensTable extends Migration
      */
     public function up(): void
     {
-        Schema::create('personal_access_tokens', function (Blueprint $table) {
+        Schema::create(self::TABLE_NAME, function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->morphs('tokenable');
             $table->string('name', PERSONAL_ACCESS_TOKEN_NAME_LENGTH)->comment("used to be 15 in pokerom_v3, may want to look into that");
@@ -34,6 +35,6 @@ class CreatePersonalAccessTokensTable extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('personal_access_tokens');
+        Schema::dropIfExists(self::TABLE_NAME);
     }
 }

@@ -8,6 +8,8 @@ return new class extends Migration {
     protected $connection = 'mysql';
     public $withinTransaction = true;
 
+    private const TABLE_NAME = 'sessions';
+
     /**
      * Run the migrations.
      *
@@ -15,7 +17,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('sessions', function (Blueprint $table) {
+        Schema::create(self::TABLE_NAME, function (Blueprint $table) {
             $table->char('id', SESSION_ID_LENGTH)->primary();
             $table->foreignId('user_id')->nullable()->index()
                 ->references('id')->on('users')
@@ -34,6 +36,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('sessions');
+        Schema::dropIfExists(self::TABLE_NAME);
     }
 };

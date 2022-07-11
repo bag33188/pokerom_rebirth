@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     protected $connection = 'mysql';
     public $withinTransaction = true;
+    private const TABLE_NAME = 'users';
 
     /**
      * Run the migrations.
@@ -16,7 +17,7 @@ return new class extends Migration {
     public function up(): void
     {
         $userRoleIndex = array_search('user', USER_ROLES, true);
-        Schema::create('users', function (Blueprint $table) use ($userRoleIndex) {
+        Schema::create(self::TABLE_NAME, function (Blueprint $table) use ($userRoleIndex) {
             $table->id()->autoIncrement();
             $table->string('name', MAX_USER_NAME);
             $table->string('email', MAX_USER_EMAIL)->unique();
@@ -37,6 +38,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists(self::TABLE_NAME);
     }
 };

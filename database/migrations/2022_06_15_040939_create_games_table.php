@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     protected $connection = 'mysql';
     public $withinTransaction = true;
+    private const TABLE_NAME = 'games';
 
     /**
      * Run the migrations.
@@ -16,7 +17,7 @@ return new class extends Migration {
     public function up(): void
     {
         $game_slug_length = MAX_GAME_NAME + 2;
-        Schema::create('games', function (Blueprint $table) use ($game_slug_length) {
+        Schema::create(self::TABLE_NAME, function (Blueprint $table) use ($game_slug_length) {
             $table->id()->autoIncrement();
             $table->foreignId('rom_id')->unique()
                 ->references('id')->on('roms')
@@ -38,6 +39,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('games');
+        Schema::dropIfExists(self::TABLE_NAME);
     }
 };
