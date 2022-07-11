@@ -52,9 +52,9 @@ class RomFileController extends ViewController
      * Store a newly created resource in storage.
      *
      * @param StoreRomFileRequest $request
-     * @return Response
+     * @return RedirectResponse
      */
-    public function store(StoreRomFileRequest $request): Response
+    public function store(StoreRomFileRequest $request): RedirectResponse
     {
         $this->romFileService->uploadRomFile($request['filename']);
         return response()->redirectTo(url()->previous())->banner("file {$request['filename']} uploaded!");
