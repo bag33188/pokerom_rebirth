@@ -35,7 +35,7 @@ class GameObserver
         GameCreated::dispatch($game, $rom);
 
         if (self::USE_DB_LOGIC === false) {
-            $rom->has_game = true;
+            $rom->has_game = TRUE;
             $rom->game_id = $game->id;
             $rom->saveQuietly();
         }
@@ -50,8 +50,8 @@ class GameObserver
     {
         if (self::USE_DB_LOGIC === false) {
             $rom = $game->rom()->first();
-            $rom->game_id = null;
-            $rom->has_game = false;
+            $rom->game_id = NULL;
+            $rom->has_game = FALSE;
             $rom->saveQuietly();
         }
     }

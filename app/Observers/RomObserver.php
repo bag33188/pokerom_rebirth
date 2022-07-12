@@ -46,7 +46,7 @@ class RomObserver
     public function deleting(Rom $rom): void
     {
         // for unique constraint purposes
-        $rom->file_id = null;
+        $rom->file_id = NULL;
     }
 
     public function deleted(Rom $rom): void
