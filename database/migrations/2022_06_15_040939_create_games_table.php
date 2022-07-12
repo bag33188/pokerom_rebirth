@@ -16,13 +16,13 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        $game_slug_length = MAX_GAME_NAME + 2;
+        $game_slug_length = MAX_GAME_NAME_LENGTH + 2;
         Schema::create(self::TABLE_NAME, function (Blueprint $table) use ($game_slug_length) {
             $table->id()->autoIncrement();
             $table->foreignId('rom_id')->unique()
                 ->references('id')->on('roms')
                 ->cascadeOnDelete()->cascadeOnUpdate();
-            $table->string('game_name', MAX_GAME_NAME);
+            $table->string('game_name', MAX_GAME_NAME_LENGTH);
             $table->enum('game_type', GAME_TYPES);
             $table->date('date_released');
             $table->tinyInteger('generation')->unsigned();

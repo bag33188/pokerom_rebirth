@@ -32,8 +32,8 @@
                     <x-jet-label for="gameName" :value="__('Game Name')"/>
                     <x-jet-input wire:model="game_name" id="gameName" class="block mt-1 w-full" type="text"
                                  name="game_name"
-                                 minlength="{{MIN_GAME_NAME}}"
-                                 maxlength="{{MAX_GAME_NAME}}"
+                                 minlength="{{MIN_GAME_NAME_LENGTH}}"
+                                 maxlength="{{MAX_GAME_NAME_LENGTH}}"
                                  required autofocus
                     />
                 </div>
@@ -68,7 +68,8 @@
                     <x-jet-input type="number" id="generation" name="generation"
                                  wire:model="generation"
                                  class="block mt-1 w-full"
-                                 min="{{MIN_GAME_GENERATION}}" max="{{MAX_GAME_GENERATION}}" required autofocus/>
+                                 min="{{MIN_GAME_GENERATION_VALUE}}" max="{{MAX_GAME_GENERATION_VALUE}}" required
+                                 autofocus/>
                 </div>
                 <div class="mt-4">
                     <x-jet-button class="float-right" wire:click="store">

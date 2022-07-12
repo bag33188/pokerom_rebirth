@@ -25,8 +25,8 @@ return new class extends Migration {
         $userRoleIndex = (int)self::getUserRoleDefinitionIndex();
         Schema::create(self::TABLE_NAME, function (Blueprint $table) use ($userRoleIndex) {
             $table->id()->autoIncrement();
-            $table->string('name', MAX_USER_NAME);
-            $table->string('email', MAX_USER_EMAIL)->unique();
+            $table->string('name', MAX_USER_NAME_LENGTH);
+            $table->string('email', MAX_USER_EMAIL_LENGTH)->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->char('password', BCRYPT_PASSWORD_LENGTH)->comment('60 chars for bcrypt hashing specification');
             $table->enum('role', USER_ROLES)->default(USER_ROLES[$userRoleIndex]);

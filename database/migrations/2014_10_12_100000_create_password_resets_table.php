@@ -18,7 +18,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create(self::TABLE_NAME, function (Blueprint $table) {
-            $table->string('email', MAX_USER_EMAIL)->index();
+            $table->string('email', MAX_USER_EMAIL_LENGTH)->index();
             $table->foreign('email')->references('email')->on('users')
                 ->cascadeOnDelete()->onUpdate(ConstraintOptions::NO_ACTION->value);
             $table->char('token', PASSWORD_RESET_TOKEN_LENGTH);

@@ -40,7 +40,7 @@ class StoreUserRequest extends FormRequest
             'password' => $this->userPasswordRules([
                 'required',
                 'confirmed',
-                Password::defaults(fn() => Password::min(MIN_USER_PASSWORD)->uncompromised())
+                Password::defaults(fn() => Password::min(MIN_USER_PASSWORD_LENGTH)->uncompromised())
             ])
         ];
     }

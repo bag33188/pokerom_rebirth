@@ -15,7 +15,7 @@ trait GameValidationRulesTrait
 {
     protected function gameNameRules(array $rules = ['required']): array
     {
-        return [...$rules, 'string', new MinLength(MIN_GAME_NAME), new MaxLength(MAX_GAME_NAME), new ValidGameName];
+        return [...$rules, 'string', new MinLength(MIN_GAME_NAME_LENGTH), new MaxLength(MAX_GAME_NAME_LENGTH), new ValidGameName];
     }
 
     protected function dateReleasedRules(array $rules = ['required']): array
@@ -25,17 +25,17 @@ trait GameValidationRulesTrait
 
     protected function gameTypeRules(array $rules = ['required']): array
     {
-        return [...$rules, 'string', new MinLength(MIN_GAME_TYPE), new MaxLength(MAX_GAME_TYPE), new ValidGameType];
+        return [...$rules, 'string', new MinLength(MIN_GAME_TYPE_LENGTH), new MaxLength(MAX_GAME_TYPE_LENGTH), new ValidGameType];
     }
 
     protected function gameRegionRules(array $rules = ['required']): array
     {
-        return [...$rules, 'string', new MinLength(MIN_GAME_REGION), new MaxLength(MAX_GAME_REGION), new ValidGameRegion];
+        return [...$rules, 'string', new MinLength(MIN_GAME_REGION_LENGTH), new MaxLength(MAX_GAME_REGION_LENGTH), new ValidGameRegion];
     }
 
     #[Pure]
     protected function gameGenerationRules(array $rules = ['required']): array
     {
-        return [...$rules, 'integer', new MinSize(MIN_GAME_GENERATION), new MaxSize(MAX_GAME_GENERATION)];
+        return [...$rules, 'integer', new MinSize(MIN_GAME_GENERATION_VALUE), new MaxSize(MAX_GAME_GENERATION_VALUE)];
     }
 }

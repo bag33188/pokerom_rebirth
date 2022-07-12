@@ -45,7 +45,7 @@ class UpdateUserRequest extends FormRequest
             'password' => $this->userPasswordRules([
                 $this->requiredIfPutRequest,
                 'confirmed',
-                Password::defaults(fn() => Password::min(MIN_USER_PASSWORD)->uncompromised())
+                Password::defaults(fn() => Password::min(MIN_USER_PASSWORD_LENGTH)->uncompromised())
             ])
         ];
     }

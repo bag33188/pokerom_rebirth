@@ -14,12 +14,12 @@ trait RomValidationRulesTrait
 {
     protected function romTypeRules(array $rules = ['required']): array
     {
-        return [...$rules, 'string', new MinLength(MIN_ROM_TYPE), new MaxLength(MAX_ROM_TYPE), new ValidRomType];
+        return [...$rules, 'string', new MinLength(MIN_ROM_TYPE_LENGTH), new MaxLength(MAX_ROM_TYPE_LENGTH), new ValidRomType];
     }
 
     protected function romNameRules(array $rules = ['required']): array
     {
-        return [...$rules, 'string', new MinLength(MIN_ROM_NAME), new MaxLength(MAX_ROM_NAME), new ValidRomName];
+        return [...$rules, 'string', new MinLength(MIN_ROM_NAME_LENGTH), new MaxLength(MAX_ROM_NAME_LENGTH), new ValidRomName];
     }
 
     #[Pure]

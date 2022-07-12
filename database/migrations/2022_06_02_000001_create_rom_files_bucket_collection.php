@@ -47,10 +47,10 @@ return new class extends Migration {
                     ]
                 );
                 $collection->integer('chunkSize');
-                $collection->string('filename', 32);
+                $collection->string('filename', MAX_ROM_FILENAME_LENGTH);
                 $collection->bigInteger('length', false, true);
                 $collection->dateTime('uploadDate');
-                $collection->char('md5', 32);
+                $collection->char('md5', MD5_HASH_LENGTH);
             });
         }
     }
@@ -65,10 +65,11 @@ return new class extends Migration {
         /*! don't use down methods as it could overwrite current files in db */
         if (self::ALLOW_MIGRATIONS === true) {
             Schema::dropIfExists(self::COLLECTION_NAME);
-            Schema::connection($this->connection)
-                ->table(self::COLLECTION_NAME, function (Blueprint $collection) {
-                    $collection->drop();
-                });
+
+//            Schema::connection($this->connection)
+//                ->table(self::COLLECTION_NAME, function (Blueprint $collection) {
+//                    $collection->drop();
+//                });
         }
     }
 };

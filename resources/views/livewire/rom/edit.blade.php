@@ -14,8 +14,8 @@
                              class="block mt-1 w-full"
                              type="text"
                              name="rom_name"
-                             minlength="{{MIN_ROM_NAME}}"
-                             maxlength="{{MAX_ROM_NAME}}"
+                             minlength="{{MIN_ROM_NAME_LENGTH}}"
+                             maxlength="{{MAX_ROM_NAME_LENGTH}}"
                              required autofocus/>
             </div>
             <div class="mt-2.5">

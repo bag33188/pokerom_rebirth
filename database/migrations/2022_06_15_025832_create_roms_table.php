@@ -20,7 +20,7 @@ return new class extends Migration {
             $table->id()->autoIncrement();
             $table->char('file_id', OBJECT_ID_LENGTH)->nullable()->unique()->comment('this unique constraint references a MongoDB GridFS file database which is binded at the API level.');
             $table->bigInteger('game_id')->unsigned()->nullable()->unique();
-            $table->string('rom_name', MAX_ROM_NAME)->unique();
+            $table->string('rom_name', MAX_ROM_NAME_LENGTH)->unique();
             $table->integer('rom_size')->default(MIN_ROM_SIZE)->unsigned()->comment('rom size value measured in kilobytes');
             $table->enum('rom_type', ROM_TYPES);
             $table->boolean('has_game')->default(false);

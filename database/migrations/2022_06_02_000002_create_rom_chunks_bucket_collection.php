@@ -40,7 +40,7 @@ return new class extends Migration {
                 );
                 $collection->integer('n', false, true);
                 $collection->binary('data');
-                $collection->char('files_id', 24);
+                $collection->char('files_id', OBJECT_ID_LENGTH);
                 $collection->foreign('files_id')->references('_id')->on('rom.files');
             });
         }
@@ -55,10 +55,11 @@ return new class extends Migration {
     {
         if (self::ALLOW_MIGRATIONS === true) {
             Schema::dropIfExists(self::COLLECTION_NAME);
-            Schema::connection($this->connection)
-                ->table(self::COLLECTION_NAME, function (Blueprint $collection) {
-                    $collection->drop();
-                });
+
+//            Schema::connection($this->connection)
+//                ->table(self::COLLECTION_NAME, function (Blueprint $collection) {
+//                    $collection->drop();
+//                });
         }
     }
 };
