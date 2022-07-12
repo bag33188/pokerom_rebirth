@@ -1,4 +1,4 @@
-const mongoURI =
+const mongoURI = // DSN
     "mongodb://brock:3931Sunflower!@localhost:27017/?authMechanism=SCRAM-SHA-256&authSource=admin";
 
 conn = new Mongo("localhost:27017");

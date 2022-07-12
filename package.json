@@ -1,8 +1,7 @@
 {
-    "name": "pokerom_rebirth",
+    "name": "pokerom",
     "version": "4.1.0",
     "license": "GPL-2.0-only",
-    "description": "A remake of the origin PokeROM web-app.",
     "author": {
         "name": "bag33188",
         "email": "bglatman@outlook.com"
@@ -12,6 +11,7 @@
         "type": "git"
     },
     "private": true,
+    "homepage": "https://github.com/bag33188/pokerom_rebirth#readme",
     "scripts": {
         "dev": "npm run development",
         "development": "mix",

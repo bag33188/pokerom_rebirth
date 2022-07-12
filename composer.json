@@ -1,8 +1,8 @@
 {
-    "name": "laravel/laravel",
+    "name": "laravel/pokerom_rebirth",
     "type": "project",
-    "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "description": "A revamped full stack web application of the original PokeROM.",
+    "keywords": ["web-app", "full-stack", "pokemon", "roms", "nintendo", "library"],
     "license": "MIT",
     "require": {
         "php": "^8.1.6",
