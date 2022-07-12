@@ -323,8 +323,6 @@ let seeds = [
     },
 ];
 
-db.rom_files.info.insertMany(seeds);
-
 let aggregations = [
     {
         name: "Calc Total ROMs Size Bytes",
@@ -416,26 +414,6 @@ let aggregations = [
         ],
     },
     {
-        name: "Filter 3DS ROMs",
-        pipeline: [
-            {
-                $sort: {
-                    length: -1,
-                    filename: 1,
-                    uploadDate: 1,
-                },
-            },
-            {
-                $match: {
-                    filename: {
-                        $regex: "^[\\w\\d\\-_]+\\.3ds$",
-                        $options: "i",
-                    },
-                },
-            },
-        ],
-    },
-    {
         name: "Filter GB ROMs",
         pipeline: [
             {
@@ -449,6 +427,26 @@ let aggregations = [
                 $match: {
                     filename: {
                         $regex: "^[\\w\\d\\-_]+\\.gb$",
+                        $options: "i",
+                    },
+                },
+            },
+        ],
+    },
+    {
+        name: "Filter 3DS ROMs",
+        pipeline: [
+            {
+                $sort: {
+                    length: -1,
+                    filename: 1,
+                    uploadDate: 1,
+                },
+            },
+            {
+                $match: {
+                    filename: {
+                        $regex: "^[\\w\\d\\-_]+\\.3ds$",
                         $options: "i",
                     },
                 },
@@ -602,4 +600,9 @@ let aggregations = [
     },
 ];
 
-db.rom.files.aggregate([...aggregations[0].pipeline]);
+db.rom_files.info.insertMany(seeds);
+
+db.rom.files.aggregate([
+    ...aggregations[0].pipeline,
+    ...aggregations[3].pipeline,
+]);
