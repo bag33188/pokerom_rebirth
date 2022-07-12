@@ -598,6 +598,26 @@ let aggregations = [
             },
         ],
     },
+    {
+        name: "Count ROM Files",
+        pipeline: [
+            {
+                $count: "id",
+            },
+            {
+                $addFields: {
+                    rom_files_count: {
+                        $toInt: "$id",
+                    },
+                },
+            },
+            {
+                $project: {
+                    id: 0,
+                },
+            },
+        ],
+    },
 ];
 
 db.rom_files.info.insertMany(seeds);
@@ -605,4 +625,5 @@ db.rom_files.info.insertMany(seeds);
 db.rom.files.aggregate([
     ...aggregations[0].pipeline,
     ...aggregations[3].pipeline,
+    ...aggregations[11].pipeline,
 ]);
