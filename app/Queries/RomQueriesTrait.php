@@ -13,7 +13,7 @@ trait RomQueriesTrait
      * @param int $romSize
      * @return QueryObject
      */
-    protected function formatRomSize(int $romSize): QueryObject
+    public function formatRomSize(int $romSize): QueryObject
     {
         $sql = /** @lang MariaDB */
             "SELECT HIGH_PRIORITY FORMAT_ROM_SIZE(?) AS romSize;";
@@ -21,7 +21,7 @@ trait RomQueriesTrait
         return new QueryObject(DB::raw($sql), $params);
     }
 
-    protected function linkRomToFile(string $romFileId, int $romFileSize, int $romId): QueryObject
+    public function linkRomToFile(string $romFileId, int $romFileSize, int $romId): QueryObject
     {
         $sql =
             /** @lang MariaDB */
@@ -31,7 +31,7 @@ trait RomQueriesTrait
         return new QueryObject(DB::raw($sql), $params);
     }
 
-    protected function findMatchingRomFromFilename(string $romFilename)
+    public function findMatchingRomFromFilename(string $romFilename): QueryObject
     {
         $sql = "CALL FindMatchingRomFromFilename(?);";
         $params = [$romFilename];

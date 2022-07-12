@@ -13,7 +13,11 @@ use Illuminate\Database\Eloquent\Collection;
 
 class RomFileRepository implements RomFileRepositoryInterface
 {
-    use RomFileQueriesTrait, RomQueriesTrait;
+    use RomFileQueriesTrait, RomQueriesTrait {
+        findMatchingRomFromFilename as protected;
+    }
+
+    // use only specific methods
 
     public function findRomFileIfExists(string $romFileId): RomFile
     {
