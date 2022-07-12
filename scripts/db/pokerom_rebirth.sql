@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 12, 2022 at 11:11 AM
+-- Generation Time: Jul 12, 2022 at 11:13 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -166,7 +166,7 @@ MAX_ROM_SIZE_LENGTH = 9; // ex. '164.28 MB'
 END$$
 
 DROP FUNCTION IF EXISTS `SPLIT_STRING`$$
-CREATE DEFINER=`bag33188`@`%` FUNCTION `SPLIT_STRING` (`STR_VAL` VARCHAR(256), `SEPARATOR` VARCHAR(1) CHARSET utf8, `POSITION` SMALLINT) RETURNS VARCHAR(256) CHARSET utf8mb4 DETERMINISTIC COMMENT 'splits a string based on delimiter ' BEGIN
+CREATE DEFINER=`bag33188`@`%` FUNCTION `SPLIT_STRING` (`STR_VAL` VARCHAR(256), `SEPARATOR` VARCHAR(1) CHARSET utf8, `POSITION` SMALLINT) RETURNS VARCHAR(128) CHARSET utf8mb4 DETERMINISTIC COMMENT 'splits a string based on delimiter ' BEGIN
         DECLARE `max_results` SMALLINT;
 
         -- get max number of items
