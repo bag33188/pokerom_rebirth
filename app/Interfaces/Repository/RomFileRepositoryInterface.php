@@ -16,7 +16,7 @@ interface RomFileRepositoryInterface
 
     public function getRomFileByFilename(string $romFilename): RomFile;
 
-    public function searchForRomMatchingFile(string $romFileId): ?Rom;
+    public function searchForRomMatchingFile(string $romFileId): mixed;
 
     public function getRomFileLengthsKibibytes(): Collection;
 

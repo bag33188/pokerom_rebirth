@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 10, 2022 at 11:53 PM
+-- Generation Time: Jul 12, 2022 at 02:42 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -54,9 +54,8 @@ START TRANSACTION;
   WHERE `id` = `ROM_ID`;
 COMMIT;
 /** !important:
-notes:
- * rom size is stored in kilobytes
- * mongodb uses raw bytes as file length value
+rom size is stored as Kibibytes
+mongodb stored as bytes
 */
 END$$
 
@@ -64,41 +63,46 @@ END$$
 -- Functions
 --
 DROP FUNCTION IF EXISTS `CONCAT_ROM_FILENAME`$$
-CREATE DEFINER=`bag33188`@`%` FUNCTION `CONCAT_ROM_FILENAME` (`ROM_NAME` VARCHAR(30), `ROM_TYPE` ENUM('gb','gbc','gba','nds','3ds','xci')) RETURNS VARCHAR(35) CHARSET utf8mb4 SQL SECURITY INVOKER COMMENT 'concats rom name and rom type with period char' RETURN CONCAT(`ROM_NAME`, '.', UCASE(`ROM_TYPE`))$$
+CREATE DEFINER=`bag33188`@`%` FUNCTION `CONCAT_ROM_FILENAME` (`ROM_NAME` VARCHAR(30), `ROM_TYPE` ENUM('gb','gbc','gba','nds','3ds','xci')) RETURNS VARCHAR(36) CHARSET utf8mb4 SQL SECURITY INVOKER COMMENT 'concats rom name and rom type with period char' RETURN CONCAT(`ROM_NAME`, '.', UCASE(`ROM_TYPE`))
+/* !important
+return value length = 36;
+MAX_ROM_FILENAME_LENGTH = 32;
+MAX_ROM_FILETYPE_LENGTH = 3;
+'.'.length = 1;
+32 + 3 + 1 = 36;
+*/$$
 
 DROP FUNCTION IF EXISTS `FORMAT_GAME_TYPE`$$
-CREATE DEFINER=`bag33188`@`%` FUNCTION `FORMAT_GAME_TYPE` (`GAME_TYPE` VARCHAR(8)) RETURNS VARCHAR(23) CHARSET utf8mb4 SQL SECURITY INVOKER CASE LOWER(`GAME_TYPE`)
+CREATE DEFINER=`bag33188`@`%` FUNCTION `FORMAT_GAME_TYPE` (`GAME_TYPE` VARCHAR(8)) RETURNS VARCHAR(21) CHARSET utf8mb4 SQL SECURITY INVOKER CASE LOWER(`GAME_TYPE`)
 WHEN 'core' THEN RETURN 'Core Pokémon Game';
 WHEN 'hack' THEN RETURN 'Pokémon ROM Hack';
 WHEN 'spin-off' THEN RETURN 'Spin-Off Pokémon Game';
 ELSE RETURN 'N/A';
 /** !important
-The return value length is 21 since the max str-len return option
-which is 'Spin-Off Pokemon Game' is 21 characters extactly.
-The max input value length is 8 since the max str-len of an input option
-which is 'spin-off' is excactly 8 chars
+return value length = 21;
+'Spin-Off Pokemon Game'.length = 21;
+MAX_GAME_TYPE_LENGTH = 21;
 */
 END CASE$$
 
 DROP FUNCTION IF EXISTS `FORMAT_ROM_SIZE`$$
-CREATE DEFINER=`bag33188`@`%` FUNCTION `FORMAT_ROM_SIZE` (`ROM_LENGTH` INT UNSIGNED) RETURNS VARCHAR(9) CHARSET utf8mb4 DETERMINISTIC SQL SECURITY INVOKER BEGIN
-/** !important:
-Note: these calculations and measurements are based on the standard units of data.
-Ie. 1 Gigabyte = 1000 MegaBytes = 1000 Kilobytes
-Other parts of the app use the Computer Information system
-Ie. 1 Gibibyte = 1024 Mebibytes = 1024 Kibibytes = 1024 = 1048576 Standard Bytes
-*/
+CREATE DEFINER=`bag33188`@`%` FUNCTION `FORMAT_ROM_SIZE` (`ROM_LENGTH` INT UNSIGNED) RETURNS VARCHAR(9) CHARSET utf8mb4 DETERMINISTIC SQL SECURITY INVOKER COMMENT 'conversion issues get fixed in this function' BEGIN
   DECLARE `size_val` FLOAT;
   DECLARE `size_type` CHAR(2);
-  IF `ROM_LENGTH` > 1024 AND `ROM_LENGTH` < 1000000 THEN
+  SET @`million` = POWER(1000, 2);
+  -- MEGABYTES
+  IF `ROM_LENGTH` > 1024 AND `ROM_LENGTH` < @`million` THEN
     SET `size_type` = 'MB';
     SET `size_val` = ROUND(`ROM_LENGTH` / 1000, 2);
-  ELSEIF `ROM_LENGTH` >= 1000000 THEN
+  -- GIGABYTES
+  ELSEIF `ROM_LENGTH` >= @`million` THEN
     SET `size_type` = 'GB';
-    SET `size_val`= ROUND(`ROM_LENGTH` / 1000000, 2);
+    SET `size_val`= ROUND(`ROM_LENGTH` / @`million`, 2);
+  -- KILOBYTES
   ELSEIF `ROM_LENGTH` > 1020 AND `ROM_LENGTH` <= 1024 THEN
     SET `size_type` = 'KB';
     SET `size_val` = CAST(`ROM_LENGTH` AS FLOAT);
+  -- BYTES
   ELSE
     SET `size_type` = 'B ';
     SET `size_val` = CAST(`ROM_LENGTH` * 1024 AS FLOAT);
@@ -106,10 +110,9 @@ Ie. 1 Gibibyte = 1024 Mebibytes = 1024 Kibibytes = 1024 = 1048576 Standard Bytes
   SET @`size_str` = CAST(`size_val` AS VARCHAR(6));
   RETURN CONCAT(@`size_str`, ' ', `size_type`);
 /** !important:
-max rounded size value is 5 digits (plus a . character), so 6 (min, 3);
-and the fixed string length of size type is 2; .... pluse
-the space in between, 6 + 2 + 1 = 9 .....
-thus varchar(9)
+return value length = 9;
+'262.14 MB'.length = 9;
+MAX_ROM_SIZE_LENGTH = 9; // ex. '164.28 MB'
 */
 END$$
 
@@ -125,7 +128,7 @@ CREATE DEFINER=`bag33188`@`%` FUNCTION `SPLIT_STRING` (`STR_VAL` VARCHAR(255), `
             RETURN NULL ;
         ELSE
         	SET @`sub_index1` := SUBSTRING_INDEX(`STR_VAL`, `SEPARATOR`, `SEPARATOR`);
-            RETURN SUBSTRING_INDEX(@`sub_index1`, `SEPARATOR` , -1) ;
+            RETURN SUBSTRING_INDEX(@`sub_index1`, `SEPARATOR` , -1) ;        
         END IF;
 
     END$$
@@ -166,7 +169,6 @@ TRUNCATE TABLE `failed_jobs`;
 -- Table structure for table `games`
 --
 -- Creation: Jul 06, 2022 at 02:20 AM
--- Last update: Jul 10, 2022 at 09:49 PM
 --
 
 DROP TABLE IF EXISTS `games`;
@@ -341,7 +343,6 @@ TRUNCATE TABLE `password_resets`;
 -- Table structure for table `personal_access_tokens`
 --
 -- Creation: Jul 06, 2022 at 01:56 AM
--- Last update: Jul 10, 2022 at 09:47 PM
 --
 
 DROP TABLE IF EXISTS `personal_access_tokens`;
@@ -373,7 +374,7 @@ TRUNCATE TABLE `personal_access_tokens`;
 --
 
 INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `name`, `token`, `abilities`, `last_used_at`, `created_at`, `updated_at`) VALUES
-(4, 'App\\Models\\User', 1, 'auth_token', 'b200ae710c4932db20b99bbae0344eac8e3a7802a9d15181c6d79cfb29e090cb', '[\"*\"]', '2022-07-11 04:47:16', '2022-07-10 23:51:32', '2022-07-11 04:47:16');
+(4, 'App\\Models\\User', 1, 'auth_token', 'b200ae710c4932db20b99bbae0344eac8e3a7802a9d15181c6d79cfb29e090cb', '[\"*\"]', '2022-07-11 05:26:18', '2022-07-10 23:51:32', '2022-07-11 05:26:18');
 
 -- --------------------------------------------------------
 
@@ -381,7 +382,6 @@ INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `n
 -- Table structure for table `roms`
 --
 -- Creation: Jul 06, 2022 at 02:20 AM
--- Last update: Jul 10, 2022 at 09:49 PM
 --
 
 DROP TABLE IF EXISTS `roms`;
@@ -461,7 +461,7 @@ INSERT INTO `roms` (`id`, `file_id`, `game_id`, `rom_name`, `rom_size`, `rom_typ
 -- Table structure for table `sessions`
 --
 -- Creation: Jul 06, 2022 at 02:20 AM
--- Last update: Jul 10, 2022 at 09:49 PM
+-- Last update: Jul 12, 2022 at 12:32 AM
 --
 
 DROP TABLE IF EXISTS `sessions`;
@@ -490,7 +490,8 @@ TRUNCATE TABLE `sessions`;
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('AgFap1NBxb02LTEFGS9fjz5qP4h9TClz7Oso6uZo', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiMDNudU9DUEtzbUFQRXVqdG9lTXZOYVhLeGdCS2xpV3RhQnl1QzdYYyI7czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjIxOiJwYXNzd29yZF9oYXNoX3NhbmN0dW0iO3M6NjA6IiQyeSQxMCR3aXAzcXg5MVBsWERrcmouekVqb0MuL3dsSW50Z0lLM1EuckFKZ2d3UWhmWFJGaUlubURabSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDQ6Imh0dHA6Ly9wb2tlcm9tX3JlYmlydGgudGVzdC9wdWJsaWMvcm9tLWZpbGVzIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1657489791);
+('AgFap1NBxb02LTEFGS9fjz5qP4h9TClz7Oso6uZo', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiMDNudU9DUEtzbUFQRXVqdG9lTXZOYVhLeGdCS2xpV3RhQnl1QzdYYyI7czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjIxOiJwYXNzd29yZF9oYXNoX3NhbmN0dW0iO3M6NjA6IiQyeSQxMCR3aXAzcXg5MVBsWERrcmouekVqb0MuL3dsSW50Z0lLM1EuckFKZ2d3UWhmWFJGaUlubURabSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NTE6Imh0dHA6Ly9wb2tlcm9tX3JlYmlydGgudGVzdC9wdWJsaWMvcm9tLWZpbGVzL2NyZWF0ZSI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1657492296),
+('hpmcgjqShvVIvunNuIYjDkApYvKmwwHd9s0NXjrk', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoid3ZEMjVrTTRleTFqZkZsN3ZXaVhiZHZxakhTRXpjVjBGcFZEZUFPaiI7czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjIxOiJwYXNzd29yZF9oYXNoX3NhbmN0dW0iO3M6NjA6IiQyeSQxMCR3aXAzcXg5MVBsWERrcmouekVqb0MuL3dsSW50Z0lLM1EuckFKZ2d3UWhmWFJGaUlubURabSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDY6Imh0dHA6Ly9wb2tlcm9tX3JlYmlydGgudGVzdC9wdWJsaWMvYXBpL3ZlcnNpb24iO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1657585952);
 
 -- --------------------------------------------------------
 
@@ -498,7 +499,6 @@ INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, 
 -- Table structure for table `users`
 --
 -- Creation: Jun 05, 2022 at 04:47 PM
--- Last update: Jul 10, 2022 at 04:32 PM
 --
 
 DROP TABLE IF EXISTS `users`;
@@ -613,7 +613,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `games`
 --
 ALTER TABLE `games`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -631,7 +631,7 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `roms`
 --
 ALTER TABLE `roms`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
 
 --
 -- AUTO_INCREMENT for table `users`

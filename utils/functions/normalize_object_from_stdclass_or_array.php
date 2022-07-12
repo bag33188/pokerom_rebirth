@@ -9,7 +9,7 @@ if (!function_exists('normalizeObjectFromStdClassOrArray')) {
      * @param stdClass|array $object
      * @return void
      */
-    function normalizeObjectFromStdClassOrArray(stdClass|array &$object): void
+    function normalizeObjectFromStdClassOrArray(mixed &$object): void
     {
         $object = json_decode(json_encode($object), associative: false);
     }

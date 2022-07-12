@@ -14,7 +14,7 @@ interface GameRepositoryInterface
 
     public function getRomAssociatedWithGame(int $gameId): Rom;
 
-    public function getAllRomsWithNoGame(): array;
+    public function getAllRomsWithNoGame();
 
     public function getFormattedGameType(string $gameType): string;
 }

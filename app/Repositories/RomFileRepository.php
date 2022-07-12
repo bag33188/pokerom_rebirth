@@ -6,13 +6,14 @@ use App\Interfaces\Repository\RomFileRepositoryInterface;
 use App\Models\Rom;
 use App\Models\RomFile;
 use App\Queries\RomFileQueriesTrait;
+use App\Queries\RomQueriesTrait;
 use Illuminate\Database\Eloquent\Collection;
 use Jenssegers\Mongodb\Helpers\EloquentBuilder;
 use Utils\Classes\_Static\FileUtils;
 
 class RomFileRepository implements RomFileRepositoryInterface
 {
-    use RomFileQueriesTrait;
+    use RomFileQueriesTrait, RomQueriesTrait;
 
     public function findRomFileIfExists(string $romFileId): RomFile
     {
@@ -36,16 +37,18 @@ class RomFileRepository implements RomFileRepositoryInterface
 
     public function searchForRomMatchingFile(string $romFileId): ?Rom
     {
-        list($romName, $romExtension) =
-            FileUtils::splitFilenameIntoParts($this->findRomFileIfExists($romFileId)->filename);
-        return Rom::where([
-            ['rom_name', '=', $romName, 'and'],
-            ['rom_type', '=', $romExtension, 'and']
-        ])->where(function (EloquentBuilder $query) {
-            $query
-                ->where('has_file', '=', FALSE)
-                ->orWhere('file_id', '=', NULL);
-        })->limit(1)->first();
+//        list($romName, $romExtension) =
+//            FileUtils::splitFilenameIntoParts($this->findRomFileIfExists($romFileId)->filename);
+//        return Rom::where([
+//            ['rom_name', '=', $romName, 'and'],
+//            ['rom_type', '=', $romExtension, 'and']
+//        ])->where(function (EloquentBuilder $query) {
+//            $query
+//                ->where('has_file', '=', FALSE)
+//                ->orWhere('file_id', '=', NULL);
+//        })->limit(1)->first();
+        list($query, $bindings) = $this->findMatchingRomFromFilename($romFileId)->getValues();
+        return \App\Models\Rom::fromQuery($query, $bindings)->first();
     }
 
     /*

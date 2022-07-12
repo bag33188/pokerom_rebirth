@@ -38,9 +38,9 @@ class GameRepository implements GameRepositoryInterface
         return DB::selectOne($query, $bindings)->gameType;
     }
 
-    public function getAllRomsWithNoGame(): array
+    public function getAllRomsWithNoGame(): Collection
     {
         [$query] = $this->findRomsWithNoGame()->getValues();
-        return DB::select($query);
+        return Rom::fromQuery($query);
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Listeners;
 
 use App\Events\RomFileCreated;
+use App\Http\Resources\RomResource;
 use App\Models\Rom;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
@@ -23,7 +24,8 @@ class UpdateMatchingRom implements ShouldQueue
 
     public function shouldQueue(RomFileCreated $event): bool
     {
-        $rom = RomFileRepo::searchForRomMatchingFile($event->romFile->getKey());
+        $rom = RomFileRepo::searchForRomMatchingFile($event->romFile->filename);
+
         $this->setMatchingRom($rom);
         return !$event->romFile->rom()->exists() && $this->matchingRomExists();
     }
@@ -56,6 +58,7 @@ class UpdateMatchingRom implements ShouldQueue
             $romFileId = $event->romFile->getKey();
             self::$matchingRom->has_file = true;
             self::$matchingRom->file_id = $romFileId;
+            self::$matchingRom->rom_size = ceil($event->romFile->length / 1024);
             self::$matchingRom->save();
         });
     }
