@@ -17,6 +17,7 @@ return new class extends Migration {
     public function up(): void
     {
         $game_slug_length = MAX_GAME_NAME_LENGTH + 2;
+
         Schema::create(self::TABLE_NAME, function (Blueprint $table) use ($game_slug_length) {
             $table->id()->autoIncrement();
             $table->foreignId('rom_id')->unique()

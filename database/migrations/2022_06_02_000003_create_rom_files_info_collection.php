@@ -14,7 +14,7 @@ return new class extends Migration {
 
     private const COLLECTION_NAME = 'rom_files.info';
 
-    private static function getFileTypesEnumValues(): array
+    private static function getFileTypeEnumValues(): array
     {
         $fileTypes = [];
         foreach (FILE_EXTENSIONS as $fileType) $fileTypes[] = str_replace('.', '', $fileType);
@@ -25,7 +25,9 @@ return new class extends Migration {
     {
         if (self::ALLOW_MIGRATIONS === true) {
             $filename_length = MAX_ROM_FILENAME_LENGTH - 4;
-            Schema::connection($this->connection)->create(self::COLLECTION_NAME, function (Blueprint $collection) use ($filename_length) {
+            $filesize_total_digits = strlen((string)MAX_FILE_SIZE);
+
+            Schema::connection($this->connection)->create(self::COLLECTION_NAME, function (Blueprint $collection) use ($filename_length, $filesize_total_digits) {
                 // compound index
                 // filename and filetype fields are unique if they already exist together on the same document
                 // at the time of querying
@@ -41,8 +43,8 @@ return new class extends Migration {
                     ]
                 );
                 $collection->string('filename', $filename_length);
-                $collection->enum('filetype', self::getFileTypesEnumValues());
-                $collection->double('filesize', total: strlen((string)MAX_FILE_SIZE), places: 0, unsigned: true);
+                $collection->enum('filetype', self::getFileTypeEnumValues());
+                $collection->double('filesize', total: $filesize_total_digits, places: 0, unsigned: true);
             });
         }
     }
