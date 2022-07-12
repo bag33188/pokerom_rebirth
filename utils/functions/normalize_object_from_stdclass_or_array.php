@@ -1,4 +1,5 @@
 <?php
+use Illuminate\Database\Eloquent\Model;
 
 if (!function_exists('normalizeObjectFromStdClassOrArray')) {
     /**
@@ -9,7 +10,7 @@ if (!function_exists('normalizeObjectFromStdClassOrArray')) {
      * @param stdClass|array $object
      * @return void
      */
-    function normalizeObjectFromStdClassOrArray(mixed &$object): void
+    function normalizeObjectFromStdClassOrArray(stdClass|array|Model &$object): void
     {
         $object = json_decode(json_encode($object), associative: false);
     }

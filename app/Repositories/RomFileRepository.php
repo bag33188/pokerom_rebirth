@@ -8,8 +8,8 @@ use App\Models\RomFile;
 use App\Queries\RomFileQueriesTrait;
 use App\Queries\RomQueriesTrait;
 use Illuminate\Database\Eloquent\Collection;
-use Jenssegers\Mongodb\Helpers\EloquentBuilder;
-use Utils\Classes\_Static\FileUtils;
+
+//use Jenssegers\Mongodb\Helpers\EloquentBuilder;
 
 class RomFileRepository implements RomFileRepositoryInterface
 {
@@ -48,7 +48,7 @@ class RomFileRepository implements RomFileRepositoryInterface
 //                ->orWhere('file_id', '=', NULL);
 //        })->limit(1)->first();
         list($query, $bindings) = $this->findMatchingRomFromFilename($romFileId)->getValues();
-        return \App\Models\Rom::fromQuery($query, $bindings)->first();
+        return Rom::fromQuery($query, $bindings)->first();
     }
 
     /*
