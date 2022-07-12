@@ -33,11 +33,9 @@ DELIMITER $$
 --
 DROP PROCEDURE IF EXISTS `FindMatchingRomFromFilename`$$
 CREATE DEFINER=`bag33188`@`%` PROCEDURE `FindMatchingRomFromFilename` (IN `ROM_FILENAME` VARCHAR(32))  READS SQL DATA BEGIN
-	DECLARE `romName` VARCHAR(28) DEFAULT SPLIT_STRING(`ROM_FILENAME`, '.', 1);
-    DECLARE `romType` VARCHAR(3) DEFAULT SPLIT_STRING(`ROM_FILENAME`, '.', 2);
 	SELECT * FROM `roms`
-	WHERE `rom_name` = `romName`
-	AND `rom_type` = `romType`
+	WHERE `rom_name` = SPLIT_STRING(`ROM_FILENAME`, '.', 1)
+	AND `rom_type` = SPLIT_STRING(`ROM_FILENAME`, '.', 2)
 	AND (`has_file` = FALSE OR `file_id` IS NULL) LIMIT 1;
 END$$
 

@@ -27,6 +27,7 @@
             <x-list-item>Filesize: {{$romFile->length}} Bytes</x-list-item>
             <x-list-item>Chunk Size: {{$romFile->chunkSize * 8}} Bits</x-list-item>
             <x-list-item>MD5 Hash: {{$romFile->md5}}</x-list-item>
+            <x-list-item>Assoc. ROM: {{@$romFile->rom()->first()->rom_name ?? 'N/A'}}</x-list-item>
             <x-list-item>
                 <div class="inline-flex flex-row justify-between w-full">
                     <span class="order-0">
