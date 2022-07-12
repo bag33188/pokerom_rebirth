@@ -12,11 +12,11 @@ const MAX_GAME_GENERATION_VALUE = 9;
 const MIN_GAME_GENERATION_VALUE = 0;
 
 /** Unit: _`Bytes`_, value: **`17` Gibibytes** */
-const MAX_FILE_SIZE = 0x440000000;
+const MAX_ROM_FILE_SIZE = 0x440000000;
 /** Unit: _`Bytes`_, value: **`1020` Kibibytes** */
-const MIN_FILE_SIZE = 0xFF000;
+const MIN_ROM_FILE_SIZE = 0xFF000;
 
-// Other filesize max entity representations
+// Other (rom) filesize max entity representations
 
 # binary
 # 100 0100 0000 0000 0000 0000 0000 0000 0000
