@@ -31,9 +31,14 @@ class RequiredIfPutRequest extends RequiredIf
         $errMsg = (App::environment('local'))
             ? 'This rule can only be used on a PUT or PATCH request.' : 'Error: Bad request';
         $requestMethod = strtoupper($this->httpRequest->getMethod());
-        if ($requestMethod !== 'PUT' && $requestMethod !== 'PATCH') {
+        if (self::requestIsNotPutOrPatch($requestMethod)) {
             throw new BadRequestHttpException($errMsg);
         }
+    }
+
+    private static function requestIsNotPutOrPatch(string $httpMethod): bool
+    {
+        return $httpMethod !== 'PUT' && $httpMethod !== 'PATCH';
     }
 
     private function setCondition(): void

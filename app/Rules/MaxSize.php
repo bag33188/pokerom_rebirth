@@ -39,6 +39,6 @@ class MaxSize implements Rule
      */
     public function message(): string
     {
-        return "The :attribute must not be greater than {$this->size}.";
+        return "The :attribute must not be greater than $this->size.";
     }
 }

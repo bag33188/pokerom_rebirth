@@ -36,7 +36,7 @@ class FileUtils
         list($name, $ext) = self::splitFilenameIntoParts($filename);
         $name = trim($name);
         $ext = strtolower($ext);
-        $filename = "$name.$ext";
+        $filename = "${name}.${ext}";
     }
 
     /**

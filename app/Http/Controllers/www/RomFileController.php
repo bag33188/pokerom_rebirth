@@ -13,6 +13,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
 use RomFileRepo;
 use Symfony\Component\HttpFoundation\StreamedResponse;
+use URL;
 
 class RomFileController extends ViewController
 {
@@ -57,7 +58,7 @@ class RomFileController extends ViewController
     public function store(StoreRomFileRequest $request): RedirectResponse
     {
         $this->romFileService->uploadRomFile($request['filename']);
-        return response()->redirectTo(url()->previous())->banner("file {$request['filename']} uploaded!");
+        return response()->redirectTo(URL::previous())->banner("file ${request['filename']} uploaded!");
     }
 
     /**

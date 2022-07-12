@@ -38,6 +38,6 @@ class MinSize implements Rule
      */
     public function message(): string
     {
-        return "The :attribute must be at least {$this->size}.";
+        return "The :attribute must be at least $this->size.";
     }
 }
