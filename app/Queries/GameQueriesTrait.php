@@ -23,7 +23,7 @@ trait GameQueriesTrait
     protected function formatGameType(string $gameType): QueryObject
     {
         $sql = /** @lang MariaDB */
-            "SELECT FORMAT_GAME_TYPE(?) AS gameType;";
+            "SELECT HIGH_PRIORITY FORMAT_GAME_TYPE(?) AS gameType;";
         $params = [$gameType];
         return new QueryObject(DB::raw($sql), $params);
     }

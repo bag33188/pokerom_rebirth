@@ -28,7 +28,7 @@
                         convertSingleToDoubleQuotes($placeholder);
                         print $placeholder;
                         foreach ($availableRoms as $rom) {
-                            normalizeObjectFromStdClassOrArray($rom);
+                            normalizeClassObject($rom);
                             $html = "<option value='{$rom->id}' wire:key='{$rom->id}'>{$rom->rom_name}</option>";
                             convertSingleToDoubleQuotes($html);
                             print $html . "\n";

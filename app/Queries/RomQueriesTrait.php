@@ -27,7 +27,6 @@ trait RomQueriesTrait
             /** @lang MariaDB */
             "CALL UpdateRomFromRomFileData(:romFileId, :romFileSize, :romId);";
         $params = ['romFileId' => $romFileId, 'romFileSize' => $romFileSize, 'romId' => $romId];
-
         return new QueryObject(DB::raw($sql), $params);
     }
 

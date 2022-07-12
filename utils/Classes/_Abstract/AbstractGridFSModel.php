@@ -12,42 +12,42 @@ use Jenssegers\Mongodb\Eloquent\Model as MongoDbModel;
 abstract class AbstractGridFSModel extends MongoDbModel
 {
     /**
-     * ## BSON Type: ObjectID (`objectId`)
+     * #### BSON Type: ObjectID (`objectId`)
      *
      * @var string
      */
     public readonly string $_id;
 
     /**
-     * ## BSON Type: int32 (`int`)
+     * #### BSON Type: int32 (`int`)
      *
      * @var int
      */
     public readonly int $chunkSize;
 
     /**
-     * ## BSON Data Type: String (`string`)
+     * #### BSON Data Type: String (`string`)
      *
      * @var string
      */
     public readonly string $filename;
 
     /**
-     * ## BSON Types: int64 (`long`), int32 (`int`)
+     * #### BSON Types: int64 (`long`), int32 (`int`)
      *
      * @var int
      */
     public readonly int $length;
 
     /**
-     * ## BSON Type: Date (`date`)
+     * #### BSON Type: Date (`date`)
      *
      * @var string
      */
     public readonly string $uploadDate;
 
     /**
-     * ## BSON Data Type: String (`string`)
+     * #### BSON Data Type: String (`string`)
      *
      * @var string
      */
