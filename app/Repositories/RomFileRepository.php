@@ -63,4 +63,9 @@ class RomFileRepository implements RomFileRepositoryInterface
     {
         return RomFile::sum('length');
     }
+
+    public function countRomFiles(): int
+    {
+        return RomFile::count();
+    }
 }

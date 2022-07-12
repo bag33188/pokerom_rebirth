@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 12, 2022 at 09:11 PM
+-- Generation Time: Jul 12, 2022 at 09:49 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -31,19 +31,27 @@ DELIMITER $$
 --
 -- Procedures
 --
+DROP PROCEDURE IF EXISTS `CountRomsAndGames`$$
+CREATE DEFINER=`bag33188`@`%` PROCEDURE `CountRomsAndGames` ()  READS SQL DATA SQL SECURITY INVOKER BEGIN
+	SELECT COUNT(*) FROM `roms`
+    UNION ALL
+    SELECT COUNT(*) FROM `games`;
+END$$
+
 DROP PROCEDURE IF EXISTS `FindMatchingRomFromFilename`$$
 CREATE DEFINER=`bag33188`@`%` PROCEDURE `FindMatchingRomFromFilename` (IN `ROM_FILENAME` VARCHAR(32))  READS SQL DATA BEGIN
 	SELECT * FROM `roms`
-	WHERE `rom_name` = SPLIT_STRING(`ROM_FILENAME`, '.', 1)
-	AND `rom_type` = SPLIT_STRING(`ROM_FILENAME`, '.', 2)
+	WHERE `rom_name` = SPLIT_STRING(`ROM_FILENAME`, '.', 1) -- file name
+	AND `rom_type` = SPLIT_STRING(`ROM_FILENAME`, '.', 2) -- file extension
 	AND (`has_file` = FALSE OR `file_id` IS NULL) LIMIT 1;
 END$$
 
 DROP PROCEDURE IF EXISTS `FindRomsWithNoGame`$$
 CREATE DEFINER=`bag33188`@`%` PROCEDURE `FindRomsWithNoGame` ()  READS SQL DATA BEGIN
-	SELECT `id`, `rom_name`, `rom_type`, /* IF (0 = FALSE, 'false', 'true') AS */ `has_game`, `game_id`
-    FROM `roms`
-    WHERE `has_game` = FALSE AND `game_id` IS NULL
+	SELECT `id`, `rom_name`, `rom_type`,
+    /* IF (0 = FALSE, 'false', 'true') AS */ `has_game`,
+    `game_id` FROM `roms`
+    WHERE `has_game` = FALSE OR `game_id` IS NULL
     ORDER BY `rom_name` DESC;
 END$$
 
@@ -78,12 +86,13 @@ END$$
 
 DROP PROCEDURE IF EXISTS `UpdateRomFromRomFileData`$$
 CREATE DEFINER=`bag33188`@`%` PROCEDURE `UpdateRomFromRomFileData` (IN `ROM_FILE_ID` CHAR(24), IN `ROM_FILE_SIZE` BIGINT UNSIGNED, IN `ROM_ID` BIGINT UNSIGNED)   BEGIN
+	DECLARE `base_bytes_unit` SMALLINT(4) UNSIGNED DEFAULT (0 + 0x400); -- 1024
     DECLARE `_rollback` BOOLEAN DEFAULT FALSE;
     DECLARE CONTINUE HANDLER FOR SQLEXCEPTION SET `_rollback` = TRUE;
 	START TRANSACTION;
   	UPDATE `roms`
   		SET `file_id` = `ROM_FILE_ID`,
-      		`rom_size` = CEIL(`ROM_FILE_SIZE` / 1024), -- get Kibibytes value from bytes
+      		`rom_size` = CEIL(`ROM_FILE_SIZE` / `base_bytes_unit`), -- get Kibibytes value from bytes
       		`has_file` = TRUE
   		WHERE `id` = `ROM_ID`;
     IF `_rollback` THEN
@@ -100,6 +109,14 @@ END$$
 --
 -- Functions
 --
+DROP FUNCTION IF EXISTS `BOOL_TO_STRING`$$
+CREATE DEFINER=`bag33188`@`%` FUNCTION `BOOL_TO_STRING` (`BOOL_VAL` TINYINT(1) UNSIGNED) RETURNS VARCHAR(5) CHARSET utf8mb4 DETERMINISTIC BEGIN
+	IF `BOOL_VAL` = 0 THEN RETURN 'false';
+	ELSEIF `BOOL_VAL` = 1 THEN RETURN 'true';
+	ELSE RETURN NULL;
+	END IF;
+END$$
+
 DROP FUNCTION IF EXISTS `CONCAT_ROM_FILENAME`$$
 CREATE DEFINER=`bag33188`@`%` FUNCTION `CONCAT_ROM_FILENAME` (`ROM_NAME` VARCHAR(28), `ROM_TYPE` ENUM('gb','gbc','gba','nds','3ds','xci')) RETURNS VARCHAR(32) CHARSET utf8mb4 SQL SECURITY INVOKER COMMENT 'concats rom name and rom type with period char' BEGIN
 	RETURN CONCAT(`ROM_NAME`, '.', UCASE(`ROM_TYPE`));
@@ -214,6 +231,7 @@ TRUNCATE TABLE `failed_jobs`;
 -- Table structure for table `games`
 --
 -- Creation: Jul 12, 2022 at 06:58 PM
+-- Last update: Jul 12, 2022 at 07:33 PM
 --
 
 DROP TABLE IF EXISTS `games`;
@@ -427,6 +445,7 @@ INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `n
 -- Table structure for table `roms`
 --
 -- Creation: Jul 06, 2022 at 02:20 AM
+-- Last update: Jul 12, 2022 at 07:33 PM
 --
 
 DROP TABLE IF EXISTS `roms`;
@@ -506,7 +525,7 @@ INSERT INTO `roms` (`id`, `file_id`, `game_id`, `rom_name`, `rom_size`, `rom_typ
 -- Table structure for table `sessions`
 --
 -- Creation: Jul 06, 2022 at 02:20 AM
--- Last update: Jul 12, 2022 at 07:11 PM
+-- Last update: Jul 12, 2022 at 07:33 PM
 --
 
 DROP TABLE IF EXISTS `sessions`;
@@ -535,7 +554,7 @@ TRUNCATE TABLE `sessions`;
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('zIx6W70OkEny8pJ9GCP5t3BYMQ8vlOQAVKzwG34R', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiWmZFU1ZHeVZLUldGd2xLcmw0eGJrYklXbktrRTBENlRoSXlPU0h1VCI7czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjIxOiJwYXNzd29yZF9oYXNoX3NhbmN0dW0iO3M6NjA6IiQyeSQxMCR3aXAzcXg5MVBsWERrcmouekVqb0MuL3dsSW50Z0lLM1EuckFKZ2d3UWhmWFJGaUlubURabSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDQ6Imh0dHA6Ly9wb2tlcm9tX3JlYmlydGgudGVzdC9wdWJsaWMvcm9tLWZpbGVzIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1657653064);
+('zIx6W70OkEny8pJ9GCP5t3BYMQ8vlOQAVKzwG34R', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiWmZFU1ZHeVZLUldGd2xLcmw0eGJrYklXbktrRTBENlRoSXlPU0h1VCI7czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjIxOiJwYXNzd29yZF9oYXNoX3NhbmN0dW0iO3M6NjA6IiQyeSQxMCR3aXAzcXg5MVBsWERrcmouekVqb0MuL3dsSW50Z0lLM1EuckFKZ2d3UWhmWFJGaUlubURabSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDY6Imh0dHA6Ly9wb2tlcm9tX3JlYmlydGgudGVzdC9wdWJsaWMvYXBpL3ZlcnNpb24iO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1657654424);
 
 -- --------------------------------------------------------
 
