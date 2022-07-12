@@ -24,9 +24,10 @@
                     wire:model.lazy="rom_type"
                     name="rom_type" id="romType"
                     required autofocus>
-                    @foreach(ROM_TYPES as $romType)
+                    @foreach(ROM_TYPES as $index => $romType)
                         <option
-                            value="{{$romType}}">
+                            value="{{$romType}}"
+                            wire:key="rom-type-{{$index + 1}}">
                             {{ strtoupper($romType) }}</option>
                     @endforeach
                 </x-form-select>

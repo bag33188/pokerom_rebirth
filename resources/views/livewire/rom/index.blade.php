@@ -3,22 +3,9 @@
 @endpush
 @php
     $downloadBtnClasses = [
-      'inline-flex',
-      'items-center',
-      'py-2',
-      'px-4',
-      'bg-blue-500',
-      'hover:bg-blue-400',
-      'text-white',
-      'font-bold',
-      'p-0',
-      'border-b-4',
-      'border-blue-700',
-      'hover:border-blue-500',
-      'rounded',
-      'active:border-t-4',
-      'active:border-b-0',
-      'active:bg-blue-400'
+        'inline-flex', 'items-center', 'py-2', 'px-4', 'bg-blue-500', 'hover:bg-blue-400',
+        'text-white', 'font-bold', 'p-0', 'border-b-4', 'border-blue-700',
+        'hover:border-blue-500', 'rounded', 'active:border-t-4', 'active:border-b-0', 'active:bg-blue-400'
     ];
 @endphp
 <div>

@@ -26,8 +26,9 @@
                     name="rom_type" id="romType"
                     required autofocus>
                     <option value="" selected>Select ROM Type</option>
-                    @foreach(ROM_TYPES as $romType)
-                        <option value="{{$romType}}">
+                    @foreach(ROM_TYPES as $index => $romType)
+                        <option value="{{$romType}}"
+                                wire:key="rom-type-{{$index + 1}}">
                             {{ strtoupper($romType) }}</option>
                     @endforeach
                 </x-form-select>

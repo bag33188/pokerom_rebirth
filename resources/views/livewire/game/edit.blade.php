@@ -24,10 +24,10 @@
                     wire:model.lazy="game_type"
                     name="game_type" id="gameType"
                     required autofocus>
-                    @foreach(GAME_TYPES as $gameType)
+                    @foreach(GAME_TYPES as $index => $gameType)
                         <option
                             value="{{$gameType}}"
-                            id="game-type-{{array_search($gameType, GAME_TYPES) + 1}}">
+                            wire:key="game-type-{{$index + 1}}">
                             {{ str_capitalize($gameType, true, 2, '-') }}
                         </option>
                     @endforeach
@@ -36,11 +36,13 @@
             <div class="mt-2.5">
                 <x-jet-label for="gameRegion" :value="__('Region')"/>
                 <x-form-select
-                    wire:model="region"
+                    wire:model.lazy="region"
                     name="region" id="gameRegion"
                     required autofocus>
-                    @foreach(REGIONS as $gameRegion)
-                        <option value="{{$gameRegion}}">{{ ucfirst($gameRegion) }}</option>
+                    @foreach(REGIONS as $index => $gameRegion)
+                        <option value="{{$gameRegion}}"
+                                wire:key="game-region-{{$index + 1}}"
+                        >{{ ucfirst($gameRegion) }}</option>
                     @endforeach
                 </x-form-select>
             </div>

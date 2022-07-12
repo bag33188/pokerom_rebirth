@@ -10,8 +10,8 @@
             <x-list-item>Rom Type: {{$rom->rom_type}}</x-list-item>
             <x-list-item>Game Name: {{$rom->has_game ? "{$rom->game->game_name} Version" : 'N/A'}}</x-list-item>
             @if($rom->has_game)
-                <x-list-item>Game Region: {{$rom->game->region}}</x-list-item>
-                <x-list-item>Generation: {{numberToRoman($rom->game->generation)}}</x-list-item>
+                <x-list-item>Region: {{$rom->game->region}} Region</x-list-item>
+                <x-list-item>Generation: {{$rom->game->generation}}</x-list-item>
                 <x-list-item>Date
                     Released: {{parseDateAsReadableString($rom->game->date_released, addDayName: false)}}</x-list-item>
                 <x-list-item>Game Type: {{$rom->game->game_type}}</x-list-item>

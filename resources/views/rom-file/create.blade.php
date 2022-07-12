@@ -17,8 +17,11 @@
                 <div class="flex flex-col">
                     <x-jet-label for="romFile" :value="__('ROM Fle')"/>
                     <x-form-select name="filename" id="romFile">
-                        @foreach($romFiles as $romFilename)
-                            <option value="{{$romFilename}}">{{$romFilename}}</option>
+                        @foreach($romFiles as $index => $romFilename)
+                            <option
+                                value="{{$romFilename}}"
+                                id="rom-file-{{$index + 1}}"
+                            >{{$romFilename}}</option>
                         @endforeach
                     </x-form-select>
                 </div>
