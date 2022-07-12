@@ -10,17 +10,15 @@ use Illuminate\View\Component;
 class RomFileDownload extends Component
 {
     public RomFile $romFile;
-    public bool $usePopupButtonStyle;
 
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct(RomFile $romFile, bool $usePopupButtonStyle = false)
+    public function __construct(RomFile $romFile)
     {
         $this->romFile = $romFile;
-        $this->usePopupButtonStyle = $usePopupButtonStyle;
     }
 
     /**
