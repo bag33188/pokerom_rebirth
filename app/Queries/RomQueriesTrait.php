@@ -2,7 +2,6 @@
 
 namespace App\Queries;
 
-use Illuminate\Support\Facades\DB;
 use Utils\Modules\QueryObject;
 
 trait RomQueriesTrait
@@ -18,7 +17,7 @@ trait RomQueriesTrait
         $sql = /** @lang MariaDB */
             "SELECT HIGH_PRIORITY FORMAT_ROM_SIZE(?) AS romSize;";
         $params = [$romSize];
-        return new QueryObject(DB::raw($sql), $params);
+        return new QueryObject($sql, $params);
     }
 
     protected function updateRomFromRomFileData(string $romFileId, int $romFileSize, int $romId): QueryObject
@@ -27,7 +26,7 @@ trait RomQueriesTrait
             /** @lang MariaDB */
             "CALL UpdateRomFromRomFileData(:romFileId, :romFileSize, :romId);";
         $params = ['romFileId' => $romFileId, 'romFileSize' => $romFileSize, 'romId' => $romId];
-        return new QueryObject(DB::raw($sql), $params);
+        return new QueryObject($sql, $params);
     }
 
     protected function findMatchingRomFromFilename(string $romFilename): QueryObject
@@ -35,6 +34,6 @@ trait RomQueriesTrait
         $sql = /** @lang MariaDB */
             "CALL FindMatchingRomFromFilename(?);";
         $params = [$romFilename];
-        return new QueryObject(DB::raw($sql), $params);
+        return new QueryObject($sql, $params);
     }
 }

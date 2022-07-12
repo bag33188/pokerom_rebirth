@@ -11,7 +11,7 @@ trait GameQueriesTrait
     {
         $sql = /** @lang MariaDB */
             "CALL FindRomsWithNoGame;";
-        return new QueryObject(DB::raw($sql));
+        return new QueryObject($sql);
     }
 
     /**
@@ -25,6 +25,6 @@ trait GameQueriesTrait
         $sql = /** @lang MariaDB */
             "SELECT HIGH_PRIORITY FORMAT_GAME_TYPE(?) AS gameType;";
         $params = [$gameType];
-        return new QueryObject(DB::raw($sql), $params);
+        return new QueryObject($sql, $params);
     }
 }

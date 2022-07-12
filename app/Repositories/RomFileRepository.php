@@ -5,12 +5,12 @@ namespace App\Repositories;
 use App\Interfaces\Repository\RomFileRepositoryInterface;
 use App\Models\Rom;
 use App\Models\RomFile;
-use App\Queries\RomFileQueriesTrait;
+use App\Queries\RomFileAggregationsTrait as RomFileAggregations;
 use Illuminate\Database\Eloquent\Collection;
 
 class RomFileRepository implements RomFileRepositoryInterface
 {
-    use RomFileQueriesTrait;
+    use RomFileAggregations;
 
     public function findRomFileIfExists(string $romFileId): RomFile
     {

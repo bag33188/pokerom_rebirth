@@ -5,13 +5,13 @@ namespace App\Repositories;
 use App\Interfaces\Repository\GameRepositoryInterface;
 use App\Models\Game;
 use App\Models\Rom;
-use App\Queries\GameQueriesTrait;
+use App\Queries\GameQueriesTrait as GameQueries;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
 
 class GameRepository implements GameRepositoryInterface
 {
-    use GameQueriesTrait;
+    use GameQueries;
 
     public function findGameIfExists(int $gameId): Game
     {

@@ -6,13 +6,13 @@ use App\Interfaces\Repository\RomRepositoryInterface;
 use App\Models\Game;
 use App\Models\Rom;
 use App\Models\RomFile;
-use App\Queries\RomQueriesTrait;
+use App\Queries\RomQueriesTrait as RomQueries;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
 
 class RomRepository implements RomRepositoryInterface
 {
-    use RomQueriesTrait;
+    use RomQueries;
 
     public function getSingleRomWithGameInfo(int $romId): Rom
     {
