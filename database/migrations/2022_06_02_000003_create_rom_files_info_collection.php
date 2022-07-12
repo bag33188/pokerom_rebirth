@@ -25,7 +25,7 @@ return new class extends Migration {
     {
         if (self::ALLOW_MIGRATIONS === true) {
             $filename_length = MAX_ROM_FILENAME_LENGTH - 4;
-            $filesize_total_digits = strlen((string)MAX_ROM_FILE_SIZE);
+            $filesize_total_digits = strlen(strval(MAX_ROM_FILE_SIZE));
 
             Schema::connection($this->connection)->create(self::COLLECTION_NAME, function (Blueprint $collection) use ($filename_length, $filesize_total_digits) {
                 // compound index

@@ -33,7 +33,7 @@ class RomFile extends MongoDbModel
         return $this->belongsTo(Rom::class, '_id', 'file_id');
     }
 
-    public function calculateRomSizeFromLength(): float|int
+    public function calculateRomSizeFromLength(): int
     {
         return (int)ceil($this->attributes['length'] / self::DATA_BYTE_FACTOR);
     }
