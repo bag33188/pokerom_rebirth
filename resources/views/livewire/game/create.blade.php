@@ -1,4 +1,9 @@
 @php
+    /**
+     * Converts single quotes to double quotes in a given string
+     * @param string $data
+     * @return void
+     */
     function convertSingleToDoubleQuotes(string &$data): void {
         list($singleQuote, $doubleQuote) = array("\u{0027}", "\u{0022}");
         $data = str_replace($singleQuote, $doubleQuote, $data);

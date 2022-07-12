@@ -7,7 +7,7 @@ use App\Models\Rom;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
-class UnsetRomFileData implements ShouldQueue
+class UnsetRomFileDataFromRom implements ShouldQueue
 {
     use InteractsWithQueue;
 
@@ -28,8 +28,8 @@ class UnsetRomFileData implements ShouldQueue
     {
         Rom::withoutEvents(function () use ($event) {
             $rom = $event->romFile->rom()->first();
-            $rom['has_file'] = false;
-            $rom['file_id'] = null;
+            $rom->has_file = FALSE;
+            $rom->file_id = NULL;
             $rom->save();
         });
     }

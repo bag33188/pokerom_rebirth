@@ -19,7 +19,7 @@ class UpdateMatchingRom implements ShouldQueue
      *
      * @var Rom|null
      */
-    public static ?Rom $matchingRom;
+    private static ?Rom $matchingRom;
 
     public function shouldQueue(RomFileCreated $event): bool
     {
@@ -54,7 +54,7 @@ class UpdateMatchingRom implements ShouldQueue
     {
         Rom::withoutEvents(function () use ($event) {
             self::$matchingRom->has_file = TRUE;
-            self::$matchingRom->file_id = $event->romFile->getKey();
+            self::$matchingRom->file_id = $event->romFile->_id;
             self::$matchingRom->rom_size = ceil($event->romFile->length / 1024);
             self::$matchingRom->save();
         });

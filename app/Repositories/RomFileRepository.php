@@ -27,23 +27,11 @@ class RomFileRepository implements RomFileRepositoryInterface
         return RomFile::all()->sortBy([['length', 'asc'], ['filename', 'asc']]);
     }
 
-    public function getRomFileByFilename(string $romFilename): RomFile
+    public function getRomFileByFilename(string $romFilename): ?RomFile
     {
         return RomFile::where('filename', '=', $romFilename)->first();
     }
 
-    /**
-     * This will attempt to cross-reference the MongoDB database and check if there is a file
-     * with the same name of the roms name plus its extension (rom type)
-     *
-     * @param Rom $rom
-     * @return \App\Models\RomFile|null
-     */
-    public function searchForRomFileMatchingRom(Rom $rom): ?RomFile
-    {
-        return RomFile::where('filename', '=', $rom->getRomFileName())
-            ->first();
-    }
 
     /*
      * Aggregations

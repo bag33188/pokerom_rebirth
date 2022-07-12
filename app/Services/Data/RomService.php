@@ -5,7 +5,7 @@ namespace App\Services\Data;
 use App\Interfaces\Action\RomActionsInterface;
 use App\Interfaces\Service\RomServiceInterface;
 use App\Models\Rom;
-use RomRepo;
+use RomFileRepo;
 use Symfony\Component\HttpFoundation\Response as HttpResponse;
 use Utils\Modules\JsonDataResponse;
 
@@ -17,7 +17,7 @@ class RomService implements RomServiceInterface
 
     public function attemptToLinkRomToFile(Rom $rom): JsonDataResponse
     {
-        $romFile = RomRepo::searchForRomFileMatchingRom($rom);
+        $romFile = RomFileRepo::getRomFileByFilename($rom->getRomFileName());
         if (isset($romFile)) {
             $this->romActions->setRomDataFromRomFileData($rom, $romFile);
             return new JsonDataResponse([

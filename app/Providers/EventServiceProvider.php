@@ -10,7 +10,7 @@ use App\Events\UserRegistered;
 use App\Listeners\AssociateRomWithGame;
 use App\Listeners\SendFarewellNotification;
 use App\Listeners\SendWelcomeNotification;
-use App\Listeners\UnsetRomFileData;
+use App\Listeners\UnsetRomFileDataFromRom;
 use App\Listeners\UpdateMatchingRom;
 use App\Models\Game;
 use App\Models\Rom;
@@ -38,7 +38,7 @@ class EventServiceProvider extends ServiceProvider
             SendFarewellNotification::class
         ],
         RomFileDeleted::class => [
-            UnsetRomFileData::class
+            UnsetRomFileDataFromRom::class
         ],
         RomFileCreated::class => [
             UpdateMatchingRom::class

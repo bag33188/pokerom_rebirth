@@ -1,5 +1,7 @@
 <?php
-use Illuminate\Database\Eloquent\Model;
+
+use Illuminate\Database\{Eloquent\Collection as EloquentCollection, Eloquent\Model as EloquentModel};
+use Jenssegers\Mongodb\Eloquent\Model as MongoDbModel;
 
 if (!function_exists('normalizeObjectFromStdClassOrArray')) {
     /**
@@ -7,11 +9,12 @@ if (!function_exists('normalizeObjectFromStdClassOrArray')) {
      *
      * Useful for livewire pages that are constantly updating data/server-side state
      *
-     * @param stdClass|array $object
+     * @param stdClass|array|EloquentModel|EloquentCollection|MongoDbModel $object
+     * @param bool $associative
      * @return void
      */
-    function normalizeObjectFromStdClassOrArray(stdClass|array|Model &$object): void
+    function normalizeObjectFromStdClassOrArray(stdClass|array|EloquentModel|EloquentCollection|MongoDbModel &$object, bool $associative = false): void
     {
-        $object = json_decode(json_encode($object), associative: false);
+        $object = json_decode(json_encode($object), associative: $associative);
     }
 }

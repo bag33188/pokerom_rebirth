@@ -25,6 +25,7 @@
                     wire:model.lazy="rom_type"
                     name="rom_type" id="romType"
                     required autofocus>
+                    <option value="" selected>Select ROM Type</option>
                     @foreach(ROM_TYPES as $romType)
                         <option value="{{$romType}}">
                             {{ strtoupper($romType) }}</option>
