@@ -7,7 +7,7 @@ use App\Models\Rom;
 use App\Models\RomFile;
 use App\Queries\RomQueriesTrait;
 use Illuminate\Support\Facades\DB;
-use RomRepo;
+use RomFileRepo;
 
 class RomActions implements RomActionsInterface
 {
@@ -22,7 +22,7 @@ class RomActions implements RomActionsInterface
 
     public function linkRomToFileIfExists(Rom $rom): void
     {
-        $romFile = RomRepo::searchForRomFileMatchingRom($rom->id);
+        $romFile = RomFileRepo::searchForRomFileMatchingRom($rom);
         if (isset($romFile)) $this->setRomDataFromRomFileData($rom, $romFile);
     }
 }

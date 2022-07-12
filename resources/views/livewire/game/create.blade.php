@@ -19,9 +19,12 @@
                 <x-jet-label for="availableRoms" :value="__('Select ROM')"/>
                 <x-form-select wire:model.lazy="rom_id" id="availableRoms" name="rom_id" autofocus required>
                     @php
+                        $placeholder = "<option value='' selected>Select ROM</option>";
+                        convertSingleToDoubleQuotes($placeholder);
+                        print $placeholder;
                         foreach ($availableRoms as $rom) {
                             normalizeObjectFromStdClassOrArray($rom);
-                            $rom->has_game = (bool)$rom->has_game;
+                            $rom->has_game = str_to_bool($rom->has_game);
                             $html = "<option value='{$rom->id}' wire:key='{$rom->id}'>{$rom->rom_name}</option>";
                             convertSingleToDoubleQuotes($html);
                             print $html . "\n";
@@ -52,6 +55,7 @@
                         wire:model="region"
                         name="region" id="gameRegion"
                         required autofocus>
+                        <option value="" selected>Select Game Region</option>
                         @foreach(REGIONS as $gameRegion)
                             <option value="{{$gameRegion}}">{{ucfirst($gameRegion)}}</option>
                         @endforeach

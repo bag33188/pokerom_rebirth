@@ -33,7 +33,8 @@ trait RomQueriesTrait
 
     protected function findMatchingRomFromFilename(string $romFilename): QueryObject
     {
-        $sql = "CALL FindMatchingRomFromFilename(?);";
+        $sql = /** @lang MariaDB */
+            "CALL FindMatchingRomFromFilename(?);";
         $params = [$romFilename];
         return new QueryObject(DB::raw($sql), $params);
     }

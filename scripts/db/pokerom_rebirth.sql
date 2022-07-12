@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 12, 2022 at 02:42 AM
+-- Generation Time: Jul 12, 2022 at 05:03 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -36,7 +36,7 @@ CREATE DEFINER=`bag33188`@`%` PROCEDURE `FindMatchingRomFromFilename` (IN `ROM_F
 
 DROP PROCEDURE IF EXISTS `FindRomsWithNoGame`$$
 CREATE DEFINER=`bag33188`@`%` PROCEDURE `FindRomsWithNoGame` ()  READS SQL DATA BEGIN
-SELECT `id`, `rom_name`, `rom_type`, /* IF (0 = FALSE, 'false', 'true') AS */ `has_game`, `game_id` FROM `roms` WHERE `has_game` = FALSE AND `game_id` IS NULL ORDER BY `rom_name` DESC;
+SELECT `id`, `rom_name`, `rom_type`, IF (0 = FALSE, 'false', 'true') AS `has_game`, `game_id` FROM `roms` WHERE `has_game` = FALSE AND `game_id` IS NULL ORDER BY `rom_name` DESC;
 END$$
 
 DROP PROCEDURE IF EXISTS `GetAllPokeROMData`$$
@@ -127,8 +127,8 @@ CREATE DEFINER=`bag33188`@`%` FUNCTION `SPLIT_STRING` (`STR_VAL` VARCHAR(255), `
         IF `SEPARATOR` > `max_results` THEN
             RETURN NULL ;
         ELSE
-        	SET @`sub_index1` := SUBSTRING_INDEX(`STR_VAL`, `SEPARATOR`, `SEPARATOR`);
-            RETURN SUBSTRING_INDEX(@`sub_index1`, `SEPARATOR` , -1) ;        
+        	SET @`sub_index1` := SUBSTRING_INDEX(`STR_VAL`, `SEPARATOR`, `POSITION`);
+            RETURN SUBSTRING_INDEX(@`sub_index1`, `SEPARATOR` , -1);
         END IF;
 
     END$$
@@ -169,6 +169,7 @@ TRUNCATE TABLE `failed_jobs`;
 -- Table structure for table `games`
 --
 -- Creation: Jul 06, 2022 at 02:20 AM
+-- Last update: Jul 12, 2022 at 02:10 AM
 --
 
 DROP TABLE IF EXISTS `games`;
@@ -382,6 +383,7 @@ INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `n
 -- Table structure for table `roms`
 --
 -- Creation: Jul 06, 2022 at 02:20 AM
+-- Last update: Jul 12, 2022 at 03:00 AM
 --
 
 DROP TABLE IF EXISTS `roms`;
@@ -461,7 +463,7 @@ INSERT INTO `roms` (`id`, `file_id`, `game_id`, `rom_name`, `rom_size`, `rom_typ
 -- Table structure for table `sessions`
 --
 -- Creation: Jul 06, 2022 at 02:20 AM
--- Last update: Jul 12, 2022 at 12:32 AM
+-- Last update: Jul 12, 2022 at 03:01 AM
 --
 
 DROP TABLE IF EXISTS `sessions`;
@@ -490,8 +492,7 @@ TRUNCATE TABLE `sessions`;
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('AgFap1NBxb02LTEFGS9fjz5qP4h9TClz7Oso6uZo', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiMDNudU9DUEtzbUFQRXVqdG9lTXZOYVhLeGdCS2xpV3RhQnl1QzdYYyI7czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjIxOiJwYXNzd29yZF9oYXNoX3NhbmN0dW0iO3M6NjA6IiQyeSQxMCR3aXAzcXg5MVBsWERrcmouekVqb0MuL3dsSW50Z0lLM1EuckFKZ2d3UWhmWFJGaUlubURabSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NTE6Imh0dHA6Ly9wb2tlcm9tX3JlYmlydGgudGVzdC9wdWJsaWMvcm9tLWZpbGVzL2NyZWF0ZSI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1657492296),
-('hpmcgjqShvVIvunNuIYjDkApYvKmwwHd9s0NXjrk', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoid3ZEMjVrTTRleTFqZkZsN3ZXaVhiZHZxakhTRXpjVjBGcFZEZUFPaiI7czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjIxOiJwYXNzd29yZF9oYXNoX3NhbmN0dW0iO3M6NjA6IiQyeSQxMCR3aXAzcXg5MVBsWERrcmouekVqb0MuL3dsSW50Z0lLM1EuckFKZ2d3UWhmWFJGaUlubURabSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDY6Imh0dHA6Ly9wb2tlcm9tX3JlYmlydGgudGVzdC9wdWJsaWMvYXBpL3ZlcnNpb24iO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1657585952);
+('hpmcgjqShvVIvunNuIYjDkApYvKmwwHd9s0NXjrk', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoid3ZEMjVrTTRleTFqZkZsN3ZXaVhiZHZxakhTRXpjVjBGcFZEZUFPaiI7czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjIxOiJwYXNzd29yZF9oYXNoX3NhbmN0dW0iO3M6NjA6IiQyeSQxMCR3aXAzcXg5MVBsWERrcmouekVqb0MuL3dsSW50Z0lLM1EuckFKZ2d3UWhmWFJGaUlubURabSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDc6Imh0dHA6Ly9wb2tlcm9tX3JlYmlydGgudGVzdC9wdWJsaWMvZ2FtZXMvY3JlYXRlIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1657594903);
 
 -- --------------------------------------------------------
 
@@ -613,7 +614,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `games`
 --
 ALTER TABLE `games`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -631,7 +632,7 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `roms`
 --
 ALTER TABLE `roms`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `users`

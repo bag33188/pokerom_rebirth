@@ -44,19 +44,22 @@ class RomRepository implements RomRepositoryInterface
         return $this->findRomIfExists($romId)->romFile()->firstOrFail();
     }
 
-    /**
-     * This will attempt to cross-reference the MongoDB database and check if there is a file
-     * with the same name of the roms name plus its extension (rom type)
-     *
-     * @param int $romId
-     * @return \App\Models\RomFile|null
-     */
-    public function searchForRomFileMatchingRom(int $romId): ?RomFile
+    public function searchForRomMatchingRomFile(RomFile $romFile): ?Rom
     {
-        // @ symbol is needed since using `findOrFail` (which throws exception on fail)
-        $romFileName = @$this->findRomIfExists($romId)->getRomFileName();
-        return RomFile::where('filename', '=', $romFileName)
-            ->first();
+        /*
+            list($romName, $romExtension) =
+                FileUtils::splitFilenameIntoParts($this->findRomFileIfExists($romFileId)->filename);
+            return Rom::where([
+                ['rom_name', '=', $romName, 'and'],
+                ['rom_type', '=', $romExtension, 'and']
+            ])->where(function (\Jenssegers\Mongodb\Helpers\EloquentBuilder $query) {
+                $query
+                    ->where('has_file', '=', FALSE)
+                    ->orWhere('file_id', '=', NULL);
+            })->limit(1)->first();
+         */
+        list($query, $bindings) = $this->findMatchingRomFromFilename($romFile->filename)->getValues();
+        return Rom::fromQuery($query, $bindings)->first();
     }
 
     public function getFormattedRomSize(int $romSize): string

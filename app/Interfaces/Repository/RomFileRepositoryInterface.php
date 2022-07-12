@@ -16,8 +16,6 @@ interface RomFileRepositoryInterface
 
     public function getRomFileByFilename(string $romFilename): RomFile;
 
-    public function searchForRomMatchingFile(string $romFilename): mixed;
-
     public function getRomFileLengthsKibibytes(): Collection;
 
     public function getRomFileLengthsGibibytes(): Collection;
@@ -25,6 +23,8 @@ interface RomFileRepositoryInterface
     public function getRomFileLengthsMebibytes(): Collection;
 
     public function getTotalSizeOfAllRomFiles(): int;
+
+    public function searchForRomFileMatchingRom(Rom $rom): ?RomFile;
 
     public function getLengthOfRomFileWithLargestFileSize(): int;
 }

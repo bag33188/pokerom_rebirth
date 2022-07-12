@@ -29,21 +29,10 @@ class Create extends Component
     public $region;
     public $rom_id;
 
-    public function boot()
-    {
-        // add select placeholder
-        $this->region = REGIONS[0];
-//        $this->game_type = GAME_TYPES[0];
-        $this->rom_id = 0;
-    }
-
     public function mount()
     {
         $this->availableRoms = GameRepo::getAllRomsWithNoGame();
         $this->romsAreAvailable = count($this->availableRoms) > 0;
-        if ($this->romsAreAvailable) {
-            $this->rom_id = $this->availableRoms[0]->id;
-        }
     }
 
     public function render(): Factory|View|Application
@@ -51,10 +40,11 @@ class Create extends Component
         return view('livewire.game.create');
     }
 
-    #[ArrayShape(['game_name' => "array", 'date_released' => "array", 'game_type' => "array", 'region' => "array", 'generation' => "array"])]
+    #[ArrayShape(['rom_id' => "string", 'game_name' => "array", 'date_released' => "array", 'game_type' => "array", 'region' => "array", 'generation' => "array"])]
     public function rules(): array
     {
         return [
+            'rom_id' => 'required|integer',
             'game_name' => $this->gameNameRules(),
             'date_released' => $this->dateReleasedRules(),
             'game_type' => $this->gameTypeRules(),
