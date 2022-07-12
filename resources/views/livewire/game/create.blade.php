@@ -22,7 +22,7 @@
                         foreach ($availableRoms as $rom) {
                             normalizeObjectFromStdClassOrArray($rom);
                             $rom->has_game = (bool)$rom->has_game;
-                            $html = "<option value='{$rom->id}'>{$rom->rom_name}</option>";
+                            $html = "<option value='{$rom->id}' wire:key='{$rom->id}'>{$rom->rom_name}</option>";
                             convertSingleToDoubleQuotes($html);
                             print $html . "\n";
                         }

@@ -35,7 +35,7 @@ class RomFileRepository implements RomFileRepositoryInterface
         return RomFile::where('filename', '=', $romFilename)->first();
     }
 
-    public function searchForRomMatchingFile(string $romFileId): ?Rom
+    public function searchForRomMatchingFile(string $romFilename): ?Rom
     {
 //        list($romName, $romExtension) =
 //            FileUtils::splitFilenameIntoParts($this->findRomFileIfExists($romFileId)->filename);
@@ -47,7 +47,7 @@ class RomFileRepository implements RomFileRepositoryInterface
 //                ->where('has_file', '=', FALSE)
 //                ->orWhere('file_id', '=', NULL);
 //        })->limit(1)->first();
-        list($query, $bindings) = $this->findMatchingRomFromFilename($romFileId)->getValues();
+        list($query, $bindings) = $this->findMatchingRomFromFilename($romFilename)->getValues();
         return Rom::fromQuery($query, $bindings)->first();
     }
 
