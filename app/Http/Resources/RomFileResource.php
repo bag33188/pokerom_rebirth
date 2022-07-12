@@ -10,6 +10,14 @@ use JetBrains\PhpStorm\ArrayShape;
 /** @mixin RomFile */
 class RomFileResource extends JsonResource
 {
+    protected final const ROMFILE_SHAPE = [
+        '_id' => "string",
+        'chunkSize' => "int",
+        'filename' => "string",
+        'length' => "int",
+        'uploadDate' => "string",
+        'md5' => "string"
+    ];
     public $additional = ['success' => true];
 
     /**
@@ -18,7 +26,7 @@ class RomFileResource extends JsonResource
      * @param Request $request
      * @return array
      */
-    #[ArrayShape(['_id' => "string", 'chunkSize' => "int", 'filename' => "string", 'length' => "int", 'uploadDate' => "string", 'md5' => "string"])]
+    #[ArrayShape(self::ROMFILE_SHAPE)]
     public function toArray($request): array
     {
         return [

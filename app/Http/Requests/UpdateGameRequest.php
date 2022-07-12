@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use App\Http\Validators\GameValidationRulesTrait;
 use App\Models\Game;
 use App\Rules\RequiredIfPutRequest;
+use Date;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Str;
 use JetBrains\PhpStorm\ArrayShape;
@@ -49,6 +50,7 @@ class UpdateGameRequest extends FormRequest
     {
         $this->merge([
             'slug' => Str::slug($this->game_name),
+            'date_released' => Date::create($this->date_released)
         ]);
     }
 

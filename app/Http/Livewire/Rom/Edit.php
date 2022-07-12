@@ -73,7 +73,7 @@ class Edit extends Component
             $this->rom->update([
                 'rom_type' => $this->rom_type,
                 'rom_name' => $this->rom_name,
-                'rom_size' => $this->rom_size
+                'rom_size' => (int)$this->rom_size
             ]);
             $this->redirect(route('roms.show', $this->romId));
         } catch (Exception $e) {

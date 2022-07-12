@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Game;
 
 use App\Http\Validators\GameValidationRulesTrait;
 use App\Models\Game;
+use Date;
 use Exception;
 use GameRepo;
 use Illuminate\Auth\Access\AuthorizationException;
@@ -78,8 +79,8 @@ class Edit extends Component
                 'game_name' => $this->game_name,
                 'game_type' => $this->game_type,
                 'region' => $this->region,
-                'date_released' => $this->date_released,
-                'generation' => $this->generation
+                'date_released' => Date::create($this->date_released),
+                'generation' => (int)$this->generation
             ]);
             $this->redirect(route('games.show', $this->gameId));
 

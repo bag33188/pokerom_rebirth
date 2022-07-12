@@ -11,8 +11,11 @@ use Utils\Modules\JsonDataResponse;
 
 class RomService implements RomServiceInterface
 {
-    public function __construct(private readonly RomActionsInterface $romActions)
+    private readonly RomActionsInterface $romActions;
+
+    public function __construct(RomActionsInterface $romActions)
     {
+        $this->romActions = $romActions;
     }
 
     public function attemptToLinkRomToFile(Rom $rom): JsonDataResponse

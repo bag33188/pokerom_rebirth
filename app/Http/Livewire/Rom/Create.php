@@ -53,7 +53,7 @@ class Create extends Component
         try {
             Rom::create([
                 'rom_name' => $this->rom_name,
-                'rom_size' => $this->rom_size,
+                'rom_size' => (int)$this->rom_size,
                 'rom_type' => $this->rom_type
             ]);
 
