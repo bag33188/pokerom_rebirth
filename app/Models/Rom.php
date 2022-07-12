@@ -31,6 +31,12 @@ class Rom extends Model
         'has_game' => 'bool',
     ];
 
+    /**
+     * Concatenates {@see Rom::rom_name rom_name} and {@see Rom::rom_type rom_type} with a period (`.`).
+     * The result is expected filename of the ROM.
+     *
+     * @return string
+     */
     public function getRomFileName(): string
     {
         return sprintf("%s.%s", $this->attributes['rom_name'], strtolower($this->attributes['rom_type']));
