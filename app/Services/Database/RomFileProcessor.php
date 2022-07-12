@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Database\GridFS;
+namespace App\Services\Database;
 
 use GfsRomFile;
 use GridFS\Support\GridFSProcessor;

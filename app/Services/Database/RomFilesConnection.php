@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Database\GridFS;
+namespace App\Services\Database;
 
 use GridFS\Client\AbstractGridFSConnection as GridFSConnection;
 

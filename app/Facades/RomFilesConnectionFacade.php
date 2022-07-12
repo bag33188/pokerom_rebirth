@@ -2,7 +2,7 @@
 
 namespace App\Facades;
 
-use App\Services\Database\GridFS\RomFilesConnection;
+use App\Services\Database\RomFilesConnection;
 use Illuminate\Support\Facades\Facade;
 
 class RomFilesConnectionFacade extends Facade
