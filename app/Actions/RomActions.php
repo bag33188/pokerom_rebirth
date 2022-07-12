@@ -15,7 +15,7 @@ class RomActions implements RomActionsInterface
 
     public function setRomDataFromRomFileData(Rom $rom, RomFile $romFile): void
     {
-        [$query, $bindings] = $this->linkRomToFile($romFile->getKey(), $romFile->length, $rom->getKey())->getValues();
+        [$query, $bindings] = $this->updateRomFromRomFileData($romFile->getKey(), $romFile->length, $rom->getKey())->getValues();
         $stmt = DB::statement($query, $bindings);
         if ($stmt) $rom->refresh();
     }

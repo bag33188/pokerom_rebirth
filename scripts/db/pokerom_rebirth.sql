@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 12, 2022 at 05:59 AM
+-- Generation Time: Jul 12, 2022 at 06:24 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -44,8 +44,8 @@ CREATE DEFINER=`bag33188`@`%` PROCEDURE `GetAllPokeROMData` ()  SQL SECURITY INV
 `games`.`id` AS `game_id`, `games`.`game_name` AS `game_name`, `games`.`game_type` AS `game_type`, `games`.`region` AS `region`, `games`.`generation` AS `generation`, `games`.`date_released` AS `date_released`
 FROM `roms` RIGHT JOIN `games` ON `roms`.`id` = `games`.`rom_id` WHERE `roms`.`has_game` = TRUE AND `roms`.`has_file` = TRUE AND `roms`.`game_id` IS NOT NULL AND `roms`.`file_id` IS NOT NULL ORDER BY `game_id` ASC$$
 
-DROP PROCEDURE IF EXISTS `LinkRomToFile`$$
-CREATE DEFINER=`bag33188`@`%` PROCEDURE `LinkRomToFile` (IN `ROM_FILE_ID` CHAR(24), IN `ROM_FILE_SIZE` BIGINT UNSIGNED, IN `ROM_ID` BIGINT UNSIGNED)   BEGIN
+DROP PROCEDURE IF EXISTS `UpdateRomFromRomFileData`$$
+CREATE DEFINER=`bag33188`@`%` PROCEDURE `UpdateRomFromRomFileData` (IN `ROM_FILE_ID` CHAR(24), IN `ROM_FILE_SIZE` BIGINT UNSIGNED, IN `ROM_ID` BIGINT UNSIGNED)   BEGIN
 START TRANSACTION;
   UPDATE `roms`
   SET `file_id` = `ROM_FILE_ID`,

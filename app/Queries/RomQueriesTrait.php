@@ -21,11 +21,11 @@ trait RomQueriesTrait
         return new QueryObject(DB::raw($sql), $params);
     }
 
-    protected function linkRomToFile(string $romFileId, int $romFileSize, int $romId): QueryObject
+    protected function updateRomFromRomFileData(string $romFileId, int $romFileSize, int $romId): QueryObject
     {
         $sql =
             /** @lang MariaDB */
-            "CALL LinkRomToFile(:romFileId, :romFileSize, :romId);";
+            "CALL UpdateRomFromRomFileData(:romFileId, :romFileSize, :romId);";
         $params = ['romFileId' => $romFileId, 'romFileSize' => $romFileSize, 'romId' => $romId];
 
         return new QueryObject(DB::raw($sql), $params);
