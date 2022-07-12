@@ -32,7 +32,8 @@
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/",
-            "Utils\\": "utils/"
+            "Utils\\": "utils/",
+            "GridFS\\": "utils/Modules/GridFS/"
         },
         "files": [
             "scripts/helpers/is_dir_empty.php",

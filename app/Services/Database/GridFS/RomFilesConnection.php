@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Services\GridFS;
+namespace App\Services\Database\GridFS;
 
-use Utils\Modules\GridFS\Client\AbstractGridFSConnection as GridFSConnection;
+use GridFS\Client\AbstractGridFSConnection as GridFSConnection;
 
 class RomFilesConnection extends GridFSConnection
 {

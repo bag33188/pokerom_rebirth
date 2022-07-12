@@ -4,7 +4,7 @@
  * MongoDB Connection Vendor Config
  */
 
-namespace Utils\Modules\GridFS\Vendor;
+namespace GridFS\Vendor;
 
 $template = <<<'php'
 return [

@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Services\GridFS;
+namespace App\Services\Database\GridFS;
 
 use GfsRomFile;
-use Utils\Modules\GridFS\Support\GridFSProcessor;
+use GridFS\Support\GridFSProcessor;
 
 class RomFileProcessor extends GridFSProcessor
 {

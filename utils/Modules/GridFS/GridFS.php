@@ -1,6 +1,6 @@
 <?php
 
-namespace Utils\Modules\GridFS;
+namespace GridFS;
 
 abstract class GridFS
 {

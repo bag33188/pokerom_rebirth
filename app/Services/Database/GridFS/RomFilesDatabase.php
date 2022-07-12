@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Services\GridFS;
+namespace App\Services\Database\GridFS;
 
-use Utils\Modules\GridFS\Client\AbstractGridFSDatabase as GridFSDatabase;
+use GridFS\Client\AbstractGridFSDatabase as GridFSDatabase;
 
 class RomFilesDatabase extends GridFSDatabase
 {

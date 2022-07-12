@@ -1,9 +1,9 @@
 <?php
 
-namespace Utils\Modules\GridFS\Client;
+namespace GridFS\Client;
 
 use Utils\Classes\_Static\MongoUtils as MongoUtil;
-use Utils\Modules\GridFS\GridFS;
+use GridFS\GridFS;
 
 /**
  * GridFS Database Class for defining a MongoDB Database

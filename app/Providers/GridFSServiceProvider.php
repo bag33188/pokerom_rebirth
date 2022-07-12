@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
-use App\Services\GridFS\RomFilesConnection;
-use App\Services\GridFS\RomFilesDatabase;
+use App\Services\Database\GridFS\RomFilesConnection;
+use App\Services\Database\GridFS\RomFilesDatabase;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Support\ServiceProvider;

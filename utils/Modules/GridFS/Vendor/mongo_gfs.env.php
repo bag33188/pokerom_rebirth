@@ -4,7 +4,7 @@
  * GridFS Vendor Env
  */
 
-namespace Utils\Modules\GridFS\Vendor;
+namespace GridFS\Vendor;
 
 $template = <<<'env'
 DB_CONNECTION_SECOND=mongodb
