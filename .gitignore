@@ -28,7 +28,7 @@ storage/**/*.gba
 !storage/**/.htaccess
 !storage/**/.gitkeep
 !storage/**/*.url
-#docker
+docker
 
 ### Public Folder Assets (Generated) ###
 public/css/**/*
