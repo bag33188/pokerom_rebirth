@@ -23,8 +23,8 @@ class UpdateMatchingRom implements ShouldQueue
 
     public function shouldQueue(RomFileCreated $event): bool
     {
-        $rom = RomRepo::searchForRomMatchingRomFile($event->romFile);
-        $this->setMatchingRom($rom);
+        $possibleRomThatMatchesRomFileInstance = RomRepo::searchForRomMatchingRomFile($event->romFile);
+        $this->setMatchingRom($possibleRomThatMatchesRomFileInstance);
         return !$event->romFile->rom()->exists() && $this->matchingRomExists();
     }
 
@@ -55,7 +55,7 @@ class UpdateMatchingRom implements ShouldQueue
         Rom::withoutEvents(function () use ($event) {
             self::$matchingRom->has_file = TRUE;
             self::$matchingRom->file_id = $event->romFile->_id;
-            self::$matchingRom->rom_size = ceil($event->romFile->length / 1024);
+            self::$matchingRom->rom_size = $event->romFile->calculateRomSizeFromLength();
             self::$matchingRom->save();
         });
     }

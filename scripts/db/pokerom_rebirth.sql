@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 12, 2022 at 05:03 AM
+-- Generation Time: Jul 12, 2022 at 05:59 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -36,7 +36,7 @@ CREATE DEFINER=`bag33188`@`%` PROCEDURE `FindMatchingRomFromFilename` (IN `ROM_F
 
 DROP PROCEDURE IF EXISTS `FindRomsWithNoGame`$$
 CREATE DEFINER=`bag33188`@`%` PROCEDURE `FindRomsWithNoGame` ()  READS SQL DATA BEGIN
-SELECT `id`, `rom_name`, `rom_type`, IF (0 = FALSE, 'false', 'true') AS `has_game`, `game_id` FROM `roms` WHERE `has_game` = FALSE AND `game_id` IS NULL ORDER BY `rom_name` DESC;
+SELECT `id`, `rom_name`, `rom_type`, /* IF (0 = FALSE, 'false', 'true') AS */ `has_game`, `game_id` FROM `roms` WHERE `has_game` = FALSE AND `game_id` IS NULL ORDER BY `rom_name` DESC;
 END$$
 
 DROP PROCEDURE IF EXISTS `GetAllPokeROMData`$$
@@ -63,21 +63,21 @@ END$$
 -- Functions
 --
 DROP FUNCTION IF EXISTS `CONCAT_ROM_FILENAME`$$
-CREATE DEFINER=`bag33188`@`%` FUNCTION `CONCAT_ROM_FILENAME` (`ROM_NAME` VARCHAR(30), `ROM_TYPE` ENUM('gb','gbc','gba','nds','3ds','xci')) RETURNS VARCHAR(36) CHARSET utf8mb4 SQL SECURITY INVOKER COMMENT 'concats rom name and rom type with period char' RETURN CONCAT(`ROM_NAME`, '.', UCASE(`ROM_TYPE`))
+CREATE DEFINER=`bag33188`@`%` FUNCTION `CONCAT_ROM_FILENAME` (`ROM_NAME` VARCHAR(30), `ROM_TYPE` ENUM('gb','gbc','gba','nds','3ds','xci')) RETURNS VARCHAR(34) CHARSET utf8mb4 SQL SECURITY INVOKER COMMENT 'concats rom name and rom type with period char' RETURN CONCAT(`ROM_NAME`, '.', UCASE(`ROM_TYPE`))
 /* !important
-return value length = 36;
-MAX_ROM_FILENAME_LENGTH = 32;
-MAX_ROM_FILETYPE_LENGTH = 3;
+return value length = 34;
+MAX_ROM_NAME_LENGTH = 30;
+MAX_ROM_TYPE_LENGTH = 3;
 '.'.length = 1;
-32 + 3 + 1 = 36;
+30 + 3 + 1 = 34;
 */$$
 
 DROP FUNCTION IF EXISTS `FORMAT_GAME_TYPE`$$
 CREATE DEFINER=`bag33188`@`%` FUNCTION `FORMAT_GAME_TYPE` (`GAME_TYPE` VARCHAR(8)) RETURNS VARCHAR(21) CHARSET utf8mb4 SQL SECURITY INVOKER CASE LOWER(`GAME_TYPE`)
-WHEN 'core' THEN RETURN 'Core Pokémon Game';
-WHEN 'hack' THEN RETURN 'Pokémon ROM Hack';
-WHEN 'spin-off' THEN RETURN 'Spin-Off Pokémon Game';
-ELSE RETURN 'N/A';
+	WHEN 'core' THEN RETURN 'Core Pokémon Game';
+	WHEN 'hack' THEN RETURN 'Pokémon ROM Hack';
+	WHEN 'spin-off' THEN RETURN 'Spin-Off Pokémon Game';
+	ELSE RETURN 'N/A';
 /** !important
 return value length = 21;
 'Spin-Off Pokemon Game'.length = 21;
@@ -344,6 +344,7 @@ TRUNCATE TABLE `password_resets`;
 -- Table structure for table `personal_access_tokens`
 --
 -- Creation: Jul 06, 2022 at 01:56 AM
+-- Last update: Jul 12, 2022 at 03:49 AM
 --
 
 DROP TABLE IF EXISTS `personal_access_tokens`;
@@ -375,7 +376,7 @@ TRUNCATE TABLE `personal_access_tokens`;
 --
 
 INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `name`, `token`, `abilities`, `last_used_at`, `created_at`, `updated_at`) VALUES
-(4, 'App\\Models\\User', 1, 'auth_token', 'b200ae710c4932db20b99bbae0344eac8e3a7802a9d15181c6d79cfb29e090cb', '[\"*\"]', '2022-07-11 05:26:18', '2022-07-10 23:51:32', '2022-07-11 05:26:18');
+(4, 'App\\Models\\User', 1, 'auth_token', 'b200ae710c4932db20b99bbae0344eac8e3a7802a9d15181c6d79cfb29e090cb', '[\"*\"]', '2022-07-12 10:49:03', '2022-07-10 23:51:32', '2022-07-12 10:49:03');
 
 -- --------------------------------------------------------
 
@@ -383,7 +384,7 @@ INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `n
 -- Table structure for table `roms`
 --
 -- Creation: Jul 06, 2022 at 02:20 AM
--- Last update: Jul 12, 2022 at 03:00 AM
+-- Last update: Jul 12, 2022 at 03:57 AM
 --
 
 DROP TABLE IF EXISTS `roms`;
@@ -463,7 +464,7 @@ INSERT INTO `roms` (`id`, `file_id`, `game_id`, `rom_name`, `rom_size`, `rom_typ
 -- Table structure for table `sessions`
 --
 -- Creation: Jul 06, 2022 at 02:20 AM
--- Last update: Jul 12, 2022 at 03:01 AM
+-- Last update: Jul 12, 2022 at 03:57 AM
 --
 
 DROP TABLE IF EXISTS `sessions`;
@@ -492,7 +493,7 @@ TRUNCATE TABLE `sessions`;
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('hpmcgjqShvVIvunNuIYjDkApYvKmwwHd9s0NXjrk', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoid3ZEMjVrTTRleTFqZkZsN3ZXaVhiZHZxakhTRXpjVjBGcFZEZUFPaiI7czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjIxOiJwYXNzd29yZF9oYXNoX3NhbmN0dW0iO3M6NjA6IiQyeSQxMCR3aXAzcXg5MVBsWERrcmouekVqb0MuL3dsSW50Z0lLM1EuckFKZ2d3UWhmWFJGaUlubURabSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDc6Imh0dHA6Ly9wb2tlcm9tX3JlYmlydGgudGVzdC9wdWJsaWMvZ2FtZXMvY3JlYXRlIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1657594903);
+('hpmcgjqShvVIvunNuIYjDkApYvKmwwHd9s0NXjrk', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoid3ZEMjVrTTRleTFqZkZsN3ZXaVhiZHZxakhTRXpjVjBGcFZEZUFPaiI7czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjIxOiJwYXNzd29yZF9oYXNoX3NhbmN0dW0iO3M6NjA6IiQyeSQxMCR3aXAzcXg5MVBsWERrcmouekVqb0MuL3dsSW50Z0lLM1EuckFKZ2d3UWhmWFJGaUlubURabSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDY6Imh0dHA6Ly9wb2tlcm9tX3JlYmlydGgudGVzdC9wdWJsaWMvYXBpL3ZlcnNpb24iO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1657598241);
 
 -- --------------------------------------------------------
 

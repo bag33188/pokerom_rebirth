@@ -34,7 +34,9 @@ class RomFileRepository implements RomFileRepositoryInterface
 
 
     /*
-     * Aggregations
+     * |----------------------|
+     * | MongoDB Aggregations |
+     * |----------------------|
      */
 
     public function getRomFileLengthsKibibytes(): Collection

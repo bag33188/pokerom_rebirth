@@ -20,6 +20,9 @@ class RomFile extends MongoDbModel
         'uploadDate' => 'datetime',
     ];
 
+    /** @var int */
+    public final const DATA_BYTE_FACTOR = 0b010000000000;
+
     public function getObjectId(): ObjectId
     {
         return MongoUtil::parseStringAsBSONObjectId($this->getKey());
@@ -28,5 +31,10 @@ class RomFile extends MongoDbModel
     public function rom(): BelongsTo
     {
         return $this->belongsTo(Rom::class, '_id', 'file_id');
+    }
+
+    public function calculateRomSizeFromLength(): float|int
+    {
+        return (int)ceil($this->attributes['length'] / self::DATA_BYTE_FACTOR);
     }
 }
