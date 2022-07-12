@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 12, 2022 at 07:43 AM
+-- Generation Time: Jul 12, 2022 at 09:21 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -40,7 +40,7 @@ SELECT `id`, `rom_name`, `rom_type`, /* IF (0 = FALSE, 'false', 'true') AS */ `h
 END$$
 
 DROP PROCEDURE IF EXISTS `GetAllPokeROMData`$$
-CREATE DEFINER=`bag33188`@`%` PROCEDURE `GetAllPokeROMData` ()  SQL SECURITY INVOKER SELECT `roms`.`id` AS `rom_id`, `roms`.`rom_name` AS `rom_name`, `roms`.`rom_type` AS `rom_type`, `roms`.`rom_size` * 1024 AS `rom_size`, CONCAT_ROM_FILENAME(`roms`.`rom_name`, `roms`.`rom_type`) AS `rom_filename`, `roms`.`file_id` AS `rom_file_id`,
+CREATE DEFINER=`bag33188`@`%` PROCEDURE `GetAllPokeROMData` ()  READS SQL DATA SQL SECURITY INVOKER SELECT `roms`.`id` AS `rom_id`, `roms`.`rom_name` AS `rom_name`, `roms`.`rom_type` AS `rom_type`, `roms`.`rom_size` * 1024 AS `rom_size`, CONCAT_ROM_FILENAME(`roms`.`rom_name`, `roms`.`rom_type`) AS `rom_filename`, `roms`.`file_id` AS `rom_file_id`,
 `games`.`id` AS `game_id`, `games`.`game_name` AS `game_name`, `games`.`game_type` AS `game_type`, `games`.`region` AS `region`, `games`.`generation` AS `generation`, `games`.`date_released` AS `date_released`
 FROM `roms` RIGHT JOIN `games` ON `roms`.`id` = `games`.`rom_id` WHERE `roms`.`has_game` = TRUE AND `roms`.`has_file` = TRUE AND `roms`.`game_id` IS NOT NULL AND `roms`.`file_id` IS NOT NULL ORDER BY `game_id` ASC$$
 
@@ -73,42 +73,49 @@ MAX_ROM_TYPE_LENGTH = 3;
 */$$
 
 DROP FUNCTION IF EXISTS `FORMAT_GAME_TYPE`$$
-CREATE DEFINER=`bag33188`@`%` FUNCTION `FORMAT_GAME_TYPE` (`GAME_TYPE` VARCHAR(8)) RETURNS VARCHAR(21) CHARSET utf8mb4 SQL SECURITY INVOKER CASE LOWER(`GAME_TYPE`)
-	WHEN 'core' THEN RETURN 'Core Pokémon Game';
-	WHEN 'hack' THEN RETURN 'Pokémon ROM Hack';
-	WHEN 'spin-off' THEN RETURN 'Spin-Off Pokémon Game';
-	ELSE RETURN 'N/A';
+CREATE DEFINER=`bag33188`@`%` FUNCTION `FORMAT_GAME_TYPE` (`GAME_TYPE` VARCHAR(8)) RETURNS VARCHAR(21) CHARSET utf8mb4 SQL SECURITY INVOKER BEGIN
+	SET @`eacute` = CAST('é' AS char(1));
+	CASE LOWER(`GAME_TYPE`)
+		WHEN 'core' THEN RETURN CONCAT('Core Pok', @`eacute`, 'mon Game');
+		WHEN 'hack' THEN RETURN CONCAT('Pok', @`eacute`, 'mon ROM Hack');
+		WHEN 'spin-off' THEN RETURN CONCAT('Spin-Off Pok', @`eacute`, 'mon Game');
+		ELSE RETURN 'N/A';
+	END CASE;
 /** !important
 return value length = 21;
 'Spin-Off Pokemon Game'.length = 21;
 MAX_GAME_TYPE_LENGTH = 21;
 */
-END CASE$$
+END$$
 
 DROP FUNCTION IF EXISTS `FORMAT_ROM_SIZE`$$
-CREATE DEFINER=`bag33188`@`%` FUNCTION `FORMAT_ROM_SIZE` (`ROM_LENGTH` INT UNSIGNED) RETURNS VARCHAR(9) CHARSET utf8mb4 DETERMINISTIC SQL SECURITY INVOKER COMMENT 'conversion issues get fixed in this function' BEGIN
+CREATE DEFINER=`bag33188`@`%` FUNCTION `FORMAT_ROM_SIZE` (`ROM_LENGTH_BYTES` INT UNSIGNED) RETURNS VARCHAR(9) CHARSET utf8mb4 DETERMINISTIC SQL SECURITY INVOKER COMMENT 'conversion issues get fixed in this function' BEGIN
   DECLARE `size_val` FLOAT;
   DECLARE `size_type` CHAR(2);
-  SET @`million` = POWER(1000, 2);
+  DECLARE `size_str` VARCHAR(6);
+  DECLARE `one_kibibyte` INT DEFAULT 1024;
+  DECLARE `one_kilobyte` INT DEFAULT 1000;
+  DECLARE `one_gigabyte` INT DEFAULT POWER(`one_kilobyte`, 2);
+
   -- MEGABYTES
-  IF `ROM_LENGTH` > 1024 AND `ROM_LENGTH` < @`million` THEN
+  IF `ROM_LENGTH_BYTES` > `one_kibibyte` AND `ROM_LENGTH_BYTES` < `one_gigabyte` THEN
     SET `size_type` = 'MB';
-    SET `size_val` = ROUND(`ROM_LENGTH` / 1000, 2);
+    SET `size_val` = ROUND(`ROM_LENGTH_BYTES` / `one_kilobyte`, 2);
   -- GIGABYTES
-  ELSEIF `ROM_LENGTH` >= @`million` THEN
+  ELSEIF `ROM_LENGTH_BYTES` >= `one_gigabyte` THEN
     SET `size_type` = 'GB';
-    SET `size_val`= ROUND(`ROM_LENGTH` / @`million`, 2);
+    SET `size_val`= ROUND(`ROM_LENGTH_BYTES` / `one_gigabyte`, 2);
   -- KILOBYTES
-  ELSEIF `ROM_LENGTH` > 1020 AND `ROM_LENGTH` <= 1024 THEN
+  ELSEIF `ROM_LENGTH_BYTES` > 1020 AND `ROM_LENGTH_BYTES` <= `one_kibibyte` THEN
     SET `size_type` = 'KB';
-    SET `size_val` = CAST(`ROM_LENGTH` AS FLOAT);
+    SET `size_val` = CAST(`ROM_LENGTH_BYTES` AS FLOAT);
   -- BYTES
   ELSE
     SET `size_type` = 'B ';
-    SET `size_val` = CAST(`ROM_LENGTH` * 1024 AS FLOAT);
+    SET `size_val` = CAST(`ROM_LENGTH_BYTES` * `one_kibibyte` AS FLOAT);
   END IF;
-  SET @`size_str` = CAST(`size_val` AS VARCHAR(6));
-  RETURN CONCAT(@`size_str`, ' ', `size_type`);
+  SET `size_str` = CAST(`size_val` AS VARCHAR(6));
+  RETURN CONCAT(`size_str`, ' ', `size_type`);
 /** !important:
 return value length = 9;
 '262.14 MB'.length = 9;
@@ -127,8 +134,7 @@ CREATE DEFINER=`bag33188`@`%` FUNCTION `SPLIT_STRING` (`STR_VAL` VARCHAR(255), `
         IF `SEPARATOR` > `max_results` THEN
             RETURN NULL ;
         ELSE
-        	SET @`sub_index1` := SUBSTRING_INDEX(`STR_VAL`, `SEPARATOR`, `POSITION`);
-            RETURN SUBSTRING_INDEX(@`sub_index1`, `SEPARATOR` , -1);
+            RETURN SUBSTRING_INDEX(SUBSTRING_INDEX(`STR_VAL`, `SEPARATOR`, `POSITION`), `SEPARATOR` , -1);
         END IF;
 
     END$$
@@ -384,7 +390,7 @@ INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `n
 -- Table structure for table `roms`
 --
 -- Creation: Jul 06, 2022 at 02:20 AM
--- Last update: Jul 12, 2022 at 03:57 AM
+-- Last update: Jul 12, 2022 at 06:11 AM
 --
 
 DROP TABLE IF EXISTS `roms`;
@@ -464,7 +470,7 @@ INSERT INTO `roms` (`id`, `file_id`, `game_id`, `rom_name`, `rom_size`, `rom_typ
 -- Table structure for table `sessions`
 --
 -- Creation: Jul 06, 2022 at 02:20 AM
--- Last update: Jul 12, 2022 at 05:40 AM
+-- Last update: Jul 12, 2022 at 07:18 AM
 --
 
 DROP TABLE IF EXISTS `sessions`;
@@ -493,7 +499,7 @@ TRUNCATE TABLE `sessions`;
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('hpmcgjqShvVIvunNuIYjDkApYvKmwwHd9s0NXjrk', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoid3ZEMjVrTTRleTFqZkZsN3ZXaVhiZHZxakhTRXpjVjBGcFZEZUFPaiI7czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjIxOiJwYXNzd29yZF9oYXNoX3NhbmN0dW0iO3M6NjA6IiQyeSQxMCR3aXAzcXg5MVBsWERrcmouekVqb0MuL3dsSW50Z0lLM1EuckFKZ2d3UWhmWFJGaUlubURabSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NTE6Imh0dHA6Ly9wb2tlcm9tX3JlYmlydGgudGVzdC9wdWJsaWMvcm9tLWZpbGVzL2NyZWF0ZSI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1657604443);
+('hpmcgjqShvVIvunNuIYjDkApYvKmwwHd9s0NXjrk', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoid3ZEMjVrTTRleTFqZkZsN3ZXaVhiZHZxakhTRXpjVjBGcFZEZUFPaiI7czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjIxOiJwYXNzd29yZF9oYXNoX3NhbmN0dW0iO3M6NjA6IiQyeSQxMCR3aXAzcXg5MVBsWERrcmouekVqb0MuL3dsSW50Z0lLM1EuckFKZ2d3UWhmWFJGaUlubURabSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDY6Imh0dHA6Ly9wb2tlcm9tX3JlYmlydGgudGVzdC9wdWJsaWMvYXBpL3ZlcnNpb24iO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1657610321);
 
 -- --------------------------------------------------------
 
