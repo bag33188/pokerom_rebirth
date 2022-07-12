@@ -14,7 +14,7 @@ use Illuminate\Database\Eloquent\Collection;
 class RomFileRepository implements RomFileRepositoryInterface
 {
     use RomFileQueriesTrait, RomQueriesTrait {
-        findMatchingRomFromFilename as protected;
+        findMatchingRomFromFilename as private;
     }
 
     // use only specific methods
