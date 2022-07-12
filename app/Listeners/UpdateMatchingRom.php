@@ -15,7 +15,7 @@ class UpdateMatchingRom implements ShouldQueue
     public bool $afterCommit = true;
 
     /**
-     * Needs to be static since RomFile bucket connection is scoped singleton
+     * Needs to be static since RomFile bucket connection is (a single) scoped singleton
      *
      * @var Rom|null
      */
@@ -29,7 +29,7 @@ class UpdateMatchingRom implements ShouldQueue
     }
 
     /**
-     * be sure to rap in an instance method since even has multiple instances
+     * be sure to rap in an instance method since this listener has multiple instances
      *
      * @param Rom|null $rom
      * @return void

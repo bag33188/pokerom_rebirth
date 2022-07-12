@@ -33,6 +33,14 @@ class RomFile extends MongoDbModel
         return $this->belongsTo(Rom::class, '_id', 'file_id');
     }
 
+    /**
+     * {@see Rom::rom_size rom_size} is represented in **kibibytes**.
+     * The method return's the RomFile's {@see RomFile::length length} value
+     * divided by {@see RomFile::DATA_BYTE_FACTOR `1024`} and rounds upward using
+     * the {@see ceil} function (casts result as integer).
+     *
+     * @return int
+     */
     public function calculateRomSizeFromLength(): int
     {
         return (int)ceil($this->attributes['length'] / self::DATA_BYTE_FACTOR);
