@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App;
 use Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider;
 use Illuminate\Support\ServiceProvider;
 use View;
@@ -15,8 +16,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        if ($this->app->isLocal()) {
-            $this->app->register(IdeHelperServiceProvider::class);
+        if (App::isLocal()) {
+            App::register(IdeHelperServiceProvider::class);
         }
     }
 

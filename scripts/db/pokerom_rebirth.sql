@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 12, 2022 at 10:59 PM
+-- Generation Time: Jul 13, 2022 at 12:38 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -233,7 +233,7 @@ TRUNCATE TABLE `failed_jobs`;
 -- Table structure for table `games`
 --
 -- Creation: Jul 12, 2022 at 06:58 PM
--- Last update: Jul 12, 2022 at 07:33 PM
+-- Last update: Jul 12, 2022 at 09:22 PM
 --
 
 DROP TABLE IF EXISTS `games`;
@@ -408,7 +408,7 @@ TRUNCATE TABLE `password_resets`;
 -- Table structure for table `personal_access_tokens`
 --
 -- Creation: Jul 06, 2022 at 01:56 AM
--- Last update: Jul 12, 2022 at 08:54 PM
+-- Last update: Jul 12, 2022 at 09:28 PM
 --
 
 DROP TABLE IF EXISTS `personal_access_tokens`;
@@ -440,7 +440,7 @@ TRUNCATE TABLE `personal_access_tokens`;
 --
 
 INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `name`, `token`, `abilities`, `last_used_at`, `created_at`, `updated_at`) VALUES
-(4, 'App\\Models\\User', 1, 'auth_token', 'b200ae710c4932db20b99bbae0344eac8e3a7802a9d15181c6d79cfb29e090cb', '[\"*\"]', '2022-07-13 03:54:27', '2022-07-10 23:51:32', '2022-07-13 03:54:27');
+(4, 'App\\Models\\User', 1, 'auth_token', 'b200ae710c4932db20b99bbae0344eac8e3a7802a9d15181c6d79cfb29e090cb', '[\"*\"]', '2022-07-13 04:28:24', '2022-07-10 23:51:32', '2022-07-13 04:28:24');
 
 -- --------------------------------------------------------
 
@@ -448,7 +448,7 @@ INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `n
 -- Table structure for table `roms`
 --
 -- Creation: Jul 06, 2022 at 02:20 AM
--- Last update: Jul 12, 2022 at 08:50 PM
+-- Last update: Jul 12, 2022 at 09:22 PM
 --
 
 DROP TABLE IF EXISTS `roms`;
@@ -528,7 +528,7 @@ INSERT INTO `roms` (`id`, `file_id`, `game_id`, `rom_name`, `rom_size`, `rom_typ
 -- Table structure for table `sessions`
 --
 -- Creation: Jul 06, 2022 at 02:20 AM
--- Last update: Jul 12, 2022 at 08:51 PM
+-- Last update: Jul 12, 2022 at 10:37 PM
 --
 
 DROP TABLE IF EXISTS `sessions`;
@@ -557,7 +557,7 @@ TRUNCATE TABLE `sessions`;
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('zIx6W70OkEny8pJ9GCP5t3BYMQ8vlOQAVKzwG34R', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiWmZFU1ZHeVZLUldGd2xLcmw0eGJrYklXbktrRTBENlRoSXlPU0h1VCI7czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjIxOiJwYXNzd29yZF9oYXNoX3NhbmN0dW0iO3M6NjA6IiQyeSQxMCR3aXAzcXg5MVBsWERrcmouekVqb0MuL3dsSW50Z0lLM1EuckFKZ2d3UWhmWFJGaUlubURabSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NTE6Imh0dHA6Ly9wb2tlcm9tX3JlYmlydGgudGVzdC9wdWJsaWMvcm9tLWZpbGVzL2NyZWF0ZSI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1657659119);
+('zIx6W70OkEny8pJ9GCP5t3BYMQ8vlOQAVKzwG34R', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiWmZFU1ZHeVZLUldGd2xLcmw0eGJrYklXbktrRTBENlRoSXlPU0h1VCI7czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjIxOiJwYXNzd29yZF9oYXNoX3NhbmN0dW0iO3M6NjA6IiQyeSQxMCR3aXAzcXg5MVBsWERrcmouekVqb0MuL3dsSW50Z0lLM1EuckFKZ2d3UWhmWFJGaUlubURabSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDY6Imh0dHA6Ly9wb2tlcm9tX3JlYmlydGgudGVzdC9wdWJsaWMvYXBpL3ZlcnNpb24iO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1657665438);
 
 -- --------------------------------------------------------
 
