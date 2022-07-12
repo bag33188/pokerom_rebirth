@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 12, 2022 at 09:21 AM
+-- Generation Time: Jul 12, 2022 at 10:28 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -32,29 +32,70 @@ DELIMITER $$
 -- Procedures
 --
 DROP PROCEDURE IF EXISTS `FindMatchingRomFromFilename`$$
-CREATE DEFINER=`bag33188`@`%` PROCEDURE `FindMatchingRomFromFilename` (IN `ROM_FILENAME` VARCHAR(32))  READS SQL DATA SELECT * FROM `roms` WHERE `rom_name` = SPLIT_STRING(`ROM_FILENAME`, '.', 1) AND `rom_type` = SPLIT_STRING(`ROM_FILENAME`, '.', 2) AND (`has_file` = 0 OR `file_id` IS NULL) LIMIT 1$$
+CREATE DEFINER=`bag33188`@`%` PROCEDURE `FindMatchingRomFromFilename` (IN `ROM_FILENAME` VARCHAR(32))  READS SQL DATA BEGIN
+	DECLARE `romName` VARCHAR(28) DEFAULT SPLIT_STRING(`ROM_FILENAME`, '.', 1);
+    DECLARE `romType` VARCHAR(3) DEFAULT SPLIT_STRING(`ROM_FILENAME`, '.', 2);
+	SELECT * FROM `roms`
+	WHERE `rom_name` = `romName`
+	AND `rom_type` = `romType`
+	AND (`has_file` = FALSE OR `file_id` IS NULL) LIMIT 1;
+END$$
 
 DROP PROCEDURE IF EXISTS `FindRomsWithNoGame`$$
 CREATE DEFINER=`bag33188`@`%` PROCEDURE `FindRomsWithNoGame` ()  READS SQL DATA BEGIN
-SELECT `id`, `rom_name`, `rom_type`, /* IF (0 = FALSE, 'false', 'true') AS */ `has_game`, `game_id` FROM `roms` WHERE `has_game` = FALSE AND `game_id` IS NULL ORDER BY `rom_name` DESC;
+	SELECT `id`, `rom_name`, `rom_type`, /* IF (0 = FALSE, 'false', 'true') AS */ `has_game`, `game_id`
+    FROM `roms`
+    WHERE `has_game` = FALSE AND `game_id` IS NULL
+    ORDER BY `rom_name` DESC;
 END$$
 
 DROP PROCEDURE IF EXISTS `GetAllPokeROMData`$$
-CREATE DEFINER=`bag33188`@`%` PROCEDURE `GetAllPokeROMData` ()  READS SQL DATA SQL SECURITY INVOKER SELECT `roms`.`id` AS `rom_id`, `roms`.`rom_name` AS `rom_name`, `roms`.`rom_type` AS `rom_type`, `roms`.`rom_size` * 1024 AS `rom_size`, CONCAT_ROM_FILENAME(`roms`.`rom_name`, `roms`.`rom_type`) AS `rom_filename`, `roms`.`file_id` AS `rom_file_id`,
-`games`.`id` AS `game_id`, `games`.`game_name` AS `game_name`, `games`.`game_type` AS `game_type`, `games`.`region` AS `region`, `games`.`generation` AS `generation`, `games`.`date_released` AS `date_released`
-FROM `roms` RIGHT JOIN `games` ON `roms`.`id` = `games`.`rom_id` WHERE `roms`.`has_game` = TRUE AND `roms`.`has_file` = TRUE AND `roms`.`game_id` IS NOT NULL AND `roms`.`file_id` IS NOT NULL ORDER BY `game_id` ASC$$
+CREATE DEFINER=`bag33188`@`%` PROCEDURE `GetAllPokeROMData` ()  READS SQL DATA SQL SECURITY INVOKER COMMENT 'Gathers all PokeROM Data in the database.' BEGIN
+	DECLARE `base_byte_offset` SMALLINT UNSIGNED DEFAULT 1024;
+    SELECT
+        `roms`.`id` AS `rom_id`,
+        `roms`.`rom_name` AS `rom_name`,
+        `roms`.`rom_type` AS `rom_type`,
+        `roms`.`rom_size` * `base_byte_offset` AS `rom_size`,
+        CONCAT_ROM_FILENAME(`roms`.`rom_name`, `roms`.`rom_type`) AS `rom_filename`,
+        `roms`.`file_id` AS `rom_file_id`,
+        `games`.`id` AS `game_id`,
+        `games`.`game_name` AS `game_name`,
+        `games`.`game_type` AS `game_type`,
+        `games`.`region` AS `region`,
+        `games`.`generation` AS `generation`,
+        `games`.`date_released` AS `date_released`
+    FROM
+        `roms`
+        RIGHT JOIN
+            `games`
+            ON `roms`.`id` = `games`.`rom_id`
+    WHERE
+        `roms`.`has_game` = TRUE
+        AND `roms`.`has_file` = TRUE
+        AND `roms`.`game_id` IS NOT NULL
+        AND `roms`.`file_id` IS NOT NULL
+    ORDER BY
+        `game_id` ASC;
+END$$
 
 DROP PROCEDURE IF EXISTS `UpdateRomFromRomFileData`$$
 CREATE DEFINER=`bag33188`@`%` PROCEDURE `UpdateRomFromRomFileData` (IN `ROM_FILE_ID` CHAR(24), IN `ROM_FILE_SIZE` BIGINT UNSIGNED, IN `ROM_ID` BIGINT UNSIGNED)   BEGIN
-START TRANSACTION;
-  UPDATE `roms`
-  SET `file_id` = `ROM_FILE_ID`,
-      `rom_size` = CEIL(`ROM_FILE_SIZE` / 1024), -- get kilobytes value from bytes
-      `has_file` = TRUE
-  WHERE `id` = `ROM_ID`;
-COMMIT;
+    DECLARE `_rollback` BOOLEAN DEFAULT FALSE;
+    DECLARE CONTINUE HANDLER FOR SQLEXCEPTION SET `_rollback` = TRUE;
+	START TRANSACTION;
+  	UPDATE `roms`
+  		SET `file_id` = `ROM_FILE_ID`,
+      		`rom_size` = CEIL(`ROM_FILE_SIZE` / 1024), -- get Kibibytes value from bytes
+      		`has_file` = TRUE
+  		WHERE `id` = `ROM_ID`;
+    IF `_rollback` THEN
+        ROLLBACK;
+    ELSE
+        COMMIT;
+    END IF;
 /** !important:
-rom size is stored as Kibibytes
+rom size is stored as Kibibytes (base 1024)
 mongodb stored as bytes
 */
 END$$
@@ -63,22 +104,24 @@ END$$
 -- Functions
 --
 DROP FUNCTION IF EXISTS `CONCAT_ROM_FILENAME`$$
-CREATE DEFINER=`bag33188`@`%` FUNCTION `CONCAT_ROM_FILENAME` (`ROM_NAME` VARCHAR(30), `ROM_TYPE` ENUM('gb','gbc','gba','nds','3ds','xci')) RETURNS VARCHAR(34) CHARSET utf8mb4 SQL SECURITY INVOKER COMMENT 'concats rom name and rom type with period char' RETURN CONCAT(`ROM_NAME`, '.', UCASE(`ROM_TYPE`))
+CREATE DEFINER=`bag33188`@`%` FUNCTION `CONCAT_ROM_FILENAME` (`ROM_NAME` VARCHAR(28), `ROM_TYPE` ENUM('gb','gbc','gba','nds','3ds','xci')) RETURNS VARCHAR(32) CHARSET utf8mb4 SQL SECURITY INVOKER COMMENT 'concats rom name and rom type with period char' BEGIN
+	RETURN CONCAT(`ROM_NAME`, '.', UCASE(`ROM_TYPE`));
 /* !important
-return value length = 34;
-MAX_ROM_NAME_LENGTH = 30;
+return value length = 32;
+MAX_ROM_NAME_LENGTH = 28;
 MAX_ROM_TYPE_LENGTH = 3;
 '.'.length = 1;
-30 + 3 + 1 = 34;
-*/$$
+28 + 3 + 1 = 32;
+*/
+END$$
 
 DROP FUNCTION IF EXISTS `FORMAT_GAME_TYPE`$$
 CREATE DEFINER=`bag33188`@`%` FUNCTION `FORMAT_GAME_TYPE` (`GAME_TYPE` VARCHAR(8)) RETURNS VARCHAR(21) CHARSET utf8mb4 SQL SECURITY INVOKER BEGIN
-	SET @`eacute` = CAST('é' AS char(1));
+	SET @`eacute` = CONVERT(CAST('é' AS char(1)) USING utf8);
 	CASE LOWER(`GAME_TYPE`)
-		WHEN 'core' THEN RETURN CONCAT('Core Pok', @`eacute`, 'mon Game');
-		WHEN 'hack' THEN RETURN CONCAT('Pok', @`eacute`, 'mon ROM Hack');
-		WHEN 'spin-off' THEN RETURN CONCAT('Spin-Off Pok', @`eacute`, 'mon Game');
+		WHEN 'core' THEN RETURN CONCAT('Core Pok', @`eacute`, 'mon Game'); -- Core Pokemon Game
+		WHEN 'hack' THEN RETURN CONCAT('Pok', @`eacute`, 'mon ROM Hack'); -- Pokemon ROM Hack
+		WHEN 'spin-off' THEN RETURN CONCAT('Spin-Off Pok', @`eacute`, 'mon Game'); -- Spin-Off Pokemon Game
 		ELSE RETURN 'N/A';
 	END CASE;
 /** !important
@@ -89,13 +132,13 @@ MAX_GAME_TYPE_LENGTH = 21;
 END$$
 
 DROP FUNCTION IF EXISTS `FORMAT_ROM_SIZE`$$
-CREATE DEFINER=`bag33188`@`%` FUNCTION `FORMAT_ROM_SIZE` (`ROM_LENGTH_BYTES` INT UNSIGNED) RETURNS VARCHAR(9) CHARSET utf8mb4 DETERMINISTIC SQL SECURITY INVOKER COMMENT 'conversion issues get fixed in this function' BEGIN
-  DECLARE `size_val` FLOAT;
+CREATE DEFINER=`bag33188`@`%` FUNCTION `FORMAT_ROM_SIZE` (`ROM_LENGTH_BYTES` BIGINT UNSIGNED) RETURNS VARCHAR(9) CHARSET utf8mb4 DETERMINISTIC SQL SECURITY INVOKER COMMENT 'conversion issues get fixed in this function' BEGIN
+  DECLARE `size_val` FLOAT UNSIGNED;
   DECLARE `size_type` CHAR(2);
   DECLARE `size_str` VARCHAR(6);
-  DECLARE `one_kibibyte` INT DEFAULT 1024;
-  DECLARE `one_kilobyte` INT DEFAULT 1000;
-  DECLARE `one_gigabyte` INT DEFAULT POWER(`one_kilobyte`, 2);
+  DECLARE `one_kibibyte` SMALLINT UNSIGNED DEFAULT 1024;
+  DECLARE `one_kilobyte` SMALLINT UNSIGNED DEFAULT 1000;
+  DECLARE `one_gigabyte` MEDIUMINT UNSIGNED DEFAULT POWER(`one_kilobyte`, 2);
 
   -- MEGABYTES
   IF `ROM_LENGTH_BYTES` > `one_kibibyte` AND `ROM_LENGTH_BYTES` < `one_gigabyte` THEN
@@ -114,7 +157,7 @@ CREATE DEFINER=`bag33188`@`%` FUNCTION `FORMAT_ROM_SIZE` (`ROM_LENGTH_BYTES` INT
     SET `size_type` = 'B ';
     SET `size_val` = CAST(`ROM_LENGTH_BYTES` * `one_kibibyte` AS FLOAT);
   END IF;
-  SET `size_str` = CAST(`size_val` AS VARCHAR(6));
+  SET `size_str` = CONVERT(`size_val`, VARCHAR(6));
   RETURN CONCAT(`size_str`, ' ', `size_type`);
 /** !important:
 return value length = 9;
@@ -124,20 +167,19 @@ MAX_ROM_SIZE_LENGTH = 9; // ex. '164.28 MB'
 END$$
 
 DROP FUNCTION IF EXISTS `SPLIT_STRING`$$
-CREATE DEFINER=`bag33188`@`%` FUNCTION `SPLIT_STRING` (`STR_VAL` VARCHAR(255), `SEPARATOR` VARCHAR(1), `POSITION` INT) RETURNS VARCHAR(255) CHARSET utf8mb4 DETERMINISTIC COMMENT 'splits a string based on delimiter ' BEGIN
-
-        DECLARE `max_results` INT ;
+CREATE DEFINER=`bag33188`@`%` FUNCTION `SPLIT_STRING` (`STR_VAL` VARCHAR(2048), `SEPARATOR` VARCHAR(1) CHARSET utf8, `POSITION` MEDIUMINT) RETURNS VARCHAR(1024) CHARSET utf8mb4 DETERMINISTIC COMMENT 'splits a string based on delimiter ' BEGIN
+        DECLARE `max_results` MEDIUMINT;
 
         -- get max number of items
         SET `max_results` = LENGTH(`STR_VAL`) - LENGTH(REPLACE(`STR_VAL`, `SEPARATOR`, '')) + 1;
 
-        IF `SEPARATOR` > `max_results` THEN
-            RETURN NULL ;
+        IF `POSITION` > `max_results` THEN
+            RETURN NULL;
         ELSE
-            RETURN SUBSTRING_INDEX(SUBSTRING_INDEX(`STR_VAL`, `SEPARATOR`, `POSITION`), `SEPARATOR` , -1);
+            RETURN SUBSTRING_INDEX(SUBSTRING_INDEX(`STR_VAL`, `SEPARATOR`, `POSITION`), `SEPARATOR`, -1);
         END IF;
-
-    END$$
+-- keep SEPARATOR as VARCHAR since if CHAR is used then a SPACE character will not work as a SEPARATOR
+END$$
 
 DELIMITER ;
 
@@ -390,7 +432,7 @@ INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `n
 -- Table structure for table `roms`
 --
 -- Creation: Jul 06, 2022 at 02:20 AM
--- Last update: Jul 12, 2022 at 06:11 AM
+-- Last update: Jul 12, 2022 at 08:11 AM
 --
 
 DROP TABLE IF EXISTS `roms`;
@@ -398,7 +440,7 @@ CREATE TABLE `roms` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `file_id` char(24) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'this unique constraint references a MongoDB GridFS file database which is binded at the API level.',
   `game_id` bigint(20) UNSIGNED DEFAULT NULL,
-  `rom_name` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `rom_name` varchar(28) COLLATE utf8mb4_unicode_ci NOT NULL,
   `rom_size` int(10) UNSIGNED NOT NULL DEFAULT 1020 COMMENT 'rom size value measured in kilobytes',
   `rom_type` enum('gb','gbc','gba','nds','3ds','xci') COLLATE utf8mb4_unicode_ci NOT NULL,
   `has_game` tinyint(1) NOT NULL DEFAULT 0,
@@ -470,7 +512,7 @@ INSERT INTO `roms` (`id`, `file_id`, `game_id`, `rom_name`, `rom_size`, `rom_typ
 -- Table structure for table `sessions`
 --
 -- Creation: Jul 06, 2022 at 02:20 AM
--- Last update: Jul 12, 2022 at 07:18 AM
+-- Last update: Jul 12, 2022 at 08:11 AM
 --
 
 DROP TABLE IF EXISTS `sessions`;
@@ -499,7 +541,7 @@ TRUNCATE TABLE `sessions`;
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('hpmcgjqShvVIvunNuIYjDkApYvKmwwHd9s0NXjrk', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoid3ZEMjVrTTRleTFqZkZsN3ZXaVhiZHZxakhTRXpjVjBGcFZEZUFPaiI7czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjIxOiJwYXNzd29yZF9oYXNoX3NhbmN0dW0iO3M6NjA6IiQyeSQxMCR3aXAzcXg5MVBsWERrcmouekVqb0MuL3dsSW50Z0lLM1EuckFKZ2d3UWhmWFJGaUlubURabSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDY6Imh0dHA6Ly9wb2tlcm9tX3JlYmlydGgudGVzdC9wdWJsaWMvYXBpL3ZlcnNpb24iO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1657610321);
+('hpmcgjqShvVIvunNuIYjDkApYvKmwwHd9s0NXjrk', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoid3ZEMjVrTTRleTFqZkZsN3ZXaVhiZHZxakhTRXpjVjBGcFZEZUFPaiI7czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjIxOiJwYXNzd29yZF9oYXNoX3NhbmN0dW0iO3M6NjA6IiQyeSQxMCR3aXAzcXg5MVBsWERrcmouekVqb0MuL3dsSW50Z0lLM1EuckFKZ2d3UWhmWFJGaUlubURabSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDY6Imh0dHA6Ly9wb2tlcm9tX3JlYmlydGgudGVzdC9wdWJsaWMvYXBpL3ZlcnNpb24iO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1657613519);
 
 -- --------------------------------------------------------
 
