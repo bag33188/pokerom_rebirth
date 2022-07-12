@@ -6,14 +6,14 @@ use App\Interfaces\Service\GameServiceInterface as IGameDataService;
 use App\Interfaces\Service\RomServiceInterface as IRomDataService;
 use App\Interfaces\Service\RomFileServiceInterface as IRomFileDataService;
 use App\Interfaces\Service\UserServiceInterface as IUserDataService;
-use App\Services\Data\GameService;
-use App\Services\Data\RomService;
-use App\Services\Data\RomFileService;
-use App\Services\Data\UserService;
+use App\Services\Api\GameService;
+use App\Services\Api\RomService;
+use App\Services\Api\RomFileService;
+use App\Services\Api\UserService;
 use Illuminate\Support\ServiceProvider;
 
 
-class DataServiceProvider extends ServiceProvider
+class ApiServiceProvider extends ServiceProvider
 {
     /**
      * Register services.

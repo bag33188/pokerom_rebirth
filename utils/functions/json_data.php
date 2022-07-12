@@ -7,7 +7,7 @@ if (!function_exists('jsonData')) {
     /**
      * Use this function to return a new {@see JsonDataResponse} object for use with methods
      * that do not explicitly return a resource and/or collection
-     * (or that don't use a {@see \App\Providers\DataServiceProvider DataServiceProvider} method)
+     * (or that don't use a {@see \App\Providers\ApiServiceProvider DataServiceProvider} method)
      *
      * @param array $data
      * @param int $code

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Data;
+namespace App\Services\Api;
 
 use App\Interfaces\Service\GameServiceInterface;
 use App\Models\Game;

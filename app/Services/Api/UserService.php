@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Data;
+namespace App\Services\Api;
 
 use App\Interfaces\Action\UserActionsInterface;
 use App\Interfaces\Service\UserServiceInterface;

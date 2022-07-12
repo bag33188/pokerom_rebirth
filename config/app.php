@@ -202,7 +202,7 @@ return [
         App\Providers\FortifyServiceProvider::class,
         App\Providers\JetstreamServiceProvider::class,
         App\Providers\RepositoryServiceProvider::class,
-        App\Providers\DataServiceProvider::class,
+        App\Providers\ApiServiceProvider::class,
         App\Providers\GridFSServiceProvider::class,
         App\Providers\ActionServiceProvider::class,
 
