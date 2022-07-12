@@ -2,10 +2,10 @@
 
 namespace App\Providers;
 
-use App\Interfaces\Service\GameServiceInterface as IGameDataService;
-use App\Interfaces\Service\RomServiceInterface as IRomDataService;
-use App\Interfaces\Service\RomFileServiceInterface as IRomFileDataService;
-use App\Interfaces\Service\UserServiceInterface as IUserDataService;
+use App\Interfaces\Service\GameServiceInterface as IGameApiService;
+use App\Interfaces\Service\RomServiceInterface as IRomApiService;
+use App\Interfaces\Service\RomFileServiceInterface as IRomFileApiService;
+use App\Interfaces\Service\UserServiceInterface as IUserApiService;
 use App\Services\Api\GameService;
 use App\Services\Api\RomService;
 use App\Services\Api\RomFileService;
@@ -22,9 +22,9 @@ class ApiServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->bind(IUserDataService::class, UserService::class);
-        $this->app->bind(IGameDataService::class, GameService::class);
-        $this->app->bind(IRomDataService::class, RomService::class);
-        $this->app->bind(IRomFileDataService::class, RomFileService::class);
+        $this->app->bind(IUserApiService::class, UserService::class);
+        $this->app->bind(IGameApiService::class, GameService::class);
+        $this->app->bind(IRomApiService::class, RomService::class);
+        $this->app->bind(IRomFileApiService::class, RomFileService::class);
     }
 }

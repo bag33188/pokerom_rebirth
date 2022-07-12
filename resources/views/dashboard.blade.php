@@ -2,7 +2,7 @@
     <script <?= 'type="text/javascript"'; ?> src="{{ mix('js/dashboard.index.js') }}"></script>
     <script <?php echo 'type="text/javascript"'; ?>>
         $(document).ready(() => {
-            loadWelcomeContent('{{$username}}');
+            loadWelcomeContent('{{ $username }}');
         });
     </script>
 @endpush

@@ -2,14 +2,7 @@
 
 /*
  * Application Entity Values
- *
- * Notes:
- *  + Loads `chars.php` as a dependency
  */
-
-// load `chars.php` constants
-include_once "chars.inc.php";
-
 
 /** directory that contains all bin rom files */
 const ROM_FILES_DIRNAME = 'rom_files';

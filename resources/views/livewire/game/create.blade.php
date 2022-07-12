@@ -26,7 +26,7 @@
                     @php
                         $placeholder = "<option value='' selected>Select ROM</option>";
                         convertSingleToDoubleQuotes($placeholder);
-                        print $placeholder;
+                        print $placeholder . "\n";
                         foreach ($availableRoms as $rom) {
                             normalizeClassObject($rom);
                             $html = "<option value='{$rom->id}' wire:key='{$rom->id}'>{$rom->rom_name}</option>";
