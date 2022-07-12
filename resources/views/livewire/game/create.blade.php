@@ -40,6 +40,7 @@
                 <div class="mt-2.5">
                     <x-jet-label for="gameType" :value="__('Game Type')"/>
                     <x-form-select wire:model="game_type" name="game_type" id="gameType" required autofocus>
+                        <option value="" selected>Select Game Type</option>
                         @foreach(GAME_TYPES as $gameType)
                             <option value="{{$gameType}}">{{str_capitalize($gameType, true, 2, '-')}}</option>
                         @endforeach

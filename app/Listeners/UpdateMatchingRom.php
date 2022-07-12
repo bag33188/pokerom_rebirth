@@ -25,7 +25,6 @@ class UpdateMatchingRom implements ShouldQueue
     public function shouldQueue(RomFileCreated $event): bool
     {
         $rom = RomFileRepo::searchForRomMatchingFile($event->romFile->filename);
-
         $this->setMatchingRom($rom);
         return !$event->romFile->rom()->exists() && $this->matchingRomExists();
     }

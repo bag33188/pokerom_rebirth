@@ -31,8 +31,9 @@ class Create extends Component
 
     public function boot()
     {
+        // add select placeholder
         $this->region = REGIONS[0];
-        $this->game_type = GAME_TYPES[0];
+//        $this->game_type = GAME_TYPES[0];
         $this->rom_id = 0;
     }
 
