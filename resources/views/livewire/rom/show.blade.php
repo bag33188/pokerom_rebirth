@@ -22,7 +22,7 @@
                 <livewire:rom.delete class="delete" :romId="$romId"/>
             </div>
             <div class="col-start-1 col-end-1 row-start-2 row-end-2 justify-self-start h-auto flex flex-row">
-                <x-jet-button class="order-0 mr-1.5" type="button" wire:click="edit({{$romId}})">Edit!</x-jet-button>
+                <x-jet-button class="order-0 mr-2" type="button" wire:click="edit({{$romId}})">Edit!</x-jet-button>
                 @unless($rom->has_file || isset($rom->file_id))
                     <x-jet-button class="order-1" wire:click="attemptToLinkRomToRomFile">Attempt ROM File Link
                     </x-jet-button>
