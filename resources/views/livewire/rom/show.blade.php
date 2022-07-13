@@ -21,12 +21,13 @@
             <div class="col-start-2 col-end-2 row-start-2 row-end-2 justify-self-end h-auto">
                 <livewire:rom.delete class="delete" :romId="$romId"/>
             </div>
-            <div class="col-start-1 col-end-1 row-start-2 row-end-2 justify-self-start h-auto">
-                <x-jet-button type="button" wire:click="edit({{$romId}})">Edit!</x-jet-button>
+            <div class="col-start-1 col-end-1 row-start-2 row-end-2 justify-self-start h-auto flex flex-row">
+                <x-jet-button class="order-0 mr-1.5" type="button" wire:click="edit({{$romId}})">Edit!</x-jet-button>
                 @unless($rom->has_file || isset($rom->file_id))
-                    <x-jet-button wire:click="attemptToLinkRomToRomFile">Attempt ROM File Link</x-jet-button>
+                    <x-jet-button class="order-1" wire:click="attemptToLinkRomToRomFile">Attempt ROM File Link
+                    </x-jet-button>
                 @else
-                    <x-rom-file-download :rom-file="$rom->romFile">
+                    <x-rom-file-download class="order-1" :rom-file="$rom->romFile">
                         <x-slot:submitButton>
                             <x-jet-button>Download</x-jet-button>
                         </x-slot:submitButton>
