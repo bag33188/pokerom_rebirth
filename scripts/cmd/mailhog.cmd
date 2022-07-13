@@ -17,6 +17,8 @@ REM.||(
 :MAILHOG
 
     REM assumes working directory is project directory
+    REM %USERPROFILE%\PhpstormProjects\pokerom_rebirth
+    REM CD %PKR%
 
     .\misc\bin\MailHog_windows_386.exe
 
