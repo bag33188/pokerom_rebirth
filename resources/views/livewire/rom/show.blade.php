@@ -25,6 +25,12 @@
                 <x-jet-button type="button" wire:click="edit({{$romId}})">Edit!</x-jet-button>
                 @unless($rom->has_file || isset($rom->file_id))
                     <x-jet-button wire:click="attemptToLinkRomToRomFile">Attempt ROM File Link</x-jet-button>
+                @else
+                    <x-rom-file-download :rom-file="$rom->romFile">
+                        <x-slot:submitButton>
+                            <x-jet-button>Download</x-jet-button>
+                        </x-slot:submitButton>
+                    </x-rom-file-download>
                 @endunless
             </div>
         @endif

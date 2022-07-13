@@ -41,12 +41,12 @@
                         <td class="px-6 py-4">
                             @if($rom->has_file)
                                 <x-rom-file-download :rom-file="$rom->romFile">
-                                    <x-slot name="submitButton">
+                                    <x-slot:submitButton>
                                         <button type="submit" class="{!! join(_SPACE, $downloadBtnClasses) !!}">
                                             <span class="order-0">@include('partials._download-icon')</span>
                                             <span class="order-1 ml-2">Download!</span>
                                         </button>
-                                    </x-slot>
+                                    </x-slot:submitButton>
                                 </x-rom-file-download>
                             @else
                                 <p class="font-normal text-lg">No File yet :(</p>
