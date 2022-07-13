@@ -22,7 +22,10 @@ _**Enjoy!**_
 
 [comment]: # 'End README.md'
 -->
+[comment]: # 'Begin README.md'
 
 # Pok&eacute;ROM Rebirth
 
 Nintendo Games Library and ROMs Data Bank
+
+[comment]: # 'End README.md'
