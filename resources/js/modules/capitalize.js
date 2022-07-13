@@ -54,7 +54,7 @@ String.prototype.capitalize = function (
  * @returns {capitalizationOptions}
  * @constructor
  */
-const CapitalizationOptions = function (
+let CapitalizationOptions = function (
     deep = false,
     depth = 0,
     separator = spaceChar
