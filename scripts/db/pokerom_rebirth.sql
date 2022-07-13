@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 13, 2022 at 12:38 AM
+-- Generation Time: Jul 13, 2022 at 02:30 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -61,7 +61,7 @@ CREATE DEFINER=`bag33188`@`%` PROCEDURE `GetAllPokeROMData` ()  READS SQL DATA S
         `roms`.`rom_name` AS `rom_name`,
         `roms`.`rom_type` AS `rom_type`,
         `roms`.`rom_size` * 1024 AS `rom_size`,
-        CONCAT_ROM_FILENAME(`roms`.`rom_name`, `roms`.`rom_type`) AS `rom_filename`,
+        CONCAT_FILENAME(`roms`.`rom_name`, `roms`.`rom_type`) AS `rom_filename`,
         `roms`.`file_id` AS `rom_file_id`,
         `games`.`id` AS `game_id`,
         `games`.`game_name` AS `game_name`,
@@ -116,9 +116,9 @@ CREATE DEFINER=`bag33188`@`%` FUNCTION `BOOL_TO_STRING` (`BOOL_VAL` TINYINT(1) U
 	END IF;
 END$$
 
-DROP FUNCTION IF EXISTS `CONCAT_ROM_FILENAME`$$
-CREATE DEFINER=`bag33188`@`%` FUNCTION `CONCAT_ROM_FILENAME` (`ROM_NAME` VARCHAR(28), `ROM_TYPE` ENUM('gb','gbc','gba','nds','3ds','xci')) RETURNS VARCHAR(32) CHARSET utf8mb4 SQL SECURITY INVOKER COMMENT 'concats rom name and rom type with period char' BEGIN
-	RETURN CONCAT(`ROM_NAME`, '.', UCASE(`ROM_TYPE`));
+DROP FUNCTION IF EXISTS `CONCAT_FILENAME`$$
+CREATE DEFINER=`bag33188`@`%` FUNCTION `CONCAT_FILENAME` (`FILE_NAME` VARCHAR(28), `FILE_TYPE` ENUM('gb','gbc','gba','nds','3ds','xci')) RETURNS VARCHAR(32) CHARSET utf8mb4 SQL SECURITY INVOKER COMMENT 'concats rom name and rom type with period char' BEGIN
+	RETURN CONCAT(`FILE_NAME`, '.', UCASE(`FILE_TYPE`));
 /* !important
 return value length = 32;
 MAX_ROM_NAME_LENGTH = 28;
@@ -233,7 +233,6 @@ TRUNCATE TABLE `failed_jobs`;
 -- Table structure for table `games`
 --
 -- Creation: Jul 12, 2022 at 06:58 PM
--- Last update: Jul 12, 2022 at 09:22 PM
 --
 
 DROP TABLE IF EXISTS `games`;
@@ -408,7 +407,7 @@ TRUNCATE TABLE `password_resets`;
 -- Table structure for table `personal_access_tokens`
 --
 -- Creation: Jul 06, 2022 at 01:56 AM
--- Last update: Jul 12, 2022 at 09:28 PM
+-- Last update: Jul 13, 2022 at 12:24 AM
 --
 
 DROP TABLE IF EXISTS `personal_access_tokens`;
@@ -440,7 +439,7 @@ TRUNCATE TABLE `personal_access_tokens`;
 --
 
 INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `name`, `token`, `abilities`, `last_used_at`, `created_at`, `updated_at`) VALUES
-(4, 'App\\Models\\User', 1, 'auth_token', 'b200ae710c4932db20b99bbae0344eac8e3a7802a9d15181c6d79cfb29e090cb', '[\"*\"]', '2022-07-13 04:28:24', '2022-07-10 23:51:32', '2022-07-13 04:28:24');
+(4, 'App\\Models\\User', 1, 'auth_token', 'b200ae710c4932db20b99bbae0344eac8e3a7802a9d15181c6d79cfb29e090cb', '[\"*\"]', '2022-07-13 07:24:30', '2022-07-10 23:51:32', '2022-07-13 07:24:30');
 
 -- --------------------------------------------------------
 
@@ -448,7 +447,6 @@ INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `n
 -- Table structure for table `roms`
 --
 -- Creation: Jul 06, 2022 at 02:20 AM
--- Last update: Jul 12, 2022 at 09:22 PM
 --
 
 DROP TABLE IF EXISTS `roms`;
@@ -528,7 +526,7 @@ INSERT INTO `roms` (`id`, `file_id`, `game_id`, `rom_name`, `rom_size`, `rom_typ
 -- Table structure for table `sessions`
 --
 -- Creation: Jul 06, 2022 at 02:20 AM
--- Last update: Jul 12, 2022 at 10:37 PM
+-- Last update: Jul 13, 2022 at 12:10 AM
 --
 
 DROP TABLE IF EXISTS `sessions`;
@@ -557,7 +555,7 @@ TRUNCATE TABLE `sessions`;
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('zIx6W70OkEny8pJ9GCP5t3BYMQ8vlOQAVKzwG34R', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiWmZFU1ZHeVZLUldGd2xLcmw0eGJrYklXbktrRTBENlRoSXlPU0h1VCI7czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjIxOiJwYXNzd29yZF9oYXNoX3NhbmN0dW0iO3M6NjA6IiQyeSQxMCR3aXAzcXg5MVBsWERrcmouekVqb0MuL3dsSW50Z0lLM1EuckFKZ2d3UWhmWFJGaUlubURabSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDY6Imh0dHA6Ly9wb2tlcm9tX3JlYmlydGgudGVzdC9wdWJsaWMvYXBpL3ZlcnNpb24iO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1657665438);
+('zIx6W70OkEny8pJ9GCP5t3BYMQ8vlOQAVKzwG34R', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiWmZFU1ZHeVZLUldGd2xLcmw0eGJrYklXbktrRTBENlRoSXlPU0h1VCI7czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjIxOiJwYXNzd29yZF9oYXNoX3NhbmN0dW0iO3M6NjA6IiQyeSQxMCR3aXAzcXg5MVBsWERrcmouekVqb0MuL3dsSW50Z0lLM1EuckFKZ2d3UWhmWFJGaUlubURabSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDY6Imh0dHA6Ly9wb2tlcm9tX3JlYmlydGgudGVzdC9wdWJsaWMvYXBpL3ZlcnNpb24iO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1657671030);
 
 -- --------------------------------------------------------
 
