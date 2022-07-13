@@ -25,7 +25,7 @@ String.prototype.capitalize = function (
     let { deep, depth, separator } = options;
     let strVal = this.trim();
     if (!strVal.length) return null;
-    let strArr = strVal.split(separator).filter((s) => s.length > 0);
+    let strArr = strVal.split(separator);
     if (deep === true && depth > 0) {
         let strWordCount = strArr.length;
         if (depth > strWordCount) depth = strWordCount;
