@@ -1,6 +1,6 @@
 <?php
 
-namespace GridFS\Support;
+namespace Utils\Classes;
 
 use Jenssegers\Mongodb\Eloquent\Model as MongoDbModel;
 

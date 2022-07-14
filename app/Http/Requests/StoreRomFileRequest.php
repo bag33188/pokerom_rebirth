@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use App\Http\Validators\RomFileValidationRulesTrait;
 use App\Models\RomFile;
+use GridFS\Support\FilenameHandler;
 use Illuminate\Foundation\Http\FormRequest;
 use JetBrains\PhpStorm\ArrayShape;
 
@@ -22,6 +23,16 @@ class StoreRomFileRequest extends FormRequest
     public function authorize(): bool
     {
         return $this->user()->can('create', RomFile::class);
+    }
+
+    protected function prepareForValidation(): void
+    {
+        $fileUtil = new FilenameHandler($this->filename);
+        $fileUtil->normalizeFileName();
+        $romFilename = $fileUtil->filename;
+        $this->merge([
+            'filename' => $romFilename,
+        ]);
     }
 
     #[ArrayShape(['filename' => "array"])]

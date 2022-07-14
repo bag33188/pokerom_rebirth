@@ -26,11 +26,6 @@ abstract class AbstractGridFSConnection extends GridFS
         $this->selectFileBucket();
     }
 
-    public function getBucket(): Bucket
-    {
-        return $this->bucket;
-    }
-
     protected function setConnectionValues(): void
     {
         $this->databaseName = $this->gridFSDatabase->databaseName;

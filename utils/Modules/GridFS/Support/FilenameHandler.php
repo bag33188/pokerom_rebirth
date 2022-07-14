@@ -20,7 +20,7 @@ class FilenameHandler
     {
         $storagePath = isset($storagePathPrefix)
             ? storage_path($storagePathPrefix)
-            : MongoUtils::getGridFSConfigArray()['fileUploadPath'];
+            : config('gridfs.fileUploadPath');
         return "$storagePath/{$this->filename}";
     }
 

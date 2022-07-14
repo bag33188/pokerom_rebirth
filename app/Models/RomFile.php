@@ -2,15 +2,15 @@
 
 namespace App\Models;
 
-use GridFS\Support\AbstractGridFSModel as GridFSModel;
-use GridFS\Support\MongoUtils as MongoUtil;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Jenssegers\Mongodb\Eloquent\Model as MongoDbModel;
 use MongoDB\BSON\ObjectId;
+use Utils\Classes\AbstractGridFSModel as GridFSModel;
 
 /** @mixin GridFSModel */
 class RomFile extends MongoDbModel
 {
+
     protected $connection = 'mongodb';
     protected $collection = 'rom.files';
     protected $table = 'rom.files'; /*! don't delete!! use for eloquent helper code */
@@ -25,7 +25,7 @@ class RomFile extends MongoDbModel
 
     public function getObjectId(): ObjectId
     {
-        return MongoUtil::parseStringAsBSONObjectId($this->getKey());
+        return new ObjectId($this->getKey());
     }
 
     public function rom(): BelongsTo

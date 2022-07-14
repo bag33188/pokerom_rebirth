@@ -19,10 +19,9 @@ class GridFSProcessor extends GridFS implements GridFSProcessorInterface
     public final function upload(string $filename): void
     {
         $fileUtil = new FilenameHandler($filename);
-        $fileUtil->normalizeFileName();
         $filepath = $fileUtil->makeFilepathFromFilename();
         $stream = fopen($filepath, 'rb');
-        $this->gridFSConnection->bucket->uploadFromStream($fileUtil->filename, $stream);
+        $this->gridFSConnection->bucket->uploadFromStream($filename, $stream);
         fclose($stream);
     }
 

@@ -3,7 +3,6 @@
 namespace GridFS\Client;
 
 use GridFS\GridFS;
-use GridFS\Support\MongoUtils as MongoUtil;
 
 /**
  * GridFS Database Class for defining a MongoDB Database
@@ -41,8 +40,8 @@ abstract class AbstractGridFSDatabase extends GridFS
 
     private function setConfigVars(): void
     {
-        self::$gfsConfig = MongoUtil::getGridFSConfigArray();
-        self::$mongoConfig = MongoUtil::getMongoConfigArray();
+        self::$gfsConfig = config('gridfs');
+        self::$mongoConfig = config('database.connections.mongodb');
     }
 
     public function mongoURI(): string
