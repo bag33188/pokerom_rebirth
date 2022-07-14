@@ -1,12 +1,12 @@
 <?php
 
-namespace GridFS\Support;
+namespace GridFS\Client;
 
+use GridFS\GridFS;
+use GridFS\Support\FileDownloader;
+use GridFS\Support\FilenameHandler;
 use MongoDB\BSON\ObjectId;
 use MongoDB\GridFS\Bucket;
-use Utils\Classes\_Static\FileUtils;
-use Utils\Modules\FileDownloader;
-use GridFS\GridFS;
 
 class GridFSProcessor extends GridFS implements GridFSProcessorInterface
 {
@@ -22,7 +22,8 @@ class GridFSProcessor extends GridFS implements GridFSProcessorInterface
 
     public final function upload(string $filename): void
     {
-        $filepath = FileUtils::makeFilepathFromFilename($filename);
+        $fileUtil = new FilenameHandler($filename);
+        $filepath = $fileUtil->makeFilepathFromFilename();
         $stream = fopen($filepath, 'rb');
         $this->bucket->uploadFromStream($filename, $stream);
         fclose($stream);

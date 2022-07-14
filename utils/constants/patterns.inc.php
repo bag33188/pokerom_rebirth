@@ -16,3 +16,5 @@ const ROM_NAME_PATTERN = /** @lang RegExp */
 /** Detects the `time` part of a DateTime string */
 const TIME_STRING = /** @lang RegExp */
 '/\s?[0-2][0-4]:[0-5]\d:[0-5]\d$/';
+const FILENAME_PATTERN = /** @lang RegExp */
+"/^([\w\d\-_]{1,28})(?:\.)([\w\d]{2,3})$/i";

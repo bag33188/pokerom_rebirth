@@ -1,6 +1,6 @@
 <?php
 
-namespace Utils\Classes\_Static;
+namespace GridFS\Support;
 
 use MongoDB\BSON\ObjectId;
 
@@ -9,6 +9,9 @@ use MongoDB\BSON\ObjectId;
  */
 class MongoUtils
 {
+    public final const MONGO_CONFIG_PATH = 'database.connections.mongodb';
+    public final const GRIDFS_CONFIG_PATH = 'gridfs';
+
     /**
      * Converts a MongoDB ID string into a {@see ObjectId BSON Object ID}
      *
@@ -27,7 +30,7 @@ class MongoUtils
      */
     public static function getMongoConfigArray(): array
     {
-        return config('database.connections.mongodb');
+        return config(self::MONGO_CONFIG_PATH);
     }
 
     /**
@@ -37,6 +40,6 @@ class MongoUtils
      */
     public static function getGridFSConfigArray(): array
     {
-        return config('gridfs');
+        return config(self::GRIDFS_CONFIG_PATH);
     }
 }

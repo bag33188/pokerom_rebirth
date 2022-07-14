@@ -12,6 +12,9 @@ class WelcomeNotification extends Notification
 {
     use Queueable;
 
+    private const APP_NAME_TEXT = "PokeROM!";
+    private string $welcomeMessage;
+
 
     /**
      * Create a new notification instance.
@@ -20,6 +23,7 @@ class WelcomeNotification extends Notification
      */
     public function __construct(public User $user)
     {
+        $this->welcomeMessage = sprintf("Hello %s, welcome to the world of %s", $this->user->name, self::APP_NAME_TEXT);
     }
 
     /**
@@ -41,11 +45,16 @@ class WelcomeNotification extends Notification
      */
     public function toMail(mixed $notifiable): MailMessage
     {
-        $lnMsg = "Hello {$this->user->name}, welcome to the world of PokeROM!";
         return (new MailMessage)
             ->subject('Thank you for joining ' . config('app.name') . '!!')
             ->from(config('mail.from.address'))
-            ->line(str_replace("PokeROM!", POKE_EACUTE . 'ROM!', $lnMsg))
+            ->line(
+                str_replace(
+                    search: self::APP_NAME_TEXT,
+                    replace: sprintf("%sROM!", POKE_EACUTE),
+                    subject: $this->welcomeMessage
+                )
+            )
             ->action('Check it out!', route('roms.index'))
             ->line('Enjoy!');
     }
@@ -62,8 +71,11 @@ class WelcomeNotification extends Notification
         return [
             'subject' => 'Thank you for joining ' . config('app.name') . '!!',
             'from' => config('mail.from.address'),
-            'line1' => str_replace("PokeROM!", POKE_EACUTE . 'ROM!',
-                "Hello {$this->user->name}, welcome to the world of PokeROM!"),
+            'line1' => str_replace(
+                search: self::APP_NAME_TEXT,
+                replace: sprintf("%sROM!", POKE_EACUTE),
+                subject: $this->welcomeMessage
+            ),
             'action' => [
                 'hypertext' => 'Check it out!',
                 'hyperlink' => route('roms.index')

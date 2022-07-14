@@ -4,10 +4,17 @@ namespace GridFS;
 
 abstract class GridFS
 {
-    /** @var string unique name/identifier for each instance of module */
+    /**
+     * unique name/identifier for each instance of module
+     * @var string
+     */
     protected string $entityName;
 
-    /** @var string name of mongodb database */
+    /**
+     * name of mongodb database
+     *
+     * @var string
+     */
     protected string $databaseName;
 
     /**

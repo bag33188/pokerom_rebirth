@@ -2,8 +2,8 @@
 
 namespace GridFS\Client;
 
-use Utils\Classes\_Static\MongoUtils as MongoUtil;
 use GridFS\GridFS;
+use GridFS\Support\MongoUtils as MongoUtil;
 
 /**
  * GridFS Database Class for defining a MongoDB Database
