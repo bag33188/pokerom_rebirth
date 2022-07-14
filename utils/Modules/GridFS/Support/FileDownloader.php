@@ -27,22 +27,22 @@ class FileDownloader
         $this->downloadFile();
     }
 
-    protected function isEndOfFile(): bool
+    private function isEndOfFile(): bool
     {
         return feof($this->fileStream);
     }
 
-    protected function getCurrentFileBuffer(): false|string
+    private function getCurrentFileBuffer(): false|string
     {
         return fread($this->fileStream, $this->readyBytesChunkSize);
     }
 
-    protected function closeFileStream(): void
+    private function closeFileStream(): void
     {
         fclose($this->fileStream);
     }
 
-    protected function printBytesIfNotEndOfFile(): void
+    private function printBytesIfNotEndOfFile(): void
     {
         while (!$this->isEndOfFile()) {
             echo $this->getCurrentFileBuffer();

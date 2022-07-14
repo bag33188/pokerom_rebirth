@@ -9,6 +9,11 @@ class FilenameHandler
     {
     }
 
+    public function __invoke(): void
+    {
+        $this->normalizeFileName();
+    }
+
     /**
      * Generates a filepath from a given filename. You may specify an optional `storagePathPrefix`.
      * Otherwise, the gridfs `fileUploadPath` value is used.
@@ -27,19 +32,24 @@ class FilenameHandler
     public function normalizeFileName(): void
     {
         // destructure
-        list($name, $ext) = $this->splitFilenameIntoParts();
+        list($name, $ext) = $this->getFilenameEntities();
         $name = trim($name);
         $ext = strtolower($ext);
         $this->filename = "${name}.${ext}";
     }
 
-    public function splitFilenameIntoParts(): array
+    /**
+     * Returns file name and file extension in array
+     *
+     * @return array
+     */
+    private function getFilenameEntities(): array
     {
         // split filename string only into 2 parts regardless of how many period (`.`) characters there are
         return explode('.', $this->filename, 2);
     }
 
-    public function checkValidFilename(): bool|int
+    public function filenameIsValid(): bool|int
     {
         return preg_match(FILENAME_PATTERN, $this->filename);
     }
