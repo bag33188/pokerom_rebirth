@@ -11,6 +11,11 @@ class GridFSProcessor extends GridFS implements GridFSProcessorInterface
 {
     public function __construct(private readonly AbstractGridFSConnection $gridFSConnection)
     {
+        $this->setGridFSEntities();
+    }
+
+    private function setGridFSEntities(): void
+    {
         $this->bucketName = $this->gridFSConnection->bucketName;
         $this->chunkSize = $this->gridFSConnection->chunkSize;
         $this->databaseName = $this->gridFSConnection->databaseName;
