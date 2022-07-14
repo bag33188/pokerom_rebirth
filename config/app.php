@@ -223,7 +223,6 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
-        'GfsRomFile' => \App\Facades\RomFilesConnectionFacade::class,
         'UserRepo'=>\App\Facades\UserRepositoryFacade::class,
         'RomRepo'=>\App\Facades\RomRepositoryFacade::class,
         'GameRepo'=>\App\Facades\GameRepositoryFacade::class,

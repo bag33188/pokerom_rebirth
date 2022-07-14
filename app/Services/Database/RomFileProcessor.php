@@ -2,15 +2,19 @@
 
 namespace App\Services\Database;
 
-use GfsRomFile;
 use GridFS\Client\GridFSProcessor;
 
 class RomFileProcessor extends GridFSProcessor
 {
     protected string $entityName = 'rom_files.processor';
 
-    public function __construct()
+    /**
+     * Create new GridFS Processor Instance
+     *
+     * @param RomFilesConnection $romFilesConnection
+     */
+    public function __construct(RomFilesConnection $romFilesConnection)
     {
-        parent::__construct(GfsRomFile::getBucket());
+        parent::__construct($romFilesConnection);
     }
 }

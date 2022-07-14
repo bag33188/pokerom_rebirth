@@ -15,19 +15,19 @@ abstract class GridFS
      *
      * @var string
      */
-    protected string $databaseName;
+    public string $databaseName;
 
     /**
      * name of gridfs file bucket (default is `fs`)
      *
      * @var string
      */
-    protected string $bucketName;
+    public string $bucketName;
 
     /**
      * size of chunks to store files as (default is `261120`, `255kb`)
      *
      * @var int
      */
-    protected int $chunkSize;
+    public int $chunkSize;
 }

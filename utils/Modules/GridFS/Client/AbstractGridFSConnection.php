@@ -2,10 +2,10 @@
 
 namespace GridFS\Client;
 
+use GridFS\GridFS;
 use MongoDB\Client as MongoClient;
 use MongoDB\Database;
 use MongoDB\GridFS\Bucket;
-use GridFS\GridFS;
 
 /**
  * GridFS Connection Class for connection to a GridFS MongoDB Database
@@ -18,7 +18,7 @@ abstract class AbstractGridFSConnection extends GridFS
     private readonly string $dsn;
 
     /** @var Bucket gridfs bucket object */
-    private Bucket $bucket;
+    public readonly Bucket $bucket;
 
     public function __construct(private readonly AbstractGridFSDatabase $gridFSDatabase)
     {

@@ -6,38 +6,35 @@ use GridFS\GridFS;
 use GridFS\Support\FileDownloader;
 use GridFS\Support\FilenameHandler;
 use MongoDB\BSON\ObjectId;
-use MongoDB\GridFS\Bucket;
 
 class GridFSProcessor extends GridFS implements GridFSProcessorInterface
 {
-    private readonly Bucket $bucket;
-
-    /**
-     * @param Bucket $bucket GridFS Bucket Object
-     */
-    public function __construct(Bucket $bucket)
+    public function __construct(private readonly AbstractGridFSConnection $gridFSConnection)
     {
-        $this->bucket = $bucket;
+        $this->bucketName = $this->gridFSConnection->bucketName;
+        $this->chunkSize = $this->gridFSConnection->chunkSize;
+        $this->databaseName = $this->gridFSConnection->databaseName;
     }
 
     public final function upload(string $filename): void
     {
         $fileUtil = new FilenameHandler($filename);
+        $fileUtil->normalizeFileName();
         $filepath = $fileUtil->makeFilepathFromFilename();
         $stream = fopen($filepath, 'rb');
-        $this->bucket->uploadFromStream($filename, $stream);
+        $this->gridFSConnection->bucket->uploadFromStream($fileUtil->filename, $stream);
         fclose($stream);
     }
 
-    public final function download(ObjectId $fileId, int $downloadTransferSize): void
+    public final function download(ObjectId $fileId): void
     {
-        $stream = $this->bucket->openDownloadStream($fileId);
-        $downloader = new FileDownloader($stream, $downloadTransferSize);
+        $stream = $this->gridFSConnection->bucket->openDownloadStream($fileId);
+        $downloader = new FileDownloader($stream, CONTENT_TRANSFER_SIZE);
         $downloader->downloadFile();
     }
 
     public final function delete(ObjectId $fileId): void
     {
-        $this->bucket->delete($fileId);
+        $this->gridFSConnection->bucket->delete($fileId);
     }
 }

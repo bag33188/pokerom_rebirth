@@ -10,26 +10,6 @@ use GridFS\Support\MongoUtils as MongoUtil;
  */
 abstract class AbstractGridFSDatabase extends GridFS
 {
-    // change accessors on inherited properties
-    // protected => public
-
-    /** @var string name of mongodb database */
-    public string $databaseName;
-
-    /**
-     * name of gridfs file bucket (default is `fs`)
-     *
-     * @var string
-     */
-    public string $bucketName;
-
-    /**
-     * size of chunks to store files as (default is `261120`, `255kb`)
-     *
-     * @var int
-     */
-    public int $chunkSize;
-
     /**
      * specify whether to use authenticate when connecting to mongodb.
      *
