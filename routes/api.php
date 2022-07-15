@@ -69,7 +69,8 @@ Route::name('api.')->group(function () {
             // rom files metadata
             Route::get('/metadata/all', function () {
                 $columns = array('filename', 'filetype', 'filesize');
-                return Response::json(DB::connection('mongodb')->table('rom_files.info')->get($columns));
+                $data = DB::connection('mongodb')->table('rom_files.info')->get($columns);
+                return Response::json($data);
             })->middleware('admin')->name('metadata.all');
         });
 
