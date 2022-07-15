@@ -80,3 +80,5 @@ if (App::environment('local')) {
             ->name('api.dev.rom-files.download');
     });
 }
+
+# \DB::connection('mongodb')->table('rom_files.info')->get();
