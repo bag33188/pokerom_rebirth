@@ -45,7 +45,7 @@ class FileDownloader
     private function printBytesIfNotEndOfFile(): void
     {
         while (!$this->isEndOfFile()) {
-            echo $this->getCurrentFileBuffer();
+            $this->printCurrentFileBuffer();
         }
     }
 
@@ -53,5 +53,10 @@ class FileDownloader
     {
         $this->printBytesIfNotEndOfFile();
         $this->closeFileStream();
+    }
+
+    private function printCurrentFileBuffer(): void
+    {
+        echo $this->getCurrentFileBuffer();
     }
 }
