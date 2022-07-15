@@ -55,6 +55,9 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::prefix('grid')->group(function () {
             Route::get('/{romFileId}/download', [RomFileController::class, 'download']);
             Route::post('/upload', [RomFileController::class, 'upload']);
+            Route::get('/all', function () {
+                return DB::connection('mongodb')->table('rom_files.info')->get();
+            });
         });
         // storage routes
         Route::prefix('disk')->group(function () {
@@ -80,5 +83,3 @@ if (App::environment('local')) {
             ->name('api.dev.rom-files.download');
     });
 }
-
-# \DB::connection('mongodb')->table('rom_files.info')->get();
