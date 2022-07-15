@@ -5,7 +5,6 @@ use App\Http\Controllers\api\RomController;
 use App\Http\Controllers\api\RomFileController;
 use App\Http\Controllers\api\UserController;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Route;
 use Symfony\Component\HttpFoundation\Response as HttpResponse;
 
