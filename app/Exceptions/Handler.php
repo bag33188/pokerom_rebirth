@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use App;
+use Clockwork\Request\LogLevel;
 use Config;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -13,7 +14,6 @@ use Illuminate\Http\Request;
 use MongoDB\Driver\Exception\BulkWriteException;
 use MongoDB\Driver\Exception\WriteException;
 use PDOException;
-use Psr\Log\LogLevel;
 use Symfony\Component\HttpFoundation\Response as HttpResponse;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Throwable;
