@@ -80,7 +80,7 @@ Route::name('api.')->group(function () {
             Route::get('roms/{romId}/rom-file', [RomController::class, 'indexRomFile'])->name('roms.rom-file');
             Route::get('games/{gameId}/rom', [GameController::class, 'indexRom'])->name('games.rom');
             Route::get('rom-files/{romFileId}/rom', [RomFileController::class, 'indexRom'])->name('rom-files.rom');
-            // relationship actions
+            // actions
             Route::patch('roms/{romId}/link-romFile', [RomController::class, 'linkRomToRomFile'])->name('roms.link-romFile');
         });
     });

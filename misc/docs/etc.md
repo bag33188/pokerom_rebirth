@@ -11,6 +11,11 @@
 /("_id":)([\s\t\n\v]*)(\{[\s\t\n\v]*)("\$oid":)([\s\t\n\v]*)("[\da-fA-F]+")([\s\t\n\v]*)(})([\s\t\n\v]*)(,?)/gim
 ```
 
+### Sql detection auto increment fix regexp
+```regexp
+/ALTER\sTABLE\s`(roms|games)`[\r\n]\s+MODIFY\s`id`\sbigint\(20\)\sUNSIGNED\sNOT\sNULL\sAUTO_INCREMENT,\sAUTO_INCREMENT=(\d+);/gi
+```
+
 
 ### allow node and php to run together
 
