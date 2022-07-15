@@ -15,7 +15,7 @@
                 <span x-show="{{$alpineStates['shown']}}" {!!$cloakData['initShow']!!}>Hide</span>
                 <span x-show="{{$alpineStates['hidden']}}" {!!$cloakData['initHide']!!}>Show</span>
             </p>
-            <span>{!! "&nbsp;" !!}</span>
+            <span>{!! "&#xA0;" !!}</span>
             <p class="inline">{{$text}}</p>
         </div>
     </button>

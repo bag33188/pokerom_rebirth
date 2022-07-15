@@ -4,7 +4,7 @@
 
     <div class="flex justify-end">
         <x-jet-danger-button type="submit">
-            Delete{!! "&nbsp;" !!}<span class="font-bold">{{$romFile->filename}}</span>
+            <span>Delete{!! "&#160;" !!}<span class="font-bold">{{$romFile->filename}}</span></span>
         </x-jet-danger-button>
     </div>
 </form>

@@ -23,7 +23,7 @@
             <h2 class="text-center text-lg mt-7">No ROMs Exist in database</h2>
         @else
             <x-show-hide-button text="ROMs" :initial-state="$alpineInitialDisplayState"/>
-            <table class="w-full text-sm text-left text-gray-500 light:text-gray-400"
+            <table class="w-full text-sm text-left text-gray-800 light:text-gray-400"
                    x-show="{{$alpineInitialDisplayState->value}}" x-cloak>
                 <thead class="bg-gray-50">
                 <tr class="text-xs text-gray-700 uppercase light:bg-gray-700 light:text-gray-400">
@@ -64,8 +64,11 @@
                 </tbody>
                 <tfoot>
                 <tr class="text-sm text-gray-700 uppercase light:bg-gray-700 light:text-gray-400">
-                    <td class="px-6 py-3">Total Count: <span class="font-semibold">{{count($roms)}}</span></td>
-                    <td class="px-6 py-3">Total Size: <span class="font-semibold">{{$roms_total_size}} Bytes</span>
+                    <td class="px-6 py-3">
+                        <p>Total Count:&nbsp;<span class="font-semibold">{{count($roms)}}&nbsp;ROMs</span></p>
+                    </td>
+                    <td class="px-6 py-3">
+                        <p>Total Size:&nbsp;<span class="font-semibold">{{$roms_total_size}}&nbsp;Bytes</span></p>
                     </td>
                 </tr>
                 </tfoot>
