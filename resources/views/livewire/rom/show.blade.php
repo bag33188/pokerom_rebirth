@@ -3,6 +3,7 @@
         <h2 class="text-center text-lg">{{$rom->getRomFileName()}} Information</h2>
     </x-slot>
     @include('ui.session-error')
+    @include('ui.session-success')
     <div class="w-full grid grid-cols-2 grid-rows-[minmax(0,_1fr)_auto] gap-y-4">
         <x-list-group>
             <x-list-item>Rom Name: {{$rom->rom_name}}</x-list-item>

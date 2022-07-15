@@ -41,6 +41,8 @@ class Show extends Component
         $this->rom->refresh();
         if (!$this->rom->has_file || empty($this->rom->file_id)) {
             session()->flash('error-message', "No matching ROM File found with name of {$this->rom->getRomFileName()}");
+        } else {
+            session()->flash('success-message', "ROM File found and linked! {$this->rom->file_id}");
         }
     }
 }
