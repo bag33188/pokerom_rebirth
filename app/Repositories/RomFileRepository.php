@@ -32,7 +32,7 @@ class RomFileRepository implements RomFileRepositoryInterface
         return RomFile::with('rom')->get()->sortBy([['length', 'asc'], ['filename', 'asc']]);
     }
 
-    public function getRomFileByFilename(string $romFilename): ?RomFile
+    public function findRomFileByFilename(string $romFilename): ?RomFile
     {
         return RomFile::where('filename', '=', $romFilename)->first();
     }

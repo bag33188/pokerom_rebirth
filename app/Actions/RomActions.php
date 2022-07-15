@@ -26,7 +26,7 @@ class RomActions implements RomActionsInterface
 
     public function linkRomToFileIfExists(Rom $rom): void
     {
-        $romFile = RomFileRepo::getRomFileByFilename($rom->getRomFileName());
+        $romFile = RomFileRepo::findRomFileByFilename($rom->getRomFileName());
         if (isset($romFile)) $this->setRomDataFromRomFileData($rom, $romFile);
     }
 }

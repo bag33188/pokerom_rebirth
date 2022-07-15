@@ -19,7 +19,7 @@ class UserRepository implements UserRepositoryInterface
         return User::where('email', $email)->firstOrFail();
     }
 
-    public function paginateUsers(?int $perPage = null): LengthAwarePaginator
+    public function getPaginatedUsers(?int $perPage = null): LengthAwarePaginator
     {
         return User::paginate($perPage ?? 4)->withQueryString();
     }

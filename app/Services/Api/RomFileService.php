@@ -38,7 +38,7 @@ class RomFileService implements RomFileServiceInterface
     public function uploadRomFile(string $romFilename): JsonDataResponse
     {
         ProcessRomFileUpload::dispatchSync($romFilename);
-        $romFile = RomFileRepo::getRomFileByFilename($romFilename);
+        $romFile = RomFileRepo::findRomFileByFilename($romFilename);
         RomFileCreated::dispatch($romFile);
         return new JsonDataResponse(
             ['message' => "file '" . $romFile->filename . "' created!"],

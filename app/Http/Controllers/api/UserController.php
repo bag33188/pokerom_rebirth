@@ -32,7 +32,7 @@ class UserController extends ApiController
         Gate::authorize('viewAny-user');
         $paginateQueryIsTruthy = str_to_bool($request->query('paginate')) === true;
         return $paginateQueryIsTruthy
-            ? new UserCollection(UserRepo::paginateUsers((int)$request->query('per_page')))
+            ? new UserCollection(UserRepo::getPaginatedUsers((int)$request->query('per_page')))
             : new UserCollection(UserRepo::getAllUsers());
     }
 
