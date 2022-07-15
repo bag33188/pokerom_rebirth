@@ -16,8 +16,8 @@ class FileDownloader
     /** @var int */
     private int $fileBufferSize;
 
-    /** <span style="color:yellow;"><code>261120</code></span>&nbsp;&nbsp;(**255 Kibibytes**) @var int */
-    private const DEFAULT_BUFFER_SIZE = 0x3FC00; // 255 Kibibytes (261120 Bytes)
+    /** `261120` Bytes (`255` Kibibytes) @var int */
+    private const DEFAULT_BUFFER_SIZE = 0x3FC00; // 261,120
 
     /**
      * @param resource $fileStream
@@ -51,7 +51,7 @@ class FileDownloader
 
     private function printOutCurrentFileBuffer(): void
     {
-        echo $this->getCurrentFileBuffer();
+        print $this->getCurrentFileBuffer();
     }
 
     private function printBytesIfNotEndOfFile(): void

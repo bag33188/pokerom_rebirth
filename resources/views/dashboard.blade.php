@@ -1,6 +1,6 @@
 @push('scripts')
     <script <?= 'type="text/javascript"'; ?> src="{{ mix('js/dashboard.index.js') }}"></script>
-    <script <?php echo 'type="text/javascript"'; ?>>
+    <script <?= 'type="text/javascript"'; ?>>
         $(document).ready(() => {
             loadWelcomeContent('{{ $username }}');
         });
@@ -26,7 +26,7 @@
                         <span class="block h-12 w-auto">@include('partials._app-logo')</span>
                     </div>
                     <div class="mt-3 text-2xl">
-                        {!! str_replace('Poke', 'Pok&eacute;', config('app.name')) !!}
+                        {!! str_replace('Poke', "Pok&eacute;", config('app.name')) !!}
                     </div>
                 </div>
                 <div class="bg-gray-200 bg-opacity-25 grid grid-rows-3 grid-cols-2 md:grid-rows-2">

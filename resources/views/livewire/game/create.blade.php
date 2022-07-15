@@ -26,12 +26,13 @@
                     @php
                         $placeholder = "<option value='' selected>Select ROM</option>";
                         convertSingleToDoubleQuotes($placeholder);
-                        echo $placeholder . "\n";
+                        echo $placeholder;
+                        echo "\n";
                         foreach ($availableRoms as $rom) {
                             normalizeClassObject($rom);
                             $html = "<option value='{$rom->id}' wire:key='{$rom->id}'>{$rom->rom_name}</option>";
                             convertSingleToDoubleQuotes($html);
-                            echo $html . "\n";
+                            echo $html , "\n";
                         }
                     @endphp
                 </x-form-select>
