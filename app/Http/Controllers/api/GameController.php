@@ -14,6 +14,8 @@ use Symfony\Component\HttpKernel\Exception\PreconditionRequiredHttpException;
 
 class GameController extends ApiController
 {
+    /** @var string[] */
+    private static array $queryParams = ['romId'];
 
     public function __construct(private readonly GameServiceInterface $gameService)
     {
@@ -46,11 +48,15 @@ class GameController extends ApiController
      */
     public function store(StoreGameRequest $request): JsonResponse
     {
-        $romId = $request->query('romId') ??
+        $romId = $request->query(self::$queryParams[0]);
+
+        if (empty($romId)) {
             throw new PreconditionRequiredHttpException(
                 message: 'No ROM ID was sent.',
                 code: HttpResponse::HTTP_PRECONDITION_REQUIRED
             );
+        }
+
         $game = $this->gameService->createGameFromRomId($romId, $request->all());
         return (new GameResource($game))->response()->setStatusCode(HttpResponse::HTTP_CREATED);
     }

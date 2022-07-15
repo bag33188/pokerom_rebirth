@@ -81,7 +81,6 @@ class Handler extends ExceptionHandler
                 $statusCode = $e->getStatusCode();
                 $message = $e->getMessage();
                 if ($statusCode === HttpResponse::HTTP_NOT_FOUND && strlen($message) === 0) {
-
                     $message = "Route not found: $currentRoute";
                 }
                 return jsonData(['message' => $message], $statusCode, array('X-Http-Error-Request-URI' => $currentRoute));

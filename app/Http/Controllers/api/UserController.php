@@ -19,6 +19,8 @@ use UserRepo;
 
 class UserController extends ApiController
 {
+    /** @var string[] */
+    private static array $queryParams = ['paginate', 'per_page'];
 
     public function __construct(private readonly UserServiceInterface $userService)
     {
@@ -30,9 +32,13 @@ class UserController extends ApiController
     public function index(Request $request): UserCollection
     {
         Gate::authorize('viewAny-user');
-        $paginateQueryIsTruthy = str_to_bool($request->query('paginate')) === true;
+
+        $paginate = $request->query(self::$queryParams[0]);
+        $perPage = (int)$request->query(self::$queryParams[1]);
+
+        $paginateQueryIsTruthy = str_to_bool($paginate) === true;
         return $paginateQueryIsTruthy
-            ? new UserCollection(UserRepo::getPaginatedUsers((int)$request->query('per_page')))
+            ? new UserCollection(UserRepo::getPaginatedUsers($perPage))
             : new UserCollection(UserRepo::getAllUsers());
     }
 

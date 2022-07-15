@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 15, 2022 at 06:26 AM
+-- Generation Time: Jul 15, 2022 at 09:25 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -419,7 +419,7 @@ TRUNCATE TABLE `password_resets`;
 -- Table structure for table `personal_access_tokens`
 --
 -- Creation: Jul 06, 2022 at 01:56 AM
--- Last update: Jul 15, 2022 at 01:26 AM
+-- Last update: Jul 15, 2022 at 07:22 AM
 --
 
 DROP TABLE IF EXISTS `personal_access_tokens`;
@@ -451,7 +451,8 @@ TRUNCATE TABLE `personal_access_tokens`;
 --
 
 INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `name`, `token`, `abilities`, `last_used_at`, `created_at`, `updated_at`) VALUES
-(4, 'App\\Models\\User', 1, 'auth_token', 'b200ae710c4932db20b99bbae0344eac8e3a7802a9d15181c6d79cfb29e090cb', '[\"*\"]', '2022-07-15 08:26:16', '2022-07-10 23:51:32', '2022-07-15 08:26:16');
+(5, 'App\\Models\\User', 4, 'auth_token', '3c29f68438c5d82dd86c2bf79b64221047f32046e349cf87493598b7f8d90717', '[\"*\"]', '2022-07-15 14:11:30', '2022-07-15 13:40:41', '2022-07-15 14:11:30'),
+(6, 'App\\Models\\User', 1, 'auth_token', '9c82aacf8e882fa27dfa37282d9eba461708b1f06a7e04c3c4bdd558b92c118c', '[\"*\"]', '2022-07-15 14:22:44', '2022-07-15 14:10:59', '2022-07-15 14:22:44');
 
 -- --------------------------------------------------------
 
@@ -459,6 +460,7 @@ INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `n
 -- Table structure for table `roms`
 --
 -- Creation: Jul 06, 2022 at 02:20 AM
+-- Last update: Jul 15, 2022 at 06:10 AM
 --
 
 DROP TABLE IF EXISTS `roms`;
@@ -491,7 +493,7 @@ TRUNCATE TABLE `roms`;
 --
 
 INSERT INTO `roms` (`id`, `file_id`, `game_id`, `rom_name`, `rom_size`, `rom_type`, `has_game`, `has_file`, `created_at`, `updated_at`) VALUES
-(1, '62c1f859f80501a0830fdd51', 1, 'POKEMON_RED01', 1024, 'gb', 1, 1, '2022-07-04 03:15:17', '2022-07-04 03:15:17'),
+(1, '62c1f859f80501a0830fdd51', 1, 'POKEMON_RED01', 1024, 'gb', 1, 1, '2022-07-04 03:15:17', '2022-07-15 13:10:13'),
 (2, '62c1f8553fc0765cf90218b1', 2, 'POKEMON_BLUE01', 1024, 'gb', 1, 1, '2022-07-04 03:15:28', '2022-07-04 03:15:28'),
 (3, '62c1f85078ebd701720e71b1', 3, 'POKEMON_GREEN01', 1024, 'gb', 1, 1, '2022-07-04 03:15:39', '2022-07-04 03:15:39'),
 (4, '62c1f84857a678cc7d0e2b51', 4, 'POKEMON_YELLOW01', 1024, 'gb', 1, 1, '2022-07-04 03:15:44', '2022-07-04 03:15:44'),
@@ -538,7 +540,7 @@ INSERT INTO `roms` (`id`, `file_id`, `game_id`, `rom_name`, `rom_size`, `rom_typ
 -- Table structure for table `sessions`
 --
 -- Creation: Jul 06, 2022 at 02:20 AM
--- Last update: Jul 15, 2022 at 04:17 AM
+-- Last update: Jul 15, 2022 at 06:49 AM
 --
 
 DROP TABLE IF EXISTS `sessions`;
@@ -567,7 +569,8 @@ TRUNCATE TABLE `sessions`;
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('8NAHFL8Y5SO8bHVbUo5ddlOch8Xj9bjDRP3KiulM', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoidDJJVGN2WkhSU0xMdkZZNEg5VEo5OXgzMEhWWjM3MUtQNUdCN3RENyI7czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjIxOiJwYXNzd29yZF9oYXNoX3NhbmN0dW0iO3M6NjA6IiQyeSQxMCR3aXAzcXg5MVBsWERrcmouekVqb0MuL3dsSW50Z0lLM1EuckFKZ2d3UWhmWFJGaUlubURabSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDA6Imh0dHA6Ly9wb2tlcm9tX3JlYmlydGgudGVzdC9wdWJsaWMvZ2FtZXMiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1657858622);
+('IdGpIldMir3NoUVFODGqLQ5wLpWf7gUxhSr05fl6', NULL, '127.0.0.1', 'PostmanRuntime/7.29.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoic1Z1OVdxbGdjaUVmMmhPbWNhOTFsbnZkVzdZY2JyUWsyc3F6NkFBYyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDA6Imh0dHA6Ly9wb2tlcm9tX3JlYmlydGgudGVzdC9wdWJsaWMvbG9naW4iO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1657866716),
+('SVhUWTLl9VBBYkX1ba1xFmlFb1Yp8gth2qSNVZrO', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiTkpxbXdSM0ZUdjRFMFpZSWw2MGlOcHhsSkR4TUU2TkRQM2FZTlRFaCI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDA6Imh0dHA6Ly9wb2tlcm9tX3JlYmlydGgudGVzdC9wdWJsaWMvbG9naW4iO31zOjM6InVybCI7YToxOntzOjg6ImludGVuZGVkIjtzOjM5OiJodHRwOi8vcG9rZXJvbV9yZWJpcnRoLnRlc3QvcHVibGljL3JvbXMiO319', 1657867772);
 
 -- --------------------------------------------------------
 
@@ -575,6 +578,7 @@ INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, 
 -- Table structure for table `users`
 --
 -- Creation: Jun 05, 2022 at 04:47 PM
+-- Last update: Jul 15, 2022 at 06:36 AM
 --
 
 DROP TABLE IF EXISTS `users`;
@@ -609,7 +613,7 @@ TRUNCATE TABLE `users`;
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `two_factor_secret`, `two_factor_recovery_codes`, `two_factor_confirmed_at`, `role`, `remember_token`, `current_team_id`, `profile_photo_path`, `created_at`, `updated_at`) VALUES
-(1, 'Brock', 'bglatman@outlook.com', NULL, '$2y$10$wip3qx91PlXDkrj.zEjoC./wlIntgIK3Q.rAJggwQhfXRFiInmDZm', NULL, NULL, NULL, 'admin', 'SXbxMOVA0qvHickDmatixL99NZVw5WyPoANtopoOGXmqhVe8nj29UoKSSd75', NULL, NULL, '2022-07-04 02:35:33', '2022-07-10 23:32:39'),
+(1, 'Brock', 'bglatman@outlook.com', NULL, '$2y$10$wip3qx91PlXDkrj.zEjoC./wlIntgIK3Q.rAJggwQhfXRFiInmDZm', NULL, NULL, NULL, 'admin', 'ApQW0sZc7nwXCM0stxZ6Xp6UflD6CWjFe6hZzLrh9hFPMFJApTbPniFrZoGA', NULL, NULL, '2022-07-04 02:35:33', '2022-07-10 23:32:39'),
 (4, 'John Doe', 'jdoe123@gmail.com', NULL, '$2y$10$TzzNPZc0JrCcsUyJB4FhQ.khUwfmikQwxpM1ZKneb/QloOTmcFnX2', NULL, NULL, NULL, 'user', NULL, NULL, NULL, '2022-07-08 13:10:55', '2022-07-08 13:10:55');
 
 --
@@ -701,7 +705,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `roms`
