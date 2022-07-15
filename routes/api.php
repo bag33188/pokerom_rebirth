@@ -41,7 +41,7 @@ Route::middleware('auth:sanctum')->group(function () {
         '/games' => GameController::class,
         '/users' => UserController::class
     ]);
-    Route::apiResource('/rom-files', RomFileController::class)->only('index', 'show', 'destroy');
+    Route::apiResource('/rom-files', RomFileController::class)->only(['index', 'show', 'destroy']);
 
     // auth routes
     Route::prefix('auth')->group(function () {
@@ -55,16 +55,18 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::prefix('grid')->group(function () {
             Route::get('/{romFileId}/download', [RomFileController::class, 'download']);
             Route::post('/upload', [RomFileController::class, 'upload']);
-            Route::get('/file-info', function () {
-                $columns = array('filename', 'filetype', 'filesize');
-                return DB::connection('mongodb')->table('rom_files.info')->get($columns);
-            })->middleware('admin')->name('api.pokerom_files.info');
         });
         // storage routes
         Route::prefix('disk')->group(function () {
             Route::get('/list-files', [RomFileController::class, 'listFilesInRomFilesStorage']);
             Route::get('/list-roms', [RomFileController::class, 'listRomsInRomFilesStorage']);
         });
+
+        // extraneous route(s)
+        Route::get('/metadata/all', function () {
+            $columns = array('filename', 'filetype', 'filesize');
+            return DB::connection('mongodb')->table('rom_files.info')->get($columns);
+        })->middleware(['auth:sanctum', 'admin'])->name('api.pokerom_files.info');
     });
 
     // relationships
@@ -75,7 +77,6 @@ Route::middleware('auth:sanctum')->group(function () {
     // relationship actions
     Route::patch('/roms/{romId}/link-file', [RomController::class, 'linkRomToFile']);
 });
-
 
 // experimental routes (debug only)
 if (App::environment('local')) {
