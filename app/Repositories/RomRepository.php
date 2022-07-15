@@ -67,4 +67,10 @@ class RomRepository implements RomRepositoryInterface
         [$query, $bindings] = $this->formatRomSize($romSize)->getValues();
         return DB::selectOne($query, $bindings)->romSize;
     }
+
+    public function getRomsCount(): int
+    {
+        $query = $this->countRomsInDatabase()->toArray()['query'];
+        return DB::selectOne($query)->count;
+    }
 }

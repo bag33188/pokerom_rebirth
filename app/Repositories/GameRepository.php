@@ -31,7 +31,6 @@ class GameRepository implements GameRepositoryInterface
         return $this->findGameIfExists($gameId)->rom()->first();
     }
 
-
     public function getFormattedGameType(string $gameType): string
     {
         [$query, $bindings] = $this->formatGameType($gameType)->getValues();
@@ -42,5 +41,11 @@ class GameRepository implements GameRepositoryInterface
     {
         [$query] = $this->findRomsWithNoGame()->getValues();
         return Rom::fromQuery($query);
+    }
+
+    public function getGamesCount(): int
+    {
+        $query = $this->countGamesInDatabase()->toArray()['query'];
+        return DB::selectOne($query)->count;
     }
 }

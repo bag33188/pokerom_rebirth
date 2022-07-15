@@ -10,14 +10,15 @@
 @endphp
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="text-center text-lg">Pok&#xE9;mon ROM Files</h2>
+        <h2 class="text-center text-lg">Pok&#xE9;mon ROM Files (<span
+                class="font-semibold">{{$romFilesCount}} Total</span>)</h2>
     </x-slot>
     <div x-data="{ open: true }">
         @unless(sizeof($romFiles) > 0)
             <h2 class="text-center text-lg mt-7">No ROM Files Exist in database</h2>
         @else
             <x-show-hide-button text="ROM Files" :initial-state="$alpineInitialDisplayState"/>
-            <div class="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-4 m-4 items-center"
+            <div class="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-4 mx-4 mb-4 mt-1 items-center"
                  x-show="{{$alpineInitialDisplayState->value}}" x-cloak>
                 @foreach($romFiles as $romFile)
                     <div

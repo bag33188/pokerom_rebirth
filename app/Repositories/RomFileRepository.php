@@ -27,9 +27,9 @@ class RomFileRepository implements RomFileRepositoryInterface
         return RomFile::all()->sortBy([['length', 'asc'], ['filename', 'asc']]);
     }
 
-    public function getAllRomFilesWithRomDataSorted(): Collection
+    public function getAllRomFilesSortedWithRomData(): Collection
     {
-        return RomFile::with(['rom'])->get()->sortBy([['length', 'asc'], ['filename', 'asc']]);
+        return RomFile::with('rom')->get()->sortBy([['length', 'asc'], ['filename', 'asc']]);
     }
 
     public function getRomFileByFilename(string $romFilename): ?RomFile

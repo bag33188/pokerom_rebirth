@@ -24,4 +24,6 @@ interface RomRepositoryInterface
     public function searchForRomMatchingRomFile(RomFile $romFile): ?Rom;
 
     public function getFormattedRomSize(int $romSize): string;
+
+    public function getRomsCount(): int;
 }

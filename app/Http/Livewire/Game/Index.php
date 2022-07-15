@@ -14,13 +14,22 @@ class Index extends Component
     /** @var Game[] */
     public $games;
 
-    public function render(): Factory|View|Application
+    /** @var int */
+    public $gamesCount;
+
+    public function mount()
     {
         $this->games = GameRepo::getAllGamesSorted();
+        $this->gamesCount = GameRepo::getGamesCount();
+    }
+
+    public function render(): Factory|View|Application
+    {
         return view('livewire.game.index');
     }
 
-    public function show(int $gameId) {
+    public function show(int $gameId)
+    {
         $this->redirect(route('games.show', $gameId));
     }
 }

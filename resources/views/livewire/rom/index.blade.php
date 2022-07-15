@@ -65,10 +65,11 @@
                 <tfoot>
                 <tr class="text-sm text-gray-700 uppercase light:bg-gray-700 light:text-gray-400">
                     <td class="px-6 py-3">
-                        <p>Total Count:&nbsp;<span class="font-semibold">{{count($roms)}}&nbsp;ROMs</span></p>
+                        <p>Total Count:&nbsp;<span class="font-semibold">{{$totalRomsCount}}&nbsp;ROMs</span>
+                        </p>
                     </td>
                     <td class="px-6 py-3">
-                        <p>Total Size:&nbsp;<span class="font-semibold">{{$roms_total_size}}&nbsp;Bytes</span></p>
+                        <p>Total Size:&nbsp;<span class="font-semibold">{{$romFileSizeSum}}&nbsp;Bytes</span></p>
                     </td>
                 </tr>
                 </tfoot>

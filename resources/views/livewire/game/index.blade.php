@@ -9,6 +9,7 @@
 <div>
     <x-slot name="header">
         <h2 class="text-center text-lg">Pok&eacute;mon Games Library</h2>
+        <h5 class="text-center text-gray-700">{{$gamesCount}} Games in Total</h5>
     </x-slot>
     <div class="container mx-auto" x-data="{ open: true }">
         @if(count($games) < 1)

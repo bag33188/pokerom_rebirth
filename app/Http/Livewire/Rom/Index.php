@@ -17,20 +17,30 @@ class Index extends Component
     /** @var string[] */
     public $romsTableColumns;
 
-    public function boot()
-    {
-        $this->roms = RomRepo::getRomsWithGameAndFileInfo();
-    }
+    /** @var int */
+    public $romFileSizeSum;
+    /** @var int */
+    public $totalRomsCount;
 
-    public function booted()
+    public function boot()
     {
         $this->romsTableColumns = array('ROM Name', 'ROM Size', 'ROM Type', 'Game Name', 'Download', 'Information');
     }
 
+    public function booted()
+    {
+        $this->romFileSizeSum = RomFileRepo::getTotalSizeOfAllRomFiles();
+        $this->totalRomsCount = RomRepo::getRomsCount();
+    }
+
+    public function mount()
+    {
+        $this->roms = RomRepo::getRomsWithGameAndFileInfo();
+    }
+
     public function render(): Factory|View|Application
     {
-        $romFileSizeSum = RomFileRepo::getTotalSizeOfAllRomFiles();
-        return view('livewire.rom.index', ['roms_total_size' => $romFileSizeSum]);
+        return view('livewire.rom.index');
     }
 
     public function show(int $romId)

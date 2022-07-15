@@ -34,7 +34,10 @@ class RomFileController extends ViewController
     public function index(): Response
     {
         Gate::authorize('viewAny-romFile');
-        return response()->view('rom-file.index', ['romFiles' => RomFileRepo::getAllRomFilesWithRomDataSorted()]);
+        return response()->view('rom-file.index', [
+            'romFiles' => RomFileRepo::getAllRomFilesSortedWithRomData(),
+            'romFilesCount' => RomFileRepo::countRomFiles()
+        ]);
     }
 
     /**

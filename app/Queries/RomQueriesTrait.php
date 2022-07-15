@@ -36,4 +36,16 @@ trait RomQueriesTrait
         $params = [$romFilename];
         return new QueryObject($sql, $params);
     }
+
+    /**
+     * ### Property accessor: **`count`**
+     *
+     * @return QueryObject
+     */
+    protected function countRomsInDatabase(): QueryObject
+    {
+        $sql = /** @lang MariaDB */
+            "CALL CountPokeROMData('roms');";
+        return new QueryObject($sql);
+    }
 }

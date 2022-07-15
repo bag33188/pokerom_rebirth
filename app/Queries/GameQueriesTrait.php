@@ -27,4 +27,16 @@ trait GameQueriesTrait
         $params = [$gameType];
         return new QueryObject($sql, $params);
     }
+
+    /**
+     * ### Property accessor: **`count`**
+     *
+     * @return QueryObject
+     */
+    protected function countGamesInDatabase(): QueryObject
+    {
+        $sql = /** @lang MariaDB */
+            "CALL CountPokeROMData('games');";
+        return new QueryObject($sql);
+    }
 }

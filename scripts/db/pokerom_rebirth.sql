@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 13, 2022 at 02:30 AM
+-- Generation Time: Jul 15, 2022 at 06:22 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -31,11 +31,23 @@ DELIMITER $$
 --
 -- Procedures
 --
-DROP PROCEDURE IF EXISTS `CountRomsAndGames`$$
-CREATE DEFINER=`bag33188`@`%` PROCEDURE `CountRomsAndGames` ()  READS SQL DATA SQL SECURITY INVOKER BEGIN
-	SELECT COUNT(*) FROM `roms`
-    UNION ALL
-    SELECT COUNT(*) FROM `games`;
+DROP PROCEDURE IF EXISTS `CountPokeROMData`$$
+CREATE DEFINER=`bag33188`@`%` PROCEDURE `CountPokeROMData` (IN `SELECTION` ENUM('roms','games','both'))  READS SQL DATA SQL SECURITY INVOKER BEGIN
+    CASE LCASE(`SELECTION`)
+    	-- count just `roms` table
+    	WHEN 'roms' THEN
+        	SELECT COUNT(*) AS `count` FROM `roms`;
+        -- count just `games` table
+        WHEN 'games' THEN
+        	SELECT COUNT(*) AS `count` FROM `games`;
+        -- count both `roms` and `games` tables (UNION ALL)
+        WHEN 'both' THEN
+        	SELECT COUNT(*) AS `count` FROM `roms`
+        	UNION ALL
+        	SELECT COUNT(*) AS `count` FROM `games`
+            LIMIT 2;
+	ELSE BEGIN END;
+    END CASE;
 END$$
 
 DROP PROCEDURE IF EXISTS `FindMatchingRomFromFilename`$$
@@ -407,7 +419,7 @@ TRUNCATE TABLE `password_resets`;
 -- Table structure for table `personal_access_tokens`
 --
 -- Creation: Jul 06, 2022 at 01:56 AM
--- Last update: Jul 13, 2022 at 12:24 AM
+-- Last update: Jul 15, 2022 at 01:26 AM
 --
 
 DROP TABLE IF EXISTS `personal_access_tokens`;
@@ -439,7 +451,7 @@ TRUNCATE TABLE `personal_access_tokens`;
 --
 
 INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `name`, `token`, `abilities`, `last_used_at`, `created_at`, `updated_at`) VALUES
-(4, 'App\\Models\\User', 1, 'auth_token', 'b200ae710c4932db20b99bbae0344eac8e3a7802a9d15181c6d79cfb29e090cb', '[\"*\"]', '2022-07-13 07:24:30', '2022-07-10 23:51:32', '2022-07-13 07:24:30');
+(4, 'App\\Models\\User', 1, 'auth_token', 'b200ae710c4932db20b99bbae0344eac8e3a7802a9d15181c6d79cfb29e090cb', '[\"*\"]', '2022-07-15 08:26:16', '2022-07-10 23:51:32', '2022-07-15 08:26:16');
 
 -- --------------------------------------------------------
 
@@ -526,7 +538,7 @@ INSERT INTO `roms` (`id`, `file_id`, `game_id`, `rom_name`, `rom_size`, `rom_typ
 -- Table structure for table `sessions`
 --
 -- Creation: Jul 06, 2022 at 02:20 AM
--- Last update: Jul 13, 2022 at 12:10 AM
+-- Last update: Jul 15, 2022 at 04:17 AM
 --
 
 DROP TABLE IF EXISTS `sessions`;
@@ -555,7 +567,7 @@ TRUNCATE TABLE `sessions`;
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('zIx6W70OkEny8pJ9GCP5t3BYMQ8vlOQAVKzwG34R', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiWmZFU1ZHeVZLUldGd2xLcmw0eGJrYklXbktrRTBENlRoSXlPU0h1VCI7czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjIxOiJwYXNzd29yZF9oYXNoX3NhbmN0dW0iO3M6NjA6IiQyeSQxMCR3aXAzcXg5MVBsWERrcmouekVqb0MuL3dsSW50Z0lLM1EuckFKZ2d3UWhmWFJGaUlubURabSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDY6Imh0dHA6Ly9wb2tlcm9tX3JlYmlydGgudGVzdC9wdWJsaWMvYXBpL3ZlcnNpb24iO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1657671030);
+('8NAHFL8Y5SO8bHVbUo5ddlOch8Xj9bjDRP3KiulM', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoidDJJVGN2WkhSU0xMdkZZNEg5VEo5OXgzMEhWWjM3MUtQNUdCN3RENyI7czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjIxOiJwYXNzd29yZF9oYXNoX3NhbmN0dW0iO3M6NjA6IiQyeSQxMCR3aXAzcXg5MVBsWERrcmouekVqb0MuL3dsSW50Z0lLM1EuckFKZ2d3UWhmWFJGaUlubURabSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDA6Imh0dHA6Ly9wb2tlcm9tX3JlYmlydGgudGVzdC9wdWJsaWMvZ2FtZXMiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1657858622);
 
 -- --------------------------------------------------------
 
