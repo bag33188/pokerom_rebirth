@@ -16,7 +16,7 @@ if (!function_exists('jsonData')) {
      */
     function jsonData(array $data, int $code, array $headers = []): JsonResponse
     {
-        // (new JsonDataResponse($data, $code, $headers))();
+        # (new JsonDataResponse($data, $code, $headers))();
         $response = new JsonDataResponse($data, $code, $headers);
         return $response();
     }
