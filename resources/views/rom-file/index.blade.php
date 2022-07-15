@@ -27,7 +27,8 @@
                         <p>{{$romFile->filename}}</p>
                         <p>{{$romFile->length}} Bytes</p>
                         <div class="justify-self-start align-self-end">
-                            <a href="{{route('rom-files.show', $romFile)}}" {!! $btnClasses !!}>Actions</a>
+                            <a href="{{route('rom-files.show', $romFile)}}"
+                                {!! preg_replace("/([\r\n]+)|((?:\s{2,8})|\t+)/", _SPACE, $btnClasses) !!}>Actions</a>
                         </div>
                     </div>
                 @endforeach

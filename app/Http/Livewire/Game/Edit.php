@@ -85,7 +85,7 @@ class Edit extends Component
             $this->redirect(route('games.show', $this->gameId));
 
         } catch (Exception $e) {
-            session()->flash('message', $e->getMessage());
+            session()->flash('error-message', $e->getMessage());
         }
     }
 }

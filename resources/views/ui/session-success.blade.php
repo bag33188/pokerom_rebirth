@@ -1,9 +1,9 @@
 @php
-    /** @var string[] $sessionErrorAlertClasses */
-    $sessionErrorAlertClasses = [
+    /** @var string[] $sessionSuccessAlertClasses */
+    $sessionSuccessAlertClasses = [
       'bg-white',
       'border-t-8',
-      'border-red-500',
+      'border-green-500',
       'rounded',
       'text-teal-900',
       'px-4',
@@ -12,11 +12,11 @@
       'my-3'
     ];
     /** @var string $sessionKeyName */
-    $sessionKeyName = 'error-message';
+    $sessionKeyName = 'success-message';
 @endphp
-{{-- Session Key: error-message --}}
+{{-- Session Key: success-message --}}
 @if (\Session::has($sessionKeyName))
-    <div class="{!! join(_SPACE, $sessionErrorAlertClasses) !!}" role="alert">
+    <div class="{!! join(_SPACE, $sessionSuccessAlertClasses) !!}" role="alert">
         <div class="flex flex-row justify-start">
             <p class="font-medium">{{ \Session::get($sessionKeyName) }}</p>
         </div>

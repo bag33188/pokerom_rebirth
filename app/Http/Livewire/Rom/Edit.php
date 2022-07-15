@@ -77,7 +77,7 @@ class Edit extends Component
             ]);
             $this->redirect(route('roms.show', $this->romId));
         } catch (Exception $e) {
-            session()->flash('message', $e->getMessage());
+            session()->flash('error-message', $e->getMessage());
         }
     }
 }

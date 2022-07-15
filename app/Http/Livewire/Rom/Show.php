@@ -40,7 +40,7 @@ class Show extends Component
         $this->redirect(route('roms.show', $this->romId));
         $this->rom->refresh();
         if (!$this->rom->has_file || empty($this->rom->file_id)) {
-            session()->flash('message', "No matching ROM File found with name of {$this->rom->getRomFileName()}");
+            session()->flash('error-message', "No matching ROM File found with name of {$this->rom->getRomFileName()}");
         }
     }
 }

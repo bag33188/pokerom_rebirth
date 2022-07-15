@@ -59,7 +59,7 @@ class Create extends Component
 
             $this->redirect(route('roms.index'));
         } catch (Exception $e) {
-            session()->flash('message', $e->getMessage());
+            session()->flash('error-message', $e->getMessage());
         }
     }
 }
