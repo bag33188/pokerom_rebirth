@@ -31,26 +31,26 @@ Route::middleware([
 ])->group(function () {
     // laravel routes
     Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
-    Route::prefix('rom-files')->group(function () {
-        Route::get('/', [RomFileController::class, 'index'])->name('rom-files.index');
-        Route::get('/info/{romFile}', [RomFileController::class, 'show'])->name('rom-files.show');
-        Route::get('/create', [RomFileController::class, 'create'])->name('rom-files.create')->middleware('admin');
-        Route::post('/store', [RomFileController::class, 'store'])->name('rom-files.store');
-        Route::delete('/delete/{romFile}', [RomFileController::class, 'destroy'])->name('rom-files.delete');
-        Route::post('/{romFile}/download', [RomFileController::class, 'download'])->name('rom-files.download');
+    Route::prefix('rom-files')->name('rom-files.')->group(function () {
+        Route::get('/', [RomFileController::class, 'index'])->name('index');
+        Route::get('/info/{romFile}', [RomFileController::class, 'show'])->name('show');
+        Route::get('/create', [RomFileController::class, 'create'])->name('create')->middleware('admin');
+        Route::post('/store', [RomFileController::class, 'store'])->name('store');
+        Route::delete('/delete/{romFile}', [RomFileController::class, 'destroy'])->name('delete');
+        Route::post('/{romFile}/download', [RomFileController::class, 'download'])->name('download');
     });
     // livewire routes
-    Route::prefix('roms')->group(function () {
-        Route::get('/', IndexRom::class)->name('roms.index');
-        Route::get('/create', CreateRom::class)->name('roms.create')->middleware('admin');
-        Route::get('/show/{romId}', ShowRom::class)->name('roms.show');
-        Route::get('/edit/{romId}', EditRom::class)->name('roms.edit')->middleware('admin');
+    Route::prefix('roms')->name('roms.')->group(function () {
+        Route::get('/', IndexRom::class)->name('index');
+        Route::get('/create', CreateRom::class)->name('create')->middleware('admin');
+        Route::get('/show/{romId}', ShowRom::class)->name('show');
+        Route::get('/edit/{romId}', EditRom::class)->name('edit')->middleware('admin');
     });
-    Route::prefix('games')->group(function () {
-        Route::get('/', IndexGame::class)->name('games.index');
-        Route::get('/create', CreateGame::class)->name('games.create')->middleware('admin');
-        Route::get('/show/{gameId}', ShowGame::class)->name('games.show');
-        Route::get('/edit/{gameId}', EditGame::class)->name('games.edit')->middleware('admin');
+    Route::prefix('games')->name('games.')->group(function () {
+        Route::get('/', IndexGame::class)->name('index');
+        Route::get('/create', CreateGame::class)->name('create')->middleware('admin');
+        Route::get('/show/{gameId}', ShowGame::class)->name('show');
+        Route::get('/edit/{gameId}', EditGame::class)->name('edit')->middleware('admin');
     });
 });
 
