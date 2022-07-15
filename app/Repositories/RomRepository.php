@@ -16,7 +16,7 @@ class RomRepository implements RomRepositoryInterface
 
     public function getSingleRomWithGameInfo(int $romId): Rom
     {
-        return Rom::with('game')->where('id', '=', $romId)->firstOrFail();
+        return Rom::with('game')->find($romId)->firstOrFail();
     }
 
     public function getRomsWithGameAndFileInfo(): Collection
