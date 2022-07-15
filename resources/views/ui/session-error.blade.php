@@ -2,9 +2,9 @@
     /** @var string[] */
     $sessionErrorAlertClasses = [
       'bg-white',
-      'border-t-4',
+      'border-t-8',
       'border-red-500',
-      'rounded-b',
+      'rounded',
       'text-teal-900',
       'px-4',
       'py-3',
@@ -15,7 +15,7 @@
 @if (\Session::has('message'))
     <div class="{!! join(_SPACE, $sessionErrorAlertClasses) !!}" role="alert">
         <div class="flex flex-row justify-start">
-            <p class="text-sm">{{ session('message') }}</p>
+            <p class="font-medium">{{ \Session::get('message') }}</p>
         </div>
     </div>
 @endif
