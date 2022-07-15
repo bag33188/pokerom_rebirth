@@ -23,9 +23,10 @@ class RomFileService implements RomFileServiceInterface
             $romFileBsonId = $romFile->getObjectId();
             ProcessRomFileDownload::dispatch($romFileBsonId);
         }, HttpResponse::HTTP_ACCEPTED, array(
-            'Content-Type' => ContentType::OCTET_STREAM->value,
-            'Content-Transfer-Encoding' => 'chunked',
-            'Content-Disposition' => "attachment; filename=\"" . $romFile->filename . "\""));
+                'Content-Type' => ContentType::OCTET_STREAM->value,
+                'Content-Transfer-Encoding' => 'chunked',
+                'Content-Disposition' => 'attachment; filename="' . $romFile->filename . '"')
+        );
     }
 
     /**
