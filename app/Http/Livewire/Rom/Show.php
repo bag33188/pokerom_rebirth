@@ -36,7 +36,7 @@ class Show extends Component
 
     public function attemptToLinkRomToRomFile(RomActionsInterface $romActions)
     {
-        $romActions->linkRomToFileIfExists($this->rom);
+        $romActions->linkRomToRomFileIfExists($this->rom);
         $this->redirect(route('roms.show', $this->romId));
         $this->rom->refresh();
         if (!$this->rom->has_file || empty($this->rom->file_id)) {

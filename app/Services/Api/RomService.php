@@ -18,7 +18,7 @@ class RomService implements RomServiceInterface
         $this->romActions = $romActions;
     }
 
-    public function attemptToLinkRomToFile(Rom $rom): JsonDataResponse
+    public function attemptToLinkRomToRomFile(Rom $rom): JsonDataResponse
     {
         $romFile = RomFileRepo::findRomFileByFilename($rom->getRomFileName());
         if (isset($romFile)) {

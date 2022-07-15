@@ -9,5 +9,5 @@ interface RomActionsInterface
 {
     public function setRomDataFromRomFileData(Rom $rom, RomFile $romFile): void;
 
-    public function linkRomToFileIfExists(Rom $rom): void;
+    public function linkRomToRomFileIfExists(Rom $rom): void;
 }

@@ -7,5 +7,5 @@ use Utils\Modules\JsonDataResponse;
 
 interface RomServiceInterface
 {
-    public function attemptToLinkRomToFile(Rom $rom): JsonDataResponse;
+    public function attemptToLinkRomToRomFile(Rom $rom): JsonDataResponse;
 }

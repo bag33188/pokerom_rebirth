@@ -39,7 +39,7 @@ class RomRepository implements RomRepositoryInterface
         return $this->findRomIfExists($romId)->game()->firstOrFail();
     }
 
-    public function getFileAssociatedWithRom(int $romId): RomFile
+    public function getRomFileAssociatedWithRom(int $romId): RomFile
     {
         return $this->findRomIfExists($romId)->romFile()->firstOrFail();
     }
@@ -58,7 +58,7 @@ class RomRepository implements RomRepositoryInterface
 
     public function getRomsCount(): int
     {
-        $query = $this->countRomsInDatabase()->toArray()['query'];
-        return DB::selectOne($query)->count;
+        [$query, $bindings] = $this->countRomsInDatabase()->getValues();
+        return DB::selectOne($query, $bindings)->count;
     }
 }

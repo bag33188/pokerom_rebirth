@@ -45,7 +45,8 @@ trait RomQueriesTrait
     protected function countRomsInDatabase(): QueryObject
     {
         $sql = /** @lang MariaDB */
-            "CALL CountPokeROMData('roms');";
-        return new QueryObject($sql);
+            "CALL CountPokeROMData(:selection);";
+        $params = ['selection' => 'roms'];
+        return new QueryObject($sql, $params);
     }
 }

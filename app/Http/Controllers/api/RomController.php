@@ -41,10 +41,10 @@ class RomController extends ApiController
     /**
      * @throws AuthorizationException
      */
-    public function indexFile(int $romId): RomFileResource
+    public function indexRomFile(int $romId): RomFileResource
     {
         Gate::authorize('viewAny-romFile');
-        return new RomFileResource(RomRepo::getFileAssociatedWithRom($romId));
+        return new RomFileResource(RomRepo::getRomFileAssociatedWithRom($romId));
     }
 
     /**
@@ -82,11 +82,11 @@ class RomController extends ApiController
     /**
      * @throws AuthorizationException
      */
-    public function linkRomToFile(int $romId): JsonResponse
+    public function linkRomToRomFile(int $romId): JsonResponse
     {
         $rom = RomRepo::findRomIfExists($romId);
         $this->authorize('update', $rom);
-        return $this->romService->attemptToLinkRomToFile($rom)->renderResponse();
+        return $this->romService->attemptToLinkRomToRomFile($rom)->renderResponse();
     }
 
     /**

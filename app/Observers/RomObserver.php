@@ -31,14 +31,14 @@ class RomObserver
 
     public function created(Rom $rom): void
     {
-        $this->romActions->linkRomToFileIfExists($rom);
+        $this->romActions->linkRomToRomFileIfExists($rom);
     }
 
     public function updated(Rom $rom): void
     {
         if (!$this->currentRequestIsLivewireRequest()) {
             if (!$rom->has_file || empty($rom->file_id)) {
-                $this->romActions->linkRomToFileIfExists($rom);
+                $this->romActions->linkRomToRomFileIfExists($rom);
             }
         }
     }

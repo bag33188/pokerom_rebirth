@@ -39,13 +39,13 @@ class GameRepository implements GameRepositoryInterface
 
     public function getAllRomsWithNoGame(): Collection
     {
-        [$query] = $this->findRomsWithNoGame()->getValues();
+        $query = $this->findRomsWithNoGame()->toArray()['query'];
         return Rom::fromQuery($query);
     }
 
     public function getGamesCount(): int
     {
-        $query = $this->countGamesInDatabase()->toArray()['query'];
-        return DB::selectOne($query)->count;
+        [$query, $bindings] = $this->countGamesInDatabase()->getValues();
+        return DB::selectOne($query, $bindings)->count;
     }
 }

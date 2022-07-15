@@ -2,7 +2,6 @@
 
 namespace App\Queries;
 
-use Illuminate\Support\Facades\DB;
 use Utils\Modules\QueryObject;
 
 trait GameQueriesTrait
@@ -36,7 +35,8 @@ trait GameQueriesTrait
     protected function countGamesInDatabase(): QueryObject
     {
         $sql = /** @lang MariaDB */
-            "CALL CountPokeROMData('games');";
-        return new QueryObject($sql);
+            "CALL CountPokeROMData(:selection);";
+        $params = ['selection' => 'games'];
+        return new QueryObject($sql, $params);
     }
 }

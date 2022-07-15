@@ -26,8 +26,8 @@ Route::get('/version', fn() => response()
     ->name('api.version');
 
 // no auth
-Route::middleware('guest')->group(function () {
-    Route::prefix('auth')->group(function () {
+Route::name('api')->middleware('guest')->group(function () {
+    Route::name('auth')->prefix('auth')->group(function () {
         Route::post('/login', [UserController::class, 'login']);
         Route::post('/register', [UserController::class, 'register']);
     });
@@ -41,7 +41,12 @@ Route::middleware('auth:sanctum')->group(function () {
         '/games' => GameController::class,
         '/users' => UserController::class
     ]);
-    Route::apiResource('/rom-files', RomFileController::class)->only(['index', 'show', 'destroy']);
+    Route::apiResource('/rom-files', RomFileController::class)->only(['index', 'show', 'destroy'])
+        ->names([
+            'index' => 'api.rom-files.index',
+            'show' => 'api.rom-files.show',
+            'destroy' => 'api.rom-files.destroy'
+        ]);
 
     // auth routes
     Route::prefix('auth')->group(function () {
@@ -66,22 +71,21 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/metadata/all', function () {
             $columns = array('filename', 'filetype', 'filesize');
             return DB::connection('mongodb')->table('rom_files.info')->get($columns);
-        })->middleware('admin')->name('api.pokerom_files.info');
+        })->middleware('admin');
     });
 
     // relationships
     Route::get('/roms/{romId}/game', [RomController::class, 'indexGame']);
-    Route::get('/roms/{romId}/file', [RomController::class, 'indexFile']);
+    Route::get('/roms/{romId}/rom-file', [RomController::class, 'indexRomFile']);
     Route::get('/games/{gameId}/rom', [GameController::class, 'indexRom']);
     Route::get('/rom-files/{romFileId}/rom', [RomFileController::class, 'indexRom']);
     // relationship actions
-    Route::patch('/roms/{romId}/link-file', [RomController::class, 'linkRomToFile']);
+    Route::patch('/roms/{romId}/link-romFile', [RomController::class, 'linkRomToRomFile']);
 });
 
 // experimental routes (debug only)
 if (App::environment('local')) {
     Route::prefix('dev')->group(function () {
-        Route::get('/rom-files/grid/{romFileId}/download', [RomFileController::class, 'download'])
-            ->name('api.dev.rom-files.download');
+        Route::get('/rom-files/grid/{romFileId}/download', [RomFileController::class, 'download']);
     });
 }
