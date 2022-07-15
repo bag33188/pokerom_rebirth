@@ -13,6 +13,7 @@ class PreventRequestsDuringMaintenance extends Middleware
      */
     protected $except = [
         "/api/version",
-        "/public/api/version"
+        "/public/api/version",
+        "/version"
     ];
 }
