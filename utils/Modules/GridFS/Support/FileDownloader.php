@@ -11,15 +11,19 @@ namespace GridFS\Support;
 class FileDownloader
 {
     /** @var resource */
-    protected $fileStream;
+    private $fileStream;
 
     /** @var int */
-    protected int $fileBufferSize;
+    private int $fileBufferSize;
 
-    /** <span style="color:yellow;">`261,120`</span>&nbsp;&nbsp;(**255 Kibibytes**) @var int */
-    private const DEFAULT_BUFFER_SIZE = 0x3FC00; // 255 Kibibytes, 261120 Bytes
+    /** <span style="color:yellow;"><code>261120</code></span>&nbsp;&nbsp;(**255 Kibibytes**) @var int */
+    private const DEFAULT_BUFFER_SIZE = 0x3FC00; // 255 Kibibytes (261120 Bytes)
 
-    public function __construct(/** @var resource */ $fileStream, int $fileBufferSize = self::DEFAULT_BUFFER_SIZE)
+    /**
+     * @param resource $fileStream
+     * @param int $fileBufferSize
+     */
+    public function __construct($fileStream, int $fileBufferSize = self::DEFAULT_BUFFER_SIZE)
     {
         $this->fileStream = $fileStream;
         $this->fileBufferSize = $fileBufferSize;
