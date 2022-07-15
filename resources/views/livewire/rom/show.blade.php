@@ -20,7 +20,7 @@
         </x-list-group>
         @if(auth()->user()->isAdmin())
             <div class="col-start-2 col-end-2 row-start-2 row-end-2 justify-self-end h-auto">
-                <livewire:rom.delete class="delete" :romId="$romId"/>
+                <livewire:rom.delete class="delete" :romId="$romId" />
             </div>
             <div class="col-start-1 col-end-1 row-start-2 row-end-2 justify-self-start h-auto flex flex-row">
                 <x-jet-button class="order-0 mr-2" type="button" wire:click="edit({{$romId}})">Edit!</x-jet-button>
