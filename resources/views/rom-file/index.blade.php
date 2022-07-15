@@ -11,7 +11,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="text-center text-lg">Pok&#xE9;mon ROM Files (<span
-                class="font-semibold">{{$romFilesCount}} Total</span>)</h2>
+                class="font-semibold">{{$romFilesCount}} ROM Files in Total</span>)</h2>
     </x-slot>
     <div x-data="{ open: true }">
         @unless(sizeof($romFiles) > 0)

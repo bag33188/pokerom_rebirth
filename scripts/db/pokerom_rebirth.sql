@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 15, 2022 at 06:22 AM
+-- Generation Time: Jul 15, 2022 at 06:26 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -33,15 +33,15 @@ DELIMITER $$
 --
 DROP PROCEDURE IF EXISTS `CountPokeROMData`$$
 CREATE DEFINER=`bag33188`@`%` PROCEDURE `CountPokeROMData` (IN `SELECTION` ENUM('roms','games','both'))  READS SQL DATA SQL SECURITY INVOKER BEGIN
-    CASE LCASE(`SELECTION`)
+    CASE UPPER(`SELECTION`)
     	-- count just `roms` table
-    	WHEN 'roms' THEN
+    	WHEN 'ROMS' THEN
         	SELECT COUNT(*) AS `count` FROM `roms`;
         -- count just `games` table
-        WHEN 'games' THEN
+        WHEN 'GAMES' THEN
         	SELECT COUNT(*) AS `count` FROM `games`;
         -- count both `roms` and `games` tables (UNION ALL)
-        WHEN 'both' THEN
+        WHEN 'BOTH' THEN
         	SELECT COUNT(*) AS `count` FROM `roms`
         	UNION ALL
         	SELECT COUNT(*) AS `count` FROM `games`
@@ -54,7 +54,7 @@ DROP PROCEDURE IF EXISTS `FindMatchingRomFromFilename`$$
 CREATE DEFINER=`bag33188`@`%` PROCEDURE `FindMatchingRomFromFilename` (IN `ROM_FILENAME` VARCHAR(32))  READS SQL DATA BEGIN
 	SELECT * FROM `roms`
 	WHERE `rom_name` = SPLIT_STRING(`ROM_FILENAME`, '.', 1) -- file name
-	AND `rom_type` = SPLIT_STRING(`ROM_FILENAME`, '.', 2) -- file extension
+	AND `rom_type` = LCASE(SPLIT_STRING(`ROM_FILENAME`, '.', 2)) -- file extension
 	AND (`has_file` = FALSE OR `file_id` IS NULL) LIMIT 1;
 END$$
 
