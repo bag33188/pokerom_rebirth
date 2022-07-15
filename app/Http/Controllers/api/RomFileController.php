@@ -10,9 +10,13 @@ use App\Http\Resources\RomResource;
 use App\Interfaces\Action\RomFileActionsInterface;
 use App\Interfaces\Service\RomFileServiceInterface;
 use App\Models\RomFile;
+use DB;
 use Illuminate\{Auth\Access\AuthorizationException, Http\JsonResponse};
 use Illuminate\Support\Facades\Gate;
+use Request;
+use Response;
 use RomFileRepo;
+use Symfony\Component\HttpFoundation\Response as HttpResponse;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
 
@@ -102,5 +106,23 @@ class RomFileController extends ApiController
         Gate::authorize('viewAny-romFile');
 
         return $romFileActions->listRomFilesInStorage();
+    }
+
+    /**
+     * Connects to the `rom_files.info` collection from the `mongodb` connection.
+     * Queries all the documents in collection.
+     *
+     * @throws AuthorizationException
+     * @returns JsonResponse|null
+     */
+    public function getRomFileMetadata(): ?JsonResponse
+    {
+        Gate::authorize('viewAny-romFile');
+        if (Request::acceptsJson()) {
+            $columns = array('filename', 'filetype', 'filesize');
+            $data = DB::connection('mongodb')->table('rom_files.info')->get($columns);
+            return Response::json($data->chunk(10), HttpResponse::HTTP_OK);
+        }
+        return null;
     }
 }

@@ -67,11 +67,7 @@ Route::name('api.')->group(function () {
                 Route::get('list-roms', [RomFileController::class, 'listRomsInRomFilesStorage'])->name('list-roms');
             });
             // rom files metadata
-            Route::get('metadata/all', function () {
-                $columns = array('filename', 'filetype', 'filesize');
-                $data = DB::connection('mongodb')->table('rom_files.info')->get($columns);
-                return Response::json($data);
-            })->middleware('admin')->name('metadata.all');
+            Route::get('metadata/all', [RomFileController::class, 'getRomFileMetadata'])->name('metadata.all');
         });
 
         // relationships
