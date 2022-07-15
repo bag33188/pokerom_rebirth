@@ -62,11 +62,11 @@ Route::middleware('auth:sanctum')->group(function () {
             Route::get('/list-roms', [RomFileController::class, 'listRomsInRomFilesStorage']);
         });
 
-        // extraneous route(s)
+        // rom files metadata
         Route::get('/metadata/all', function () {
             $columns = array('filename', 'filetype', 'filesize');
             return DB::connection('mongodb')->table('rom_files.info')->get($columns);
-        })->middleware(['auth:sanctum', 'admin'])->name('api.pokerom_files.info');
+        })->middleware('admin')->name('api.pokerom_files.info');
     });
 
     // relationships
