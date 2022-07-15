@@ -18,7 +18,7 @@ use Symfony\Component\HttpFoundation\Response as HttpResponse;
 |
 */
 
-Route::get('/version', fn() => response()
+Route::get('version', fn() => response()
     ->json([
         'success' => true,
         'version' => config('app.version')
@@ -28,19 +28,19 @@ Route::get('/version', fn() => response()
 Route::name('api.')->group(function () {
     // no auth
     Route::name('auth.')->prefix('auth')->group(function () {
-        Route::post('/login', [UserController::class, 'login'])->name('login');
-        Route::post('/register', [UserController::class, 'register'])->name('register');
+        Route::post('login', [UserController::class, 'login'])->name('login');
+        Route::post('register', [UserController::class, 'register'])->name('register');
     });
 
-    // auth
+    // sanctum auth
     Route::middleware('auth:sanctum')->group(function () {
         // api resource routes
         Route::apiResources([
-            '/roms' => RomController::class,
-            '/games' => GameController::class,
-            '/users' => UserController::class
+            'roms' => RomController::class,
+            'games' => GameController::class,
+            'users' => UserController::class
         ]);
-        Route::apiResource('/rom-files', RomFileController::class)->only(['index', 'show', 'destroy'])
+        Route::apiResource('rom-files', RomFileController::class)->only(['index', 'show', 'destroy'])
             ->names([
                 'index' => 'rom-files.index',
                 'show' => 'rom-files.show',
@@ -49,25 +49,25 @@ Route::name('api.')->group(function () {
 
         // auth routes
         Route::prefix('auth')->name('auth.')->group(function () {
-            Route::get('/me', [UserController::class, 'showMe'])->name('me');
-            Route::get('/token', [UserController::class, 'getCurrentUserBearerToken'])->name('token');
-            Route::post('/logout', [UserController::class, 'logout'])->name('logout');
+            Route::get('me', [UserController::class, 'showMe'])->name('me');
+            Route::get('token', [UserController::class, 'getCurrentUserBearerToken'])->name('token');
+            Route::post('logout', [UserController::class, 'logout'])->name('logout');
         });
 
         // other rom-file routes
         Route::prefix('rom-files')->name('rom-files.')->group(function () {
             // gridfs routes
             Route::prefix('grid')->name('grid.')->group(function () {
-                Route::get('/{romFileId}/download', [RomFileController::class, 'download'])->name('download');
-                Route::post('/upload', [RomFileController::class, 'upload'])->name('upload');
+                Route::get('{romFileId}/download', [RomFileController::class, 'download'])->name('download');
+                Route::post('upload', [RomFileController::class, 'upload'])->name('upload');
             });
             // storage routes
             Route::prefix('disk')->name('disk.')->group(function () {
-                Route::get('/list-files', [RomFileController::class, 'listFilesInRomFilesStorage'])->name('list-files');
-                Route::get('/list-roms', [RomFileController::class, 'listRomsInRomFilesStorage'])->name('list-roms');
+                Route::get('list-files', [RomFileController::class, 'listFilesInRomFilesStorage'])->name('list-files');
+                Route::get('list-roms', [RomFileController::class, 'listRomsInRomFilesStorage'])->name('list-roms');
             });
             // rom files metadata
-            Route::get('/metadata/all', function () {
+            Route::get('metadata/all', function () {
                 $columns = array('filename', 'filetype', 'filesize');
                 $data = DB::connection('mongodb')->table('rom_files.info')->get($columns);
                 return Response::json($data);
@@ -76,12 +76,12 @@ Route::name('api.')->group(function () {
 
         // relationships
         Route::name('relations.')->group(function () {
-            Route::get('/roms/{romId}/game', [RomController::class, 'indexGame'])->name('roms.game');
-            Route::get('/roms/{romId}/rom-file', [RomController::class, 'indexRomFile'])->name('roms.rom-file');
-            Route::get('/games/{gameId}/rom', [GameController::class, 'indexRom'])->name('games.rom');
-            Route::get('/rom-files/{romFileId}/rom', [RomFileController::class, 'indexRom'])->name('rom-files.rom');
+            Route::get('roms/{romId}/game', [RomController::class, 'indexGame'])->name('roms.game');
+            Route::get('roms/{romId}/rom-file', [RomController::class, 'indexRomFile'])->name('roms.rom-file');
+            Route::get('games/{gameId}/rom', [GameController::class, 'indexRom'])->name('games.rom');
+            Route::get('rom-files/{romFileId}/rom', [RomFileController::class, 'indexRom'])->name('rom-files.rom');
             // relationship actions
-            Route::patch('/roms/{romId}/link-romFile', [RomController::class, 'linkRomToRomFile'])->name('roms.link-romFile');
+            Route::patch('roms/{romId}/link-romFile', [RomController::class, 'linkRomToRomFile'])->name('roms.link-romFile');
         });
     });
 });
