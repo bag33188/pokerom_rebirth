@@ -10,6 +10,8 @@ interface RomFileRepositoryInterface
 {
     public function getAllRomFilesSorted(): Collection;
 
+    public function getAllRomFilesWithRomDataSorted(): Collection;
+
     public function findRomFileIfExists(string $romFileId): RomFile;
 
     public function getRomAssociatedWithFile(string $romFileId): Rom;
