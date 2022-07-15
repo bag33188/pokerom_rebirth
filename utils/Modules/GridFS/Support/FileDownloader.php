@@ -14,12 +14,12 @@ class FileDownloader
     protected $fileStream;
 
     /** @var int */
-    protected int $readyBytesChunkSize;
+    protected int $fileBufferSize;
 
-    public function __construct(/** @var resource */ $fileStream, int $readyBytesChunkSize = 0x3FC00)
+    public function __construct(/** @var resource */ $fileStream, int $fileBufferSize = 0x3FC00)
     {
         $this->fileStream = $fileStream;
-        $this->readyBytesChunkSize = $readyBytesChunkSize;
+        $this->fileBufferSize = $fileBufferSize;
     }
 
     public function __invoke(): void
@@ -34,7 +34,7 @@ class FileDownloader
 
     private function getCurrentFileBuffer(): false|string
     {
-        return fread($this->fileStream, $this->readyBytesChunkSize);
+        return fread($this->fileStream, $this->fileBufferSize);
     }
 
     private function closeFileStream(): void
