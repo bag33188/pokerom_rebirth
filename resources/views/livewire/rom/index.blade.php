@@ -7,6 +7,12 @@
         'text-white', 'font-bold', 'p-0', 'border-b-4', 'border-blue-700',
         'hover:border-blue-500', 'rounded', 'active:border-t-4', 'active:border-b-0', 'active:bg-blue-400'
     ];
+    $getInfoBtnClasses = [
+        'inline-flex', 'items-center', 'py-2', 'px-4', 'bg-red-500', 'hover:bg-red-400',
+        'text-white', 'font-bold', 'p-0', 'border-b-4', 'border-red-700', 'hover:border-red-500',
+        'rounded', 'active:border-t-4', 'active:border-b-0', 'active:bg-red-400'
+    ];
+    $alpineInitialDisplayState = \App\Enums\DisplayStateEnum::SHOW;
 @endphp
 <div>
     <x-slot name="header">
@@ -16,13 +22,9 @@
         @if(count($roms) < 1)
             <h2 class="text-center text-lg mt-7">No ROMs Exist in database</h2>
         @else
-            <div class="w-full flex justify-center">
-                <button type="button" @click="open = !open"
-                        class="bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-2 px-4 my-4 shadow-md rounded">
-                    @include("ui.show-hide", ['text' => 'ROMs', 'initialState' => \App\Enums\DisplayStateEnum::SHOW->value])
-                </button>
-            </div>
-            <table class="w-full text-sm text-left text-gray-500 light:text-gray-400" x-show="open" x-cloak>
+            <x-show-hide-button text="ROMs" :initial-state="$alpineInitialDisplayState"/>
+            <table class="w-full text-sm text-left text-gray-500 light:text-gray-400"
+                   x-show="{{$alpineInitialDisplayState->value}}" x-cloak>
                 <thead class="bg-gray-50">
                 <tr class="text-xs text-gray-700 uppercase light:bg-gray-700 light:text-gray-400">
                     @for($i = 0; $i < count($romsTableColumns); $i++)
@@ -53,9 +55,8 @@
                             @endif
                         </td>
                         <td class="px-6 py-4">
-                            <button type="button" class="inline-flex items-center py-2 px-4 bg-red-500 hover:bg-red-400 text-white font-bold
-                                    p-0 border-b-4 border-red-700 hover:border-red-500 rounded active:border-t-4
-                                    active:border-b-0 active:bg-red-400" wire:click="show({{$rom->id}})">Get Info
+                            <button type="button" class="{{implode(_SPACE, $getInfoBtnClasses)}}"
+                                    wire:click="show({{$rom->id}})">Get Info
                             </button>
                         </td>
                     </tr>
