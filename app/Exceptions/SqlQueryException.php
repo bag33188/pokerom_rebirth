@@ -15,7 +15,7 @@ class SqlQueryException extends ApplicationException
             return redirect()->to(url()->previous())->dangerBanner($this->getMessage());
         }
         if ($this->isApiRequest()) {
-            return response()->json(['message' => $this->getMessage(), 'success' => false], $this->getCode());
+            return jsonData(['message' => $this->getMessage()], $this->getCode());
         }
         return false;
     }

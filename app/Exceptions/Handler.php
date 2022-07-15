@@ -4,6 +4,7 @@ namespace App\Exceptions;
 
 use App;
 use Config;
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
@@ -66,10 +67,14 @@ class Handler extends ExceptionHandler
 
         $this->renderable(fn(BulkWriteException $e) => throw App::make(MongoWriteException::class,
             ['message' => $e->getMessage(), 'code' => HttpResponse::HTTP_CONFLICT]));
-
         $this->renderable(fn(QueryException $e) => throw App::make(SqlQueryException::class,
             ['message' => $e->getMessage(), 'code' => HttpResponse::HTTP_CONFLICT]));
-
+        $this->renderable(function (AuthenticationException $e, Request $request): ?JsonResponse {
+            if ($request->expectsJson()) {
+                return jsonData(['message' => 'Unauthenticated.'], HttpResponse::HTTP_UNAUTHORIZED);
+            }
+            return null;
+        });
         $this->renderable(function (HttpException $e, Request $request): ?JsonResponse {
             $currentRoute = str_replace(Config::get('app.url'), '', URL::current());
             if ($request->is("api/*", "/public/api/*")) {
@@ -79,11 +84,7 @@ class Handler extends ExceptionHandler
 
                     $message = "Route not found: $currentRoute";
                 }
-                return response()->json(
-                    data: ['message' => $message, 'success' => false],
-                    status: $statusCode,
-                    headers: array('X-Http-Error-Request-URI' => $currentRoute)
-                );
+                return jsonData(['message' => $message], $statusCode, array('X-Http-Error-Request-URI' => $currentRoute));
             }
             return null;
         });

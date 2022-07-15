@@ -14,4 +14,6 @@ interface UserServiceInterface
     public function registerUserToken(User $user): JsonDataResponse;
 
     public function deleteUser(User $user): JsonDataResponse;
+
+    public function retrieveUserBearerToken(): JsonDataResponse;
 }

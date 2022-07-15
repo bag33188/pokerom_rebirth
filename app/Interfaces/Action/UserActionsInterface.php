@@ -9,4 +9,6 @@ interface UserActionsInterface
     public function generateUserApiToken(User $user): string;
 
     public function revokeUserTokens(): void;
+
+    public function getUserBearerToken(): ?string;
 }

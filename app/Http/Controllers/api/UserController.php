@@ -75,6 +75,11 @@ class UserController extends ApiController
         return jsonData(['data' => request()->user()], HttpResponse::HTTP_OK);
     }
 
+    public function getCurrentUserBearerToken(): JsonResponse
+    {
+        return $this->userService->retrieveUserBearerToken()->renderResponse();
+    }
+
     /**
      * @throws AuthorizationException
      */

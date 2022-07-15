@@ -49,4 +49,14 @@ class UserService implements UserServiceInterface
             'token' => $token
         ], HttpResponse::HTTP_OK);
     }
+
+    public function retrieveUserBearerToken(): JsonDataResponse
+    {
+        $token = $this->userActions->getUserBearerToken();
+        if (isset($token)) {
+            return new JsonDataResponse(['token' => $token], HttpResponse::HTTP_OK);
+        } else {
+            return new JsonDataResponse(['message' => 'No token exists.'], HttpResponse::HTTP_NOT_FOUND);
+        }
+    }
 }
