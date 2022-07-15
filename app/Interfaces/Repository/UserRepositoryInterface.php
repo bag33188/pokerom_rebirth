@@ -15,4 +15,6 @@ interface UserRepositoryInterface
     public function paginateUsers(?int $perPage): LengthAwarePaginator;
 
     public function findUserByEmail(string $email): User;
+
+    public function getUsersCount(): int;
 }

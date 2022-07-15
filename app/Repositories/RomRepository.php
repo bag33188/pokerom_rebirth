@@ -46,18 +46,6 @@ class RomRepository implements RomRepositoryInterface
 
     public function searchForRomMatchingRomFile(RomFile $romFile): ?Rom
     {
-        /*
-            list($romName, $romExtension) =
-                FileUtils::splitFilenameIntoParts($this->findRomFileIfExists($romFileId)->filename);
-            return Rom::where([
-                ['rom_name', '=', $romName, 'and'],
-                ['rom_type', '=', $romExtension, 'and']
-            ])->where(function (\Jenssegers\Mongodb\Helpers\EloquentBuilder $query) {
-                $query
-                    ->where('has_file', '=', FALSE)
-                    ->orWhere('file_id', '=', NULL);
-            })->limit(1)->first();
-         */
         list($query, $bindings) = $this->findMatchingRomFromFilename($romFile->filename)->getValues();
         return Rom::fromQuery($query, $bindings)->first();
     }

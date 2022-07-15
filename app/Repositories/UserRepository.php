@@ -28,4 +28,9 @@ class UserRepository implements UserRepositoryInterface
     {
         return User::all();
     }
+
+    public function getUsersCount(): int
+    {
+        return User::all()->count();
+    }
 }
