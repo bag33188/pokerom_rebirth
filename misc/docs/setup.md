@@ -165,6 +165,19 @@ MAIL_FROM_ADDRESS="no-reply@whatever.id"
 MAIL_FROM_NAME="${APP_NAME}"
 ```
 
+### MongoDB
+
+Download **THREAD-SAFE** (_ts_) MongoDB Extension (_v13 for windows_): [PECL mongodb][mongodb-ts-php-ext]
+
+MongoDB PECL Package Page: [MongoDB PHP PECL][mongodb-php-pecl]
+
+```ini
+; C:/xampp/php/php.ini
+
+; Dynamic Extensions ... 
+extension=php_mongodb.dll
+```
+
 ### Debug
 
 #### Xdebug
@@ -252,3 +265,5 @@ configure node exec and sass-lint npm cmd exec and config file...
 [mailhog download]: https://github.com/mailhog/MailHog/releases/v1.0.0 "download mailhog"
 [mongodb-community]: https://www.mongodb.com/try/download/community?tck=docs_server
 [mongodb-server-tools]: https://www.mongodb.com/try/download/database-tools
+[mongodb-ts-php-ext]: https://pecl.php.net/package/mongodb/1.13.0/windows "mongodb extension for windows (thread safe)"
+[mongodb-php-pecl]: https://pecl.php.net/package/mongodb "php mongodb driver extension page (pecl)"

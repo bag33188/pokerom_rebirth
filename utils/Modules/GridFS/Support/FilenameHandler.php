@@ -5,8 +5,11 @@ namespace GridFS\Support;
 
 class FilenameHandler
 {
-    public function __construct(public string $filename)
+    public string $filename;
+
+    public function __construct(string $filename)
     {
+        $this->filename = $filename;
     }
 
     public function __invoke(): void
@@ -16,7 +19,7 @@ class FilenameHandler
 
     /**
      * Generates a filepath from a given filename. You may specify an optional `storagePathPrefix`.
-     * Otherwise, the gridfs `fileUploadPath` value is used.
+     * Otherwise, the gridfs `fileUploadPath` value is used from gfs configuration.
      *
      * @param string|null $storagePathPrefix
      * @return string
@@ -32,25 +35,49 @@ class FilenameHandler
     public function normalizeFileName(): void
     {
         // destructure
-        list($name, $ext) = $this->getFilenameEntities();
-        $name = trim($name);
-        $ext = strtolower($ext);
-        $this->filename = "${name}.${ext}";
-    }
-
-    /**
-     * Returns file name and file extension in array
-     *
-     * @return array
-     */
-    private function getFilenameEntities(): array
-    {
-        // split filename string only into 2 parts regardless of how many period (`.`) characters there are
-        return explode('.', $this->filename, 2);
+        list($name, $ext) = $this->getFileNameAndExtensionAsArray();
+        self::trimFileNameEntity($name);
+        self::convertFileExtEntityToLowerCase($ext);
+        $this->filename = self::parseFilenameFromEntities($name, $ext);
     }
 
     public function filenameIsValid(): bool|int
     {
         return preg_match(FILENAME_PATTERN, $this->filename);
+    }
+
+    /**
+     * Returns file name and file extension in array.
+     *
+     * Splits the string with a period (`.`) delimiter
+     *
+     * @return string[]
+     */
+    private function getFileNameAndExtensionAsArray(): array
+    {
+        // limit: split filename string only on FIRST period character.
+        return explode('.', $this->filename, limit: 2);
+    }
+
+    private static function trimFileNameEntity(string &$name): void
+    {
+        $name = trim($name, _SPACE . "\t\n\r\0\x0B");
+    }
+
+    private static function convertFileExtEntityToLowerCase(string &$ext): void
+    {
+        $ext = strtolower($ext);
+    }
+
+    /**
+     * Joins file's name and extension string entities into a filename string.
+     *
+     * @param string $f_name
+     * @param string $f_ext
+     * @return string
+     */
+    private static function parseFilenameFromEntities(string $f_name, string $f_ext): string
+    {
+        return "${f_name}.${f_ext}";
     }
 }
