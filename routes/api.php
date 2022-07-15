@@ -55,9 +55,10 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::prefix('grid')->group(function () {
             Route::get('/{romFileId}/download', [RomFileController::class, 'download']);
             Route::post('/upload', [RomFileController::class, 'upload']);
-            Route::get('/all', function () {
-                return DB::connection('mongodb')->table('rom_files.info')->get();
-            });
+            Route::get('/file-info', function () {
+                $columns = array('filename', 'filetype', 'filesize');
+                return DB::connection('mongodb')->table('rom_files.info')->get($columns);
+            })->middleware('admin')->name('api.pokerom_files.info');
         });
         // storage routes
         Route::prefix('disk')->group(function () {

@@ -10,7 +10,7 @@ use GridFS\GridFS;
 abstract class AbstractGridFSDatabase extends GridFS
 {
     /**
-     * specify whether to use authenticate when connecting to mongodb.
+     * specify whether to use authentication when connecting to mongodb.
      *
      * _note: only allows username/password auth_
      *
