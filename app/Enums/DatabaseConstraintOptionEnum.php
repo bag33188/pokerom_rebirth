@@ -2,7 +2,7 @@
 
 namespace App\Enums;
 
-enum DatabaseConstraintOptionsEnum: string
+enum DatabaseConstraintOptionEnum: string
 {
     case NO_ACTION = 'NO ACTION';
     case CASCADE = 'CASCADE';
