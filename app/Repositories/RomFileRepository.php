@@ -45,12 +45,12 @@ class RomFileRepository implements RomFileRepositoryInterface
         return RomFile::count();
     }
 
-    public function getRomFileLengthsKibibytes(): Collection
+    public function getAllRomFileLengthsKibibytes(): Collection
     {
         return RomFile::project($this->calcLengthsOfRomFilesKibibytes())->get();
     }
 
-    public function getRomFilenameValues(): Collection
+    public function getAllRomFileNameAndFileTypeValues(): Collection
     {
         return RomFile::project($this->splitRomFilenamesIntoFileEntityValues())->get();
     }

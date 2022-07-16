@@ -18,9 +18,9 @@ interface RomFileRepositoryInterface
 
     public function findRomFileByFilename(string $romFilename): ?RomFile;
 
-    public function getRomFileLengthsKibibytes(): Collection;
+    public function getAllRomFileLengthsKibibytes(): Collection;
 
-    public function getRomFilenameValues(): Collection;
+    public function getAllRomFileNameAndFileTypeValues(): Collection;
 
     public function getTotalSizeOfAllRomFiles(): int;
 
