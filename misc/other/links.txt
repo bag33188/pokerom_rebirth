@@ -1,4 +1,3 @@
-https://www.pokemon.com/us/pokemon-video-games/pokemon-ultra-sun-and-pokemon-ultra-moon/
 https://laravel.com/docs/9.x
 https://laravel-livewire.com/docs/2.x/quickstart
 https://jetstream.laravel.com/2.x/introduction.html
@@ -7,3 +6,7 @@ https://mariadb.com/kb/en/documentation/
 https://www.php.net/manual/en/
 https://www.mongodb.com/docs/
 https://www.mongodb.com/docs/manual/
+
+https://www.pokemon.com/us/strategy/the-details-of-discovering-pokemon-eggs
+https://www.pokemon.com/us/strategy/raising-battle-ready-pokemon/
+https://www.pokemon.com/us/pokemon-video-games/pokemon-ultra-sun-and-pokemon-ultra-moon/
