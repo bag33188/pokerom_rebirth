@@ -17,7 +17,7 @@ yarn-error.log
 ### Custom ###
 misc/schemas/*.bkp
 misc/schemas/*.dtmp
-misc/data/dump
+# misc/data/dump
 misc/old
 storage/**/*.nds
 storage/**/*.xci

@@ -1,3 +1,5 @@
+const fs = require("fs");
+
 let gamesData = require("./dump/games.json");
 gamesData = gamesData.map((e) => {
     delete e["id"];
@@ -9,7 +11,7 @@ gamesData = gamesData.map((e) => {
     e["game_type"] = e["game_type"].toLowerCase();
     e["game_name"] = e["game_name"].replace("Pok\xE9mon", "Pokemon");
     e["date_released"] = e["date_released"].replace(
-        /T[0-2][0-4]:[0-5]\d:[0-5]\d\.\d+Z/i,
+        /T[0-2][0-4]:[0-5]\d:[0-5]\d\.\d{6}Z$/i,
         ""
     );
     return e;
@@ -34,7 +36,6 @@ romFilesData = romFilesData.valueOf().map((e) => {
     return e;
 });
 
-const fs = require("fs");
 fs.writeFileSync(
     "seeds.json",
     JSON.stringify({ roms: romsData, games: gamesData, romFiles: romFilesData })
