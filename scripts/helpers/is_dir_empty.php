@@ -16,6 +16,6 @@ if (!function_exists('isDirEmpty')) {
     function isDirEmpty(string $dir): bool
     {
         $iterator = new FilesystemIterator($dir, FSI_FLAGS);
-        return !$iterator->valid();
+        return $iterator->valid() === false;
     }
 }

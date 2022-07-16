@@ -3,12 +3,13 @@ const path = require("path");
 
 console.log("Generating seeds...");
 
-const baseDir = __dirname.replace(/([\/\\]scripts)([\/\\]helpers)/i, "");
-const dumpDir = path.join(baseDir, "misc", "data", "dump");
-const seedFilePath = path.resolve(
-    path.join(baseDir, "misc", "data"),
-    "seeds.json"
-);
+const __basedir__ = __dirname.replace(/([\/\\]scripts)([\/\\]helpers)/i, "");
+
+const [dumpDir, seedFilePath] = [
+    path.join(__basedir__, "misc", "data", "dump"),
+    path.resolve(path.join(__basedir__, "misc", "data"), "seeds.json"),
+];
+
 const seedData = {
     gamesData: require(path.resolve(dumpDir, "games.json")),
     romsData: require(path.resolve(dumpDir, "roms.json")),
