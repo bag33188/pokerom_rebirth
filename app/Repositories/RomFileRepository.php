@@ -11,8 +11,8 @@ use Illuminate\Database\Eloquent\Collection;
 class RomFileRepository implements RomFileRepositoryInterface
 {
     use RomFileAggregations {
-        calcLengthsOfRomFilesKibibytes as private;
-        splitRomFilenamesIntoFileEntityValues as private;
+        romFileSumLength as private;
+        romFileMaxLength as private;
     }
 
     public function findRomFileIfExists(string $romFileId): RomFile
