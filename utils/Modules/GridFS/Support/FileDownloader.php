@@ -51,7 +51,7 @@ class FileDownloader
 
     private function printOutCurrentFileBuffer(): void
     {
-        print $this->getCurrentFileBuffer();
+        echo $this->getCurrentFileBuffer();
     }
 
     private function printBytesIfNotEndOfFile(): void
