@@ -4,7 +4,7 @@
 
 $constants_path = __DIR__ . '/constants';
 
-if (!isDirEmpty($constants_path)) {
+if (!dir_is_empty($constants_path)) {
     require_once $constants_path . '/chars.inc.php';
     require_once $constants_path . '/entities.inc.php';
     require_once $constants_path . '/enums.inc.php';
