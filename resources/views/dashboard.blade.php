@@ -3,6 +3,7 @@
     <script type="text/javascript">
         $(document).ready(() => {
             loadWelcomeContent('{{ $username }}');
+            loadCopyrightYear();
         });
     </script>
 @endpush
@@ -45,6 +46,8 @@
                                 <!-- about description -->
                                 This web app is a databank of Pok&eacute;mon ROMs.
                                 It contains 40 ROMs, including all 33 core Pok&eacute;mon ROMs.
+                                <br/>
+                                <p class="italic">&copy; Pok&eacute;mon Company <span id="copyright-year"></span></p>
                             </div>
                         </div>
                     </div>

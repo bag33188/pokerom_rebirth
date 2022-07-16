@@ -43,4 +43,10 @@ let loadWelcomeContent = (username) => {
     }
 };
 
+let loadCopyrightYear = function () {
+    const copyrightYearElement = document.getElementById("copyright-year");
+    copyrightYearElement.textContent = new Date().getFullYear().toString();
+};
+
 window.loadWelcomeContent = loadWelcomeContent;
+window.loadCopyrightYear = loadCopyrightYear;
