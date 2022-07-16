@@ -10,8 +10,8 @@ namespace App\Queries;
 
 use stdClass;
 
-/** @var stdClass $aggregations */
-$aggregations = (object)array(
+/** @var stdClass $rom_file_aggregations */
+$rom_file_aggregations = (object)array(
     'kibibyte_lengths' => [
         'length' => [
             '$concat' => [
@@ -41,4 +41,4 @@ $aggregations = (object)array(
     ]
 );
 
-return $aggregations;
+return $rom_file_aggregations;

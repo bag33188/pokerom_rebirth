@@ -7,9 +7,9 @@ use stdClass;
 
 trait RomFileQueriesTrait
 {
-    private static function getAggregations(): stdClass
+    private static function fetchRomFileAggregations(): stdClass
     {
-        return require('aggregations.php');
+        return require('rom_file_aggregations.php');
     }
 
     /**
@@ -34,11 +34,11 @@ trait RomFileQueriesTrait
 
     protected function splitRomFilenamesIntoFileEntityValues(): array
     {
-        return self::getAggregations()->split_rom_filenames;
+        return self::fetchRomFileAggregations()->split_rom_filenames;
     }
 
     protected function calcLengthsOfRomFilesKibibytes(): array
     {
-        return self::getAggregations()->kibibyte_lengths;
+        return self::fetchRomFileAggregations()->kibibyte_lengths;
     }
 }
