@@ -1,4 +1,4 @@
-@ECHO OFF
+@ECHO ON
 
 :: ======================
 :: Compile Project Script
@@ -17,13 +17,12 @@ REM.||(
 :COMPILE
 
     REM assumes working directory is project directory
-    REM %USERPROFILE%\PhpstormProjects\pokerom_rebirth
-    REM CD %PKR%
+    REM %PROJECT_DIR% = %USERPROFILE%\PhpstormProjects\pokerom_rebirth
 
     composer install & composer update & npm install & npm update & npm run dev & git status & git add . & git commit -m "update code base" & git push
 
     ECHO Finished!
 
-    PAUSE
+    :: PAUSE
 
 EXIT /B 0

@@ -4,6 +4,9 @@
     <option name="INTERPRETER_OPTIONS" value="" />
     <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
     <option name="PARENT_ENVS" value="true" />
+    <envs>
+      <env name="PROJECT_DIR" value="C:\Users\bglat\PhpstormProjects\pokerom_rebirth" />
+    </envs>
     <option name="SCRIPT_NAME" value="./scripts/cmd/compile.bat" />
     <option name="PARAMETERS" value="" />
     <method v="2" />
