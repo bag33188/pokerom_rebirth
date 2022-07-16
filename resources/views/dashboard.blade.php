@@ -37,6 +37,7 @@
                         </div>
                         <div class="ml-12">
                             <div class="mt-2 text-sm text-gray-500">
+                                <!-- about description -->
                                 Lorem ipsum dolor sit amet, consectetur adipisicing
                                 elit. A accusantium cupiditate delectus,
                                 dicta ducimus eveniet, fuga ipsum maxime minus nostrum nulla officiis possimus quod
@@ -53,6 +54,7 @@
                         </div>
                         <div class="ml-12">
                             <div class="mt-2 text-sm text-gray-500">
+                                <!-- roms description -->
                                 Lorem ipsum dolor sit amet, consectetur adipisicing
                                 elit. A accusantium cupiditate delectus,
                                 dicta ducimus eveniet, fuga ipsum maxime minus nostrum nulla officiis possimus quod
@@ -69,6 +71,7 @@
                         </div>
                         <div class="ml-12">
                             <div class="mt-2 text-sm text-gray-500">
+                                <!-- games description -->
                                 Lorem ipsum dolor sit amet, consectetur adipisicing
                                 elit. A accusantium cupiditate delectus,
                                 dicta ducimus eveniet, fuga ipsum maxime minus nostrum nulla officiis possimus quod
