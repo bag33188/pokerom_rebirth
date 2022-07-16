@@ -2,10 +2,13 @@
 
 if (!function_exists('normalizeObjectUsingJSONConversions')) {
     /**
-     * Takes a class object (or eloquent object) or associative array and normalizes it using {@see json_encode} and then {@see json_decode}
+     * Takes a class object ({@see stdClass stdClass}) or associative array ({@see array array})
+     * and normalizes it using {@see json_encode} and then {@see json_decode}
      *
-     * @param mixed $object `stdClass`, `array`, collections, models are all types that can be handled
-     * @param bool $associative Set to true to convert object to an associative {@see array array}, else use {@see stdClass stdClass} as conversion
+     * This method also works with **Eloquent Objects** (_resources/collections/models_).
+     *
+     * @param mixed $object stdClass, array, collections/resources, models are all types that can be handled
+     * @param bool $associative Set to true to convert object to an associative {@see array}, else convert to {@see stdClass}
      * @return void
      *
      */
