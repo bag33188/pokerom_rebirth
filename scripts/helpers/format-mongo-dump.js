@@ -10,9 +10,9 @@ console.log("formatting mongo dump...");
 
 const [dirnamePattern, objectIdPattern, lengthPattern, chunkSizePattern] = [
     /([\/\\]scripts)([\/\\]helpers)/i,
-    /("_id":)([\s\t\n\v]*)(\{[\s\t\n\v]*)("\$oid":)([\s\t\n\v]*)("[\da-fA-F]+")([\s\t\n\v]*)(})([\s\t\n\v]*)(,?)/gim,
-    /("length":)([\s\t\n\v]*)/gim,
-    /("chunkSize":)([\s\t\n\v]*)(\d+)(,?)/gim,
+    /("_id":)([\s\t\n\v]*)(\{[\s\t\n\v]*)("\$oid":)([\s\t\n\v]*)("[\da-fA-F]+")([\s\t\n\v]*)(})([\s\t\n\v]*)(,?)/gi,
+    /("length":)([\s\t\n\v]*)/gi,
+    /("chunkSize":)([\s\t\n\v]*)(\d+)(,?)/gi,
 ];
 
 const filePath = path.join(
@@ -32,7 +32,7 @@ try {
     console.error(err);
 }
 
-let newData = data
+let formattedData = data
     .valueOf()
     .toString()
     .replace(objectIdPattern, "")
@@ -41,7 +41,7 @@ let newData = data
     .replace(/\n\t/g, "");
 
 try {
-    fs.writeFileSync(filePath, newData);
+    fs.writeFileSync(filePath, formattedData);
     console.log("file written successfully!");
 } catch (err) {
     console.error(err);
