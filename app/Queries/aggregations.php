@@ -10,11 +10,9 @@ namespace App\Queries;
 
 use stdClass;
 
-/**
- * @var stdClass
- */
+/** @var stdClass $aggregations */
 $aggregations = (object)array(
-    'kibibyteLengths' => [
+    'kibibyte_lengths' => [
         'length' => [
             '$concat' => [
                 [
@@ -36,7 +34,7 @@ $aggregations = (object)array(
         'filename' => '$filename',
         'chunkSize' => '$chunkSize'
     ],
-    'splitFilenames' => [
+    'split_rom_filenames' => [
         'fileEntities' => ['$split' => ['$filename', '.']],
         'length' => '$length',
         'chunkSize' => '$chunkSize'
