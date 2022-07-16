@@ -32,7 +32,8 @@ gen_pw() {
   pw_gen_script_location="./scripts/helpers/password-hasher.js"
   salt_val=$1
   node $pw_gen_script_location --salt="$salt_val"
-  exit 0
 }
 
 gen_pw "$@"
+
+exit 0;
