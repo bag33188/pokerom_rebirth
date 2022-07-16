@@ -1,14 +1,3 @@
-@php
-    /**
-     * Converts single quotes to double quotes in a given string
-     * @param string $data
-     * @return void
-     */
-    function convertSingleToDoubleQuotes(string &$data): void {
-        list($singleQuote, $doubleQuote) = array("\u{0027}", "\u{0022}");
-        $data = str_replace($singleQuote, $doubleQuote, $data);
-    }
-@endphp
 <div class="container mx-auto w-full">
     <x-slot name="header">
         <h2 class="text-center text-lg">Add Game</h2>
@@ -23,17 +12,11 @@
             <form wire:submit.prevent="store">
                 <x-jet-label for="availableRoms" :value="__('Select ROM')"/>
                 <x-form-select wire:model.lazy="rom_id" id="availableRoms" name="rom_id" autofocus required>
-                    @php
-                        $placeholder = "<option value='' selected>Select ROM</option>";
-                        convertSingleToDoubleQuotes($placeholder);
-                        echo $placeholder . "\n";
-                        foreach ($availableRoms as $rom) {
-                            normalizeObjectUsingJSONConversions($rom);
-                            $html = "<option value='{$rom->id}' wire:key='{$rom->id}'>{$rom->rom_name}</option>";
-                            convertSingleToDoubleQuotes($html);
-                            echo $html, "\n";
-                        }
-                    @endphp
+                    <option value="" selected>Select ROM</option>
+                    @foreach($availableRoms as $rom)
+                        @php normalizeObjectUsingJSONConversions($rom); @endphp
+                        <option value="{{$rom->id}}" wire:key="{{$rom->id}}">{{$rom->rom_name}}</option>
+                    @endforeach
                 </x-form-select>
                 <div class="mt-2.5">
                     <x-jet-label for="gameName" :value="__('Game Name')"/>
