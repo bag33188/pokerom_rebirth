@@ -59,8 +59,8 @@ return [
     'url' => env('APP_URL', 'http://localhost'),
 
     // use for blade templating engine
-    'asset_url' => env('ASSET_URL'),
-    'mix_url' => env('MIX_ASSET_URL'),
+    'asset_url' => env('ASSET_URL', 'http://localhost/public'),
+    'mix_url' => env('MIX_ASSET_URL', 'http://localhost/public'),
 
     /*
     |--------------------------------------------------------------------------

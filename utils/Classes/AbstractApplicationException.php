@@ -2,11 +2,13 @@
 
 namespace Utils\Classes;
 
+use Config;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Throwable;
+use URL;
 
 # use JetBrains\PhpStorm\Internal\LanguageLevelTypeAware;
 
@@ -32,4 +34,11 @@ abstract class AbstractApplicationException extends Exception
     abstract public function render(Request $request): false|JsonResponse|RedirectResponse;
 
     abstract public function report(): bool|null;
+
+    public final static function getCurrentErrorRouteAsString(): array|string
+    {
+        $baseAppUrl = Config::get('app.url');
+        $currentUrl = URL::current();
+        return (string)str_replace("$baseAppUrl/", '/', $currentUrl);
+    }
 }

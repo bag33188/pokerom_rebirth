@@ -4,7 +4,6 @@ namespace App\Exceptions;
 
 use App;
 use Clockwork\Request\LogLevel;
-use Config;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\QueryException;
@@ -17,7 +16,7 @@ use PDOException;
 use Symfony\Component\HttpFoundation\Response as HttpResponse;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Throwable;
-use URL;
+use Utils\Classes\AbstractApplicationException as AppHttpException;
 
 //use Illuminate\Http\Response;
 
@@ -69,21 +68,26 @@ class Handler extends ExceptionHandler
             ['message' => $e->getMessage(), 'code' => HttpResponse::HTTP_CONFLICT]));
         $this->renderable(fn(QueryException $e) => throw App::make(SqlQueryException::class,
             ['message' => $e->getMessage(), 'code' => HttpResponse::HTTP_CONFLICT]));
-        $this->renderable(function (AuthenticationException $e, Request $request): ?JsonResponse {
+        $this->renderable(function (AuthenticationException $e, Request $request): JsonResponse|null {
+            $currentRoute = AppHttpException::getCurrentErrorRouteAsString();
             if ($request->expectsJson()) {
-                return jsonData(['message' => 'Unauthenticated.'], HttpResponse::HTTP_UNAUTHORIZED);
+                return jsonData(
+                    ['message' => 'Unauthenticated.'],
+                    HttpResponse::HTTP_UNAUTHORIZED,
+                    array('X-Http-Error-Request-URI' => $currentRoute)
+                );
             }
             return null;
         });
-        $this->renderable(function (HttpException $e, Request $request): ?JsonResponse {
-            $currentRoute = str_replace(Config::get('app.url'), '', URL::current());
+        $this->renderable(function (HttpException $e, Request $request): JsonResponse|null {
+            $currentRoute = AppHttpException::getCurrentErrorRouteAsString();
             if ($request->is("api/*", "/public/api/*")) {
                 $statusCode = $e->getStatusCode();
                 $message = $e->getMessage();
                 if ($statusCode === HttpResponse::HTTP_NOT_FOUND && strlen($message) === 0) {
                     $message = "Route not found: $currentRoute";
                 }
-                return jsonData(['message' => $message], $statusCode, array('X-Http-Error-Request-URI' => $currentRoute));
+                return jsonData(['message' => $message], $statusCode, ['X-Http-Error-Request-URI' => $currentRoute]);
             }
             return null;
         });

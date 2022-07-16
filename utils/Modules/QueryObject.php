@@ -2,9 +2,9 @@
 
 namespace Utils\Modules;
 
-use DB;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Database\Query\Expression;
+use Illuminate\Support\Facades\DB;
 use JetBrains\PhpStorm\ArrayShape;
 
 class QueryObject implements Arrayable
