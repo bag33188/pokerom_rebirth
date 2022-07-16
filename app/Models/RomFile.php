@@ -20,8 +20,8 @@ class RomFile extends MongoDbModel
         'uploadDate' => 'datetime',
     ];
 
-    /** `1024` @var int */
-    public final const DATA_BYTE_FACTOR = 0b010000000000;
+    /** <span style="color:yellow;">`1024`</span> @var int */
+    public final const DATA_BYTE_FACTOR = 0b010000000000; // 1024
 
     public function getObjectId(): ObjectId
     {

@@ -20,13 +20,11 @@ interface RomFileRepositoryInterface
 
     public function getRomFileLengthsKibibytes(): Collection;
 
-    public function getRomFileLengthsGibibytes(): Collection;
-
-    public function getRomFileLengthsMebibytes(): Collection;
+    public function splitRomFilenameValues(): Collection;
 
     public function getTotalSizeOfAllRomFiles(): int;
 
     public function getLengthOfRomFileWithLargestFileSize(): int;
 
-    public function countRomFiles(): int;
+    public function getRomFilesCount(): int;
 }

@@ -5,12 +5,15 @@ namespace App\Repositories;
 use App\Interfaces\Repository\RomFileRepositoryInterface;
 use App\Models\Rom;
 use App\Models\RomFile;
-use App\Queries\RomFileAggregationsTrait as RomFileAggregations;
+use App\Queries\RomFileQueriesTrait as RomFileAggregations;
 use Illuminate\Database\Eloquent\Collection;
 
 class RomFileRepository implements RomFileRepositoryInterface
 {
-    use RomFileAggregations;
+    use RomFileAggregations {
+        calcLengthsOfRomFilesKibibytes as private;
+        splitRomFilenamesIntoFileEntities as private;
+    }
 
     public function findRomFileIfExists(string $romFileId): RomFile
     {
@@ -37,40 +40,28 @@ class RomFileRepository implements RomFileRepositoryInterface
         return RomFile::where('filename', '=', $romFilename)->first();
     }
 
-
-    /*
-     * |----------------------|
-     * | MongoDB Aggregations |
-     * |----------------------|
-     */
+    public function getRomFilesCount(): int
+    {
+        return RomFile::count();
+    }
 
     public function getRomFileLengthsKibibytes(): Collection
     {
         return RomFile::project($this->calcLengthsOfRomFilesKibibytes())->get();
     }
 
-    public function getRomFileLengthsGibibytes(): Collection
+    public function splitRomFilenameValues(): Collection
     {
-        return RomFile::project($this->calcLengthsOfRomFilesGibibytes())->get();
-    }
-
-    public function getRomFileLengthsMebibytes(): Collection
-    {
-        return RomFile::project($this->calcLengthsOfRomFilesMebibytes())->get();
+        return RomFile::project($this->splitRomFilenamesIntoFileEntities())->get();
     }
 
     public function getLengthOfRomFileWithLargestFileSize(): int
     {
-        return RomFile::max('length');
+        return $this->romFileMaxLength();
     }
 
     public function getTotalSizeOfAllRomFiles(): int
     {
-        return RomFile::sum('length');
-    }
-
-    public function countRomFiles(): int
-    {
-        return RomFile::count();
+        return $this->romFileSumLength();
     }
 }
