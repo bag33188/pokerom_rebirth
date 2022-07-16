@@ -155,7 +155,7 @@ return [
     |
     */
 
-    'domain' => env('SESSION_DOMAIN'),
+    'domain' => env('SESSION_DOMAIN'), // CAREFUL WITH THIS AS IT CAUSES PAGE EXPIRATION ISSUES
 
     /*
     |--------------------------------------------------------------------------
