@@ -1,3 +1,8 @@
+@php
+    function formatRomSize(int $romSize): string {
+        return RomRepo::getFormattedRomSize($romSize);
+    }
+@endphp
 <div class="p-2.5">
     <x-slot name="header">
         <h2 class="text-center text-lg">{{$rom->getRomFileName()}} Information</h2>
@@ -7,7 +12,7 @@
     <div class="w-full grid grid-cols-2 grid-rows-[minmax(0,_1fr)_auto] gap-y-4">
         <x-list-group>
             <x-list-item>Rom Name: {{$rom->rom_name}}</x-list-item>
-            <x-list-item>Rom Size: {{RomRepo::getFormattedRomSize($rom->rom_size)}}</x-list-item>
+            <x-list-item>Rom Size: {{formatRomSize($rom->rom_size)}}</x-list-item>
             <x-list-item>Rom Type: {{$rom->rom_type}}</x-list-item>
             <x-list-item>Game Name: {{$rom->has_game ? "{$rom->game->game_name} Version" : 'N/A'}}</x-list-item>
             @if($rom->has_game)
@@ -20,7 +25,7 @@
         </x-list-group>
         @if(auth()->user()->isAdmin())
             <div class="col-start-2 col-end-2 row-start-2 row-end-2 justify-self-end h-auto">
-                <livewire:rom.delete class="delete" :romId="$romId" />
+                <livewire:rom.delete class="delete" :romId="$romId"/>
             </div>
             <div class="col-start-1 col-end-1 row-start-2 row-end-2 justify-self-start h-auto flex flex-row">
                 <x-jet-button class="order-0 mr-2" type="button" wire:click="edit({{$romId}})">Edit!</x-jet-button>
