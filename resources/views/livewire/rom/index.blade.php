@@ -28,7 +28,7 @@
                 <thead class="bg-gray-50">
                 <tr class="text-xs text-gray-700 uppercase light:bg-gray-700 light:text-gray-400">
                     @for($i = 0; $i < count($romsTableColumns); $i++)
-                        <th scope="col" class="px-6 py-3" id="column-{{ $i+1 }}">{{ $romsTableColumns[$i] }}</th>
+                        <th scope="col" class="px-6 py-3" id="column-{{ $i + 1 }}">{{ $romsTableColumns[$i] }}</th>
                     @endfor
                 </tr>
                 </thead>

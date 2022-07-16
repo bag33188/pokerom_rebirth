@@ -3,11 +3,15 @@
 namespace App\Queries;
 
 use App\Models\RomFile;
-use JetBrains\PhpStorm\ArrayShape;
-use JetBrains\PhpStorm\Pure;
+use stdClass;
 
 trait RomFileQueriesTrait
 {
+    private function getAggregations(): stdClass
+    {
+        return require('aggregations.php');
+    }
+
     /**
      * Returns result in `bytes`
      * @return int
@@ -28,42 +32,13 @@ trait RomFileQueriesTrait
         return RomFile::sum('length');
     }
 
-    #[ArrayShape(['fileEntities' => "\string[][]", 'length' => "string", 'chunkSize' => "string"])]
-    #[Pure]
-    protected function splitRomFilenamesIntoFileEntities(): array
+    protected function splitRomFilenamesIntoFileEntityValues(): array
     {
-        return [
-            'fileEntities' => ['$split' => ['$filename', '.']],
-            'length' => '$length',
-            'chunkSize' => '$chunkSize'
-        ];
+        return $this->getAggregations()->splitFilenames;
     }
 
-    #[Pure]
-    #[ArrayShape(['length' => "array[]", 'filename' => "string", 'chunkSize' => "string"])]
     protected function calcLengthsOfRomFilesKibibytes(): array
     {
-        return [
-            'length' => [
-                '$concat' => [
-                    [
-                        '$toString' => [
-                            '$toInt' => [
-                                '$ceil' => [
-                                    '$divide' => [
-                                        '$length',
-                                        1024
-                                    ]
-                                ]
-                            ]
-                        ]
-                    ],
-                    _SPACE,
-                    'KB'
-                ]
-            ],
-            'filename' => '$filename',
-            'chunkSize' => '$chunkSize'
-        ];
+        return $this->getAggregations()->kibibyteLengths;
     }
 }
