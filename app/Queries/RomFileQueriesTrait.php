@@ -15,7 +15,7 @@ trait RomFileQueriesTrait
     /**
      * Returns result in `bytes`
      * @return int
-     * @see RomFile::DATA_BYTE_FACTOR
+     * @see DATA_BYTE_FACTOR
      */
     protected function romFileMaxLength(): int
     {
@@ -25,7 +25,7 @@ trait RomFileQueriesTrait
     /**
      * Returns result in `bytes`
      * @return int
-     * @see RomFile::DATA_BYTE_FACTOR
+     * @see DATA_BYTE_FACTOR
      */
     protected function romFileSumLength(): int
     {

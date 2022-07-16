@@ -12,3 +12,5 @@ const API_TOKEN_KEY = 'auth_token';
 const CONTENT_TRANSFER_SIZE = 0xFF000;
 /** concat: Pok, &eacute; ... output: Pok&eacute; */
 const POKE_EACUTE = "Pok" . _EACUTE;
+/** <span style="color:yellow;">`1024`</span> @var int */
+const DATA_BYTE_FACTOR = 0b010000000000; // 1024

@@ -20,9 +20,6 @@ class RomFile extends MongoDbModel
         'uploadDate' => 'datetime',
     ];
 
-    /** <span style="color:yellow;">`1024`</span> @var int */
-    public final const DATA_BYTE_FACTOR = 0b010000000000; // 1024
-
     public function getObjectId(): ObjectId
     {
         return new ObjectId($this->getKey());
@@ -36,13 +33,13 @@ class RomFile extends MongoDbModel
     /**
      * {@see Rom::rom_size rom_size} is represented in **kibibytes**.
      * The method return's the RomFile's {@see RomFile::length length} value
-     * divided by {@see RomFile::DATA_BYTE_FACTOR `1024`} and rounds upward using
+     * divided by {@see DATA_BYTE_FACTOR `1024`} and rounds upward using
      * the {@see ceil} function (casts result as integer).
      *
      * @return int
      */
     public function calculateRomSizeFromLength(): int
     {
-        return (int)ceil($this->attributes['length'] / self::DATA_BYTE_FACTOR);
+        return (int)ceil($this->attributes['length'] / DATA_BYTE_FACTOR);
     }
 }

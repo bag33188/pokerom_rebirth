@@ -11,13 +11,10 @@ use JetBrains\PhpStorm\ArrayShape;
  */
 class RomFactory extends Factory
 {
-    /** @var int 1024 */
-    private const BYTE_FACTOR = 0x400;
-
     private static function generateRandomRomSizeValue(): int
     {
-        $min = intval(MIN_ROM_FILE_SIZE / self::BYTE_FACTOR, 16) + 0x02;
-        $max = intval(MAX_ROM_FILE_SIZE / self::BYTE_FACTOR, 16) - 0x02;
+        $min = intval(MIN_ROM_FILE_SIZE / DATA_BYTE_FACTOR, 16) + 0x02;
+        $max = intval(MAX_ROM_FILE_SIZE / DATA_BYTE_FACTOR, 16) - 0x02;
         return rand($min, $max);
     }
 
