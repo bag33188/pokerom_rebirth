@@ -15,7 +15,7 @@
                     <option value="" selected>Select ROM</option>
                     @foreach($availableRoms as $rom)
                         @php normalizeObjectUsingJSONConversions($rom); @endphp
-                        <option value="{{$rom->id}}" wire:key="{{$rom->getKey()}}">{{$rom->rom_name}}</option>
+                        <option value="{{$rom->id}}" wire:key="{{$rom->id}}">{{$rom->rom_name}}</option>
                     @endforeach
                 </x-form-select>
                 <div class="mt-2.5">
