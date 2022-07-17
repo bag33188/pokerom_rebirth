@@ -3,6 +3,7 @@
 namespace Utils\Classes;
 
 use App\Models\RomFile;
+use stdClass;
 
 /**
  * MongoDB Aggregation Pipeline for {@see RomFile RomFile} resource collection.
@@ -11,7 +12,7 @@ use App\Models\RomFile;
  *   - {@see AbstractRomFileAggregations::$kibibyte_lengths kibibyte_lengths}
  *   - {@see AbstractApplicationException::$split_rom_filenames split_rom_filenames}
  */
-abstract class AbstractRomFileAggregations
+abstract class AbstractRomFileAggregations extends stdClass
 {
     /**
      * retrieves all documents in collection but converts the {@see AbstractGridFSModel::$length length} property

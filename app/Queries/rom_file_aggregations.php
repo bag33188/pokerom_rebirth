@@ -9,9 +9,10 @@
 
 namespace App\Queries;
 
+use stdClass;
 use Utils\Classes\AbstractRomFileAggregations as RomFileAggregations;
 
-/** @var RomFileAggregations $rom_file_aggregations */
+/** @var RomFileAggregations|stdClass $rom_file_aggregations */
 $rom_file_aggregations = (object)array(
     'kibibyte_lengths' => [
         'length' => [
