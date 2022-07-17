@@ -7,7 +7,7 @@
         <h5 class="text-center text-gray-700">{{$gamesCount}} Games in Total</h5>
     </x-slot>
     <div class="container mx-auto" x-data="{ open: true }">
-        @if(count($games) < 1)
+        @if($gamesCount < 1)
             <h2 class="text-center text-lg mt-7">No Games Exist in database</h2>
         @else
             <x-show-hide-button text="Games" :initial-state="$alpineInitialDisplayState"/>

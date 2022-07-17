@@ -29,7 +29,7 @@ class RomFactory extends Factory
         return [
             'rom_name' => strtoupper($this->faker->lastName()),
             'rom_size' => self::generateRandomRomSizeValue(),
-            'rom_type' => ROM_TYPES[rand(0, sizeof(ROM_TYPES) - 1)],
+            'rom_type' => ROM_TYPES[rand(0, count(ROM_TYPES) - 1)],
             'has_file' => FALSE,
             'has_game' => FALSE,
             'file_id' => NULL,

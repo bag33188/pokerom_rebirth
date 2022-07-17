@@ -2,7 +2,7 @@
     <link rel="stylesheet" type="text/css" href="{{ mix('css/punch.css') }}" />
 @endpush
 @php
-    $romFilesDirCount = sizeof($romFiles);
+    $romFilesDirCount = count($romFiles);
 @endphp
 <x-app-layout>
     <x-slot name="header">

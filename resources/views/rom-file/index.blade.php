@@ -14,7 +14,7 @@
                 class="font-semibold">{{$romFilesCount}} ROM Files in Total</span>)</h2>
     </x-slot>
     <div x-data="{ open: true }">
-        @unless(sizeof($romFiles) > 0)
+        @unless($romFilesCount > 0)
             <h2 class="text-center text-lg mt-7">No ROM Files Exist in database</h2>
         @else
             <x-show-hide-button text="ROM Files" :initial-state="$alpineInitialDisplayState"/>
