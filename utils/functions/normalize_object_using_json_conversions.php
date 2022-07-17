@@ -8,12 +8,12 @@ if (!function_exists('normalizeObjectUsingJSONConversions')) {
      * This method also works with **Eloquent Objects** (_resources/collections/models_).
      *
      * @param mixed $object stdClass, array, collections/resources, models are all types that can be handled
-     * @param bool $associative Set to true to convert object to an associative {@see array}, else convert to {@see stdClass}
+     * @param bool $useAssociative Set to true to convert object to an associative {@see array}, else convert to {@see stdClass}
      * @return void
      *
      */
-    function normalizeObjectUsingJSONConversions(mixed &$object, bool $associative = false): void
+    function normalizeObjectUsingJSONConversions(mixed &$object, bool $useAssociative = true): void
     {
-        $object = json_decode(json_encode($object), associative: $associative);
+        $object = json_decode(json_encode($object), associative: $useAssociative);
     }
 }
