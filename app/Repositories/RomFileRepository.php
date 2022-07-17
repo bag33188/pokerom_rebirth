@@ -10,7 +10,9 @@ use Illuminate\Database\Eloquent\Collection;
 
 class RomFileRepository implements RomFileRepositoryInterface
 {
-    use RomFileAggregations;
+    use RomFileAggregations {
+        sortByLengthAscFilenameAsc as private;
+    }
 
     public function findRomFileIfExists(string $romFileId): RomFile
     {
@@ -24,12 +26,12 @@ class RomFileRepository implements RomFileRepositoryInterface
 
     public function getAllRomFilesSorted(): Collection
     {
-        return RomFile::all()->sortBy($this->sortByLengthAndFilenameAsc());
+        return RomFile::all()->sortBy($this->sortByLengthAscFilenameAsc());
     }
 
     public function getAllRomFilesSortedWithRomData(): Collection
     {
-        return RomFile::with('rom')->get()->sortBy($this->sortByLengthAndFilenameAsc());
+        return RomFile::with('rom')->get()->sortBy($this->sortByLengthAscFilenameAsc());
     }
 
     public function findRomFileByFilename(string $romFilename): ?RomFile
