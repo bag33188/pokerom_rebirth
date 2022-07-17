@@ -18,3 +18,6 @@ const TIME_STRING = /** @lang RegExp */
 '/\s?[0-2][0-4]:[0-5]\d:[0-5]\d$/';
 const FILENAME_PATTERN = /** @lang RegExp */
 "/^([\w\d\-_]{1,28})(?:\.)([\w\d]{2,3})$/i";
+/** pattern for recognizing mongodb's bson object id format/data-type */
+const OBJECT_ID_PATTERN = /** @lang RegExp */
+"/^[\da-fA-F]{24}$/";

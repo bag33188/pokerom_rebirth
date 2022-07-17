@@ -21,7 +21,7 @@
                 <div class="inline-flex flex-row justify-between w-full">
                     <span class="order-0">
                         <x-rom-file-download :rom-file="$romFile">
-                            <x-slot name="submitButton">
+                            <x-slot name="button">
                                 <button type="submit" class="{!! join(_SPACE, $downloadBtnClasses) !!}">
                                     <span class="order-1">@include('partials._download-icon')</span>
                                     <span class="order-0 mr-2">Download!</span>

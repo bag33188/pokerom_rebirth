@@ -54,7 +54,7 @@ class Create extends Component
         ];
     }
 
-    public function updated($propertyName)
+    public function updated($propertyName): void
     {
         $this->validateOnly($propertyName);
     }
@@ -63,7 +63,7 @@ class Create extends Component
     /**
      * @throws AuthorizationException
      */
-    public function store(GameServiceInterface $gameService)
+    public function store(GameServiceInterface $gameService): void
     {
         $this->authorize('create', Game::class);
 

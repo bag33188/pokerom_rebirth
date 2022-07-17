@@ -31,7 +31,7 @@ class Index extends Component
         return view('livewire.game.index');
     }
 
-    public function show(int $gameId)
+    public function show(int $gameId): void
     {
         $this->redirect(route('games.show', $gameId));
     }

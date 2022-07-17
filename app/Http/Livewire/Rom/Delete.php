@@ -27,7 +27,6 @@ class Delete extends Component
         return view('livewire.rom.delete');
     }
 
-
     /**
      * @throws AuthorizationException
      */
