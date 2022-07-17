@@ -45,7 +45,7 @@ class GameRepository implements GameRepositoryInterface
 
     public function getGamesCount(): int
     {
-        [$query, $bindings] = $this->countGamesInDatabase()->getValues();
+        ['query' => $query, 'bindings' => $bindings] = $this->countGamesInDatabase()->toArray();
         return DB::selectOne($query, $bindings)->count;
     }
 }
