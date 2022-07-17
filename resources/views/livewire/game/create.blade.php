@@ -14,7 +14,7 @@
                 <x-form-select wire:model.lazy="rom_id" id="availableRoms" name="rom_id" autofocus required>
                     <option value="" selected>Select ROM</option>
                     @foreach($availableRoms as $rom)
-                        @php normalizeObjectUsingJSONConversions($rom, useAssociative: false); @endphp
+                        @php normalizeObjectUsingJSONConversions($rom, normalizeToAssociativeArray: false); @endphp
                         <option value="{{$rom->id}}" wire:key="{{$rom->id}}">{{$rom->rom_name}}</option>
                     @endforeach
                 </x-form-select>

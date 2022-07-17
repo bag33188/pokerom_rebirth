@@ -9,7 +9,7 @@
       'shadow-md',
       'my-3'
     ];
-    $messageType = Session::get('message-type');
+    $messageType = Session::get('message-type', \App\Enums\SessionMessageTypeEnum::ERROR);
     $message = Session::get('message');
 @endphp
 @if (Session::has('message'))

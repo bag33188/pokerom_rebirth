@@ -10,11 +10,7 @@ use Illuminate\Database\Eloquent\Collection;
 
 class RomFileRepository implements RomFileRepositoryInterface
 {
-    use RomFileAggregations {
-        romFileSumLength as private;
-        romFileMaxLength as private;
-        countRomFiles as public;
-    }
+    use RomFileAggregations;
 
     public function findRomFileIfExists(string $romFileId): RomFile
     {
@@ -43,17 +39,17 @@ class RomFileRepository implements RomFileRepositoryInterface
 
     public function getRomFilesCount(): int
     {
-        return $this->countRomFiles();
+        return RomFile::count();
     }
 
     public function getLengthOfRomFileWithLargestFileSize(): int
     {
-        return $this->romFileMaxLength();
+        return RomFile::max('length');
     }
 
     public function getTotalSizeOfAllRomFiles(): int
     {
-        return $this->romFileSumLength();
+        return RomFile::sum('length');
     }
 
     public function getAllRomFileLengthsKibibytes(): Collection

@@ -2,36 +2,10 @@
 
 namespace App\Queries;
 
-use App\Models\RomFile;
 use JetBrains\PhpStorm\ArrayShape;
 
 trait RomFileQueriesTrait
 {
-    protected function countRomFiles(): int
-    {
-        return RomFile::count();
-    }
-
-    /**
-     * Returns result in `bytes`
-     * @return int
-     * @see DATA_BYTE_FACTOR
-     */
-    protected function romFileMaxLength(): int
-    {
-        return RomFile::max('length');
-    }
-
-    /**
-     * Returns result in `bytes`
-     * @return int
-     * @see DATA_BYTE_FACTOR
-     */
-    protected function romFileSumLength(): int
-    {
-        return RomFile::sum('length');
-    }
-
     /**
      * projects the {@see AbstractGridFSModel::$filename filename} into an array
      * with the file's name and the file's type as array items.
