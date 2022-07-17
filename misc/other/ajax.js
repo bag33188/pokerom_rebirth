@@ -6,7 +6,7 @@ var token = "__API_TOKEN__";
 function loadRomsData() {
     var xhr = new XMLHttpRequest();
 
-    xhr.open("GET", apiUrl + "/roms", true);
+    xhr.open("GET", apiUrl + "/dev/roms", true);
     xhr.setRequestHeader("Accept", "application/json");
     xhr.setRequestHeader("Authorization", "Bearer " + token);
 
@@ -27,3 +27,5 @@ function loadRomsData() {
 
     xhr.send();
 }
+
+// loadRomsData()

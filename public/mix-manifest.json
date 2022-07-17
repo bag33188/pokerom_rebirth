@@ -2,6 +2,7 @@
     "/js/app.js": "/js/app.js",
     "/js/modules/capitalize.js": "/js/modules/capitalize.js",
     "/js/modules/ready.js": "/js/modules/ready.js",
+    "/js/modules/csrf.js": "/js/modules/csrf.js",
     "/js/dashboard.index.js": "/js/dashboard.index.js",
     "/js/roms.index.js": "/js/roms.index.js",
     "/css/app.css": "/css/app.css",

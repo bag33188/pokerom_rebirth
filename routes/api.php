@@ -90,3 +90,7 @@ Route::name('api.')->group(function () {
         });
     });
 });
+
+if (App::environment('local', 'debug')) {
+    Route::get('dev/roms', [RomController::class, 'index'])->name('api.dev.roms.index');
+}
