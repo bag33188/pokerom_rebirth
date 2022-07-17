@@ -10,7 +10,6 @@ use Utils\Classes\AbstractGridFSModel as GridFSModel;
 /** @mixin GridFSModel */
 class RomFile extends MongoDbModel
 {
-
     protected $connection = 'mongodb';
     protected $collection = 'rom.files';
     protected $table = 'rom.files'; /*! don't delete!! use for eloquent helper code */
