@@ -12,6 +12,11 @@ trait RomFileQueriesTrait
         return require('rom_file_aggregations.php');
     }
 
+    protected function countRomFiles(): int
+    {
+        return RomFile::count();
+    }
+
     /**
      * Returns result in `bytes`
      * @return int

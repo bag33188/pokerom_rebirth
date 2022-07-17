@@ -21,7 +21,7 @@ $rom_file_aggregations = (object)array(
                             '$ceil' => [
                                 '$divide' => [
                                     '$length',
-                                    1024
+                                    DATA_BYTE_FACTOR
                                 ]
                             ]
                         ]
@@ -35,7 +35,12 @@ $rom_file_aggregations = (object)array(
         'chunkSize' => '$chunkSize'
     ],
     'split_rom_filenames' => [
-        'fileEntities' => ['$split' => ['$filename', '.']],
+        'fileEntities' => [
+            '$split' => [
+                '$filename',
+                '.'
+            ]
+        ],
         'length' => '$length',
         'chunkSize' => '$chunkSize'
     ]
