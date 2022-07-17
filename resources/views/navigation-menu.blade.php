@@ -7,7 +7,7 @@
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('welcome') }}">
                         {{-- <x-jet-application-mark class="block h-9 w-auto" /> --}}
-                        @include('partials._app-logo')
+                        @include('ui.app-logo')
                     </a>
                 </div>
 

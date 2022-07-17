@@ -3,7 +3,7 @@
         <h2 class="text-center text-lg">Edit {{$rom->getRomFileName()}}</h2>
     </x-slot>
     <div class="p-3">
-        @include('ui.session-error')
+        @include('ui.session-message')
         <x-jet-validation-errors class="mb-4"/>
 
         <form wire:submit.prevent="update">

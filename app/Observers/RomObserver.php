@@ -37,7 +37,7 @@ class RomObserver
     public function updated(Rom $rom): void
     {
         if (!$this->currentRequestIsLivewireRequest()) {
-            if (!$rom->has_file || empty($rom->file_id)) {
+            if (!$rom->has_file) {
                 $this->romActions->linkRomToRomFileIfExists($rom);
             }
         }

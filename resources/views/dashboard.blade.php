@@ -24,7 +24,7 @@
 
                 <div class="p-6 sm:px-20 bg-white border-b border-gray-200">
                     <div>
-                        <span class="block h-12 w-auto">@include('partials._app-logo')</span>
+                        <span class="block h-12 w-auto">@include('ui.app-logo')</span>
                     </div>
                     <div class="mt-3 text-2xl">
                         <p>

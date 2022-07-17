@@ -7,8 +7,8 @@
     <x-slot name="header">
         <h2 class="text-center text-lg">{{$rom->getRomFileName()}} Information</h2>
     </x-slot>
-    @include('ui.session-error')
-    @include('ui.session-success')
+    @include('ui.session-message')
+
     <div class="w-full grid grid-cols-2 grid-rows-[minmax(0,_1fr)_auto] gap-y-4">
         <x-list-group>
             <x-list-item>Rom Name: {{$rom->rom_name}}</x-list-item>
@@ -29,7 +29,7 @@
             </div>
             <div class="col-start-1 col-end-1 row-start-2 row-end-2 justify-self-start h-auto flex flex-row">
                 <x-jet-button class="order-0 mr-2" type="button" wire:click="edit({{$romId}})">Edit!</x-jet-button>
-                @unless($rom->has_file === TRUE || isset($rom->file_id))
+                @unless($rom->has_file)
                     <x-jet-button class="order-1" wire:click="attemptToLinkRomToRomFile">
                         Attempt ROM File Link
                     </x-jet-button>

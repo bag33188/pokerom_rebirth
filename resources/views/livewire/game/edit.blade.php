@@ -3,7 +3,7 @@
         <h2 class="text-center text-lg">Edit {{$game->game_name}} Version</h2>
     </x-slot>
     <div class="p-3">
-        @include('ui.session-error')
+        @include('ui.session-message')
 
         <x-jet-validation-errors class="mb-4"/>
 

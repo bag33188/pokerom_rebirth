@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Game;
 
+use App\Enums\SessionMessageTypeEnum as SessionMessageTypes;
 use App\Http\Validators\GameValidationRulesTrait;
 use App\Models\Game;
 use Date;
@@ -85,7 +86,8 @@ class Edit extends Component
             $this->redirect(route('games.show', $this->gameId));
 
         } catch (Exception $e) {
-            session()->flash('error-message', $e->getMessage());
+            session()->flash('message', $e->getMessage());
+            session()->flash('message-type', SessionMessageTypes::ERROR);
         }
     }
 }

@@ -3,7 +3,7 @@
         <h2 class="text-center text-lg">Add Game</h2>
     </x-slot>
     <div class="mt-3.5">
-        @include('ui.session-error')
+        @include('ui.session-message')
 
         @if($romsAreAvailable)
 

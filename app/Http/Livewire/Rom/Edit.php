@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Rom;
 
+use App\Enums\SessionMessageTypeEnum as SessionMessageTypes;
 use App\Http\Validators\RomValidationRulesTrait;
 use App\Models\Rom;
 use Exception;
@@ -77,7 +78,8 @@ class Edit extends Component
             ]);
             $this->redirect(route('roms.show', $this->romId));
         } catch (Exception $e) {
-            session()->flash('error-message', $e->getMessage());
+            session()->flash('message', $e->getMessage());
+            session()->flash('message-type', SessionMessageTypes::ERROR);
         }
     }
 }
