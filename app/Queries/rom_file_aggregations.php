@@ -15,7 +15,7 @@ $rom_file_aggregations = (object)array(
     'kibibyte_lengths' => [
         'length' => [
             '$concat' => [
-                [
+                array(
                     '$toString' => [
                         '$toInt' => [
                             '$ceil' => [
@@ -26,7 +26,7 @@ $rom_file_aggregations = (object)array(
                             ]
                         ]
                     ]
-                ],
+                ),
                 _SPACE,
                 'KB'
             ]
