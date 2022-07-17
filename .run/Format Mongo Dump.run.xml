@@ -1,8 +1,0 @@
-<component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Format Mongo Dump" type="NodeJSConfigurationType" path-to-js-file="format-mongo-dump.js" working-dir="$PROJECT_DIR$/scripts/helpers">
-    <envs>
-      <env name="NODE_ENV" value="development" />
-    </envs>
-    <method v="2" />
-  </configuration>
-</component>
