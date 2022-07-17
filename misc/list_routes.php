@@ -15,7 +15,7 @@
     <body>
         <?php
             // run command, list routes
-            $output = `CD .. && php artisan route:list`;
+            $output = `cd .. && php artisan route:list`;
             echo "<pre>\n" . htmlentities($output) . "\n</pre>", "\n";
         ?>
     </body>
