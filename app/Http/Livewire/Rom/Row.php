@@ -12,6 +12,11 @@ class Row extends Component
 {
     public Rom $rom;
 
+    public function getInfo(int $romId): void
+    {
+        $this->emitUp('show', $romId);
+    }
+
     public function render(): Factory|View|Application
     {
         return view('livewire.rom.row');
