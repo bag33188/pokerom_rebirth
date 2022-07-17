@@ -9,7 +9,7 @@ trait GameQueriesTrait
     protected function findRomsWithNoGame(): QueryObject
     {
         $sql = /** @lang MariaDB */
-            "CALL FindRomsWithNoGame;";
+            "CALL FindRomsWithNoGame();";
         return new QueryObject($sql);
     }
 

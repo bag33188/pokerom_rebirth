@@ -36,6 +36,6 @@ class ListGroup extends Component
             <ul {{ $attributes->merge(['class' => implode(_SPACE, $listGroupClasses)]) }}>
                 {{ $slot }}
             </ul>
-        blade;
+        blade. "\n";
     }
 }
