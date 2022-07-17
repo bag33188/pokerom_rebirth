@@ -9,9 +9,9 @@
     </head>
     <body>
         <?php
-            # run command, list directory contents
+            // run command, list directory contents
             $output = `DIR`;
-            echo "<pre>$output</pre>";
+            echo "<pre>\n$output\n</pre>", "\n";
         ?>
     </body>
 </html>
