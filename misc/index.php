@@ -9,6 +9,7 @@
     </head>
     <body>
         <?php
+            # run command, list directory contents
             $output = `DIR`;
             echo "<pre>$output</pre>";
         ?>
