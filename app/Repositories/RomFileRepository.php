@@ -13,6 +13,7 @@ class RomFileRepository implements RomFileRepositoryInterface
     use RomFileAggregations {
         romFileSumLength as private;
         romFileMaxLength as private;
+        countRomFiles as public;
     }
 
     public function findRomFileIfExists(string $romFileId): RomFile
@@ -45,16 +46,6 @@ class RomFileRepository implements RomFileRepositoryInterface
         return $this->countRomFiles();
     }
 
-    public function getAllRomFileLengthsKibibytes(): Collection
-    {
-        return RomFile::project($this->calcLengthsOfRomFilesKibibytes())->get();
-    }
-
-    public function getAllRomFileNameAndFileTypeValues(): Collection
-    {
-        return RomFile::project($this->splitRomFilenamesIntoFileEntityValues())->get();
-    }
-
     public function getLengthOfRomFileWithLargestFileSize(): int
     {
         return $this->romFileMaxLength();
@@ -63,5 +54,15 @@ class RomFileRepository implements RomFileRepositoryInterface
     public function getTotalSizeOfAllRomFiles(): int
     {
         return $this->romFileSumLength();
+    }
+
+    public function getAllRomFileLengthsKibibytes(): Collection
+    {
+        return RomFile::project($this->calcLengthsOfRomFilesKibibytes())->get();
+    }
+
+    public function getAllRomFileNameAndFileTypeValues(): Collection
+    {
+        return RomFile::project($this->splitRomFilenamesIntoFileEntityValues())->get();
     }
 }
