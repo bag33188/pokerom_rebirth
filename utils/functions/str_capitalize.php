@@ -39,14 +39,14 @@ if (!function_exists('str_capitalize')) {
             }
             return join($separator, $str_arr);
         } else {
-            list($php, $c) = array(
+            list('php' => $interpolate, 'c' => $ucfirst) = array(
                 'php' => strtoupper($value[0]) . strtolower(substr($value, 1, strlen($value) - 1)),
-                'c' => ucfirst($value)
+                'c' => ucfirst($value) // <- native
             );
             $conversions = new stdClass();
-            $conversions->php = $php;
-            $conversions->c = $c;
-            return $conversions->c;
+            $conversions->interpolate = $interpolate;
+            $conversions->ucfirst = $ucfirst;
+            return $conversions->ucfirst;
         }
     }
 }

@@ -28,7 +28,7 @@ Route::get('version', fn() => response()
 
 Route::name('api.')->group(function () {
     // no auth
-    Route::name('auth.')->prefix('auth')->group(function () {
+    Route::prefix('auth')->name('auth.')->group(function () {
         Route::post('login', [UserController::class, 'login'])->name('login');
         Route::post('register', [UserController::class, 'register'])->name('register');
     });
@@ -92,5 +92,8 @@ Route::name('api.')->group(function () {
 });
 
 if (App::environment('local', 'debug')) {
-    Route::get('dev/roms', [RomController::class, 'index'])->name('api.dev.roms.index');
+    Route::prefix('dev')->name('api.dev.')->group(function () {
+        Route::get('roms', [RomController::class, 'index'])->name('roms.index');
+        Route::get('rom-files/{romFileId}/download', [RomFileController::class, 'download'])->name('rom-files.download');
+    });
 }
