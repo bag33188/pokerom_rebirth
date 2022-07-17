@@ -1,16 +1,17 @@
 <?php
 
-namespace App\Queries;
-
 /*
  * |===================================|
  * | MongoDB Aggregations for RomFiles |
  * |===================================|
  */
 
-use stdClass;
 
-/** @var stdClass $rom_file_aggregations */
+namespace App\Queries;
+
+use Utils\Classes\AbstractRomFileAggregations as RomFileAggregations;
+
+/** @var RomFileAggregations $rom_file_aggregations */
 $rom_file_aggregations = (object)array(
     'kibibyte_lengths' => [
         'length' => [

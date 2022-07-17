@@ -14,12 +14,16 @@ abstract class AbstractGridFSModel extends MongoDbModel
     /**
      * #### BSON Type: ObjectID (`objectId`)
      *
+     * **The ID of the file.**
+     *
      * @var string
      */
     public readonly string $_id;
 
     /**
      * #### BSON Type: int32 (`int`)
+     *
+     * **Size of chunks file is stored as in grid.**
      *
      * @var int
      */
@@ -28,12 +32,16 @@ abstract class AbstractGridFSModel extends MongoDbModel
     /**
      * #### BSON Data Type: String (`string`)
      *
+     * **Name of file.**
+     *
      * @var string
      */
     public readonly string $filename;
 
     /**
      * #### BSON Types: int64 (`long`), int32 (`int`)
+     *
+     * **Size of file in _bytes_.**
      *
      * @var int
      */
@@ -42,12 +50,16 @@ abstract class AbstractGridFSModel extends MongoDbModel
     /**
      * #### BSON Type: Date (`date`)
      *
+     * **Date file was uploaded.**
+     *
      * @var string
      */
     public readonly string $uploadDate;
 
     /**
      * #### BSON Data Type: String (`string`)
+     *
+     * **The `md5` hash for the file.**
      *
      * @var string
      */

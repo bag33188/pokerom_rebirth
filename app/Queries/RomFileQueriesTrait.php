@@ -3,11 +3,11 @@
 namespace App\Queries;
 
 use App\Models\RomFile;
-use stdClass;
+use Utils\Classes\AbstractRomFileAggregations as RomFileAggregations;
 
 trait RomFileQueriesTrait
 {
-    private static function fetchRomFileAggregations(): stdClass
+    private static function fetchRomFileAggregations(): RomFileAggregations
     {
         return require('rom_file_aggregations.php');
     }
