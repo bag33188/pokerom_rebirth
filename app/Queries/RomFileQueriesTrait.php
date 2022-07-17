@@ -57,4 +57,18 @@ trait RomFileQueriesTrait
             'chunkSize' => '$chunkSize'
         ];
     }
+
+    /**
+     * ### Sort:
+     *
+     * ```
+     * length: 1,
+     * filename: 1
+     * ```
+     * @return string[][]
+     */
+    protected function sortByLengthAndFilenameAsc(): array
+    {
+        return array(['length', 'asc'], ['filename', 'asc']);
+    }
 }
