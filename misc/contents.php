@@ -15,7 +15,7 @@
     <body>
         <?php
             // run command, list directory contents
-            $output = `DIR`;
+            $output = `DIR /A /S /Q /N /O:N .`;
             echo "<pre>\n" . htmlentities($output) . "\n</pre>", "\n";
         ?>
     </body>
