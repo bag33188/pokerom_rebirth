@@ -27,9 +27,9 @@ class StoreRomFileRequest extends FormRequest
 
     protected function prepareForValidation(): void
     {
-        $fileUtil = new FilenameHandler($this->filename);
-        $fileUtil->normalizeFileName();
-        $romFilename = $fileUtil->filename;
+        $filenameUtil = new FilenameHandler($this->filename);
+        $filenameUtil->normalizeFileName();
+        $romFilename = $filenameUtil->filename;
         $this->merge([
             'filename' => $romFilename,
         ]);

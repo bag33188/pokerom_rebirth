@@ -74,7 +74,7 @@ class Handler extends ExceptionHandler
                 return jsonData(
                     ['message' => 'Unauthenticated.'],
                     HttpResponse::HTTP_UNAUTHORIZED,
-                    array('X-Http-Error-Request-URI' => $currentRoute)
+                    ['X-Http-Error-Request-URI' => $currentRoute]
                 );
             }
             return null;
@@ -87,7 +87,11 @@ class Handler extends ExceptionHandler
                 if ($statusCode === HttpResponse::HTTP_NOT_FOUND && strlen($message) === 0) {
                     $message = "Route not found: $currentRoute";
                 }
-                return jsonData(['message' => $message], $statusCode, ['X-Http-Error-Request-URI' => $currentRoute]);
+                return jsonData(
+                    ['message' => $message],
+                    $statusCode,
+                    ['X-Http-Error-Request-URI' => $currentRoute]
+                );
             }
             return null;
         });

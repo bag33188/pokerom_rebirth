@@ -21,7 +21,7 @@ class RomActions implements RomActionsInterface
             $rom->id
         )->getValues();
         $stmt = DB::statement($query, $bindings);
-        if ($stmt) $rom->refresh();
+        if ($stmt === true) $rom->refresh();
     }
 
     public function linkRomToRomFileIfExists(Rom $rom): void

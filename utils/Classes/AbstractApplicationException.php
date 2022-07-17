@@ -35,7 +35,7 @@ abstract class AbstractApplicationException extends Exception
 
     abstract public function report(): bool|null;
 
-    public final static function getCurrentErrorRouteAsString(): array|string
+    public final static function getCurrentErrorRouteAsString(): string
     {
         $baseAppUrl = Config::get('app.url');
         $currentUrl = URL::current();

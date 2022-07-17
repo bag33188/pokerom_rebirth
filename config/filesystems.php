@@ -78,7 +78,7 @@ return [
 
     'links' => [
         public_path('storage') => storage_path('app/public'),
-        public_path('rom_file') => storage_path('app/rom_files')
+        public_path('rom_files') => storage_path('app/rom_files')
     ],
 
 ];

@@ -56,7 +56,11 @@ romFilesData = romFilesData.valueOf().map((romFileData) => {
 
 fs.writeFileSync(
     seedFilePath,
-    JSON.stringify({ roms: romsData, games: gamesData, romFiles: romFilesData })
+    JSON.stringify({
+        roms: romsData,
+        games: gamesData,
+        rom_files: romFilesData,
+    })
 );
 
 console.log("Seeds generated!");
