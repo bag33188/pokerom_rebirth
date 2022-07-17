@@ -47,7 +47,10 @@
                                 This web app is a databank of Pok&eacute;mon ROMs.
                                 It contains 40 ROMs, including all 33 core Pok&eacute;mon ROMs.
                                 <br/>
-                                <p class="italic">&copy; Pok&eacute;mon Company <span id="copyright-year"></span></p>
+                                <p class="italic">
+                                    <span>&copy; Pok&eacute;mon Company </span>
+                                    <span id="copyright-year"><!-- js content insert --></span>
+                                </p>
                             </div>
                         </div>
                     </div>

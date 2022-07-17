@@ -45,7 +45,8 @@ let loadWelcomeContent = (username) => {
 
 let loadCopyrightYear = function () {
     const copyrightYearElement = document.getElementById("copyright-year");
-    copyrightYearElement.textContent = new Date().getFullYear().toString();
+    let currentYear = new Date().getFullYear();
+    copyrightYearElement.textContent = currentYear.toString();
 };
 
 window.loadWelcomeContent = loadWelcomeContent;
