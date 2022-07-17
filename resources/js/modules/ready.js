@@ -1,11 +1,12 @@
 "use strict";
 
+// syntax: ES5
+
 var $ = function (callbackDocumentObj) {
     var ready = function (callback) {
         var docObj = callbackDocumentObj;
-        if (typeof docObj !== "object") {
-            docObj = document;
-        }
+        // distinguish between $(function(){}) and $(document).ready(function(){})
+        if (typeof docObj !== "object") docObj = document;
         if (docObj.readyState !== "loading") {
             callback();
         } else if (
