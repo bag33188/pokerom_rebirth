@@ -52,7 +52,7 @@ class ShowHideButton extends Component
         return ['initHide' => $initHide, 'initShow' => $initShow];
     }
 
-    #[ArrayShape(['hidden' => "string", 'shown' => "string"])]
+    #[ArrayShape(['hidden' => "!open", 'shown' => "open"])]
     private function getAlpineStates(): array
     {
         return ['hidden' => DisplayStateEnum::HIDE->value, 'shown' => DisplayStateEnum::SHOW->value];
