@@ -11,7 +11,7 @@
         <?php
             // run command, list directory contents
             $output = `DIR`;
-            echo "<pre>\n$output\n</pre>", "\n";
+            echo "<pre>\n" . htmlentities($output) . "\n</pre>", "\n";
         ?>
     </body>
 </html>
