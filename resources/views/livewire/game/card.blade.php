@@ -14,7 +14,7 @@
                 {{$game->game_name . ' Version'}}
             </li>
             <li class="p-3 hover:bg-blue-600 hover:text-blue-200">
-                Generation {{$game->generation > 0 ? numberToRoman($game->generation) : 'N/A'}}
+                Generation {{$this->parseGenerationIntoRoman($game->generation)}}
             </li>
             <li class="p-3 hover:bg-blue-600 hover:text-blue-200">
                 {{$game->region}} Region

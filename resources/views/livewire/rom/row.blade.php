@@ -31,8 +31,10 @@
         @endif
     </td>
     <td class="px-6 py-4">
-        <button type="button" class="{{implode(_SPACE, $getInfoBtnClasses)}}"
-                wire:click="getInfo({{$rom->id}})">Get Info
+        <button type="button"
+                class="{{implode(_SPACE, $getInfoBtnClasses)}}"
+                wire:click="getInfo({{$rom->id}})">
+            Get Info
         </button>
     </td>
 </tr>

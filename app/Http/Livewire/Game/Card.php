@@ -17,4 +17,9 @@ class Card extends Component
         return view('livewire.game.card');
     }
 
+    public function parseGenerationIntoRoman(int $generation): string
+    {
+        return $generation > 0 ? numberToRoman($generation) : strval(0); // 'N/A'
+    }
+
 }
