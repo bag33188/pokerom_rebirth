@@ -17,6 +17,9 @@ class Index extends Component
     /** @var int */
     public $gamesCount;
 
+    /** @var string[] */
+    protected $listeners = ['show'];
+
     public function mount()
     {
         $this->games = GameRepo::getAllGamesSorted();

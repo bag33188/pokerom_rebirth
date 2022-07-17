@@ -22,6 +22,9 @@ class Index extends Component
     /** @var int */
     public $totalRomsCount;
 
+    /** @var string[] */
+    protected $listeners = ['show'];
+
     public function boot()
     {
         $this->romsTableColumns = array('ROM Name', 'ROM Size', 'ROM Type', 'Game Name', 'Download', 'Information');
