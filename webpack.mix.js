@@ -14,8 +14,9 @@ const mix = require("laravel-mix");
 mix.js("resources/js/app.js", "public/js")
     .postCss("resources/css/app.css", "public/css", [require("tailwindcss")])
     .css("resources/css/punch.css", "public/css")
-    .js("resources/js/modules/capitalize.js", "public/js/modules")
     .js("resources/js/modules/ready.js", "public/js/modules")
+    .js("resources/js/modules/capitalize.js", "public/js/modules")
+    .js("resources/js/modules/getCookie.js", "public/js/modules")
     .js("resources/js/modules/csrf.js", "public/js/modules")
     .js("resources/js/Pages/Dashboard/index.js", "public/js/dashboard.index.js")
     .js("resources/js/Pages/Roms/index.js", "public/js/roms.index.js");

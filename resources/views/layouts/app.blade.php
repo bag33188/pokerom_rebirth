@@ -20,6 +20,7 @@
         <script type="text/javascript" src="{{ mix('js/app.js') }}" defer></script>
         <script type="text/javascript" src="{{ mix('js/modules/ready.js') }}"></script>
         <script type="text/javascript" src="{{ mix('js/modules/capitalize.js') }}"></script>
+        <script type="text/javascript" src="{{ mix('js/modules/getCookie.js') }}"></script>
         <script type="text/javascript" src="{{ mix('js/modules/csrf.js') }}"></script>
         @stack('scripts')
     </head>
