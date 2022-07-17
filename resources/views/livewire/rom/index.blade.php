@@ -9,7 +9,7 @@
         <h2 class="text-center text-lg">Pok&eacute;mon ROMs Library</h2>
     </x-slot>
     <div x-data="{ open: true }" id="roms-container">
-        @if(count($roms) < 1)
+        @if($totalRomsCount < 1)
             <h2 class="text-center text-lg mt-7">No ROMs Exist in database</h2>
         @else
             <x-show-hide-button text="ROMs" :initial-state="$alpineInitialDisplayState"/>
