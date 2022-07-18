@@ -316,4 +316,16 @@ return [
         // 'ide-helper:models --nowrite',
     ],
 
+    /*!
+     * composer.json
+     * ==============
+     *
+     * "post-autoload-dump"
+     * "@php artisan ide-helper:generate",
+     * "@php artisan ide-helper:meta"
+     * ------------------------
+     * "post-update-cmd"
+     * "@php artisan ide-helper:generate",
+     * "@php artisan ide-helper:meta"
+     */
 ];

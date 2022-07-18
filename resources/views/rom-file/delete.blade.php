@@ -23,6 +23,7 @@
     key (ObjectId|string)
 --}}
 <form
+    class="inline-block"
     action="{{route('rom-files.delete', ['romFile' => $romFile])}}"
     method="POST"
     data-form-key="{{ getStringValueFromKey($key) }}"

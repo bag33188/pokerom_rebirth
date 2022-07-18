@@ -1,6 +1,6 @@
 @props(['button'])
-<form {{ $attributes->merge(['class' => 'inline']) }}
-      action="{{ route('rom-files.download', array('romFile' => $romFile)) }}"
+<form {{ $attributes->merge(['class' => 'inline-block']) }}
+      action="{{ route('rom-files.download', ['romFile' => $romFile]) }}"
       method="POST">
     @method('POST')
     @csrf

@@ -2,7 +2,7 @@
 
 namespace App\View\Components;
 
-use App\Enums\DisplayStateEnum;
+use App\Enums\DisplayStateEnum as AlpineDisplayState;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -12,14 +12,16 @@ use JetBrains\PhpStorm\ArrayShape;
 class ShowHideButton extends Component
 {
     public string $text;
-    public DisplayStateEnum $initialState;
+    public AlpineDisplayState $initialState;
+
+    private const alpineStatesShape = ['hidden' => "!open", 'shown' => "open"];
 
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct(string $text, DisplayStateEnum $initialState)
+    public function __construct(string $text, AlpineDisplayState $initialState)
     {
         $this->initialState = $initialState;
         $this->text = $text;
@@ -42,19 +44,19 @@ class ShowHideButton extends Component
     private function getCloakData(): array
     {
         $initShow = match ($this->initialState) {
-            DisplayStateEnum::HIDE => 'x-cloak',
-            DisplayStateEnum::SHOW => ''
+            AlpineDisplayState::HIDE => 'x-cloak',
+            AlpineDisplayState::SHOW => ''
         };
         $initHide = match ($this->initialState) {
-            DisplayStateEnum::HIDE => '',
-            DisplayStateEnum::SHOW => 'x-cloak'
+            AlpineDisplayState::HIDE => '',
+            AlpineDisplayState::SHOW => 'x-cloak'
         };
-        return ['initHide' => $initHide, 'initShow' => $initShow];
+        return array('initHide' => $initHide, 'initShow' => $initShow);
     }
 
-    #[ArrayShape(['hidden' => "!open", 'shown' => "open"])]
+    #[ArrayShape(self::alpineStatesShape)]
     private function getAlpineStates(): array
     {
-        return ['hidden' => DisplayStateEnum::HIDE->value, 'shown' => DisplayStateEnum::SHOW->value];
+        return ['hidden' => AlpineDisplayState::HIDE->value, 'shown' => AlpineDisplayState::SHOW->value];
     }
 }

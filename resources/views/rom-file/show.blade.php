@@ -17,26 +17,26 @@
             <x-list-item>Chunk Size: {{ $romFile->chunkSize * 0x08 }} Bits</x-list-item>
             <x-list-item>MD5 Hash: {{ $romFile->md5 }}</x-list-item>
             <x-list-item>
-                <span class="w-full"
+                <p class="inline-block w-full"
                     {!! empty($romFile->rom) ? 'title="this ROM File does not have an associated ROM"': '' !!}>
                     Assoc. ROM ID: {{ $romFile->rom->id ?? 'N/A' }}
-                </span>
+                </p>
             </x-list-item>
             <x-list-item>
                 <div class="inline-flex flex-row justify-between w-full">
-                    <span class="order-0">
+                    <div class="order-0">
                         <x-rom-file-download :rom-file="$romFile">
                             <x-slot name="button">
                                 <button type="submit" class="{!! join(_SPACE, $downloadBtnClasses) !!}">
                                     <span class="order-1">@include('partials._download-icon')</span>
-                                    <span class="order-0 mr-2">Download!</span>
+                                    <span class="order-0 mr-1.5">Download!</span>
                                 </button>
                             </x-slot>
                         </x-rom-file-download>
-                    </span>
-                    <span class="order-1">
+                    </div>
+                    <div class="order-1">
                         @include('rom-file.delete', ['romFile' => $romFile, 'key' => $romFile->getObjectId()])
-                    </span>
+                    </div>
                 </div>
             </x-list-item>
         </x-list-group>
