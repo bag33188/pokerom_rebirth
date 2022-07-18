@@ -4,8 +4,8 @@ namespace App\Enums;
 
 enum DisplayStateEnum: string
 {
-    /** ui-state : show */
+    /** ui-state : show (`open`) */
     case SHOW = 'open';
-    /** ui-state : hide */
+    /** ui-state : hide (`!open`) */
     case HIDE = '!open';
 }
