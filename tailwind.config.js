@@ -18,6 +18,7 @@ module.exports = {
             },
         },
     },
+    // for use with emulator links in dashboard page
     safelist: ["underline", "text-blue-400", "hover:text-blue-500"],
     plugins: [
         require("@tailwindcss/forms"),
