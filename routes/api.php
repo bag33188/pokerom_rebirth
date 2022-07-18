@@ -26,7 +26,7 @@ Route::get('version', fn() => response()
             'version' => config('app.version')
         ],
         HttpResponse::HTTP_OK,
-        array('X-Api-Author' => 'greeny_broccolini')
+        array('X-App-Creator' => config('app.creator'))
     )
 )->name('api.version');
 

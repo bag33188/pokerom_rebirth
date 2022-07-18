@@ -19,6 +19,8 @@ return [
 
     'version' => (float)env('APP_VERSION', 2.0),
 
+    'creator' => 'greeny_broccolini',
+
     /*
     |--------------------------------------------------------------------------
     | Application Environment
