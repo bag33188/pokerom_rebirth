@@ -7,7 +7,7 @@
     <envs>
       <env name="PROJECT_DIR" value="C:\Users\bglat\PhpstormProjects\pokerom_rebirth" />
     </envs>
-    <option name="SCRIPT_NAME" value="./scripts/cmd/compile.bat" />
+    <option name="SCRIPT_NAME" value="./scripts/cmd/compile.cmd" />
     <option name="PARAMETERS" value="" />
     <method v="2" />
   </configuration>
