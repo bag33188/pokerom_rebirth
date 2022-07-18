@@ -12,30 +12,38 @@ const path = require("path");
  |
  */
 
-const resourcesCss = "resources/css";
-const resourcesJs = "resources/js";
-const resourcesModules = path.resolve(resourcesJs, "modules");
 const assetsJs = "public/assets/js";
 const assetsCss = "public/assets/css";
+const resourcesJs = "resources/js";
+const resourcesCss = "resources/css";
+const resourcesModules = path.join(resourcesJs, "modules");
 
-mix.js("resources/js/app.js", assetsJs)
-    .scripts(
-        [
-            `${resourcesModules}/ready.js`,
-            `${resourcesModules}/capitalize.js`,
-            `${resourcesModules}/getCookie.js`,
-            `${resourcesModules}/csrf.js`,
-        ],
-        path.join(assetsJs, "bundle.js")
-    )
-    .postCss(`${resourcesCss}/app.css`, assetsCss, [require("tailwindcss")])
-    .css(`${resourcesCss}/punch.css`, assetsCss)
-    .js(
-        `${resourcesJs}/Pages/Dashboard/index.js`,
-        `${assetsJs}/pages/dashboard.index.js`
-    )
-    .js(`${resourcesJs}/Pages/Roms/index.js`, `${assetsJs}/pages/roms.index.js`)
-    .options({ legacyNodePolyfills: false });
+mix.js("resources/js/app.js", path.join(assetsJs, "app.js"));
+mix.scripts(
+    [
+        path.join(resourcesModules, "ready.js"),
+        path.join(resourcesModules, "capitalize.js"),
+        path.join(resourcesModules, "getCookie.js"),
+        path.join(resourcesModules, "csrf.js"),
+    ],
+    path.join(assetsJs, "bundle.js")
+);
+
+mix.postCss(path.join(resourcesCss, "app.css"), assetsCss, [
+    require("tailwindcss"),
+]);
+mix.css(path.join(resourcesCss, "punch.css"), assetsCss);
+
+mix.js(
+    path.join(resourcesJs, "Pages", "Dashboard", "index.js"),
+    path.join(assetsJs, "pages", "dashboard.index.js")
+);
+mix.js(
+    path.join(resourcesJs, "Pages", "Roms", "index.js"),
+    path.join(assetsJs, "pages", "roms.index.js")
+);
+
+mix.options({ legacyNodePolyfills: false });
 
 if (mix.inProduction()) {
     mix.version();
