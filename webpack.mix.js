@@ -1,4 +1,5 @@
 const mix = require("laravel-mix");
+const path = require("path");
 
 /*
  |--------------------------------------------------------------------------
@@ -13,23 +14,28 @@ const mix = require("laravel-mix");
 
 const resourcesCss = "resources/css";
 const resourcesJs = "resources/js";
-const resourcesModules = `${resourcesJs}/modules/`;
+const resourcesModules = path.resolve(resourcesJs, "modules");
 const assetsJs = "public/assets/js";
 const assetsCss = "public/assets/css";
-const assetsModules = `${assetsJs}/modules`;
 
 mix.js("resources/js/app.js", assetsJs)
+    .scripts(
+        [
+            `${resourcesModules}/ready.js`,
+            `${resourcesModules}/capitalize.js`,
+            `${resourcesModules}/getCookie.js`,
+            `${resourcesModules}/csrf.js`,
+        ],
+        path.join(assetsJs, "bundle.js")
+    )
     .postCss(`${resourcesCss}/app.css`, assetsCss, [require("tailwindcss")])
     .css(`${resourcesCss}/punch.css`, assetsCss)
-    .js(`${resourcesModules}ready.js`, assetsModules)
-    .js(`${resourcesModules}/capitalize.js`, assetsModules)
-    .js(`${resourcesModules}/getCookie.js`, assetsModules)
-    .js(`${resourcesModules}/csrf.js`, assetsModules)
     .js(
         `${resourcesJs}/Pages/Dashboard/index.js`,
-        `${assetsJs}/dashboard.index.js`
+        `${assetsJs}/pages/dashboard.index.js`
     )
-    .js(`${resourcesJs}/Pages/Roms/index.js`, `${assetsJs}/roms.index.js`);
+    .js(`${resourcesJs}/Pages/Roms/index.js`, `${assetsJs}/pages/roms.index.js`)
+    .options({ legacyNodePolyfills: false });
 
 if (mix.inProduction()) {
     mix.version();

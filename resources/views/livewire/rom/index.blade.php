@@ -1,5 +1,5 @@
 @push('scripts')
-    <script type="text/javascript" src="{{mix('assets/js/roms.index.js')}}" defer></script>
+    <script type="text/javascript" src="{{mix('assets/js/pages/roms.index.js')}}" defer></script>
 @endpush
 @php
     $alpineInitialDisplayState = \App\Enums\DisplayStateEnum::SHOW;
