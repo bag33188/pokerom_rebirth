@@ -18,6 +18,7 @@ class RomFile extends MongoDbModel
     protected $casts = [
         'uploadDate' => 'datetime',
     ];
+    protected $dates = ['uploadDate'];
 
     public function getObjectId(): ObjectId
     {
