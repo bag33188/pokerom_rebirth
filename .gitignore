@@ -30,8 +30,8 @@ storage/**/*.gba
 !storage/**/*.url
 
 ### Public Folder Assets (Generated) ###
-public/css/**/*
-public/js/**/*
+public/assets/css/**/*
+public/assets/js/**/*
 /public/vendor/
 
 ### Laravel IDEA Helper ###

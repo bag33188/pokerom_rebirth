@@ -1,5 +1,5 @@
 @push('styles')
-    <link rel="stylesheet" type="text/css" href="{{ mix('css/punch.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ mix('assets/css/punch.css') }}" />
 @endpush
 @php
     $romFilesDirCount = count($romFiles);

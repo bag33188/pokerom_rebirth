@@ -1,11 +1,11 @@
 {
-    "/js/app.js": "/js/app.js",
-    "/js/modules/ready.js": "/js/modules/ready.js",
-    "/js/modules/capitalize.js": "/js/modules/capitalize.js",
-    "/js/modules/getCookie.js": "/js/modules/getCookie.js",
-    "/js/modules/csrf.js": "/js/modules/csrf.js",
-    "/js/dashboard.index.js": "/js/dashboard.index.js",
-    "/js/roms.index.js": "/js/roms.index.js",
-    "/css/app.css": "/css/app.css",
-    "/css/punch.css": "/css/punch.css"
+    "/assets/js/app.js": "/assets/js/app.js",
+    "/assets/js/modules/ready.js": "/assets/js/modules/ready.js",
+    "/assets/js/modules/capitalize.js": "/assets/js/modules/capitalize.js",
+    "/assets/js/modules/getCookie.js": "/assets/js/modules/getCookie.js",
+    "/assets/js/modules/csrf.js": "/assets/js/modules/csrf.js",
+    "/assets/js/dashboard.index.js": "/assets/js/dashboard.index.js",
+    "/assets/js/roms.index.js": "/assets/js/roms.index.js",
+    "/assets/css/app.css": "/assets/css/app.css",
+    "/assets/css/punch.css": "/assets/css/punch.css"
 }

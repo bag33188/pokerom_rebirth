@@ -11,17 +11,17 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap"/>
 
         <!-- Styles -->
-        <link rel="stylesheet" type="text/css" href="{{ mix('css/app.css') }}"/>
+        <link rel="stylesheet" type="text/css" href="{{ mix('assets/css/app.css') }}"/>
         @stack('styles')
 
         @livewireStyles
 
         <!-- Scripts -->
-        <script type="text/javascript" src="{{ mix('js/app.js') }}" defer></script>
-        <script type="text/javascript" src="{{ mix('js/modules/ready.js') }}"></script>
-        <script type="text/javascript" src="{{ mix('js/modules/capitalize.js') }}"></script>
-        <script type="text/javascript" src="{{ mix('js/modules/getCookie.js') }}"></script>
-        <script type="text/javascript" src="{{ mix('js/modules/csrf.js') }}"></script>
+        <script type="text/javascript" src="{{ mix('assets/js/app.js') }}" defer></script>
+        <script type="text/javascript" src="{{ mix('assets/js/modules/ready.js') }}"></script>
+        <script type="text/javascript" src="{{ mix('assets/js/modules/capitalize.js') }}"></script>
+        <script type="text/javascript" src="{{ mix('assets/js/modules/getCookie.js') }}"></script>
+        <script type="text/javascript" src="{{ mix('assets/js/modules/csrf.js') }}"></script>
         @stack('scripts')
     </head>
     <body class="font-sans antialiased">
