@@ -19,9 +19,7 @@ REM.||(
     REM assumes working directory is project directory
     REM %PROJECT_DIR% = %USERPROFILE%\PhpstormProjects\pokerom_rebirth
 
-    composer install & composer update & npm install & npm update & npm run dev & git status & git add . & git commit -m "update code base" & git push
-
-    ECHO Finished!
+    composer install & composer update & npm install & npm update & npm run dev & git status & git add . & git commit -m "update code base" & git push & ECHO Finished!
 
     :: PAUSE
 
