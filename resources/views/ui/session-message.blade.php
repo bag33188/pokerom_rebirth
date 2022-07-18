@@ -13,6 +13,7 @@
     $message = Session::get('message');
 @endphp
 @if (Session::has('message'))
+    {{-- default message type is error --}}
     <div @class([
         ...$sessionClasses,
         'border-red-500' => $messageType === \App\Enums\SessionMessageTypeEnum::ERROR,
