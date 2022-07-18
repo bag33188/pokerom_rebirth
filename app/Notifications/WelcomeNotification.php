@@ -77,8 +77,8 @@ class WelcomeNotification extends Notification
                 subject: $this->welcomeMessage
             ),
             'action' => [
-                'hypertext' => 'Check it out!',
-                'hyperlink' => route('roms.index')
+                'actionText' => 'Check it out!',
+                'actionUrl' => route('roms.index')
             ],
             'line2' => 'Enjoy!'
         ];

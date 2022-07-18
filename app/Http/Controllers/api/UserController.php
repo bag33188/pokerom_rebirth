@@ -93,6 +93,6 @@ class UserController extends ApiController
     {
         $user = UserRepo::findUserIfExists($userId);
         $this->authorize('delete', $user);
-        return $this->userService->deleteUser($user)->renderResponse();
+        return $this->userService->deleteUserII($user)->renderResponse();
     }
 }

@@ -14,7 +14,7 @@ class UserService implements UserServiceInterface
     {
     }
 
-    public function deleteUser(User $user): JsonDataResponse
+    public function deleteUserII(User $user): JsonDataResponse
     {
         $this->userActions->revokeUserTokens();
         $user->delete();
