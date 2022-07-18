@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\www;
+namespace App\Http\Controllers\WWW;
 
 use App\Http\Controllers\Controller as ViewController;
 

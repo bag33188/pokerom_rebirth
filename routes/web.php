@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\www\{HomeController, RomFileController, WelcomeController};
+use App\Http\Controllers\WWW\{HomeController, RomFileController, WelcomeController};
 use App\Http\Livewire\Game\Create as CreateGame;
 use App\Http\Livewire\Game\Edit as EditGame;
 use App\Http\Livewire\Game\Index as IndexGame;

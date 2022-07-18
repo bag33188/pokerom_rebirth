@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\www;
+namespace App\Http\Controllers\WWW;
 
 use App\Http\Controllers\Controller as ViewController;
 use App\Http\Requests\StoreRomFileRequest;
@@ -60,8 +60,9 @@ class RomFileController extends ViewController
      */
     public function store(StoreRomFileRequest $request): RedirectResponse
     {
-        $this->romFileService->uploadRomFile($request['filename']);
-        return response()->redirectTo(URL::previous())->banner("file ${request['filename']} uploaded!");
+        $romFilename = $request['filename'];
+        $this->romFileService->uploadRomFile($romFilename);
+        return response()->redirectTo(URL::previous())->banner("file $romFilename uploaded!");
     }
 
     /**

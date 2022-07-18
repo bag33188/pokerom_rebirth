@@ -1,9 +1,9 @@
 <?php
 
-use App\Http\Controllers\api\GameController;
-use App\Http\Controllers\api\RomController;
-use App\Http\Controllers\api\RomFileController;
-use App\Http\Controllers\api\UserController;
+use App\Http\Controllers\API\GameController;
+use App\Http\Controllers\API\RomController;
+use App\Http\Controllers\API\RomFileController;
+use App\Http\Controllers\API\UserController;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Route;
 use Symfony\Component\HttpFoundation\Response as HttpResponse;
