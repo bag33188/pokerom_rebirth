@@ -8,7 +8,7 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Livewire\Component;
 
-class Row extends Component
+class TableRow extends Component
 {
     public Rom $rom;
 
@@ -19,6 +19,6 @@ class Row extends Component
 
     public function render(): Factory|View|Application
     {
-        return view('livewire.rom.row');
+        return view('livewire.rom.table-row');
     }
 }
