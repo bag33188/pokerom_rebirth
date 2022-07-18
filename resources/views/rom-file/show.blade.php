@@ -14,9 +14,14 @@
             <x-list-item>BSON Object ID: {{ $romFile->_id }}</x-list-item>
             <x-list-item>Filename: {{ $romFile->filename }}</x-list-item>
             <x-list-item>Filesize: {{ $romFile->length }} Bytes</x-list-item>
-            <x-list-item>Chunk Size: {{ $romFile->chunkSize * 8 }} Bits</x-list-item>
+            <x-list-item>Chunk Size: {{ $romFile->chunkSize * 0x08 }} Bits</x-list-item>
             <x-list-item>MD5 Hash: {{ $romFile->md5 }}</x-list-item>
-            <x-list-item>Assoc. ROM ID: {{ $romFile->rom->id ?? 'N/A' }}</x-list-item>
+            <x-list-item>
+                <span class="w-full"
+                    {!! empty($romFile->rom) ? 'title="this ROM File does not have an associated ROM"': '' !!}>
+                    Assoc. ROM ID: {{ $romFile->rom->id ?? 'N/A' }}
+                </span>
+            </x-list-item>
             <x-list-item>
                 <div class="inline-flex flex-row justify-between w-full">
                     <span class="order-0">
