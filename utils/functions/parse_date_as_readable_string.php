@@ -2,9 +2,8 @@
 
 use Illuminate\Support\Facades\Date;
 
-if (!function_exists('parseDateAsLocaleString')) {
+if (!function_exists('parseDateAsReadableString')) {
     /**
-     *
      * Converts a date/datetime object to a human-readable string
      *
      * **standard**: _February 27th, 1996_
@@ -17,9 +16,9 @@ if (!function_exists('parseDateAsLocaleString')) {
      * @return string
      * @link https://www.php.net/manual/en/datetime.createfromformat.php
      */
-    function parseDateAsLocaleString(DateTime|Date $dateTime, bool $addDayName = true, string $customFormat = null): string
+    function parseDateAsReadableString(DateTime|Date $dateTime, bool $addDayName = true, string $customFormat = null): string
     {
-        $formatString = $customFormat ?? ($addDayName ? 'l, F jS, Y' : 'F jS, Y');
-        return date_format($dateTime, $formatString);
+        $_formatString = $customFormat ?? ($addDayName ? 'l, F jS, Y' : 'F jS, Y');
+        return date_format($dateTime, $_formatString);
     }
 }

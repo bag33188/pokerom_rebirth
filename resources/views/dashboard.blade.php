@@ -10,7 +10,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            <div class="inline-flex flex-row w-full justify-between">
+            <div class="flex flex-row w-full justify-between">
                 <span class="order-0">{{ __('Dashboard') }}</span>
                 <span class="order-1" id="welcome-username"><!-- js content insert --></span>
             </div>

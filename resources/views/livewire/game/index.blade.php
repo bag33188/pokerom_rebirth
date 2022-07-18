@@ -14,8 +14,8 @@
             <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4 justify-items-center my-1.5 pb-4"
                  x-show="{{$alpineInitialDisplayState->value}}"
                  x-cloak>
-                @foreach($games as $game)
-                    <livewire:game.card :game="$game" :wire:key="$game->getKey()" />
+                @foreach($games as $i => $game)
+                    <livewire:game.card :game="$game" :index="$i" :wire:key="$game->getKey()" />
                 @endforeach
             </div>
         @endif

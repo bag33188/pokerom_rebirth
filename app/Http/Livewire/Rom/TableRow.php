@@ -11,6 +11,7 @@ use Livewire\Component;
 class TableRow extends Component
 {
     public Rom $rom;
+    public int $index;
 
     public function getInfo(int $romId): void
     {

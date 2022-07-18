@@ -46,7 +46,6 @@ class Show extends Component
         } else {
             session()->flash('message', "ROM File found and linked! File ID: {$this->rom->file_id}");
             session()->flash('message-type', SessionMessageTypes::SUCCESS);
-
         }
     }
 }

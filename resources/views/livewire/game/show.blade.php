@@ -13,7 +13,7 @@
             <x-list-item title="{{$game->generation}}">Generation {{numberToRoman($game->generation)}}</x-list-item>
             <x-list-item>{{$game->region}} Region</x-list-item>
             <x-list-item>{{formatGameType($game->game_type)}}</x-list-item>
-            <x-list-item>Released on {{parseDateAsLocaleString($game->date_released)}}</x-list-item>
+            <x-list-item>Released on {{parseDateAsReadableString($game->date_released)}}</x-list-item>
         </x-list-group>
         @if(auth()->user()->isAdmin())
             <div class="row-start-2 row-end-2 ml-1 col-start-2 col-end-2 justify-self-end">

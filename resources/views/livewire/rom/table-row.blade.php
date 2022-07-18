@@ -18,7 +18,7 @@
         'even:light:bg-gray-700'
     ];
 @endphp
-<tr data-rom-id="{{$rom->getKey()}}" class="{{ implode(_SPACE, $tableRowClasses) }}">
+<tr data-rom-id="{{$rom->getKey()}}" id="row-{{$index + 1}}" class="{{ implode(_SPACE, $tableRowClasses) }}">
     <td class="px-6 py-4">{{$rom->rom_name}}</td>
     <td class="px-6 py-4">{{RomRepo::getFormattedRomSize($rom->rom_size)}}</td>
     <td class="px-6 py-4">.{{strtolower($rom->rom_type)}}</td>

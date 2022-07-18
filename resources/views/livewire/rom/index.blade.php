@@ -23,8 +23,8 @@
                 </tr>
                 </thead>
                 <tbody class="light:bg-gray-800">
-                @foreach($roms as $rom)
-                    <livewire:rom.table-row :rom="$rom" :wire:key="$rom->getKey()" />
+                @foreach($roms as $i => $rom)
+                    <livewire:rom.table-row :rom="$rom" :index="$i" :wire:key="$rom->getKey()" />
                 @endforeach
                 </tbody>
                 <tfoot>
