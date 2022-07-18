@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 18, 2022 at 04:26 PM
+-- Generation Time: Jul 18, 2022 at 06:38 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -190,7 +190,7 @@ DELIMITER ;
 --
 -- Table structure for table `failed_jobs`
 --
--- Creation: Jul 08, 2022 at 12:34 AM
+-- Creation: Jul 06, 2022 at 01:56 AM
 --
 
 DROP TABLE IF EXISTS `failed_jobs`;
@@ -218,7 +218,7 @@ TRUNCATE TABLE `failed_jobs`;
 --
 -- Table structure for table `games`
 --
--- Creation: Jul 12, 2022 at 09:23 AM
+-- Creation: Jul 12, 2022 at 06:58 PM
 --
 
 DROP TABLE IF EXISTS `games`;
@@ -327,7 +327,7 @@ DELIMITER ;
 --
 -- Table structure for table `migrations`
 --
--- Creation: Jul 08, 2022 at 12:34 AM
+-- Creation: Jun 05, 2022 at 04:47 PM
 --
 
 DROP TABLE IF EXISTS `migrations`;
@@ -366,7 +366,7 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 --
 -- Table structure for table `password_resets`
 --
--- Creation: Jul 08, 2022 at 12:34 AM
+-- Creation: Jul 06, 2022 at 02:07 AM
 --
 
 DROP TABLE IF EXISTS `password_resets`;
@@ -392,7 +392,7 @@ TRUNCATE TABLE `password_resets`;
 --
 -- Table structure for table `personal_access_tokens`
 --
--- Creation: Jul 08, 2022 at 12:34 AM
+-- Creation: Jul 06, 2022 at 01:56 AM
 --
 
 DROP TABLE IF EXISTS `personal_access_tokens`;
@@ -410,6 +410,8 @@ CREATE TABLE `personal_access_tokens` (
 
 --
 -- RELATIONSHIPS FOR TABLE `personal_access_tokens`:
+--   `tokenable_id`
+--       `users` -> `id`
 --
 
 --
@@ -430,7 +432,7 @@ INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `n
 --
 -- Table structure for table `roms`
 --
--- Creation: Jul 08, 2022 at 12:34 AM
+-- Creation: Jul 06, 2022 at 02:20 AM
 --
 
 DROP TABLE IF EXISTS `roms`;
@@ -449,6 +451,8 @@ CREATE TABLE `roms` (
 
 --
 -- RELATIONSHIPS FOR TABLE `roms`:
+--   `game_id`
+--       `games` -> `id`
 --
 
 --
@@ -507,7 +511,8 @@ INSERT INTO `roms` (`id`, `file_id`, `game_id`, `rom_name`, `rom_size`, `rom_typ
 --
 -- Table structure for table `sessions`
 --
--- Creation: Jul 08, 2022 at 12:34 AM
+-- Creation: Jul 06, 2022 at 02:20 AM
+-- Last update: Jul 18, 2022 at 04:38 PM
 --
 
 DROP TABLE IF EXISTS `sessions`;
@@ -536,14 +541,15 @@ TRUNCATE TABLE `sessions`;
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('CrJH5RHmcFKnPGyRXWKACpN8pbvvoLtHs6ksyBCn', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiamMzTkIyeXlQbElSOXlvdUxvMEFNekdqNjFrQzNybFpSZkZKc0JCaiI7czozOiJ1cmwiO2E6MDp7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjc0OiJodHRwOi8vcG9rZXJvbV9yZWJpcnRoLnRlc3QvcHVibGljL3JvbS1maWxlcy9pbmZvLzYyYzFmODU5ZjgwNTAxYTA4MzBmZGQ1MSI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7czoyMToicGFzc3dvcmRfaGFzaF9zYW5jdHVtIjtzOjYwOiIkMnkkMTAkd2lwM3F4OTFQbFhEa3JqLnpFam9DLi93bEludGdJSzNRLnJBSmdnd1FoZlhSRmlJbm1EWm0iO30=', 1658093216);
+('CrJH5RHmcFKnPGyRXWKACpN8pbvvoLtHs6ksyBCn', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiamMzTkIyeXlQbElSOXlvdUxvMEFNekdqNjFrQzNybFpSZkZKc0JCaiI7czozOiJ1cmwiO2E6MDp7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjc0OiJodHRwOi8vcG9rZXJvbV9yZWJpcnRoLnRlc3QvcHVibGljL3JvbS1maWxlcy9pbmZvLzYyYzFmODU5ZjgwNTAxYTA4MzBmZGQ1MSI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7czoyMToicGFzc3dvcmRfaGFzaF9zYW5jdHVtIjtzOjYwOiIkMnkkMTAkd2lwM3F4OTFQbFhEa3JqLnpFam9DLi93bEludGdJSzNRLnJBSmdnd1FoZlhSRmlJbm1EWm0iO30=', 1658093216),
+('OnV2x6kq70x1LUt9QJ8cle7iUbs4nBUOggfFjh11', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiS2xuekJqcVNMMlZuZVhXNmZHUmxCeFhGTmRDSHN1Tmk5bEtYNFhOUiI7czozOiJ1cmwiO2E6MDp7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjQ2OiJodHRwOi8vcG9rZXJvbV9yZWJpcnRoLnRlc3QvcHVibGljL2FwaS92ZXJzaW9uIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjIxOiJwYXNzd29yZF9oYXNoX3NhbmN0dW0iO3M6NjA6IiQyeSQxMCR3aXAzcXg5MVBsWERrcmouekVqb0MuL3dsSW50Z0lLM1EuckFKZ2d3UWhmWFJGaUlubURabSI7fQ==', 1658162308);
 
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `users`
 --
--- Creation: Jul 08, 2022 at 12:34 AM
+-- Creation: Jun 05, 2022 at 04:47 PM
 --
 
 DROP TABLE IF EXISTS `users`;
@@ -566,6 +572,10 @@ CREATE TABLE `users` (
 
 --
 -- RELATIONSHIPS FOR TABLE `users`:
+--   `email`
+--       `password_resets` -> `email`
+--   `id`
+--       `personal_access_tokens` -> `tokenable_id`
 --
 
 --
