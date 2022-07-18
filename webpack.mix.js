@@ -18,7 +18,8 @@ const resourcesJs = "resources/js";
 const resourcesCss = "resources/css";
 const resourcesModules = path.join(resourcesJs, "modules");
 
-mix.js("resources/js/app.js", path.join(assetsJs, "app.js"));
+mix.js(path.join(resourcesJs, "app.js"), path.join(assetsJs, "app.js"));
+
 mix.scripts(
     [
         path.join(resourcesModules, "ready.js"),
@@ -32,7 +33,11 @@ mix.scripts(
 mix.postCss(path.join(resourcesCss, "app.css"), assetsCss, [
     require("tailwindcss"),
 ]);
-mix.css(path.join(resourcesCss, "punch.css"), assetsCss);
+
+mix.css(
+    path.join(resourcesCss, "punch.css"),
+    path.join(assetsCss, "punch.css")
+);
 
 mix.js(
     path.join(resourcesJs, "Pages", "Dashboard", "index.js"),
