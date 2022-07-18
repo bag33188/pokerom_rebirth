@@ -84,7 +84,8 @@ CREATE DEFINER=`bag33188`@`%` PROCEDURE `uspSelectAllPokeROMData` ()  READS SQL 
         `games`.`game_type` AS `game_type`,
         `games`.`region` AS `region`,
         `games`.`generation` AS `generation`,
-        `games`.`date_released` AS `date_released`
+        `games`.`date_released` AS `date_released`,
+        COUNT(*) AS `total_rows`
     FROM
         `roms`
             RIGHT JOIN
