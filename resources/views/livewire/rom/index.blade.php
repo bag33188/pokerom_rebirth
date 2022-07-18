@@ -24,7 +24,7 @@
                 </thead>
                 <tbody class="light:bg-gray-800">
                 @foreach($roms as $rom)
-                    @livewire('rom.row', ['rom' => $rom], key($rom->getKey()))
+                    @livewire('rom.table-row', ['rom' => $rom], key($rom->getKey()))
                 @endforeach
                 </tbody>
                 <tfoot>
