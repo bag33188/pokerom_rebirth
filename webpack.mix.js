@@ -11,15 +11,25 @@ const mix = require("laravel-mix");
  |
  */
 
-mix.js("resources/js/app.js", "public/assets/js")
-    .postCss("resources/css/app.css", "public/assets/css", [require("tailwindcss")])
-    .css("resources/css/punch.css", "public/assets/css")
-    .js("resources/js/modules/ready.js", "public/assets/js/modules")
-    .js("resources/js/modules/capitalize.js", "public/assets/js/modules")
-    .js("resources/js/modules/getCookie.js", "public/assets/js/modules")
-    .js("resources/js/modules/csrf.js", "public/assets/js/modules")
-    .js("resources/js/Pages/Dashboard/index.js", "public/assets/js/dashboard.index.js")
-    .js("resources/js/Pages/Roms/index.js", "public/assets/js/roms.index.js");
+const resourcesCss = "resources/css";
+const resourcesJs = "resources/js";
+const resourcesModules = `${resourcesJs}/modules/`;
+const assetsJs = "public/assets/js";
+const assetsCss = "public/assets/css";
+const assetsModules = `${assetsJs}/modules`;
+
+mix.js("resources/js/app.js", assetsJs)
+    .postCss(`${resourcesCss}/app.css`, assetsCss, [require("tailwindcss")])
+    .css(`${resourcesCss}/punch.css`, assetsCss)
+    .js(`${resourcesModules}ready.js`, assetsModules)
+    .js(`${resourcesModules}/capitalize.js`, assetsModules)
+    .js(`${resourcesModules}/getCookie.js`, assetsModules)
+    .js(`${resourcesModules}/csrf.js`, assetsModules)
+    .js(
+        `${resourcesJs}/Pages/Dashboard/index.js`,
+        `${assetsJs}/dashboard.index.js`
+    )
+    .js(`${resourcesJs}/Pages/Roms/index.js`, `${assetsJs}/roms.index.js`);
 
 if (mix.inProduction()) {
     mix.version();
