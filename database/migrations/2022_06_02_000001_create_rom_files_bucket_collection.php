@@ -66,10 +66,10 @@ return new class extends Migration {
         if (self::ALLOW_MIGRATIONS === true) {
             Schema::dropIfExists(self::COLLECTION_NAME);
 
-//            Schema::connection($this->connection)
-//                ->table(self::COLLECTION_NAME, function (Blueprint $collection) {
-//                    $collection->drop();
-//                });
+            // Schema::connection($this->connection)
+            //     ->table(self::COLLECTION_NAME, function (Blueprint $collection) {
+            //         $collection->drop();
+            //     });
         }
     }
 };
