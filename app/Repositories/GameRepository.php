@@ -11,7 +11,9 @@ use Illuminate\Support\Facades\DB;
 
 class GameRepository implements GameRepositoryInterface
 {
-    use GameQueries;
+    use GameQueries {
+        countGamesInDatabase as private;
+    }
 
     public function findGameIfExists(int $gameId): Game
     {
@@ -45,7 +47,6 @@ class GameRepository implements GameRepositoryInterface
 
     public function getGamesCount(): int
     {
-        ['query' => $query, 'bindings' => $bindings] = $this->countGamesInDatabase()->toArray();
-        return DB::selectOne($query, $bindings)->count;
+        return Game::all()->count();
     }
 }

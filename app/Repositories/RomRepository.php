@@ -12,7 +12,9 @@ use Illuminate\Support\Facades\DB;
 
 class RomRepository implements RomRepositoryInterface
 {
-    use RomQueries;
+    use RomQueries {
+        countRomsInDatabase as private;
+    }
 
     public function getSingleRomWithGameInfo(int $romId): Rom
     {
@@ -46,7 +48,7 @@ class RomRepository implements RomRepositoryInterface
 
     public function searchForRomMatchingRomFile(RomFile $romFile): ?Rom
     {
-        [$query, $bindings] = $this->findMatchingRomFromFilename($romFile->filename)->getValues();
+        ['query' => $query, 'bindings' => $bindings] = $this->findMatchingRomFromFilename($romFile->filename)->toArray();
         return Rom::fromQuery($query, $bindings)->first();
     }
 
@@ -58,7 +60,6 @@ class RomRepository implements RomRepositoryInterface
 
     public function getRomsCount(): int
     {
-        ['query' => $query, 'bindings' => $bindings] = $this->countRomsInDatabase()->toArray();
-        return DB::selectOne($query, $bindings)->count;
+        return Rom::all()->count();
     }
 }
