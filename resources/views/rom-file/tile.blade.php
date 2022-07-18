@@ -6,17 +6,17 @@
     focus:outline-none focus:border-blue-600 focus:ring focus:ring-blue-300
     disabled:opacity-25 transition"
     EOS;
-    $romFileTileClasses = <<<'EOS'
+    $tileClasses = <<<'EOS'
     class="border border-gray-200 bg-white shadow-md rounded w-full h-full
     inline-grid grid-cols-1 grid-rows-[auto_auto] gap-y-2 justify-self-center p-2"
     EOS;
-    $eosRegExp= /** @lang RegExp */ "/([\r\n]+)|((?:\s{2,8})|\t+)/";
+    $eosRegExp = /** @lang RegExp */ "/([\r\n]+)|((?:\s{2,8})|\t+)/";
 @endphp
 {{-- parameters: index (int), romFile (RomFile) --}}
 <div
     data-rom-file-id="{{$romFile->_id}}"
     id="tile-{{ $index + 1 }}"
-    {!! preg_replace($eosRegExp, _SPACE, $romFileTileClasses) !!}>
+    {!! preg_replace($eosRegExp, _SPACE, $tileClasses) !!}>
     <p>{{$romFile->filename}}</p>
     <p>{{$romFile->length}} Bytes</p>
     <div class="justify-self-start align-self-end">
