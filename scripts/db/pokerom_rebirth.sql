@@ -130,9 +130,11 @@ END$$
 
 DROP FUNCTION IF EXISTS `FORMAT_ROM_SIZE`$$
 CREATE DEFINER=`bag33188`@`%` FUNCTION `FORMAT_ROM_SIZE` (`ROM_SIZE` BIGINT UNSIGNED) RETURNS VARCHAR(9) CHARSET utf8mb4 SQL SECURITY INVOKER COMMENT 'conversion issues get fixed in this function' BEGIN
-    DECLARE `size_val` FLOAT UNSIGNED;
+    -- size entity values
+    DECLARE `size_num` FLOAT UNSIGNED;
     DECLARE `size_unit` CHAR(2);
     DECLARE `size_str` VARCHAR(6);
+    -- size calculation values
     DECLARE `one_kibibyte` SMALLINT UNSIGNED DEFAULT 1024;
     DECLARE `one_kilobyte` SMALLINT UNSIGNED DEFAULT 1000;
     DECLARE `one_gigabyte` MEDIUMINT UNSIGNED DEFAULT POWER(`one_kilobyte`, 2);
@@ -140,21 +142,21 @@ CREATE DEFINER=`bag33188`@`%` FUNCTION `FORMAT_ROM_SIZE` (`ROM_SIZE` BIGINT UNSI
     -- MEGABYTES
     IF `ROM_SIZE` > `one_kibibyte` AND `ROM_SIZE` < `one_gigabyte` THEN
         SET `size_unit` = 'MB';
-        SET `size_val` = ROUND(`ROM_SIZE` / `one_kilobyte`, 2);
+        SET `size_num` = ROUND(`ROM_SIZE` / `one_kilobyte`, 2);
         -- GIGABYTES
     ELSEIF `ROM_SIZE` >= `one_gigabyte` THEN
         SET `size_unit` = 'GB';
-        SET `size_val`= ROUND(`ROM_SIZE` / `one_gigabyte`, 2);
+        SET `size_num`= ROUND(`ROM_SIZE` / `one_gigabyte`, 2);
         -- KILOBYTES
     ELSEIF `ROM_SIZE` > 1020 AND `ROM_SIZE` <= `one_kibibyte` THEN
         SET `size_unit` = 'KB';
-        SET `size_val` = CAST(`ROM_SIZE` AS FLOAT);
+        SET `size_num` = CAST(`ROM_SIZE` AS FLOAT);
         -- BYTES
     ELSE
         SET `size_unit` = 'B ';
-        SET `size_val` = CAST(`ROM_SIZE` * `one_kibibyte` AS FLOAT);
+        SET `size_num` = CAST((`ROM_SIZE` * `one_kibibyte`) AS FLOAT);
     END IF;
-    SET `size_str` = CONVERT(`size_val`, VARCHAR(6));
+    SET `size_str` = CONVERT(`size_num`, VARCHAR(6));
     RETURN CONCAT(`size_str`, ' ', `size_unit`);
 /* !important
 return value length = 9;
