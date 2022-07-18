@@ -12,7 +12,9 @@ use Illuminate\Support\Facades\DB;
 
 class RomRepository implements RomRepositoryInterface
 {
-    use RomQueries;
+    use RomQueries {
+        sortByGameIdAscRomSizeAsc as private;
+    }
 
     public function getSingleRomWithGameInfo(int $romId): Rom
     {
@@ -31,7 +33,7 @@ class RomRepository implements RomRepositoryInterface
 
     public function getAllRomsSorted(): Collection
     {
-        return Rom::all()->sortBy([['game_id', 'asc'], ['rom_size', 'asc']]);
+        return Rom::all()->sortBy($this->sortByGameIdAscRomSizeAsc());
     }
 
     public function getGameAssociatedWithRom(int $romId): Game

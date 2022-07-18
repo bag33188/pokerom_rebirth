@@ -11,7 +11,9 @@ use Illuminate\Support\Facades\DB;
 
 class GameRepository implements GameRepositoryInterface
 {
-    use GameQueries;
+    use GameQueries {
+        sortByRomIdAscGenerationAsc as private;
+    }
 
     public function findGameIfExists(int $gameId): Game
     {
@@ -20,10 +22,7 @@ class GameRepository implements GameRepositoryInterface
 
     public function getAllGamesSorted(): Collection
     {
-        return Game::all()->sortBy([
-            ['rom_id', 'asc'],
-            ['generation', 'asc']
-        ]);
+        return Game::all()->sortBy($this->sortByRomIdAscGenerationAsc());
     }
 
     public function getRomAssociatedWithGame(int $gameId): Rom

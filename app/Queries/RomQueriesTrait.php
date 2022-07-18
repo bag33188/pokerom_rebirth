@@ -36,4 +36,13 @@ trait RomQueriesTrait
         $params = ['rom_filename' => $romFilename];
         return new QueryObject($sql, $params);
     }
+
+    protected function sortByGameIdAscRomSizeAsc(): array
+    {
+        return array(
+            ['game_id', 'asc'],
+            ['rom_size', 'asc']
+        );
+    }
+
 }

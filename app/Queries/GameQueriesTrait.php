@@ -26,4 +26,12 @@ trait GameQueriesTrait
         $params = [$gameType];
         return new QueryObject($sql, $params);
     }
+
+    protected function sortByRomIdAscGenerationAsc(): array
+    {
+        return array(
+            ['rom_id', 'asc'],
+            ['generation', 'asc']
+        );
+    }
 }
