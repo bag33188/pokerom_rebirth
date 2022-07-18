@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 18, 2022 at 04:08 PM
+-- Generation Time: Jul 18, 2022 at 04:26 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -76,19 +76,18 @@ END$$
 DROP PROCEDURE IF EXISTS `uspSelectAllPokeROMData`$$
 CREATE DEFINER=`bag33188`@`%` PROCEDURE `uspSelectAllPokeROMData` ()  READS SQL DATA SQL SECURITY INVOKER COMMENT 'Gathers all PokeROM Data in the database.' BEGIN
     SELECT
-        `roms`.`id` AS `rom_id`,
-        `roms`.`rom_name` AS `rom_name`,
-        `roms`.`rom_type` AS `rom_type`,
-        `roms`.`rom_size` * 1024 AS `rom_size`,
-        CONCAT(`roms`.`rom_name`, '.', UCASE(`roms`.`rom_type`)) AS `rom_filename`,
-        `roms`.`file_id` AS `rom_file_id`,
-        `games`.`id` AS `game_id`,
-        `games`.`game_name` AS `game_name`,
-        `games`.`game_type` AS `game_type`,
-        `games`.`region` AS `region`,
-        `games`.`generation` AS `generation`,
-        `games`.`date_released` AS `date_released`,
-        COUNT(*) AS "total_rows"
+        `roms`.`id` AS "rom_id",
+        `roms`.`rom_name` AS "rom_name",
+        `roms`.`rom_type` AS "rom_type",
+        (`roms`.`rom_size` * 1024) AS "rom_size", -- convert kibibytes to bytes
+        CONCAT(`roms`.`rom_name`, '.', UCASE(`roms`.`rom_type`)) AS "rom_filename",
+        `roms`.`file_id` AS "rom_file_id",
+        `games`.`id` AS "game_id",
+        `games`.`game_name` AS "game_name",
+        `games`.`game_type` AS "game_type",
+        `games`.`region` AS "region",
+        `games`.`generation` AS "generation",
+        `games`.`date_released` AS "date_released"
     FROM
         `roms`
             RIGHT JOIN
@@ -99,8 +98,7 @@ CREATE DEFINER=`bag33188`@`%` PROCEDURE `uspSelectAllPokeROMData` ()  READS SQL 
       AND `roms`.`has_file` = TRUE
       AND `roms`.`game_id` IS NOT NULL
       AND `roms`.`file_id` IS NOT NULL
-    ORDER BY
-        `game_id` DESC;
+   	ORDER BY `game_id` DESC, `rom_id` DESC;
 END$$
 
 --
