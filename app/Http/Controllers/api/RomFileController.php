@@ -10,7 +10,7 @@ use App\Http\Resources\RomResource;
 use App\Interfaces\Action\RomFileActionsInterface;
 use App\Interfaces\Service\RomFileServiceInterface;
 use App\Models\RomFile;
-use Illuminate\{Auth\Access\AuthorizationException, Http\JsonResponse};
+use Illuminate\{Auth\Access\AuthorizationException, Http\JsonResponse, Support\Collection};
 use Illuminate\Support\Facades\Gate;
 use RomFileRepo;
 use Symfony\Component\HttpFoundation\StreamedResponse;
@@ -22,9 +22,6 @@ class RomFileController extends ApiController
     {
     }
 
-    /**
-     * @throws AuthorizationException
-     */
     public function index(): RomFileCollection
     {
         Gate::authorize('viewAny-romFile');
@@ -84,7 +81,6 @@ class RomFileController extends ApiController
 
     /**
      * @return string[]
-     * @throws AuthorizationException
      */
     public function listFilesInRomFilesStorage(RomFileActionsInterface $romFileActions): array
     {
@@ -95,12 +91,17 @@ class RomFileController extends ApiController
 
     /**
      * @return string[]
-     * @throws AuthorizationException
      */
     public function listRomsInRomFilesStorage(RomFileActionsInterface $romFileActions): array
     {
         Gate::authorize('viewAny-romFile');
 
         return $romFileActions->listRomFilesInStorage();
+    }
+
+    public function indexMetadata(): Collection
+    {
+        Gate::authorize('viewAny-romFile');
+        return RomFileRepo::getRomeFilesMetadata();
     }
 }

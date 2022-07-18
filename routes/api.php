@@ -4,7 +4,6 @@ use App\Http\Controllers\API\GameController;
 use App\Http\Controllers\API\RomController;
 use App\Http\Controllers\API\RomFileController;
 use App\Http\Controllers\API\UserController;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Route;
 use Symfony\Component\HttpFoundation\Response as HttpResponse;
 
@@ -72,15 +71,7 @@ Route::name('api.')->group(function () {
                 Route::get('list-roms', [RomFileController::class, 'listRomsInRomFilesStorage'])->name('list-roms');
             });
             // rom files metadata
-            Route::get('metadata/all', function (): ?JsonResponse {
-                Gate::authorize('viewAny-romFile');
-                if (Request::acceptsJson()) {
-                    $columns = array('filename', 'filetype', 'filesize');
-                    $data = DB::connection('mongodb')->table('rom_files.info')->get($columns);
-                    return Response::json(['success' => true, 'data' => $data->chunk(10)], HttpResponse::HTTP_OK);
-                }
-                return null;
-            })->name('metadata.all');
+            Route::get('metadata/all', [RomFileController::class, 'indexMetadata'])->name('metadata.all');
         });
 
         // relationships

@@ -2,10 +2,17 @@
 
 namespace App\Queries;
 
+use Illuminate\Database\Query\Builder;
+use Illuminate\Support\Facades\DB;
 use JetBrains\PhpStorm\ArrayShape;
 
 trait RomFileQueriesTrait
 {
+    protected function queryRomFileMetadata(): Builder
+    {
+        return DB::connection('mongodb')->table('rom_files.info');
+    }
+
     /**
      * projects the {@see AbstractGridFSModel::$filename filename} into an array
      * with the file's name and the file's type as array items.

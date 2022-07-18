@@ -27,4 +27,6 @@ interface RomFileRepositoryInterface
     public function getLengthOfRomFileWithLargestFileSize(): int;
 
     public function getRomFilesCount(): int;
+
+    public function getRomeFilesMetadata(): \Illuminate\Support\Collection;
 }

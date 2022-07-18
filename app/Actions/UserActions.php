@@ -4,9 +4,12 @@ namespace App\Actions;
 
 use App\Interfaces\Action\UserActionsInterface;
 use App\Models\User;
+use App\Queries\UserQueriesTrait;
 
 class UserActions implements UserActionsInterface
 {
+    use UserQueriesTrait;
+
     public function generateUserApiToken(User $user): string
     {
         return $user->createToken(API_TOKEN_KEY)->plainTextToken;
@@ -20,5 +23,17 @@ class UserActions implements UserActionsInterface
     public function getUserBearerToken(): ?string
     {
         return request()->bearerToken();
+    }
+
+    public function makeUserAdministrator(User $user): bool
+    {
+        if (auth()->user()->isAdmin()) {
+            $this->updateUserSetAdmin($user->getKey());
+            $user->refresh();
+            // check if user was successfully updated
+            return $user->isAdmin();
+        } else {
+            return false;
+        }
     }
 }

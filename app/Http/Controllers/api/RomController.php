@@ -38,9 +38,6 @@ class RomController extends ApiController
         return new GameResource(RomRepo::getGameAssociatedWithRom($romId));
     }
 
-    /**
-     * @throws AuthorizationException
-     */
     public function indexRomFile(int $romId): RomFileResource
     {
         Gate::authorize('viewAny-romFile');

@@ -11,4 +11,6 @@ interface UserActionsInterface
     public function revokeUserTokens(): void;
 
     public function getUserBearerToken(): ?string;
+
+    public function makeUserAdministrator(User $user): bool;
 }
