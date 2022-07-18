@@ -23,6 +23,15 @@ ng lint
 > -   Change directory to your new workspace and run `ng add @angular-eslint/schematics` to add all relevant ESLint packages.
 > -   Run `ng g @angular-eslint/schematics:convert-tslint-to-eslint --remove-tslint-if-no-more-tslint-targets --ignore-existing-tslint-config` to automatically convert your new project from TSLint to ESLint.
 
+### barry ide helper
+
+```shell
+# composer.json
+"@php artisan ide-helper:generate",
+"@php artisan ide-helper:meta"
+# "post-update-cmd", "post-autoload-dump"
+```
+
 ## db
 
 `mysql -u root`
