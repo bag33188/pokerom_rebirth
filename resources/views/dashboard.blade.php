@@ -4,6 +4,7 @@
         $(document).ready(() => {
             loadWelcomeContent('{{ $username }}');
             loadCopyrightYear();
+            loadEmulatorLinks();
         });
     </script>
 @endpush
@@ -43,7 +44,7 @@
                                 <!-- about description -->
                                 This web app is a databank of Pok&eacute;mon ROMs.
                                 It contains 40 ROMs, including all 33 core Pok&eacute;mon ROMs.
-                                <br />
+                                <br/>
                                 <p class="italic mt-2 inline-flex flex-row text-sm">
                                     <span>&copy; Pok&eacute;mon Company</span>
                                     <span>&nbsp;</span>
@@ -59,7 +60,7 @@
                             <div class="mt-2 text-sm text-gray-500">
                                 <!-- roms description -->
                                 Here you will find all your Core Pok&eacute;mon ROMs, as well as some spin-offs and
-                                ROM hacks.<br />Feel free to download them for use with an emulator.
+                                ROM hacks.<br/>Feel free to download them for use with an emulator.
                             </div>
                         </div>
                     </div>
@@ -69,9 +70,11 @@
                         <div class="ml-12">
                             <div class="mt-2 text-sm text-gray-500">
                                 <!-- games description -->
-                                You can also navigate through the Games that are associated with the ROMs.
-                                <br />
-                                You will find more information about each one.
+                                <p class="inline-block">Feel free to play these amazing Games on your emulators!!</p>
+                                <br/>
+                                <ul class="list-disc" id="emulator-links">
+                                    <!-- js content insert -->
+                                </ul>
                             </div>
                         </div>
                     </div>

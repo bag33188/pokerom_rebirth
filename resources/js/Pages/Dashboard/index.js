@@ -57,6 +57,34 @@ let loadCopyrightYear = () => {
     copyrightYearElement.textContent = currentYear.toString();
 };
 
+let loadEmulatorLinks = () => {
+    let emulatorLinksList = document.getElementById("emulator-links");
+    const anchorClasses = ["underline", "text-blue-400", "hover:text-blue-500"];
+    const emulators = [
+        {
+            href: "https://desmume.org/",
+            text: "DeSmuME",
+        },
+        {
+            href: "https://www.emulator-zone.com/doc.php/gba/vboyadvance.html",
+            text: "Visual Boy Advanced (VBA)",
+        },
+        {
+            href: "https://citra-emu.org/",
+            text: "Citra",
+        },
+    ];
+    emulators.forEach(
+        (emulator, index) =>
+            (emulatorLinksList.innerHTML += `<li id="emulator-${
+                index + 1
+            }"><a class="${anchorClasses.join(" ")}" rel="noreferrer" href="${
+                emulator.href
+            }" target="_blank">${emulator.text}</a>`)
+    );
+};
+
 // export functions
 window.loadWelcomeContent = loadWelcomeContent;
 window.loadCopyrightYear = loadCopyrightYear;
+window.loadEmulatorLinks = loadEmulatorLinks;
