@@ -12,9 +12,7 @@ use Illuminate\Support\Facades\DB;
 
 class RomRepository implements RomRepositoryInterface
 {
-    use RomQueries {
-        countRomsInDatabase as private;
-    }
+    use RomQueries;
 
     public function getSingleRomWithGameInfo(int $romId): Rom
     {

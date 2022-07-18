@@ -10,7 +10,9 @@ use Illuminate\Database\Eloquent\Collection;
 
 class RomFileRepository implements RomFileRepositoryInterface
 {
-    use RomFileAggregations;
+    use RomFileAggregations {
+        sortByLengthAscFilenameAsc as private; # public
+    }
 
     public function findRomFileIfExists(string $romFileId): RomFile
     {

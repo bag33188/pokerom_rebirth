@@ -31,25 +31,6 @@ DELIMITER $$
 --
 -- Procedures
 --
-DROP PROCEDURE IF EXISTS `CountPokeROMData`$$
-CREATE DEFINER=`bag33188`@`%` PROCEDURE `CountPokeROMData` (IN `SELECTION` ENUM('roms','games','both'))  READS SQL DATA SQL SECURITY INVOKER BEGIN
-    CASE UPPER(`SELECTION`)
-    	-- count just `roms` table
-    	WHEN 'ROMS' THEN
-        	SELECT COUNT(*) AS `count` FROM `roms`;
-        -- count just `games` table
-        WHEN 'GAMES' THEN
-        	SELECT COUNT(*) AS `count` FROM `games`;
-        -- count both `roms` and `games` tables (UNION ALL)
-        WHEN 'BOTH' THEN
-        	SELECT COUNT(*) AS `count` FROM `roms`
-        	UNION ALL
-        	SELECT COUNT(*) AS `count` FROM `games`
-            LIMIT 2;
-	ELSE BEGIN END;
-    END CASE;
-END$$
-
 DROP PROCEDURE IF EXISTS `FindMatchingRomFromFilename`$$
 CREATE DEFINER=`bag33188`@`%` PROCEDURE `FindMatchingRomFromFilename` (IN `ROM_FILENAME` VARCHAR(32))  READS SQL DATA BEGIN
 	SELECT * FROM `roms`
@@ -73,7 +54,7 @@ CREATE DEFINER=`bag33188`@`%` PROCEDURE `GetAllPokeROMData` ()  READS SQL DATA S
         `roms`.`rom_name` AS `rom_name`,
         `roms`.`rom_type` AS `rom_type`,
         `roms`.`rom_size` * 1024 AS `rom_size`,
-        CONCAT_FILENAME(`roms`.`rom_name`, `roms`.`rom_type`) AS `rom_filename`,
+        CONCAT(`roms`.`rom_name`, UCASE(`roms`.`rom_type`)) AS `rom_filename`,
         `roms`.`file_id` AS `rom_file_id`,
         `games`.`id` AS `game_id`,
         `games`.`game_name` AS `game_name`,
@@ -126,18 +107,6 @@ CREATE DEFINER=`bag33188`@`%` FUNCTION `BOOL_TO_STRING` (`BOOL_VAL` TINYINT(1) U
 	ELSEIF `BOOL_VAL` = 1 THEN RETURN 'true';
 	ELSE RETURN NULL;
 	END IF;
-END$$
-
-DROP FUNCTION IF EXISTS `CONCAT_FILENAME`$$
-CREATE DEFINER=`bag33188`@`%` FUNCTION `CONCAT_FILENAME` (`FILE_NAME` VARCHAR(28), `FILE_TYPE` ENUM('gb','gbc','gba','nds','3ds','xci')) RETURNS VARCHAR(32) CHARSET utf8mb4 SQL SECURITY INVOKER COMMENT 'concats rom name and rom type with period char' BEGIN
-	RETURN CONCAT(`FILE_NAME`, '.', UCASE(`FILE_TYPE`));
-/* !important
-return value length = 32;
-MAX_ROM_NAME_LENGTH = 28;
-MAX_ROM_TYPE_LENGTH = 3;
-'.'.length = 1;
-28 + 3 + 1 = 32;
-*/
 END$$
 
 DROP FUNCTION IF EXISTS `FORMAT_GAME_TYPE`$$

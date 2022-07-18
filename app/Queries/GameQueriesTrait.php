@@ -9,7 +9,7 @@ trait GameQueriesTrait
     protected function findRomsWithNoGame(): QueryObject
     {
         $sql = /** @lang MariaDB */
-            "CALL FindRomsWithNoGame();";
+            "CALL FindRomsWithNoGame;";
         return new QueryObject($sql);
     }
 
@@ -24,19 +24,6 @@ trait GameQueriesTrait
         $sql = /** @lang MariaDB */
             "SELECT HIGH_PRIORITY FORMAT_GAME_TYPE(?) AS gameType;";
         $params = [$gameType];
-        return new QueryObject($sql, $params);
-    }
-
-    /**
-     * ### Property accessor: **`count`**
-     *
-     * @return QueryObject
-     */
-    protected function countGamesInDatabase(): QueryObject
-    {
-        $sql = /** @lang MariaDB */
-            "CALL CountPokeROMData(:selection);";
-        $params = ['selection' => 'games'];
         return new QueryObject($sql, $params);
     }
 }

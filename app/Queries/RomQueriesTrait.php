@@ -24,29 +24,16 @@ trait RomQueriesTrait
     {
         $sql =
             /** @lang MariaDB */
-            "CALL UpdateRomFromRomFileData(:romFileId, :romFileSize, :romId);";
-        $params = ['romFileId' => $romFileId, 'romFileSize' => $romFileSize, 'romId' => $romId];
+            "CALL UpdateRomFromRomFileData(:rom_file_id, :rom_file_size, :rom_id);";
+        $params = ['rom_file_id' => $romFileId, 'rom_file_size' => $romFileSize, 'rom_id' => $romId];
         return new QueryObject($sql, $params);
     }
 
     protected function findMatchingRomFromFilename(string $romFilename): QueryObject
     {
         $sql = /** @lang MariaDB */
-            "CALL FindMatchingRomFromFilename(?);";
-        $params = [$romFilename];
-        return new QueryObject($sql, $params);
-    }
-
-    /**
-     * ### Property accessor: **`count`**
-     *
-     * @return QueryObject
-     */
-    protected function countRomsInDatabase(): QueryObject
-    {
-        $sql = /** @lang MariaDB */
-            "CALL CountPokeROMData(:selection);";
-        $params = ['selection' => 'roms'];
+            "CALL FindMatchingRomFromFilename(:rom_filename);";
+        $params = ['rom_filename' => $romFilename];
         return new QueryObject($sql, $params);
     }
 }

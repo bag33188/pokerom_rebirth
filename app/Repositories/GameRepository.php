@@ -11,9 +11,7 @@ use Illuminate\Support\Facades\DB;
 
 class GameRepository implements GameRepositoryInterface
 {
-    use GameQueries {
-        countGamesInDatabase as private;
-    }
+    use GameQueries;
 
     public function findGameIfExists(int $gameId): Game
     {
