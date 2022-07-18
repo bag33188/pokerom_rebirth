@@ -1,7 +1,7 @@
 function getCookie(cname) {
-    let name = `${cname}=`;
-    let decodedCookie = decodeURIComponent(document.cookie);
-    let ca = decodedCookie.split(";");
+    let name = `${cname}=`,
+        decodedCookie = decodeURIComponent(document.cookie),
+        ca = decodedCookie.split(";");
     for (let i = 0; i < ca.length; i++) {
         let c = ca[i];
         while (c.charAt(0) === " ") {
@@ -14,4 +14,5 @@ function getCookie(cname) {
     return "";
 }
 
+// export function
 window.getCookie = getCookie;

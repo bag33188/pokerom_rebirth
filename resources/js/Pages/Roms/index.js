@@ -1,6 +1,6 @@
 async function getApiVersion() {
-    const apiUrl = "http://pokerom_rebirth.test/public/api/version";
-    const response = await fetch(apiUrl);
+    const apiUrl = "http://pokerom_rebirth.test/public/api";
+    const response = await fetch(`${apiUrl}/version`);
     if (!response.ok) {
         throw new Error(`An error has occurred: ${response.status}`);
     }

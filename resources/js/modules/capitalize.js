@@ -69,4 +69,5 @@ let CapitalizationOptions = function (
     };
 };
 
+// export prototype class
 window.CapitalizationOptions = CapitalizationOptions;

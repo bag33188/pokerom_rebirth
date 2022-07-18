@@ -43,11 +43,20 @@ let loadWelcomeContent = (username) => {
     }
 };
 
-let loadCopyrightYear = function () {
+/**
+ * @name loadCopyrightYear
+ * @description Loads the current year (dynamically) for the copyright statement.
+ * @summary Get current year for copyright statement on page
+ *
+ * @returns {void}
+ */
+let loadCopyrightYear = () => {
     const copyrightYearElement = document.getElementById("copyright-year");
-    let currentYear = new Date().getFullYear();
+    const now = new Date();
+    let currentYear = now.getFullYear();
     copyrightYearElement.textContent = currentYear.toString();
 };
 
+// export functions
 window.loadWelcomeContent = loadWelcomeContent;
 window.loadCopyrightYear = loadCopyrightYear;

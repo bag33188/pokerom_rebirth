@@ -30,6 +30,7 @@ class SendFarewellNotification implements ShouldQueue
      */
     public function handle(UserDeleted $event): void
     {
-        Notification::send($event->user, new FarewellNotification($event->user));
+        $partingUser = $event->user;
+        Notification::send($partingUser, new FarewellNotification($partingUser));
     }
 }

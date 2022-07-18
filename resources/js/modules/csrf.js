@@ -18,4 +18,5 @@ let invokeToken = () => {
         .catch((err) => console.error(err));
 };
 
+// export function
 window.invokeToken = invokeToken;

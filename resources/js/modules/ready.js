@@ -31,4 +31,5 @@ var $ = function (callbackDocumentObj) {
     }
 };
 
+// export function
 window.$ = $;
