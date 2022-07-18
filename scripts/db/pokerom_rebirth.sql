@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 17, 2022 at 11:44 PM
+-- Generation Time: Jul 18, 2022 at 04:08 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -190,7 +190,7 @@ DELIMITER ;
 --
 -- Table structure for table `failed_jobs`
 --
--- Creation: Jul 06, 2022 at 01:56 AM
+-- Creation: Jul 08, 2022 at 12:34 AM
 --
 
 DROP TABLE IF EXISTS `failed_jobs`;
@@ -218,8 +218,7 @@ TRUNCATE TABLE `failed_jobs`;
 --
 -- Table structure for table `games`
 --
--- Creation: Jul 12, 2022 at 06:58 PM
--- Last update: Jul 17, 2022 at 05:32 PM
+-- Creation: Jul 12, 2022 at 09:23 AM
 --
 
 DROP TABLE IF EXISTS `games`;
@@ -328,7 +327,7 @@ DELIMITER ;
 --
 -- Table structure for table `migrations`
 --
--- Creation: Jun 05, 2022 at 04:47 PM
+-- Creation: Jul 08, 2022 at 12:34 AM
 --
 
 DROP TABLE IF EXISTS `migrations`;
@@ -367,7 +366,7 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 --
 -- Table structure for table `password_resets`
 --
--- Creation: Jul 06, 2022 at 02:07 AM
+-- Creation: Jul 08, 2022 at 12:34 AM
 --
 
 DROP TABLE IF EXISTS `password_resets`;
@@ -393,8 +392,7 @@ TRUNCATE TABLE `password_resets`;
 --
 -- Table structure for table `personal_access_tokens`
 --
--- Creation: Jul 06, 2022 at 01:56 AM
--- Last update: Jul 17, 2022 at 09:42 PM
+-- Creation: Jul 08, 2022 at 12:34 AM
 --
 
 DROP TABLE IF EXISTS `personal_access_tokens`;
@@ -412,8 +410,6 @@ CREATE TABLE `personal_access_tokens` (
 
 --
 -- RELATIONSHIPS FOR TABLE `personal_access_tokens`:
---   `tokenable_id`
---       `users` -> `id`
 --
 
 --
@@ -434,8 +430,7 @@ INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `n
 --
 -- Table structure for table `roms`
 --
--- Creation: Jul 06, 2022 at 02:20 AM
--- Last update: Jul 17, 2022 at 09:15 PM
+-- Creation: Jul 08, 2022 at 12:34 AM
 --
 
 DROP TABLE IF EXISTS `roms`;
@@ -454,8 +449,6 @@ CREATE TABLE `roms` (
 
 --
 -- RELATIONSHIPS FOR TABLE `roms`:
---   `game_id`
---       `games` -> `id`
 --
 
 --
@@ -514,8 +507,7 @@ INSERT INTO `roms` (`id`, `file_id`, `game_id`, `rom_name`, `rom_size`, `rom_typ
 --
 -- Table structure for table `sessions`
 --
--- Creation: Jul 06, 2022 at 02:20 AM
--- Last update: Jul 17, 2022 at 09:26 PM
+-- Creation: Jul 08, 2022 at 12:34 AM
 --
 
 DROP TABLE IF EXISTS `sessions`;
@@ -551,7 +543,7 @@ INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, 
 --
 -- Table structure for table `users`
 --
--- Creation: Jun 05, 2022 at 04:47 PM
+-- Creation: Jul 08, 2022 at 12:34 AM
 --
 
 DROP TABLE IF EXISTS `users`;
@@ -574,10 +566,6 @@ CREATE TABLE `users` (
 
 --
 -- RELATIONSHIPS FOR TABLE `users`:
---   `email`
---       `password_resets` -> `email`
---   `id`
---       `personal_access_tokens` -> `tokenable_id`
 --
 
 --
