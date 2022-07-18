@@ -48,7 +48,10 @@ class RomRepository implements RomRepositoryInterface
 
     public function searchForRomMatchingRomFile(RomFile $romFile): ?Rom
     {
-        ['query' => $query, 'bindings' => $bindings] = $this->findMatchingRomFromFilename($romFile->filename)->toArray();
+        list(
+            'query' => $query,
+            'bindings' => $bindings
+            ) = $this->findMatchingRomFromFilename($romFile->filename)->toArray();
         return Rom::fromQuery($query, $bindings)->first();
     }
 

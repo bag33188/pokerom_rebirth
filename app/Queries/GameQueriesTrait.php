@@ -9,7 +9,7 @@ trait GameQueriesTrait
     protected function findRomsWithNoGame(): QueryObject
     {
         $sql = /** @lang MariaDB */
-            "CALL FindRomsWithNoGame;";
+            "CALL `spSelectRomsWithNoGame`;";
         return new QueryObject($sql);
     }
 
@@ -22,7 +22,7 @@ trait GameQueriesTrait
     protected function formatGameType(string $gameType): QueryObject
     {
         $sql = /** @lang MariaDB */
-            "SELECT HIGH_PRIORITY FORMAT_GAME_TYPE(?) AS gameType;";
+            "SELECT HIGH_PRIORITY `FORMAT_GAME_TYPE`(?) AS `gameType`;";
         $params = [$gameType];
         return new QueryObject($sql, $params);
     }
