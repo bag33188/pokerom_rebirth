@@ -1,3 +1,4 @@
+{{-- parameters: romFile (RomFile) --}}
 <form action="{{route('rom-files.delete', $romFile)}}" method="POST">
     @method('DELETE')
     @csrf

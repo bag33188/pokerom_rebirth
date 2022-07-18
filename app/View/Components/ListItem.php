@@ -26,7 +26,9 @@ class ListItem extends Component
     public function render(): View|Closure|string
     {
         return /** @lang InjectablePHP */ <<<'blade'
-          <li {{ $attributes->merge(['class' => "px-6 py-2 border-b border-gray-200 w-full"]) }}>{{ $slot }}</li>
+          <li {{ $attributes->merge(['class' => "px-6 py-2 border-b border-gray-200 w-full"]) }}>
+            {{ $slot }}
+          </li>
         blade. "\n";
     }
 }
