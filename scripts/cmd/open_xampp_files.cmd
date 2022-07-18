@@ -1,6 +1,21 @@
 @ECHO ON
 
-REM script only works with admin privileges
+:: =======================
+:: Open Xampp Files Script
+:: =======================
+
+REM.||(
+  Windows Batchfile
+  -----------------
+  This script cannot be run on a Unix machine.
+  Batch is a scripting language invented for DOS.
+  It has no compatibility with OSX or Linux.
+  This file can only be run on a Windows machine.
+)
+
+
+
+REM Note: script only works with ADMINISTRATIVE privileges
 
 :OPEN_XAMPP_FILES
 
