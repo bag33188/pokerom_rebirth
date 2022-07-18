@@ -34,7 +34,9 @@
                             </x-slot>
                         </x-rom-file-download>
                     </span>
-                    <span class="order-1">@include('rom-file.delete', ['romFile' => $romFile])</span>
+                    <span class="order-1">
+                        @include('rom-file.delete', ['romFile' => $romFile, 'key' => $romFile->getObjectId()])
+                    </span>
                 </div>
             </x-list-item>
         </x-list-group>
