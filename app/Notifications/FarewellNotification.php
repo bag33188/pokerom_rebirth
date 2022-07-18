@@ -46,8 +46,7 @@ class FarewellNotification extends Notification
         return (new MailMessage)
             ->subject("I guess it's goodbye for now...")
             ->line("{$this->user->name}, we're sad to see you leave.")
-            ->line(sprintf("Thank you for using %s!", config('app.name')))
-            ->action('I guess you know where to find us.', route('welcome'));
+            ->line(sprintf("Thank you for using %s!", config('app.name')));
     }
 
     /**
@@ -62,9 +61,6 @@ class FarewellNotification extends Notification
         return [
             'subject' => "I guess it's goodbye for now...",
             'line1' => "{$this->user->name}, we're sad to see you leave.",
-            'action' => [
-
-            ],
             'line2' => 'Thank you for using ' . config('app.name') . '!'
         ];
     }
