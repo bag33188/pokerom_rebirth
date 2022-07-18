@@ -4,11 +4,11 @@
     </x-slot>
     <div class="p-3">
         @include('ui.session-message')
-        <x-jet-validation-errors class="mb-4"/>
+        <x-jet-validation-errors class="mb-4" />
 
         <form wire:submit.prevent="update">
             <div class="mt-2.5">
-                <x-jet-label for="romName" :value="__('Rom Name')"/>
+                <x-jet-label for="romName" :value="__('Rom Name')" />
                 <x-jet-input id="romName"
                              wire:model="rom_name"
                              class="block mt-1 w-full"
@@ -16,10 +16,10 @@
                              name="rom_name"
                              minlength="{{MIN_ROM_NAME_LENGTH}}"
                              maxlength="{{MAX_ROM_NAME_LENGTH}}"
-                             required autofocus/>
+                             required autofocus />
             </div>
             <div class="mt-2.5">
-                <x-jet-label for="romType" :value="__('Rom Type')"/>
+                <x-jet-label for="romType" :value="__('Rom Type')" />
                 <x-form-select
                     wire:model.lazy="rom_type"
                     name="rom_type" id="romType"
@@ -33,22 +33,24 @@
                 </x-form-select>
             </div>
             <div class="mt-2.5">
-                <x-jet-label for="romSize" :value="__('Rom Size')"/>
+                <x-jet-label for="romSize" :value="__('Rom Size')" />
                 <x-jet-input id="romSize"
                              wire:model="rom_size"
                              name="rom_size"
                              class="block mt-1 w-full"
                              type="number" min="{{MIN_ROM_SIZE}}"
                              max="{{MAX_ROM_SIZE}}"
-                             required autofocus/>
+                             required autofocus />
             </div>
             <div class="mt-4">
-                <x-jet-button class="float-right" wire:click="update">
-                    {{ __('Save!') }}
-                </x-jet-button>
+                <div class="float-right">
+                    <x-jet-button wire:click="update">
+                        {{ __('Save!') }}
+                    </x-jet-button>
+                </div>
                 <div class="float-left">
                     <x-jet-secondary-button type="button" wire:click="cancel({{$romId}})">
-                        {{__('Cancel')}}
+                        {{ __('Cancel') }}
                     </x-jet-secondary-button>
                 </div>
             </div>

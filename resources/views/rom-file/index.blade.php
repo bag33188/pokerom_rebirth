@@ -13,8 +13,8 @@
             <x-show-hide-button text="ROM Files" :initial-state="$alpineInitialDisplayState" />
             <div class="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-4 mx-4 mb-4 mt-1 items-center"
                  x-show="{{$alpineInitialDisplayState->value}}" x-cloak>
-                @foreach($romFiles as $i => $romFile)
-                    @include('rom-file.tile', ['index' => $i, 'romFile' => $romFile])
+                @foreach($romFiles as $key => $romFile)
+                    @include('rom-file.tile', ['index' => $key, 'romFile' => $romFile])
                 @endforeach
             </div>
         @endunless

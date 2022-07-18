@@ -20,7 +20,7 @@ use UserRepo;
 class UserController extends ApiController
 {
     /** @var string[] */
-    private static array $queryParams = ['paginate', 'per_page'];
+    private static array $queryParamNames = ['paginate', 'per_page'];
 
     public function __construct(private readonly UserServiceInterface $userService)
     {
@@ -33,8 +33,8 @@ class UserController extends ApiController
     {
         Gate::authorize('viewAny-user');
 
-        $paginate = $request->query(self::$queryParams[0]);
-        $perPage = (int)$request->query(self::$queryParams[1]);
+        $paginate = $request->query(self::$queryParamNames[0]);
+        $perPage = (int)$request->query(self::$queryParamNames[1]);
 
         $paginateQueryIsTruthy = str_to_bool($paginate) === true;
         return $paginateQueryIsTruthy

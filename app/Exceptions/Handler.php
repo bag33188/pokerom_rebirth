@@ -66,20 +66,28 @@ class Handler extends ExceptionHandler
 
         $this->renderable(fn(BulkWriteException $e) => throw App::make(MongoWriteException::class,
             ['message' => $e->getMessage(), 'code' => HttpResponse::HTTP_CONFLICT]));
+
         $this->renderable(fn(QueryException $e) => throw App::make(SqlQueryException::class,
             ['message' => $e->getMessage(), 'code' => HttpResponse::HTTP_CONFLICT]));
-        $this->renderable(function (AuthenticationException $e, Request $request): JsonResponse|null {
+
+        $this->renderable(function (AuthenticationException $e, Request $request): JsonResponse|false {
             $currentErrorRoute = AppHttpException::getCurrentErrorRouteAsString();
             if ($request->expectsJson()) {
+                # $e->getTraceAsString();
                 return jsonData(
-                    ['message' => 'Unauthenticated.'],
+                    ['message' => 'Error: Unauthenticated.'],
                     HttpResponse::HTTP_UNAUTHORIZED,
-                    ['X-Http-Error-Request-URL' => $currentErrorRoute]
+                    [
+                        'X-Http-Error-Request-URL' => $currentErrorRoute,
+                        'X-Http-Exception-Original-Message' => $e->getMessage()
+                    ]
                 );
             }
-            return null;
+            // don't use custom rendering if request is not an API request
+            return false;
         });
-        $this->renderable(function (HttpException $e, Request $request): JsonResponse|null {
+
+        $this->renderable(function (HttpException $e, Request $request): JsonResponse|false {
             $currentErrorRoute = AppHttpException::getCurrentErrorRouteAsString();
             if ($request->is("api/*", "/public/api/*")) {
                 $statusCode = $e->getStatusCode();
@@ -93,7 +101,8 @@ class Handler extends ExceptionHandler
                     ['X-Http-Error-Request-URL' => $currentErrorRoute]
                 );
             }
-            return null;
+            // don't use custom rendering if request is not an API request
+            return false;
         });
     }
 }

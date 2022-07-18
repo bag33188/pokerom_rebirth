@@ -15,7 +15,7 @@ use Symfony\Component\HttpKernel\Exception\PreconditionRequiredHttpException;
 class GameController extends ApiController
 {
     /** @var string[] */
-    private static array $queryParams = ['romId'];
+    private static array $queryParamNames = ['romId'];
 
     public function __construct(private readonly GameServiceInterface $gameService)
     {
@@ -48,7 +48,7 @@ class GameController extends ApiController
      */
     public function store(StoreGameRequest $request): JsonResponse
     {
-        $romId = $request->query(self::$queryParams[0]);
+        $romId = $request->query(self::$queryParamNames[0]);
 
         if (empty($romId)) {
             throw new PreconditionRequiredHttpException(
