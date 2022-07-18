@@ -32,7 +32,7 @@ class RomFile extends MongoDbModel
     /**
      * {@see Rom::rom_size rom_size} is represented in **kibibytes**.
      * The method return's the RomFile's {@see RomFile::length length} value
-     * divided by {@link DATA_BYTE_FACTOR `1024`} and rounds upward using
+     * divided by {@see DATA_BYTE_FACTOR `1024`} and rounds upward using
      * the {@see ceil} function (casts result as integer).
      *
      * @return int

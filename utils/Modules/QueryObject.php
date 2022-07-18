@@ -19,7 +19,7 @@ class QueryObject implements Arrayable
     }
 
     /**
-     * Call {@see QueryObject::getValues getValues} accessor method on invocation
+     * Call {@see getValues `getValues`} accessor method on invocation
      *
      * @return array
      */

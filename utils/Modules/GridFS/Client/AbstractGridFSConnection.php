@@ -14,7 +14,11 @@ use MongoDB\GridFS\Bucket;
  */
 abstract class AbstractGridFSConnection extends GridFS
 {
-    /** @var string {@link https://www.mongodb.com/docs/manual/reference/connection-string/ MongoDB Connection String} */
+    /**
+     * @link https://www.mongodb.com/docs/manual/reference/connection-string/
+     * MongoDB Connection String
+     * @var string
+     */
     private readonly string $dsn;
 
     /** @var Bucket gridfs bucket object */

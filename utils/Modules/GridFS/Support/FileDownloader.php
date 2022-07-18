@@ -29,6 +29,12 @@ class FileDownloader
         $this->fileBufferSize = $fileBufferSize;
     }
 
+    /**
+     * Download file on class invocation.
+     *
+     * @return void
+     * @see downloadFile
+     */
     public function __invoke(): void
     {
         $this->downloadFile();

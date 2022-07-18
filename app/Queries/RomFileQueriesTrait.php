@@ -28,7 +28,7 @@ trait RomFileQueriesTrait
 
     /**
      * converts the {@see AbstractGridFSModel::$length length} property
-     * to Kibibytes (base {@link DATA_BYTE_FACTOR 1024} bytes)
+     * to Kibibytes (base {@see DATA_BYTE_FACTOR 1024} bytes)
      * @return array
      */
     #[ArrayShape(['length' => "array[]", 'filename' => "string", 'chunkSize' => "string"])]
