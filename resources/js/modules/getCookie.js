@@ -1,14 +1,19 @@
-function getCookie(cname) {
-    let name = `${cname}=`,
+/**
+ * Get a specified cookie
+ * @param {string} cookieName
+ * @returns {string}
+ */
+function getCookie(cookieName) {
+    let name = `${cookieName}=`,
         decodedCookie = decodeURIComponent(document.cookie),
-        ca = decodedCookie.split(";");
-    for (let i = 0; i < ca.length; i++) {
-        let c = ca[i];
-        while (c.charAt(0) === " ") {
-            c = c.substring(1);
+        cookieParts = decodedCookie.split(";");
+    for (let i = 0; i < cookieParts.length; i++) {
+        let cookiePart = cookieParts[i];
+        while (cookiePart.charAt(0) === "\u0020") {
+            cookiePart = cookiePart.substring(1);
         }
-        if (c.indexOf(name) === 0) {
-            return c.substring(name.length, c.length);
+        if (cookiePart.indexOf(name) === 0) {
+            return cookiePart.substring(name.length, cookiePart.length);
         }
     }
     return "";

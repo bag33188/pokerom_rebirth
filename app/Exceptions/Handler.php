@@ -69,28 +69,28 @@ class Handler extends ExceptionHandler
         $this->renderable(fn(QueryException $e) => throw App::make(SqlQueryException::class,
             ['message' => $e->getMessage(), 'code' => HttpResponse::HTTP_CONFLICT]));
         $this->renderable(function (AuthenticationException $e, Request $request): JsonResponse|null {
-            $currentRoute = AppHttpException::getCurrentErrorRouteAsString();
+            $currentErrorRoute = AppHttpException::getCurrentErrorRouteAsString();
             if ($request->expectsJson()) {
                 return jsonData(
                     ['message' => 'Unauthenticated.'],
                     HttpResponse::HTTP_UNAUTHORIZED,
-                    ['X-Http-Error-Request-URI' => $currentRoute]
+                    ['X-Http-Error-Request-URL' => $currentErrorRoute]
                 );
             }
             return null;
         });
         $this->renderable(function (HttpException $e, Request $request): JsonResponse|null {
-            $currentRoute = AppHttpException::getCurrentErrorRouteAsString();
+            $currentErrorRoute = AppHttpException::getCurrentErrorRouteAsString();
             if ($request->is("api/*", "/public/api/*")) {
                 $statusCode = $e->getStatusCode();
                 $message = $e->getMessage();
                 if ($statusCode === HttpResponse::HTTP_NOT_FOUND && strlen($message) === 0) {
-                    $message = "Route not found: $currentRoute";
+                    $message = "Route not found: $currentErrorRoute";
                 }
                 return jsonData(
                     ['message' => $message],
                     $statusCode,
-                    ['X-Http-Error-Request-URI' => $currentRoute]
+                    ['X-Http-Error-Request-URL' => $currentErrorRoute]
                 );
             }
             return null;

@@ -4,7 +4,6 @@
         $(document).ready(() => {
             loadWelcomeContent('{{ $username }}');
             loadCopyrightYear();
-            getCookie('XSRF-TOKEN');
         });
     </script>
 @endpush
@@ -48,8 +47,8 @@
                                 This web app is a databank of Pok&eacute;mon ROMs.
                                 It contains 40 ROMs, including all 33 core Pok&eacute;mon ROMs.
                                 <br/>
-                                <p class="italic mt-2">
-                                    <span>&copy; Pok&eacute;mon Company </span>
+                                <p class="italic mt-2 inline-flex flex-row">
+                                    <span>&copy; Pok&eacute;mon Company&nbsp;</span>
                                     <span id="copyright-year"><!-- js content insert --></span>
                                 </p>
                             </div>
