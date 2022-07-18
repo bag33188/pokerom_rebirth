@@ -1,14 +1,12 @@
 "use strict";
 
 var apiUrl = "http://pokerom_rebirth.test/public/api";
-var token = "__API_TOKEN__";
 
 function loadRomsData() {
     var xhr = new XMLHttpRequest();
 
     xhr.open("GET", apiUrl + "/dev/roms", true);
     xhr.setRequestHeader("Accept", "application/json");
-    xhr.setRequestHeader("Authorization", "Bearer " + token);
 
     xhr.onprogress = function () {
         console.log("Fetching data...");
@@ -28,4 +26,4 @@ function loadRomsData() {
     xhr.send();
 }
 
-// loadRomsData()
+loadRomsData();

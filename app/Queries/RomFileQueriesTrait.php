@@ -65,6 +65,7 @@ trait RomFileQueriesTrait
      * length: 1,
      * filename: 1
      * ```
+     *
      * @return string[][]
      */
     protected function sortByLengthAscFilenameAsc(): array
