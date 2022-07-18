@@ -28,8 +28,7 @@ storage/**/*.gba
 !storage/**/.htaccess
 !storage/**/.gitkeep
 !storage/**/*.url
-/public/images
-/public/pictures
+/public/assets/(images|pictures)
 
 ### Public Folder Assets (Generated) ###
 public/assets/css/**/*
