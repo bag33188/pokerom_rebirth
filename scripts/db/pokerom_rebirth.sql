@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 18, 2022 at 06:38 PM
+-- Generation Time: Jul 18, 2022 at 07:37 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -74,31 +74,34 @@ mongodb stored as bytes
 END$$
 
 DROP PROCEDURE IF EXISTS `uspSelectAllPokeROMData`$$
-CREATE DEFINER=`bag33188`@`%` PROCEDURE `uspSelectAllPokeROMData` ()  READS SQL DATA SQL SECURITY INVOKER COMMENT 'Gathers all PokeROM Data in the database.' BEGIN
+CREATE DEFINER=`bag33188`@`%` PROCEDURE `uspSelectAllPokeROMData` ()  READS SQL DATA SQL SECURITY INVOKER COMMENT 'Table Joins to select all PokeROM Data in the database.' BEGIN
     SELECT
         `roms`.`id` AS "rom_id",
         `roms`.`rom_name` AS "rom_name",
         `roms`.`rom_type` AS "rom_type",
-        (`roms`.`rom_size` * 1024) AS "rom_size", -- convert kibibytes to bytes
-        CONCAT(`roms`.`rom_name`, '.', UCASE(`roms`.`rom_type`)) AS "rom_filename",
-        `roms`.`file_id` AS "rom_file_id",
+        `roms`.`rom_size` AS "rom_size", -- measured in kibibytes (base 1024)
         `games`.`id` AS "game_id",
         `games`.`game_name` AS "game_name",
         `games`.`game_type` AS "game_type",
         `games`.`region` AS "region",
         `games`.`generation` AS "generation",
-        `games`.`date_released` AS "date_released"
+        `games`.`date_released` AS "date_released",
+        `roms`.`file_id` AS "rom_file_id",
+        CONCAT(`roms`.`rom_name`, '.', UCASE(`roms`.`rom_type`)) AS "rom_filename",
+        (`roms`.`rom_size` * 1024) AS "rom_file_size" -- convert kibibytes to bytes
     FROM
         `roms`
             RIGHT JOIN
         `games`
         ON `roms`.`id` = `games`.`rom_id`
     WHERE
-            `roms`.`has_game` = TRUE
-      AND `roms`.`has_file` = TRUE
-      AND `roms`.`game_id` IS NOT NULL
-      AND `roms`.`file_id` IS NOT NULL
-   	ORDER BY `game_id` DESC, `rom_id` DESC;
+        `roms`.`has_game` = TRUE AND
+        `roms`.`has_file` = TRUE AND
+        `roms`.`game_id` IS NOT NULL AND
+        `roms`.`file_id` IS NOT NULL
+    ORDER BY
+    `rom_id` DESC,
+    `generation` DESC;
 END$$
 
 --
@@ -393,6 +396,7 @@ TRUNCATE TABLE `password_resets`;
 -- Table structure for table `personal_access_tokens`
 --
 -- Creation: Jul 06, 2022 at 01:56 AM
+-- Last update: Jul 18, 2022 at 05:17 PM
 --
 
 DROP TABLE IF EXISTS `personal_access_tokens`;
@@ -419,20 +423,13 @@ CREATE TABLE `personal_access_tokens` (
 --
 
 TRUNCATE TABLE `personal_access_tokens`;
---
--- Dumping data for table `personal_access_tokens`
---
-
-INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `name`, `token`, `abilities`, `last_used_at`, `created_at`, `updated_at`) VALUES
-(5, 'App\\Models\\User', 4, 'auth_token', '3c29f68438c5d82dd86c2bf79b64221047f32046e349cf87493598b7f8d90717', '[\"*\"]', '2022-07-15 14:11:30', '2022-07-15 13:40:41', '2022-07-15 14:11:30'),
-(8, 'App\\Models\\User', 1, 'auth_token', 'f17804702643fdbbbeefbc42a3e379772d15a8656d0ccb2e1ce10281f2ccb0e8', '[\"*\"]', '2022-07-18 04:42:23', '2022-07-17 01:57:22', '2022-07-18 04:42:23');
-
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `roms`
 --
 -- Creation: Jul 06, 2022 at 02:20 AM
+-- Last update: Jul 18, 2022 at 04:40 PM
 --
 
 DROP TABLE IF EXISTS `roms`;
@@ -512,7 +509,7 @@ INSERT INTO `roms` (`id`, `file_id`, `game_id`, `rom_name`, `rom_size`, `rom_typ
 -- Table structure for table `sessions`
 --
 -- Creation: Jul 06, 2022 at 02:20 AM
--- Last update: Jul 18, 2022 at 04:38 PM
+-- Last update: Jul 18, 2022 at 05:28 PM
 --
 
 DROP TABLE IF EXISTS `sessions`;
@@ -541,8 +538,8 @@ TRUNCATE TABLE `sessions`;
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('CrJH5RHmcFKnPGyRXWKACpN8pbvvoLtHs6ksyBCn', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiamMzTkIyeXlQbElSOXlvdUxvMEFNekdqNjFrQzNybFpSZkZKc0JCaiI7czozOiJ1cmwiO2E6MDp7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjc0OiJodHRwOi8vcG9rZXJvbV9yZWJpcnRoLnRlc3QvcHVibGljL3JvbS1maWxlcy9pbmZvLzYyYzFmODU5ZjgwNTAxYTA4MzBmZGQ1MSI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7czoyMToicGFzc3dvcmRfaGFzaF9zYW5jdHVtIjtzOjYwOiIkMnkkMTAkd2lwM3F4OTFQbFhEa3JqLnpFam9DLi93bEludGdJSzNRLnJBSmdnd1FoZlhSRmlJbm1EWm0iO30=', 1658093216),
-('OnV2x6kq70x1LUt9QJ8cle7iUbs4nBUOggfFjh11', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiS2xuekJqcVNMMlZuZVhXNmZHUmxCeFhGTmRDSHN1Tmk5bEtYNFhOUiI7czozOiJ1cmwiO2E6MDp7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjQ2OiJodHRwOi8vcG9rZXJvbV9yZWJpcnRoLnRlc3QvcHVibGljL2FwaS92ZXJzaW9uIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjIxOiJwYXNzd29yZF9oYXNoX3NhbmN0dW0iO3M6NjA6IiQyeSQxMCR3aXAzcXg5MVBsWERrcmouekVqb0MuL3dsSW50Z0lLM1EuckFKZ2d3UWhmWFJGaUlubURabSI7fQ==', 1658162308);
+('bAznmk2Q0LYroFM19cmAPhw4GPKEoYwWrdQxLxIu', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiWXVNREJsNzRaYjFydXpKTHJ1cU12WTBWb0JqQ2FCZ1BvY0FaVWlHeiI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDY6Imh0dHA6Ly9wb2tlcm9tX3JlYmlydGgudGVzdC9wdWJsaWMvYXBpL3ZlcnNpb24iO31zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO3M6MjE6InBhc3N3b3JkX2hhc2hfc2FuY3R1bSI7czo2MDoiJDJ5JDEwJHdpcDNxeDkxUGxYRGtyai56RWpvQy4vd2xJbnRnSUszUS5yQUpnZ3dRaGZYUkZpSW5tRFptIjt9', 1658165284),
+('CrJH5RHmcFKnPGyRXWKACpN8pbvvoLtHs6ksyBCn', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiamMzTkIyeXlQbElSOXlvdUxvMEFNekdqNjFrQzNybFpSZkZKc0JCaiI7czozOiJ1cmwiO2E6MDp7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjc0OiJodHRwOi8vcG9rZXJvbV9yZWJpcnRoLnRlc3QvcHVibGljL3JvbS1maWxlcy9pbmZvLzYyYzFmODU5ZjgwNTAxYTA4MzBmZGQ1MSI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7czoyMToicGFzc3dvcmRfaGFzaF9zYW5jdHVtIjtzOjYwOiIkMnkkMTAkd2lwM3F4OTFQbFhEa3JqLnpFam9DLi93bEludGdJSzNRLnJBSmdnd1FoZlhSRmlJbm1EWm0iO30=', 1658093216);
 
 -- --------------------------------------------------------
 
@@ -550,6 +547,7 @@ INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, 
 -- Table structure for table `users`
 --
 -- Creation: Jun 05, 2022 at 04:47 PM
+-- Last update: Jul 18, 2022 at 05:18 PM
 --
 
 DROP TABLE IF EXISTS `users`;
@@ -588,8 +586,8 @@ TRUNCATE TABLE `users`;
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `two_factor_secret`, `two_factor_recovery_codes`, `two_factor_confirmed_at`, `role`, `remember_token`, `current_team_id`, `profile_photo_path`, `created_at`, `updated_at`) VALUES
-(1, 'Brock', 'bglatman@outlook.com', NULL, '$2y$10$wip3qx91PlXDkrj.zEjoC./wlIntgIK3Q.rAJggwQhfXRFiInmDZm', NULL, NULL, NULL, 'admin', 's2Sx7zKdJzhExXdIAJGNyMHUrC8n3nGxCjOjUF4ew4gsrDWEnUlYnCj6hb8a', NULL, NULL, '2022-07-04 02:35:33', '2022-07-10 23:32:39'),
-(4, 'John Doe', 'jdoe123@gmail.com', NULL, '$2y$10$TzzNPZc0JrCcsUyJB4FhQ.khUwfmikQwxpM1ZKneb/QloOTmcFnX2', NULL, NULL, NULL, 'user', NULL, NULL, NULL, '2022-07-08 13:10:55', '2022-07-08 13:10:55');
+(1, 'Brock', 'bglatman@outlook.com', NULL, '$2y$10$wip3qx91PlXDkrj.zEjoC./wlIntgIK3Q.rAJggwQhfXRFiInmDZm', NULL, NULL, NULL, 'admin', 'W9ICS3K06mNQi8v03vL2KMrQSkYaeuwfYWVZLXuGW0vVWhTK9SfWag0mEzvt', NULL, NULL, '2022-07-04 02:35:33', '2022-07-10 23:32:39'),
+(5, 'John Doe', 'jdoe123@gmail.com', NULL, '$2y$10$JCtGYy2CKXxWdotqOcOky.lhPTI44BtmMN7eFyJ/MCi083wLiZTOi', NULL, NULL, NULL, 'user', NULL, NULL, NULL, '2022-07-19 00:18:01', '2022-07-19 00:18:01');
 
 --
 -- Indexes for dumped tables
@@ -692,7 +690,7 @@ ALTER TABLE `roms`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Constraints for dumped tables
