@@ -7,6 +7,7 @@ use App\Models\Rom;
 use App\Models\RomFile;
 use App\Queries\RomFileQueriesTrait as RomFileAggregations;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Collection as ResourceCollection;
 
 class RomFileRepository implements RomFileRepositoryInterface
 {
@@ -64,7 +65,7 @@ class RomFileRepository implements RomFileRepositoryInterface
         return RomFile::project($this->splitRomFilenamesIntoFileEntityValues())->get();
     }
 
-    public function getRomeFilesMetadata(): \Illuminate\Support\Collection
+    public function getRomeFilesMetadata(): ResourceCollection
     {
         $columns = array('filename', 'filetype', 'filesize');
         return $this->queryRomFileMetadata()->get($columns);

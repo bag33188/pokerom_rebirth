@@ -39,6 +39,12 @@ class RomFileController extends ApiController
         return new RomResource(RomFileRepo::getRomAssociatedWithFile($romFileId));
     }
 
+    public function indexMetadata(): Collection
+    {
+        Gate::authorize('viewAny-romFile');
+        return RomFileRepo::getRomeFilesMetadata();
+    }
+
     /**
      * @throws AuthorizationException
      */
@@ -97,11 +103,5 @@ class RomFileController extends ApiController
         Gate::authorize('viewAny-romFile');
 
         return $romFileActions->listRomFilesInStorage();
-    }
-
-    public function indexMetadata(): Collection
-    {
-        Gate::authorize('viewAny-romFile');
-        return RomFileRepo::getRomeFilesMetadata();
     }
 }
