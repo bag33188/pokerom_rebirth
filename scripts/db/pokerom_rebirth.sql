@@ -27,22 +27,25 @@ SET time_zone = "+00:00";
 CREATE DATABASE IF NOT EXISTS `pokerom_rebirth` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 USE `pokerom_rebirth`;
 
-
 DELIMITER $$
 --
 -- Procedures
 --
 DROP PROCEDURE IF EXISTS `spSelectMatchingRomFromRomFilename`$$
 CREATE DEFINER=`bag33188`@`%` PROCEDURE `spSelectMatchingRomFromRomFilename` (IN `ROM_FILENAME` VARCHAR(32))  READS SQL DATA BEGIN
+    DECLARE `fullstop` CHAR(1) DEFAULT '.'; -- delimiter
     SELECT * FROM `roms`
-    WHERE `rom_name` = SPLIT_STRING(`ROM_FILENAME`, '.', 1) -- file name
-      AND `rom_type` = LCASE(SPLIT_STRING(`ROM_FILENAME`, '.', 2)) -- file extension
-      AND (`has_file` = FALSE OR `file_id` IS NULL) LIMIT 1;
+    WHERE `rom_name` = SPLIT_STRING(`ROM_FILENAME`, `fullstop`, 1) -- file name
+      AND `rom_type` = LCASE(SPLIT_STRING(`ROM_FILENAME`, `fullstop`, 2)) -- file extension
+      AND (`has_file` = FALSE OR `file_id` IS NULL) -- no previous rom-file data
+    LIMIT 1;
 END$$
 
 DROP PROCEDURE IF EXISTS `spSelectRomsWithNoGame`$$
 CREATE DEFINER=`bag33188`@`%` PROCEDURE `spSelectRomsWithNoGame` ()  READS SQL DATA BEGIN
-    SELECT `id`, `rom_name`, `rom_type`, `has_game`, `game_id`
+    SELECT
+        `id`, `rom_name`, `rom_type`,
+        `has_game`, `game_id`
     FROM `roms`
     WHERE `has_game` = FALSE OR `game_id` IS NULL
     ORDER BY CHAR_LENGTH(`rom_name`) DESC;
@@ -50,7 +53,7 @@ END$$
 
 DROP PROCEDURE IF EXISTS `spUpdateRomFromRomFileData`$$
 CREATE DEFINER=`bag33188`@`%` PROCEDURE `spUpdateRomFromRomFileData` (IN `ROM_FILE_ID` CHAR(24), IN `ROM_FILE_SIZE` BIGINT UNSIGNED, IN `ROM_ID` BIGINT UNSIGNED)   BEGIN
-    DECLARE `base_bytes_unit` INTEGER(4) UNSIGNED DEFAULT (0 + 0x400); -- 1024
+    DECLARE `base_bytes_unit` INTEGER(4) UNSIGNED DEFAULT POW(32, 2); -- 1024
     DECLARE `_rollback` BOOLEAN DEFAULT FALSE;
     DECLARE CONTINUE HANDLER FOR SQLEXCEPTION SET `_rollback` = TRUE;
     START TRANSACTION;
@@ -59,7 +62,7 @@ CREATE DEFINER=`bag33188`@`%` PROCEDURE `spUpdateRomFromRomFileData` (IN `ROM_FI
         `rom_size` = CEIL(`ROM_FILE_SIZE` / `base_bytes_unit`), -- get Kibibytes value from bytes
         `has_file` = TRUE
     WHERE `id` = `ROM_ID`;
-    IF `_rollback` THEN
+    IF `_rollback` = 1 THEN
         ROLLBACK;
     ELSE
         COMMIT;
@@ -85,7 +88,7 @@ CREATE DEFINER=`bag33188`@`%` PROCEDURE `uspSelectAllPokeROMData` ()  READS SQL 
         `games`.`region` AS `region`,
         `games`.`generation` AS `generation`,
         `games`.`date_released` AS `date_released`,
-        COUNT(*) AS `total_rows`
+        COUNT(*) AS "total_rows"
     FROM
         `roms`
             RIGHT JOIN
@@ -97,7 +100,7 @@ CREATE DEFINER=`bag33188`@`%` PROCEDURE `uspSelectAllPokeROMData` ()  READS SQL 
       AND `roms`.`game_id` IS NOT NULL
       AND `roms`.`file_id` IS NOT NULL
     ORDER BY
-        `game_id` ASC;
+        `game_id` DESC;
 END$$
 
 --
@@ -105,20 +108,19 @@ END$$
 --
 DROP FUNCTION IF EXISTS `BOOL_TO_STRING`$$
 CREATE DEFINER=`bag33188`@`%` FUNCTION `BOOL_TO_STRING` (`BOOL_VAL` TINYINT(1) UNSIGNED) RETURNS VARCHAR(5) CHARSET utf8mb4 DETERMINISTIC BEGIN
-	IF `BOOL_VAL` = 0 THEN RETURN 'false';
-	ELSEIF `BOOL_VAL` = 1 THEN RETURN 'true';
-	ELSE RETURN NULL;
-	END IF;
+    IF `BOOL_VAL` = 0 THEN RETURN "false";
+    ELSEIF `BOOL_VAL` = 1 THEN RETURN "true";
+    ELSE RETURN NULL;
+    END IF;
 END$$
-
 
 DROP FUNCTION IF EXISTS `FORMAT_GAME_TYPE`$$
 CREATE DEFINER=`bag33188`@`%` FUNCTION `FORMAT_GAME_TYPE` (`GAME_TYPE` ENUM('core','hack','spin-off')) RETURNS VARCHAR(21) CHARSET utf8mb4 SQL SECURITY INVOKER BEGIN
     SET @`eacute` = CAST(CONVERT(x'E9' USING ucs2) AS char(1));
     CASE `GAME_TYPE`
-        WHEN 'core' THEN RETURN CONCAT('Core Pok', @`eacute`, 'mon Game'); -- Core Pokemon Game
-        WHEN 'hack' THEN RETURN CONCAT('Pok', @`eacute`, 'mon ROM Hack'); -- Pokemon ROM Hack
-        WHEN 'spin-off' THEN RETURN CONCAT('Spin-Off Pok', @`eacute`, 'mon Game'); -- Spin-Off Pokemon Game
+        WHEN 'core' THEN RETURN CONCAT("Core Pok", @`eacute`, "mon Game"); -- Core Pokemon Game
+        WHEN 'hack' THEN RETURN CONCAT("Pok", @`eacute`, "mon ROM Hack"); -- Pokemon ROM Hack
+        WHEN 'spin-off' THEN RETURN CONCAT("Spin-Off Pok", @`eacute`, "mon Game"); -- Spin-Off Pokemon Game
         ELSE RETURN 'N/A';
         END CASE;
 /* !important
@@ -129,7 +131,7 @@ MAX_GAME_TYPE_LENGTH = 21;
 END$$
 
 DROP FUNCTION IF EXISTS `FORMAT_ROM_SIZE`$$
-CREATE DEFINER=`bag33188`@`%` FUNCTION `FORMAT_ROM_SIZE` (`ROM_SIZE` BIGINT UNSIGNED) RETURNS VARCHAR(9) CHARSET utf8mb4 DETERMINISTIC SQL SECURITY INVOKER COMMENT 'conversion issues get fixed in this function' BEGIN
+CREATE DEFINER=`bag33188`@`%` FUNCTION `FORMAT_ROM_SIZE` (`ROM_SIZE` BIGINT UNSIGNED) RETURNS VARCHAR(9) CHARSET utf8mb4 SQL SECURITY INVOKER COMMENT 'conversion issues get fixed in this function' BEGIN
     DECLARE `size_val` FLOAT UNSIGNED;
     DECLARE `size_unit` CHAR(2);
     DECLARE `size_str` VARCHAR(6);
@@ -165,16 +167,16 @@ END$$
 
 DROP FUNCTION IF EXISTS `SPLIT_STRING`$$
 CREATE DEFINER=`bag33188`@`%` FUNCTION `SPLIT_STRING` (`STR_VAL` VARCHAR(256), `SEPARATOR` VARCHAR(1) CHARSET utf8, `POSITION` SMALLINT) RETURNS VARCHAR(128) CHARSET utf8mb4 DETERMINISTIC COMMENT 'splits a string based on delimiter ' BEGIN
-        DECLARE `max_results` SMALLINT;
+    DECLARE `max_results` SMALLINT;
 
-        -- get max number of items
-        SET `max_results` = LENGTH(`STR_VAL`) - LENGTH(REPLACE(`STR_VAL`, `SEPARATOR`, '')) + 1;
+    -- get max number of items
+    SET `max_results` = LENGTH(`STR_VAL`) - LENGTH(REPLACE(`STR_VAL`, `SEPARATOR`, '')) + 1;
 
-        IF `POSITION` > `max_results` THEN
-            RETURN NULL;
-        ELSE
-            RETURN SUBSTRING_INDEX(SUBSTRING_INDEX(`STR_VAL`, `SEPARATOR`, `POSITION`), `SEPARATOR`, -1);
-        END IF;
+    IF `POSITION` > `max_results` THEN
+        RETURN NULL;
+    ELSE
+        RETURN SUBSTRING_INDEX(SUBSTRING_INDEX(`STR_VAL`, `SEPARATOR`, `POSITION`), `SEPARATOR`, -1);
+    END IF;
 /* !important
 keep SEPARATOR as VARCHAR since if CHAR is used
 then a SPACE character will not work as a SEPARATOR
