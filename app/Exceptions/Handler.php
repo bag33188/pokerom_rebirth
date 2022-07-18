@@ -18,7 +18,7 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 use Throwable;
 use Utils\Classes\AbstractApplicationException as AppHttpException;
 
-//use Illuminate\Http\Response;
+# use Illuminate\Http\Response; // <- has all status code constants
 
 class Handler extends ExceptionHandler
 {

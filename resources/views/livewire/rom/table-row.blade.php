@@ -22,7 +22,9 @@
     <td class="px-6 py-4">{{$rom->rom_name}}</td>
     <td class="px-6 py-4">{{RomRepo::getFormattedRomSize($rom->rom_size)}}</td>
     <td class="px-6 py-4">.{{strtolower($rom->rom_type)}}</td>
-    <td class="px-6 py-4">{{$rom->has_game ? $rom->game->game_name : 'N/A'}}</td>
+    <td class="px-6 py-4" {!! empty($rom->game_id) ? 'title="this ROM does not have a game"' : '' !!}>
+        {{ $rom->has_game ? $rom->game->game_name : 'N/A' }}
+    </td>
     <td class="px-6 py-4">
         @if($rom->has_file)
             <x-rom-file-download :rom-file="$rom->romFile">
@@ -34,7 +36,10 @@
                 </x-slot:button>
             </x-rom-file-download>
         @else
-            <p class="font-normal text-lg">No File yet :(</p>
+            <p class="font-normal text-lg"
+                {!! empty($rom->file_id) ? 'title="this ROM does not yet have a file"' : '' !!}>
+                No ROM File yet :(
+            </p>
         @endif
     </td>
     <td class="px-6 py-4">

@@ -6,12 +6,17 @@ if (!defined('FSI_FLAGS')) {
 
 if (!function_exists('dir_is_empty')) {
     /**
-     * Checks if a given directory is empty (devoid of files)
+     * ## Directory Is Empty (Boolean)
+     *
+     * Checks if a given directory is empty (devoid of any and all files)
      *
      * _Loaded in `composer.json`_
      *
+     * ----
+     *
      * @param string $dir
      * @return bool
+     * @link https://github.com/bag33188/pokerom_rebirth/blob/main/composer.json
      */
     function dir_is_empty(string $dir): bool
     {

@@ -23,7 +23,7 @@
                 {{GameRepo::getFormattedGameType($game->game_type)}}
             </li>
             <li class="p-3 hover:bg-blue-600 hover:text-blue-200">
-                Released on {{parseDateAsReadableString($game->date_released, false)}}
+                Released on {{parseDateAsLocaleString($game->date_released, false)}}
             </li>
         </ul>
     </div>

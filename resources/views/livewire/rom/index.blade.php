@@ -12,7 +12,7 @@
         @if($totalRomsCount < 1)
             <h2 class="text-center text-lg mt-7">No ROMs Exist in database</h2>
         @else
-            <x-show-hide-button text="ROMs" :initial-state="$alpineInitialDisplayState"/>
+            <x-show-hide-button text="ROMs" :initial-state="$alpineInitialDisplayState" />
             <table class="w-full text-sm text-left text-gray-800 light:text-gray-400"
                    x-show="{{$alpineInitialDisplayState->value}}" x-cloak>
                 <thead class="bg-gray-50">
@@ -24,17 +24,16 @@
                 </thead>
                 <tbody class="light:bg-gray-800">
                 @foreach($roms as $rom)
-                    @livewire('rom.table-row', ['rom' => $rom], key($rom->getKey()))
+                    <livewire:rom.table-row :rom="$rom" :wire:key="$rom->getKey()" />
                 @endforeach
                 </tbody>
                 <tfoot>
                 <tr class="text-sm text-gray-700 uppercase light:bg-gray-700 light:text-gray-400">
                     <td class="px-6 py-3">
-                        <p>Total Count:&nbsp;<span class="font-semibold">{{$totalRomsCount}}&nbsp;ROMs</span>
-                        </p>
+                        <p>Total Count:&nbsp;<span class="font-semibold">{{$totalRomsCount}}&nbsp;ROMs</span></p>
                     </td>
                     <td class="px-6 py-3">
-                        <p>Total Size:&nbsp;<span class="font-semibold">{{$romFileSizeSum}}&nbsp;Bytes</span></p>
+                        <p>Total ROMs Size:&nbsp;<span class="font-semibold">{{$romFileSizeSum}}&nbsp;Bytes</span></p>
                     </td>
                 </tr>
                 </tfoot>
