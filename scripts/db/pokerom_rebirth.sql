@@ -108,8 +108,8 @@ END$$
 --
 DROP FUNCTION IF EXISTS `BOOL_TO_STRING`$$
 CREATE DEFINER=`bag33188`@`%` FUNCTION `BOOL_TO_STRING` (`BOOL_VAL` TINYINT(1) UNSIGNED) RETURNS VARCHAR(5) CHARSET utf8mb4 DETERMINISTIC BEGIN
-    IF `BOOL_VAL` = 0 THEN RETURN "false";
-    ELSEIF `BOOL_VAL` = 1 THEN RETURN "true";
+    IF `BOOL_VAL` = 0 THEN RETURN 'false';
+    ELSEIF `BOOL_VAL` = 1 THEN RETURN 'true';
     ELSE RETURN NULL;
     END IF;
 END$$
@@ -118,9 +118,9 @@ DROP FUNCTION IF EXISTS `FORMAT_GAME_TYPE`$$
 CREATE DEFINER=`bag33188`@`%` FUNCTION `FORMAT_GAME_TYPE` (`GAME_TYPE` ENUM('core','hack','spin-off')) RETURNS VARCHAR(21) CHARSET utf8mb4 SQL SECURITY INVOKER BEGIN
     SET @`eacute` = CAST(CONVERT(x'E9' USING ucs2) AS char(1));
     CASE `GAME_TYPE`
-        WHEN 'core' THEN RETURN CONCAT("Core Pok", @`eacute`, "mon Game"); -- Core Pokemon Game
-        WHEN 'hack' THEN RETURN CONCAT("Pok", @`eacute`, "mon ROM Hack"); -- Pokemon ROM Hack
-        WHEN 'spin-off' THEN RETURN CONCAT("Spin-Off Pok", @`eacute`, "mon Game"); -- Spin-Off Pokemon Game
+        WHEN 'core' THEN RETURN CONCAT('Core Pok', @`eacute`, 'mon Game'); -- Core Pokemon Game
+        WHEN 'hack' THEN RETURN CONCAT('Pok', @`eacute`, 'mon ROM Hack'); -- Pokemon ROM Hack
+        WHEN 'spin-off' THEN RETURN CONCAT('Spin-Off Pok', @`eacute`, 'mon Game'); -- Spin-Off Pokemon Game
         ELSE RETURN 'N/A';
         END CASE;
 /* !important
