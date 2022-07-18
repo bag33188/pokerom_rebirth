@@ -18,6 +18,21 @@ class QueryObject implements Arrayable
         $this->query = DB::raw($query);
     }
 
+    /**
+     * Call {@see QueryObject::getValues getValues} accessor method on invocation
+     *
+     * @return array
+     */
+    public function __invoke(): array
+    {
+        return $this->getValues();
+    }
+
+    /**
+     * Converts to associative array
+     *
+     * @return array
+     */
     #[ArrayShape(['query' => "\Illuminate\Database\Query\Expression", 'bindings' => "array"])]
     public function toArray(): array
     {

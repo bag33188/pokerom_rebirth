@@ -9,7 +9,7 @@ use Illuminate\Support\Str;
 class GameActions implements GameActionsInterface
 {
     /**
-     * Modifies a {@see Game Game} object and slugifies the {@link Game::game_name game_name} property
+     * Modifies a {@see Game `Game`} object and slugifies the {@see Game::game_name `game_name`} property
      * (sets `slug` field value).
      *
      * @param Game $game
