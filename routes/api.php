@@ -20,11 +20,15 @@ use Symfony\Component\HttpFoundation\Response as HttpResponse;
 */
 
 Route::get('version', fn() => response()
-    ->json([
-        'success' => true,
-        'version' => config('app.version')
-    ], HttpResponse::HTTP_OK))
-    ->name('api.version');
+    ->json(
+        [
+            'success' => true,
+            'version' => config('app.version')
+        ],
+        HttpResponse::HTTP_OK,
+        array('X-Api-Author' => 'greeny_broccolini')
+    )
+)->name('api.version');
 
 Route::name('api.')->group(function () {
     // no auth

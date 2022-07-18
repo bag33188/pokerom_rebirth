@@ -17,7 +17,7 @@ return [
 
     'name' => env('APP_NAME', 'PokeROM'),
 
-    'version' => (float)env('APP_VERSION', 4.0),
+    'version' => (float)env('APP_VERSION', 2.0),
 
     /*
     |--------------------------------------------------------------------------
