@@ -30,7 +30,7 @@ class JsonDataResponse implements Jsonable
     }
 
     /**
-     * return RenderResult when class is invoked
+     * Call {@see renderResponse} method when class is invoked
      *
      * @return JsonResponse
      */
