@@ -16,9 +16,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        if (App::isLocal()) {
-            App::register(IdeHelperServiceProvider::class);
-        }
+//        if (App::isLocal()) {
+//            App::register(IdeHelperServiceProvider::class);
+//        }
     }
 
     /**
