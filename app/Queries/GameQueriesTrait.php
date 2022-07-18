@@ -27,6 +27,16 @@ trait GameQueriesTrait
         return new QueryObject($sql, $params);
     }
 
+    /**
+     * ### Order By:
+     *
+     * ```
+     * rom_id => 1,
+     * generation => 1
+     * ```
+     *
+     * @return string[][]
+     */
     protected function sortByRomIdAscGenerationAsc(): array
     {
         return array(

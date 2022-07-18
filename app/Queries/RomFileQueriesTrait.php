@@ -59,17 +59,20 @@ trait RomFileQueriesTrait
     }
 
     /**
-     * ### Sort:
+     * ### Sort By:
      *
      * ```
-     * length: 1,
-     * filename: 1
+     * length => 1,
+     * filename => 1
      * ```
      *
      * @return string[][]
      */
     protected function sortByLengthAscFilenameAsc(): array
     {
-        return array(['length', 'asc'], ['filename', 'asc']);
+        return array(
+            ['length', 'asc'],
+            ['filename', 'asc']
+        );
     }
 }
