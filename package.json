@@ -10,6 +10,7 @@
         "url": "https://github.com/bag33188/pokerom_rebirth",
         "type": "git"
     },
+    "description": "A Pokemon ROMs Website with application features.",
     "private": true,
     "homepage": "https://github.com/bag33188/pokerom_rebirth#readme",
     "scripts": {
