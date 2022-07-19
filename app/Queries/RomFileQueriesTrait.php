@@ -2,15 +2,18 @@
 
 namespace App\Queries;
 
-use Illuminate\Database\Query\Builder;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use JetBrains\PhpStorm\ArrayShape;
 
 trait RomFileQueriesTrait
 {
-    protected function queryRomFileMetadata(): Builder
+    protected function queryRomFileMetadata(/** @var string[] */ array $columns): Collection
     {
-        return DB::connection('mongodb')->table('rom_files.info');
+        return DB::connection('mongodb')
+            ->table('rom_files.info')
+            ->get($columns)
+            ->sortBy(['filesize', 'filename']);
     }
 
     /**
