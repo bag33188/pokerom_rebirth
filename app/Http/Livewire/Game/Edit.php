@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire\Game;
 
-use App\Enums\SessionMessageTypeEnum as SessionMessageTypes;
+use App\Enums\SessionMessageTypeEnum as SessionMessageType;
 use App\Http\Validators\GameValidationRulesTrait;
 use App\Models\Game;
 use Date;
@@ -87,7 +87,7 @@ class Edit extends Component
 
         } catch (Exception $e) {
             session()->flash('message', $e->getMessage());
-            session()->flash('message-type', SessionMessageTypes::ERROR);
+            session()->flash('message-type', SessionMessageType::ERROR);
         }
     }
 }

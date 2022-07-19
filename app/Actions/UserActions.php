@@ -4,11 +4,11 @@ namespace App\Actions;
 
 use App\Interfaces\Action\UserActionsInterface;
 use App\Models\User;
-use App\Queries\UserQueriesTrait;
+use App\Queries\UserQueriesTrait as UserQueries;
 
 class UserActions implements UserActionsInterface
 {
-    use UserQueriesTrait;
+    use UserQueries;
 
     public function generateUserApiToken(User $user): string
     {
@@ -28,7 +28,7 @@ class UserActions implements UserActionsInterface
     public function makeUserAdministrator(User $user): bool
     {
         if (auth()->user()->isAdmin()) {
-            $this->updateUserSetAdmin($user->getKey());
+            $this->updateUserSetAdminRole($user->getKey());
             $user->refresh();
             // check if user was successfully updated
             return $user->isAdmin();

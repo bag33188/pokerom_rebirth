@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire\Rom;
 
-use App\Enums\SessionMessageTypeEnum as SessionMessageTypes;
+use App\Enums\SessionMessageTypeEnum as SessionMessageType;
 use App\Interfaces\Action\RomActionsInterface;
 use App\Models\Rom;
 use Illuminate\Contracts\Foundation\Application;
@@ -42,10 +42,10 @@ class Show extends Component
         $this->rom->refresh();
         if (!$this->rom->has_file) {
             session()->flash('message', "No matching ROM File found with name of {$this->rom->getRomFileName()}");
-            session()->flash('message-type', SessionMessageTypes::ERROR);
+            session()->flash('message-type', SessionMessageType::ERROR);
         } else {
             session()->flash('message', "ROM File found and linked! File ID: {$this->rom->file_id}");
-            session()->flash('message-type', SessionMessageTypes::SUCCESS);
+            session()->flash('message-type', SessionMessageType::SUCCESS);
         }
     }
 }

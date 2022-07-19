@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Enums\UserRoleEnum;
+use App\Enums\UserRoleEnum as UserRole;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -64,7 +64,7 @@ class User extends Authenticatable # implements MustVerifyEmail
 
     public function isAdmin(): bool
     {
-        return $this->attributes['role'] == UserRoleEnum::ADMIN->value;
+        return $this->attributes['role'] == UserRole::ADMIN->value;
     }
 
     public function checkPassword(string $currentPassword): bool

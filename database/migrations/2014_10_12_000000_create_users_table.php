@@ -1,6 +1,6 @@
 <?php
 
-use App\Enums\UserRoleEnum;
+use App\Enums\UserRoleEnum as UserRole;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -12,7 +12,7 @@ return new class extends Migration {
 
     private static function getUserRoleDefinitionIndex(): bool|int|string
     {
-        return array_search(UserRoleEnum::USER->value, USER_ROLES, true);
+        return array_search(UserRole::USER->value, USER_ROLES, true);
     }
 
     /**

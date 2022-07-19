@@ -1,6 +1,6 @@
 <?php
 
-use App\Enums\DatabaseConstraintOptionEnum as ConstraintOptions;
+use App\Enums\DatabaseConstraintOptionEnum as ConstraintOption;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -22,7 +22,7 @@ return new class extends Migration {
             $table->char('id', SESSION_ID_LENGTH)->primary();
             $table->foreignId('user_id')->nullable()->index()
                 ->references('id')->on('users')
-                ->cascadeOnDelete()->onUpdate(ConstraintOptions::NO_ACTION->value);
+                ->cascadeOnDelete()->onUpdate(ConstraintOption::NO_ACTION->value);
             $table->string('ip_address', IP_ADDRESS_LENGTH)->nullable()->comment("45 characters because of ipv6");
             $table->text('user_agent')->nullable();
             $table->text('payload');

@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 
 trait UserQueriesTrait
 {
-    protected function updateUserSetAdmin(int $userId): void
+    protected function updateUserSetAdminRole(int $userId): void
     {
         DB::connection('mysql')
             ->table('users')
