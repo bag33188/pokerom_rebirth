@@ -46,6 +46,7 @@
                                     <wbr/>
                                     It contains 40 ROMs, including all 33 core Pok&#233;mon ROMs.
                                 </p>
+                                <br/>
                                 <p class="italic mt-2 inline-flex flex-row text-sm">
                                     <span>&copy; Pok&eacute;mon Company</span>
                                     <span>&nbsp;</span>
