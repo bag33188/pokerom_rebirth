@@ -27,7 +27,8 @@ class UserController extends ApiController
     }
 
     /**
-     * @throws AuthorizationException
+     * @param Request $request
+     * @return UserCollection
      */
     public function index(Request $request): UserCollection
     {

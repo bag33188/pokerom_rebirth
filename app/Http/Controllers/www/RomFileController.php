@@ -60,7 +60,7 @@ class RomFileController extends ViewController
     {
         $romFilename = $request['filename'];
         $this->romFileService->uploadRomFile($romFilename);
-        return response()->redirectTo(URL::previous())->banner("file '$romFilename' uploaded!");
+        return response()->redirectTo(URL::previous())->banner("file `$romFilename` uploaded!");
     }
 
     /**

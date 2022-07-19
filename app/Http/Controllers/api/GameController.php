@@ -52,8 +52,9 @@ class GameController extends ApiController
 
         if (empty($romId)) {
             throw new PreconditionRequiredHttpException(
-                message: 'No ROM ID was sent.',
-                code: HttpResponse::HTTP_PRECONDITION_REQUIRED
+                message: 'Error: No ROM ID was sent.',
+                code: HttpResponse::HTTP_PRECONDITION_REQUIRED,
+                headers: ['X-Precondition-Requirement' => 'A game resource MUST be constrained to a ROM resource in the database.']
             );
         }
 
@@ -85,6 +86,6 @@ class GameController extends ApiController
         $game = GameRepo::findGameIfExists($gameId);
         $this->authorize('delete', $game);
         Game::destroy($gameId);
-        return jsonData(['message' => "game $game->game_name deleted!"], HttpResponse::HTTP_OK);
+        return jsonData(['message' => "game `$game->game_name` deleted!"], HttpResponse::HTTP_OK);
     }
 }

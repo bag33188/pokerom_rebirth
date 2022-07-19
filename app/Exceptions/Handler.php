@@ -98,7 +98,7 @@ class Handler extends ExceptionHandler
                 return jsonData(
                     ['message' => $message],
                     $statusCode,
-                    ['X-Http-Error-Request-URL' => $currentErrorRoute]
+                    ['X-Http-Error-Request-URL' => $currentErrorRoute, ...$e->getHeaders()]
                 );
             }
             // don't use custom rendering if request is not an API request
