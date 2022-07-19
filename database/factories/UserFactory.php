@@ -43,7 +43,7 @@ class UserFactory extends Factory
             'name' => $this->faker->name(),
             'email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
-            'password' => bcrypt(self::USER_PASSWORDS[rand(0, sizeof(self::USER_PASSWORDS) - 1)]), // password
+            'password' => bcrypt(self::getRandomPassword()), // password
             'remember_token' => Str::random(10),
         ];
     }
@@ -80,5 +80,10 @@ class UserFactory extends Factory
                 }),
             'ownedTeams'
         );
+    }
+
+    private static function getRandomPassword(): string
+    {
+        return self::USER_PASSWORDS[rand(0, sizeof(self::USER_PASSWORDS) - 1)];
     }
 }
