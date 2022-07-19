@@ -12,7 +12,7 @@ class RequiredIfPutRequest extends RequiredIf
 {
     private Request $httpRequest;
 
-    private const METHODS = ['put' => 'PUT', 'patch' => 'PATCH'];
+    private const ALLOWED_METHODS = ['put' => 'PUT', 'patch' => 'PATCH'];
 
     /** @var callable|bool */
     public $condition;
@@ -28,10 +28,11 @@ class RequiredIfPutRequest extends RequiredIf
     /**
      * @throws BadRequestHttpException
      */
-    private function checkIfUsedCorrectly()
+    private function checkIfUsedCorrectly(): void
     {
         $errMsg = (App::environment('local'))
-            ? 'This rule can only be used on a PUT or PATCH request.' : 'Error: Bad request';
+            ? ('This rule can only be used on a ' . self::ALLOWED_METHODS['put'] . ' or ' . self::ALLOWED_METHODS['patch'] . ' request.')
+            : 'Error: Bad request';
         $requestMethod = strtoupper($this->httpRequest->getMethod());
         if (self::requestIsNotPutOrPatch($requestMethod)) {
             throw new BadRequestHttpException($errMsg);
@@ -40,11 +41,11 @@ class RequiredIfPutRequest extends RequiredIf
 
     private static function requestIsNotPutOrPatch(string $httpMethod): bool
     {
-        return $httpMethod !== self::METHODS['put'] && $httpMethod !== self::METHODS['patch'];
+        return $httpMethod !== self::ALLOWED_METHODS['put'] && $httpMethod !== self::ALLOWED_METHODS['patch'];
     }
 
     private function setCondition(): void
     {
-        $this->condition = $this->httpRequest->getMethod() === self::METHODS['put'];
+        $this->condition = $this->httpRequest->getMethod() === self::ALLOWED_METHODS['put'];
     }
 }
