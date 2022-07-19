@@ -24,7 +24,7 @@ trait RomQueriesTrait
     {
         $sql =
             /** @lang MariaDB */
-            "CALL `spUpdateRomFromRomFileData`(:rom_file_id, :rom_file_size, :rom_id);";
+            "CALL spUpdateRomFromRomFileData(:rom_file_id, :rom_file_size, :rom_id);";
         $params = ['rom_file_id' => $romFileId, 'rom_file_size' => $romFileSize, 'rom_id' => $romId];
         return new QueryObject($sql, $params);
     }
@@ -32,7 +32,7 @@ trait RomQueriesTrait
     protected function findMatchingRomFromFilename(string $romFilename): QueryObject
     {
         $sql = /** @lang MariaDB */
-            "CALL `spSelectMatchingRomFromRomFilename`(:rom_filename);";
+            "CALL spSelectMatchingRomFromRomFilename(:rom_filename);";
         $params = ['rom_filename' => $romFilename];
         return new QueryObject($sql, $params);
     }
