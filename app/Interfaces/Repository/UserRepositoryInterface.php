@@ -12,7 +12,9 @@ interface UserRepositoryInterface
 
     public function findUserIfExists(int $userId): User;
 
-    public function getPaginatedUsers(?int $perPage): LengthAwarePaginator;
+    public function getPaginatedUsers(?int $perPage): array|LengthAwarePaginator;
+
+    public function getPaginatedUsersWithQueryString(?int $perPage): array|LengthAwarePaginator;
 
     public function findUserByEmail(string $email): User;
 

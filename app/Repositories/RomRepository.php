@@ -7,8 +7,8 @@ use App\Models\Game;
 use App\Models\Rom;
 use App\Models\RomFile;
 use App\Queries\RomQueriesTrait as RomQueries;
+use DB;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Support\Facades\DB;
 
 class RomRepository implements RomRepositoryInterface
 {
@@ -48,10 +48,8 @@ class RomRepository implements RomRepositoryInterface
 
     public function searchForRomMatchingRomFile(RomFile $romFile): ?Rom
     {
-        list(
-            'query' => $query,
-            'bindings' => $bindings
-            ) = $this->findMatchingRomFromFilename($romFile->filename)->toArray();
+        ['query' => $query, 'bindings' => $bindings] =
+            $this->findMatchingRomFromFilename($romFile->filename)->toArray();
         return Rom::fromQuery($query, $bindings)->first();
     }
 

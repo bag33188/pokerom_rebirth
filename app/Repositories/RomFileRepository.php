@@ -42,7 +42,7 @@ class RomFileRepository implements RomFileRepositoryInterface
 
     public function getRomFilesCount(): int
     {
-        return RomFile::count();
+        return RomFile::count("*");
     }
 
     public function getLengthOfRomFileWithLargestFileSize(): int

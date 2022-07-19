@@ -7,7 +7,7 @@ use App\Models\Game;
 use App\Models\Rom;
 use App\Queries\GameQueriesTrait as GameQueries;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Support\Facades\DB;
+use DB;
 
 class GameRepository implements GameRepositoryInterface
 {

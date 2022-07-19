@@ -17,7 +17,6 @@ use URL;
 
 class RomFileController extends ViewController
 {
-
     private readonly RomFileServiceInterface $romFileService;
 
     public function __construct(RomFileServiceInterface $romFileService)
@@ -29,7 +28,6 @@ class RomFileController extends ViewController
      * Display a listing of the resource.
      *
      * @return Response
-     * @throws AuthorizationException
      */
     public function index(): Response
     {
@@ -62,7 +60,7 @@ class RomFileController extends ViewController
     {
         $romFilename = $request['filename'];
         $this->romFileService->uploadRomFile($romFilename);
-        return response()->redirectTo(URL::previous())->banner("file $romFilename uploaded!");
+        return response()->redirectTo(URL::previous())->banner("file '$romFilename' uploaded!");
     }
 
     /**

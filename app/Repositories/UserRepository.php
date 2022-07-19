@@ -21,6 +21,11 @@ class UserRepository implements UserRepositoryInterface
 
     public function getPaginatedUsers(?int $perPage = null): LengthAwarePaginator
     {
+        return User::paginate($perPage ?? 4);
+    }
+
+    public function getPaginatedUsersWithQueryString(?int $perPage = null): LengthAwarePaginator
+    {
         return User::paginate($perPage ?? 4)->withQueryString();
     }
 
@@ -31,6 +36,6 @@ class UserRepository implements UserRepositoryInterface
 
     public function getUsersCount(): int
     {
-        return User::all()->count();
+        return User::count("*");
     }
 }
