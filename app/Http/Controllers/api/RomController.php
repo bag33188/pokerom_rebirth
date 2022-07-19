@@ -11,9 +11,9 @@ use App\Http\Resources\RomFileResource;
 use App\Http\Resources\RomResource;
 use App\Interfaces\Service\RomServiceInterface;
 use App\Models\Rom;
+use Gate;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\JsonResponse;
-use Gate;
 use RomRepo;
 use Symfony\Component\HttpFoundation\Response as HttpResponse;
 
@@ -50,7 +50,7 @@ class RomController extends ApiController
      * @param StoreRomRequest $request
      * @return JsonResponse
      */
-    public function store(StoreRomRequest $request)
+    public function store(StoreRomRequest $request): JsonResponse
     {
         $rom = Rom::create($request->all());
 

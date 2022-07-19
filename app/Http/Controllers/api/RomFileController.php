@@ -10,8 +10,8 @@ use App\Http\Resources\RomResource;
 use App\Interfaces\Action\RomFileActionsInterface;
 use App\Interfaces\Service\RomFileServiceInterface;
 use App\Models\RomFile;
-use Illuminate\{Auth\Access\AuthorizationException, Http\JsonResponse, Support\Collection};
 use Gate;
+use Illuminate\{Auth\Access\AuthorizationException, Http\JsonResponse, Support\Collection};
 use RomFileRepo;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
@@ -39,16 +39,21 @@ class RomFileController extends ApiController
         return new RomResource(RomFileRepo::getRomAssociatedWithFile($romFileId));
     }
 
+    /**
+     * Queries `rom_files.info` collection (mongodb)
+     * @return Collection
+     */
     public function indexMetadata(): Collection
     {
         Gate::authorize('viewAny-romFile');
+
         return RomFileRepo::getRomFilesMetadata();
     }
 
     /**
      * @throws AuthorizationException
      */
-    public function show(string $romFileId)
+    public function show(string $romFileId): RomFileResource
     {
         $romFile = RomFileRepo::findRomFileIfExists($romFileId);
         $this->authorize('view', $romFile);
