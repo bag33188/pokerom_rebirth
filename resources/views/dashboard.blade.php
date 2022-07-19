@@ -12,7 +12,7 @@
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             <div class="flex flex-row w-full justify-between">
-                <span class="order-0">{{ __('Dashboard') }}</span>
+                <span class="order-0" id="home-page-name">{{ $home_page_name }}</span>
                 <span class="order-1" id="welcome-username"><!-- js content insert --></span>
             </div>
         </h2>
