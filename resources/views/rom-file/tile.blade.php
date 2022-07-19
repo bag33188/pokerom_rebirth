@@ -27,12 +27,21 @@
             <span class="font-semibold">Uploaded on</span>
             <span>&nbsp;</span>
             @php
-                // set pacific standard timezone
-                date_default_timezone_set('PST8PDT');
-                // month-day-year hour:minute:second AM/PM (Time Zone, Daylight Savings)
-                $dtFormat = 'm-d-Y, h:i:s A (T, I)';
+                /**
+                 * ## pacific standard timezone
+                 * `PST, GMT-7`
+                 * @var string $timeZonePST
+                 */
+                $timeZonePST = 'PST8PDT';
+                /**
+                 * ### `month-day-year hour:minute:second AM/PM (Time Zone, Daylight Savings)`
+                 * @var string $upload_date_format
+                 */
+                $upload_date_format = 'm-d-Y, h:i:s A (T, I)';
+                // set time zone
+                date_default_timezone_set($timeZonePST);
             @endphp
-            <code>{{parseDateAsReadableString($romFile->uploadDate, customFormat: $dtFormat)}}</code>
+            <code>{{ parseDateAsReadableString($romFile->uploadDate, customFormat: $upload_date_format )}}</code>
         </p>
     </div>
 
