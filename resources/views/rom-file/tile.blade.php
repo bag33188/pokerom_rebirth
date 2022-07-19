@@ -23,9 +23,16 @@
     data-rom-file-id="{{$romFile->_id}}"
     id="tile-{{ $index + 1 }}"
     {!! preg_replace($eosRegExp, _SPACE, $tileClassesStr) !!}>
-    <p>{{$romFile->filename}}</p>
-    <p>{{$romFile->length}} Bytes</p>
-    <p>Uploaded on {{parseDateAsReadableString($romFile->uploadDate, customFormat: 'm-d-Y, h:i:s A (T)')}}</p>
+    <div class="p-2 border rounded-md shadow-sm border-gray-200 flex flex-col">
+        <p class="inline-block"><code>{{$romFile->filename}}</code></p>
+        <p class="inline-block"><code>{{$romFile->length}} Bytes</code></p>
+        <p class="inline-flex flex-row">
+            <span class="font-semibold">Uploaded on</span>
+            <span>&nbsp;</span>
+            <code>{{parseDateAsReadableString($romFile->uploadDate, customFormat: 'm-d-Y, h:i:s A (T, I)')}}</code>
+        </p>
+    </div>
+
     <div class="justify-self-start align-self-end">
         <a href="{{route('rom-files.show', $romFile)}}"
             {!! preg_replace($eosRegExp, _SPACE, $btnClassesStr) !!}>Actions</a>

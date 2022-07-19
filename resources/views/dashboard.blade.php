@@ -27,14 +27,13 @@
                     <div>
                         <span class="block h-12 w-auto">@include('ui.app-logo')</span>
                     </div>
-                    <div class="mt-3 text-2xl">
-                        <p>
-                            <span
-                                class="font-semibold">{!! str_replace('Poke', "Pok&eacute;", config('app.name')) !!}</span>
-                            <span class="font-bold">&nbsp;-&nbsp;</span>
-                            <span class="italic">One Stop for all your ROMs</span>
-                        </p>
-                    </div>
+                    <p class="mt-3 text-2xl">
+                        <span class="font-semibold">
+                            {!! str_replace('Poke', "Pok&eacute;", config('app.name')) !!}
+                        </span>
+                        <span class="font-bold">&nbsp;-&nbsp;</span>
+                        <span class="italic">One Stop for all your ROMs</span>
+                    </p>
                 </div>
                 <div class="bg-gray-200 bg-opacity-25 grid grid-rows-3 grid-cols-2 md:grid-rows-2">
                     <div class="p-6 border-b border-gray-200 col-span-2 row-span-1">
