@@ -37,11 +37,11 @@
                 </div>
                 <div class="bg-gray-200 bg-opacity-25 grid grid-rows-3 grid-cols-2 md:grid-rows-2">
                     <section data-name="about" class="p-6 border-b border-gray-200 col-span-2 row-span-1">
-                        <div class="ml-12 text-lg text-gray-600 leading-7 font-semibold">About</div>
+                        <h3 class="ml-12 text-lg text-gray-600 leading-7 font-semibold">About</h3>
                         <div class="ml-12">
                             <div id="about-description" class="mt-2 text-md text-gray-500">
                                 <!-- about description -->
-                                <p class="inline">
+                                <p class="inline-block">
                                     This web app is a databank of Pok&#xE9;mon ROMs.
                                     <wbr/>
                                     It contains 40 ROMs, including all 33 core Pok&#233;mon ROMs.
@@ -58,11 +58,11 @@
                     <section
                         data-name="roms"
                         class="p-6 border-r border-gray-200 row-start-2 row-end-2 col-span-full md:col-start-1 md:col-end-1">
-                        <div class="ml-12 text-lg text-gray-600 leading-7 font-semibold">Roms</div>
+                        <h3 class="ml-12 text-lg text-gray-600 leading-7 font-semibold">Roms</h3>
                         <div class="ml-12">
                             <div id="roms-description" class="mt-2 text-sm text-gray-500">
                                 <!-- roms description -->
-                                <p class="inline">
+                                <p class="inline-block">
                                     Here you will find all your <strong>Core Pok&#xE9;mon ROMs</strong>,
                                     <wbr/>
                                     as well as some <b>Spin-Off Games</b>,
@@ -78,11 +78,11 @@
                     <section
                         data-name="games"
                         class="p-6 md:row-start-2 md:row-end-2 row-start-3 row-end-3 col-span-full md:col-start-2 md:col-end-2">
-                        <div class="ml-12 text-lg text-gray-600 leading-7 font-semibold">Games</div>
+                        <h3 class="ml-12 text-lg text-gray-600 leading-7 font-semibold">Games</h3>
                         <div class="ml-12">
                             <div id="games-description" class="mt-2 text-sm text-gray-500">
                                 <!-- games description -->
-                                <p class="inline">Feel free to play these amazing Games on your emulators!!</p>
+                                <p class="inline-block">Feel free to play these amazing Games on your emulators!!</p>
                                 <ul class="list-disc" id="emulator-links">
                                     <!-- js content insert -->
                                 </ul>

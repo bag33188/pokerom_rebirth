@@ -22,10 +22,10 @@
 <div class="w-full flex justify-center">
     <button type="button" @click="open = !open" {{ $attributes->merge(['class' => implode(_SPACE, $btnClasses)]) }}>
         <div class="inline-flex flex-row">
-            <p class="inline">
+            <div class="inline-block">
                 <span x-show="{{ $alpineStates['shown'] }}" {!! $cloakData['initShow'] !!}>Hide</span>
                 <span x-show="{{ $alpineStates['hidden'] }}" {!! $cloakData['initHide'] !!}>Show</span>
-            </p>
+            </div>
             <span>&#xA0;</span>
             <p class="inline">{{ $text }}</p>
         </div>
