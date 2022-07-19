@@ -31,7 +31,7 @@ class UserObserver
         $this->userActions->revokeUserTokens();
     }
 
-    public function deleted(User $user): void
+    public function deleting(User $user): void
     {
         UserDeleted::dispatchUnless($user->isAdmin(), $user);
     }
