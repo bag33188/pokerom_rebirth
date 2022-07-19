@@ -4,8 +4,10 @@ namespace App\Repositories;
 
 use App\Interfaces\Repository\UserRepositoryInterface;
 use App\Models\User;
+use Auth;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Request;
 
 class UserRepository implements UserRepositoryInterface
 {
@@ -37,5 +39,15 @@ class UserRepository implements UserRepositoryInterface
     public function getUsersCount(): int
     {
         return User::count("*");
+    }
+
+    public function getUserBearerToken(): ?string
+    {
+        return Request::bearerToken();
+    }
+
+    public function getUserStoredSessionToken(): ?string
+    {
+        return Auth::user()->getRememberToken();
     }
 }

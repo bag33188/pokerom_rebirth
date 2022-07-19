@@ -6,6 +6,7 @@ use App\Interfaces\Action\UserActionsInterface;
 use App\Interfaces\Service\UserServiceInterface;
 use App\Models\User;
 use Symfony\Component\HttpFoundation\Response as HttpResponse;
+use UserRepo;
 use Utils\Modules\JsonDataResponse;
 
 class UserService implements UserServiceInterface
@@ -52,7 +53,7 @@ class UserService implements UserServiceInterface
 
     public function retrieveUserBearerToken(): JsonDataResponse
     {
-        $token = $this->userActions->getUserBearerToken();
+        $token = UserRepo::getUserBearerToken();
         if (isset($token)) {
             return new JsonDataResponse(['token' => $token], HttpResponse::HTTP_OK);
         } else {

@@ -13,7 +13,7 @@ class RomActions implements RomActionsInterface
 {
     use RomQueries;
 
-    public function setRomDataFromRomFileData(Rom $rom, RomFile $romFile): void
+    public function setRomDataFromRomFileData(Rom $rom, RomFile $romFile): bool
     {
         [$query, $bindings] = ($this->updateRomFromRomFileData(
             $romFile->_id,
@@ -22,11 +22,16 @@ class RomActions implements RomActionsInterface
         ))();
         $stmt = DB::statement($query, $bindings);
         if ($stmt === true) $rom->refresh();
+        return $stmt;
     }
 
-    public function linkRomToRomFileIfExists(Rom $rom): void
+    public function linkRomToRomFileIfExists(Rom $rom): bool
     {
         $romFile = RomFileRepo::findRomFileByFilename($rom->getRomFileName());
-        if (isset($romFile)) $this->setRomDataFromRomFileData($rom, $romFile);
+        if (isset($romFile)) {
+            return $this->setRomDataFromRomFileData($rom, $romFile);
+        } else {
+            return false;
+        }
     }
 }

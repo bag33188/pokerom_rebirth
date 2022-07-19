@@ -7,7 +7,7 @@ use App\Models\RomFile;
 
 interface RomActionsInterface
 {
-    public function setRomDataFromRomFileData(Rom $rom, RomFile $romFile): void;
+    public function setRomDataFromRomFileData(Rom $rom, RomFile $romFile): bool;
 
-    public function linkRomToRomFileIfExists(Rom $rom): void;
+    public function linkRomToRomFileIfExists(Rom $rom): bool;
 }

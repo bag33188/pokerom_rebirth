@@ -14,9 +14,13 @@ interface UserRepositoryInterface
 
     public function getPaginatedUsers(?int $perPage): array|LengthAwarePaginator;
 
+    public function getUserBearerToken(): ?string;
+
     public function getPaginatedUsersWithQueryString(?int $perPage): array|LengthAwarePaginator;
 
     public function findUserByEmail(string $email): User;
 
     public function getUsersCount(): int;
+
+    public function getUserStoredSessionToken(): ?string;
 }

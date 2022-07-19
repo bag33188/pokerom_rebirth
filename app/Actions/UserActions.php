@@ -20,11 +20,6 @@ class UserActions implements UserActionsInterface
         auth()->user()->tokens()->delete();
     }
 
-    public function getUserBearerToken(): ?string
-    {
-        return request()->bearerToken();
-    }
-
     public function makeUserAdministrator(User $user): bool
     {
         if (auth()->user()->isAdmin()) {
