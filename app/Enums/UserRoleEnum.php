@@ -7,7 +7,7 @@ enum UserRoleEnum: string
     /** administrator */
     case ADMIN = 'admin';
     /** default user */
-    case USER = 'user';
+    case DEFAULT = 'user';
     /** guest user */
     case GUEST = 'guest';
 }

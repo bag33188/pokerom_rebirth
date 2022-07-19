@@ -12,7 +12,7 @@ return new class extends Migration {
 
     private static function getUserRoleDefinitionIndex(): bool|int|string
     {
-        return array_search(UserRole::USER->value, USER_ROLES, true);
+        return array_search(UserRole::DEFAULT->value, USER_ROLES, true);
     }
 
     /**

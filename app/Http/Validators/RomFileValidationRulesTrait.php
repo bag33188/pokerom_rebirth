@@ -12,6 +12,11 @@ trait RomFileValidationRulesTrait
     #[Pure]
     protected function romFilenameRules(array $rules = ['required']): array
     {
-        return [...$rules, new ValidRomFilename, new MaxLength(MAX_ROM_FILENAME_LENGTH), new MinLength(MIN_ROM_FILENAME_LENGTH)];
+        return [
+            ...$rules,
+            new ValidRomFilename,
+            new MaxLength(MAX_ROM_FILENAME_LENGTH),
+            new MinLength(MIN_ROM_FILENAME_LENGTH)
+        ];
     }
 }

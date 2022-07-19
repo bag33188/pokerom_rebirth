@@ -8,10 +8,10 @@ use Illuminate\Support\Facades\DB;
 trait UserQueriesTrait
 {
     /**
-     * **Raw Trait Logic Warning:**
+     * Will make given user admin.
      *
-     * GOOD IDEA TO WRAP THIS INSIDE A CONDITIONAL THAT CHECKS IF USER IS ADMINISTRATOR
-     * BEFORE EXECUTING QUERY
+     * _Poses potential security threat. Make sure logic is encapsulated in conditional that checks if
+     * current Authenticated user is administrator._
      *
      * @param int $userId
      * @return void
@@ -22,5 +22,22 @@ trait UserQueriesTrait
             ->table('users')
             ->where('id', '=', $userId)
             ->update(['role' => UserRole::ADMIN->value]);
+    }
+
+    /**
+     * Resets user's role to default user.
+     *
+     * _Poses potential security threat. Make sure logic is encapsulated in conditional that checks if
+     * current Authenticated user is administrator._
+     *
+     * @param int $userId
+     * @return void
+     */
+    protected function updateUserSetDefaultRole(int $userId): void
+    {
+        DB::connection('mysql')
+            ->table('users')
+            ->where('id', '=', $userId)
+            ->update(['role' => UserRole::DEFAULT->value]);
     }
 }

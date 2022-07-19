@@ -54,5 +54,4 @@ trait RomQueriesTrait
             ['rom_size', 'asc']
         );
     }
-
 }
