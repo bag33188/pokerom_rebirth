@@ -35,6 +35,7 @@ class ValidGameType implements Rule
      */
     public function message(): string
     {
-        return 'Invalid game type. Must be one of: ' . implode(', ', GAME_TYPES) . '.';
+        $validGameTypesStr = implode(', ', GAME_TYPES);
+        return "Invalid game type. Must be one of: ${validGameTypesStr}.";
     }
 }

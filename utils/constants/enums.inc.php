@@ -23,4 +23,4 @@ const ROM_TYPES = array('gb', 'gbc', 'gba', 'nds', '3ds', 'xci');
 /** array of valid user roles */
 const USER_ROLES = array('user', 'admin', 'guest');
 /** array of valid file extensions */
-const FILE_EXTENSIONS = array('.gb', '.gbc', '.gba', '.nds', '.3ds', '.xci');
+const ROM_FILE_EXTENSIONS = array('.gb', '.gbc', '.gba', '.nds', '.3ds', '.xci');

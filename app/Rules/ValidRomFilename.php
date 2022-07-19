@@ -25,8 +25,9 @@ class ValidRomFilename implements Rule
      */
     public function message(): string
     {
+        $validRomFileExtensionsStr = implode(', ', ROM_FILE_EXTENSIONS);
         return 'Invalid file name. Filename must: ' .
             'only contain letters, numbers, hyphens and/or underscores. ' .
-            'File extension must be one of: ' . implode(', ', FILE_EXTENSIONS) . '.';
+            "File extension must be one of: $validRomFileExtensionsStr.";
     }
 }

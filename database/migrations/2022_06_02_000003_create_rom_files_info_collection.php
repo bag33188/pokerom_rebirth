@@ -17,7 +17,7 @@ return new class extends Migration {
     private static function getFileTypeEnumValues(): array
     {
         $fileTypes = [];
-        foreach (FILE_EXTENSIONS as $fileType) $fileTypes[] = str_replace('.', '', $fileType);
+        foreach (ROM_FILE_EXTENSIONS as $fileType) $fileTypes[] = str_replace('.', '', $fileType);
         return $fileTypes;
     }
 

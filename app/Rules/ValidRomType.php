@@ -35,6 +35,7 @@ class ValidRomType implements Rule
      */
     public function message(): string
     {
-        return 'Invalid rom type. Must be one of: ' . implode(', ', ROM_TYPES) . '.';
+        $validRomTypeStr = implode(', ', ROM_TYPES);
+        return "Invalid rom type. Must be one of: ${validRomTypeStr}.";
     }
 }
