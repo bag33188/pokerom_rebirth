@@ -11,6 +11,9 @@
     inline-grid grid-cols-1 grid-rows-[auto_auto] gap-y-2 justify-self-center p-2"
     EOS;
     $eosRegExp = /** @lang RegExp */ "/([\r\n]+)|((?:\s{2,8})|\t+)/";
+
+    // set pacific standard timezone
+    date_default_timezone_set('PST8PDT');
 @endphp
 {{-- parameters:
     index (int),
@@ -22,6 +25,7 @@
     {!! preg_replace($eosRegExp, _SPACE, $tileClassesStr) !!}>
     <p>{{$romFile->filename}}</p>
     <p>{{$romFile->length}} Bytes</p>
+    <p>Uploaded on {{parseDateAsReadableString($romFile->uploadDate, customFormat: 'm-d-Y, h:i:s A (T)')}}</p>
     <div class="justify-self-start align-self-end">
         <a href="{{route('rom-files.show', $romFile)}}"
             {!! preg_replace($eosRegExp, _SPACE, $btnClassesStr) !!}>Actions</a>

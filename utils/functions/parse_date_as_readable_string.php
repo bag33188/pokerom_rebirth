@@ -15,6 +15,7 @@ if (!function_exists('parseDateAsReadableString')) {
      * @param string|null $customFormat Option to add your own date formatting. (ie. customFormat: "Y/m/d")
      * @return string
      * @link https://www.php.net/manual/en/datetime.createfromformat.php
+     * @link https://www.php.net/manual/en/timezones.others.php
      */
     function parseDateAsReadableString(DateTime|Date $dateTime, bool $addDayName = true, string $customFormat = null): string
     {
