@@ -65,7 +65,7 @@ class RomFileRepository implements RomFileRepositoryInterface
         return RomFile::project($this->splitRomFilenamesIntoFileEntityValues())->get();
     }
 
-    public function getRomeFilesMetadata(): ResourceCollection
+    public function getRomFilesMetadata(): ResourceCollection
     {
         $columns = array('filename', 'filetype', 'filesize');
         return $this->queryRomFileMetadata($columns)->map(function (array $romFileMetadata) {

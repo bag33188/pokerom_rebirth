@@ -42,7 +42,7 @@ class RomFileController extends ApiController
     public function indexMetadata(): Collection
     {
         Gate::authorize('viewAny-romFile');
-        return RomFileRepo::getRomeFilesMetadata();
+        return RomFileRepo::getRomFilesMetadata();
     }
 
     /**
