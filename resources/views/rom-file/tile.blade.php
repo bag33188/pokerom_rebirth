@@ -11,9 +11,6 @@
     inline-grid grid-cols-1 grid-rows-[auto_auto] gap-y-2 justify-self-center p-2"
     EOS;
     $eosRegExp = /** @lang RegExp */ "/([\r\n]+)|((?:\s{2,8})|\t+)/";
-
-    // set pacific standard timezone
-    date_default_timezone_set('PST8PDT');
 @endphp
 {{-- parameters:
     index (int),
@@ -29,7 +26,13 @@
         <p class="inline-flex flex-row">
             <span class="font-semibold">Uploaded on</span>
             <span>&nbsp;</span>
-            <code>{{parseDateAsReadableString($romFile->uploadDate, customFormat: 'm-d-Y, h:i:s A (T, I)')}}</code>
+            @php
+                // set pacific standard timezone
+                date_default_timezone_set('PST8PDT');
+                // month-day-year hour:minute:second AM/PM (Time Zone, Daylight Savings)
+                $dtFormat = 'm-d-Y, h:i:s A (T, I)';
+            @endphp
+            <code>{{parseDateAsReadableString($romFile->uploadDate, customFormat: $dtFormat)}}</code>
         </p>
     </div>
 
