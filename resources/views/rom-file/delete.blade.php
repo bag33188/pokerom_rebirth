@@ -32,7 +32,7 @@
     @csrf
     <div class="flex justify-end">
         <x-jet-danger-button type="submit">
-            <p class="inline">Delete{!! "&#160;" !!}<span class="font-bold">{{$romFile->filename}}</span></p>
+            <p class="inline">Delete&#160;<span class="font-bold">{{$romFile->filename}}</span></p>
         </x-jet-danger-button>
     </div>
 </form>

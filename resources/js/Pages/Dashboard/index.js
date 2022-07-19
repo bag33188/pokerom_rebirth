@@ -60,28 +60,40 @@ let loadCopyrightYear = () => {
 let loadEmulatorLinks = () => {
     let emulatorLinksList = document.getElementById("emulator-links");
     const anchorClasses = ["underline", "text-blue-400", "hover:text-blue-500"];
+    /** @type {{href: string, text: string, name: string, target: '_blank'}[]} */
     const emulators = [
         {
             href: "https://desmume.org/",
             text: "DeSmuME",
+            name: "desmume",
+            target: "_blank",
         },
         {
             href: "https://www.emulator-zone.com/doc.php/gba/vboyadvance.html",
-            text: "Visual Boy Advanced (VBA)",
+            text: "Visual Boy Advanced",
+            name: "vba",
+            target: "_blank",
         },
         {
             href: "https://citra-emu.org/",
             text: "Citra",
+            name: "citra",
+            target: "_blank",
         },
     ];
-    emulators.forEach(
-        (emulator, index) =>
-            (emulatorLinksList.innerHTML += `<li id="emulator-${
-                index + 1
-            }"><a class="${anchorClasses.join(" ")}" rel="noreferrer" href="${
-                emulator.href
-            }" target="_blank">${emulator.text}</a>`)
-    );
+    emulators.forEach((emulator, index) => {
+        let listItemElement = document.createElement("li");
+        listItemElement.id = `emulator-${index + 1}`;
+        let emulatorLinkElement = document.createElement("a");
+        emulatorLinkElement.id = `${emulator.name}-emu`;
+        emulatorLinkElement.href = emulator.href;
+        emulatorLinkElement.text = emulator.text;
+        emulatorLinkElement.target = emulator.target;
+        emulatorLinkElement.classList.add(...anchorClasses);
+        emulatorLinkElement.setAttribute("rel", "noreferrer");
+        listItemElement.appendChild(emulatorLinkElement);
+        emulatorLinksList.appendChild(listItemElement);
+    });
 };
 
 // export functions

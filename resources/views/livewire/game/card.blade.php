@@ -11,7 +11,7 @@
     <div class="w-full bg-white rounded-lg my-2.5">
         <ul class="divide-y-2 divide-gray-100">
             <li class="p-3 hover:bg-blue-600 hover:text-blue-200">
-                {{$game->game_name . ' Version'}}
+                {{$game->game_name}}&nbsp;Version
             </li>
             <li class="p-3 hover:bg-blue-600 hover:text-blue-200">
                 Generation {{$this->parseGenerationIntoRomanWhenNotZero($game->generation)}}
