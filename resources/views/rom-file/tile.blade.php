@@ -36,15 +36,15 @@
                  * @var string $upload_date_format
                  */
                 $upload_date_format = 'm-d-Y, h:i:s A (T, I)';
-                /** ### machine-readable `dateTime` format @var string $dtFormat */
-                $dtFormat = 'Y-m-d G:i';
+                /** ### machine-readable `dateTime` format @var string $machine_dt_format */
+                $machine_dt_format = 'Y-m-d G:i';
                 // set time zone
                 date_default_timezone_set($timeZonePST);
             @endphp
             <span class="font-semibold">Uploaded on</span>
             <span>&nbsp;</span>
             <time class="font-semibold"
-                  datetime="{{ parseDateAsReadableString($romFile->uploadDate, format: $dtFormat) }}">
+                  datetime="{{ parseDateAsReadableString($romFile->uploadDate, format: $machine_dt_format) }}">
                 {{ parseDateAsReadableString($romFile->uploadDate, format: $upload_date_format )}}
             </time>
         </p>
