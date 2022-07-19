@@ -4,8 +4,8 @@ namespace App\Enums;
 
 enum FileContentTypeEnum: string
 {
-    /** (generic) binary stream where file type is unknown */
+    /** binary stream where file subtype is unknown or not officially defined in spec */
     case OCTET_STREAM = "application/octet-stream";
-    /** unofficial mime type (custom http header) */
-    case X_BINARY = "application/x-binary";
+    /** plain text encoding */
+    case PLAIN_TEXT = "text/plain";
 }
