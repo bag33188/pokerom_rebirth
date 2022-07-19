@@ -12,6 +12,8 @@ class RequiredIfPutRequest extends RequiredIf
 {
     private Request $httpRequest;
 
+    private const METHODS = ['put' => 'PUT', 'patch' => 'PATCH'];
+
     /** @var callable|bool */
     public $condition;
 
@@ -38,11 +40,11 @@ class RequiredIfPutRequest extends RequiredIf
 
     private static function requestIsNotPutOrPatch(string $httpMethod): bool
     {
-        return $httpMethod !== 'PUT' && $httpMethod !== 'PATCH';
+        return $httpMethod !== self::METHODS['put'] && $httpMethod !== self::METHODS['patch'];
     }
 
     private function setCondition(): void
     {
-        $this->condition = $this->httpRequest->getMethod() === 'PUT';
+        $this->condition = $this->httpRequest->getMethod() === self::METHODS['put'];
     }
 }
