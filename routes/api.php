@@ -5,7 +5,7 @@ use App\Http\Controllers\API\RomController;
 use App\Http\Controllers\API\RomFileController;
 use App\Http\Controllers\API\UserController;
 use Illuminate\Support\Facades\Route;
-use Symfony\Component\HttpFoundation\Response as HttpResponse;
+use Symfony\Component\HttpFoundation\Response as HttpStatus;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,7 +24,7 @@ Route::get('version', fn() => response()
             'success' => true,
             'version' => config('app.version')
         ],
-        HttpResponse::HTTP_OK,
+        HttpStatus::HTTP_OK,
         array('X-App-Creator' => config('app.creator'))
     )
 )->name('api.version');

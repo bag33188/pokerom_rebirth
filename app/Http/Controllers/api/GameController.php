@@ -9,8 +9,8 @@ use App\Interfaces\Service\GameServiceInterface;
 use App\Models\Game;
 use GameRepo;
 use Illuminate\{Auth\Access\AuthorizationException, Http\JsonResponse};
-use Symfony\Component\HttpFoundation\Response as HttpResponse;
-use Symfony\Component\HttpKernel\Exception\PreconditionRequiredHttpException;
+use Symfony\Component\HttpFoundation\Response as HttpStatus;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class GameController extends ApiController
 {
@@ -51,15 +51,18 @@ class GameController extends ApiController
         $romId = $request->query(self::$queryParamNames[0]);
 
         if (empty($romId)) {
-            throw new PreconditionRequiredHttpException(
+            throw new BadRequestHttpException(
                 message: 'Error: No ROM ID was sent.',
-                code: HttpResponse::HTTP_PRECONDITION_REQUIRED,
-                headers: ['X-Precondition-Requirement' => 'A game resource MUST be constrained to a ROM resource in the database.']
+                code: HttpStatus::HTTP_BAD_REQUEST,
+                headers: array(
+                    'X-Request-Requirement' => 'A game resource MUST be constrained to a ROM resource in the database.',
+                    'X-Request-Required-Action' => 'Add query parameter `' . self::$queryParamNames[0] . '` to request URI.'
+                )
             );
         }
 
         $game = $this->gameService->createGameFromRomId($romId, $request->all());
-        return (new GameResource($game))->response()->setStatusCode(HttpResponse::HTTP_CREATED);
+        return (new GameResource($game))->response()->setStatusCode(HttpStatus::HTTP_CREATED);
     }
 
     public function update(UpdateGameRequest $request, int $gameId): GameResource
@@ -86,6 +89,6 @@ class GameController extends ApiController
         $game = GameRepo::findGameIfExists($gameId);
         $this->authorize('delete', $game);
         Game::destroy($gameId);
-        return jsonData(['message' => "game `$game->game_name` deleted!"], HttpResponse::HTTP_OK);
+        return jsonData(['message' => "game `$game->game_name` deleted!"], HttpStatus::HTTP_OK);
     }
 }

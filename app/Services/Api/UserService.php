@@ -5,7 +5,7 @@ namespace App\Services\Api;
 use App\Interfaces\Action\UserActionsInterface;
 use App\Interfaces\Service\UserServiceInterface;
 use App\Models\User;
-use Symfony\Component\HttpFoundation\Response as HttpResponse;
+use Symfony\Component\HttpFoundation\Response as HttpStatus;
 use UserRepo;
 use Utils\Modules\JsonDataResponse;
 
@@ -19,7 +19,7 @@ class UserService implements UserServiceInterface
     {
         $this->userActions->revokeUserTokens();
         $user->delete();
-        return new JsonDataResponse(['message' => "user $user->name deleted!"], HttpResponse::HTTP_OK);
+        return new JsonDataResponse(['message' => "user $user->name deleted!"], HttpStatus::HTTP_OK);
     }
 
     public function registerUserToken(User $user): JsonDataResponse
@@ -28,36 +28,36 @@ class UserService implements UserServiceInterface
         return new JsonDataResponse([
             'user' => $user,
             'token' => $token
-        ], HttpResponse::HTTP_CREATED);
+        ], HttpStatus::HTTP_CREATED);
     }
 
     public function logoutCurrentUser(): JsonDataResponse
     {
         $this->userActions->revokeUserTokens();
-        return new JsonDataResponse(['message' => 'logged out!'], HttpResponse::HTTP_OK);
+        return new JsonDataResponse(['message' => 'logged out!'], HttpStatus::HTTP_OK);
     }
 
     public function authenticateUserAgainstCredentials(User $user, string $requestPassword): JsonDataResponse
     {
         // Check password hash against database
         if (!$user->checkPassword($requestPassword)) {
-            return new JsonDataResponse(['message' => 'Bad credentials'], HttpResponse::HTTP_UNAUTHORIZED);
+            return new JsonDataResponse(['message' => 'Bad credentials'], HttpStatus::HTTP_UNAUTHORIZED);
         }
 
         $token = $this->userActions->generateUserApiToken($user);
         return new JsonDataResponse([
             'user' => $user,
             'token' => $token
-        ], HttpResponse::HTTP_OK);
+        ], HttpStatus::HTTP_OK);
     }
 
     public function retrieveUserBearerToken(): JsonDataResponse
     {
         $token = UserRepo::getUserBearerToken();
         if (isset($token)) {
-            return new JsonDataResponse(['token' => $token], HttpResponse::HTTP_OK);
+            return new JsonDataResponse(['token' => $token], HttpStatus::HTTP_OK);
         } else {
-            return new JsonDataResponse(['message' => 'No token exists.'], HttpResponse::HTTP_NOT_FOUND);
+            return new JsonDataResponse(['message' => 'No token exists.'], HttpStatus::HTTP_NOT_FOUND);
         }
     }
 }

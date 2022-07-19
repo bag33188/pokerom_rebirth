@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
 use MongoDB\Driver\Exception\BulkWriteException;
 use MongoDB\Driver\Exception\WriteException;
 use PDOException;
-use Symfony\Component\HttpFoundation\Response as HttpResponse;
+use Symfony\Component\HttpFoundation\Response as HttpStatus;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Throwable;
 use Utils\Classes\AbstractApplicationException as AppHttpException;
@@ -65,21 +65,20 @@ class Handler extends ExceptionHandler
         });
 
         $this->renderable(fn(BulkWriteException $e) => throw App::make(MongoWriteException::class,
-            ['message' => $e->getMessage(), 'code' => HttpResponse::HTTP_CONFLICT]));
+            ['message' => $e->getMessage(), 'code' => HttpStatus::HTTP_CONFLICT]));
 
         $this->renderable(fn(QueryException $e) => throw App::make(SqlQueryException::class,
-            ['message' => $e->getMessage(), 'code' => HttpResponse::HTTP_CONFLICT]));
+            ['message' => $e->getMessage(), 'code' => HttpStatus::HTTP_CONFLICT]));
 
         $this->renderable(function (AuthenticationException $e, Request $request): JsonResponse|false {
             $currentErrorRoute = AppHttpException::getCurrentErrorRouteAsString();
             if ($request->expectsJson()) {
-                # $e->getTraceAsString();
                 return jsonData(
-                    ['message' => 'Error: Unauthenticated.'],
-                    HttpResponse::HTTP_UNAUTHORIZED,
+                    ['message' => 'Error: Unauthenticated.'], # $e->getTraceAsString();
+                    HttpStatus::HTTP_UNAUTHORIZED,
                     [
                         'X-Http-Error-Request-URL' => $currentErrorRoute,
-                        'X-Http-Exception-Original-Message' => $e->getMessage()
+                        'X-Http-Auth-Exception-Original-Message' => $e->getMessage(),
                     ]
                 );
             }
@@ -89,14 +88,14 @@ class Handler extends ExceptionHandler
 
         $this->renderable(function (HttpException $e, Request $request): JsonResponse|false {
             $currentErrorRoute = AppHttpException::getCurrentErrorRouteAsString();
-            if ($request->is("api/*", "/public/api/*")) {
-                $statusCode = $e->getStatusCode();
+            if ($request->is("api/*")) {
+                $statusCode = $e->getCode() != 0 ? $e->getCode() : $e->getStatusCode();
                 $message = $e->getMessage();
-                if ($statusCode === HttpResponse::HTTP_NOT_FOUND && strlen($message) === 0) {
+                if ($statusCode === HttpStatus::HTTP_NOT_FOUND && strlen($message) === 0) {
                     $message = "Route not found: $currentErrorRoute";
                 }
                 return jsonData(
-                    ['message' => $message],
+                    ['message' => $message], # $e->getTrace();
                     $statusCode,
                     ['X-Http-Error-Request-URL' => $currentErrorRoute, ...$e->getHeaders()]
                 );

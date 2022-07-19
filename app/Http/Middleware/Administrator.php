@@ -9,7 +9,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Symfony\Component\HttpFoundation\Response as HttpResponse;
+use Symfony\Component\HttpFoundation\Response as HttpStatus;
 
 class Administrator
 {
@@ -28,7 +28,7 @@ class Administrator
             return response()->redirectTo(RouteServiceProvider::HOME);
         } else {
             /** extends {@see HttpResponseException} */
-            abort(HttpResponse::HTTP_FORBIDDEN, "This action is unauthorized.");
+            abort(HttpStatus::HTTP_FORBIDDEN, "This action is unauthorized.");
         }
     }
 }

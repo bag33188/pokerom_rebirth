@@ -6,7 +6,7 @@ use App\Interfaces\Action\RomActionsInterface;
 use App\Interfaces\Service\RomServiceInterface;
 use App\Models\Rom;
 use RomFileRepo;
-use Symfony\Component\HttpFoundation\Response as HttpResponse;
+use Symfony\Component\HttpFoundation\Response as HttpStatus;
 use Utils\Modules\JsonDataResponse;
 
 class RomService implements RomServiceInterface
@@ -26,11 +26,11 @@ class RomService implements RomServiceInterface
             return new JsonDataResponse([
                 'message' => "file found and linked! file id: {$romFile->_id}",
                 'data' => $rom->refresh()
-            ], HttpResponse::HTTP_OK);
+            ], HttpStatus::HTTP_OK);
         } else {
             return new JsonDataResponse([
                 'message' => "File not found with name of {$rom->getRomFileName()}"
-            ], HttpResponse::HTTP_NOT_FOUND);
+            ], HttpStatus::HTTP_NOT_FOUND);
         }
     }
 }
