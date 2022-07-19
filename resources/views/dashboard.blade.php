@@ -2,7 +2,7 @@
     <script type="text/javascript" src="{{ mix('assets/js/pages/dashboard.index.js') }}"></script>
     <script type="text/javascript">
         $(document).ready(() => {
-            loadWelcomeContent('{{ $username }}');
+            loadWelcomeContent({{ Js::from($username) }});
             loadCopyrightYear();
             loadEmulatorLinks();
         });
