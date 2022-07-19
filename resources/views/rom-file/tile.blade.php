@@ -37,7 +37,7 @@
                  */
                 $upload_date_format = 'm-d-Y, h:i:s A (T, I)';
                 /** ### machine-readable `dateTime` format @var string $dtFormat */
-                $dtFormat ='Y-m-d G:i';
+                $dtFormat = 'Y-m-d G:i';
                 // set time zone
                 date_default_timezone_set($timeZonePST);
             @endphp
