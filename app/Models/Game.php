@@ -59,7 +59,7 @@ class Game extends Model
 
     public function setGameNameAttribute(string $value): void
     {
-        $this->attributes['game_name'] = preg_replace("/^pokemon/i", 'Pokemon', $value);
+        $this->attributes['game_name'] = preg_replace("/^(pokemon)/i", 'Pokemon', $value);
     }
 
     public function setGameTypeAttribute(string $value): void
