@@ -15,9 +15,12 @@ class UserActions implements UserActionsInterface
         return $user->createToken(API_TOKEN_KEY)->plainTextToken;
     }
 
-    public function revokeUserTokens(): void
+    /**
+     * @return int 1 if successful
+     */
+    public function revokeUserTokens(): int
     {
-        auth()->user()->tokens()->delete();
+        return auth()->user()->tokens()->delete();
     }
 
     public function makeUserAdministrator(User $user): bool

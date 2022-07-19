@@ -8,7 +8,7 @@ interface UserActionsInterface
 {
     public function generateUserApiToken(User $user): string;
 
-    public function revokeUserTokens(): void;
+    public function revokeUserTokens(): int;
 
     public function makeUserAdministrator(User $user): bool;
 }
