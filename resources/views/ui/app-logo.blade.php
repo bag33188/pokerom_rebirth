@@ -1,5 +1,5 @@
-<img data-name="app_logo"
-     src="/public/assets/images/logo.png"
+<img data-name="pokerom logo"
+     src="/public/assets/images/app_logo.png"
      alt="app-logo"
-     class="block w-auto h-auto"
-     data-width="132" data-height="32" />
+     class="block w-[90px] h-[32px]"
+     data-width="90" data-height="32"/>

@@ -96,3 +96,8 @@ return Rom::where([
         ->orWhere('file_id', '=', NULL);
 })->limit(1)->first();
 ```
+
+## pokerom logo links: 
+
+* [image](https://lostmediawiki.com/images/3/32/Pokerom_title.png "pokerom logo image url")
+* [website](https://lostmediawiki.com/Pok%C3%A9ROM_%28partially_lost_Pok%C3%A9mon_edutainment_series;_2000%29 "website containing pokerom logo asset")
