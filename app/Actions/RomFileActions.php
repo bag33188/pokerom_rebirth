@@ -28,7 +28,7 @@ class RomFileActions implements RomFileActionsInterface
     }
 
     /**
-     * Sort by string length
+     * Sort by string length descending
      *
      * @return array|string[]
      */
