@@ -6,20 +6,19 @@ if (!function_exists('parseDateAsReadableString')) {
     /**
      * Converts a date/datetime object to a human-readable string
      *
-     * **standard**: _February 27th, 1996_
+     * Uses the following format as default: `F jS, Y`
      *
-     * **with day added** (`$addDayName=true`): _Tuesday, February 27th, 1996_
+     * Ex: `1998-09-28 00:00:00 -> September 28th, 1998`
      *
-     * @param DateTime|Date $dateTime
-     * @param bool $addDayName Set to `false` to exclude the exact day from the date string
-     * @param string|null $customFormat Option to add your own date formatting. (ie. customFormat: "Y/m/d")
-     * @return string
      * @link https://www.php.net/manual/en/datetime.createfromformat.php
+     * @link https://www.php.net/manual/en/datetimeimmutable.createfromformat.php
      * @link https://www.php.net/manual/en/timezones.others.php
+     * @param DateTime|Date $dateTime
+     * @param string $format php date/datetime format string literal
+     * @return string
      */
-    function parseDateAsReadableString(DateTime|Date $dateTime, bool $addDayName = true, string $customFormat = null): string
+    function parseDateAsReadableString(DateTime|Date $dateTime, string $format = 'F jS, Y'): string
     {
-        $_formatString = $customFormat ?? ($addDayName ? 'l, F jS, Y' : 'F jS, Y');
-        return date_format($dateTime, $_formatString);
+        return date_format($dateTime, $format);
     }
 }

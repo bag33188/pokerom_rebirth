@@ -21,7 +21,7 @@
                 <x-list-item>Region: {{$rom->game->region}}</x-list-item>
                 <x-list-item>Generation: {{$rom->game->generation}}</x-list-item>
                 <x-list-item>Date Released:
-                    {{parseDateAsReadableString($rom->game->date_released, addDayName: false)}}</x-list-item>
+                    {{parseDateAsReadableString($rom->game->date_released)}}</x-list-item>
                 <x-list-item>Game Type: {{$rom->game->game_type}}</x-list-item>
             @endif
         </x-list-group>

@@ -24,8 +24,7 @@
         <p class="inline-block"><code>{{$romFile->filename}}</code></p>
         <p class="inline-block"><code>{{$romFile->length}} Bytes</code></p>
         <p class="inline-flex flex-row">
-            <span class="font-semibold">Uploaded on</span>
-            <span>&nbsp;</span>
+
             @php
                 /**
                  * ## pacific standard timezone
@@ -38,10 +37,17 @@
                  * @var string $upload_date_format
                  */
                 $upload_date_format = 'm-d-Y, h:i:s A (T, I)';
+                /** ### machine-readable `dateTime` format @var string $dtFormat */
+                $dtFormat ='Y-m-d G:i';
                 // set time zone
                 date_default_timezone_set($timeZonePST);
             @endphp
-            <code>{{ parseDateAsReadableString($romFile->uploadDate, customFormat: $upload_date_format )}}</code>
+            <span class="font-semibold">Uploaded on</span>
+            <span>&nbsp;</span>
+            <time class="font-semibold"
+                  datetime="{{ parseDateAsReadableString($romFile->uploadDate, format: $dtFormat) }}">
+                {{ parseDateAsReadableString($romFile->uploadDate, format: $upload_date_format )}}
+            </time>
         </p>
     </div>
 

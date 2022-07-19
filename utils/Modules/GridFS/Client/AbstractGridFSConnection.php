@@ -16,12 +16,12 @@ abstract class AbstractGridFSConnection extends GridFS
 {
     /**
      * MongoDB Connection String
-     * @var string
      * @link https://www.mongodb.com/docs/manual/reference/connection-string/
+     * @var string $dsn
      */
     private readonly string $dsn;
 
-    /** @var Bucket gridfs bucket object */
+    /** @var Bucket $bucket gridfs bucket object */
     public readonly Bucket $bucket;
 
     public function __construct(private readonly AbstractGridFSDatabase $gridFSDatabase)
