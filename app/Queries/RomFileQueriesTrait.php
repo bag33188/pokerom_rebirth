@@ -10,10 +10,11 @@ trait RomFileQueriesTrait
 {
     protected function queryRomFileMetadata(/** @var string[] */ array $columns): Collection
     {
+        $sortFileSizeAscFileNameAsc = ['filesize', 'filename'];
         return DB::connection('mongodb')
             ->table('rom_files.info')
             ->get($columns)
-            ->sortBy(['filesize', 'filename']);
+            ->sortBy($sortFileSizeAscFileNameAsc);
     }
 
     /**
@@ -21,7 +22,7 @@ trait RomFileQueriesTrait
      * with the file's name and the file's type as array items.
      * @return array
      */
-    #[ArrayShape(['fileEntities' => "\string[][]", 'length' => "string", 'chunkSize' => "string"])]
+    #[ArrayShape(['fileEntities' => "string[][]", 'length' => "string", 'chunkSize' => "string"])]
     protected function splitRomFilenamesIntoFileEntityValues(): array
     {
         return [
