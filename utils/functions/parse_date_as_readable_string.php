@@ -18,9 +18,13 @@ if (!function_exists('parseDateAsReadableString')) {
      * @param bool $addDayName Set to `true` to include the name of day in the date string
      * @return string
      */
-    function parseDateAsReadableString(DateTime|Date $dateTime, string $format = 'F jS, Y', bool $addDayName = false): string
+    function parseDateAsReadableString(DateTime|Date $dateTime,
+                                       string        $format = DATE_FORMATS['readable_date_format'],
+                                       bool          $addDayName = false): string
     {
-        $dtFormatString = $addDayName === true ? 'l, F jS, Y' : $format;
+        $dtFormatString = $addDayName === true
+            ? DATE_FORMATS['readable_date_format_with_day']
+            : $format;
         return date_format($dateTime, $dtFormatString);
     }
 }

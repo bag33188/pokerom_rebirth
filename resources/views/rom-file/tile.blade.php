@@ -11,6 +11,8 @@
     inline-grid grid-cols-1 grid-rows-[auto_auto] gap-y-2 justify-self-center p-2"
     EOS;
     $eosRegExp = /** @lang RegExp */ "/([\r\n]+)|((?:\s{2,8})|\t+)/";
+    // set time zone
+    date_default_timezone_set(TIME_ZONE_PST);
 @endphp
 {{-- parameters:
     index (int),
@@ -24,28 +26,11 @@
         <p class="inline-block"><code>{{$romFile->filename}}</code></p>
         <p class="inline-block"><code>{{$romFile->length}} Bytes</code></p>
         <p class="inline-flex flex-row">
-            @php
-                /**
-                 * ## pacific standard timezone
-                 * `PST, GMT-7`
-                 * @var string $timeZonePST
-                 */
-                $timeZonePST = 'PST8PDT';
-                /**
-                 * ### `month-day-year hour:minute:second AM/PM (Time Zone, Daylight Savings)`
-                 * @var string $upload_date_format
-                 */
-                $upload_date_format = 'm-d-Y, h:i:s A (T, I)';
-                /** ### machine-readable `dateTime` format @var string $machine_dt_format */
-                $machine_dt_format = 'Y-m-d G:i';
-                // set time zone
-                date_default_timezone_set($timeZonePST);
-            @endphp
             <span class="font-semibold">Uploaded on</span>
             <span>&nbsp;</span>
             <time class="font-semibold"
-                  datetime="{{ parseDateAsReadableString($romFile->uploadDate, format: $machine_dt_format) }}">
-                {{ parseDateAsReadableString($romFile->uploadDate, format: $upload_date_format )}}
+                  datetime="{{ parseDateAsReadableString($romFile->uploadDate, format: DATE_FORMATS['machine_dt_format']) }}">
+                {{ parseDateAsReadableString($romFile->uploadDate, format: DATE_FORMATS['upload_date_format'] )}}
             </time>
         </p>
     </div>
