@@ -11,7 +11,7 @@ use App\Interfaces\Action\RomFileActionsInterface;
 use App\Interfaces\Service\RomFileServiceInterface;
 use App\Models\RomFile;
 use Illuminate\{Auth\Access\AuthorizationException, Http\JsonResponse, Support\Collection};
-use Illuminate\Support\Facades\Gate;
+use Gate;
 use RomFileRepo;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 

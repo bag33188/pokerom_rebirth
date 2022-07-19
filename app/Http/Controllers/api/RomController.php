@@ -13,7 +13,7 @@ use App\Interfaces\Service\RomServiceInterface;
 use App\Models\Rom;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\Gate;
+use Gate;
 use RomRepo;
 use Symfony\Component\HttpFoundation\Response as HttpResponse;
 
