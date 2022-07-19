@@ -28,6 +28,8 @@ class RomFileActions implements RomFileActionsInterface
     }
 
     /**
+     * Sort by string length
+     *
      * @return array|string[]
      */
     public function listRomFilesInStorageSorted(): array
