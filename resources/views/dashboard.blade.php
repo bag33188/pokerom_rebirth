@@ -36,7 +36,7 @@
                     </p>
                 </div>
                 <div class="bg-gray-200 bg-opacity-25 grid grid-rows-3 grid-cols-2 md:grid-rows-2">
-                    <section class="p-6 border-b border-gray-200 col-span-2 row-span-1">
+                    <section data-name="about" class="p-6 border-b border-gray-200 col-span-2 row-span-1">
                         <div class="ml-12 text-lg text-gray-600 leading-7 font-semibold">About</div>
                         <div class="ml-12">
                             <div id="about-description" class="mt-2 text-md text-gray-500">
@@ -55,6 +55,7 @@
                         </div>
                     </section>
                     <section
+                        data-name="roms"
                         class="p-6 border-r border-gray-200 row-start-2 row-end-2 col-span-full md:col-start-1 md:col-end-1">
                         <div class="ml-12 text-lg text-gray-600 leading-7 font-semibold">Roms</div>
                         <div class="ml-12">
@@ -74,6 +75,7 @@
                         </div>
                     </section>
                     <section
+                        data-name="games"
                         class="p-6 md:row-start-2 md:row-end-2 row-start-3 row-end-3 col-span-full md:col-start-2 md:col-end-2">
                         <div class="ml-12 text-lg text-gray-600 leading-7 font-semibold">Games</div>
                         <div class="ml-12">
