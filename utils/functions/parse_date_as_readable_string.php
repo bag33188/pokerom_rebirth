@@ -15,10 +15,12 @@ if (!function_exists('parseDateAsReadableString')) {
      * @link https://www.php.net/manual/en/timezones.others.php
      * @param DateTime|Date $dateTime
      * @param string $format php date/datetime format string literal
+     * @param bool $addDayName Set to `true` to include the name of day in the date string
      * @return string
      */
-    function parseDateAsReadableString(DateTime|Date $dateTime, string $format = 'F jS, Y'): string
+    function parseDateAsReadableString(DateTime|Date $dateTime, string $format = 'F jS, Y', bool $addDayName = false): string
     {
-        return date_format($dateTime, $format);
+        $dtFormatString = $addDayName === true ? 'l, F jS, Y' : $format;
+        return date_format($dateTime, $dtFormatString);
     }
 }

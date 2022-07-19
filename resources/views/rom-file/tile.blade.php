@@ -24,7 +24,6 @@
         <p class="inline-block"><code>{{$romFile->filename}}</code></p>
         <p class="inline-block"><code>{{$romFile->length}} Bytes</code></p>
         <p class="inline-flex flex-row">
-
             @php
                 /**
                  * ## pacific standard timezone
@@ -50,8 +49,7 @@
             </time>
         </p>
     </div>
-
-    <div class="justify-self-start align-self-end">
+    <div class="justify-self-start align-self-end pt-0.5">
         <a href="{{route('rom-files.show', $romFile)}}"
             {!! preg_replace($eosRegExp, _SPACE, $btnClassesStr) !!}>Actions</a>
     </div>
