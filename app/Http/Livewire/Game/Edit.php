@@ -6,7 +6,7 @@ use App\Enums\SessionMessageTypeEnum as SessionMessageType;
 use App\Http\Validators\GameValidationRulesTrait;
 use App\Models\Game;
 use Date;
-use Exception;
+use Exception as GeneralException;
 use GameRepo;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\Foundation\Application;
@@ -85,7 +85,7 @@ class Edit extends Component
             ]);
             $this->redirect(route('games.show', $this->gameId));
 
-        } catch (Exception $e) {
+        } catch (GeneralException $e) {
             session()->flash('message', $e->getMessage());
             session()->flash('message-type', SessionMessageType::ERROR);
         }

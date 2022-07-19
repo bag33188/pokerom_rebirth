@@ -7,7 +7,7 @@ use App\Http\Validators\GameValidationRulesTrait;
 use App\Interfaces\Service\GameServiceInterface;
 use App\Models\Game;
 use Date;
-use Exception;
+use Exception as GeneralException;
 use GameRepo;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\{Foundation\Application, View\Factory, View\View};
@@ -80,7 +80,7 @@ class Create extends Component
             $this->reset();
             $this->redirect(route('games.index'));
 
-        } catch (Exception $e) {
+        } catch (GeneralException $e) {
             session()->flash('message', $e->getMessage());
             session()->flash('message-type', SessionMessageType::ERROR);
         }

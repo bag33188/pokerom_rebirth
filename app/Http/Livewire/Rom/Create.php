@@ -5,7 +5,7 @@ namespace App\Http\Livewire\Rom;
 use App\Enums\SessionMessageTypeEnum as SessionMessageType;
 use App\Http\Validators\RomValidationRulesTrait;
 use App\Models\Rom;
-use Exception;
+use Exception as GeneralException;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -59,7 +59,7 @@ class Create extends Component
             ]);
 
             $this->redirect(route('roms.index'));
-        } catch (Exception $e) {
+        } catch (GeneralException $e) {
             session()->flash('message', $e->getMessage());
             session()->flash('message-type', SessionMessageType::ERROR);
         }
