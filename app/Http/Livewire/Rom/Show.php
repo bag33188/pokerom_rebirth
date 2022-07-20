@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Rom;
 
 use App\Enums\SessionMessageTypeEnum as SessionMessageType;
 use App\Interfaces\Action\RomActionsInterface;
+use App\Interfaces\Service\RomServiceInterface;
 use App\Models\Rom;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -35,9 +36,9 @@ class Show extends Component
         $this->redirect(route('roms.edit', $romId));
     }
 
-    public function attemptToLinkRomToRomFile(RomActionsInterface $romActions)
+    public function attemptToLinkRomToRomFile(RomServiceInterface $romService)
     {
-        $stmt = $romActions->linkRomToRomFileIfExists($this->rom);
+        $stmt = $romService->linkRomToRomFileIfExists($this->rom);
         $this->redirect(route('roms.show', $this->romId));
         $this->rom->refresh();
         if ($stmt === false) {

@@ -3,6 +3,7 @@
 namespace App\Observers;
 
 use App\Interfaces\Action\RomActionsInterface;
+use App\Interfaces\Service\RomServiceInterface;
 use App\Models\Rom;
 use Request;
 
@@ -20,7 +21,7 @@ class RomObserver
     public bool $afterCommit = false;
 
 
-    public function __construct(private readonly RomActionsInterface $romActions)
+    public function __construct(private readonly RomServiceInterface $romService)
     {
     }
 
@@ -32,14 +33,14 @@ class RomObserver
 
     public function created(Rom $rom): void
     {
-        $this->romActions->linkRomToRomFileIfExists($rom);
+        $this->romService->linkRomToRomFileIfExists($rom);
     }
 
     public function updated(Rom $rom): void
     {
         if ($this->currentRequestIsNotLivewireRequest()) {
             if ($rom->has_file === FALSE) {
-                $this->romActions->linkRomToRomFileIfExists($rom);
+                $this->romService->linkRomToRomFileIfExists($rom);
             }
         }
     }

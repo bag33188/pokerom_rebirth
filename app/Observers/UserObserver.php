@@ -5,6 +5,7 @@ namespace App\Observers;
 use App\Events\UserDeleted;
 use App\Events\UserRegistered;
 use App\Interfaces\Action\UserActionsInterface;
+use App\Interfaces\Service\UserServiceInterface;
 use App\Models\User;
 
 
@@ -17,7 +18,7 @@ class UserObserver
      */
     public bool $afterCommit = true;
 
-    public function __construct(private readonly UserActionsInterface $userActions)
+    public function __construct(private readonly UserServiceInterface $userService)
     {
     }
 
@@ -28,7 +29,7 @@ class UserObserver
 
     public function updated(User $user): void
     {
-        $this->userActions->revokeUserTokens();
+        $this->userService->revokeUserTokens();
     }
 
     public function deleting(User $user): void

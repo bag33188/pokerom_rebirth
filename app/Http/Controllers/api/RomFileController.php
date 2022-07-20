@@ -81,7 +81,7 @@ class RomFileController extends ApiController
 
         $uploadFile = $this->romFileService->uploadRomFile($request['filename']);
         return response()->json(
-            ['message' => "file '" . $uploadFile->filename . "' created!"],
+            ['message' => "file '" . $uploadFile->filename . "' created!",'success'=>true],
             HttpStatus::HTTP_CREATED,
             ['X-Content-Transfer-Type', ContentType::OCTET_STREAM->value]
         );
@@ -96,7 +96,7 @@ class RomFileController extends ApiController
         $this->authorize('delete', $romFile);
         $exec = $this->romFileService->deleteRomFile($romFile);
         return response()->json(
-            ['message' => "file '" . $exec->filename . "' deleted!"],
+            ['message' => "file '" . $exec->filename . "' deleted!",'success'=>true],
             HttpStatus::HTTP_OK
         );
     }
