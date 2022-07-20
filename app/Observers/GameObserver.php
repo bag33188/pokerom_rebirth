@@ -9,7 +9,7 @@ use App\Models\Game;
 class GameObserver
 {
     /** @var bool Use database relationships to update models */
-    private const USE_DB_LOGIC = true;
+    private static bool $_USE_DB_LOGIC = true;
 
 
     /**
@@ -34,7 +34,7 @@ class GameObserver
         $rom = $game->rom()->first();
         GameCreated::dispatch($game, $rom);
 
-        if (self::USE_DB_LOGIC === false) {
+        if (self::$_USE_DB_LOGIC === false) {
             $rom->has_game = TRUE;
             $rom->game_id = $game->id;
             $rom->saveQuietly();
@@ -48,7 +48,7 @@ class GameObserver
 
     public function deleted(Game $game): void
     {
-        if (self::USE_DB_LOGIC === false) {
+        if (self::$_USE_DB_LOGIC === false) {
             $rom = $game->rom()->first();
             $rom->game_id = NULL;
             $rom->has_game = FALSE;

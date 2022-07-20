@@ -57,7 +57,8 @@ class GridFSProcessor extends GridFS implements GridFSProcessorInterface
 
     private function throwExceptionIfFileDoesNotExistInAppStorage(string $filename): void
     {
-        if (!file_exists(self::makeFilepathFromFilename($filename))) {
+        $file = self::makeFilepathFromFilename($filename);
+        if (!file_exists($file)) {
             throw new BadRequestHttpException(
                 message: sprintf(
                     "Error: File `%s` does not exist on server's disk storage. Storage Path: %s",

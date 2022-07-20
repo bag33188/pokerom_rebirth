@@ -10,13 +10,14 @@ use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\URL;
 use MongoDB\Driver\Exception\BulkWriteException;
 use MongoDB\Driver\Exception\WriteException;
 use PDOException;
 use Symfony\Component\HttpFoundation\Response as HttpStatus;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Throwable;
-use Utils\Classes\AbstractApplicationException as AppHttpException;
 
 # use Illuminate\Http\Response; // <- has all status code constants
 
@@ -71,7 +72,7 @@ class Handler extends ExceptionHandler
             ['message' => $e->getMessage(), 'code' => HttpStatus::HTTP_CONFLICT]));
 
         $this->renderable(function (AuthenticationException $e, Request $request): JsonResponse|false {
-            $currentErrorRoute = AppHttpException::getCurrentErrorRouteAsString();
+            $currentErrorRoute = self::getCurrentErrorRouteAsString();
             if ($request->expectsJson()) {
                 return jsonData(
                     ['message' => 'Error: Unauthenticated.'], # $e->getTraceAsString();
@@ -87,7 +88,7 @@ class Handler extends ExceptionHandler
         });
 
         $this->renderable(function (HttpException $e, Request $request): JsonResponse|false {
-            $currentErrorRoute = AppHttpException::getCurrentErrorRouteAsString();
+            $currentErrorRoute = self::getCurrentErrorRouteAsString();
             if ($request->is("api/*")) {
                 $statusCode = $e->getCode() != 0 ? $e->getCode() : $e->getStatusCode();
                 $message = $e->getMessage();
@@ -103,5 +104,13 @@ class Handler extends ExceptionHandler
             // don't use custom rendering if request is not an API request
             return false;
         });
+    }
+
+
+    private static function getCurrentErrorRouteAsString(): string
+    {
+        $baseAppUrl = Config::get('app.url');
+        $currentUrl = URL::current();
+        return str_replace("$baseAppUrl/", '/', $currentUrl);
     }
 }

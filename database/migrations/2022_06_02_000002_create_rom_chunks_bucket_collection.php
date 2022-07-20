@@ -19,8 +19,7 @@ return new class extends Migration {
      */
     public $withinTransaction = true;
 
-    // don't allow migrations
-    protected const ALLOW_MIGRATIONS = false;
+    protected static bool $_ALLOW_MIGRATIONS = false;
 
     private const COLLECTION_NAME = 'rom.chunks';
 
@@ -31,7 +30,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        if (self::ALLOW_MIGRATIONS === true) {
+        if (self::$_ALLOW_MIGRATIONS === true) {
             Schema::connection($this->connection)->create(self::COLLECTION_NAME, function (Blueprint $collection) {
                 $collection->index(
                     columns: ['files_id', 'n'],
@@ -53,13 +52,13 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        if (self::ALLOW_MIGRATIONS === true) {
+        if (self::$_ALLOW_MIGRATIONS === true) {
             Schema::dropIfExists(self::COLLECTION_NAME);
 
-            // Schema::connection($this->connection)
-            //     ->table(self::COLLECTION_NAME, function (Blueprint $collection) {
-            //         $collection->drop();
-            //     });
+            # Schema::connection($this->connection)
+            #     ->table(self::COLLECTION_NAME, function (Blueprint $collection) {
+            #         $collection->drop();
+            #     });
         }
     }
 };

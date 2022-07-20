@@ -4,11 +4,12 @@ namespace App\Observers;
 
 use App\Interfaces\Action\RomActionsInterface;
 use App\Models\Rom;
+use Request;
 
 class RomObserver
 {
     /** @var bool Use database relationships to update models */
-    private const USE_DB_LOGIC = true;
+    private static bool $_USE_DB_LOGIC = true;
 
 
     /**
@@ -23,10 +24,10 @@ class RomObserver
     {
     }
 
-    private function currentRequestIsLivewireRequest(): bool
+    private function currentRequestIsNotLivewireRequest(): bool
     {
-        $livewireHttpHeader = request()->header('X-Livewire');
-        return !empty($livewireHttpHeader);
+        $livewireHttpHeader = Request::header('X-Livewire');
+        return empty($livewireHttpHeader);
     }
 
     public function created(Rom $rom): void
@@ -36,8 +37,8 @@ class RomObserver
 
     public function updated(Rom $rom): void
     {
-        if (!$this->currentRequestIsLivewireRequest()) {
-            if (!$rom->has_file) {
+        if ($this->currentRequestIsNotLivewireRequest()) {
+            if ($rom->has_file === FALSE) {
                 $this->romActions->linkRomToRomFileIfExists($rom);
             }
         }
@@ -51,7 +52,7 @@ class RomObserver
 
     public function deleted(Rom $rom): void
     {
-        if (self::USE_DB_LOGIC === false) {
+        if (self::$_USE_DB_LOGIC === false) {
             $rom->game()->delete();
         }
     }

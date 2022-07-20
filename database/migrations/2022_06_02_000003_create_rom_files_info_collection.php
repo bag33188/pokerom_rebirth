@@ -10,7 +10,7 @@ return new class extends Migration {
 
     public $withinTransaction = true;
 
-    protected const ALLOW_MIGRATIONS = false;
+    protected static bool $_ALLOW_MIGRATIONS = false;
 
     private const COLLECTION_NAME = 'rom_files.info';
 
@@ -23,7 +23,7 @@ return new class extends Migration {
 
     public function up(): void
     {
-        if (self::ALLOW_MIGRATIONS === true) {
+        if (self::$_ALLOW_MIGRATIONS === true) {
             $filename_length = MAX_ROM_FILENAME_LENGTH - 4;
             $filesize_total_digits = strlen(strval(MAX_ROM_FILE_SIZE));
 
@@ -51,13 +51,13 @@ return new class extends Migration {
 
     public function down(): void
     {
-        if (self::ALLOW_MIGRATIONS === true) {
+        if (self::$_ALLOW_MIGRATIONS === true) {
             Schema::dropIfExists(self::COLLECTION_NAME);
 
-            // Schema::connection($this->connection)
-            //     ->table(self::COLLECTION_NAME, function (Blueprint $collection) {
-            //         $collection->drop();
-            //     });
+            # Schema::connection($this->connection)
+            #     ->table(self::COLLECTION_NAME, function (Blueprint $collection) {
+            #         $collection->drop();
+            #     });
         }
     }
 };
