@@ -5,13 +5,13 @@ namespace App\Services\Api;
 use App\Interfaces\Service\RomServiceInterface;
 use App\Models\Rom;
 use App\Queries\RomQueriesTrait as RomQueries;
+use DB;
 use RomFileRepo;
 
 class RomService implements RomServiceInterface
 {
     use RomQueries;
 
-    // todo: used in observer
     public function linkRomToRomFileIfExists(Rom $rom): bool
     {
         $romFile = RomFileRepo::findRomFileByFilename($rom->getRomFileName());
@@ -21,7 +21,7 @@ class RomService implements RomServiceInterface
                 $romFile->length,
                 $rom->id
             ))();
-            $stmt = \DB::statement($query, $bindings);
+            $stmt = DB::statement($query, $bindings);
             if ($stmt === true) $rom->refresh();
             return $stmt;
         } else {

@@ -2,6 +2,7 @@
 
 namespace App\Observers;
 
+use App\Actions\Game\SlugifyGameName;
 use App\Events\GameCreated;
 use App\Models\Game;
 
@@ -18,14 +19,9 @@ class GameObserver
      */
     public bool $afterCommit = false;
 
-
-    public function __construct(private readonly GameActionsInterface $gameActions)
-    {
-    }
-
     public function creating(Game $game): void
     {
-        $this->gameActions->slugifyGameName($game);
+        SlugifyGameName::slugify($game);
     }
 
     public function created(Game $game): void
@@ -42,7 +38,7 @@ class GameObserver
 
     public function updating(Game $game): void
     {
-        $this->gameActions->slugifyGameName($game);
+        SlugifyGameName::slugify($game);
     }
 
     public function deleted(Game $game): void

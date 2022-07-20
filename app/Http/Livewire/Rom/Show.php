@@ -3,7 +3,6 @@
 namespace App\Http\Livewire\Rom;
 
 use App\Enums\SessionMessageTypeEnum as SessionMessageType;
-use App\Interfaces\Action\RomActionsInterface;
 use App\Interfaces\Service\RomServiceInterface;
 use App\Models\Rom;
 use Illuminate\Contracts\Foundation\Application;

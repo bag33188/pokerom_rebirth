@@ -8,6 +8,7 @@ use App\Models\RomFile;
 use App\Queries\RomFileQueriesTrait as RomFileAggregations;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Collection as ResourceCollection;
+use Storage;
 
 class RomFileRepository implements RomFileRepositoryInterface
 {
@@ -72,5 +73,26 @@ class RomFileRepository implements RomFileRepositoryInterface
             $romFileMetadata['_id'] = (string)$romFileMetadata['_id'];
             return $romFileMetadata;
         });
+    }
+
+    /**
+     * @return array|string[]
+     */
+    public function listAllFilesInStorage(): array
+    {
+        return Storage::disk(ROM_FILES_DIRNAME)->files('/');
+    }
+
+
+    /**
+     * @return array|string[]
+     */
+    public function listRomFilesInStorage(): array
+    {
+        $filteredRomFiles = array_filter(
+            $this->listAllFilesInStorage(),
+            fn(string $romFilename): false|int => preg_match(ROM_FILENAME_PATTERN, $romFilename)
+        );
+        return array_values($filteredRomFiles);
     }
 }

@@ -206,7 +206,6 @@ return [
         App\Providers\RepositoryServiceProvider::class,
         App\Providers\ApiServiceProvider::class,
         App\Providers\GridFSServiceProvider::class,
-        App\Providers\ActionServiceProvider::class,
 
         // Laravel IDE Helper
         # Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class

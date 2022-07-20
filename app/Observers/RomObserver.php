@@ -2,7 +2,6 @@
 
 namespace App\Observers;
 
-use App\Interfaces\Action\RomActionsInterface;
 use App\Interfaces\Service\RomServiceInterface;
 use App\Models\Rom;
 use Request;

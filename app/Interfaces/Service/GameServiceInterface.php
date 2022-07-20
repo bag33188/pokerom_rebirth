@@ -8,6 +8,4 @@ use Illuminate\Database\Eloquent\Model;
 interface GameServiceInterface
 {
     public function createGameFromRomId(int $romId, array $gameData): Model|Game;
-    public function slugifyGameName(Game &$game): void;
-
 }

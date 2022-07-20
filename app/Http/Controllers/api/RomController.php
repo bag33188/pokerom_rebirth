@@ -111,6 +111,6 @@ class RomController extends ApiController
         $rom = RomRepo::findRomIfExists($romId);
         $this->authorize('delete', $rom);
         Rom::destroy($romId);
-        return response()->json(['message' => "rom $rom->rom_name deleted!", 'success'=>true], HttpStatus::HTTP_OK);
+        return response()->json(['message' => "rom $rom->rom_name deleted!", 'success' => true], HttpStatus::HTTP_OK);
     }
 }

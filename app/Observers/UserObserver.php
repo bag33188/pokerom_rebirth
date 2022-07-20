@@ -7,7 +7,6 @@ use App\Events\UserRegistered;
 use App\Interfaces\Service\UserServiceInterface;
 use App\Models\User;
 
-
 class UserObserver
 {
     /**

@@ -30,4 +30,8 @@ interface RomFileRepositoryInterface
     public function getRomFilesCount(): int;
 
     public function getRomFilesMetadata(): ResourceCollection;
+
+    public function listAllFilesInStorage(): array;
+
+    public function listRomFilesInStorage(): array;
 }

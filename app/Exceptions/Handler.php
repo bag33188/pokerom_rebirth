@@ -75,7 +75,7 @@ class Handler extends ExceptionHandler
             $currentErrorRoute = self::getCurrentErrorRouteAsString();
             if ($request->expectsJson()) {
                 return response()->json(
-                    ['message' => 'Error: Unauthenticated.','success'=>false], # $e->getTraceAsString();
+                    ['message' => 'Error: Unauthenticated.', 'success' => false], # $e->getTraceAsString();
                     HttpStatus::HTTP_UNAUTHORIZED,
                     [
                         'X-Http-Error-Request-URL' => $currentErrorRoute,
@@ -96,7 +96,7 @@ class Handler extends ExceptionHandler
                     $message = "Route not found: $currentErrorRoute";
                 }
                 return response()->json(
-                    ['message' => $message,'success'=>false], # $e->getTrace();
+                    ['message' => $message, 'success' => false], # $e->getTrace();
                     $statusCode,
                     ['X-Http-Error-Request-URL' => $currentErrorRoute, ...$e->getHeaders()]
                 );

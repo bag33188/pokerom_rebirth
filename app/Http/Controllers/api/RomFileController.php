@@ -80,7 +80,7 @@ class RomFileController extends ApiController
 
         $uploadFile = $this->romFileService->uploadRomFile($request['filename']);
         return response()->json(
-            ['message' => "file '" . $uploadFile->filename . "' created!",'success'=>true],
+            ['message' => "file '" . $uploadFile->filename . "' created!", 'success' => true],
             HttpStatus::HTTP_CREATED,
             ['X-Content-Transfer-Type', ContentType::OCTET_STREAM->value]
         );
@@ -95,7 +95,7 @@ class RomFileController extends ApiController
         $this->authorize('delete', $romFile);
         $exec = $this->romFileService->deleteRomFile($romFile);
         return response()->json(
-            ['message' => "file '" . $exec->filename . "' deleted!",'success'=>true],
+            ['message' => "file '" . $exec->filename . "' deleted!", 'success' => true],
             HttpStatus::HTTP_OK
         );
     }
@@ -103,20 +103,20 @@ class RomFileController extends ApiController
     /**
      * @return string[]
      */
-    public function listFilesInRomFilesStorage(RomFileActionsInterface $romFileActions): array
+    public function listFilesInRomFilesStorage(): array
     {
         Gate::authorize('viewAny-romFile');
 
-        return $romFileActions->listAllFilesInStorage();
+        return RomFileRepo::listAllFilesInStorage();
     }
 
     /**
      * @return string[]
      */
-    public function listRomsInRomFilesStorage(RomFileActionsInterface $romFileActions): array
+    public function listRomsInRomFilesStorage(): array
     {
         Gate::authorize('viewAny-romFile');
 
-        return $romFileActions->listRomFilesInStorage();
+        return RomFileRepo::listRomFilesInStorage();
     }
 }

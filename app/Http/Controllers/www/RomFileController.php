@@ -4,7 +4,6 @@ namespace App\Http\Controllers\WWW;
 
 use App\Http\Controllers\Controller as ViewController;
 use App\Http\Requests\StoreRomFileRequest;
-use App\Interfaces\Action\RomFileActionsInterface;
 use App\Interfaces\Service\RomFileServiceInterface;
 use App\Models\RomFile;
 use Gate;
@@ -41,13 +40,13 @@ class RomFileController extends ViewController
     /**
      * Show the form for creating a new resource.
      *
-     * @param RomFileActionsInterface $romFileActions
      * @return Response
      */
-    public function create(RomFileActionsInterface $romFileActions): Response
+    public function create(): Response
     {
-        $romFiles = $romFileActions->listRomFilesInStorageSorted();
-        return response()->view('rom-file.create', ['romFiles' => $romFiles]);
+        $romFilesList = RomFileRepo::listRomFilesInStorage();
+        usort($romFilesList, fn(string $a, string $b): int => strlen($b) - strlen($a));
+        return response()->view('rom-file.create', ['romFiles' => $romFilesList]);
     }
 
     /**

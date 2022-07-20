@@ -15,7 +15,7 @@ class MongoWriteException extends ApplicationException
             return redirect()->to(url()->previous())->dangerBanner($this->getMessage());
         }
         if ($this->isApiRequest()) {
-            return response()->json(['message' => $this->getMessage(),            'success' => false,
+            return response()->json(['message' => $this->getMessage(), 'success' => false,
             ], $this->getCode());
         }
         return false;

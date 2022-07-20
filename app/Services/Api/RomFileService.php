@@ -2,10 +2,10 @@
 
 namespace App\Services\Api;
 
+use App\Actions\RomFile\NormalizeRomFilename;
 use App\Enums\FileContentTypeEnum as ContentType;
 use App\Events\RomFileCreated;
 use App\Events\RomFileDeleted;
-use App\Interfaces\Action\RomFileActionsInterface;
 use App\Interfaces\Service\RomFileServiceInterface;
 use App\Jobs\ProcessRomFileDeletion;
 use App\Jobs\ProcessRomFileDownload;
@@ -17,10 +17,6 @@ use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class RomFileService implements RomFileServiceInterface
 {
-    public function __construct(private readonly RomFileActionsInterface $romFileActions)
-    {
-    }
-
     public function downloadRomFile(RomFile $romFile): StreamedResponse
     {
         return new StreamedResponse(function () use ($romFile) {
@@ -41,7 +37,7 @@ class RomFileService implements RomFileServiceInterface
      */
     public function uploadRomFile(string $romFilename): RomFile
     {
-        $this->romFileActions->normalizeRomFilename($romFilename);
+        NormalizeRomFilename::normalize($romFilename);
         ProcessRomFileUpload::dispatchSync($romFilename);
         $romFile = RomFileRepo::findRomFileByFilename($romFilename);
         RomFileCreated::dispatch($romFile);
@@ -51,9 +47,9 @@ class RomFileService implements RomFileServiceInterface
     public function deleteRomFile(RomFile $romFile): RomFile
     {
         $romFileClone = $romFile->replicateQuietly(); // or regular replication
-        // change to romfilebeingdeleted or something
         RomFileDeleted::dispatch($romFile);
         ProcessRomFileDeletion::dispatchSync($romFile->getObjectId());
         return $romFileClone;
     }
+
 }
