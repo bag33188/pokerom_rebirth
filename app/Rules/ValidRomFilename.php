@@ -6,6 +6,8 @@ use Illuminate\Contracts\Validation\Rule;
 
 class ValidRomFilename implements Rule
 {
+    protected final const FIELD_NAME = 'filename';
+
     /**
      * Determine if the validation rule passes.
      *
@@ -26,8 +28,8 @@ class ValidRomFilename implements Rule
     public function message(): string
     {
         $validRomFileExtensionsStr = implode(', ', ROM_FILE_EXTENSIONS);
-        return 'Invalid file name. Filename must: ' .
+        return "Invalid `:attribute`. File Name must: " .
             'only contain letters, numbers, hyphens and/or underscores. ' .
-            "File extension must be one of: $validRomFileExtensionsStr.";
+            "File Extension must be one of: `$validRomFileExtensionsStr`.";
     }
 }

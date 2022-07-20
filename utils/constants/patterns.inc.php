@@ -12,7 +12,7 @@ const GAME_NAME_PATTERN = /** @lang RegExp */
 "/^Pokemon\s.+$/";
 /** rom name regular expression */
 const ROM_NAME_PATTERN = /** @lang RegExp */
-"/^[\w_-]+$/i";
+"/^[\w\d_\-]+$/i";
 /** Detects the `time` part of a DateTime string */
 const TIME_STRING = /** @lang RegExp */
 '/\s?[0-2][0-4]:[0-5]\d:[0-5]\d$/';

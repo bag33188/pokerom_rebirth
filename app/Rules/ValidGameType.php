@@ -6,6 +6,8 @@ use Illuminate\Contracts\Validation\Rule;
 
 class ValidGameType implements Rule
 {
+    protected final const FIELD_NAME = 'game_type';
+
     /**
      * Create a new rule instance.
      *
@@ -36,6 +38,6 @@ class ValidGameType implements Rule
     public function message(): string
     {
         $validGameTypesStr = implode(', ', GAME_TYPES);
-        return "Invalid game type. Must be one of: ${validGameTypesStr}.";
+        return "Invalid `:attribute`. Game Type must be one of: `" . $validGameTypesStr . "`.";
     }
 }

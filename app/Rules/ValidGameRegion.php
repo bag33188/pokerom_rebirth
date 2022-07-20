@@ -6,6 +6,8 @@ use Illuminate\Contracts\Validation\Rule;
 
 class ValidGameRegion implements Rule
 {
+    protected final const FIELD_NAME = 'region';
+
     /**
      * Create a new rule instance.
      *
@@ -35,6 +37,7 @@ class ValidGameRegion implements Rule
      */
     public function message(): string
     {
-        return 'Invalid region. Must be one of: ' . join(', ', REGIONS) . '.';
+        $validGameRegionsStr = join(', ', REGIONS);
+        return "Invalid `:attribute`. Game Region must be one of: `" . $validGameRegionsStr . "`.";
     }
 }

@@ -6,6 +6,8 @@ use Illuminate\Contracts\Validation\Rule;
 
 class ValidGameName implements Rule
 {
+    protected final const FIELD_NAME = 'game_name';
+
     /**
      * Create a new rule instance.
      *
@@ -35,6 +37,6 @@ class ValidGameName implements Rule
      */
     public function message(): string
     {
-        return 'Invalid game name. Must start with "Pokemon".';
+        return "Invalid `:attribute`. Game Name must start with the word 'Pokemon'.";
     }
 }

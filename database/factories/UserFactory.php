@@ -22,7 +22,7 @@ class UserFactory extends Factory
     protected $model = User::class;
 
     /** @var string[] */
-    private const USER_PASSWORDS = [
+    private static array $userPasswordsList = [
         '1234567890',
         '123456789',
         '12345678',
@@ -84,6 +84,6 @@ class UserFactory extends Factory
 
     private static function getRandomPassword(): string
     {
-        return self::USER_PASSWORDS[rand(0, sizeof(self::USER_PASSWORDS) - 1)];
+        return self::$userPasswordsList[rand(0, sizeof(self::$userPasswordsList) - 1)];
     }
 }

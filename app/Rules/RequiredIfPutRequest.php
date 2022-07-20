@@ -66,8 +66,10 @@ class RequiredIfPutRequest extends RequiredIf
     {
         if (App::isLocal()) {
             return sprintf(
-                'Error: ' .
-                "Validation Rule `%s` can only be used on a `%s` or `%s` request. " .
+                'Error:' .
+                _SPACE .
+                "Validation Rule `%s` can only be used on a `%s` or `%s` request." .
+                _SPACE .
                 "Current request method is a `%s` request.",
                 self::class,
                 self::ALLOWED_HTTP_METHODS['put'],

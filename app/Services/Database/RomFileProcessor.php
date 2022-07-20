@@ -15,6 +15,7 @@ class RomFileProcessor extends GridFSProcessor
      */
     public function __construct(RomFilesConnection $romFilesConnection)
     {
+        $this->storagePath = public_path('rom_files');
         parent::__construct($romFilesConnection);
     }
 }

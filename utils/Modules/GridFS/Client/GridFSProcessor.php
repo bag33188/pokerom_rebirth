@@ -6,9 +6,12 @@ use GridFS\GridFS;
 use GridFS\Support\FileDownloader;
 use GridFS\Support\FilenameHandler;
 use MongoDB\BSON\ObjectId;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class GridFSProcessor extends GridFS implements GridFSProcessorInterface
 {
+    protected string $storagePath;
+
     public function __construct(private readonly AbstractGridFSConnection $gridFSConnection)
     {
         $this->setGridFSEntities();
@@ -25,6 +28,14 @@ class GridFSProcessor extends GridFS implements GridFSProcessorInterface
     {
         $filenameUtil = new FilenameHandler($filename);
         $filepath = $filenameUtil->makeFilepathFromFilename();
+        if (!file_exists($filepath)) {
+            $backSlashPattern = /** @lang RegExp */
+                "/\x{5C}/u";
+            $storagePath = preg_replace($backSlashPattern, "/", $this->storagePath);
+            throw new BadRequestHttpException(
+                sprintf("File `${filename}` does not exist on server's disk storage. Path: %s", $storagePath)
+            );
+        }
         $stream = fopen($filepath, 'rb');
         $this->gridFSConnection->bucket->uploadFromStream($filename, $stream);
         fclose($stream);

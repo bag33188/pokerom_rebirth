@@ -7,9 +7,15 @@ class FilenameHandler
 {
     public string $filename;
 
-    public function __construct(string $filename)
+    private static string $fallbackFilename = 'invalid_filename.err';
+
+    public function __construct(?string $filename)
     {
-        $this->filename = $filename;
+        $this->filename = $filename ?? self::$fallbackFilename;
+
+        if (!$this->filenameIsValid()) {
+            $this->filename = self::$fallbackFilename;
+        }
     }
 
     public function __invoke(): void

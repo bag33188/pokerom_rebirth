@@ -6,6 +6,8 @@ use Illuminate\Contracts\Validation\Rule;
 
 class ValidRomName implements Rule
 {
+    protected final const FIELD_NAME = 'rom_name';
+
     /**
      * Create a new rule instance.
      *
@@ -35,6 +37,6 @@ class ValidRomName implements Rule
      */
     public function message(): string
     {
-        return 'Invalid rom name';
+        return "Invalid `:attribute`. Rom Name can only contain words, numbers, underscores, and/or hyphens";
     }
 }

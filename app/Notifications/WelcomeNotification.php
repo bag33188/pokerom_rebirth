@@ -3,6 +3,7 @@
 namespace App\Notifications;
 
 use App\Models\User;
+use Config;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
@@ -12,9 +13,8 @@ class WelcomeNotification extends Notification
 {
     use Queueable;
 
-    private const APP_NAME_TEXT = "PokeROM!";
     private string $welcomeMessage;
-
+    private static string $appName;
 
     /**
      * Create a new notification instance.
@@ -23,7 +23,8 @@ class WelcomeNotification extends Notification
      */
     public function __construct(public User $user)
     {
-        $this->welcomeMessage = sprintf("Hello %s, welcome to the world of %s", $this->user->name, self::APP_NAME_TEXT);
+        self::$appName = Config::get('app.name');
+        $this->welcomeMessage = sprintf("Hello %s, welcome to the world of %s!", $this->user->name, self::$appName);
     }
 
     /**
@@ -46,12 +47,12 @@ class WelcomeNotification extends Notification
     public function toMail(mixed $notifiable): MailMessage
     {
         return (new MailMessage)
-            ->subject('Thank you for joining ' . config('app.name') . '!!')
+            ->subject('Thank you for joining ' . self::$appName . '!!')
             ->from(config('mail.from.address'))
             ->line(
                 str_replace(
-                    search: self::APP_NAME_TEXT,
-                    replace: sprintf("%sROM!", POKE_EACUTE),
+                    search: self::$appName,
+                    replace: sprintf("%sROM", POKE_EACUTE),
                     subject: $this->welcomeMessage
                 )
             )
@@ -69,11 +70,11 @@ class WelcomeNotification extends Notification
     public function toArray(mixed $notifiable): array
     {
         return [
-            'subject' => 'Thank you for joining ' . config('app.name') . '!!',
+            'subject' => 'Thank you for joining ' . self::$appName . '!!',
             'from' => config('mail.from.address'),
             'line1' => str_replace(
-                search: self::APP_NAME_TEXT,
-                replace: sprintf("%sROM!", POKE_EACUTE),
+                search: self::$appName,
+                replace: sprintf("%sROM", POKE_EACUTE),
                 subject: $this->welcomeMessage
             ),
             'action' => [

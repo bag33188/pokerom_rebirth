@@ -6,6 +6,8 @@ use Illuminate\Contracts\Validation\Rule;
 
 class ValidRomType implements Rule
 {
+    protected final const FIELD_NAME = 'rom_type';
+
     /**
      * Create a new rule instance.
      *
@@ -36,6 +38,6 @@ class ValidRomType implements Rule
     public function message(): string
     {
         $validRomTypeStr = implode(', ', ROM_TYPES);
-        return "Invalid rom type. Must be one of: ${validRomTypeStr}.";
+        return "Invalid `:attribute`. Rom Type must be one of: `" . $validRomTypeStr . "`.";
     }
 }
