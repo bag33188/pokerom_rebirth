@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Api;
+namespace App\Services\Resources;
 
 use App\Enums\FileContentTypeEnum as ContentType;
 use App\Events\RomFileCreated;

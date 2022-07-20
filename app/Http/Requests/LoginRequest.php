@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\Http\Validators\UserValidationRulesTrait;
+use App\Actions\Validators\UserValidationRulesTrait;
 use Illuminate\Foundation\Http\FormRequest;
 use JetBrains\PhpStorm\ArrayShape;
 

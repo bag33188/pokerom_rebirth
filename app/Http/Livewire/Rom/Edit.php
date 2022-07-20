@@ -2,8 +2,8 @@
 
 namespace App\Http\Livewire\Rom;
 
+use App\Actions\Validators\RomValidationRulesTrait;
 use App\Enums\SessionMessageTypeEnum as SessionMessageType;
-use App\Http\Validators\RomValidationRulesTrait;
 use App\Models\Rom;
 use Exception as GeneralException;
 use Illuminate\Auth\Access\AuthorizationException;

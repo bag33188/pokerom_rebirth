@@ -2,8 +2,8 @@
 
 namespace App\Http\Livewire\Game;
 
+use App\Actions\Validators\GameValidationRulesTrait;
 use App\Enums\SessionMessageTypeEnum as SessionMessageType;
-use App\Http\Validators\GameValidationRulesTrait;
 use App\Interfaces\Service\GameServiceInterface;
 use App\Models\Game;
 use Date;

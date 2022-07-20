@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\Http\Validators\RomValidationRulesTrait;
+use App\Actions\Validators\RomValidationRulesTrait;
 use App\Models\Rom;
 use Illuminate\Foundation\Http\FormRequest;
 use JetBrains\PhpStorm\ArrayShape;
