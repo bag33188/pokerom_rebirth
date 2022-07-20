@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 18, 2022 at 07:37 PM
+-- Generation Time: Jul 20, 2022 at 08:08 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -222,6 +222,7 @@ TRUNCATE TABLE `failed_jobs`;
 -- Table structure for table `games`
 --
 -- Creation: Jul 12, 2022 at 06:58 PM
+-- Last update: Jul 20, 2022 at 05:50 AM
 --
 
 DROP TABLE IF EXISTS `games`;
@@ -254,7 +255,7 @@ TRUNCATE TABLE `games`;
 --
 
 INSERT INTO `games` (`id`, `rom_id`, `game_name`, `game_type`, `date_released`, `generation`, `region`, `slug`, `created_at`, `updated_at`) VALUES
-(1, 1, 'Pokemon Red', 'core', '1998-09-28', 1, 'kanto', 'pokemon-red', '2022-07-04 03:31:25', '2022-07-04 03:31:25'),
+(1, 1, 'Pokemon Red', 'core', '2022-01-01', 1, 'kanto', 'pokemon-red', '2022-07-04 03:31:25', '2022-07-20 07:51:23'),
 (2, 2, 'Pokemon Blue', 'core', '1998-09-28', 1, 'kanto', 'pokemon-blue', '2022-07-04 03:31:32', '2022-07-04 03:31:32'),
 (3, 3, 'Pokemon Green (JP)', 'core', '1996-02-27', 1, 'kanto', 'pokemon-green-jp', '2022-07-04 03:31:52', '2022-07-04 03:31:52'),
 (4, 4, 'Pokemon Yellow', 'core', '1999-10-18', 1, 'kanto', 'pokemon-yellow', '2022-07-04 03:32:14', '2022-07-04 03:32:14'),
@@ -293,7 +294,8 @@ INSERT INTO `games` (`id`, `rom_id`, `game_name`, `game_type`, `date_released`, 
 (37, 37, 'Pokemon Brown', 'hack', '2012-06-15', 0, 'other', 'pokemon-brown', '2022-07-04 03:44:50', '2022-07-04 03:44:50'),
 (38, 38, 'Pokemon Genesis', 'hack', '2019-08-23', 0, 'other', 'pokemon-genesis', '2022-07-04 03:47:31', '2022-07-04 03:47:31'),
 (39, 39, 'Pokemon Ash Gray', 'hack', '2009-05-31', 1, 'kanto', 'pokemon-ash-gray', '2022-07-04 03:48:07', '2022-07-04 03:48:07'),
-(40, 40, 'Pokemon Renegade Platinum', 'hack', '2019-04-16', 4, 'sinnoh', 'pokemon-renegade-platinum', '2022-07-04 03:48:37', '2022-07-04 03:48:37');
+(40, 40, 'Pokemon Renegade Platinum', 'hack', '2019-04-16', 4, 'sinnoh', 'pokemon-renegade-platinum', '2022-07-04 03:48:37', '2022-07-04 03:48:37'),
+(41, 41, 'Pokemon Legends: Arceus', 'spin-off', '2022-12-08', 8, 'sinnoh', 'pokemon-legends-arceus', '2022-07-20 12:50:03', '2022-07-20 12:50:03');
 
 --
 -- Triggers `games`
@@ -396,7 +398,6 @@ TRUNCATE TABLE `password_resets`;
 -- Table structure for table `personal_access_tokens`
 --
 -- Creation: Jul 06, 2022 at 01:56 AM
--- Last update: Jul 18, 2022 at 05:17 PM
 --
 
 DROP TABLE IF EXISTS `personal_access_tokens`;
@@ -423,13 +424,20 @@ CREATE TABLE `personal_access_tokens` (
 --
 
 TRUNCATE TABLE `personal_access_tokens`;
+--
+-- Dumping data for table `personal_access_tokens`
+--
+
+INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `name`, `token`, `abilities`, `last_used_at`, `created_at`, `updated_at`) VALUES
+(17, 'App\\Models\\User', 1, 'auth_token', '49c8155244d691cfcaff8aa6a62e63d080dff97ed45ab28a14ee872f527b90d4', '[\"*\"]', '2022-07-20 12:14:29', '2022-07-20 08:35:24', '2022-07-20 12:14:29');
+
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `roms`
 --
 -- Creation: Jul 06, 2022 at 02:20 AM
--- Last update: Jul 18, 2022 at 04:40 PM
+-- Last update: Jul 20, 2022 at 06:00 AM
 --
 
 DROP TABLE IF EXISTS `roms`;
@@ -501,7 +509,8 @@ INSERT INTO `roms` (`id`, `file_id`, `game_id`, `rom_name`, `rom_size`, `rom_typ
 (37, '62c1f866133b94ba3a0ccc91', 37, 'pokemon_brown_2014-red_hack', 2048, 'gb', 1, 1, '2022-07-04 03:21:42', '2022-07-04 03:21:42'),
 (38, '62c1f86e73d95a1cf70f7bd1', 38, 'genesis-final-2019-08-23', 16384, 'gba', 1, 1, '2022-07-04 03:21:58', '2022-07-04 03:21:58'),
 (39, '62c1f874529b5091fb0e5481', 39, 'Pokemon_Ash_Gray_4-5-3', 16384, 'gba', 1, 1, '2022-07-04 03:22:16', '2022-07-04 03:22:16'),
-(40, '62c1f87d2c665156bd0f3071', 40, 'RenegadePlatinum', 102464, 'nds', 1, 1, '2022-07-04 03:22:28', '2022-07-04 03:22:28');
+(40, '62c1f87d2c665156bd0f3071', 40, 'RenegadePlatinum', 102464, 'nds', 1, 1, '2022-07-04 03:22:28', '2022-07-04 03:22:28'),
+(41, '62d795c6ee387f72b10c0de1', 41, '01001F5010DFA000', 7798784, 'xci', 1, 1, '2022-07-20 12:48:00', '2022-07-20 12:52:41');
 
 -- --------------------------------------------------------
 
@@ -509,7 +518,7 @@ INSERT INTO `roms` (`id`, `file_id`, `game_id`, `rom_name`, `rom_size`, `rom_typ
 -- Table structure for table `sessions`
 --
 -- Creation: Jul 06, 2022 at 02:20 AM
--- Last update: Jul 18, 2022 at 05:28 PM
+-- Last update: Jul 20, 2022 at 06:00 AM
 --
 
 DROP TABLE IF EXISTS `sessions`;
@@ -538,8 +547,7 @@ TRUNCATE TABLE `sessions`;
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('bAznmk2Q0LYroFM19cmAPhw4GPKEoYwWrdQxLxIu', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiWXVNREJsNzRaYjFydXpKTHJ1cU12WTBWb0JqQ2FCZ1BvY0FaVWlHeiI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDY6Imh0dHA6Ly9wb2tlcm9tX3JlYmlydGgudGVzdC9wdWJsaWMvYXBpL3ZlcnNpb24iO31zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO3M6MjE6InBhc3N3b3JkX2hhc2hfc2FuY3R1bSI7czo2MDoiJDJ5JDEwJHdpcDNxeDkxUGxYRGtyai56RWpvQy4vd2xJbnRnSUszUS5yQUpnZ3dRaGZYUkZpSW5tRFptIjt9', 1658165284),
-('CrJH5RHmcFKnPGyRXWKACpN8pbvvoLtHs6ksyBCn', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiamMzTkIyeXlQbElSOXlvdUxvMEFNekdqNjFrQzNybFpSZkZKc0JCaiI7czozOiJ1cmwiO2E6MDp7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjc0OiJodHRwOi8vcG9rZXJvbV9yZWJpcnRoLnRlc3QvcHVibGljL3JvbS1maWxlcy9pbmZvLzYyYzFmODU5ZjgwNTAxYTA4MzBmZGQ1MSI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7czoyMToicGFzc3dvcmRfaGFzaF9zYW5jdHVtIjtzOjYwOiIkMnkkMTAkd2lwM3F4OTFQbFhEa3JqLnpFam9DLi93bEludGdJSzNRLnJBSmdnd1FoZlhSRmlJbm1EWm0iO30=', 1658093216);
+('LGyul9g4kNmbaxsWokxymMCxg7d5iGvz2dCjdn71', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoianh4YTNrNk1WVlRpVUtOcTF3NkhJVHYyOXUxRGR1Q3E3TzA5c3RSNyI7czozOiJ1cmwiO2E6MDp7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjQ2OiJodHRwOi8vcG9rZXJvbV9yZWJpcnRoLnRlc3QvcHVibGljL2FwaS92ZXJzaW9uIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjIxOiJwYXNzd29yZF9oYXNoX3NhbmN0dW0iO3M6NjA6IiQyeSQxMCR3aXAzcXg5MVBsWERrcmouekVqb0MuL3dsSW50Z0lLM1EuckFKZ2d3UWhmWFJGaUlubURabSI7fQ==', 1658296848);
 
 -- --------------------------------------------------------
 
@@ -547,7 +555,6 @@ INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, 
 -- Table structure for table `users`
 --
 -- Creation: Jun 05, 2022 at 04:47 PM
--- Last update: Jul 18, 2022 at 05:18 PM
 --
 
 DROP TABLE IF EXISTS `users`;
@@ -586,8 +593,8 @@ TRUNCATE TABLE `users`;
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `two_factor_secret`, `two_factor_recovery_codes`, `two_factor_confirmed_at`, `role`, `remember_token`, `current_team_id`, `profile_photo_path`, `created_at`, `updated_at`) VALUES
-(1, 'Brock', 'bglatman@outlook.com', NULL, '$2y$10$wip3qx91PlXDkrj.zEjoC./wlIntgIK3Q.rAJggwQhfXRFiInmDZm', NULL, NULL, NULL, 'admin', 'W9ICS3K06mNQi8v03vL2KMrQSkYaeuwfYWVZLXuGW0vVWhTK9SfWag0mEzvt', NULL, NULL, '2022-07-04 02:35:33', '2022-07-10 23:32:39'),
-(5, 'John Doe', 'jdoe123@gmail.com', NULL, '$2y$10$JCtGYy2CKXxWdotqOcOky.lhPTI44BtmMN7eFyJ/MCi083wLiZTOi', NULL, NULL, NULL, 'user', NULL, NULL, NULL, '2022-07-19 00:18:01', '2022-07-19 00:18:01');
+(1, 'Brock', 'bglatman@outlook.com', NULL, '$2y$10$wip3qx91PlXDkrj.zEjoC./wlIntgIK3Q.rAJggwQhfXRFiInmDZm', NULL, NULL, NULL, 'admin', 'NTvLHOPb8pPPDr002vvhghZyW9KSEmBsHKtsbboKSkPzD3BhlJIATBteo1sb', NULL, NULL, '2022-07-04 02:35:33', '2022-07-10 23:32:39'),
+(13, 'Breezy', 'fassfd@fdasf.com', NULL, '$2y$10$EnNzpijHahkG3JihFOIoueJRdsOFxP8tr9PhInsWw6xiVaNtaeU/q', NULL, NULL, NULL, 'user', NULL, NULL, NULL, '2022-07-20 08:26:52', '2022-07-20 08:26:52');
 
 --
 -- Indexes for dumped tables
@@ -666,7 +673,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `games`
 --
 ALTER TABLE `games`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -678,19 +685,19 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `roms`
 --
 ALTER TABLE `roms`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- Constraints for dumped tables

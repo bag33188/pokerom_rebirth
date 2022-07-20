@@ -44,7 +44,7 @@
                                 <p class="inline-block">
                                     This web app is a databank of Pok&#xE9;mon ROMs.
                                     <wbr/>
-                                    It contains 40 ROMs, including all 33 core Pok&#233;mon ROMs.
+                                    It contains more than 40 ROMs, including all 33 core Pok&#233;mon ROMs.
                                 </p>
                                 <br/>
                                 <p class="italic mt-2 inline-flex flex-row text-sm">
