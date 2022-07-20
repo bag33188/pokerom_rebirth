@@ -28,8 +28,8 @@ const MAX_USER_PASSWORD_LENGTH = 50;
 const MIN_USER_PASSWORD_LENGTH = 8;
 
 
-const MIN_ROM_FILENAME_LENGTH = 3;
-const MAX_ROM_FILENAME_LENGTH = 32;
+const MIN_ROM_FILENAME_LENGTH = 3; // includes filename and extension
+const MAX_ROM_FILENAME_LENGTH = 32; // includes filename and extension
 
 
 // Database //

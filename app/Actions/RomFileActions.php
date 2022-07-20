@@ -38,4 +38,17 @@ class RomFileActions implements RomFileActionsInterface
         usort($romFilesList, fn(string $a, string $b): int => strlen($b) - strlen($a));
         return $romFilesList;
     }
+
+    /**
+     * Converts filename's extension to lowercase
+     *
+     * @param string $romFilename
+     * @return void
+     */
+    public function normalizeFilename(string &$romFilename): void
+    {
+        list($name, $ext) = explode('.', $romFilename, 2);
+        $ext = strtolower($ext);
+        $romFilename = "$name.$ext";
+    }
 }

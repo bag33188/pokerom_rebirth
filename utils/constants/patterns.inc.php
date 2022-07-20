@@ -16,8 +16,6 @@ const ROM_NAME_PATTERN = /** @lang RegExp */
 /** Detects the `time` part of a DateTime string */
 const TIME_STRING = /** @lang RegExp */
 '/\s?[0-2][0-4]:[0-5]\d:[0-5]\d$/';
-const VALID_FILENAME_PATTERN = /** @lang RegExp */
-"/^([\w\d\-_]+)(?:\.)([\w\d]+)$/i";
 /** pattern for recognizing mongodb's bson object id format/data-type */
-const OBJECT_ID_PATTERN = /** @lang RegExp */
+const BSON_OBJECT_ID_PATTERN = /** @lang RegExp */
 "/^[\da-fA-F]{24}$/";

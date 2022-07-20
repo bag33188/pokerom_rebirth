@@ -14,9 +14,9 @@ trait RomFileValidationRulesTrait
     {
         return [
             ...$rules,
-            new ValidRomFilename,
+            new MinLength(MIN_ROM_FILENAME_LENGTH),
             new MaxLength(MAX_ROM_FILENAME_LENGTH),
-            new MinLength(MIN_ROM_FILENAME_LENGTH)
+            new ValidRomFilename,
         ];
     }
 }

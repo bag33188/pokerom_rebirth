@@ -2,7 +2,7 @@
 
 namespace App\Services\Database;
 
-use GridFS\Client\GridFSProcessor;
+use GridFS\Support\GridFSProcessor;
 
 class RomFileProcessor extends GridFSProcessor
 {

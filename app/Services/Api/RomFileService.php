@@ -5,6 +5,7 @@ namespace App\Services\Api;
 use App\Enums\FileContentTypeEnum as ContentType;
 use App\Events\RomFileCreated;
 use App\Events\RomFileDeleted;
+use App\Interfaces\Action\RomFileActionsInterface;
 use App\Interfaces\Service\RomFileServiceInterface;
 use App\Jobs\ProcessRomFileDeletion;
 use App\Jobs\ProcessRomFileDownload;
@@ -17,6 +18,10 @@ use Utils\Modules\JsonDataResponse;
 
 class RomFileService implements RomFileServiceInterface
 {
+    public function __construct(private readonly RomFileActionsInterface $romFileActions)
+    {
+    }
+
     public function downloadRomFile(RomFile $romFile): StreamedResponse
     {
         return new StreamedResponse(function () use ($romFile) {
@@ -37,6 +42,7 @@ class RomFileService implements RomFileServiceInterface
      */
     public function uploadRomFile(string $romFilename): JsonDataResponse
     {
+        $this->romFileActions->normalizeFilename($romFilename);
         ProcessRomFileUpload::dispatchSync($romFilename);
         $romFile = RomFileRepo::findRomFileByFilename($romFilename);
         RomFileCreated::dispatch($romFile);

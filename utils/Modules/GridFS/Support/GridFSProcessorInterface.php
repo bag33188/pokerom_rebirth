@@ -1,6 +1,6 @@
 <?php
 
-namespace GridFS\Client;
+namespace GridFS\Support;
 
 use MongoDB\BSON\ObjectId;
 

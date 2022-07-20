@@ -12,4 +12,6 @@ interface RomFileActionsInterface
 
     /** @return string[] */
     public function listRomFilesInStorageSorted(): array;
+
+    public function normalizeFilename(string &$romFilename): void;
 }
