@@ -21,7 +21,7 @@ db.createCollection("rom.files", {
                 filename: {
                     bsonType: "string",
                     pattern:
-                        "^([\\w\\d\\-_]{3,32})(?:\\.)(3ds|xci|nds|gbc|gb|gba)$",
+                        "^([\\w\\d\\-_]{1,28})(?:\\.)(3ds|xci|nds|gbc|gb|gba)$",
                     minLength: 3,
                     maxLength: 32,
                     description:

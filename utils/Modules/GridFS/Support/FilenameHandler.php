@@ -49,7 +49,7 @@ class FilenameHandler
 
     public function filenameIsValid(): bool|int
     {
-        return preg_match(FILENAME_PATTERN, $this->filename);
+        return preg_match(VALID_FILENAME_PATTERN, $this->filename);
     }
 
     /**

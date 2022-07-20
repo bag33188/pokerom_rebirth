@@ -26,7 +26,7 @@ class GridFSProcessor extends GridFS implements GridFSProcessorInterface
     {
         $filenameUtil = new FilenameHandler($filename);
         $filepath = $filenameUtil->makeFilepathFromFilename();
-        $this->throwExceptionIfFileDoesNotExistInDiskStorage($filepath, $filename);
+        $this->throwExceptionIfFileDoesNotExistInAppStorage($filepath, $filename);
         $stream = fopen($filepath, 'rb');
         $this->gridFSConnection->bucket->uploadFromStream($filename, $stream);
         fclose($stream);
@@ -44,14 +44,20 @@ class GridFSProcessor extends GridFS implements GridFSProcessorInterface
         $this->gridFSConnection->bucket->delete($fileId);
     }
 
-    private function parseStoragePath(): string
+    private function parseStoragePath(): array|string|null
+    {
+        $DOCUMENT_ROOT = $_SERVER['DOCUMENT_ROOT'];
+        return str_replace($DOCUMENT_ROOT, config('app.url'), $this->parseDiskPath());
+    }
+
+    public function parseDiskPath(): string|array|null
     {
         $backSlashPattern = /** @lang RegExp */
             "/\x{5C}/u";
-        return (string)preg_replace($backSlashPattern, "/", config('gridfs.fileUploadPath'));
+        return preg_replace($backSlashPattern, "/", config('gridfs.fileUploadPath'));
     }
 
-    private function throwExceptionIfFileDoesNotExistInDiskStorage(string $filepath, string $filename): void
+    private function throwExceptionIfFileDoesNotExistInAppStorage(string $filepath, string $filename): void
     {
         if (!file_exists($filepath)) {
             throw new BadRequestHttpException(
