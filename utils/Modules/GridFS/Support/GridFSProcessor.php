@@ -3,6 +3,7 @@
 namespace GridFS\Support;
 
 use GridFS\Client\AbstractGridFSConnection;
+use GridFS\FileDownloader;
 use GridFS\GridFS;
 use MongoDB\BSON\ObjectId;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;

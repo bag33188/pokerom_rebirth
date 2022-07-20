@@ -6,7 +6,7 @@
  * Uses proper streaming to download excessively long files with mass binary content.
  */
 
-namespace GridFS\Support;
+namespace GridFS;
 
 class FileDownloader
 {
