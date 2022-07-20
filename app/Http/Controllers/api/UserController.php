@@ -10,7 +10,6 @@ use App\Http\Resources\UserCollection;
 use App\Http\Resources\UserResource;
 use App\Interfaces\Service\UserServiceInterface;
 use App\Models\User;
-use Auth;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -57,12 +56,11 @@ class UserController extends ApiController
 
     public function login(LoginRequest $request): JsonResponse
     {
-
         $user = UserRepo::findUserByEmail($request['email']);
         $user->tokens()->delete();
         if ($user->checkPassword($request['password']) === true) {
             $token = $this->userService->generateUserPersonalAccessToken($user);
-            Auth::guard('api')->login($user);
+            $this->userService->setLoginApiUser($user);
             return response()->json([
                 'user' => $user,
                 'token' => $token,

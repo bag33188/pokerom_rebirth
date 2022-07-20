@@ -5,6 +5,7 @@ namespace App\Services\Api;
 use App\Interfaces\Service\UserServiceInterface;
 use App\Models\User;
 use App\Queries\UserQueriesTrait as UserQueries;
+use Auth;
 
 class UserService implements UserServiceInterface
 {
@@ -21,6 +22,11 @@ class UserService implements UserServiceInterface
     public function revokeUserTokens(): int
     {
         return auth('api')->user()->tokens()->delete();
+    }
+
+    public function setLoginApiUser(User $user): void
+    {
+        Auth::guard('api')->login($user);
     }
 
     public function makeUserAdministrator(User $user): bool

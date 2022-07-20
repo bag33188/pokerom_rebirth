@@ -11,4 +11,6 @@ interface UserServiceInterface
     public function revokeUserTokens(): int;
 
     public function makeUserAdministrator(User $user): bool;
+
+    public function setLoginApiUser(User $user): void;
 }
