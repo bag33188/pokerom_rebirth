@@ -10,6 +10,7 @@ use App\Http\Resources\UserCollection;
 use App\Http\Resources\UserResource;
 use App\Interfaces\Service\UserServiceInterface;
 use App\Models\User;
+use Auth;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -46,7 +47,7 @@ class UserController extends ApiController
     public function register(StoreUserRequest $request): JsonResponse
     {
         $user = User::create($request->all());
-        $token = $this->userService->generateUserApiToken();
+        $token = $this->userService->generateUserPersonalAccessToken($user);
         return response()->json([
             'user' => $user,
             'token' => $token,
@@ -56,9 +57,12 @@ class UserController extends ApiController
 
     public function login(LoginRequest $request): JsonResponse
     {
+
         $user = UserRepo::findUserByEmail($request['email']);
+        $user->tokens()->delete();
         if ($user->checkPassword($request['password']) === true) {
-            $token = $this->userService->generateUserApiToken();
+            $token = $this->userService->generateUserPersonalAccessToken($user);
+            Auth::guard('api')->login($user);
             return response()->json([
                 'user' => $user,
                 'token' => $token,
@@ -66,17 +70,14 @@ class UserController extends ApiController
 
             ], HttpStatus::HTTP_OK);
         } else {
-            return response()->json(['message' => 'Bad credentials'], HttpStatus::HTTP_UNAUTHORIZED);
+            return response()->json(['message' => 'Bad credentials', 'success' => false], HttpStatus::HTTP_UNAUTHORIZED);
         }
-
-
     }
 
     public function logout(): JsonResponse
     {
         $this->userService->revokeUserTokens();
-        return response()->json(['message' => 'logged out!', 'success' => true,
-        ], HttpStatus::HTTP_OK);
+        return response()->json(['message' => 'logged out!', 'success' => true], HttpStatus::HTTP_OK);
     }
 
     public function update(UpdateUserRequest $request, int $userId): UserResource
@@ -98,7 +99,7 @@ class UserController extends ApiController
 
     public function showMe(): JsonResponse
     {
-        return response()->json(['data' => request()->user()]);
+        return response()->json(['data' => request()->user(), 'success' => true]);
     }
 
     public function getCurrentUserBearerToken(): JsonResponse

@@ -2,9 +2,9 @@
 
 namespace App\Observers;
 
-use App\Actions\Game\SlugifyGameName;
 use App\Events\GameCreated;
 use App\Models\Game;
+use Str;
 
 class GameObserver
 {
@@ -21,7 +21,7 @@ class GameObserver
 
     public function creating(Game $game): void
     {
-        SlugifyGameName::call($game);
+        $game->game_name = Str::slug($game->game_name);
     }
 
     public function created(Game $game): void
@@ -38,7 +38,7 @@ class GameObserver
 
     public function updating(Game $game): void
     {
-        SlugifyGameName::call($game);
+        $game->game_name = Str::slug($game->game_name);
     }
 
     public function deleted(Game $game): void

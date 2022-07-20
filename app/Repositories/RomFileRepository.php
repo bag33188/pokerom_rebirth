@@ -83,7 +83,6 @@ class RomFileRepository implements RomFileRepositoryInterface
         return Storage::disk(ROM_FILES_DIRNAME)->files('/');
     }
 
-
     /**
      * @return array|string[]
      */

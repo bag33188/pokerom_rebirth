@@ -21,6 +21,6 @@ if (!function_exists('dir_is_empty')) {
     function dir_is_empty(string $dir): bool
     {
         $iterator = new FilesystemIterator($dir, FSI_FLAGS);
-        return $iterator->valid() === boolval(0);
+        return $iterator->valid() === false;
     }
 }

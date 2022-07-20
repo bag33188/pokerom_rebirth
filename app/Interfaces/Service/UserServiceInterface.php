@@ -6,7 +6,7 @@ use App\Models\User;
 
 interface UserServiceInterface
 {
-    public function generateUserApiToken(): string;
+    public function generateUserPersonalAccessToken(User $user): string;
 
     public function revokeUserTokens(): int;
 

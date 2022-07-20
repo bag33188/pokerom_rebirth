@@ -29,7 +29,7 @@
                         {{ __('Games') }}
                     </x-jet-nav-link>
                 </div>
-                @if(auth()->user()->isAdmin())
+                @if(auth('web')->user()->isAdmin())
                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                         <x-jet-nav-link href="{{ route('rom-files.index') }}"
                                         :active="request()->routeIs('rom-files.index', 'rom-files.show')">
@@ -206,7 +206,7 @@
                 {{ __('Games') }}
             </x-jet-responsive-nav-link>
         </div>
-        @if(auth()->user()->isAdmin())
+        @if(auth('web')->user()->isAdmin())
             <div class="pt-2 pb-3 space-y-1">
                 <x-jet-responsive-nav-link href="{{ route('rom-files.index') }}"
                                            :active="request()->routeIs('rom-files.index', 'rom-files.show')">

@@ -10,10 +10,9 @@ class UserService implements UserServiceInterface
 {
     use UserQueries;
 
-    public function generateUserApiToken(): string
+    public function generateUserPersonalAccessToken(User $user): string
     {
-        // todo: make sure user is current request/auth user
-        return User::createToken(API_TOKEN_KEY)->plainTextToken;
+        return $user->createToken(API_TOKEN_KEY)->plainTextToken;
     }
 
     /**
@@ -21,7 +20,7 @@ class UserService implements UserServiceInterface
      */
     public function revokeUserTokens(): int
     {
-        return auth()->user()->tokens()->delete();
+        return auth('api')->user()->tokens()->delete();
     }
 
     public function makeUserAdministrator(User $user): bool

@@ -25,7 +25,7 @@
                 <x-list-item>Game Type: {{$rom->game->game_type}}</x-list-item>
             @endif
         </x-list-group>
-        @if(auth()->user()->isAdmin())
+        @if(auth('web')->user()->isAdmin())
             <div class="col-start-2 col-end-2 row-start-2 row-end-2 justify-self-end h-auto">
                 @livewire('rom.delete', ['romId' => $romId])
             </div>

@@ -37,10 +37,10 @@ class Show extends Component
 
     public function attemptToLinkRomToRomFile(RomServiceInterface $romService)
     {
-        $stmt = $romService->linkRomToRomFileIfExists($this->rom);
+        $exec = $romService->linkRomToRomFileIfExists($this->rom);
         $this->redirect(route('roms.show', $this->romId));
         $this->rom->refresh();
-        if ($stmt === false) {
+        if ($exec === false) {
             session()->flash('message', "No matching ROM File found with name of {$this->rom->getRomFileName()}");
             session()->flash('message-type', SessionMessageType::ERROR);
         } else {

@@ -46,7 +46,7 @@ class RomFileController extends ViewController
     {
         $romFilesList = RomFileRepo::listRomFilesInStorage();
         usort($romFilesList, fn(string $a, string $b): int => strlen($b) - strlen($a));
-        return response()->view('rom-file.create', ['romFiles' => $romFilesList]);
+        return response()->view('rom-file.create', ['romFilesList' => $romFilesList]);
     }
 
     /**

@@ -2,7 +2,7 @@
     <link rel="stylesheet" type="text/css" href="{{ mix('assets/css/punch.css') }}"/>
 @endpush
 @php
-    $romFilesDirCount = count($romFiles);
+    $romFilesDirCount = count($romFilesList);
 @endphp
 <x-app-layout>
     <x-slot name="header">
@@ -22,7 +22,7 @@
                 <div class="flex flex-col">
                     <x-jet-label for="romFile" :value="__('ROM Fle')"/>
                     <x-form-select name="filename" id="romFile">
-                        @foreach($romFiles as $index => $romFilename)
+                        @foreach($romFilesList as $index => $romFilename)
                             <option
                                 value="{{$romFilename}}"
                                 id="rom-file-{{$index + 1}}"

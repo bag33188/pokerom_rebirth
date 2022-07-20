@@ -2,7 +2,6 @@
 
 namespace App\Services\Api;
 
-use App\Actions\RomFile\NormalizeRomFilename;
 use App\Enums\FileContentTypeEnum as ContentType;
 use App\Events\RomFileCreated;
 use App\Events\RomFileDeleted;
@@ -37,7 +36,7 @@ class RomFileService implements RomFileServiceInterface
      */
     public function uploadRomFile(string $romFilename): RomFile
     {
-        NormalizeRomFilename::call($romFilename);
+        self::normalizeRomFilename($romFilename);
         ProcessRomFileUpload::dispatchSync($romFilename);
         $romFile = RomFileRepo::findRomFileByFilename($romFilename);
         RomFileCreated::dispatch($romFile);
@@ -52,4 +51,11 @@ class RomFileService implements RomFileServiceInterface
         return $romFileClone;
     }
 
+    private static function normalizeRomFilename(string &$romFilename): void
+    {
+        list($name, $ext) = explode('.', $romFilename, 2);
+        $name = trim($name);
+        $ext = strtolower($ext);
+        $romFilename = "$name.$ext";
+    }
 }
