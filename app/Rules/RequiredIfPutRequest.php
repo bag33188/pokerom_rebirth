@@ -30,12 +30,9 @@ class RequiredIfPutRequest extends RequiredIf
      */
     private function validateIfRuleIsBeingUsedCorrectly(): void
     {
-        $errMsg = (App::environment('local'))
-            ? self::localErrorMessage()
-            : 'Error: Bad request';
-        $requestMethod = strtoupper($this->httpRequest->getMethod());
-        if (self::requestIsNotPutOrPatch($requestMethod)) {
-            throw new BadRequestHttpException($errMsg);
+        $exceptionMessage = self::parseExceptionMessage();
+        if ($this->requestIsNotPutOrPatch()) {
+            throw new BadRequestHttpException($exceptionMessage);
         }
     }
 
@@ -44,17 +41,22 @@ class RequiredIfPutRequest extends RequiredIf
         return $this->httpRequest->getMethod() === self::ALLOWED_METHODS['put'];
     }
 
-    private static function requestIsNotPutOrPatch(string $httpMethod): bool
+    private function requestIsNotPutOrPatch(): bool
     {
-        return $httpMethod !== self::ALLOWED_METHODS['put'] && $httpMethod !== self::ALLOWED_METHODS['patch'];
+        $requestMethod = $this->httpRequest->method();
+        return $requestMethod !== self::ALLOWED_METHODS['put'] && $requestMethod !== self::ALLOWED_METHODS['patch'];
     }
 
-    private static function localErrorMessage(): string
+    private static function parseExceptionMessage(): string
     {
-        return sprintf(
-            "This rule can only be used on a %s or %s request.",
-            self::ALLOWED_METHODS['put'],
-            self::ALLOWED_METHODS['patch']
-        );
+        if (App::environment('local')) {
+            return sprintf(
+                "This rule can only be used on a %s or %s request.",
+                self::ALLOWED_METHODS['put'],
+                self::ALLOWED_METHODS['patch']
+            );
+        } else {
+            return 'Error: Bad request';
+        }
     }
 }
