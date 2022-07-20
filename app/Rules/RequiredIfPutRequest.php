@@ -30,24 +30,29 @@ class RequiredIfPutRequest extends RequiredIf
      */
     private function validateIfRuleIsBeingUsedCorrectly(): void
     {
-        $exceptionMessage = self::parseExceptionMessage();
-        if ($this->requestIsNotPutOrPatch()) {
+        $exceptionMessage = self::generateExceptionMessage();
+        if ($this->requestMethodIsNotPutOrPatch()) {
             throw new BadRequestHttpException($exceptionMessage);
         }
     }
 
     private function httpRequestMethodIsPUT(): bool
     {
-        return $this->httpRequest->getMethod() === self::ALLOWED_METHODS['put'];
+        return $this->getRequestMethod() === self::ALLOWED_METHODS['put'];
     }
 
-    private function requestIsNotPutOrPatch(): bool
+    private function requestMethodIsNotPutOrPatch(): bool
     {
-        $requestMethod = $this->httpRequest->method();
+        $requestMethod = $this->getRequestMethod();
         return $requestMethod !== self::ALLOWED_METHODS['put'] && $requestMethod !== self::ALLOWED_METHODS['patch'];
     }
 
-    private static function parseExceptionMessage(): string
+    private function getRequestMethod(): string
+    {
+        return $this->httpRequest->method();
+    }
+
+    private static function generateExceptionMessage(): string
     {
         if (App::environment('local')) {
             return sprintf(
