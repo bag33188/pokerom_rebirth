@@ -40,14 +40,15 @@ class RomFileActions implements RomFileActionsInterface
     }
 
     /**
-     * Converts filename's extension to lowercase
+     * Converts the `filename` property's extension to lowercase
      *
      * @param string $romFilename
      * @return void
      */
-    public function normalizeFilename(string &$romFilename): void
+    public function normalizeRomFilename(string &$romFilename): void
     {
         list($name, $ext) = explode('.', $romFilename, 2);
+        $name = trim($name);
         $ext = strtolower($ext);
         $romFilename = "$name.$ext";
     }

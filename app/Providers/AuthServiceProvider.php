@@ -31,12 +31,8 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
         // keep these as gates since multiple api controllers will need to use them
-        Gate::define('viewAny-user', function (User $user) {
-            return $user->isAdmin();
-        });
-        Gate::define('viewAny-romFile', function (User $user) {
-            return $user->isAdmin();
-        });
+        Gate::define('viewAny-user', fn(User $user) => $user->isAdmin());
+        Gate::define('viewAny-romFile', fn(User $user) => $user->isAdmin());
 
         // give admin user complete access to all endpoints and actions
         Gate::before(function (User $user, string $ability) {

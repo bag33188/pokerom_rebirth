@@ -10,3 +10,4 @@ https://www.mongodb.com/docs/manual/
 https://www.pokemon.com/us/strategy/the-details-of-discovering-pokemon-eggs
 https://www.pokemon.com/us/strategy/raising-battle-ready-pokemon/
 https://www.pokemon.com/us/pokemon-video-games/pokemon-ultra-sun-and-pokemon-ultra-moon/
+https://www.pokemon.com/us/pokemon-video-games/all-pokemon-games/

@@ -53,11 +53,20 @@ class UserService implements UserServiceInterface
 
     public function retrieveUserBearerToken(): JsonDataResponse
     {
-        $token = UserRepo::getUserBearerToken();
-        if (isset($token)) {
-            return new JsonDataResponse(['token' => $token], HttpStatus::HTTP_OK);
+        if (request()->is("api/*")) {
+            $token = UserRepo::getUserBearerToken();
+            if (isset($token)) {
+                return new JsonDataResponse(['token' => $token], HttpStatus::HTTP_OK);
+            } else {
+                return new JsonDataResponse(['message' => 'No token exists.'], HttpStatus::HTTP_NOT_FOUND);
+            }
         } else {
-            return new JsonDataResponse(['message' => 'No token exists.'], HttpStatus::HTTP_NOT_FOUND);
+            return new JsonDataResponse(
+                ['message' => 'Cannot retrieve Bearer token on non-api request.'],
+                HttpStatus::HTTP_BAD_REQUEST,
+                ['X-Attempted-Request-Url' => request()->url()]
+            );
         }
+
     }
 }
