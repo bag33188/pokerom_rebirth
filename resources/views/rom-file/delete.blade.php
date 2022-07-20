@@ -7,10 +7,9 @@
      * @param mixed $keyVal
      * @return string
      */
-    #[\JetBrains\PhpStorm\Pure]
     function getStringValueFromKey(mixed $keyVal): string {
       if ($keyVal instanceof \MongoDB\BSON\ObjectId) {
-        return strval($keyVal);
+        return $keyVal->__toString();
       } else if (!is_string($keyVal) || gettype($keyVal) !== "string") {
         return (string)$keyVal;
       } else {
