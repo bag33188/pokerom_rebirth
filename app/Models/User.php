@@ -77,4 +77,9 @@ class User extends Authenticatable # implements MustVerifyEmail
         $this->attributes['password'] = Hash::make($value); //! uses bcrypt by default
     }
 
+    public function deleteExistingTokens(): void
+    {
+        $this->tokens()->delete();
+    }
+
 }

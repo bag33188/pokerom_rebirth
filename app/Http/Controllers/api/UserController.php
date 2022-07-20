@@ -13,7 +13,6 @@ use App\Models\User;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Gate;
 use Symfony\Component\HttpFoundation\Response as HttpStatus;
 use UserRepo;
 
@@ -29,10 +28,11 @@ class UserController extends ApiController
     /**
      * @param Request $request
      * @return UserCollection
+     * @throws AuthorizationException
      */
     public function index(Request $request): UserCollection
     {
-        Gate::authorize('viewAny-user');
+        $this->authorize('viewAny', $request->user());
 
         $paginate = $request->query(self::$queryParamNames[0]);
         $perPage = (int)$request->query(self::$queryParamNames[1]);
@@ -57,7 +57,7 @@ class UserController extends ApiController
     public function login(LoginRequest $request): JsonResponse
     {
         $user = UserRepo::findUserByEmail($request['email']);
-        $user->tokens()->delete();
+        $user->deleteExistingTokens();
         if ($user->checkPassword($request['password']) === true) {
             $token = $this->userService->generateUserPersonalAccessToken($user);
             $this->userService->setLoginApiUser($user);
@@ -95,9 +95,9 @@ class UserController extends ApiController
         return new UserResource($user);
     }
 
-    public function showMe(): JsonResponse
+    public function showMe(Request $request): JsonResponse
     {
-        return response()->json(['data' => request()->user(), 'success' => true]);
+        return response()->json(['data' => $request->user(), 'success' => true]);
     }
 
     public function getCurrentUserBearerToken(): JsonResponse
