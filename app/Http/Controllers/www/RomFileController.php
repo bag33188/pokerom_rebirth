@@ -54,9 +54,11 @@ class RomFileController extends ViewController
      *
      * @param StoreRomFileRequest $request
      * @return RedirectResponse
+     * @throws AuthorizationException
      */
     public function store(StoreRomFileRequest $request): RedirectResponse
     {
+        $this->authorize('create', RomFile::class);
         $romFilename = $request['filename'];
         $this->romFileService->uploadRomFile($romFilename);
         return response()->redirectTo(URL::previous())->banner("file `$romFilename` uploaded!");
@@ -67,9 +69,11 @@ class RomFileController extends ViewController
      *
      * @param RomFile $romFile
      * @return Response
+     * @throws AuthorizationException
      */
     public function show(RomFile $romFile): Response
     {
+        $this->authorize('view', $romFile);
         return response()->view('rom-file.show', ['romFile' => $romFile]);
     }
 
