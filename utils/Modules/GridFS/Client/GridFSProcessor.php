@@ -10,8 +10,6 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class GridFSProcessor extends GridFS implements GridFSProcessorInterface
 {
-    protected string $storagePath;
-
     public function __construct(private readonly AbstractGridFSConnection $gridFSConnection)
     {
         $this->setGridFSEntities();
@@ -28,14 +26,7 @@ class GridFSProcessor extends GridFS implements GridFSProcessorInterface
     {
         $filenameUtil = new FilenameHandler($filename);
         $filepath = $filenameUtil->makeFilepathFromFilename();
-        if (!file_exists($filepath)) {
-            $backSlashPattern = /** @lang RegExp */
-                "/\x{5C}/u";
-            $storagePath = preg_replace($backSlashPattern, "/", $this->storagePath);
-            throw new BadRequestHttpException(
-                sprintf("File `${filename}` does not exist on server's disk storage. Path: %s", $storagePath)
-            );
-        }
+        $this->throwExceptionIfFileDoesNotExistInDiskStorage($filepath, $filename);
         $stream = fopen($filepath, 'rb');
         $this->gridFSConnection->bucket->uploadFromStream($filename, $stream);
         fclose($stream);
@@ -51,5 +42,24 @@ class GridFSProcessor extends GridFS implements GridFSProcessorInterface
     public final function delete(ObjectId $fileId): void
     {
         $this->gridFSConnection->bucket->delete($fileId);
+    }
+
+    private function parseStoragePath(): string
+    {
+        $backSlashPattern = /** @lang RegExp */
+            "/\x{5C}/u";
+        return (string)preg_replace($backSlashPattern, "/", config('gridfs.fileUploadPath'));
+    }
+
+    private function throwExceptionIfFileDoesNotExistInDiskStorage(string $filepath, string $filename): void
+    {
+        if (!file_exists($filepath)) {
+            throw new BadRequestHttpException(
+                message: sprintf(
+                    "Error: File `%s` does not exist on server's disk storage. Storage Path: %s",
+                    $filename, $this->parseStoragePath()
+                )
+            );
+        }
     }
 }
