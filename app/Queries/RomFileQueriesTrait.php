@@ -8,12 +8,20 @@ use JetBrains\PhpStorm\ArrayShape;
 
 trait RomFileQueriesTrait
 {
+    /**
+     * @return string[]
+     */
+    private function filesizeAscFilenameAsc(): array
+    {
+        return array('filesize', 'filename');
+    }
+
     protected function queryRomFileMetadata(/** @var string[] */ array $columns): Collection
     {
         return DB::connection('mongodb')
             ->table('rom_files.info')
             ->get($columns)
-            ->sortBy(array('filesize', 'filename'));
+            ->sortBy($this->filesizeAscFilenameAsc());
     }
 
     /**
