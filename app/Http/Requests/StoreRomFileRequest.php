@@ -25,7 +25,7 @@ class StoreRomFileRequest extends FormRequest
         return $this->user()->can('create', RomFile::class);
     }
 
-    protected function prepareForValidation(): void
+ /*   protected function prepareForValidation(): void
     {
         $filenameUtil = new FilenameHandler($this->filename);
         $filenameUtil->normalizeFileName();
@@ -33,7 +33,7 @@ class StoreRomFileRequest extends FormRequest
         $this->merge([
             'filename' => $romFilename,
         ]);
-    }
+    } */
 
     #[ArrayShape(['filename' => "array"])]
     public function rules(): array
