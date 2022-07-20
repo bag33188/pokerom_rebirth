@@ -2,7 +2,7 @@
 
 namespace App\Actions\RomFile;
 
-trait FilenameTrait
+trait FilenameActionsTrait
 {
     /**
      * # Normalize RomFile Filename

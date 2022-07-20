@@ -2,7 +2,7 @@
 
 namespace App\Services\Object;
 
-use App\Actions\RomFile\FilenameTrait as RomFilenameActions;
+use App\Actions\RomFile\FilenameActionsTrait as RomFilenameActions;
 use App\Enums\FileContentTypeEnum as ContentType;
 use App\Events\RomFileCreated;
 use App\Events\RomFileDeleted;
