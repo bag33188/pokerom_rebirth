@@ -8,7 +8,7 @@ interface UserServiceInterface
 {
     public function generateUserPersonalAccessToken(User $user): string;
 
-    public function revokeUserTokens(): int;
+    public function revokeUserApiTokens(): int;
 
     public function makeUserAdministrator(User $user): bool;
 

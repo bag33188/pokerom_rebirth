@@ -22,6 +22,7 @@ class GameService implements GameServiceInterface
     public function createGameFromRomId(int $romId, #[ArrayShape(self::GAME_DATA_SHAPE)] array $gameData): Game
     {
         $rom = RomRepo::findRomIfExists($romId);
+        // create resource with embed relationship
         return $rom->game()->create($gameData);
     }
 }

@@ -19,7 +19,7 @@ class UserService implements UserServiceInterface
     /**
      * @return int 1 if successful
      */
-    public function revokeUserTokens(): int
+    public function revokeUserApiTokens(): int
     {
         return auth('api')->user()->tokens()->delete();
     }

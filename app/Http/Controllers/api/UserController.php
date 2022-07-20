@@ -76,7 +76,7 @@ class UserController extends ApiController
 
     public function logout(): JsonResponse
     {
-        $this->userService->revokeUserTokens();
+        $this->userService->revokeUserApiTokens();
         return response()->json([
             'message' => 'logged out!', 'success' => true
         ], HttpStatus::HTTP_OK);
@@ -133,7 +133,7 @@ class UserController extends ApiController
     {
         $user = UserRepo::findUserIfExists($userId);
         $this->authorize('delete', $user);
-        $this->userService->revokeUserTokens();
+        $this->userService->revokeUserApiTokens();
         $user->delete();
         return response()->json([
             'message' => "user $user->name deleted!", 'success' => true,
