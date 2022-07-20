@@ -14,7 +14,6 @@ use App\Models\RomFile;
 use RomFileRepo;
 use Symfony\Component\HttpFoundation\Response as HttpStatus;
 use Symfony\Component\HttpFoundation\StreamedResponse;
-use Utils\Modules\JsonDataResponse;
 
 class RomFileService implements RomFileServiceInterface
 {
@@ -38,28 +37,23 @@ class RomFileService implements RomFileServiceInterface
      * Only pass in the filename as rom files are already need to be stored on the system.
      *
      * @param string $romFilename
-     * @return JsonDataResponse
+     * @return RomFile
      */
-    public function uploadRomFile(string $romFilename): JsonDataResponse
+    public function uploadRomFile(string $romFilename): RomFile
     {
         $this->romFileActions->normalizeRomFilename($romFilename);
         ProcessRomFileUpload::dispatchSync($romFilename);
         $romFile = RomFileRepo::findRomFileByFilename($romFilename);
         RomFileCreated::dispatch($romFile);
-        return new JsonDataResponse(
-            ['message' => "file '" . $romFile->filename . "' created!"],
-            HttpStatus::HTTP_CREATED,
-            ['X-Content-Transfer-Type', ContentType::OCTET_STREAM->value]
-        );
+        return $romFile;
     }
 
-    public function deleteRomFile(RomFile $romFile): JsonDataResponse
+    public function deleteRomFile(RomFile $romFile): RomFile
     {
+        $romFileClone = $romFile->replicateQuietly(); // or regular replication
+        // change to romfilebeingdeleted or something
         RomFileDeleted::dispatch($romFile);
-        ProcessRomFileDeletion::dispatch($romFile->getObjectId());
-        return new JsonDataResponse(
-            ['message' => "file '" . $romFile->filename . "' deleted!"],
-            HttpStatus::HTTP_OK
-        );
+        ProcessRomFileDeletion::dispatchSync($romFile->getObjectId());
+        return $romFileClone;
     }
 }

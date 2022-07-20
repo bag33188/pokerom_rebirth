@@ -74,8 +74,8 @@ class Handler extends ExceptionHandler
         $this->renderable(function (AuthenticationException $e, Request $request): JsonResponse|false {
             $currentErrorRoute = self::getCurrentErrorRouteAsString();
             if ($request->expectsJson()) {
-                return jsonData(
-                    ['message' => 'Error: Unauthenticated.'], # $e->getTraceAsString();
+                return response()->json(
+                    ['message' => 'Error: Unauthenticated.','success'=>false], # $e->getTraceAsString();
                     HttpStatus::HTTP_UNAUTHORIZED,
                     [
                         'X-Http-Error-Request-URL' => $currentErrorRoute,
@@ -95,8 +95,8 @@ class Handler extends ExceptionHandler
                 if ($statusCode === HttpStatus::HTTP_NOT_FOUND && strlen($message) === 0) {
                     $message = "Route not found: $currentErrorRoute";
                 }
-                return jsonData(
-                    ['message' => $message], # $e->getTrace();
+                return response()->json(
+                    ['message' => $message,'success'=>false], # $e->getTrace();
                     $statusCode,
                     ['X-Http-Error-Request-URL' => $currentErrorRoute, ...$e->getHeaders()]
                 );

@@ -5,6 +5,7 @@ namespace App\Services\Api;
 use App\Interfaces\Service\GameServiceInterface;
 use App\Models\Game;
 use Date;
+use Illuminate\Support\Str;
 use JetBrains\PhpStorm\ArrayShape;
 use RomRepo;
 
@@ -26,6 +27,21 @@ class GameService implements GameServiceInterface
     public function createGameFromRomId(int $romId, #[ArrayShape(self::GAME_DATA_SHAPE)] array $gameData): Game
     {
         $rom = RomRepo::findRomIfExists($romId);
-        return $rom->game()->create($gameData);
+        $game = $rom->game()->create($gameData);
+        return $game;
+    }
+
+    /**
+     * Modifies a {@see Game `Game`} object and slugifies the {@see Game::game_name `game_name`} property
+     * (sets `slug` field value).
+     *
+     * @param Game $game
+     * @return void
+     */
+    public function slugifyGameName(Game &$game): void // todo: make action
+    {
+        // uses get/set syntax instead of accessor syntax
+        $gameName = $game->getAttributeValue('game_name');
+        $game = $game->setAttribute('slug', Str::slug($gameName));
     }
 }

@@ -83,7 +83,20 @@ class RomController extends ApiController
     {
         $rom = RomRepo::findRomIfExists($romId);
         $this->authorize('update', $rom);
-        return $this->romService->attemptToLinkRomToRomFile($rom)->renderResponse();
+        $exec = $this->romService->linkRomToRomFileIfExists($rom);
+        if ($exec !== false) {
+            $rom->refresh();
+            return response()->json([
+                'message' => "file found and linked! file id: " . $rom->romFile->_id,
+                'data' => $rom,
+                'success' => true
+            ], HttpStatus::HTTP_OK);
+        } else {
+            return response()->json([
+                'message' => "File not found with name of {$rom->getRomFileName()}",
+                'success' => false
+            ], HttpStatus::HTTP_NOT_FOUND);
+        }
     }
 
     /**
@@ -98,6 +111,6 @@ class RomController extends ApiController
         $rom = RomRepo::findRomIfExists($romId);
         $this->authorize('delete', $rom);
         Rom::destroy($romId);
-        return jsonData(['message' => "rom $rom->rom_name deleted!"], HttpStatus::HTTP_OK);
+        return response()->json(['message' => "rom $rom->rom_name deleted!", 'success'=>true], HttpStatus::HTTP_OK);
     }
 }

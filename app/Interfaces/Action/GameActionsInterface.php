@@ -6,5 +6,4 @@ use App\Models\Game;
 
 interface GameActionsInterface
 {
-    public function slugifyGameName(Game &$game): void;
 }

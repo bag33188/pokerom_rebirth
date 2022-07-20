@@ -2,35 +2,30 @@
 
 namespace App\Services\Api;
 
-use App\Interfaces\Action\RomActionsInterface;
 use App\Interfaces\Service\RomServiceInterface;
 use App\Models\Rom;
+use App\Queries\RomQueriesTrait as RomQueries;
 use RomFileRepo;
-use Symfony\Component\HttpFoundation\Response as HttpStatus;
-use Utils\Modules\JsonDataResponse;
 
 class RomService implements RomServiceInterface
 {
-    private readonly RomActionsInterface $romActions;
+    use RomQueries;
 
-    public function __construct(RomActionsInterface $romActions)
-    {
-        $this->romActions = $romActions;
-    }
-
-    public function attemptToLinkRomToRomFile(Rom $rom): JsonDataResponse
+    // todo: used in observer
+    public function linkRomToRomFileIfExists(Rom $rom): bool
     {
         $romFile = RomFileRepo::findRomFileByFilename($rom->getRomFileName());
         if (isset($romFile)) {
-            $this->romActions->setRomDataFromRomFileData($rom, $romFile);
-            return new JsonDataResponse([
-                'message' => "file found and linked! file id: {$romFile->_id}",
-                'data' => $rom->refresh()
-            ], HttpStatus::HTTP_OK);
+            [$query, $bindings] = ($this->updateRomFromRomFileData(
+                $romFile->_id,
+                $romFile->length,
+                $rom->id
+            ))();
+            $stmt = \DB::statement($query, $bindings);
+            if ($stmt === true) $rom->refresh();
+            return $stmt;
         } else {
-            return new JsonDataResponse([
-                'message' => "File not found with name of {$rom->getRomFileName()}"
-            ], HttpStatus::HTTP_NOT_FOUND);
+            return false;
         }
     }
 }
