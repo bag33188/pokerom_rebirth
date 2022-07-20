@@ -25,9 +25,8 @@ return new class extends Migration {
     {
         if (self::$_ALLOW_MIGRATIONS === true) {
             $filename_length = MAX_ROM_FILENAME_LENGTH - 4;
-            $filesize_total_digits = strlen(strval(MAX_ROM_FILE_SIZE));
 
-            Schema::connection($this->connection)->create(self::COLLECTION_NAME, function (Blueprint $collection) use ($filename_length, $filesize_total_digits) {
+            Schema::connection($this->connection)->create(self::COLLECTION_NAME, function (Blueprint $collection) use ($filename_length) {
                 // compound index
                 // filename and filetype fields are unique if they already exist together on the same document
                 // at the time of querying
@@ -44,7 +43,7 @@ return new class extends Migration {
                 );
                 $collection->string('filename', $filename_length);
                 $collection->enum('filetype', self::getFileTypeEnumValues());
-                $collection->double('filesize', total: $filesize_total_digits, places: 0, unsigned: true);
+                $collection->unsignedBigInteger('filesize', autoIncrement: false);
             });
         }
     }
