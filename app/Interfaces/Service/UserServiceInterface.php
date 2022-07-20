@@ -7,13 +7,10 @@ use Utils\Modules\JsonDataResponse;
 
 interface UserServiceInterface
 {
-    public function authenticateUserAgainstCredentials(User $user, string $requestPassword): JsonDataResponse;
 
-    public function logoutCurrentUser(): JsonDataResponse;
+    public function generateUserApiToken(): string;
 
-    public function registerUserToken(User $user): JsonDataResponse;
+    public function revokeUserTokens(): int;
 
-    public function deleteUser(User $user): JsonDataResponse;
-
-    public function retrieveUserBearerToken(): JsonDataResponse;
+    public function makeUserAdministrator(User $user): bool;
 }

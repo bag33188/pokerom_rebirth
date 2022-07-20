@@ -14,7 +14,9 @@ use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
+use Symfony\Component\HttpFoundation\Response as HttpStatus;
 use UserRepo;
+use Utils\Modules\JsonDataResponse;
 
 class UserController extends ApiController
 {
@@ -45,18 +47,33 @@ class UserController extends ApiController
     public function register(StoreUserRequest $request): JsonResponse
     {
         $user = User::create($request->all());
-        return $this->userService->registerUserToken($user)->renderResponse();
+        $token = $this->userService->generateUserApiToken();
+        return new JsonDataResponse([
+            'user' => $user,
+            'token' => $token
+        ], HttpStatus::HTTP_CREATED);
     }
 
     public function login(LoginRequest $request): JsonResponse
     {
         $user = UserRepo::findUserByEmail($request['email']);
-        return $this->userService->authenticateUserAgainstCredentials($user, $request['password'])->renderResponse();
+        if($user->checkPassword($request['password']) === true) {
+            $token = $this->userService->generateUserApiToken();
+            return new JsonDataResponse([
+                'user' => $user,
+                'token' => $token
+            ], HttpStatus::HTTP_OK);
+        } else {
+            return new JsonDataResponse(['message' => 'Bad credentials'], HttpStatus::HTTP_UNAUTHORIZED);
+        }
+
+
     }
 
     public function logout(): JsonResponse
     {
-        return $this->userService->logoutCurrentUser()->renderResponse();
+        $this->userService->revokeUserTokens();
+        return new JsonDataResponse(['message' => 'logged out!'], HttpStatus::HTTP_OK);
     }
 
     public function update(UpdateUserRequest $request, int $userId): UserResource
@@ -83,7 +100,20 @@ class UserController extends ApiController
 
     public function getCurrentUserBearerToken(): JsonResponse
     {
-        return $this->userService->retrieveUserBearerToken()->renderResponse();
+        if (request()->is("api/*")) {
+            $token = UserRepo::getUserBearerToken();
+            if (isset($token)) {
+                return new JsonDataResponse(['token' => $token], HttpStatus::HTTP_OK);
+            } else {
+                return new JsonDataResponse(['message' => 'No token exists.'], HttpStatus::HTTP_NOT_FOUND);
+            }
+        } else {
+            return new JsonDataResponse(
+                ['message' => 'Cannot retrieve Bearer token on non-api request.'],
+                HttpStatus::HTTP_BAD_REQUEST,
+                ['X-Attempted-Request-Url' => request()->url()]
+            );
+        }
     }
 
     /**
@@ -93,6 +123,8 @@ class UserController extends ApiController
     {
         $user = UserRepo::findUserIfExists($userId);
         $this->authorize('delete', $user);
-        return $this->userService->deleteUser($user)->renderResponse();
+        $this->userService->revokeUserTokens();
+        $user->delete();
+        return new JsonDataResponse(['message' => "user $user->name deleted!"], HttpStatus::HTTP_OK);
     }
 }
