@@ -3,7 +3,6 @@
 namespace App\Observers;
 
 use App\Events\GameCreated;
-use App\Interfaces\Action\GameActionsInterface;
 use App\Models\Game;
 
 class GameObserver

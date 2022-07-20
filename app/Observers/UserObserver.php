@@ -4,7 +4,6 @@ namespace App\Observers;
 
 use App\Events\UserDeleted;
 use App\Events\UserRegistered;
-use App\Interfaces\Action\UserActionsInterface;
 use App\Interfaces\Service\UserServiceInterface;
 use App\Models\User;
 
