@@ -12,9 +12,7 @@ use Illuminate\Database\Eloquent\Collection;
 
 class RomRepository implements RomRepositoryInterface
 {
-    use RomQueries {
-        sortByGameIdAscRomSizeAsc as private;
-    }
+    use RomQueries;
 
     public function getSingleRomWithGameInfo(int $romId): Rom
     {

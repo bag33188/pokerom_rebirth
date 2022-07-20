@@ -11,9 +11,7 @@ use DB;
 
 class GameRepository implements GameRepositoryInterface
 {
-    use GameQueries {
-        sortByRomIdAscGenerationAsc as private;
-    }
+    use GameQueries;
 
     public function findGameIfExists(int $gameId): Game
     {

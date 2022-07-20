@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Resources;
+namespace App\Services\Object;
 
 use App\Interfaces\Service\RomServiceInterface;
 use App\Models\Rom;

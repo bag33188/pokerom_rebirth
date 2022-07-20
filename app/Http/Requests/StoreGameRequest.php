@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\Actions\Validators\GameValidationRulesTrait;
+use App\Http\Validators\GameValidationRulesTrait;
 use App\Models\Game;
 use Date;
 use Illuminate\Foundation\Http\FormRequest;

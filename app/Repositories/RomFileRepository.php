@@ -12,9 +12,7 @@ use Storage;
 
 class RomFileRepository implements RomFileRepositoryInterface
 {
-    use RomFileAggregations {
-        sortByLengthAscFilenameAsc as private; # public
-    }
+    use RomFileAggregations;
 
     public function findRomFileIfExists(string $romFileId): RomFile
     {

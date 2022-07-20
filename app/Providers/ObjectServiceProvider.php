@@ -6,14 +6,14 @@ use App\Interfaces\Service\GameServiceInterface;
 use App\Interfaces\Service\RomFileServiceInterface;
 use App\Interfaces\Service\RomServiceInterface;
 use App\Interfaces\Service\UserServiceInterface;
-use App\Services\Resources\GameService;
-use App\Services\Resources\RomFileService;
-use App\Services\Resources\RomService;
-use App\Services\Resources\UserService;
+use App\Services\Object\GameService;
+use App\Services\Object\RomFileService;
+use App\Services\Object\RomService;
+use App\Services\Object\UserService;
 use Illuminate\Support\ServiceProvider;
 
 
-class ResourceServiceProvider extends ServiceProvider
+class ObjectServiceProvider extends ServiceProvider
 {
     /**
      * Register services.

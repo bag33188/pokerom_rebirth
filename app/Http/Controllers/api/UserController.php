@@ -68,14 +68,18 @@ class UserController extends ApiController
 
             ], HttpStatus::HTTP_OK);
         } else {
-            return response()->json(['message' => 'Bad credentials', 'success' => false], HttpStatus::HTTP_UNAUTHORIZED);
+            return response()->json([
+                'message' => 'Bad credentials', 'success' => false
+            ], HttpStatus::HTTP_UNAUTHORIZED);
         }
     }
 
     public function logout(): JsonResponse
     {
         $this->userService->revokeUserTokens();
-        return response()->json(['message' => 'logged out!', 'success' => true], HttpStatus::HTTP_OK);
+        return response()->json([
+            'message' => 'logged out!', 'success' => true
+        ], HttpStatus::HTTP_OK);
     }
 
     public function update(UpdateUserRequest $request, int $userId): UserResource
@@ -105,16 +109,17 @@ class UserController extends ApiController
         if (request()->is("api/*")) {
             $token = UserRepo::getUserBearerToken();
             if (isset($token)) {
-                return response()->json(['token' => $token, 'success' => true,
+                return response()->json([
+                    'token' => $token, 'success' => true,
                 ], HttpStatus::HTTP_OK);
             } else {
-                return response()->json(['message' => 'No token exists.', 'success' => false,
+                return response()->json([
+                    'message' => 'No token exists.', 'success' => false,
                 ], HttpStatus::HTTP_NOT_FOUND);
             }
         } else {
             return response()->json(
-                ['message' => 'Cannot retrieve Bearer token on non-api request.', 'success' => false,
-                ],
+                ['message' => 'Cannot retrieve Bearer token on non-api request.', 'success' => false],
                 HttpStatus::HTTP_BAD_REQUEST,
                 ['X-Attempted-Request-Url' => request()->url()]
             );
@@ -130,7 +135,8 @@ class UserController extends ApiController
         $this->authorize('delete', $user);
         $this->userService->revokeUserTokens();
         $user->delete();
-        return response()->json(['message' => "user $user->name deleted!", 'success' => true,
+        return response()->json([
+            'message' => "user $user->name deleted!", 'success' => true,
         ], HttpStatus::HTTP_OK);
     }
 }

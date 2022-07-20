@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Actions\Validators;
+namespace App\Http\Validators;
 
 use App\Rules\MaxLength;
 use App\Rules\MinLength;

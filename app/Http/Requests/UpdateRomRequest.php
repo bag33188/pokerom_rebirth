@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\Actions\Validators\RomValidationRulesTrait;
+use App\Http\Validators\RomValidationRulesTrait;
 use App\Models\Rom;
 use App\Rules\RequiredIfPutRequest;
 use Illuminate\Foundation\Http\FormRequest;

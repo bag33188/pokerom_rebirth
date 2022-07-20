@@ -204,7 +204,7 @@ return [
         App\Providers\FortifyServiceProvider::class,
         App\Providers\JetstreamServiceProvider::class,
         App\Providers\RepositoryServiceProvider::class,
-        App\Providers\ResourceServiceProvider::class,
+        App\Providers\ObjectServiceProvider::class,
         App\Providers\GridFSServiceProvider::class,
 
         // Laravel IDE Helper

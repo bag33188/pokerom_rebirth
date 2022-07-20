@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Services\Resources;
+namespace App\Services\Object;
 
+use App\Actions\RomFile\Filename as RomFilenameActions;
 use App\Enums\FileContentTypeEnum as ContentType;
 use App\Events\RomFileCreated;
 use App\Events\RomFileDeleted;
@@ -16,6 +17,10 @@ use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class RomFileService implements RomFileServiceInterface
 {
+    use RomFilenameActions {
+        normalize as normalizeRomFilename;
+    }
+
     public function downloadRomFile(RomFile $romFile): StreamedResponse
     {
         return new StreamedResponse(function () use ($romFile) {
@@ -36,7 +41,7 @@ class RomFileService implements RomFileServiceInterface
      */
     public function uploadRomFile(string $romFilename): RomFile
     {
-        self::normalizeRomFilename($romFilename);
+        $this->normalizeRomFilename($romFilename);
         ProcessRomFileUpload::dispatchSync($romFilename);
         $romFile = RomFileRepo::findRomFileByFilename($romFilename);
         RomFileCreated::dispatch($romFile);
@@ -49,13 +54,5 @@ class RomFileService implements RomFileServiceInterface
         RomFileDeleted::dispatch($romFile);
         ProcessRomFileDeletion::dispatchSync($romFile->getObjectId());
         return $romFileClone;
-    }
-
-    private static function normalizeRomFilename(string &$romFilename): void
-    {
-        list($name, $ext) = explode('.', $romFilename, 2);
-        $name = trim($name);
-        $ext = strtolower($ext);
-        $romFilename = "$name.$ext";
     }
 }
