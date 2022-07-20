@@ -3,14 +3,26 @@
 namespace App\Http\Controllers\WWW;
 
 use App\Http\Controllers\Controller as ViewController;
-use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\View\Factory;
-use Illuminate\Contracts\View\View;
+use Config;
+use Illuminate\Http\Response as ResponseView;
+use Response;
 
 class WelcomeController extends ViewController
 {
-    public function index(): Application|Factory|View
+    public function index(): ResponseView
     {
-        return view('welcome');
+        return Response::view('welcome', [
+            'page_title' => $this->makePageTitleValue()
+        ]);
+    }
+
+    private static function getAppName(): string
+    {
+        return Config::get('app.name');
+    }
+
+    private function makePageTitleValue(): string
+    {
+        return str_replace('Poke', POKE_EACUTE, self::getAppName());
     }
 }
