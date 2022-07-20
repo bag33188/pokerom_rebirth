@@ -14,7 +14,7 @@ class SlugifyGameName
      * @param Game $game
      * @return void
      */
-    public static function slugify(Game &$game): void
+    public static function call(Game &$game): void
     {
         // uses get/set syntax instead of accessor syntax
         $gameName = $game->getAttributeValue('game_name');

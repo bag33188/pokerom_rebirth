@@ -37,7 +37,7 @@ class RomFileService implements RomFileServiceInterface
      */
     public function uploadRomFile(string $romFilename): RomFile
     {
-        NormalizeRomFilename::normalize($romFilename);
+        NormalizeRomFilename::call($romFilename);
         ProcessRomFileUpload::dispatchSync($romFilename);
         $romFile = RomFileRepo::findRomFileByFilename($romFilename);
         RomFileCreated::dispatch($romFile);

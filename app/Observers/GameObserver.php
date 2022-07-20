@@ -21,7 +21,7 @@ class GameObserver
 
     public function creating(Game $game): void
     {
-        SlugifyGameName::slugify($game);
+        SlugifyGameName::call($game);
     }
 
     public function created(Game $game): void
@@ -38,7 +38,7 @@ class GameObserver
 
     public function updating(Game $game): void
     {
-        SlugifyGameName::slugify($game);
+        SlugifyGameName::call($game);
     }
 
     public function deleted(Game $game): void
