@@ -35,7 +35,8 @@ class RequiredIfPutRequest extends RequiredIf
      */
     private function validateIfRuleIsBeingUsedCorrectly(): void
     {
-        $exceptionMessage = self::generateExceptionMessage();
+        $exceptionMessage = self::generateExceptionMessage($this->getHttpRequestMethod());
+
         if ($this->requestMethodIsNotPutOrPatch()) {
             throw new BadRequestHttpException($exceptionMessage);
         }
@@ -43,12 +44,12 @@ class RequiredIfPutRequest extends RequiredIf
 
     private function httpRequestMethodIsAPutRequest(): bool
     {
-        return $this->getRequestMethod() === self::ALLOWED_HTTP_METHODS['put'];
+        return $this->getHttpRequestMethod() === self::ALLOWED_HTTP_METHODS['put'];
     }
 
     private function requestMethodIsNotPutOrPatch(): bool
     {
-        $requestMethod = $this->getRequestMethod();
+        $requestMethod = $this->getHttpRequestMethod();
 
         return
             $requestMethod !== self::ALLOWED_HTTP_METHODS['put']
@@ -56,18 +57,22 @@ class RequiredIfPutRequest extends RequiredIf
             $requestMethod !== self::ALLOWED_HTTP_METHODS['patch'];
     }
 
-    private function getRequestMethod(): string
+    private function getHttpRequestMethod(): string
     {
         return $this->httpRequest->method();
     }
 
-    private static function generateExceptionMessage(): string
+    private static function generateExceptionMessage(string $currentRequestMethodName): string
     {
         if (App::isLocal()) {
             return sprintf(
-                "This rule can only be used on a %s or %s request.",
+                'Error: ' .
+                "Validation Rule `%s` can only be used on a `%s` or `%s` request. " .
+                "Current request method is a `%s` request.",
+                self::class,
                 self::ALLOWED_HTTP_METHODS['put'],
-                self::ALLOWED_HTTP_METHODS['patch']
+                self::ALLOWED_HTTP_METHODS['patch'],
+                $currentRequestMethodName
             );
         } else {
             return 'Error: Bad request';
