@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\WWW;
 
+use App\Enums\FileContentTypeEnum as ContentType;
 use App\Http\Controllers\Controller as ViewController;
 use App\Http\Requests\StoreRomFileRequest;
 use App\Interfaces\Service\RomFileServiceInterface;
@@ -11,6 +12,7 @@ use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
 use RomFileRepo;
+use Symfony\Component\HttpFoundation\Response as HttpStatus;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use URL;
 
@@ -93,7 +95,12 @@ class RomFileController extends ViewController
 
     public function download(RomFile $romFile): StreamedResponse
     {
-        return $this->romFileService->downloadRomFile($romFile);
+        return new StreamedResponse(function () use ($romFile) {
+            $this->romFileService->downloadRomFile($romFile);
+        }, HttpStatus::HTTP_ACCEPTED, array(
+                'Content-Type' => ContentType::OCTET_STREAM->value,
+                'Content-Transfer-Encoding' => 'chunked',
+                'Content-Disposition' => 'attachment; filename="' . $romFile->filename . '"')
+        );
     }
 }
-

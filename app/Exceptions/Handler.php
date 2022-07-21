@@ -98,7 +98,10 @@ class Handler extends ExceptionHandler
                 return response()->json(
                     ['message' => $message, 'success' => false], # $e->getTrace();
                     $statusCode,
-                    ['X-Http-Error-Request-URL' => $currentErrorRoute, ...$e->getHeaders()]
+                    [
+                        'X-Http-Error-Request-URL' => $currentErrorRoute,
+                        ...$e->getHeaders()
+                    ]
                 );
             }
             // don't use custom rendering if request is not an API request
@@ -109,8 +112,9 @@ class Handler extends ExceptionHandler
 
     private static function getCurrentErrorRouteAsString(): string
     {
+        $_SOLIDUS = "\u{2F}";
         $baseAppUrl = Config::get('app.url');
         $currentUrl = URL::current();
-        return str_replace("$baseAppUrl/", '/', $currentUrl);
+        return str_replace("${baseAppUrl}${_SOLIDUS}", $_SOLIDUS, $currentUrl);
     }
 }

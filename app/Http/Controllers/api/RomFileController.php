@@ -68,7 +68,13 @@ class RomFileController extends ApiController
     public function download(string $romFileId): StreamedResponse
     {
         $romFile = RomFileRepo::findRomFileIfExists($romFileId);
-        return $this->romFileService->downloadRomFile($romFile);
+        return new StreamedResponse(function () use ($romFile) {
+            $this->romFileService->downloadRomFile($romFile);
+        }, HttpStatus::HTTP_ACCEPTED, array(
+                'Content-Type' => ContentType::OCTET_STREAM->value,
+                'Content-Transfer-Encoding' => 'chunked',
+                'Content-Disposition' => 'attachment; filename="' . $romFile->filename . '"')
+        );
     }
 
     /**
