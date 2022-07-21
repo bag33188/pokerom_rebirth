@@ -4,6 +4,9 @@
  * Custom module for downloading large files.
  *
  * Uses proper streaming to download excessively long files with mass binary content.
+ *
+ * useful links:
+ * https://www.php.net/readfile
  */
 
 namespace Utils\Modules;

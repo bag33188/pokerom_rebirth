@@ -6,8 +6,18 @@ use Jenssegers\Mongodb\Schema\Blueprint;
 
 return new class extends Migration {
 
+    /**
+     * The name of the database connection to use.
+     *
+     * @var string
+     */
     protected $connection = 'mongodb';
 
+    /**
+     * Execute migration within transaction IF AVAILABLE
+     *
+     * @var bool
+     */
     public $withinTransaction = true;
 
     protected static bool $_ALLOW_MIGRATIONS = false;
