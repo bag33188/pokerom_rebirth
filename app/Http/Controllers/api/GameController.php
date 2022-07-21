@@ -50,19 +50,29 @@ class GameController extends ApiController
     {
         $romId = $request->query(self::$queryParamNames[0]);
 
+        self::throwExceptionIfNoRomIdWasSentInQuery($romId);
+
+        $game = $this->gameService->createGameFromRomId($romId, $request->all());
+        return (new GameResource($game))->response()->setStatusCode(HttpStatus::HTTP_CREATED);
+    }
+
+    /**
+     * @param mixed $romId
+     * @return void
+     * @throws BadRequestHttpException
+     */
+    private static function throwExceptionIfNoRomIdWasSentInQuery(mixed $romId): void
+    {
         if (empty($romId)) {
             throw new BadRequestHttpException(
                 message: 'Error: No ROM ID was sent.',
                 code: HttpStatus::HTTP_BAD_REQUEST,
-                headers: array(
+                headers: [
                     'X-Request-Requirement' => 'A game resource MUST be constrained to a ROM resource in the database.',
                     'X-Request-Required-Action' => 'Add query parameter `' . self::$queryParamNames[0] . '` to request URI.'
-                )
+                ]
             );
         }
-
-        $game = $this->gameService->createGameFromRomId($romId, $request->all());
-        return (new GameResource($game))->response()->setStatusCode(HttpStatus::HTTP_CREATED);
     }
 
     public function update(UpdateGameRequest $request, int $gameId): GameResource

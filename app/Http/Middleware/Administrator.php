@@ -28,6 +28,7 @@ class Administrator
         } else if (!$request->expectsJson()) {
             return response()->redirectTo(RouteServiceProvider::HOME);
         } else {
+            // throws: HttpResponseException
             abort(HttpStatus::HTTP_FORBIDDEN, "This action is unauthorized.");
         }
     }
