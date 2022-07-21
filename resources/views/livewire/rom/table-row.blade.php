@@ -9,16 +9,8 @@
         'text-white', 'font-bold', 'p-0', 'border-b-4', 'border-red-700', 'hover:border-red-500',
         'rounded', 'active:border-t-4', 'active:border-b-0', 'active:bg-red-400'
     ];
-    $tableRowClasses = [
-        'border',
-        'light:border-gray-700',
-        'odd:bg-white',
-        'even:bg-gray-50',
-        'odd:light:bg-gray-800',
-        'even:light:bg-gray-700'
-    ];
 @endphp
-<tr data-rom-id="{{$rom->getKey()}}" id="row-{{$index + 1}}" class="{{ implode(_SPACE, $tableRowClasses) }}">
+<tr data-rom-id="{{$rom->getKey()}}" id="row-{{$index + 1}}" class="border odd:bg-white even:bg-gray-100">
     <td class="px-6 py-4">{{$rom->rom_name}}</td>
     <td class="px-6 py-4">{{RomRepo::getFormattedRomSize($rom->rom_size)}}</td>
     <td class="px-6 py-4">.{{strtolower($rom->rom_type)}}</td>
