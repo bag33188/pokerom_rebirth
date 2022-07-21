@@ -16,7 +16,21 @@
         return $keyVal;
       }
     }
+
+    $romFileKey = getStringValueFromKey($key);
 @endphp
+@push('scripts')
+    <script type="text/javascript">
+        $(document).ready(function () {
+            const key = {{ Js::from($romFileKey) }};
+            let al = document.getElementById(`delete-${key}`)
+            al.addEventListener('submit', function () {
+                document.getElementById(`delete-${key}-text`).textContent = 'please wait!';
+                document.getElementById(`delete-${key}-btn`).disabled = true;
+            });
+        })
+    </script>
+@endpush
 {{-- parameters:
     romFile (RomFile)
     key (ObjectId|string)
@@ -25,13 +39,14 @@
     class="inline-block"
     action="{{route('rom-files.delete', ['romFile' => $romFile])}}"
     method="POST"
-    data-form-key="{{ getStringValueFromKey($key) }}"
+    id="delete-{{$romFileKey}}"
 >
     @method('DELETE')
     @csrf
     <div class="flex justify-end">
-        <x-jet-danger-button type="submit">
-            <p class="inline">Delete&#160;<span class="font-bold">{{$romFile->filename}}</span></p>
+        <x-jet-danger-button id="delete-{{$romFileKey}}-btn" type="submit">
+            <p id="delete-{{$romFileKey}}-text" class="inline">Delete&#160;<span
+                    class="font-bold">{{$romFile->filename}}</span></p>
         </x-jet-danger-button>
     </div>
 </form>

@@ -36,7 +36,8 @@ class RomFileService implements RomFileServiceInterface
     public function uploadRomFile(string $romFilename): RomFile
     {
         $this->normalizeRomFilename($romFilename);
-        ProcessRomFileUpload::dispatchSync($romFilename);
+        //!! DO NOT queue using `dispatchSync` as it will cause a gateway timeout (504) with very large files (ie, 15/16gb)
+        ProcessRomFileUpload::dispatch($romFilename);
         $romFile = RomFileRepo::findRomFileByFilename($romFilename);
         RomFileCreated::dispatch($romFile);
         return $romFile;

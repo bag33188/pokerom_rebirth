@@ -15,7 +15,8 @@
             <h2 class="text-center text-lg mt-7">No ROM Files found in <samp>{{ROM_FILES_DIRNAME}}</samp> folder</h2>
         @else
             <x-jet-validation-errors class="mb-4"/>
-            <form action="{{route('rom-files.store')}}" method="POST" enctype="multipart/form-data">
+            <form action="{{route('rom-files.store')}}" id="rom-file-create-form" method="POST"
+                  enctype="multipart/form-data">
                 @csrf
                 @method('POST')
 
@@ -32,9 +33,20 @@
                 </div>
 
                 <div class="my-4">
-                    <x-punch-button type="submit" text="Upload!"/>
+                    <x-punch-button type="submit" text="Upload!" id="submit-rom-file-btn"/>
                 </div>
             </form>
         @endunless
     </div>
+    <script>
+        let btn;
+        Array.prototype.slice.call(document.getElementById('submit-rom-file-btn').childNodes).forEach((e) => {
+            if (e.nodeName === 'BUTTON') btn = e;
+        })
+        console.log(btn)
+        document.getElementById('rom-file-create-form').addEventListener('submit', function () {
+            a.disabled = true;
+            a.textContent = 'PLEASE WAIT... THIS COULD TAKE A WHILE';
+        })
+    </script>
 </x-app-layout>
