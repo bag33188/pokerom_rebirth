@@ -30,7 +30,7 @@ class GridFSProcessor extends GridFS implements GridFSProcessorInterface
     {
         $filepath = self::makeFilepathFromFilename($filename);
         self::throwExceptionIfFileDoesNotExistInAppStorage($filename);
-        $stream = fopen($filepath, 'rb');
+        $stream = fopen($filepath, 'rb', true);
         $this->gridFSConnection->bucket->uploadFromStream($filename, $stream);
         fclose($stream);
     }
