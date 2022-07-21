@@ -2,7 +2,7 @@
 
 namespace App\Listeners;
 
-use App\Events\UserDeleted;
+use App\Events\UserDeleting;
 use App\Notifications\FarewellNotification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\Notification;
@@ -25,10 +25,10 @@ class SendFarewellNotification implements ShouldQueue
     /**
      * Handle the event.
      *
-     * @param UserDeleted $event
+     * @param UserDeleting $event
      * @return void
      */
-    public function handle(UserDeleted $event): void
+    public function handle(UserDeleting $event): void
     {
         $partingUser = $event->user;
         Notification::send($partingUser, new FarewellNotification($partingUser));

@@ -2,7 +2,7 @@
 
 namespace App\Observers;
 
-use App\Events\UserDeleted;
+use App\Events\UserDeleting;
 use App\Events\UserRegistered;
 use App\Interfaces\Service\UserServiceInterface;
 use App\Models\User;
@@ -32,6 +32,6 @@ class UserObserver
 
     public function deleting(User $user): void
     {
-        UserDeleted::dispatchUnless($user->isAdmin(), $user);
+        UserDeleting::dispatchUnless($user->isAdmin(), $user);
     }
 }

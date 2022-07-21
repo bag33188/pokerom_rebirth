@@ -2,9 +2,9 @@
 
 namespace App\Services\Object;
 
-use App\Actions\RomFile\NormalizeRomFilenameActionTrait as NormalizeRomFilenameAction;
+use App\Actions\RomFile\NormalizeFilenameActionTrait as NormalizeFilenameAction;
 use App\Events\RomFileCreated;
-use App\Events\RomFileDeleted;
+use App\Events\RomFileDeleting;
 use App\Interfaces\Service\RomFileServiceInterface;
 use App\Jobs\ProcessRomFileDeletion;
 use App\Jobs\ProcessRomFileDownload;
@@ -14,7 +14,7 @@ use RomFileRepo;
 
 class RomFileService implements RomFileServiceInterface
 {
-    use NormalizeRomFilenameAction {
+    use NormalizeFilenameAction {
         normalize as normalizeRomFilename;
     }
 
@@ -43,7 +43,7 @@ class RomFileService implements RomFileServiceInterface
     public function deleteRomFile(RomFile $romFile): RomFile
     {
         $romFileClone = $romFile->replicateQuietly(); // mute extraneous events when cloning
-        RomFileDeleted::dispatch($romFile);
+        RomFileDeleting::dispatch($romFile);
         ProcessRomFileDeletion::dispatchSync($romFile->getObjectId());
         return $romFileClone;
     }

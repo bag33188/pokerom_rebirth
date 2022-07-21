@@ -4,8 +4,8 @@ namespace App\Providers;
 
 use App\Events\GameCreated;
 use App\Events\RomFileCreated;
-use App\Events\RomFileDeleted;
-use App\Events\UserDeleted;
+use App\Events\RomFileDeleting;
+use App\Events\UserDeleting;
 use App\Events\UserRegistered;
 use App\Listeners\AssociateRomWithGame;
 use App\Listeners\SendFarewellNotification;
@@ -34,10 +34,10 @@ class EventServiceProvider extends ServiceProvider
         UserRegistered::class => [
             SendWelcomeNotification::class
         ],
-        UserDeleted::class => [
+        UserDeleting::class => [
             SendFarewellNotification::class
         ],
-        RomFileDeleted::class => [
+        RomFileDeleting::class => [
             UnsetRomFileDataFromRom::class
         ],
         RomFileCreated::class => [
