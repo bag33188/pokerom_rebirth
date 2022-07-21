@@ -54,7 +54,7 @@ class GridFSProcessor extends GridFS implements GridFSProcessorInterface
         $filename = "$storagePath/$filename";
     }
 
-    private static function parseDiskPath(): string|array|null
+    private static function parseUploadPath(): string|array|null
     {
         $backSlashPattern = /** @lang RegExp */
             "/\x{5C}/u";
@@ -64,7 +64,7 @@ class GridFSProcessor extends GridFS implements GridFSProcessorInterface
     private static function parseStoragePath(): array|string|null
     {
         $DOCUMENT_ROOT = $_SERVER['DOCUMENT_ROOT'];
-        return str_replace($DOCUMENT_ROOT, '', self::parseDiskPath());
+        return str_replace($DOCUMENT_ROOT, '', self::parseUploadPath());
     }
 
     private static function getFileOriginalName(string $filename): string|array

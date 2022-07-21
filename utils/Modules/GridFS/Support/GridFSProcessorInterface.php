@@ -6,9 +6,9 @@ use MongoDB\BSON\ObjectId;
 
 interface GridFSProcessorInterface
 {
-    public function upload(string $filename): void;
+    function upload(string $filename): void;
 
-    public function download(ObjectId $fileId): void;
+    function download(ObjectId $fileId): void;
 
-    public function delete(ObjectId $fileId): void;
+    function delete(ObjectId $fileId): void;
 }
