@@ -9,6 +9,10 @@ use GridFS\GridFS;
  */
 abstract class AbstractGridFSDatabase extends GridFS
 {
+    /** @var string[] */
+    private static array $gfsConfig;
+    /** @var string[] */
+    private static array $mongoConfig;
     /**
      * specify whether to use authentication when connecting to mongodb.
      *
@@ -18,23 +22,18 @@ abstract class AbstractGridFSDatabase extends GridFS
      */
     protected bool $useAuth = false;
 
-    /** @var string[] */
-    private static array $gfsConfig;
-    /** @var string[] */
-    private static array $mongoConfig;
-
     public function __construct(string $databaseName = null, string $bucketName = null, int $chunkSize = null)
     {
         $this->setConfigVars();
 
         if (empty($this->databaseName)) {
-            $this->databaseName = $databaseName ?? self::$gfsConfig['connection']['database'];
+            $this->set_database_name($databaseName ?? self::$gfsConfig['connection']['database']);
         }
         if (empty($this->bucketName)) {
-            $this->bucketName = $bucketName ?? self::$gfsConfig['bucketName'];
+            $this->set_bucket_name($bucketName ?? self::$gfsConfig['bucketName']);
         }
         if (empty($this->chunkSize)) {
-            $this->chunkSize = $chunkSize ?? self::$gfsConfig['chunkSize'];
+            $this->set_chunk_size($chunkSize ?? self::$gfsConfig['chunkSize']);
         }
     }
 

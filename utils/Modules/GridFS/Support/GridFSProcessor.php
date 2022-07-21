@@ -15,15 +15,15 @@ class GridFSProcessor extends GridFS implements GridFSProcessorInterface
     public function __construct(private readonly AbstractGridFSConnection $gridFSConnection)
     {
         self::$gridFilesUploadPath = config('gridfs.fileUploadPath');
-        
+
         $this->setGridFSEntities();
     }
 
     private function setGridFSEntities(): void
     {
-        $this->bucketName = $this->gridFSConnection->bucketName;
-        $this->chunkSize = $this->gridFSConnection->chunkSize;
-        $this->databaseName = $this->gridFSConnection->databaseName;
+        $this->bucketName = $this->gridFSConnection->get_bucket_name();
+        $this->chunkSize = $this->gridFSConnection->get_chunk_size();
+        $this->databaseName = $this->gridFSConnection->get_database_name();
     }
 
     public final function upload(string $filename): void
@@ -35,29 +35,10 @@ class GridFSProcessor extends GridFS implements GridFSProcessorInterface
         fclose($stream);
     }
 
-    public final function download(ObjectId $fileId): void
+    private static function makeFilepathFromFilename(string $filename): string
     {
-        $stream = $this->gridFSConnection->bucket->openDownloadStream($fileId);
-        $downloader = new FileDownloader($stream, CONTENT_TRANSFER_SIZE);
-        $downloader->downloadFile();
-    }
-
-    public final function delete(ObjectId $fileId): void
-    {
-        $this->gridFSConnection->bucket->delete($fileId);
-    }
-
-    private function parseStoragePath(): array|string|null
-    {
-        $DOCUMENT_ROOT = $_SERVER['DOCUMENT_ROOT'];
-        return str_replace($DOCUMENT_ROOT, config('app.url'), $this->parseDiskPath());
-    }
-
-    public function parseDiskPath(): string|array|null
-    {
-        $backSlashPattern = /** @lang RegExp */
-            "/\x{5C}/u";
-        return preg_replace($backSlashPattern, "/", self::$gridFilesUploadPath);
+        $storagePath = self::$gridFilesUploadPath;
+        return "$storagePath/${filename}";
     }
 
     private function throwExceptionIfFileDoesNotExistInAppStorage(string $filename): void
@@ -74,9 +55,28 @@ class GridFSProcessor extends GridFS implements GridFSProcessorInterface
         }
     }
 
-    private static function makeFilepathFromFilename(string $filename): string
+    private function parseStoragePath(): array|string|null
     {
-        $storagePath = self::$gridFilesUploadPath;
-        return "$storagePath/${filename}";
+        $DOCUMENT_ROOT = $_SERVER['DOCUMENT_ROOT'];
+        return str_replace($DOCUMENT_ROOT, config('app.url'), $this->parseDiskPath());
+    }
+
+    public function parseDiskPath(): string|array|null
+    {
+        $backSlashPattern = /** @lang RegExp */
+            "/\x{5C}/u";
+        return preg_replace($backSlashPattern, "/", self::$gridFilesUploadPath);
+    }
+
+    public final function download(ObjectId $fileId): void
+    {
+        $stream = $this->gridFSConnection->bucket->openDownloadStream($fileId);
+        $downloader = new FileDownloader($stream, CONTENT_TRANSFER_SIZE);
+        $downloader->downloadFile();
+    }
+
+    public final function delete(ObjectId $fileId): void
+    {
+        $this->gridFSConnection->bucket->delete($fileId);
     }
 }
