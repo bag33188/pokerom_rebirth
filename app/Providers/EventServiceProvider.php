@@ -5,8 +5,8 @@ namespace App\Providers;
 use App\Events\GameCreated;
 use App\Events\RomFileCreated;
 use App\Events\RomFileDeleting;
+use App\Events\UserCreated;
 use App\Events\UserDeleting;
-use App\Events\UserRegistered;
 use App\Listeners\AssociateRomWithGame;
 use App\Listeners\SendFarewellNotification;
 use App\Listeners\SendWelcomeNotification;
@@ -31,7 +31,7 @@ class EventServiceProvider extends ServiceProvider
      * @var array<class-string, array<int, class-string>>
      */
     protected $listen = [
-        UserRegistered::class => [
+        UserCreated::class => [
             SendWelcomeNotification::class
         ],
         UserDeleting::class => [

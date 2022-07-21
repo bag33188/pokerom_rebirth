@@ -2,7 +2,7 @@
 
 namespace App\Listeners;
 
-use App\Events\UserRegistered;
+use App\Events\UserCreated;
 use App\Notifications\WelcomeNotification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\Notification;
@@ -24,10 +24,10 @@ class SendWelcomeNotification implements ShouldQueue
     /**
      * Handle the event.
      *
-     * @param UserRegistered $event
+     * @param UserCreated $event
      * @return void
      */
-    public function handle(UserRegistered $event): void
+    public function handle(UserCreated $event): void
     {
         $newUser = $event->user;
         Notification::send($newUser, new WelcomeNotification($newUser));
