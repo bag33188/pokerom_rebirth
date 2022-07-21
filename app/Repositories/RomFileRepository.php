@@ -70,13 +70,7 @@ class RomFileRepository implements RomFileRepositoryInterface
         $columns = array('filename', 'filetype', 'filesize');
 
         return $this->queryRomFileMetadata($columns)->map(
-        /**
-         * ### map romfile metadata
-         *
-         * @param array{_id: ObjectId, filename: string, filesize: int, filetype: string} $romFileMetadata
-         * @return array{_id: ObjectId, filename: string, filesize: int, filetype: string}
-         */
-            function (array $romFileMetadata): array {
+            function (/** @var $romFileMetadata array{_id: ObjectId, filename: string, filesize: int, filetype: string} */ array $romFileMetadata): array {
                 $romFileMetadata['_id'] = $romFileMetadata['_id']->__toString();
                 return $romFileMetadata;
             }
