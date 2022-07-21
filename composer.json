@@ -1,7 +1,7 @@
 {
     "name": "laravel/pokerom_rebirth",
     "type": "project",
-    "description": "A revamped full stack web application of the original PokeROM.",
+    "description": "A revamped full stack web application of the original PokeROM app.",
     "keywords": ["web-app", "full-stack", "pokemon", "roms", "nintendo", "library"],
     "license": "MIT",
     "require": {
