@@ -10,7 +10,7 @@ use RomRepo;
 
 class GameService implements GameServiceInterface
 {
-    protected final const GAME_DATA_SHAPE = [
+    private const GAME_DATA_SHAPE = [
         "game_name" => "string",
         "game_type" => "string",
         "date_released" => Date::class,

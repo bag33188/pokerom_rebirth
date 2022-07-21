@@ -10,7 +10,7 @@ use JetBrains\PhpStorm\ArrayShape;
 /** @mixin RomFile */
 class RomFileResource extends JsonResource
 {
-    protected final const ROMFILE_SHAPE = [
+    private const ROMFILE_SHAPE = [
         '_id' => "string",
         'chunkSize' => "int",
         'filename' => "string",

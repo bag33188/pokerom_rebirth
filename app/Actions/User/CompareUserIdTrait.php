@@ -15,9 +15,10 @@ trait CompareUserIdTrait
      */
     public function requestInstanceUserIdIsAuthInstanceUserId(User $authUser, User $requestUser): bool
     {
+        $_key_id = 'id';
         return
-            (string)$authUser->getAttributeValue('id')
+            (string)$authUser->getAttributeValue($_key_id)
             ===
-            (string)$requestUser->getAttributeValue('id');
+            (string)$requestUser->getAttributeValue($_key_id);
     }
 }
