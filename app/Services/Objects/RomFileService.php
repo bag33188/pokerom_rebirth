@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Object;
+namespace App\Services\Objects;
 
 use App\Actions\RomFile\NormalizeFilenameActionTrait as NormalizeFilenameAction;
 use App\Events\RomFileCreated;

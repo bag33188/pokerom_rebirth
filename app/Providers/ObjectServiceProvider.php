@@ -2,14 +2,14 @@
 
 namespace App\Providers;
 
-use App\Interfaces\Service\GameServiceInterface;
-use App\Interfaces\Service\RomFileServiceInterface;
-use App\Interfaces\Service\RomServiceInterface;
-use App\Interfaces\Service\UserServiceInterface;
-use App\Services\Object\GameService;
-use App\Services\Object\RomFileService;
-use App\Services\Object\RomService;
-use App\Services\Object\UserService;
+use App\Interfaces\Service\GameServiceInterface as IGameObjectService;
+use App\Interfaces\Service\RomFileServiceInterface as IRomFileObjectService;
+use App\Interfaces\Service\RomServiceInterface as IRomObjectService;
+use App\Interfaces\Service\UserServiceInterface as IUserObjectService;
+use App\Services\Objects\GameService as GameObjectService;
+use App\Services\Objects\RomFileService as RomFileObjectService;
+use App\Services\Objects\RomService as RomObjectService;
+use App\Services\Objects\UserService as UserObjectService;
 use Illuminate\Support\ServiceProvider;
 
 
@@ -22,9 +22,9 @@ class ObjectServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->bind(UserServiceInterface::class, UserService::class);
-        $this->app->bind(GameServiceInterface::class, GameService::class);
-        $this->app->bind(RomServiceInterface::class, RomService::class);
-        $this->app->bind(RomFileServiceInterface::class, RomFileService::class);
+        $this->app->bind(IUserObjectService::class, UserObjectService::class);
+        $this->app->bind(IGameObjectService::class, GameObjectService::class);
+        $this->app->bind(IRomObjectService::class, RomObjectService::class);
+        $this->app->bind(IRomFileObjectService::class, RomFileObjectService::class);
     }
 }

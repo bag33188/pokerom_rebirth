@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Object;
+namespace App\Services\Objects;
 
 use App\Interfaces\Service\UserServiceInterface;
 use App\Models\User;
@@ -9,7 +9,9 @@ use Auth;
 
 class UserService implements UserServiceInterface
 {
-    use UserQueries;
+    use UserQueries {
+        updateUserSetAdminRole as private;
+    }
 
     public function generateUserPersonalAccessToken(User $user): string
     {
