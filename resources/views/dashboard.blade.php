@@ -18,24 +18,27 @@
         </h2>
     </x-slot>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+    <div data-name="dashboard-container" class="py-6 my-6 sm:py-8 sm:my-8 md:py-12 md:my-12 lg:py-16 lg:my-16">
+        <div data-name="dash-content-card" class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 {{--<x-jet-welcome/>--}}
 
-                <div class="p-6 sm:px-20 bg-white border-b border-gray-200">
-                    <div>
-                        <span class="block h-12 w-auto">@include('ui.app-logo')</span>
+                <section
+                    data-name="heading"
+                    class="p-4 sm:px-20 md:p-6 bg-white border-b-2 border-gray-200 flex flex-col md:flex-row justify-start md:justify-between">
+                    <div class="mb-3 md:mb-auto">
+                        <span class="h-12 w-auto">@include('ui.app-logo')</span>
                     </div>
-                    <p class="mt-3 text-2xl">
+                    <p class="text-lg sm:text-xl md:text-2xl">
                         <span class="font-semibold">
                             {!! str_replace('Poke', "Pok&eacute;", config('app.name')) !!}
                         </span>
                         <span class="font-bold">&#160;&#8209;&#xA0;</span>
                         <span class="italic">One Stop for all your Pok&eacute;mon ROMs</span>
                     </p>
-                </div>
-                <div class="bg-gray-200 bg-opacity-25 grid grid-rows-3 grid-cols-2 md:grid-rows-2">
+                </section>
+                <div
+                    class="bg-gray-200 bg-opacity-25 grid grid-rows-[repeat(3,auto)] grid-cols-1 md:grid-cols-2 md:grid-rows-[auto_auto]">
                     <section data-name="about" class="p-6 border-b border-gray-200 col-span-2 row-span-1">
                         <h3 class="ml-12 text-lg text-gray-600 leading-7 font-semibold">About</h3>
                         <div class="ml-12">
@@ -44,10 +47,11 @@
                                 <p class="inline-block">
                                     This web app is a databank of Pok&#xE9;mon ROMs.
                                     <wbr/>
-                                    It contains more than 40 ROMs, including all 33 core Pok&#233;mon ROMs.
+                                    This databank contains <!--more than-->{{(RomRepo::getRomsCount() - 3) . '+'}} ROMs,
+                                    including all 33 core Pok&#233;mon ROMs.
                                 </p>
                                 <br/>
-                                <p class="italic mt-2 inline-flex flex-row text-sm">
+                                <p class="italic mt-3 mb-0 pb-0 inline-flex flex-row text-sm">
                                     <span>&copy; Pok&eacute;mon Company</span>
                                     <span>&nbsp;</span>
                                     <span id="copyright-year"><!-- js content insert --></span>
@@ -57,7 +61,7 @@
                     </section>
                     <section
                         data-name="roms"
-                        class="p-6 border-r border-gray-200 row-start-2 row-end-2 col-span-full md:col-start-1 md:col-end-1">
+                        class="p-6 border-r border-t border-gray-200 row-start-2 row-end-2 col-span-full md:col-start-1 md:col-end-1">
                         <h3 class="ml-12 text-lg text-gray-600 leading-7 font-semibold">Roms</h3>
                         <div class="ml-12">
                             <div id="roms-description" class="mt-2 text-sm text-gray-500">
@@ -77,7 +81,7 @@
                     </section>
                     <section
                         data-name="games"
-                        class="p-6 md:row-start-2 md:row-end-2 row-start-3 row-end-3 col-span-full md:col-start-2 md:col-end-2">
+                        class="p-6 border-l border-t border-gray-200 md:row-start-2 md:row-end-2 row-start-3 row-end-3 col-span-full md:col-start-2 md:col-end-2">
                         <h3 class="ml-12 text-lg text-gray-600 leading-7 font-semibold">Games</h3>
                         <div class="ml-12">
                             <div id="games-description" class="mt-2 text-sm text-gray-500">
