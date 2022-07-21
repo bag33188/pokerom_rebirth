@@ -73,7 +73,7 @@ class RomFileController extends ApiController
     {
         $this->authorize('create', RomFile::class);
 
-        $uploadedRomFile = $this->romFileService->uploadRomFile($request['filename']);
+        $uploadedRomFile = $this->romFileService->uploadRomFile($request['rom_filename']);
         return response()->json(
             ['message' => "file '" . $uploadedRomFile->filename . "' created!", 'success' => true],
             HttpStatus::HTTP_CREATED,

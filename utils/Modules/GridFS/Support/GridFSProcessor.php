@@ -28,10 +28,13 @@ class GridFSProcessor extends GridFS implements GridFSProcessorInterface
 
     public final function upload(string $filename): void
     {
-        $filepath = self::makeFilepathFromFilename($filename);
+        self::appendUploadPathToFilename($filename);
         self::throwExceptionIfFileDoesNotExistInAppStorage($filename);
-        $stream = fopen($filepath, 'rb', true);
-        $this->gridFSConnection->bucket->uploadFromStream($filename, $stream);
+        # if (filesize($filepath) >= pow(2, 30) * 7) {
+        #     // do something for OVERLY large files
+        # }
+        $stream = fopen($filename, 'rb', true);
+        $this->gridFSConnection->bucket->uploadFromStream(self::getFileOriginalName($filename), $stream);
         fclose($stream);
     }
 
@@ -47,10 +50,10 @@ class GridFSProcessor extends GridFS implements GridFSProcessorInterface
         $this->gridFSConnection->bucket->delete($fileId);
     }
 
-    private static function makeFilepathFromFilename(string $filename): string
+    private static function appendUploadPathToFilename(string &$filename): void
     {
         $storagePath = self::$gridFilesUploadPath;
-        return "$storagePath/$filename";
+        $filename = "$storagePath/$filename";
     }
 
     private static function parseDiskPath(): string|array|null
@@ -66,19 +69,23 @@ class GridFSProcessor extends GridFS implements GridFSProcessorInterface
         return str_replace($DOCUMENT_ROOT, config('app.url'), self::parseDiskPath());
     }
 
+    private static function getFileOriginalName(string $filename): string|array
+    {
+        return str_replace(self::$gridFilesUploadPath . '/', "", $filename);
+    }
+
     /**
-     * @param string $filename
+     * @param string $filepath
      * @return void
      * @throws NotFoundHttpException
      */
-    private static function throwExceptionIfFileDoesNotExistInAppStorage(string $filename): void
+    private static function throwExceptionIfFileDoesNotExistInAppStorage(string $filepath): void
     {
-        $filepath = self::makeFilepathFromFilename($filename);
         if (!file_exists($filepath)) {
             throw new NotFoundHttpException(
                 message: sprintf(
                     "Error: File `%s` does not exist on server's disk storage. Storage Path: %s",
-                    $filename,
+                    $filepath,
                     self::parseStoragePath()
                 )
             );

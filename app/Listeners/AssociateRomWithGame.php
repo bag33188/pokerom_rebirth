@@ -25,7 +25,6 @@ class AssociateRomWithGame
      */
     public function handle(GameCreated $event): void
     {
-        // todo: make sure this works!!
         $game = $event->game;
         $rom = $event->rom;
         Game::withoutEvents(function () use ($game, $rom) {

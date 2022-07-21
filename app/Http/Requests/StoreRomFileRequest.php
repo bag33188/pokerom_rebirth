@@ -24,11 +24,11 @@ class StoreRomFileRequest extends FormRequest
         return $this->user()->can('create', RomFile::class);
     }
 
-    #[ArrayShape(['filename' => "array"])]
+    #[ArrayShape(['rom_filename' => "array"])]
     public function rules(): array
     {
         return [
-            'filename' => $this->romFilenameRules()
+            'rom_filename' => $this->romFilenameRules()
         ];
     }
 }
