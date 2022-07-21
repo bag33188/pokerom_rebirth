@@ -99,8 +99,8 @@ db.createCollection("rom_files", {
                 },
                 filesize: {
                     bsonType: ["int", "long"],
-                    minimum: 0xff000, // 1020 Kibibytes
-                    maximum: 0x440000000, // 17 Gibibytes
+                    minimum: 0x400, // 1024 bytes
+                    maximum: 0x440000000, // 18,253,611,008 bytes
                     description: "Size of file measured in raw Bytes",
                 },
             },

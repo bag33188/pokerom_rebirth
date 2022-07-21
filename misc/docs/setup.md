@@ -95,15 +95,15 @@ Protocols h2 h2c http/1.1
 
 ```ini
 ; C:/xampp/php/php.ini
-file_uploads=On
-upload_tmp_dir="C:\xampp\tmp"
+max_input_time=0
+max_execution_time=0
+post_max_size=0
+memory_limit=-1
 upload_max_filesize=20G
 max_file_uploads=20
-post_max_size=20G
-default_socket_timeout=12000
-max_execution_time=0
-max_input_time=-1
-memory_limit=16G
+default_socket_timeout=-1
+file_uploads=On
+upload_tmp_dir="C:\xampp\tmp"
 ```
 
 ### PHP Fast CGI
