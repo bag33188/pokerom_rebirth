@@ -57,11 +57,11 @@ class GameController extends ApiController
     }
 
     /**
-     * @param mixed $romId
+     * @param int|null $romId
      * @return void
      * @throws BadRequestHttpException
      */
-    private static function throwExceptionIfNoRomIdWasSentInQuery(mixed $romId): void
+    private static function throwExceptionIfNoRomIdWasSentInQuery(?int $romId): void
     {
         if (empty($romId)) {
             throw new BadRequestHttpException(
