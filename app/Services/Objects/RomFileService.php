@@ -2,7 +2,7 @@
 
 namespace App\Services\Objects;
 
-use App\Actions\RomFile\NormalizeFilenameActionTrait as NormalizeFilenameAction;
+use App\Actions\RomFile\NormalizeFilenameTrait as NormalizeFilenameAction;
 use App\Events\RomFileCreated;
 use App\Events\RomFileDeleting;
 use App\Interfaces\Service\RomFileServiceInterface;
