@@ -6,7 +6,7 @@ use Illuminate\Contracts\Validation\Rule;
 
 class MaxSize implements Rule
 {
-    private int $size;
+    private readonly int $size;
 
     /**
      * Create a new rule instance.

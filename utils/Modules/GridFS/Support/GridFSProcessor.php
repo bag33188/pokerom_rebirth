@@ -10,11 +10,12 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class GridFSProcessor extends GridFS implements GridFSProcessorInterface
 {
-    private static string $fileUploadPath;
+    private static string $gridFilesUploadPath;
 
     public function __construct(private readonly AbstractGridFSConnection $gridFSConnection)
     {
-        self::$fileUploadPath = config('gridfs.fileUploadPath');
+        self::$gridFilesUploadPath = config('gridfs.fileUploadPath');
+        
         $this->setGridFSEntities();
     }
 
@@ -56,7 +57,7 @@ class GridFSProcessor extends GridFS implements GridFSProcessorInterface
     {
         $backSlashPattern = /** @lang RegExp */
             "/\x{5C}/u";
-        return preg_replace($backSlashPattern, "/", self::$fileUploadPath);
+        return preg_replace($backSlashPattern, "/", self::$gridFilesUploadPath);
     }
 
     private function throwExceptionIfFileDoesNotExistInAppStorage(string $filename): void
@@ -75,7 +76,7 @@ class GridFSProcessor extends GridFS implements GridFSProcessorInterface
 
     private static function makeFilepathFromFilename(string $filename): string
     {
-        $storagePath = self::$fileUploadPath;
+        $storagePath = self::$gridFilesUploadPath;
         return "$storagePath/${filename}";
     }
 }

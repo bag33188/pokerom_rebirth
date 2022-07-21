@@ -6,7 +6,7 @@ use Illuminate\Contracts\Validation\Rule;
 
 class MinSize implements Rule
 {
-    private int $size;
+    private readonly int $size;
 
     /**
      * Create a new rule instance.
