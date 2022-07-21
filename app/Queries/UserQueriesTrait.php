@@ -14,14 +14,15 @@ trait UserQueriesTrait
      * current Authenticated user is administrator._
      *
      * @param int $userId
-     * @return void
+     * @return int
      */
-    protected function updateUserSetAdminRole(int $userId): void
+    protected function updateUserSetAdminRole(int $userId): int
     {
-        DB::connection('mysql')
+        $query = ['role' => UserRole::ADMIN->value];
+        return DB::connection('mysql')
             ->table('users')
             ->where('id', '=', $userId)
-            ->update(['role' => UserRole::ADMIN->value]);
+            ->update($query);
     }
 
     /**

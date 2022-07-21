@@ -48,6 +48,11 @@ class EventServiceProvider extends ServiceProvider
         ]
     ];
 
+    /**
+     * The model observers to register.
+     *
+     * @var string[][]
+     */
     protected $observers = [
         Game::class => [GameObserver::class],
         Rom::class => [RomObserver::class],

@@ -10,7 +10,7 @@ use Auth;
 class UserService implements UserServiceInterface
 {
     use UserQueries {
-        updateUserSetAdminRole as private updateUserSetAdminRoleCommand;
+        updateUserSetAdminRole as private;
     }
 
     public function generateUserPersonalAccessToken(User $user): string
@@ -34,8 +34,9 @@ class UserService implements UserServiceInterface
     public function makeUserAdministrator(User $user): bool
     {
         if (auth()->user()->isAdmin()) {
-            $this->updateUserSetAdminRoleCommand($user->getKey());
-            $user->refresh();
+            $dbCommand = $this->updateUserSetAdminRole($user->getKey());
+            // if command executes to truthy then refresh user resource instance
+            if ($dbCommand) $user->refresh();
             // check if user was successfully updated
             return $user->isAdmin();
         } else {
