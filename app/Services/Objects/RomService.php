@@ -20,7 +20,8 @@ class RomService implements RomServiceInterface
 
         if (isset($romFile)) {
             $props = array($romFile->_id, $romFile->length, $rom->id);
-            list($query, $bindings) = $this->updateRomFromRomFileData(...$props)->toArray();
+            $command = $this->updateRomFromRomFileData(...$props)->toArray();
+            extract($command);
 
             $stmt = DB::statement($query, $bindings);
 

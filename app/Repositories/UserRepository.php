@@ -38,6 +38,7 @@ class UserRepository implements UserRepositoryInterface
 
     public function getUsersCount(): int
     {
+        // may not use sql count query, uses php count function instead
         return User::count("*");
     }
 

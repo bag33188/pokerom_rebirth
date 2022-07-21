@@ -42,6 +42,7 @@ class RomFileRepository implements RomFileRepositoryInterface
 
     public function getRomFilesCount(): int
     {
+        // uses actual mongodb aggregator logic, not php count function
         return RomFile::count("*");
     }
 

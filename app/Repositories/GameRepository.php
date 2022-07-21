@@ -6,12 +6,16 @@ use App\Interfaces\Repository\GameRepositoryInterface;
 use App\Models\Game;
 use App\Models\Rom;
 use App\Queries\GameQueriesTrait as GameQueries;
-use Illuminate\Database\Eloquent\Collection;
 use DB;
+use Illuminate\Database\Eloquent\Collection;
 
 class GameRepository implements GameRepositoryInterface
 {
-    use GameQueries;
+    use GameQueries {
+        sortByRomIdAscGenerationAsc as private;
+        formatGameType as private;
+        findRomsWithNoGame as private;
+    }
 
     public function findGameIfExists(int $gameId): Game
     {
