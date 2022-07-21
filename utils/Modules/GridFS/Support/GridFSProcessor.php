@@ -29,12 +29,10 @@ class GridFSProcessor extends GridFS implements GridFSProcessorInterface
     public final function upload(string $filename): void
     {
         self::appendUploadPathToFilename($filename);
-        self::throwExceptionIfFileDoesNotExistInAppStorage($filename);
-        # if (filesize($filepath) >= pow(2, 30) * 7) {
-        #     // do something for OVERLY large files
-        # }
+        $this->throwExceptionIfFileDoesNotExistInAppStorage(filepath: $filename);
         $stream = fopen($filename, 'rb', true);
-        $this->gridFSConnection->bucket->uploadFromStream(self::getFileOriginalName($filename), $stream);
+        $originalFileName = self::getFileOriginalName($filename);
+        $this->gridFSConnection->bucket->uploadFromStream($originalFileName, $stream);
         fclose($stream);
     }
 
@@ -66,12 +64,13 @@ class GridFSProcessor extends GridFS implements GridFSProcessorInterface
     private static function parseStoragePath(): array|string|null
     {
         $DOCUMENT_ROOT = $_SERVER['DOCUMENT_ROOT'];
-        return str_replace($DOCUMENT_ROOT, config('app.url'), self::parseDiskPath());
+        return str_replace($DOCUMENT_ROOT, '', self::parseDiskPath());
     }
 
     private static function getFileOriginalName(string $filename): string|array
     {
-        return str_replace(self::$gridFilesUploadPath . '/', "", $filename);
+        $storagePath = self::$gridFilesUploadPath;
+        return str_replace("${storagePath}/", "", $filename);
     }
 
     /**
@@ -79,16 +78,26 @@ class GridFSProcessor extends GridFS implements GridFSProcessorInterface
      * @return void
      * @throws NotFoundHttpException
      */
-    private static function throwExceptionIfFileDoesNotExistInAppStorage(string $filepath): void
+    private function throwExceptionIfFileDoesNotExistInAppStorage(string $filepath): void
     {
         if (!file_exists($filepath)) {
             throw new NotFoundHttpException(
                 message: sprintf(
                     "Error: File `%s` does not exist on server's disk storage. Storage Path: %s",
-                    $filepath,
+                    self::getFileOriginalName($filepath),
                     self::parseStoragePath()
                 )
             );
         }
+    }
+
+    protected function fileIsTooBig(string $filename): bool
+    {
+        $seven_gibibytes = pow(2, 30) * 7;
+        if (filesize($filename) >= $seven_gibibytes) {
+            // do something for OVERLY large files??
+            return true;
+        }
+        return false;
     }
 }
