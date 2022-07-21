@@ -20,8 +20,8 @@ class RomFileService implements RomFileServiceInterface
 
     public function downloadRomFile(RomFile $romFile): RomFile
     {
-        $romFileBsonId = $romFile->getObjectId();
-        ProcessRomFileDownload::dispatch($romFileBsonId);
+        $romFileId = $romFile->getObjectId();
+        ProcessRomFileDownload::dispatchSync($romFileId);
         return $romFile;
     }
 

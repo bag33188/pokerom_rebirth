@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\Http\Validators\UserValidationRulesTrait;
+use App\Http\Validators\UserValidationRulesTrait as UserValidationRules;
 use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
@@ -13,7 +13,7 @@ use JetBrains\PhpStorm\ArrayShape;
 class StoreUserRequest extends FormRequest
 {
     // protected $redirectRoute = 'dashboard';
-    use UserValidationRulesTrait;
+    use UserValidationRules;
 
     /**
      * Determine if the user is authorized to make this request.

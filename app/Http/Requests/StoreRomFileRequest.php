@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\Http\Validators\RomFileValidationRulesTrait;
+use App\Http\Validators\RomFileValidationRulesTrait as RomFileValidationRules;
 use App\Models\RomFile;
 use Illuminate\Foundation\Http\FormRequest;
 use JetBrains\PhpStorm\ArrayShape;
@@ -10,7 +10,7 @@ use JetBrains\PhpStorm\ArrayShape;
 /** @mixin RomFile */
 class StoreRomFileRequest extends FormRequest
 {
-    use RomFileValidationRulesTrait;
+    use RomFileValidationRules;
 
     protected $stopOnFirstFailure = true;
 

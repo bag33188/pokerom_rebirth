@@ -3,7 +3,7 @@
 namespace App\Http\Livewire\Rom;
 
 use App\Enums\SessionMessageTypeEnum as SessionMessageType;
-use App\Http\Validators\RomValidationRulesTrait;
+use App\Http\Validators\RomValidationRulesTrait as RomValidationRules;
 use App\Models\Rom;
 use Exception as GeneralException;
 use Illuminate\Auth\Access\AuthorizationException;
@@ -17,7 +17,7 @@ use RomRepo;
 
 class Edit extends Component
 {
-    use RomValidationRulesTrait, AuthorizesRequests;
+    use RomValidationRules, AuthorizesRequests;
 
     /** @var Rom */
     public $rom;

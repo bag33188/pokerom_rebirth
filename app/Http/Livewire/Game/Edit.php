@@ -3,7 +3,7 @@
 namespace App\Http\Livewire\Game;
 
 use App\Enums\SessionMessageTypeEnum as SessionMessageType;
-use App\Http\Validators\GameValidationRulesTrait;
+use App\Http\Validators\GameValidationRulesTrait as GameValidationRules;
 use App\Models\Game;
 use Date;
 use Exception as GeneralException;
@@ -18,7 +18,7 @@ use Livewire\Component;
 
 class Edit extends Component
 {
-    use GameValidationRulesTrait, AuthorizesRequests;
+    use GameValidationRules, AuthorizesRequests;
 
     /** @var Game */
     public $game;

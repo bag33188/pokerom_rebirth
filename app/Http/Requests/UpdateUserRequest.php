@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\Http\Validators\UserValidationRulesTrait;
+use App\Http\Validators\UserValidationRulesTrait as UserValidationRules;
 use App\Models\User;
 use App\Rules\RequiredIfPutRequest;
 use Auth;
@@ -14,7 +14,7 @@ use JetBrains\PhpStorm\ArrayShape;
 /** @mixin User */
 class UpdateUserRequest extends FormRequest
 {
-    use UserValidationRulesTrait;
+    use UserValidationRules;
 
     public function __construct(private readonly RequiredIfPutRequest $requiredIfPutRequest)
     {

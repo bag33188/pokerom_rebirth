@@ -2,14 +2,15 @@
 
 namespace App\Http\Requests;
 
-use App\Http\Validators\UserValidationRulesTrait;
+use App\Http\Validators\UserValidationRulesTrait as UserValidationRules;
 use Illuminate\Foundation\Http\FormRequest;
 use JetBrains\PhpStorm\ArrayShape;
 
 
 class LoginRequest extends FormRequest
 {
-    use UserValidationRulesTrait;
+    use UserValidationRules;
+
     /**
      * Determine if the user is authorized to make this request.
      *

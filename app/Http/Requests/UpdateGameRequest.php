@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\Http\Validators\GameValidationRulesTrait;
+use App\Http\Validators\GameValidationRulesTrait as GameValidationRules;
 use App\Models\Game;
 use App\Rules\RequiredIfPutRequest;
 use Date;
@@ -13,7 +13,7 @@ use JetBrains\PhpStorm\ArrayShape;
 /** @mixin Game */
 class UpdateGameRequest extends FormRequest
 {
-    use GameValidationRulesTrait;
+    use GameValidationRules;
 
 
     public function __construct(private readonly RequiredIfPutRequest $requiredIfPutRequest)
