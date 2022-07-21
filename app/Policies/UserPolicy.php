@@ -2,23 +2,15 @@
 
 namespace App\Policies;
 
+use App\Actions\User\CompareUserIdTrait as CompareUserIdAction;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class UserPolicy
 {
     use HandlesAuthorization;
-
-    /**
-     * Check if Current user's ID is equal to that of the User being authenticated.
-     *
-     * @param User $user
-     * @param User $model
-     * @return bool
-     */
-    private static function currentUserIdIsAuthUserId(User $user, User $model): bool
-    {
-        return $user->getAttributeValue('id') == $model->getAttributeValue('id');
+    use CompareUserIdAction {
+        requestInstanceUserIdIsAuthInstanceUserId as protected requestUserIsAuthUser;
     }
 
     public function viewAny(User $user, User $model): bool
@@ -35,7 +27,7 @@ class UserPolicy
      */
     public function view(User $user, User $model): bool
     {
-        return self::currentUserIdIsAuthUserId($user, $model);
+        return $this->requestUserIsAuthUser($user, $model);
     }
 
     /**
@@ -47,7 +39,7 @@ class UserPolicy
      */
     public function update(User $user, User $model): bool
     {
-        return self::currentUserIdIsAuthUserId($user, $model);
+        return $this->requestUserIsAuthUser($user, $model);
     }
 
     /**
@@ -59,6 +51,6 @@ class UserPolicy
      */
     public function delete(User $user, User $model): bool
     {
-        return self::currentUserIdIsAuthUserId($user, $model);
+        return $this->requestUserIsAuthUser($user, $model);
     }
 }

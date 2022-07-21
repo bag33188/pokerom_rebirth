@@ -11,7 +11,7 @@
       if ($keyVal instanceof \MongoDB\BSON\ObjectId) {
         return $keyVal->__toString();
       } else if (!is_string($keyVal) || gettype($keyVal) !== "string") {
-        return (string)$keyVal;
+        return strval($keyVal);
       } else {
         return $keyVal;
       }

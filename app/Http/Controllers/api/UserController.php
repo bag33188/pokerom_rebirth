@@ -65,7 +65,6 @@ class UserController extends ApiController
                 'user' => $user,
                 'token' => $token,
                 'success' => true,
-
             ], HttpStatus::HTTP_OK);
         } else {
             return response()->json([
@@ -99,31 +98,24 @@ class UserController extends ApiController
         return new UserResource($user);
     }
 
+    /**
+     * @throws AuthorizationException
+     */
     public function showMe(Request $request): JsonResponse
     {
-        return response()->json(['data' => $request->user(), 'success' => true]);
+        $user = $request->user();
+        $this->authorize('view', $user);
+        return response()->json(['data' => $user, 'success' => true]);
     }
 
     public function getCurrentUserBearerToken(): JsonResponse
     {
-        if (request()->is("api/*")) {
-            $token = UserRepo::getUserBearerToken();
-            if (isset($token)) {
-                return response()->json([
-                    'token' => $token, 'success' => true,
-                ], HttpStatus::HTTP_OK);
-            } else {
-                return response()->json([
-                    'message' => 'No token exists.', 'success' => false,
-                ], HttpStatus::HTTP_NOT_FOUND);
-            }
-        } else {
-            return response()->json(
-                ['message' => 'Cannot retrieve Bearer token on non-api request.', 'success' => false],
-                HttpStatus::HTTP_BAD_REQUEST,
-                ['X-Attempted-Request-Url' => request()->url()]
-            );
-        }
+        $token = UserRepo::getUserBearerToken();
+        return isset($token) ? response()->json([
+            'token' => $token, 'success' => true,
+        ], HttpStatus::HTTP_OK) : response()->json([
+            'message' => 'No token exists.', 'success' => false,
+        ], HttpStatus::HTTP_NOT_FOUND);
     }
 
     /**
