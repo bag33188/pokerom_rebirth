@@ -2,28 +2,18 @@
 
 namespace App\Actions\RomFile;
 
+use App\Models\RomFile;
+
 trait NormalizeFilenameActionTrait
 {
     /**
-     * # Normalize RomFile Filename
+     * ## Normalize RomFile Filename
      *
-     * ```js
-     * // javascript-interpretation logic //
+     * Does some string manipulations on a given {@see RomFile::$filename `filename property`} value.
      *
-     * // split romFilename with fullstop as delimiter
-     * [name, ext] = romFilename.split('.');
-     *
-     * // trim the name part of `romFilename`:
-     * // spaces, tabs, linefeed, carriage returns, fullstops, vertical tabs, null byte(s)
-     * name = name.trim();
-     *
-     * // convert the ext part of `romFilename` to lower case,
-     * // for use with database schema validation
-     * ext = ext.toLowerCase();
-     *
-     * // concat result
-     * return `${name}.${ext}`;
-     * ```
+     * 1. Splits `filename` into _`$name`_ and _`$ext`_.
+     * 2. Trims **spaces, tabs, linefeed, carriage returns, vertical tabs, fullstops, null byte(s)** from _`$name`_
+     * 3. Converts _`$ext`_ to **lowercase** (for use with database validation schema)
      *
      * @param string $romFilename
      * @return void Changes semantics of (&)$romFilename parameter, has no return value.
@@ -31,8 +21,8 @@ trait NormalizeFilenameActionTrait
     public function normalize(string &$romFilename): void
     {
         list($name, $ext) = explode('.', $romFilename, 2);
-        $name = trim($name, characters: (_SPACE . "\t\n\r\v\0\x2E"));
-        $ext = strtolower($ext);
+        $name = trim($name, characters: (_SPACE . "\t\n\r\v\x2E\0"));
+        $ext = strtolower(string: $ext);
         $romFilename = "${name}.${ext}";
     }
 }
