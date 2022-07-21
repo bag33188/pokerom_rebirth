@@ -12,7 +12,7 @@ return new class extends Migration {
 
     protected static bool $_ALLOW_MIGRATIONS = false;
 
-    private const COLLECTION_NAME = 'rom_files.info';
+    private const COLLECTION_NAME = 'rom_files';
 
     private static function getFileTypeEnumValues(): array
     {

@@ -15,7 +15,7 @@ trait RomFileQueriesTrait
     protected function queryRomFileMetadata(array $columns): Collection
     {
         return DB::connection('mongodb')
-            ->table('rom_files.info') // <- document collection
+            ->table('rom_files') // <- document collection
             ->get($columns)
             ->sortBy(['filesize', 'filename']);
     }

@@ -70,8 +70,6 @@ Route::name('api.')->group(function () {
                 Route::get('list-files', [RomFileController::class, 'listFilesInRomFilesStorage'])->name('list-files');
                 Route::get('list-roms', [RomFileController::class, 'listRomsInRomFilesStorage'])->name('list-roms');
             });
-            // rom files metadata
-            Route::get('metadata/all', [RomFileController::class, 'indexMetadata'])->name('metadata.all');
         });
 
         // relationships
