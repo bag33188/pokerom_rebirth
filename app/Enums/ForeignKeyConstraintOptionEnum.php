@@ -2,7 +2,7 @@
 
 namespace App\Enums;
 
-enum DatabaseConstraintOptionEnum: string
+enum ForeignKeyConstraintOptionEnum: string
 {
     /** apply no action with foreign key constraints */
     case NO_ACTION = 'NO ACTION';
