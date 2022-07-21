@@ -13,8 +13,8 @@ class GameRepository implements GameRepositoryInterface
 {
     use GameQueries {
         sortByRomIdAscGenerationAsc as private;
-        formatGameType as private;
-        findRomsWithNoGame as private;
+        formatGameType as private formatGameTypeQuery;
+        findRomsWithNoGame as private findRomsWithNoGameQuery;
     }
 
     public function findGameIfExists(int $gameId): Game
@@ -34,13 +34,13 @@ class GameRepository implements GameRepositoryInterface
 
     public function getFormattedGameType(string $gameType): string
     {
-        [$query, $bindings] = $this->formatGameType($gameType)->getValues();
+        [$query, $bindings] = $this->formatGameTypeQuery($gameType)->getValues();
         return DB::selectOne($query, $bindings)->gameType;
     }
 
     public function getAllRomsWithNoGame(): Collection
     {
-        ['query' => $query] = $this->findRomsWithNoGame()->toArray();
+        ['query' => $query] = $this->findRomsWithNoGameQuery()->toArray();
         return Rom::fromQuery($query);
     }
 

@@ -11,7 +11,7 @@ use RomFileRepo;
 class RomService implements RomServiceInterface
 {
     use RomQueries {
-        updateRomFromRomFileData as private;
+        updateRomFromRomFileData as private updateRomFromRomFileDataQuery;
     }
 
     public function linkRomToRomFileIfExists(Rom $rom): bool
@@ -20,7 +20,7 @@ class RomService implements RomServiceInterface
 
         if (isset($romFile)) {
             $props = array($romFile->_id, $romFile->length, $rom->id);
-            $command = $this->updateRomFromRomFileData(...$props)->toArray();
+            $command = $this->updateRomFromRomFileDataQuery(...$props)->toArray();
             extract($command);
 
             $stmt = DB::statement($query, $bindings);

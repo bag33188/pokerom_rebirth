@@ -25,10 +25,13 @@ class AssociateRomWithGame
      */
     public function handle(GameCreated $event): void
     {
-        Game::withoutEvents(function () use ($event) {
-            $event->rom->refresh();
-            $event->game->rom()->associate($event->rom);
-            $event->game->save();
+        // todo: make sure this works!!
+        $game = $event->game;
+        $rom = $event->rom;
+        Game::withoutEvents(function () use ($game, $rom) {
+            $rom->refresh();
+            $game->rom()->associate($rom);
+            $game->save();
         });
     }
 }
