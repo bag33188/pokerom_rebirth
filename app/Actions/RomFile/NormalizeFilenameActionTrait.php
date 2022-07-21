@@ -33,6 +33,6 @@ trait NormalizeFilenameActionTrait
         list($name, $ext) = explode('.', $romFilename, 2);
         $name = trim($name, characters: (_SPACE . "\t\n\r\v\0\x2E"));
         $ext = strtolower($ext);
-        $romFilename = "$name.$ext";
+        $romFilename = "${name}.${ext}";
     }
 }

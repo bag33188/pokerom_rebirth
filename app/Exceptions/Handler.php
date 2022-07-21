@@ -112,9 +112,8 @@ class Handler extends ExceptionHandler
 
     private static function getCurrentErrorRouteAsString(): string
     {
-        $_SOLIDUS = "\u{2F}";
         $baseAppUrl = Config::get('app.url');
         $currentUrl = URL::current();
-        return str_replace("${baseAppUrl}${_SOLIDUS}", $_SOLIDUS, $currentUrl);
+        return str_replace("$baseAppUrl/", '/', $currentUrl);
     }
 }
