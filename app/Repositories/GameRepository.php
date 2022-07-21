@@ -12,9 +12,9 @@ use Illuminate\Database\Eloquent\Collection;
 class GameRepository implements GameRepositoryInterface
 {
     use GameQueries {
-        sortByRomIdAscGenerationAsc as private;
-        formatGameType as private formatGameTypeQuery;
-        findRomsWithNoGame as private findRomsWithNoGameQuery;
+        sortByRomIdAscGenerationAsc as public sortByRomIdAscGenerationAscSequence;
+        formatGameType as private;
+        findRomsWithNoGame as private;
     }
 
     public function findGameIfExists(int $gameId): Game
@@ -24,7 +24,7 @@ class GameRepository implements GameRepositoryInterface
 
     public function getAllGamesSorted(): Collection
     {
-        return Game::all()->sortBy($this->sortByRomIdAscGenerationAsc());
+        return Game::all()->sortBy($this->sortByRomIdAscGenerationAscSequence());
     }
 
     public function getRomAssociatedWithGame(int $gameId): Rom
@@ -34,13 +34,13 @@ class GameRepository implements GameRepositoryInterface
 
     public function getFormattedGameType(string $gameType): string
     {
-        [$query, $bindings] = $this->formatGameTypeQuery($gameType)->getValues();
+        [$query, $bindings] = $this->formatGameType($gameType)->getValues();
         return DB::selectOne($query, $bindings)->gameType;
     }
 
     public function getAllRomsWithNoGame(): Collection
     {
-        ['query' => $query] = $this->findRomsWithNoGameQuery()->toArray();
+        ['query' => $query] = $this->findRomsWithNoGame()->toArray();
         return Rom::fromQuery($query);
     }
 

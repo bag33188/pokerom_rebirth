@@ -13,9 +13,9 @@ use Illuminate\Database\Eloquent\Collection;
 class RomRepository implements RomRepositoryInterface
 {
     use RomQueries {
-        sortByGameIdAscRomSizeAsc as sortByGameIdAscRomSizeAscSequence;
-        findMatchingRomFromFilename as private findMatchingRomFromFilenameQuery;
-        formatRomSize as private formatRomSizeQuery;
+        sortByGameIdAscRomSizeAsc as public sortByGameIdAscRomSizeAscSequence;
+        findMatchingRomFromFilename as private;
+        formatRomSize as private;
     }
 
     public function getSingleRomWithGameInfo(int $romId): Rom
@@ -51,13 +51,13 @@ class RomRepository implements RomRepositoryInterface
     public function searchForRomMatchingRomFile(RomFile $romFile): ?Rom
     {
         ['query' => $query, 'bindings' => $bindings] =
-            $this->findMatchingRomFromFilenameQuery($romFile->filename)->toArray();
+            $this->findMatchingRomFromFilename($romFile->filename)->toArray();
         return Rom::fromQuery($query, $bindings)->first();
     }
 
     public function getFormattedRomSize(int $romSize): string
     {
-        [$query, $bindings] = $this->formatRomSizeQuery($romSize)->getValues();
+        [$query, $bindings] = $this->formatRomSize($romSize)->getValues();
         return DB::selectOne($query, $bindings)->romSize;
     }
 

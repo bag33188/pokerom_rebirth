@@ -14,10 +14,10 @@ use Storage;
 class RomFileRepository implements RomFileRepositoryInterface
 {
     use RomFileAggregations {
-        calcLengthsOfRomFilesKibibytes as private calcLengthsOfRomFilesKibibytesAggregation;
-        splitRomFilenamesIntoFileEntityValues as private splitRomFilenamesIntoFileEntityValuesAggregation;
+        calcLengthsOfRomFilesKibibytes as private;
+        splitRomFilenamesIntoFileEntityValues as private;
         queryRomFileMetadata as private;
-        sortByLengthAscFilenameAsc as sortByLengthAscFilenameAscSequence;
+        sortByLengthAscFilenameAsc as public sortByLengthAscFilenameAscSequence;
     }
 
     public function findRomFileIfExists(string $romFileId): RomFile
@@ -63,12 +63,12 @@ class RomFileRepository implements RomFileRepositoryInterface
 
     public function getAllRomFileLengthsKibibytes(): Collection
     {
-        return RomFile::project($this->calcLengthsOfRomFilesKibibytesAggregation())->get();
+        return RomFile::project($this->calcLengthsOfRomFilesKibibytes())->get();
     }
 
     public function getAllRomFileNameAndFileTypeValues(): Collection
     {
-        return RomFile::project($this->splitRomFilenamesIntoFileEntityValuesAggregation())->get();
+        return RomFile::project($this->splitRomFilenamesIntoFileEntityValues())->get();
     }
 
     public function getRomFilesMetadata(): ResourceCollection
