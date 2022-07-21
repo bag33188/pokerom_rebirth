@@ -2,24 +2,10 @@
 
 namespace App\Queries;
 
-use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\DB;
 use JetBrains\PhpStorm\ArrayShape;
 
 trait RomFileQueriesTrait
 {
-    /**
-     * @param string[] $columns Available columns: filename, filetype, filesize
-     * @return Collection
-     */
-    protected function queryRomFileMetadata(array $columns): Collection
-    {
-        return DB::connection('mongodb')
-            ->table('rom_files') // <- document collection
-            ->get($columns)
-            ->sortBy(['filesize', 'filename']);
-    }
-
     /**
      * projects the {@see AbstractGridFSModel::$filename filename} into an array
      * with the file's name and the file's type as array items.

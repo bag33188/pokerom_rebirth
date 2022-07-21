@@ -5,7 +5,6 @@ namespace App\Interfaces\Repository;
 use App\Models\Rom;
 use App\Models\RomFile;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Support\Collection as ResourceCollection;
 
 interface RomFileRepositoryInterface
 {
@@ -28,8 +27,6 @@ interface RomFileRepositoryInterface
     public function getLengthOfRomFileWithLargestFileSize(): int;
 
     public function getRomFilesCount(): int;
-
-    public function getRomFilesMetadata(): ResourceCollection;
 
     public function listAllFilesInStorage(): array;
 

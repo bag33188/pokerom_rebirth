@@ -6,9 +6,7 @@ use App\Interfaces\Repository\RomFileRepositoryInterface;
 use App\Models\Rom;
 use App\Models\RomFile;
 use App\Queries\RomFileQueriesTrait as RomFileAggregations;
-use Illuminate\Database\Eloquent\Collection as EloquentCollection;
-use Illuminate\Support\Collection as ResourceCollection;
-use MongoDB\BSON\ObjectId;
+use Illuminate\Database\Eloquent\Collection;
 use Storage;
 
 class RomFileRepository implements RomFileRepositoryInterface
@@ -16,7 +14,6 @@ class RomFileRepository implements RomFileRepositoryInterface
     use RomFileAggregations {
         calcLengthsOfRomFilesKibibytes as private;
         splitRomFilenamesIntoFileEntityValues as private;
-        queryRomFileMetadata as private;
         sortByLengthAscFilenameAsc as public sortByLengthAscFilenameAscSequence;
     }
 
@@ -30,12 +27,12 @@ class RomFileRepository implements RomFileRepositoryInterface
         return $this->findRomFileIfExists($romFileId)->rom()->firstOrFail();
     }
 
-    public function getAllRomFilesSorted(): EloquentCollection
+    public function getAllRomFilesSorted(): Collection
     {
         return RomFile::all()->sortBy($this->sortByLengthAscFilenameAscSequence());
     }
 
-    public function getAllRomFilesSortedWithRomData(): EloquentCollection
+    public function getAllRomFilesSortedWithRomData(): Collection
     {
         return RomFile::with('rom')->get()->sortBy($this->sortByLengthAscFilenameAscSequence());
     }
@@ -61,29 +58,14 @@ class RomFileRepository implements RomFileRepositoryInterface
         return RomFile::sum('length');
     }
 
-    public function getAllRomFileLengthsKibibytes(): EloquentCollection
+    public function getAllRomFileLengthsKibibytes(): Collection
     {
         return RomFile::project($this->calcLengthsOfRomFilesKibibytes())->get();
     }
 
-    public function getAllRomFileNameAndFileTypeValues(): EloquentCollection
+    public function getAllRomFileNameAndFileTypeValues(): Collection
     {
         return RomFile::project($this->splitRomFilenamesIntoFileEntityValues())->get();
-    }
-
-    public function getRomFilesMetadata(): ResourceCollection
-    {
-        $columns = array('filename', 'filetype', 'filesize');
-
-        return $this->queryRomFileMetadata($columns)->map(
-            function (
-                /** @var $romFileMetadata array{_id: ObjectId, filename: string, filesize: int, filetype: string} */
-                array $romFileMetadata
-            ): array {
-                $romFileMetadata['_id'] = $romFileMetadata['_id']->__toString();
-                return $romFileMetadata;
-            }
-        );
     }
 
     /**
