@@ -24,10 +24,6 @@
         <p class="inline-block"><code>{{ $romFile->filename }}</code></p>
         <p class="inline-block"><code>{{ $romFile->length }} Bytes</code></p>
         <p class="inline-flex flex-row">
-            @php
-                // set time zone
-                date_default_timezone_set(TIME_ZONE_PST);
-            @endphp
             <span class="font-semibold">Uploaded on</span>
             <span>&nbsp;</span>
             <time class="font-semibold"
