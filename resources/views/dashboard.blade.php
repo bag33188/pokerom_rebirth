@@ -47,8 +47,9 @@
                                 <p class="inline-block">
                                     This web app is a databank of Pok&#xE9;mon ROMs.
                                     <wbr/>
-                                    This databank contains <!--more than-->{{(RomRepo::getRomsCount() - 3) . '+'}} ROMs,
-                                    including all 33 core Pok&#233;mon ROMs.
+                                    This databank contains
+                                    <span id="adv-count"><!--more than-->{{(RomRepo::getRomsCount() - 3) . '+'}}</span>
+                                    ROMs, including all 33 core Pok&#233;mon ROMs.
                                 </p>
                                 <br/>
                                 <p class="italic mt-3 mb-0 pb-0 inline-flex flex-row text-sm">
