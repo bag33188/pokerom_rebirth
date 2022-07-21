@@ -8,6 +8,7 @@ use App\Models\RomFile;
 use App\Queries\RomFileQueriesTrait as RomFileAggregations;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Collection as ResourceCollection;
+use MongoDB\BSON\ObjectId;
 use Storage;
 
 class RomFileRepository implements RomFileRepositoryInterface
@@ -67,10 +68,19 @@ class RomFileRepository implements RomFileRepositoryInterface
     public function getRomFilesMetadata(): ResourceCollection
     {
         $columns = array('filename', 'filetype', 'filesize');
-        return $this->queryRomFileMetadata($columns)->map(function (array $romFileMetadata): array {
-            $romFileMetadata['_id'] = $romFileMetadata['_id']->__toString();
-            return $romFileMetadata;
-        });
+
+        return $this->queryRomFileMetadata($columns)->map(
+        /**
+         * ### map romfile metadata
+         *
+         * @param array{_id: ObjectId, filename: string, filesize: int, filetype: string} $romFileMetadata
+         * @return array{_id: ObjectId, filename: string, filesize: int, filetype: string}
+         */
+            function (array $romFileMetadata): array {
+                $romFileMetadata['_id'] = $romFileMetadata['_id']->__toString();
+                return $romFileMetadata;
+            }
+        );
     }
 
     /**
