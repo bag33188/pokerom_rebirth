@@ -20,6 +20,12 @@ trait RomQueriesTrait
         return new QueryObject($sql, $params);
     }
 
+    /**
+     * @param string $romFileId p1
+     * @param int $romFileSize p2
+     * @param int $romId p3
+     * @return QueryObject
+     */
     protected function updateRomFromRomFileData(string $romFileId, int $romFileSize, int $romId): QueryObject
     {
         $sql =

@@ -28,6 +28,8 @@ class RomFileService implements RomFileServiceInterface
     /**
      * Only pass in the filename as rom files are already need to be stored on the system.
      *
+     * _Cannot use {@see \Illuminate\Http\UploadedFile `UploadedFile`} object_
+     *
      * @param string $romFilename
      * @return RomFile
      */

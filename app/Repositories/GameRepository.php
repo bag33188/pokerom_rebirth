@@ -36,7 +36,7 @@ class GameRepository implements GameRepositoryInterface
 
     public function getAllRomsWithNoGame(): Collection
     {
-        list('query' => $query) = $this->findRomsWithNoGame()->toArray();
+        ['query' => $query] = $this->findRomsWithNoGame()->toArray();
         return Rom::fromQuery($query);
     }
 

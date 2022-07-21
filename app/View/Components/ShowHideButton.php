@@ -14,7 +14,7 @@ class ShowHideButton extends Component
     public string $text;
     public AlpineDisplayState $initialState;
 
-    private const alpineStatesShape = ['hidden' => "!open", 'shown' => "open"];
+    private const ALPINE_STATES_SHAPE = ['hidden' => "!open", 'shown' => "open"];
 
     /**
      * Create a new component instance.
@@ -54,7 +54,7 @@ class ShowHideButton extends Component
         return array('initHide' => $initHide, 'initShow' => $initShow);
     }
 
-    #[ArrayShape(self::alpineStatesShape)]
+    #[ArrayShape(self::ALPINE_STATES_SHAPE)]
     private function getAlpineStates(): array
     {
         return ['hidden' => AlpineDisplayState::HIDE->value, 'shown' => AlpineDisplayState::SHOW->value];
