@@ -8,7 +8,11 @@ use JetBrains\PhpStorm\ArrayShape;
 
 trait RomFileQueriesTrait
 {
-    protected function queryRomFileMetadata(/** @var string[] */ array $columns): Collection
+    /**
+     * @param string[] $columns Available columns: filename, filetype, filesize
+     * @return Collection
+     */
+    protected function queryRomFileMetadata(array $columns): Collection
     {
         return DB::connection('mongodb')
             ->table('rom_files.info') // <- document collection

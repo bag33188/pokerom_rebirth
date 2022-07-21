@@ -15,7 +15,7 @@ use RomFileRepo;
 class RomFileService implements RomFileServiceInterface
 {
     use NormalizeFilenameAction {
-        normalize as normalizeRomFilename;
+        normalize as protected normalizeRomFilename;
     }
 
     public function downloadRomFile(RomFile $romFile): RomFile

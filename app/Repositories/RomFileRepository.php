@@ -6,7 +6,7 @@ use App\Interfaces\Repository\RomFileRepositoryInterface;
 use App\Models\Rom;
 use App\Models\RomFile;
 use App\Queries\RomFileQueriesTrait as RomFileAggregations;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Illuminate\Support\Collection as ResourceCollection;
 use MongoDB\BSON\ObjectId;
 use Storage;
@@ -30,12 +30,12 @@ class RomFileRepository implements RomFileRepositoryInterface
         return $this->findRomFileIfExists($romFileId)->rom()->firstOrFail();
     }
 
-    public function getAllRomFilesSorted(): Collection
+    public function getAllRomFilesSorted(): EloquentCollection
     {
         return RomFile::all()->sortBy($this->sortByLengthAscFilenameAscSequence());
     }
 
-    public function getAllRomFilesSortedWithRomData(): Collection
+    public function getAllRomFilesSortedWithRomData(): EloquentCollection
     {
         return RomFile::with('rom')->get()->sortBy($this->sortByLengthAscFilenameAscSequence());
     }
@@ -61,12 +61,12 @@ class RomFileRepository implements RomFileRepositoryInterface
         return RomFile::sum('length');
     }
 
-    public function getAllRomFileLengthsKibibytes(): Collection
+    public function getAllRomFileLengthsKibibytes(): EloquentCollection
     {
         return RomFile::project($this->calcLengthsOfRomFilesKibibytes())->get();
     }
 
-    public function getAllRomFileNameAndFileTypeValues(): Collection
+    public function getAllRomFileNameAndFileTypeValues(): EloquentCollection
     {
         return RomFile::project($this->splitRomFilenamesIntoFileEntityValues())->get();
     }
