@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 20, 2022 at 08:08 AM
+-- Generation Time: Jul 21, 2022 at 07:08 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -62,7 +62,7 @@ CREATE DEFINER=`bag33188`@`%` PROCEDURE `spUpdateRomFromRomFileData` (IN `ROM_FI
         `rom_size` = CEIL(`ROM_FILE_SIZE` / `base_bytes_unit`), -- get Kibibytes value from bytes
         `has_file` = TRUE
     WHERE `id` = `ROM_ID`;
-    IF `_rollback` = 1 THEN
+    IF `_rollback` = TRUE THEN
         ROLLBACK;
     ELSE
         COMMIT;
@@ -222,7 +222,6 @@ TRUNCATE TABLE `failed_jobs`;
 -- Table structure for table `games`
 --
 -- Creation: Jul 12, 2022 at 06:58 PM
--- Last update: Jul 20, 2022 at 05:50 AM
 --
 
 DROP TABLE IF EXISTS `games`;
@@ -398,6 +397,7 @@ TRUNCATE TABLE `password_resets`;
 -- Table structure for table `personal_access_tokens`
 --
 -- Creation: Jul 06, 2022 at 01:56 AM
+-- Last update: Jul 21, 2022 at 03:02 AM
 --
 
 DROP TABLE IF EXISTS `personal_access_tokens`;
@@ -429,7 +429,8 @@ TRUNCATE TABLE `personal_access_tokens`;
 --
 
 INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `name`, `token`, `abilities`, `last_used_at`, `created_at`, `updated_at`) VALUES
-(17, 'App\\Models\\User', 1, 'auth_token', '49c8155244d691cfcaff8aa6a62e63d080dff97ed45ab28a14ee872f527b90d4', '[\"*\"]', '2022-07-20 12:14:29', '2022-07-20 08:35:24', '2022-07-20 12:14:29');
+(32, 'App\\Models\\User', 13, 'auth_token', '235fcc3e10ff37a9313f99b971f612ddb7eb02a7067e78b28535d67c6387d19e', '[\"*\"]', '2022-07-20 23:46:54', '2022-07-20 20:34:59', '2022-07-20 23:46:54'),
+(33, 'App\\Models\\User', 1, 'auth_token', '765ae9d0a51fb8742d26e85fef5becdbece4afc8eb93f9dc1806364c6682c2e5', '[\"*\"]', '2022-07-21 10:02:35', '2022-07-20 23:47:05', '2022-07-21 10:02:35');
 
 -- --------------------------------------------------------
 
@@ -437,7 +438,7 @@ INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `n
 -- Table structure for table `roms`
 --
 -- Creation: Jul 06, 2022 at 02:20 AM
--- Last update: Jul 20, 2022 at 06:00 AM
+-- Last update: Jul 21, 2022 at 01:25 AM
 --
 
 DROP TABLE IF EXISTS `roms`;
@@ -518,7 +519,7 @@ INSERT INTO `roms` (`id`, `file_id`, `game_id`, `rom_name`, `rom_size`, `rom_typ
 -- Table structure for table `sessions`
 --
 -- Creation: Jul 06, 2022 at 02:20 AM
--- Last update: Jul 20, 2022 at 06:00 AM
+-- Last update: Jul 21, 2022 at 02:45 AM
 --
 
 DROP TABLE IF EXISTS `sessions`;
@@ -547,7 +548,10 @@ TRUNCATE TABLE `sessions`;
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('LGyul9g4kNmbaxsWokxymMCxg7d5iGvz2dCjdn71', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoianh4YTNrNk1WVlRpVUtOcTF3NkhJVHYyOXUxRGR1Q3E3TzA5c3RSNyI7czozOiJ1cmwiO2E6MDp7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjQ2OiJodHRwOi8vcG9rZXJvbV9yZWJpcnRoLnRlc3QvcHVibGljL2FwaS92ZXJzaW9uIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjIxOiJwYXNzd29yZF9oYXNoX3NhbmN0dW0iO3M6NjA6IiQyeSQxMCR3aXAzcXg5MVBsWERrcmouekVqb0MuL3dsSW50Z0lLM1EuckFKZ2d3UWhmWFJGaUlubURabSI7fQ==', 1658296848);
+('7DZS1DrSPfWGuZw4fwSboiGqGU90IqhRijL4aWlx', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiekl4eGxLWTNhblNaYWh6N2Iwa1dScHRubGVQZEhFZU1aSzNnNk5lbCI7czozOiJ1cmwiO2E6MDp7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjQ0OiJodHRwOi8vcG9rZXJvbV9yZWJpcnRoLnRlc3QvcHVibGljL3JvbS1maWxlcyI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7czoyMToicGFzc3dvcmRfaGFzaF9zYW5jdHVtIjtzOjYwOiIkMnkkMTAkd2lwM3F4OTFQbFhEa3JqLnpFam9DLi93bEludGdJSzNRLnJBSmdnd1FoZlhSRmlJbm1EWm0iO30=', 1658371558),
+('DuW1cy5XzAuLBo584BsqTbZBDbaAFeSIw22fcGyc', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiRHRJenFCZzljMTRmWm1BZXpyR2pIbGxaVGU0Y0JENWF0MThiNFpLcyI7czozOiJ1cmwiO2E6MDp7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjM3OiJodHRwOi8vcG9rZXJvbV9yZWJpcnRoLnRlc3Qvcm9tLWZpbGVzIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjIxOiJwYXNzd29yZF9oYXNoX3NhbmN0dW0iO3M6NjA6IiQyeSQxMCR3aXAzcXg5MVBsWERrcmouekVqb0MuL3dsSW50Z0lLM1EuckFKZ2d3UWhmWFJGaUlubURabSI7fQ==', 1658323437),
+('LGyul9g4kNmbaxsWokxymMCxg7d5iGvz2dCjdn71', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoianh4YTNrNk1WVlRpVUtOcTF3NkhJVHYyOXUxRGR1Q3E3TzA5c3RSNyI7czozOiJ1cmwiO2E6MDp7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjQ2OiJodHRwOi8vcG9rZXJvbV9yZWJpcnRoLnRlc3QvcHVibGljL2FwaS92ZXJzaW9uIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjIxOiJwYXNzd29yZF9oYXNoX3NhbmN0dW0iO3M6NjA6IiQyeSQxMCR3aXAzcXg5MVBsWERrcmouekVqb0MuL3dsSW50Z0lLM1EuckFKZ2d3UWhmWFJGaUlubURabSI7fQ==', 1658297367),
+('w9chVCxdmrCrWjw1HgVnoAMVhZsrWrnLxrXtlvBH', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiQjlBUk9jYWFqSVVjazNvQzIxMzNvd2pscW0zZnN1UzRCZktFeW5oRiI7czozOiJ1cmwiO2E6MDp7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjQ0OiJodHRwOi8vcG9rZXJvbV9yZWJpcnRoLnRlc3QvcHVibGljL3JvbS1maWxlcyI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7czoyMToicGFzc3dvcmRfaGFzaF9zYW5jdHVtIjtzOjYwOiIkMnkkMTAkd2lwM3F4OTFQbFhEa3JqLnpFam9DLi93bEludGdJSzNRLnJBSmdnd1FoZlhSRmlJbm1EWm0iO30=', 1658337625);
 
 -- --------------------------------------------------------
 
@@ -685,7 +689,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `roms`
