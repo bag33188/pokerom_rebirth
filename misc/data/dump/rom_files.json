@@ -1,328 +1,330 @@
 [
     {
         "_id": {
-            "$oid": "62c1f0b3124383f348009521"
+            "$oid": "62d938b7043a8d7003c49318"
         },
-        "chunkSize": 1044480,
-        "filename": "0100ABF008968000.xci",
-        "length": 15971909632
+        "filename": "0100ABF008968000",
+        "filesize": 15971909632,
+        "filetype": "xci"
     },
     {
         "_id": {
-            "$oid": "62c1f17fab8651d95f0013c1"
+            "$oid": "62d938b7043a8d7003c49319"
         },
-        "chunkSize": 1044480,
-        "filename": "01008DB008C2C000.xci",
-        "length": 15971909632
+        "filename": "01008DB008C2C000",
+        "filesize": 15971909632,
+        "filetype": "xci"
     },
     {
         "_id": {
-            "$oid": "62c1f28977ab05bb03073041"
+            "$oid": "62d938b7043a8d7003c4931a"
         },
-        "chunkSize": 1044480,
-        "filename": "010018E011D92000.xci",
-        "length": 7985954816
+        "filename": "010018E011D92000",
+        "filesize": 7985954816,
+        "filetype": "xci"
     },
     {
         "_id": {
-            "$oid": "62c1f2feee76382f4702d5c1"
+            "$oid": "62d938b7043a8d7003c4931b"
         },
-        "chunkSize": 1044480,
-        "filename": "0100000011D90000.xci",
-        "length": 4997734912
+        "filename": "0100000011D90000",
+        "filesize": 4997734912,
+        "filetype": "xci"
     },
     {
         "_id": {
-            "$oid": "62c1f35f048436717d0219e1"
+            "$oid": "62d938b7043a8d7003c4931c"
         },
-        "chunkSize": 1044480,
-        "filename": "010003F003A34000.xci",
-        "length": 4851431936
+        "filename": "010003F003A34000",
+        "filesize": 4851431936,
+        "filetype": "xci"
     },
     {
         "_id": {
-            "$oid": "62c1f3cb17c7e0692e0e3101"
+            "$oid": "62d938b7043a8d7003c4931d"
         },
-        "chunkSize": 1044480,
-        "filename": "0100187003A36000.xci",
-        "length": 4468491264
+        "filename": "0100187003A36000",
+        "filesize": 4468491264,
+        "filetype": "xci"
     },
     {
         "_id": {
-            "$oid": "62c1f44459a40296ea057eb1"
+            "$oid": "62d938b7043a8d7003c4931e"
         },
-        "chunkSize": 1044480,
-        "filename": "00040000001B5000_v00.3ds",
-        "length": 4294967295
+        "filename": "00040000001B5000_v00",
+        "filesize": 4294967295,
+        "filetype": "3ds"
     },
     {
         "_id": {
-            "$oid": "62c1f4c0e4946f662b0452e1"
+            "$oid": "62d938b7043a8d7003c4931f"
         },
-        "chunkSize": 1044480,
-        "filename": "00040000001B5100_v00.3ds",
-        "length": 4294967295
+        "filename": "00040000001B5100_v00",
+        "filesize": 4294967295,
+        "filetype": "3ds"
     },
     {
         "_id": {
-            "$oid": "62c1f53f3a9494578d0b1161"
+            "$oid": "62d938b7043a8d7003c49320"
         },
-        "chunkSize": 1044480,
-        "filename": "0004000000175E00_v00.3ds",
-        "length": 4294967295
+        "filename": "0004000000175E00_v00",
+        "filesize": 4294967295,
+        "filetype": "3ds"
     },
     {
         "_id": {
-            "$oid": "62c1f5b3c1565ea1660e89a1"
+            "$oid": "62d938b7043a8d7003c49321"
         },
-        "chunkSize": 1044480,
-        "filename": "0004000000164800_v00.3ds",
-        "length": 4294967295
+        "filename": "0004000000164800_v00",
+        "filesize": 4294967295,
+        "filetype": "3ds"
     },
     {
         "_id": {
-            "$oid": "62c1f6890903d19032057d61"
+            "$oid": "62d938b7043a8d7003c49322"
         },
-        "chunkSize": 1044480,
-        "filename": "000400000011C400_v00.3ds",
-        "length": 2147483648
+        "filename": "000400000011C400_v00",
+        "filesize": 2147483648,
+        "filetype": "3ds"
     },
     {
         "_id": {
-            "$oid": "62c1f6f541d4a0bb3d0ee5e1"
+            "$oid": "62d938b7043a8d7003c49323"
         },
-        "chunkSize": 1044480,
-        "filename": "000400000011C500_v00.3ds",
-        "length": 2147483648
+        "filename": "000400000011C500_v00",
+        "filesize": 2147483648,
+        "filetype": "3ds"
     },
     {
         "_id": {
-            "$oid": "62c1f730345182b6c0067e41"
+            "$oid": "62d938b7043a8d7003c49324"
         },
-        "chunkSize": 1044480,
-        "filename": "0004000000055D00_v00.3ds",
-        "length": 2147483648
+        "filename": "0004000000055D00_v00",
+        "filesize": 2147483648,
+        "filetype": "3ds"
     },
     {
         "_id": {
-            "$oid": "62c1f767449aa5235402b601"
+            "$oid": "62d938b7043a8d7003c49325"
         },
-        "chunkSize": 1044480,
-        "filename": "0004000000055E00_v00.3ds",
-        "length": 2147483648
+        "filename": "0004000000055E00_v00",
+        "filesize": 2147483648,
+        "filetype": "3ds"
     },
     {
         "_id": {
-            "$oid": "62c1f7a69e801668070cba11"
+            "$oid": "62d938b7043a8d7003c49326"
         },
-        "chunkSize": 1044480,
-        "filename": "POKEMON_B2_IREO01.nds",
-        "length": 536870912
+        "filename": "POKEMON_B2_IREO01",
+        "filesize": 536870912,
+        "filetype": "nds"
     },
     {
         "_id": {
-            "$oid": "62c1f7b02b2fe7984b0af731"
+            "$oid": "62d938b7043a8d7003c49327"
         },
-        "chunkSize": 1044480,
-        "filename": "POKEMON_W2_IRDO01.nds",
-        "length": 536870912
+        "filename": "POKEMON_W2_IRDO01",
+        "filesize": 536870912,
+        "filetype": "nds"
     },
     {
         "_id": {
-            "$oid": "62c1f7b9e373f2f86f0fbbe1"
+            "$oid": "62d938b7043a8d7003c49328"
         },
-        "chunkSize": 1044480,
-        "filename": "POKEMON_B_IRBO01.nds",
-        "length": 268435456
+        "filename": "POKEMON_B_IRBO01",
+        "filesize": 268435456,
+        "filetype": "nds"
     },
     {
         "_id": {
-            "$oid": "62c1f7cdf92a4a0a14075881"
+            "$oid": "62d938b7043a8d7003c49329"
         },
-        "chunkSize": 1044480,
-        "filename": "POKEMON_W_IRAO01.nds",
-        "length": 268435456
+        "filename": "POKEMON_W_IRAO01",
+        "filesize": 268435456,
+        "filetype": "nds"
     },
     {
         "_id": {
-            "$oid": "62c1f7db235ab0b7e405b001"
+            "$oid": "62d938b7043a8d7003c4932a"
         },
-        "chunkSize": 1044480,
-        "filename": "POKEMON_HG_IPKE01.nds",
-        "length": 134217728
+        "filename": "POKEMON_HG_IPKE01",
+        "filesize": 134217728,
+        "filetype": "nds"
     },
     {
         "_id": {
-            "$oid": "62c1f7e4146b9ad6a9064351"
+            "$oid": "62d938b7043a8d7003c4932b"
         },
-        "chunkSize": 1044480,
-        "filename": "POKEMON_SS_IPGE01.nds",
-        "length": 134217728
+        "filename": "POKEMON_SS_IPGE01",
+        "filesize": 134217728,
+        "filetype": "nds"
     },
     {
         "_id": {
-            "$oid": "62c1f7ee7debe6e99e028611"
+            "$oid": "62d938b7043a8d7003c4932c"
         },
-        "chunkSize": 1044480,
-        "filename": "POKEMON_PL_CPUE01.nds",
-        "length": 134217728
+        "filename": "POKEMON_PL_CPUE01",
+        "filesize": 134217728,
+        "filetype": "nds"
     },
     {
         "_id": {
-            "$oid": "62c1f7f7032feb564f0014e1"
+            "$oid": "62d938b7043a8d7003c4932d"
         },
-        "chunkSize": 1044480,
-        "filename": "POKEMON_D_ADAE01.nds",
-        "length": 67108864
+        "filename": "POKEMON_D_ADAE01",
+        "filesize": 67108864,
+        "filetype": "nds"
     },
     {
         "_id": {
-            "$oid": "62c1f7fdb7e80025ec04af01"
+            "$oid": "62d938b7043a8d7003c4932e"
         },
-        "chunkSize": 1044480,
-        "filename": "POKEMON_P_APAE.nds",
-        "length": 67108864
+        "filename": "POKEMON_P_APAE",
+        "filesize": 67108864,
+        "filetype": "nds"
     },
     {
         "_id": {
-            "$oid": "62c1f80c199b08211c0e0b91"
+            "$oid": "62d938b7043a8d7003c4932f"
         },
-        "chunkSize": 1044480,
-        "filename": "POKEMON_EMERBPEE01.gba",
-        "length": 16777216
+        "filename": "POKEMON_EMERBPEE01",
+        "filesize": 16777216,
+        "filetype": "gba"
     },
     {
         "_id": {
-            "$oid": "62c1f81672b9730b0704c171"
+            "$oid": "62d938b7043a8d7003c49330"
         },
-        "chunkSize": 1044480,
-        "filename": "POKEMON_FIREBPRE01.gba",
-        "length": 16777216
+        "filename": "POKEMON_FIREBPRE01",
+        "filesize": 16777216,
+        "filetype": "gba"
     },
     {
         "_id": {
-            "$oid": "62c1f81cebac46eb8c087c51"
+            "$oid": "62d938b7043a8d7003c49331"
         },
-        "chunkSize": 1044480,
-        "filename": "POKEMON_LEAFBPGE01.gba",
-        "length": 16777216
+        "filename": "POKEMON_LEAFBPGE01",
+        "filesize": 16777216,
+        "filetype": "gba"
     },
     {
         "_id": {
-            "$oid": "62c1f822e6d1f33ef20719d1"
+            "$oid": "62d938b7043a8d7003c49332"
         },
-        "chunkSize": 1044480,
-        "filename": "POKEMON_RUBYAXVE01.gba",
-        "length": 16777216
+        "filename": "POKEMON_RUBYAXVE01",
+        "filesize": 16777216,
+        "filetype": "gba"
     },
     {
         "_id": {
-            "$oid": "62c1f827f6e3ba8d990035d1"
+            "$oid": "62d938b7043a8d7003c49333"
         },
-        "chunkSize": 1044480,
-        "filename": "POKEMON_SAPPAXPE01.gba",
-        "length": 16777216
+        "filename": "POKEMON_SAPPAXPE01",
+        "filesize": 16777216,
+        "filetype": "gba"
     },
     {
         "_id": {
-            "$oid": "62c1f83010c6d73c6908c841"
+            "$oid": "62d938b7043a8d7003c49334"
         },
-        "chunkSize": 1044480,
-        "filename": "PM_CRYSTAL_BYTE01.gbc",
-        "length": 2097152
+        "filename": "PM_CRYSTAL_BYTE01",
+        "filesize": 2097152,
+        "filetype": "gbc"
     },
     {
         "_id": {
-            "$oid": "62c1f83543c584b6e3008491"
+            "$oid": "62d938b7043a8d7003c49335"
         },
-        "chunkSize": 1044480,
-        "filename": "POKEMON_GLDAAUE01.gbc",
-        "length": 2097152
+        "filename": "POKEMON_GLDAAUE01",
+        "filesize": 2097152,
+        "filetype": "gbc"
     },
     {
         "_id": {
-            "$oid": "62c1f83ad868d1a2d40692b1"
+            "$oid": "62d938b7043a8d7003c49336"
         },
-        "chunkSize": 1044480,
-        "filename": "POKEMON_SLVAAXE01.gbc",
-        "length": 2097152
+        "filename": "POKEMON_SLVAAXE01",
+        "filesize": 2097152,
+        "filetype": "gbc"
     },
     {
         "_id": {
-            "$oid": "62c1f84857a678cc7d0e2b51"
+            "$oid": "62d938b7043a8d7003c49337"
         },
-        "chunkSize": 1044480,
-        "filename": "POKEMON_YELLOW01.gb",
-        "length": 1048576
+        "filename": "POKEMON_YELLOW01",
+        "filesize": 1048576,
+        "filetype": "gb"
     },
     {
         "_id": {
-            "$oid": "62c1f85078ebd701720e71b1"
+            "$oid": "62d938b7043a8d7003c49338"
         },
-        "chunkSize": 1044480,
-        "filename": "POKEMON_GREEN01.gb",
-        "length": 1048576
+        "filename": "POKEMON_GREEN01",
+        "filesize": 1048576,
+        "filetype": "gb"
     },
     {
         "_id": {
-            "$oid": "62c1f8553fc0765cf90218b1"
+            "$oid": "62d938b7043a8d7003c49339"
         },
-        "chunkSize": 1044480,
-        "filename": "POKEMON_BLUE01.gb",
-        "length": 1048576
+        "filename": "POKEMON_BLUE01",
+        "filesize": 1048576,
+        "filetype": "gb"
     },
     {
         "_id": {
-            "$oid": "62c1f859f80501a0830fdd51"
+            "$oid": "62d938b7043a8d7003c4933a"
         },
-        "chunkSize": 1044480,
-        "filename": "POKEMON_RED01.gb",
-        "length": 1048576
+        "filename": "POKEMON_RED01",
+        "filesize": 1048576,
+        "filetype": "gb"
     },
     {
         "_id": {
-            "$oid": "62c1f860f8ff95e09f094bf1"
+            "$oid": "62d938b7043a8d7003c4933b"
         },
-        "chunkSize": 1044480,
-        "filename": "pokeprism.gbc",
-        "length": 2097152
+        "filename": "pokeprism",
+        "filesize": 2097152,
+        "filetype": "gbc"
     },
     {
         "_id": {
-            "$oid": "62c1f866133b94ba3a0ccc91"
+            "$oid": "62d938b7043a8d7003c4933c"
         },
-        "chunkSize": 1044480,
-        "filename": "pokemon_brown_2014-red_hack.gb",
-        "length": 2097152
+        "filename": "pokemon_brown_2014-red_hack",
+        "filesize": 2097152,
+        "filetype": "gb"
     },
     {
         "_id": {
-            "$oid": "62c1f86e73d95a1cf70f7bd1"
+            "$oid": "62d938b7043a8d7003c4933d"
         },
-        "chunkSize": 1044480,
-        "filename": "genesis-final-2019-08-23.gba",
-        "length": 16777216
+        "filename": "genesis-final-2019-08-23",
+        "filesize": 16777216,
+        "filetype": "gba"
     },
     {
         "_id": {
-            "$oid": "62c1f874529b5091fb0e5481"
+            "$oid": "62d938b7043a8d7003c4933e"
         },
-        "chunkSize": 1044480,
-        "filename": "Pokemon_Ash_Gray_4-5-3.gba",
-        "length": 16777216
+        "filename": "Pokemon_Ash_Gray_4-5-3",
+        "filesize": 16777216,
+        "filetype": "gba"
     },
     {
         "_id": {
-            "$oid": "62c1f87d2c665156bd0f3071"
+            "$oid": "62d938b7043a8d7003c4933f"
         },
-        "chunkSize": 1044480,
-        "filename": "RenegadePlatinum.nds",
-        "length": 104923028
+        "filename": "RenegadePlatinum",
+        "filesize": 104923028,
+        "filetype": "nds"
     },
     {
-        "_id": { "$oid": "62d795c6ee387f72b10c0de1" },
-        "chunkSize": 1044480,
-        "filename": "01001F5010DFA000.xci",
-        "length": 7985954816
+        "_id": {
+            "$oid": "62d938b7043a8d7003c49340"
+        },
+        "filename": "01001F5010DFA000",
+        "filesize": 7985954816,
+        "filetype": "xci"
     }
 ]
