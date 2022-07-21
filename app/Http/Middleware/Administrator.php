@@ -19,6 +19,7 @@ class Administrator
      * @param Request $request
      * @param Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
      * @return Response|RedirectResponse|JsonResponse
+     * @throws HttpResponseException
      */
     public function handle(Request $request, Closure $next): Response|RedirectResponse|JsonResponse
     {
@@ -27,7 +28,6 @@ class Administrator
         } else if (!$request->expectsJson()) {
             return response()->redirectTo(RouteServiceProvider::HOME);
         } else {
-            /** @throws HttpResponseException */
             abort(HttpStatus::HTTP_FORBIDDEN, "This action is unauthorized.");
         }
     }
