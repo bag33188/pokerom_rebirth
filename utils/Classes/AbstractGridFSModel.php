@@ -12,7 +12,8 @@ use Jenssegers\Mongodb\Eloquent\Model as MongoDbModel;
 abstract class AbstractGridFSModel extends MongoDbModel
 {
     /**
-     * #### BSON Type: ObjectID (`objectId`)
+     * ## _id
+     * ### BSON Type: ObjectID (`objectId`)
      *
      * **The ID of the file.**
      *
@@ -21,7 +22,8 @@ abstract class AbstractGridFSModel extends MongoDbModel
     public readonly string $_id;
 
     /**
-     * #### BSON Type: int32 (`int`)
+     * ## chunkSize
+     * ### BSON Type: int32 (`int`)
      *
      * **Size of chunks file is stored as in grid.**
      *
@@ -30,7 +32,8 @@ abstract class AbstractGridFSModel extends MongoDbModel
     public readonly int $chunkSize;
 
     /**
-     * #### BSON Data Type: String (`string`)
+     * ## filename
+     * ### BSON Data Type: String (`string`)
      *
      * **Name of file.**
      *
@@ -39,7 +42,8 @@ abstract class AbstractGridFSModel extends MongoDbModel
     public readonly string $filename;
 
     /**
-     * #### BSON Types: int64 (`long`), int32 (`int`)
+     * ## length
+     * ### BSON Types: int64 (`long`), int32 (`int`)
      *
      * **Size of file in _bytes_.**
      *
@@ -48,7 +52,8 @@ abstract class AbstractGridFSModel extends MongoDbModel
     public readonly int $length;
 
     /**
-     * #### BSON Type: Date (`date`)
+     * ## uploadDate
+     * ### BSON Type: Date (`date`)
      *
      * **Date file was uploaded.**
      *
@@ -57,7 +62,8 @@ abstract class AbstractGridFSModel extends MongoDbModel
     public readonly string $uploadDate;
 
     /**
-     * #### BSON Data Type: String (`string`)
+     * ## md5
+     * ### BSON Data Type: String (`string`)
      *
      * **The `md5` hash for the file.**
      *

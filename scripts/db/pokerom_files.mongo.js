@@ -1,5 +1,5 @@
 const mongoURI = // DSN
-    "mongodb://brock:3931Sunflower!@localhost:27017/?authMechanism=SCRAM-SHA-256&authSource=admin";
+    "mongodb://brock:3931Sunflower!@localhost:27017/?authSource=admin&authMechanism=SCRAM-SHA-256";
 
 conn = new Mongo("localhost:27017");
 
@@ -60,7 +60,7 @@ db.createCollection("rom.chunks", {
     validator: {
         $jsonSchema: {
             bsonType: "object",
-            /* required: ["files_id", "n", "data"], */
+            required: ["files_id", "n", "data"],
             properties: {
                 files_id: {
                     bsonType: "objectId",
