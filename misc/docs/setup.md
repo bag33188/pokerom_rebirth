@@ -103,8 +103,9 @@ upload_max_filesize=20G
 max_file_uploads=20
 default_socket_timeout=-1
 file_uploads=On
-upload_tmp_dir="C:\xampp\tmp"
 exit_on_timeout=false
+upload_tmp_dir="C:\xampp\tmp"
+; allow_url_include=On ; deprecated
 ```
 
 ### PHP Fast CGI

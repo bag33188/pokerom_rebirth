@@ -34,3 +34,6 @@ https://www.youtube.com/watch?v=2BU1OwPOdrc&ab_channel=CodingFaculty
 [never-triggers-?]: https://salesforce.stackexchange.com/a/367977 "interesting, take a look"
 [mongodb-divide-agg]: https://www.mongodb.com/docs/manual/reference/operator/aggregation/divide/
 [laravel-eloquent-jessengers-hybrid-db-relationship]: https://zappysys.com/blog/ssis-loading-data-into-mongodb-upsert-update-delete-insert/
+
+[public folder serve1]: https://stackoverflow.com/questions/28364496/laravel-5-remove-public-from-url
+[public folder serve2]: https://stackoverflow.com/questions/40756665/how-to-make-public-folder-as-root-in-laravel

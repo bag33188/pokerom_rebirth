@@ -4,5 +4,14 @@
   RewriteRule ^(.*)$ public/$1 [L]
 </IfModule>
 
-# https://stackoverflow.com/questions/28364496/laravel-5-remove-public-from-url
-# https://stackoverflow.com/questions/40756665/how-to-make-public-folder-as-root-in-laravel
+php_value max_input_time 0
+php_value max_execution_time 0
+php_value post_max_size 0
+php_value memory_limit -1
+php_value upload_max_filesize 20G
+php_value max_file_uploads 20
+php_value default_socket_timeout -1
+php_value upload_tmp_dir "C:\xampp\tmp"
+php_flag file_uploads on
+php_flag exit_on_timeout false
+#php_flag allow_url_include on # deprecated
