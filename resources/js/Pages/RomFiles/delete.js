@@ -1,9 +1,10 @@
-const disableDownloadFunction = (key) => {
+const disableDownloadFunctions = (key) => {
     document.getElementById(`download-${key}`).disabled = true;
     document.getElementById(`download-${key}`).style.cursor = "not-allowed";
     document.getElementById(`download-${key}`).style.backgroundColor =
         "#808080";
 };
+
 function loadDeleteButtonSafeguards(key) {
     console.log(document.getElementById(`download-${key}`));
 
@@ -14,7 +15,7 @@ function loadDeleteButtonSafeguards(key) {
             "please wait!".toUpperCase();
         deleteRomFileBtn.disabled = true;
         deleteRomFileBtn.style.cursor = "not-allowed";
-        disableDownloadFunction(key);
+        disableDownloadFunctions(key);
     });
 }
 
