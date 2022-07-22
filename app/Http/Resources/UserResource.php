@@ -14,7 +14,7 @@ class UserResource extends JsonResource
         'id' => "int",
         'name' => "string",
         'email' => "string",
-        # 'role' => "string",
+        'role' => "string",
         'created_at' => "\Illuminate\Support\Carbon|null",
         'updated_at' => "\Illuminate\Support\Carbon|null"
     ];
@@ -34,7 +34,7 @@ class UserResource extends JsonResource
             'email' => $this->email,
             # 'email_verified_at' => $this->email_verified_at,
             # 'password' => $this->password,
-            # 'role' => $this->role,
+            'role' => $this->role,
             # 'remember_token' => $this->remember_token,
             # 'current_team_id' => $this->current_team_id,
             # 'profile_photo_path' => $this->profile_photo_path,
