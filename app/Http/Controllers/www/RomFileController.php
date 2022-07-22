@@ -96,7 +96,7 @@ class RomFileController extends ViewController
     }
 
     /**
-     * Download ROM File resource with streamed response
+     * Download ROM File resource with Symfony {@see StreamedResponse}
      *
      * @param RomFile $romFile
      * @return StreamedResponse
