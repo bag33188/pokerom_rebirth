@@ -20,10 +20,10 @@
     data-rom-file-id="{{ $romFile->_id }}"
     id="tile-{{ $index + 1 }}"
     {!! preg_replace($eosRegExp, _SPACE, $tileClassesStr) !!}>
-    <div class="p-2 border rounded-md shadow-sm border-gray-200 flex flex-col">
+    <div class="p-2 border rounded-md shadow-inner border-gray-300 flex flex-col">
         <p class="inline-block"><code>{{ $romFile->filename }}</code></p>
         <p class="inline-block"><code>{{ $romFile->length }} Bytes</code></p>
-        <p class="inline-flex flex-row">
+        <p class="inline-flex flex-row flex-wrap">
             <span class="font-semibold">Uploaded on</span>
             <span>&nbsp;</span>
             <time class="font-semibold"
