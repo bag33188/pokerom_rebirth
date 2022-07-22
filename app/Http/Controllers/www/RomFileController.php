@@ -12,7 +12,9 @@ use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
 use RomFileRepo;
+use Symfony\Component\HttpFoundation\HeaderUtils;
 use Symfony\Component\HttpFoundation\Response as HttpStatus;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use URL;
 
@@ -95,12 +97,13 @@ class RomFileController extends ViewController
 
     public function download(RomFile $romFile): StreamedResponse
     {
+        $disposition = HeaderUtils::makeDisposition(ResponseHeaderBag::DISPOSITION_ATTACHMENT, $romFile->filename);
         return new StreamedResponse(function () use ($romFile) {
             $this->romFileService->downloadRomFile($romFile);
-        }, HttpStatus::HTTP_ACCEPTED, array(
-                'Content-Type' => ContentType::OCTET_STREAM->value,
-                'Content-Transfer-Encoding' => 'chunked',
-                'Content-Disposition' => 'attachment; filename="' . $romFile->filename . '"')
-        );
+        }, HttpStatus::HTTP_ACCEPTED, [
+            'Content-Type' => ContentType::OCTET_STREAM->value,
+            'Content-Transfer-Encoding' => 'chunked',
+            'Content-Disposition' => $disposition
+        ]);
     }
 }

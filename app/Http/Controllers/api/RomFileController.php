@@ -13,9 +13,10 @@ use App\Models\RomFile;
 use Gate;
 use Illuminate\{Auth\Access\AuthorizationException, Http\JsonResponse};
 use RomFileRepo;
+use Symfony\Component\HttpFoundation\HeaderUtils;
 use Symfony\Component\HttpFoundation\Response as HttpStatus;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\HttpFoundation\StreamedResponse;
-
 
 class RomFileController extends ApiController
 {
@@ -57,13 +58,14 @@ class RomFileController extends ApiController
     public function download(string $romFileId): StreamedResponse
     {
         $romFile = RomFileRepo::findRomFileIfExists($romFileId);
+        $disposition = HeaderUtils::makeDisposition(ResponseHeaderBag::DISPOSITION_ATTACHMENT, $romFile->filename);
         return new StreamedResponse(function () use ($romFile) {
             $this->romFileService->downloadRomFile($romFile);
-        }, HttpStatus::HTTP_ACCEPTED, array(
-                'Content-Type' => ContentType::OCTET_STREAM->value,
-                'Content-Transfer-Encoding' => 'chunked',
-                'Content-Disposition' => 'attachment; filename="' . $romFile->filename . '"')
-        );
+        }, HttpStatus::HTTP_ACCEPTED, [
+            'Content-Type' => ContentType::OCTET_STREAM->value,
+            'Content-Transfer-Encoding' => 'chunked',
+            'Content-Disposition' => $disposition
+        ]);
     }
 
     /**
@@ -88,9 +90,9 @@ class RomFileController extends ApiController
     {
         $romFile = RomFileRepo::findRomFileIfExists($romFileId);
         $this->authorize('delete', $romFile);
-        $exec = $this->romFileService->deleteRomFile($romFile);
+        $execCommand = $this->romFileService->deleteRomFile($romFile);
         return response()->json(
-            ['message' => "file '" . $exec->filename . "' deleted!", 'success' => true],
+            ['message' => "file '" . $execCommand->filename . "' deleted!", 'success' => true],
             HttpStatus::HTTP_OK
         );
     }

@@ -83,8 +83,8 @@ class RomController extends ApiController
     {
         $rom = RomRepo::findRomIfExists($romId);
         $this->authorize('update', $rom);
-        $exec = $this->romService->linkRomToRomFileIfExists($rom);
-        if ($exec !== false) {
+        $execCommand = $this->romService->linkRomToRomFileIfExists($rom);
+        if ($execCommand !== false) {
             $rom->refresh();
             return response()->json([
                 'message' => "file found and linked! file id: " . $rom->romFile->_id,
