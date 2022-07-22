@@ -105,7 +105,8 @@ default_socket_timeout=-1
 file_uploads=On
 exit_on_timeout=false
 upload_tmp_dir="C:\xampp\tmp"
-; allow_url_include=On ; deprecated
+; the following config options is deprecated
+; allow_url_include=On
 ```
 
 ### PHP Fast CGI
