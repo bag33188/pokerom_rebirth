@@ -1,8 +1,8 @@
 const disableDownloadFunctions = (key) => {
-    document.getElementById(`download-${key}`).disabled = true;
-    document.getElementById(`download-${key}`).style.cursor = "not-allowed";
-    document.getElementById(`download-${key}`).style.backgroundColor =
-        "#888888";
+    let downloadRomFileBtn = document.getElementById(`download-${key}`);
+    downloadRomFileBtn.disabled = true;
+    downloadRomFileBtn.style.cursor = "not-allowed";
+    downloadRomFileBtn.style.backgroundColor = "#888888";
 };
 
 function loadDeleteButtonSafeguards(key) {
