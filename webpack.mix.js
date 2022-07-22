@@ -47,6 +47,14 @@ mix.js(
     path.join(resourcesJs, "Pages", "Roms", "index.js"),
     path.join(assetsJs, "pages", "roms.index.js")
 );
+mix.js(
+    path.join(resourcesJs, "Pages", "RomFiles", "create.js"),
+    path.join(assetsJs, "pages", "rom-files.create.js")
+);
+mix.js(
+    path.join(resourcesJs, "Pages", "RomFiles", "delete.js"),
+    path.join(assetsJs, "pages", "rom-files.delete.js")
+);
 
 mix.options({ legacyNodePolyfills: false });
 

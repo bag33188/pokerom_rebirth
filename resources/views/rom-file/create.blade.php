@@ -1,6 +1,9 @@
 @push('styles')
     <link rel="stylesheet" type="text/css" href="{{ mix('assets/css/punch.css') }}"/>
 @endpush
+@push('scripts')
+    <script type="text/javascript" src="{{mix('assets/js/pages/rom-files.create.js')}}"></script>
+@endpush
 @php
     $romFilesDirCount = count($romFilesList);
 @endphp
@@ -31,22 +34,10 @@
                         @endforeach
                     </x-form-select>
                 </div>
-
                 <div class="my-4">
                     <x-punch-button type="submit" text="Upload!" id="submit-rom-file-btn"/>
                 </div>
             </form>
         @endunless
     </div>
-    <script>
-        let btn;
-        Array.prototype.slice.call(document.getElementById('submit-rom-file-btn').childNodes).forEach((e) => {
-            if (e.nodeName === 'BUTTON') btn = e;
-        })
-        console.log(btn)
-        document.getElementById('rom-file-create-form').addEventListener('submit', function () {
-            a.disabled = true;
-            a.textContent = 'PLEASE WAIT... THIS COULD TAKE A WHILE';
-        })
-    </script>
 </x-app-layout>

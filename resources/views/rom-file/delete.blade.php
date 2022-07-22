@@ -20,14 +20,10 @@
     $romFileKey = getStringValueFromKey($key);
 @endphp
 @push('scripts')
+    <script type="text/javascript" src="{{mix('assets/js/pages/rom-files.delete.js')}}"></script>
     <script type="text/javascript">
         $(document).ready(function () {
-            const key = {{ Js::from($romFileKey) }};
-            let al = document.getElementById(`delete-${key}`)
-            al.addEventListener('submit', function () {
-                document.getElementById(`delete-${key}-text`).textContent = 'please wait!';
-                document.getElementById(`delete-${key}-btn`).disabled = true;
-            });
+            loadDeleteButtonSafeguards({{ Js::from($romFileKey) }});
         })
     </script>
 @endpush

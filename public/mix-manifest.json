@@ -2,6 +2,8 @@
     "/assets/js/app.js": "/assets/js/app.js",
     "/assets/js/pages/dashboard.index.js": "/assets/js/pages/dashboard.index.js",
     "/assets/js/pages/roms.index.js": "/assets/js/pages/roms.index.js",
+    "/assets/js/pages/rom-files.create.js": "/assets/js/pages/rom-files.create.js",
+    "/assets/js/pages/rom-files.delete.js": "/assets/js/pages/rom-files.delete.js",
     "/assets/css/app.css": "/assets/css/app.css",
     "/assets/css/punch.css": "/assets/css/punch.css",
     "/assets/js/bundle.js": "/assets/js/bundle.js"
