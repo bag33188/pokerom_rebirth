@@ -88,7 +88,7 @@ Protocols h2 h2c http/1.1
 
 127.0.0.1        localhost
 ::1              localhost
-127.0.0.1 pokerom_rebirth.test
+127.0.0.1        pokerom_rebirth.test
 ```
 
 ### PHP Config
