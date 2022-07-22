@@ -22,7 +22,7 @@ class RomFile extends MongoDbModel
 
     public function getObjectId(): ObjectId
     {
-        return objectId($this->getKey());
+        return new ObjectId(strval($this->getKey()));
     }
 
     public function rom(): BelongsTo

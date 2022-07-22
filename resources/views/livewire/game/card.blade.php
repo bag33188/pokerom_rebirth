@@ -28,7 +28,7 @@
         </ul>
     </div>
     <button type="button"
-            class="{{implode(_SPACE, $moreInfoBtnClasses)}}"
+            class="{{joinHtmlClasses($moreInfoBtnClasses)}}"
             wire:click="$emitUp('show', {{$game->id}})">
         <span class="order-0">More Info</span>
         <span class="order-1">&nbsp;</span>

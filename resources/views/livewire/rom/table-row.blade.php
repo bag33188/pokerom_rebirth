@@ -21,7 +21,7 @@
         @if($rom->has_file)
             <x-rom-file-download :rom-file="$rom->romFile">
                 <x-slot:button>
-                    <button type="submit" class="{{ join(_SPACE, $downloadBtnClasses) }}">
+                    <button type="submit" class="{{ joinHtmlClasses($downloadBtnClasses) }}">
                         <span class="order-0">@include('partials._download-icon')</span>
                         <span class="order-1 ml-2">Download!</span>
                     </button>
@@ -36,7 +36,7 @@
     </td>
     <td class="px-6 py-4">
         <button type="button"
-                class="{{ implode(_SPACE, $getInfoBtnClasses) }}"
+                class="{{ joinHtmlClasses($getInfoBtnClasses) }}"
                 wire:click="getInfo({{$rom->id}})">
             Get Info
         </button>
