@@ -5,11 +5,12 @@ $(document).ready(function () {
     document.forms["create-rom-file-form"].addEventListener(
         "submit",
         function () {
+            const _CRLF = "\r\n";
             uploadBtn.style.whiteSpace = "pre";
             uploadBtn.disabled = true;
             uploadBtn.textContent =
-                "PLEASE WAIT....\r\nTHIS COULD TAKE A WHILE".capitalize(
-                    new CapitalizationOptions(true, "\r\n")
+                `PLEASE WAIT....${_CRLF}THIS COULD TAKE A WHILE`.capitalize(
+                    new CapitalizationOptions(true, _CRLF)
                 );
             romFilenameField.style.pointerEvents = "none";
             romFilenameField.style.backgroundColor = "#F5F5F5"; // HTML WhiteSmoke

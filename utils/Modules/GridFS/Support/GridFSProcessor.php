@@ -29,9 +29,9 @@ class GridFSProcessor extends GridFS implements GridFSProcessorInterface
     public final function upload(string $filename): void
     {
         self::appendUploadPathToFilename($filename);
+        $originalFileName = self::getFileOriginalName($filename);
         $this->throwExceptionIfFileDoesNotExistInAppStorage(filepath: $filename);
         $stream = fopen($filename, 'rb', true);
-        $originalFileName = self::getFileOriginalName($filename);
         $this->gridFSConnection->bucket->uploadFromStream($originalFileName, $stream);
         fclose($stream);
     }
@@ -63,8 +63,8 @@ class GridFSProcessor extends GridFS implements GridFSProcessorInterface
 
     private static function parseStoragePath(): array|string|null
     {
-        $DOCUMENT_ROOT = $_SERVER['DOCUMENT_ROOT'];
-        return str_replace($DOCUMENT_ROOT, '', self::parseUploadPath());
+        $_DOCUMENT_ROOT = $_SERVER['DOCUMENT_ROOT'];
+        return str_replace($_DOCUMENT_ROOT, '', self::parseUploadPath());
     }
 
     private static function getFileOriginalName(string $filename): string|array
