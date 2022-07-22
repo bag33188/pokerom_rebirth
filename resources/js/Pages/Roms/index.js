@@ -1,5 +1,5 @@
 async function getApiVersion() {
-    const apiUrl = "http://pokerom_rebirth.test/public/api";
+    const apiUrl = "http://pokerom_rebirth.test/api";
     const response = await fetch(`${apiUrl}/version`);
     if (!response.ok) {
         throw new Error(`An error has occurred: ${response.status}`);
@@ -7,10 +7,12 @@ async function getApiVersion() {
     return response.json();
 }
 
-const loadApiVersionAttr = async () => {
-    const { version: apiVersion } = await getApiVersion();
-    const romsContainer = document.getElementById("roms-container");
-    romsContainer.setAttribute("data-api-version", apiVersion);
-};
+const apiVersionResponse = async () => await getApiVersion();
 
-loadApiVersionAttr().catch((e) => console.error(e));
+apiVersionResponse()
+    .then(({ version: apiVersion }) => {
+        const romsContainer = document.getElementById("roms-container");
+        let attrData = ["data-api-version", apiVersion];
+        romsContainer.setAttribute(...attrData);
+    })
+    .catch((e) => console.error(e));
