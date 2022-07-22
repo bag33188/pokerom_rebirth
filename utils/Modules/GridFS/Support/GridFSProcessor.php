@@ -10,11 +10,13 @@ use Utils\Modules\FileDownloader;
 
 class GridFSProcessor extends GridFS implements GridFSProcessorInterface
 {
-    private static string $gridFilesUploadPath;
+    protected static string $gridFilesUploadPath;
 
     public function __construct(private readonly AbstractGridFSConnection $gridFSConnection)
     {
-        self::$gridFilesUploadPath = config('gridfs.fileUploadPath');
+        if (empty(self::$gridFilesUploadPath)) {
+            self::$gridFilesUploadPath = config('gridfs.fileUploadPath');
+        }
 
         $this->setGridFSEntities();
     }

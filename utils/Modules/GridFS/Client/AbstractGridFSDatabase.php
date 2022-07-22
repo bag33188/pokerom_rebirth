@@ -43,8 +43,9 @@ abstract class AbstractGridFSDatabase extends GridFS
         self::$mongoConfig = config('database.connections.mongodb');
     }
 
-    public function mongoURI(): string
+    public final function mongoURI(): string
     {
+        // does not have compatibility with atlas
         $dsnBuilder = _SPACE .
             self::$mongoConfig['driver'] . '://' .
             self::$mongoConfig['username'] . ':' .
@@ -58,6 +59,6 @@ abstract class AbstractGridFSDatabase extends GridFS
                 '&authSource=' .
                 (@self::$mongoConfig['options']['authSource'] ?? 'admin');
         }
-        return ltrim($dsnBuilder);
+        return ltrim($dsnBuilder, _SPACE);
     }
 }
