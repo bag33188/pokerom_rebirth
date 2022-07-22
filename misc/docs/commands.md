@@ -46,7 +46,9 @@ ng lint
 
 `mongoexport --collection=events --db=reporting --out=events.json --jsonformat=relaxed`
 
-`mongofiles --verbose -d music -l="05 - Together Forever_01.wav" --type="audio/x-wav" --writeConcern="{w:'majority'}" put "05 - Together Forever_01.wav"`
+`mongofiles --verbose -d music -l="05 - Together Forever_01.wav" --type="audio/x-wav" put "05 - Together Forever_01.wav"`
+
+[//]: # (--writeConcern="{w:'majority'}"  only for shards/clusters)
 
 `!!! php artisan migrate:rollback`
 
