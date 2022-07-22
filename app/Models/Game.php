@@ -48,7 +48,7 @@ class Game extends Model
     protected function gameType(): Attribute
     {
         return Attribute::make(
-            get: fn($value) => str_capitalize($value, true, 2, '-')
+            get: fn($value) => str_capitalize($value, true, '-', 2)
         );
     }
 

@@ -15,7 +15,7 @@ if (!function_exists('str_capitalize')) {
      * @param string $separator Set to any string value if you wish to distinguish the words in your string **by a character other than space**
      * @return string|null
      */
-    function str_capitalize(string $value, bool $deep = false, int $depth = 0, string $separator = _SPACE): ?string
+    function str_capitalize(string $value, bool $deep = false, string $separator = _SPACE, int $depth = 0): ?string
     {
         $value = trim($value);
         if (!strlen($value) || !$value) return null;

@@ -18,7 +18,7 @@
             <h2 class="text-center text-lg mt-7">No ROM Files found in <samp>{{ROM_FILES_DIRNAME}}</samp> folder</h2>
         @else
             <x-jet-validation-errors class="mb-4"/>
-            <form action="{{route('rom-files.store')}}" id="rom-file-create-form" method="POST"
+            <form action="{{route('rom-files.store')}}" name="create-rom-file-form" method="POST"
                   enctype="multipart/form-data">
                 @csrf
                 @method('POST')
@@ -35,7 +35,7 @@
                     </x-form-select>
                 </div>
                 <div class="my-4">
-                    <x-punch-button type="submit" text="Upload!" id="submit-rom-file-btn"/>
+                    <x-punch-button type="submit" text="Upload!" data-name="submit-rom-file"/>
                 </div>
             </form>
         @endunless

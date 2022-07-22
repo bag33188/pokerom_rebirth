@@ -34,7 +34,7 @@
                         @foreach(GAME_TYPES as $index => $gameType)
                             <option value="{{$gameType}}"
                                     wire:key="game-type-{{$index + 1}}"
-                            >{{str_capitalize($gameType, true, 2, '-')}}</option>
+                            >{{str_capitalize($gameType, true, '-', 2)}}</option>
                         @endforeach
                     </x-form-select>
                 </div>

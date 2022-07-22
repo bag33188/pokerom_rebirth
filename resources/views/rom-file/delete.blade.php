@@ -35,14 +35,13 @@
     class="inline-block"
     action="{{route('rom-files.delete', ['romFile' => $romFile])}}"
     method="POST"
-    id="delete-{{$romFileKey}}"
+    name="delete-{{$romFileKey}}-form"
 >
     @method('DELETE')
     @csrf
     <div class="flex justify-end">
         <x-jet-danger-button id="delete-{{$romFileKey}}-btn" type="submit">
-            <p id="delete-{{$romFileKey}}-text" class="inline">Delete&#160;<span
-                    class="font-bold">{{$romFile->filename}}</span></p>
+            <p class="inline">Delete&#160;<span class="font-bold">{{$romFile->filename}}</span></p>
         </x-jet-danger-button>
     </div>
 </form>
