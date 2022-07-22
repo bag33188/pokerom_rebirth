@@ -14,7 +14,12 @@ class HomeController extends ViewController
 {
     public const HOME_PAGE_NAME = 'Dashboard';
 
-    public function index(): View|Application|Factory
+    public function __construct()
+    {
+        $this->middleware('auth:web');
+    }
+
+    public function __invoke(): View|Application|Factory
     {
         return view('dashboard', [
             'username' => strtolower($this->getUsername()),

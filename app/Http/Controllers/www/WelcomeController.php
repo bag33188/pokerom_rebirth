@@ -9,7 +9,12 @@ use Response;
 
 class WelcomeController extends ViewController
 {
-    public function index(): ResponseView
+    public function __construct()
+    {
+        $this->middleware('guest');
+    }
+
+    public function __invoke(): ResponseView
     {
         return Response::view('welcome', [
             'page_title' => $this->makePageTitleValue()
