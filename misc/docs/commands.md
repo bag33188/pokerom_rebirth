@@ -48,6 +48,8 @@ ng lint
 
 `mongofiles --verbose -d music -l="05 - Together Forever_01.wav" --type="audio/x-wav" put "05 - Together Forever_01.wav"`
 
+`mongofiles --verbose -d music -l="{{filename}}" --type="audio/x-wav" put "{{filename}}"`
+
 [//]: # (--writeConcern="{w:'majority'}"  only for shards/clusters)
 
 `!!! php artisan migrate:rollback`
