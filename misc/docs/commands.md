@@ -38,7 +38,7 @@ ng lint
 
 `mysql -u bag33188 -p 3931Sunflower$`
 
-`mongofiles.exe -d gridfs put song.mp3`
+`mongofiles.exe -d music put song.mp3`
 
 `mongofiles.exe -d pokerom_files put POKEMON_SLVAAXE01.gbc`
 
