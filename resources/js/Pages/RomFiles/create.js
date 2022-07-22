@@ -6,11 +6,15 @@ $(document).ready(function () {
             const BUTTON_NODE_NAME = "BUTTON";
             if (e.nodeName === BUTTON_NODE_NAME) uploadBtn = e;
         });
+    const selectRomFilename = document.querySelector(
+        "select[name=rom_filename]"
+    );
     document
         .getElementById("rom-file-create-form")
         .addEventListener("submit", function () {
             uploadBtn.disabled = true;
             uploadBtn.textContent = "PLEASE WAIT....THIS COULD TAKE A WHILE";
-            document.getElementById("romFile").style.pointerEvents = "none";
+            selectRomFilename.style.pointerEvents = "none";
+            selectRomFilename.style.backgroundColor = "#F5F5F5"; // HTML WhiteSmoke
         });
 });

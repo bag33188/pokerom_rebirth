@@ -28,7 +28,7 @@
                         <x-rom-file-download :rom-file="$romFile">
                             <x-slot name="button">
                                 <button type="submit" class="{!! join(_SPACE, $downloadBtnClasses) !!}"
-                                        id="download-{{$romFile->_id}}">
+                                        id="download-{{$romFile->getKey()}}-btn">
                                     <span class="order-1">@include('partials._download-icon')</span>
                                     <span class="order-0 mr-1.5">Download!</span>
                                 </button>

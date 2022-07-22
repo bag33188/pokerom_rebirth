@@ -1,13 +1,13 @@
 const disableDownloadFunctions = (key) => {
-    let downloadRomFileBtn = document.getElementById(`download-${key}`);
+    const downloadRomFileBtn = document.getElementById(`download-${key}-btn`);
     downloadRomFileBtn.disabled = true;
     downloadRomFileBtn.style.cursor = "not-allowed";
-    downloadRomFileBtn.style.backgroundColor = "#888888";
+    downloadRomFileBtn.style.backgroundColor = "#C0C0C0"; // HTML silver
 };
 
 function loadDeleteButtonSafeguards(key) {
-    let deleteRomFileForm = document.getElementById(`delete-${key}`);
-    let deleteRomFileBtn = document.getElementById(`delete-${key}-btn`);
+    const deleteRomFileForm = document.getElementById(`delete-${key}`);
+    const deleteRomFileBtn = document.getElementById(`delete-${key}-btn`);
     deleteRomFileForm.addEventListener("submit", function () {
         document.getElementById(`delete-${key}-text`).textContent =
             "please wait!".toUpperCase();
