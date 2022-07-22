@@ -3,8 +3,7 @@ const disableDownloadFunctions = (romFileKey) => {
         `download-${romFileKey}-btn`
     );
     downloadRomFileBtn.disabled = true;
-    downloadRomFileBtn.style.cursor = "not-allowed";
-    downloadRomFileBtn.style.backgroundColor = "#C0C0C0"; // HTML silver
+    downloadRomFileBtn.classList.add("not-allowed", "bg-html-silver");
 };
 
 function loadDeleteButtonSafeguards(romFileKey) {
@@ -17,7 +16,7 @@ function loadDeleteButtonSafeguards(romFileKey) {
             deleteRomFileBtn.firstElementChild.textContent =
                 "please wait!".toUpperCase();
             deleteRomFileBtn.disabled = true;
-            deleteRomFileBtn.style.cursor = "not-allowed";
+            deleteRomFileBtn.classList.add("not-allowed");
             // needs to its own function, logic will not be applied otherwise
             disableDownloadFunctions(romFileKey);
         }

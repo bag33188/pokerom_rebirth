@@ -1,6 +1,6 @@
 @props(['text'])
 @push('styles')
-    <style <?= 'type="text/css"'; ?>>
+    <style {!! 'type="text/css"'; !!}>
         [x-cloak] {
             display: none;
         }

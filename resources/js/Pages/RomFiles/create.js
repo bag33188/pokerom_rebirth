@@ -6,14 +6,16 @@ $(document).ready(function () {
         "submit",
         function () {
             const _CRLF = "\r\n";
-            uploadBtn.style.whiteSpace = "pre";
+            uploadBtn.classList.add("white-space-pre");
             uploadBtn.disabled = true;
             uploadBtn.textContent =
                 `PLEASE WAIT....${_CRLF}THIS COULD TAKE A WHILE`.capitalize(
                     new CapitalizationOptions(true, _CRLF)
                 );
-            romFilenameField.style.pointerEvents = "none";
-            romFilenameField.style.backgroundColor = "#F5F5F5"; // HTML WhiteSmoke
+            romFilenameField.classList.add(
+                "no-pointer-events",
+                "bg-html-white-smoke"
+            );
         }
     );
 });

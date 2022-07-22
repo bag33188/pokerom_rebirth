@@ -27,6 +27,17 @@
         })
     </script>
 @endpush
+@push('styles')
+    <style {!! 'type="text/css"'; !!}>
+        .not-allowed {
+            cursor: not-allowed;
+        }
+
+        .bg-html-silver {
+            background-color: #C0C0C0;
+        }
+    </style>
+@endpush
 {{-- parameters:
     romFile (RomFile)
     key (ObjectId|string)

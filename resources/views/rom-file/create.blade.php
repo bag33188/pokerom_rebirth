@@ -1,5 +1,18 @@
 @push('styles')
     <link rel="stylesheet" type="text/css" href="{{ mix('assets/css/punch.css') }}"/>
+    <style {!! 'type="text/css"'; !!}>
+        .white-space-pre {
+            white-space: pre;
+        }
+
+        .no-pointer-events {
+            pointer-events: none;
+        }
+
+        .bg-html-white-smoke {
+            background-color: #F5F5F5;
+        }
+    </style>
 @endpush
 @push('scripts')
     <script type="text/javascript" src="{{mix('assets/js/pages/rom-files.create.js')}}"></script>
