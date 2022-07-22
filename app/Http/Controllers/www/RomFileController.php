@@ -95,6 +95,12 @@ class RomFileController extends ViewController
         return response()->redirectTo(route('rom-files.index'))->banner("$romFile->filename deleted!");
     }
 
+    /**
+     * Download ROM File resource with streamed response
+     *
+     * @param RomFile $romFile
+     * @return StreamedResponse
+     */
     public function download(RomFile $romFile): StreamedResponse
     {
         $disposition = HeaderUtils::makeDisposition(ResponseHeaderBag::DISPOSITION_ATTACHMENT, $romFile->filename);
