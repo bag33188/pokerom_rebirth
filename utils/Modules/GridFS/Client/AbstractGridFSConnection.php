@@ -5,8 +5,6 @@ namespace GridFS\Client;
 use GridFS\GridFS;
 use MongoDB\Client as MongoClient;
 use MongoDB\Database;
-use MongoDB\Driver\ReadConcern;
-use MongoDB\Driver\WriteConcern;
 use MongoDB\GridFS\Bucket;
 
 /**
@@ -51,9 +49,7 @@ abstract class AbstractGridFSConnection extends GridFS
         $mongodb = $this->connectToMongoClient();
         $this->bucket = $mongodb->selectGridFSBucket([
             'chunkSizeBytes' => $this->chunkSize,
-            'bucketName' => $this->bucketName,
-            'writeConcern' => new WriteConcern(WriteConcern::MAJORITY),
-            'readConcern' => new ReadConcern(ReadConcern::MAJORITY),
+            'bucketName' => $this->bucketName
         ]);
     }
 }

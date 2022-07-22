@@ -24,8 +24,6 @@ db.createCollection("rom.files", {
                         "^(?:([\\w\\d\\-_]{1,28})(?:\\.)(3ds|xci|nds|gbc|gb|gba))$",
                     minLength: 3,
                     maxLength: 32,
-                    description:
-                        "Filename must be: between 3 and 32 characters and only contain letters, numbers, hyphens and/or underscores. File extension must be one of: .gb, .gbc, .gba, .nds, .3ds, .xci.",
                 },
                 uploadDate: {
                     bsonType: "date",
@@ -34,10 +32,12 @@ db.createCollection("rom.files", {
                     bsonType: "int",
                     minimum: 261120,
                 },
-                filesize: {
+                length: {
                     bsonType: ["int", "long"],
                     minimum: 1044480, // 1020 Kibibytes (base 1024)
                     maximum: 18253611008, // 17 Gibibytes (base 1024)
+                    description:
+                        "length can either be int32 or int64. ranges are 1044480 (1020 kibibytes) through 18253611008 (17 gibibytes)",
                 },
                 md5: {
                     bsonType: "string",

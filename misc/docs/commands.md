@@ -46,6 +46,8 @@ ng lint
 
 `mongoexport --collection=events --db=reporting --out=events.json --jsonformat=relaxed`
 
+`mongofiles --verbose -d music -l="05 - Together Forever_01.wav" --type="audio/x-wav" --writeConcern="{w:'majority'}" put "05 - Together Forever_01.wav"`
+
 `!!! php artisan migrate:rollback`
 
 > _**MAKE SURE IT HAS THE REFRESH OPTION OR ELSE WILL ERASE EVERYTHING!!!**_
