@@ -2,7 +2,7 @@
 
 if (!function_exists('joinClasses')) {
     /**
-     *  Join Css Classes Into Html String
+     * ## Join Css Classes Into Html String
      *
      * Convert an array of CSS classes and join them together into an HTML class-attribute string.
      *
