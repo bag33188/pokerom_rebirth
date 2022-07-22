@@ -20,7 +20,7 @@
     ];
 @endphp
 <div class="w-full flex justify-center">
-    <button type="button" @click="open = !open" {{ $attributes->merge(['class' => joinHtmlClasses($btnClasses)]) }}>
+    <button type="button" @click="open = !open" {{ $attributes->merge(['class' => joinClasses($btnClasses)]) }}>
         <div class="inline-flex flex-row">
             <div class="inline-block">
                 <span x-show="{{ $alpineStates['shown'] }}" {!! $cloakData['initShow'] !!}>Hide</span>

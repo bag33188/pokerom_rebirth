@@ -2,6 +2,8 @@
 
 if (!function_exists('str_to_bool')) {
     /**
+     * ## String To Boolean
+     *
      * Convert string boolean value to boolean
      *
      * @param string|null $value value to cast. can be null if referenced passed-into function is null

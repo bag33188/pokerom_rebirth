@@ -12,6 +12,6 @@
       'w-full'
     ];
 @endphp
-<select {{ $attributes->merge(['class' => joinHtmlClasses($formSelectClasses)]) }}>
+<select {{ $attributes->merge(['class' => joinClasses($formSelectClasses)]) }}>
     {{ $slot }}
 </select>

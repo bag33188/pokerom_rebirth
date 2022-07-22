@@ -33,7 +33,7 @@ class ListGroup extends Component
                     'row-start-1', 'row-end-1'
                  ];
             @endphp
-            <ul {{ $attributes->merge(['class' => joinHtmlClasses($listGroupClasses)]) }}>
+            <ul {{ $attributes->merge(['class' => joinClasses($listGroupClasses)]) }}>
                 {{ $slot }}
             </ul>
         blade. "\n";

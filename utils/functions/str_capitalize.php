@@ -2,6 +2,8 @@
 
 if (!function_exists('str_capitalize')) {
     /**
+     * String Capitalize
+     *
      * This function is a more advanced version of the {@see ucfirst} function included with PHP
      *
      * This function gives you the following options:

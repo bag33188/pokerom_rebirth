@@ -29,7 +29,7 @@ class ListItem extends Component
           @php
               $listItemClasses = ['px-6', 'py-2', 'border-b', 'border-gray-200', 'w-full'];
           @endphp
-          <li {{ $attributes->merge(['class' => joinHtmlClasses($listItemClasses)]) }}>
+          <li {{ $attributes->merge(['class' => joinClasses($listItemClasses)]) }}>
               {{ $slot }}
           </li>
         blade. "\n";
