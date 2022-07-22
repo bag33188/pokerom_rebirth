@@ -35,7 +35,7 @@ class UserController extends ApiController
         $this->authorize('viewAny', $request->user());
 
         $paginate = $request->query(self::$queryParamNames[0]);
-        $perPage = (int)$request->query(self::$queryParamNames[1]);
+        $perPage = intval($request->query(self::$queryParamNames[1]));
 
         $paginateQueryIsTruthy = str_to_bool($paginate) === true;
         return $paginateQueryIsTruthy

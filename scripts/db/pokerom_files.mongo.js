@@ -344,6 +344,7 @@ let aggregations = [
                 $sort: {
                     length: 1,
                     field_length: 1,
+                    uploadDate: -1, // change to 1 (asc) based on sequence files were uploaded in
                 },
             },
             {
