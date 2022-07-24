@@ -8,6 +8,6 @@ trait CurrentGuardTrait
 {
     public function showCurrentAuthGuard(): void
     {
-        echo Auth::getDefaultDriver();
+        print Auth::getDefaultDriver();
     }
 }

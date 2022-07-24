@@ -18,10 +18,10 @@ trait CompareIdTrait
      */
     public function authIdMatchesRequestedId(User $currentUser, User $requestedUser): bool
     {
-        $_key_id_ = 'id';
+        $_user_key_id_ = 'id';
         return
-            (string)$currentUser->getAttributeValue($_key_id_)
+            (string)$currentUser->getAttributeValue($_user_key_id_)
             ===
-            (string)$requestedUser->getAttributeValue($_key_id_);
+            (string)$requestedUser->getAttributeValue($_user_key_id_);
     }
 }
