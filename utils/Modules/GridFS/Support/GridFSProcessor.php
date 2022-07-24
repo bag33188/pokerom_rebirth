@@ -10,12 +10,15 @@ use Utils\Modules\FileDownloader;
 
 class GridFSProcessor extends GridFS implements GridFSProcessorInterface
 {
-    protected string $gridFilesUploadPath;
+    private string $gridFilesStorageUploadPath;
+    protected string $storageUploadPath;
 
     public function __construct(private readonly AbstractGridFSConnection $gridFSConnection)
     {
-        if (empty($this->gridFilesUploadPath)) {
-            $this->gridFilesUploadPath = config('gridfs.fileUploadPath');
+        if (empty($this->storageUploadPath)) {
+            $this->gridFilesStorageUploadPath = config('gridfs.fileUploadPath');
+        } else {
+            $this->gridFilesStorageUploadPath = storage_path($this->storageUploadPath);
         }
 
         $this->setGridFSEntities();
@@ -52,7 +55,7 @@ class GridFSProcessor extends GridFS implements GridFSProcessorInterface
 
     private function appendUploadPathToFilename(string &$filename): void
     {
-        $storagePath = $this->gridFilesUploadPath;
+        $storagePath = $this->gridFilesStorageUploadPath;
         $filename = "$storagePath/$filename";
     }
 
@@ -60,7 +63,7 @@ class GridFSProcessor extends GridFS implements GridFSProcessorInterface
     {
         $backSlashPattern = /** @lang RegExp */
             "/\x{5C}/u";
-        return preg_replace($backSlashPattern, "/", $this->gridFilesUploadPath);
+        return preg_replace($backSlashPattern, "/", $this->gridFilesStorageUploadPath);
     }
 
     private function parseStoragePath(): array|string|null
@@ -71,7 +74,7 @@ class GridFSProcessor extends GridFS implements GridFSProcessorInterface
 
     private function getFileOriginalName(string $filename): string|array
     {
-        $storagePath = $this->gridFilesUploadPath;
+        $storagePath = $this->gridFilesStorageUploadPath;
         return str_replace("${storagePath}/", "", $filename);
     }
 

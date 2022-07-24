@@ -15,5 +15,5 @@ return [
     ],
     'bucketName' => env('DB_GFS_BUCKET_NAME', 'fs'),
     'chunkSize' => intval(env('DB_GFS_CHUNK_SIZE', 0x3FC00), 16),
-    'fileUploadPath' => storage_path(env('SERVER_FILES_UPLOAD_STORAGE_PATH', 'app/files'))
+    'fileUploadPath' => storage_path(env('SERVER_ROM_FILES_UPLOAD_STORAGE_PATH', 'app/files'))
 ];
