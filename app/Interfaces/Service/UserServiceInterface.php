@@ -6,11 +6,9 @@ use App\Models\User;
 
 interface UserServiceInterface
 {
-    public function generateUserPersonalAccessToken(User $user): string;
+    public function generatePersonalAccessToken(User $user): string;
 
-    public function revokeUserApiTokens(): int;
+    public function revokeApiTokens(): bool;
 
-    public function makeUserAdministrator(User $user): bool;
-
-    public function setLoginApiUser(User $user): void;
+    public function makeAdministrator(User $user): bool;
 }

@@ -12,7 +12,6 @@ use Illuminate\Database\Eloquent\Collection;
 class GameRepository implements GameRepositoryInterface
 {
     use GameQueries {
-        sortByRomIdAscGenerationAsc as public sortByRomIdAscGenerationAscSequence;
         formatGameType as private;
         findRomsWithNoGame as private;
     }
@@ -24,7 +23,10 @@ class GameRepository implements GameRepositoryInterface
 
     public function getAllGamesSorted(): Collection
     {
-        return Game::all()->sortBy($this->sortByRomIdAscGenerationAscSequence());
+        return Game::all()->sortBy(array(
+            ['rom_id', 'asc'],
+            ['generation', 'asc']
+        ));
     }
 
     public function getRomAssociatedWithGame(int $gameId): Rom

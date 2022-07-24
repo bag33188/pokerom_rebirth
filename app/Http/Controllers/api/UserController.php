@@ -46,7 +46,7 @@ class UserController extends ApiController
     public function register(StoreUserRequest $request): JsonResponse
     {
         $user = User::create($request->all());
-        $token = $this->userService->generateUserPersonalAccessToken($user);
+        $token = $this->userService->generatePersonalAccessToken($user);
         return response()->json([
             'user' => $user,
             'token' => $token,
@@ -59,8 +59,7 @@ class UserController extends ApiController
         $user = UserRepo::findUserByEmail($request['email']);
         $user->deleteExistingApiTokens();
         if ($user->checkPassword($request['password']) === true) {
-            $token = $this->userService->generateUserPersonalAccessToken($user);
-            $this->userService->setLoginApiUser($user);
+            $token = $this->userService->generatePersonalAccessToken($user);
             return response()->json([
                 'user' => $user,
                 'token' => $token,
@@ -75,7 +74,7 @@ class UserController extends ApiController
 
     public function logout(): JsonResponse
     {
-        $this->userService->revokeUserApiTokens();
+        $this->userService->revokeApiTokens();
         return response()->json([
             'message' => 'logged out!', 'success' => true
         ], HttpStatus::HTTP_OK);
@@ -125,7 +124,7 @@ class UserController extends ApiController
     {
         $user = UserRepo::findUserIfExists($userId);
         $this->authorize('delete', $user);
-        $this->userService->revokeUserApiTokens();
+        $this->userService->revokeApiTokens();
         $user->delete();
         return response()->json([
             'message' => "user $user->name deleted!", 'success' => true,

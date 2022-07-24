@@ -14,31 +14,22 @@ class UserService implements UserServiceInterface
         updateUserSetAdminRole as private;
     }
 
-    public function generateUserPersonalAccessToken(User $user): string
+    public function generatePersonalAccessToken(User $user): string
     {
         return $user->createToken(API_TOKEN_KEY)->plainTextToken;
     }
 
-    /**
-     * @return int 1 if successful
-     */
-    public function revokeUserApiTokens(): int
+    public function revokeApiTokens(): bool
     {
-        $authSer = auth()->user();
-        if (Request::is('api/*') && isset($authSer)) {
-
-            auth()->user()->tokens()->delete();
-            return 1;
+        $authUser = Auth::user();
+        if (Request::is('api/*') && isset($authUser)) {
+            $authUser->deleteExistingApiTokens();
+            return true;
         }
-        return 0;
+        return false;
     }
 
-    public function setLoginApiUser(User $user): void
-    {
-        Auth::guard()->login($user);
-    }
-
-    public function makeUserAdministrator(User $user): bool
+    public function makeAdministrator(User $user): bool
     {
         if (auth()->user()->isAdmin()) {
             $dbCommand = $this->updateUserSetAdminRole($user->getKey());

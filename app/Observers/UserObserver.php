@@ -27,7 +27,7 @@ class UserObserver
 
     public function updated(User $user): void
     {
-        $this->userService->revokeUserApiTokens();
+        $this->userService->revokeApiTokens();
     }
 
     public function deleting(User $user): void

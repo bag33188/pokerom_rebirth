@@ -13,7 +13,6 @@ use Illuminate\Database\Eloquent\Collection;
 class RomRepository implements RomRepositoryInterface
 {
     use RomQueries {
-        sortByGameIdAscRomSizeAsc as public sortByGameIdAscRomSizeAscSequence;
         findMatchingRomFromFilename as private;
         formatRomSize as private;
     }
@@ -35,7 +34,10 @@ class RomRepository implements RomRepositoryInterface
 
     public function getAllRomsSorted(): Collection
     {
-        return Rom::all()->sortBy($this->sortByGameIdAscRomSizeAscSequence());
+        return Rom::all()->sortBy(array(
+            ['game_id', 'asc'],
+            ['rom_size', 'asc']
+        ));
     }
 
     public function getGameAssociatedWithRom(int $romId): Game

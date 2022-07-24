@@ -2,6 +2,8 @@
 
 namespace App\Queries;
 
+use DB;
+use Illuminate\Support\Collection;
 use JetBrains\PhpStorm\ArrayShape;
 
 trait RomFileQueriesTrait
@@ -74,5 +76,10 @@ trait RomFileQueriesTrait
             ['length', 'asc'],
             ['filename', 'asc']
         );
+    }
+
+    protected function getRomFilesMetadata(): Collection
+    {
+        return DB::connection('mongodb')->table('rom_files')->get();
     }
 }
