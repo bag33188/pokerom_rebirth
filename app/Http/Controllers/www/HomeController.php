@@ -39,7 +39,7 @@ class HomeController extends ViewController
 
     private function getCurrentUser(): Authenticatable|User|null
     {
-        return Auth::guard('web')->user();
+        return Auth::guard()->user();
     }
 
     private function userIsInSession(): bool

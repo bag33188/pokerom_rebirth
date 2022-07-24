@@ -49,6 +49,6 @@ class UserRepository implements UserRepositoryInterface
 
     public function getUserStoredSessionToken(): ?string
     {
-        return Auth::guard('web')->user()->getRememberToken();
+        return Auth::guard()->user()->getRememberToken();
     }
 }

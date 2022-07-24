@@ -11,9 +11,9 @@ php_flag exit_on_timeout false
 # the following config options is deprecated
 # php_flag allow_url_include on
 
-<IfModule mod_rewrite.c>
-  RewriteEngine On
-  RewriteCond %{REQUEST_URI} !^/public/
-  RewriteRule ^(private/info\.php)($|/) - [L,PT]
-  RewriteRule ^(.*)$ public/$1 [L]
-</IfModule>
+#<IfModule mod_rewrite.c>
+#  RewriteEngine On
+#  RewriteCond %{REQUEST_URI} !^/public/
+#  RewriteRule ^(private/info\.php)($|/) - [L,PT]
+#  RewriteRule ^(.*)$ public/$1 [L]
+#</IfModule>

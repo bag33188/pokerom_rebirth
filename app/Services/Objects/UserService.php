@@ -6,6 +6,7 @@ use App\Interfaces\Service\UserServiceInterface;
 use App\Models\User;
 use App\Queries\UserQueriesTrait as UserQueries;
 use Auth;
+use Request;
 
 class UserService implements UserServiceInterface
 {
@@ -23,12 +24,18 @@ class UserService implements UserServiceInterface
      */
     public function revokeUserApiTokens(): int
     {
-        return auth('api')->user()->tokens()->delete();
+        $authSer = auth()->user();
+        if (Request::is('api/*') && isset($authSer)) {
+
+            auth()->user()->tokens()->delete();
+            return 1;
+        }
+        return 0;
     }
 
     public function setLoginApiUser(User $user): void
     {
-        Auth::guard('api')->login($user);
+        Auth::guard()->login($user);
     }
 
     public function makeUserAdministrator(User $user): bool

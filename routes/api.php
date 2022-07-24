@@ -41,8 +41,7 @@ Route::name('api.')->group(function () {
         // api resource routes
         Route::apiResources([
             'roms' => RomController::class,
-            'games' => GameController::class,
-            'users' => UserController::class
+            'games' => GameController::class
         ]);
         Route::apiResource('rom-files', RomFileController::class)->only(['index', 'show', 'destroy'])
             ->names([
@@ -50,7 +49,14 @@ Route::name('api.')->group(function () {
                 'show' => 'rom-files.show',
                 'destroy' => 'rom-files.destroy'
             ]);
-
+        Route::apiResource('users', UserController::class)->except('store')
+            ->names([
+                'index' => 'users.index',
+                'show' => 'users.show',
+                'destroy' => 'users.destroy',
+                'update' => 'users.update',
+            ]);
+        
         // auth routes
         Route::prefix('auth')->name('auth.')->group(function () {
             Route::get('me', [UserController::class, 'showMe'])->name('me');

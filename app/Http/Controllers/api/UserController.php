@@ -57,7 +57,7 @@ class UserController extends ApiController
     public function login(LoginRequest $request): JsonResponse
     {
         $user = UserRepo::findUserByEmail($request['email']);
-        $user->deleteExistingTokens();
+        $user->deleteExistingApiTokens();
         if ($user->checkPassword($request['password']) === true) {
             $token = $this->userService->generateUserPersonalAccessToken($user);
             $this->userService->setLoginApiUser($user);
