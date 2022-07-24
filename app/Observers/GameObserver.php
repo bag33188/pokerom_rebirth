@@ -21,7 +21,7 @@ class GameObserver
 
     public function creating(Game $game): void
     {
-        $game->game_name = Str::slug($game->game_name);
+        $game->slug = Str::slug($game->game_name);
     }
 
     public function created(Game $game): void
@@ -38,7 +38,7 @@ class GameObserver
 
     public function updating(Game $game): void
     {
-        $game->game_name = Str::slug($game->game_name);
+        $game->slug = Str::slug($game->game_name);
     }
 
     public function deleted(Game $game): void

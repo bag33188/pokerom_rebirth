@@ -2,7 +2,7 @@
 
 namespace App\Policies;
 
-use App\Actions\User\CompareIdTrait as CompareUserIdAction;
+use App\Actions\User\AuthIdMatchesRequestedId as CompareUserIdAction;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
@@ -10,7 +10,7 @@ class UserPolicy
 {
     use HandlesAuthorization;
     use CompareUserIdAction {
-        authIdMatchesRequestedId as protected authUserIdMatchesRequestedUserId;
+        compare as protected compareUsers;
     }
 
     public function viewAny(User $user, User $model): bool
@@ -27,7 +27,7 @@ class UserPolicy
      */
     public function view(User $user, User $model): bool
     {
-        return $this->authUserIdMatchesRequestedUserId($user, $model);
+        return $this->compareUsers($user, $model);
     }
 
     /**
@@ -39,7 +39,7 @@ class UserPolicy
      */
     public function update(User $user, User $model): bool
     {
-        return $this->authUserIdMatchesRequestedUserId($user, $model);
+        return $this->compareUsers($user, $model);
     }
 
     /**
@@ -51,6 +51,6 @@ class UserPolicy
      */
     public function delete(User $user, User $model): bool
     {
-        return $this->authUserIdMatchesRequestedUserId($user, $model);
+        return $this->compareUsers($user, $model);
     }
 }
