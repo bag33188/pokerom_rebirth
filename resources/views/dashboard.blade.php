@@ -1,12 +1,12 @@
 @push('scripts')
-    <script type="text/javascript" src="{{ mix('assets/js/pages/dashboard.index.js') }}"></script>
-    <script type="text/javascript">
-        $(document).ready(() => {
-            loadWelcomeContent({{ Js::from($username) }});
-            loadCopyrightYear();
-            loadEmulatorLinks();
-        });
-    </script>
+{{--    <script type="text/javascript" src="{{ mix('assets/js/pages/dashboard.index.js') }}"></script>--}}
+{{--    <script type="text/javascript">--}}
+{{--        $(document).ready(() => {--}}
+{{--            loadWelcomeContent({{ Js::from($username) }});--}}
+{{--            loadCopyrightYear();--}}
+{{--            loadEmulatorLinks();--}}
+{{--        });--}}
+{{--    </script>--}}
 @endpush
 <x-app-layout>
     <x-slot name="header">

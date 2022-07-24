@@ -20,12 +20,12 @@
     $romFileKey = getStringValueFromKey($key);
 @endphp
 @push('scripts')
-    <script type="text/javascript" src="{{mix('assets/js/pages/rom-files.delete.js')}}"></script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            loadDeleteButtonSafeguards({{ Js::from($romFileKey) }});
-        })
-    </script>
+{{--    <script type="text/javascript" src="{{mix('assets/js/pages/rom-files.delete.js')}}"></script>--}}
+{{--    <script type="text/javascript">--}}
+{{--        $(document).ready(function () {--}}
+{{--            loadDeleteButtonSafeguards({{ Js::from($romFileKey) }});--}}
+{{--        })--}}
+{{--    </script>--}}
 @endpush
 @push('styles')
     <style {!! 'type="text/css"'; !!}>
