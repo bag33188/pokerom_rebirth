@@ -8,7 +8,7 @@
         let loadWelcomeContent = (username) => {
             const welcomeUsername = document.getElementById("welcome-username");
             const jsInsertHtmlComment = welcomeUsername.childNodes[0];
-            const welcomeMessage = `welcome, ${username}!`;
+            const welcomeMessage = `Welcome, ${username}!`;
             const welcomeText = document.createTextNode(welcomeMessage);
             if (checkIfNodeIsComment(jsInsertHtmlComment)) {
                 welcomeUsername.replaceChild(welcomeText, jsInsertHtmlComment);
