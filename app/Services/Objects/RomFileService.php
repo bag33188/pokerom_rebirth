@@ -2,7 +2,7 @@
 
 namespace App\Services\Objects;
 
-use App\Actions\RomFile\NormalizeFilenameTrait as NormalizeFilenameAction;
+use App\Actions\RomFileActionsTrait as RomFileActions;
 use App\Events\RomFileCreated;
 use App\Events\RomFileDeleting;
 use App\Interfaces\Service\RomFileServiceInterface;
@@ -14,8 +14,8 @@ use RomFileRepo;
 
 class RomFileService implements RomFileServiceInterface
 {
-    use NormalizeFilenameAction {
-        normalize as protected normalizeRomFilename;
+    use RomFileActions {
+        normalizeRomFilename as private;
     }
 
     public function downloadRomFile(RomFile $romFile): RomFile

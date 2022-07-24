@@ -2,15 +2,15 @@
 
 namespace App\Policies;
 
-use App\Actions\User\RestrictUserAccessTrait as RestrictUserAccessAction;
+use App\Actions\UserActionsTrait as UserActions;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class UserPolicy
 {
     use HandlesAuthorization;
-    use RestrictUserAccessAction {
-        authIdMatchesRequestedId as protected compareUsers;
+    use UserActions {
+        restrictUserAccess as private;
     }
 
     public function viewAny(User $user, User $model): bool
@@ -27,7 +27,7 @@ class UserPolicy
      */
     public function view(User $user, User $model): bool
     {
-        return $this->compareUsers($user, $model);
+        return $this->restrictUserAccess($user, $model);
     }
 
     /**
@@ -39,7 +39,7 @@ class UserPolicy
      */
     public function update(User $user, User $model): bool
     {
-        return $this->compareUsers($user, $model);
+        return $this->restrictUserAccess($user, $model);
     }
 
     /**
@@ -51,6 +51,6 @@ class UserPolicy
      */
     public function delete(User $user, User $model): bool
     {
-        return $this->compareUsers($user, $model);
+        return $this->restrictUserAccess($user, $model);
     }
 }

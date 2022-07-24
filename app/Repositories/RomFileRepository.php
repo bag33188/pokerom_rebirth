@@ -2,12 +2,12 @@
 
 namespace App\Repositories;
 
+use App\Actions\RomFileActionsTrait as RomFileActions;
 use App\Interfaces\Repository\RomFileRepositoryInterface;
 use App\Models\Rom;
 use App\Models\RomFile;
 use App\Queries\RomFileQueriesTrait as RomFileAggregations;
 use Illuminate\Database\Eloquent\Collection;
-use Storage;
 
 class RomFileRepository implements RomFileRepositoryInterface
 {
@@ -15,6 +15,9 @@ class RomFileRepository implements RomFileRepositoryInterface
         calcLengthsOfRomFilesKibibytes as private;
         splitRomFilenamesIntoFileEntityValues as private;
         sortByLengthAscFilenameAsc as public sortByLengthAscFilenameAscSequence;
+    }
+    use RomFileActions {
+        listFilesInStorage as private;
     }
 
     public function findRomFileIfExists(string $romFileId): RomFile
@@ -58,7 +61,7 @@ class RomFileRepository implements RomFileRepositoryInterface
         return RomFile::sum('length');
     }
 
-    public function getAllRomFileLengthsKibibytes(): Collection
+    public function getAllRomFileLengthsInKibibytes(): Collection
     {
         return RomFile::project($this->calcLengthsOfRomFilesKibibytes())->get();
     }
@@ -71,18 +74,10 @@ class RomFileRepository implements RomFileRepositoryInterface
     /**
      * @return array|string[]
      */
-    public function listAllFilesInStorage(): array
-    {
-        return Storage::disk(ROM_FILES_DIRNAME)->files('/');
-    }
-
-    /**
-     * @return array|string[]
-     */
     public function listRomFilesInStorage(): array
     {
         $filteredRomFiles = array_filter(
-            $this->listAllFilesInStorage(),
+            $this->listFilesInStorage(),
             fn(string $romFilename): false|int => preg_match(ROM_FILENAME_PATTERN, $romFilename)
         );
         return array_values($filteredRomFiles);

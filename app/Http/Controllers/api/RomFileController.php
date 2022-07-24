@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Actions\RomFileActionsTrait as RomFileActions;
 use App\Enums\FileContentTypeEnum as ContentType;
 use App\Http\Controllers\Controller as ApiController;
 use App\Http\Requests\StoreRomFileRequest;
@@ -20,6 +21,10 @@ use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class RomFileController extends ApiController
 {
+    use RomFileActions {
+        listFilesInStorage as private;
+    }
+
     public function __construct(private readonly RomFileServiceInterface $romFileService)
     {
     }
@@ -104,7 +109,7 @@ class RomFileController extends ApiController
     {
         Gate::authorize('viewAny-romFile');
 
-        return RomFileRepo::listAllFilesInStorage();
+        return $this->listFilesInStorage();
     }
 
     /**
