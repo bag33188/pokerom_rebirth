@@ -21,6 +21,13 @@ class User extends Authenticatable # implements MustVerifyEmail
     use Notifiable;
     use TwoFactorAuthenticatable;
 
+    protected $connection = 'mysql';
+    protected $table = 'users';
+    protected $primaryKey = 'id';
+    protected $keyType = 'int';
+    public $incrementing = true;
+    public $timestamps = true;
+
     /**
      * The attributes that are mass assignable.
      *

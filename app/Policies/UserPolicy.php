@@ -10,7 +10,7 @@ class UserPolicy
 {
     use HandlesAuthorization;
     use UserActions {
-        restrictUserAccess as private;
+        authIdIsRequestedUserId as private;
     }
 
     public function viewAny(User $user, User $model): bool
@@ -27,7 +27,7 @@ class UserPolicy
      */
     public function view(User $user, User $model): bool
     {
-        return $this->restrictUserAccess($user, $model);
+        return $this->authIdIsRequestedUserId($user, $model);
     }
 
     /**
@@ -39,7 +39,7 @@ class UserPolicy
      */
     public function update(User $user, User $model): bool
     {
-        return $this->restrictUserAccess($user, $model);
+        return $this->authIdIsRequestedUserId($user, $model);
     }
 
     /**
@@ -51,6 +51,6 @@ class UserPolicy
      */
     public function delete(User $user, User $model): bool
     {
-        return $this->restrictUserAccess($user, $model);
+        return $this->authIdIsRequestedUserId($user, $model);
     }
 }

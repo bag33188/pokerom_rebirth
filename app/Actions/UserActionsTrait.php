@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 
 trait UserActionsTrait
 {
-    public function restrictUserAccess(User $currentUser, User $requestedUser): bool
+    public function authIdIsRequestedUserId(User $currentUser, User $requestedUser): bool
     {
         $_user_key_id_ = 'id';
         return
