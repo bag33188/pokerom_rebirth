@@ -22,10 +22,27 @@ _**Enjoy!**_
 
 [comment]: # 'End README.md'
 -->
-[comment]: # 'Begin README.md'
+
+[comment]: # "Begin README.md"
 
 # Pok&eacute;ROM Rebirth
 
 Nintendo Games Library and ROMs Data Bank
 
-[comment]: # 'End README.md'
+## Structure
+
+### Repository
+
+Methods that retrieve different types of data from the database.
+
+Commonly use queries that retrieve database information
+
+### Service
+
+Methods that manipulate and/or change data in the database.
+
+### Action
+
+Unique functions that perform a specific action based on an api model, _not database data_.
+
+[comment]: # "End README.md"

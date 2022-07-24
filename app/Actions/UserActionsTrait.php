@@ -9,14 +9,13 @@ trait UserActionsTrait
 {
     public function authIdIsRequestedUserId(User $currentUser, User $requestedUser): bool
     {
-        $_user_key_id_ = 'id';
         return
-            (string)$currentUser->getAttributeValue($_user_key_id_)
+            (string)$currentUser->getAttributeValue('id')
             ===
-            (string)$requestedUser->getAttributeValue($_user_key_id_);
+            (string)$requestedUser->getAttributeValue('id');
     }
 
-    public function getCurrentAuthGuard(): void
+    public function showCurrentAuthGuard(): void
     {
         print Auth::getDefaultDriver();
     }
