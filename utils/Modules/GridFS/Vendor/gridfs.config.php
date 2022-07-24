@@ -22,7 +22,7 @@ return [
     ],
     'bucketName' => env('DB_GFS_BUCKET_NAME', 'fs'),
     'chunkSize' => intval(env('DB_GFS_CHUNK_SIZE', 0x3FC00), 16),
-    'fileUploadPath' => storage_path('app/files')
+    'fileUploadPath' => storage_path(ev('GFS_UPLOAD_PATH', 'app/grid_files'))
 ];
 php;
 
