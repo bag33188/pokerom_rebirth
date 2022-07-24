@@ -4,9 +4,9 @@ namespace App\Actions\User;
 
 use Auth;
 
-trait CurrentGuardTrait
+trait ShowCurrentGuardTrait
 {
-    public function showCurrentAuthGuard(): void
+    public function currentGuard(): void
     {
         print Auth::getDefaultDriver();
     }
