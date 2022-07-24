@@ -1,5 +1,5 @@
 @push('scripts')
-    <script>
+    <script type="text/javascript">
         async function getApiVersion() {
             const apiUrl = "http://pokerom_rebirth.test/api";
             const response = await fetch(`${apiUrl}/version`);
@@ -11,7 +11,7 @@
 
         let apiVersionResponse = async () => await getApiVersion();
     </script>
-    <script>
+    <script type="text/javascript">
         apiVersionResponse()
             .then(({ version: apiVersion }) => {
                 const romsContainer = document.getElementById("roms-container");

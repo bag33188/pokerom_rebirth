@@ -19,6 +19,17 @@
 
     $romFileKey = getStringValueFromKey($key);
 @endphp
+@push('styles')
+    <style {!! 'type="text/css"'; !!}>
+        .not-allowed {
+            cursor: not-allowed;
+        }
+
+        .bg-html-silver {
+            background-color: #C0C0C0;
+        }
+    </style>
+@endpush
 @push('scripts')
     <script type="text/javascript">
         const disableDownloadFunctions = (romFileKey) => {
@@ -45,19 +56,10 @@
                 }
             );
         }
+    </script>
+    <script type="text/javascript">
         loadDeleteButtonSafeguards({{Js::from($romFileKey)}});
     </script>
-@endpush
-@push('styles')
-    <style {!! 'type="text/css"'; !!}>
-        .not-allowed {
-            cursor: not-allowed;
-        }
-
-        .bg-html-silver {
-            background-color: #C0C0C0;
-        }
-    </style>
 @endpush
 {{-- parameters:
     romFile (RomFile)

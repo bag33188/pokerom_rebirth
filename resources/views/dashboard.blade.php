@@ -1,5 +1,5 @@
 @push('scripts')
-    <script>
+    <script type="text/javascript">
         const checkIfNodeIsComment = (node) => {
             const COMMENT_NODE_TYPE = 8;
             return node.nodeType === COMMENT_NODE_TYPE;
@@ -9,7 +9,7 @@
             const welcomeUsername = document.getElementById("welcome-username");
             const jsInsertHtmlComment = welcomeUsername.childNodes[0];
             const welcomeMessage = `welcome, ${username}!`;
-            const welcomeText =document.createTextNode(welcomeMessage);
+            const welcomeText = document.createTextNode(welcomeMessage);
             if (checkIfNodeIsComment(jsInsertHtmlComment)) {
                 welcomeUsername.replaceChild(welcomeText, jsInsertHtmlComment);
             } else {
@@ -27,40 +27,40 @@
         let loadEmulatorLinks = () => {
             let emulatorLinksList = document.getElementById("emulator-links");
             const anchorClasses = ["underline", "text-blue-400", "hover:text-blue-500"];
-    const emulators = [
-        {
-            href: "https://desmume.org/",
-            text: "DeSmuME",
-            name: "desmume",
-            target: "_blank",
-        },
-        {
-            href: "https://www.emulator-zone.com/doc.php/gba/vboyadvance.html",
-            text: "Visual Boy Advanced",
-            name: "vba",
-            target: "_blank",
-        },
-        {
-            href: "https://citra-emu.org/",
-            text: "Citra",
-            name: "citra",
-            target: "_blank",
-        },
-    ];
-    emulators.forEach((emulator, index) => {
-        let listItemElement = document.createElement("li");
-        listItemElement.id = `emulator-${index + 1}`;
-        let emulatorLinkElement = document.createElement("a");
-        emulatorLinkElement.id = `${emulator.name}-emu`;
-        emulatorLinkElement.href = emulator.href;
-        emulatorLinkElement.text = emulator.text;
-        emulatorLinkElement.target = emulator.target;
-        emulatorLinkElement.classList.add(...anchorClasses);
-        emulatorLinkElement.setAttribute("rel", "noreferrer");
-        listItemElement.appendChild(emulatorLinkElement);
-        emulatorLinksList.appendChild(listItemElement);
-    });
-};
+            const emulators = [
+                {
+                    href: "https://desmume.org/",
+                    text: "DeSmuME",
+                    name: "desmume",
+                    target: "_blank",
+                },
+                {
+                    href: "https://www.emulator-zone.com/doc.php/gba/vboyadvance.html",
+                    text: "Visual Boy Advanced",
+                    name: "vba",
+                    target: "_blank",
+                },
+                {
+                    href: "https://citra-emu.org/",
+                    text: "Citra",
+                    name: "citra",
+                    target: "_blank",
+                },
+            ];
+            emulators.forEach((emulator, index) => {
+                let listItemElement = document.createElement("li");
+                listItemElement.id = `emulator-${index + 1}`;
+                let emulatorLinkElement = document.createElement("a");
+                emulatorLinkElement.id = `${emulator.name}-emu`;
+                emulatorLinkElement.href = emulator.href;
+                emulatorLinkElement.text = emulator.text;
+                emulatorLinkElement.target = emulator.target;
+                emulatorLinkElement.classList.add(...anchorClasses);
+                emulatorLinkElement.setAttribute("rel", "noreferrer");
+                listItemElement.appendChild(emulatorLinkElement);
+                emulatorLinksList.appendChild(listItemElement);
+            });
+        };
     </script>
     <script type="text/javascript">
         loadWelcomeContent({{ Js::from($username) }});
