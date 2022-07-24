@@ -1,5 +1,25 @@
 @push('scripts')
-    <script type="text/javascript" src="{{mix('assets/js/pages/roms.index.js')}}" defer></script>
+    <script type="text/javascript">
+        async function getApiVersion() {
+            const apiUrl = "http://pokerom_rebirth.test/api";
+            const response = await fetch(`${apiUrl}/version`);
+            if (!response.ok) {
+                throw new Error(`An error has occurred: ${response.status}`);
+            }
+            return response.json();
+        }
+
+        let apiVersionResponse = async () => await getApiVersion();
+    </script>
+    <script type="text/javascript">
+        apiVersionResponse()
+            .then(({ version: apiVersion }) => {
+                const romsContainer = document.getElementById("roms-container");
+                let attrData = ["data-api-version", apiVersion];
+                romsContainer.setAttribute(...attrData);
+            })
+            .catch((e) => console.error(e));
+    </script>
 @endpush
 @php
     $alpineInitialDisplayState = \App\Enums\DisplayStateEnum::SHOW;

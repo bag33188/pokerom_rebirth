@@ -7,6 +7,7 @@ use GridFS\Support\GridFSProcessor;
 class RomFileProcessor extends GridFSProcessor
 {
     protected string $entityName = 'rom_files.processor';
+    protected string $storageUploadPath = 'app/rom_files';
 
     /**
      * Create new GridFS Processor Instance
@@ -15,7 +16,6 @@ class RomFileProcessor extends GridFSProcessor
      */
     public function __construct(RomFilesConnection $romFilesConnection)
     {
-        $this->gridFilesUploadPath = storage_path('app/rom_files');
         parent::__construct($romFilesConnection);
     }
 }

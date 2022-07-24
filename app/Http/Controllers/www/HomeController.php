@@ -22,7 +22,7 @@ class HomeController extends ViewController
     public function __invoke(): View|Application|Factory
     {
         return view('dashboard', [
-            'username' => strtolower($this->getUsername()),
+            'username' => $this->getUsername(),
             'home_page_name' => __(self::HOME_PAGE_NAME)
         ]);
     }

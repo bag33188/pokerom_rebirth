@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 21, 2022 at 01:36 PM
+-- Generation Time: Jul 24, 2022 at 06:50 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -371,6 +371,7 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 -- Table structure for table `password_resets`
 --
 -- Creation: Jul 06, 2022 at 02:07 AM
+-- Last update: Jul 24, 2022 at 03:04 AM
 --
 
 DROP TABLE IF EXISTS `password_resets`;
@@ -397,6 +398,7 @@ TRUNCATE TABLE `password_resets`;
 -- Table structure for table `personal_access_tokens`
 --
 -- Creation: Jul 06, 2022 at 01:56 AM
+-- Last update: Jul 24, 2022 at 04:07 AM
 --
 
 DROP TABLE IF EXISTS `personal_access_tokens`;
@@ -423,21 +425,13 @@ CREATE TABLE `personal_access_tokens` (
 --
 
 TRUNCATE TABLE `personal_access_tokens`;
---
--- Dumping data for table `personal_access_tokens`
---
-
-INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `name`, `token`, `abilities`, `last_used_at`, `created_at`, `updated_at`) VALUES
-(34, 'App\\Models\\User', 13, 'auth_token', '7782190ac10c27ba58bf9996d1f62ec98972c66a60cb3e9c14493c95358d9f89', '[\"*\"]', '2022-07-21 15:28:41', '2022-07-21 14:22:48', '2022-07-21 15:28:41'),
-(35, 'App\\Models\\User', 1, 'auth_token', '58af754ec53d736bbb646e017bb579122261a7711065868fa16ae44d753427c4', '[\"*\"]', '2022-07-21 16:05:17', '2022-07-21 14:25:45', '2022-07-21 16:05:17');
-
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `roms`
 --
 -- Creation: Jul 06, 2022 at 02:20 AM
--- Last update: Jul 21, 2022 at 11:24 AM
+-- Last update: Jul 24, 2022 at 04:49 AM
 --
 
 DROP TABLE IF EXISTS `roms`;
@@ -470,55 +464,55 @@ TRUNCATE TABLE `roms`;
 --
 
 INSERT INTO `roms` (`id`, `file_id`, `game_id`, `rom_name`, `rom_size`, `rom_type`, `has_game`, `has_file`, `created_at`, `updated_at`) VALUES
-(1, '62d9274da48c211782040141', 1, 'POKEMON_RED01', 1024, 'gb', 1, 1, '2022-07-04 03:15:17', '2022-07-21 17:15:41'),
-(2, '62d927f23eb4a09f2e020a91', 2, 'POKEMON_BLUE01', 1024, 'gb', 1, 1, '2022-07-04 03:15:28', '2022-07-21 17:18:26'),
-(3, '62d936d6413666c278044821', 3, 'POKEMON_GREEN01', 1024, 'gb', 1, 1, '2022-07-04 03:15:39', '2022-07-21 18:21:59'),
-(4, '62d936dad05df146300d3041', 4, 'POKEMON_YELLOW01', 1024, 'gb', 1, 1, '2022-07-04 03:15:44', '2022-07-21 18:22:02'),
-(5, '62d9371e888bd1eca404d541', 5, 'POKEMON_GLDAAUE01', 2048, 'gbc', 1, 1, '2022-07-04 03:15:56', '2022-07-21 18:23:10'),
-(6, '62d9370b537e9b8a830ce1e1', 6, 'POKEMON_SLVAAXE01', 2048, 'gbc', 1, 1, '2022-07-04 03:16:03', '2022-07-21 18:22:51'),
-(7, '62d9372a2cfda49be7053c01', 7, 'PM_CRYSTAL_BYTE01', 2048, 'gbc', 1, 1, '2022-07-04 03:16:10', '2022-07-21 18:23:22'),
-(8, '62d937312a589661290bbf31', 8, 'POKEMON_RUBYAXVE01', 16384, 'gba', 1, 1, '2022-07-04 03:16:22', '2022-07-21 18:23:30'),
-(9, '62d9372d9538e1a59b025dd1', 9, 'POKEMON_SAPPAXPE01', 16384, 'gba', 1, 1, '2022-07-04 03:16:27', '2022-07-21 18:23:26'),
-(10, '62d9373e4c7feec59c090dd1', 10, 'POKEMON_EMERBPEE01', 16384, 'gba', 1, 1, '2022-07-04 03:16:32', '2022-07-21 18:23:42'),
-(11, '62d937392082a24fab0a8fe1', 11, 'POKEMON_FIREBPRE01', 16384, 'gba', 1, 1, '2022-07-04 03:16:38', '2022-07-21 18:23:38'),
-(12, '62d93735c00aad22db0a2f31', 12, 'POKEMON_LEAFBPGE01', 16384, 'gba', 1, 1, '2022-07-04 03:16:44', '2022-07-21 18:23:34'),
-(13, '62d936e962773807e80401a1', 13, 'POKEMON_D_ADAE01', 65536, 'nds', 1, 1, '2022-07-04 03:16:55', '2022-07-21 18:22:18'),
-(14, '62d936d1f3f2fbf7c501f0f1', 14, 'POKEMON_P_APAE', 65536, 'nds', 1, 1, '2022-07-04 03:17:01', '2022-07-21 18:21:53'),
-(15, '62d93711652ea6173b0818b1', 15, 'POKEMON_PL_CPUE01', 131072, 'nds', 1, 1, '2022-07-04 03:17:09', '2022-07-21 18:22:58'),
-(16, '62d93719c6f09f03710a15c1', 16, 'POKEMON_HG_IPKE01', 131072, 'nds', 1, 1, '2022-07-04 03:17:15', '2022-07-21 18:23:06'),
-(17, '62d937053b811a6409089531', 17, 'POKEMON_SS_IPGE01', 131072, 'nds', 1, 1, '2022-07-04 03:17:19', '2022-07-21 18:22:46'),
-(18, '62d936eee7ebafa3cb0c5ad1', 18, 'POKEMON_B_IRBO01', 262144, 'nds', 1, 1, '2022-07-04 03:17:24', '2022-07-21 18:22:24'),
-(19, '62d936e4dcc0823bdf0ff011', 19, 'POKEMON_W_IRAO01', 262144, 'nds', 1, 1, '2022-07-04 03:17:28', '2022-07-21 18:22:14'),
-(20, '62d93722f65038370d0e2bc1', 20, 'POKEMON_B2_IREO01', 524288, 'nds', 1, 1, '2022-07-04 03:17:34', '2022-07-21 18:23:17'),
-(21, '62d936fd765924221a047e11', 21, 'POKEMON_W2_IRDO01', 524288, 'nds', 1, 1, '2022-07-04 03:17:38', '2022-07-21 18:22:40'),
-(22, '62d934ced5273c6f1f045b81', 22, '0004000000055D00_v00', 2097152, '3ds', 1, 1, '2022-07-04 03:18:06', '2022-07-21 18:13:36'),
-(23, '62d93480b2cc52b2bc050a41', 23, '0004000000055E00_v00', 2097152, '3ds', 1, 1, '2022-07-04 03:18:15', '2022-07-21 18:12:36'),
-(24, '62d9345c31efddf60908f721', 24, '000400000011C400_v00', 2097152, '3ds', 1, 1, '2022-07-04 03:18:24', '2022-07-21 18:11:52'),
-(25, '62d93444b5cda774f6025f11', 25, '000400000011C500_v00', 2097152, '3ds', 1, 1, '2022-07-04 03:18:29', '2022-07-21 18:11:16'),
-(26, '62d9341ff96ac2f17b0e32b1', 26, '0004000000164800_v00', 4194304, '3ds', 1, 1, '2022-07-04 03:18:40', '2022-07-21 18:10:55'),
-(27, '62d933f8fa9d76c1060a04d1', 27, '0004000000175E00_v00', 4194304, '3ds', 1, 1, '2022-07-04 03:18:48', '2022-07-21 18:10:16'),
-(28, '62d933a054b3d5388c098731', 28, '00040000001B5000_v00', 4194304, '3ds', 1, 1, '2022-07-04 03:18:54', '2022-07-21 18:09:36'),
-(29, '62d9327493d63c564005b261', 29, '00040000001B5100_v00', 4194304, '3ds', 1, 1, '2022-07-04 03:18:59', '2022-07-21 18:04:52'),
-(30, '62d92a9b2b3d773b8b0e5aa1', 30, '0100ABF008968000', 15597568, 'xci', 1, 1, '2022-07-04 03:19:32', '2022-07-21 17:35:46'),
-(31, '62d927ff8c2089eba70975f1', 31, '01008DB008C2C000', 15597568, 'xci', 1, 1, '2022-07-04 03:19:38', '2022-07-21 17:23:58'),
-(32, '62d9315854f38e0424063a31', 32, '0100000011D90000', 4880601, 'xci', 1, 1, '2022-07-04 03:19:59', '2022-07-21 18:01:06'),
-(33, '62d92d3f7c04263679056001', 33, '010018E011D92000', 7798784, 'xci', 1, 1, '2022-07-04 03:20:06', '2022-07-21 17:44:15'),
-(34, '62d9309911c72eee0a0767b1', 34, '010003F003A34000', 4737727, 'xci', 1, 1, '2022-07-04 03:20:28', '2022-07-21 17:58:00'),
-(35, '62d930199c04f1931d07e501', 35, '0100187003A36000', 4363761, 'xci', 1, 1, '2022-07-04 03:20:38', '2022-07-21 17:55:11'),
-(36, '62d93755650d454b210fcab1', 36, 'pokeprism', 2048, 'gbc', 1, 1, '2022-07-04 03:21:13', '2022-07-21 18:24:05'),
-(37, '62d93743b73bd1372f0de5f1', 37, 'pokemon_brown_2014-red_hack', 2048, 'gb', 1, 1, '2022-07-04 03:21:42', '2022-07-21 18:23:47'),
-(38, '62d9374878dee46e7d084761', 38, 'genesis-final-2019-08-23', 16384, 'gba', 1, 1, '2022-07-04 03:21:58', '2022-07-21 18:23:52'),
-(39, '62d93741d13e71ecf405a4c1', 39, 'Pokemon_Ash_Gray_4-5-3', 16384, 'gba', 1, 1, '2022-07-04 03:22:16', '2022-07-21 18:23:45'),
-(40, '62d936dddb176b3fd7062551', 40, 'RenegadePlatinum', 102464, 'nds', 1, 1, '2022-07-04 03:22:28', '2022-07-21 18:22:06'),
-(41, '62d92c3a161354dbd301e681', 41, '01001F5010DFA000', 7798784, 'xci', 1, 1, '2022-07-20 12:48:00', '2022-07-21 17:40:32');
+(1, '62dcce993d93aec26a0ccfd1', 1, 'POKEMON_RED01', 1024, 'gb', 1, 1, '2022-07-04 03:15:17', '2022-07-24 11:46:17'),
+(2, '62dcce9e10522e219406a6a1', 2, 'POKEMON_BLUE01', 1024, 'gb', 1, 1, '2022-07-04 03:15:28', '2022-07-24 11:46:22'),
+(3, '62dcceaafed886b636063fe1', 3, 'POKEMON_GREEN01', 1024, 'gb', 1, 1, '2022-07-04 03:15:39', '2022-07-24 11:46:34'),
+(4, '62dcceae00b307474603a9d1', 4, 'POKEMON_YELLOW01', 1024, 'gb', 1, 1, '2022-07-04 03:15:44', '2022-07-24 11:46:38'),
+(5, '62dccf1074c7366d3e0453f1', 5, 'POKEMON_GLDAAUE01', 2048, 'gbc', 1, 1, '2022-07-04 03:15:56', '2022-07-24 11:48:16'),
+(6, '62dccef6c9263b25bd0f68a1', 6, 'POKEMON_SLVAAXE01', 2048, 'gbc', 1, 1, '2022-07-04 03:16:03', '2022-07-24 11:47:50'),
+(7, '62dccf1fe459dbc8f6014b01', 7, 'PM_CRYSTAL_BYTE01', 2048, 'gbc', 1, 1, '2022-07-04 03:16:10', '2022-07-24 11:48:31'),
+(8, '62dccf30a2b2a1258c092c31', 8, 'POKEMON_RUBYAXVE01', 16384, 'gba', 1, 1, '2022-07-04 03:16:22', '2022-07-24 11:48:49'),
+(9, '62dccf270be968f4fb0bb651', 9, 'POKEMON_SAPPAXPE01', 16384, 'gba', 1, 1, '2022-07-04 03:16:27', '2022-07-24 11:48:39'),
+(10, '62dccf43467026e31003df91', 10, 'POKEMON_EMERBPEE01', 16384, 'gba', 1, 1, '2022-07-04 03:16:32', '2022-07-24 11:49:08'),
+(11, '62dccf3f78c94afa4f07bad1', 11, 'POKEMON_FIREBPRE01', 16384, 'gba', 1, 1, '2022-07-04 03:16:38', '2022-07-24 11:49:03'),
+(12, '62dccf36ce5a2656030663f1', 12, 'POKEMON_LEAFBPGE01', 16384, 'gba', 1, 1, '2022-07-04 03:16:44', '2022-07-24 11:48:55'),
+(13, '62dccecee350e230d7037901', 13, 'POKEMON_D_ADAE01', 65536, 'nds', 1, 1, '2022-07-04 03:16:55', '2022-07-24 11:47:12'),
+(14, '62dccea30723463796020d21', 14, 'POKEMON_P_APAE', 65536, 'nds', 1, 1, '2022-07-04 03:17:01', '2022-07-24 11:46:29'),
+(15, '62dccefda6afbe042d0c7d81', 15, 'POKEMON_PL_CPUE01', 131072, 'nds', 1, 1, '2022-07-04 03:17:09', '2022-07-24 11:47:59'),
+(16, '62dccf0437922fb1e0065231', 16, 'POKEMON_HG_IPKE01', 131072, 'nds', 1, 1, '2022-07-04 03:17:15', '2022-07-24 11:48:07'),
+(17, '62dcceed2ce3e11ed70cda31', 17, 'POKEMON_SS_IPGE01', 131072, 'nds', 1, 1, '2022-07-04 03:17:19', '2022-07-24 11:47:44'),
+(18, '62dcced73fc92c566103d9c1', 18, 'POKEMON_B_IRBO01', 262144, 'nds', 1, 1, '2022-07-04 03:17:24', '2022-07-24 11:47:22'),
+(19, '62dccec1e872aff6fa039e51', 19, 'POKEMON_W_IRAO01', 262144, 'nds', 1, 1, '2022-07-04 03:17:28', '2022-07-24 11:47:04'),
+(20, '62dccf14123e11a50f0fc4e1', 20, 'POKEMON_B2_IREO01', 524288, 'nds', 1, 1, '2022-07-04 03:17:34', '2022-07-24 11:48:27'),
+(21, '62dccee24238bdaf1f01d9e1', 21, 'POKEMON_W2_IRDO01', 524288, 'nds', 1, 1, '2022-07-04 03:17:38', '2022-07-24 11:47:36'),
+(22, '62dcce402223eb18e1008011', 22, '0004000000055D00_v00', 2097152, '3ds', 1, 1, '2022-07-04 03:18:06', '2022-07-24 11:45:45'),
+(23, '62dcce0680aefa53f10c97b1', 23, '0004000000055E00_v00', 2097152, '3ds', 1, 1, '2022-07-04 03:18:15', '2022-07-24 11:44:39'),
+(24, '62dccdcb6beb66e31b0dd0f1', 24, '000400000011C400_v00', 2097152, '3ds', 1, 1, '2022-07-04 03:18:24', '2022-07-24 11:43:44'),
+(25, '62dccd98ba3b2e52b50246c1', 25, '000400000011C500_v00', 2097152, '3ds', 1, 1, '2022-07-04 03:18:29', '2022-07-24 11:42:41'),
+(26, '62dccd2ec7312b8b8009dca1', 26, '0004000000164800_v00', 4194304, '3ds', 1, 1, '2022-07-04 03:18:40', '2022-07-24 11:41:50'),
+(27, '62dcccd479498d07440533c1', 27, '0004000000175E00_v00', 4194304, '3ds', 1, 1, '2022-07-04 03:18:48', '2022-07-24 11:40:07'),
+(28, '62dccc742683181a7f045b81', 28, '00040000001B5000_v00', 4194304, '3ds', 1, 1, '2022-07-04 03:18:54', '2022-07-24 11:38:38'),
+(29, '62dccc141d16af36c70ee081', 29, '00040000001B5100_v00', 4194304, '3ds', 1, 1, '2022-07-04 03:18:59', '2022-07-24 11:36:55'),
+(30, '62dcc78141944a22b0015271', 30, '0100ABF008968000', 15597568, 'xci', 1, 1, '2022-07-04 03:19:32', '2022-07-24 11:19:48'),
+(31, '62dcc86ff0baf9f1260118a1', 31, '01008DB008C2C000', 15597568, 'xci', 1, 1, '2022-07-04 03:19:38', '2022-07-24 11:23:17'),
+(32, '62dcc9a8703f582832010921', 32, '0100000011D90000', 4880601, 'xci', 1, 1, '2022-07-04 03:19:59', '2022-07-24 11:26:30'),
+(33, '62dcc954100cd029c706d1f1', 33, '010018E011D92000', 7798784, 'xci', 1, 1, '2022-07-04 03:20:06', '2022-07-24 11:25:05'),
+(34, '62dcc73807d21405ed0b36a1', 34, '010003F003A34000', 4737727, 'xci', 1, 1, '2022-07-04 03:20:28', '2022-07-24 11:15:42'),
+(35, '62dcc70a8855feecdd00cc51', 35, '0100187003A36000', 4363761, 'xci', 1, 1, '2022-07-04 03:20:38', '2022-07-24 11:14:34'),
+(36, '62dccb5e7d6228432f0f0281', 36, 'pokeprism', 2048, 'gbc', 1, 1, '2022-07-04 03:21:13', '2022-07-24 11:32:30'),
+(37, '62dccf51f0c07cf3740c3e61', 37, 'pokemon_brown_2014-red_hack', 2048, 'gb', 1, 1, '2022-07-04 03:21:42', '2022-07-24 11:49:21'),
+(38, '62dccf4ec3b005ab7f026c31', 38, 'genesis-final-2019-08-23', 16384, 'gba', 1, 1, '2022-07-04 03:21:58', '2022-07-24 11:49:18'),
+(39, '62dccf4935478eb075064e81', 39, 'Pokemon_Ash_Gray_4-5-3', 16384, 'gba', 1, 1, '2022-07-04 03:22:16', '2022-07-24 11:49:14'),
+(40, '62dcceb3056264fd0d004cc1', 40, 'RenegadePlatinum', 102464, 'nds', 1, 1, '2022-07-04 03:22:28', '2022-07-24 11:46:45'),
+(41, '62dcca230fd730427b0bf951', 41, '01001F5010DFA000', 7798784, 'xci', 1, 1, '2022-07-20 12:48:00', '2022-07-24 11:29:49');
 
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `sessions`
 --
--- Creation: Jul 06, 2022 at 02:20 AM
--- Last update: Jul 21, 2022 at 11:28 AM
+-- Creation: Jul 22, 2022 at 11:15 AM
+-- Last update: Jul 24, 2022 at 04:49 AM
 --
 
 DROP TABLE IF EXISTS `sessions`;
@@ -533,8 +527,6 @@ CREATE TABLE `sessions` (
 
 --
 -- RELATIONSHIPS FOR TABLE `sessions`:
---   `user_id`
---       `users` -> `id`
 --
 
 --
@@ -547,7 +539,8 @@ TRUNCATE TABLE `sessions`;
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('oUveTugcs8Hml6Lcl9G8HfF8P3P5LrcgBv8qrWQL', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiYVZJU3cwR0J6V0dEQWpTZmVmVVpuSGc5c2FodU8ydDBjMjl2SWd1YSI7czozOiJ1cmwiO2E6MDp7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjQ2OiJodHRwOi8vcG9rZXJvbV9yZWJpcnRoLnRlc3QvcHVibGljL3JvbXMvY3JlYXRlIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjIxOiJwYXNzd29yZF9oYXNoX3NhbmN0dW0iO3M6NjA6IiQyeSQxMCR3aXAzcXg5MVBsWERrcmouekVqb0MuL3dsSW50Z0lLM1EuckFKZ2d3UWhmWFJGaUlubURabSI7fQ==', 1658402882);
+('R6f8hhVB3pwA86OfKnBJt1nblbWlfEbSxB4VLX8c', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiQTE0SWp2WjZTMVZ3TXVzOGlUMEs1cW8xeDUwVjZWQlZmNTNYczV0TSI7czozOiJ1cmwiO2E6MTp7czo4OiJpbnRlbmRlZCI7czozMjoiaHR0cDovL3Bva2Vyb21fcmViaXJ0aC50ZXN0L3JvbXMiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1658631746),
+('tN3gZW9fECRuv1X2WIot9YV696B57RzQn1DsipDe', 14, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiYk1IZFFzZ1V6cTltVnVzRGdnZUszZjdJc2JWZmlWWGt1ZUFrYVhtViI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mzk6Imh0dHA6Ly9wb2tlcm9tX3JlYmlydGgudGVzdC9hcGkvdmVyc2lvbiI7fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE0O3M6MTc6InBhc3N3b3JkX2hhc2hfd2ViIjtzOjYwOiIkMnkkMTAkLjRxMmV4a2pvS2ZpaUR2a2JpUzFhZTBCSjl2QzhLWGxqa0NDenhGLlcyRlo1cllGcmIxNG0iO3M6MjE6InBhc3N3b3JkX2hhc2hfc2FuY3R1bSI7czo2MDoiJDJ5JDEwJC40cTJleGtqb0tmaWlEdmtiaVMxYWUwQko5dkM4S1hsamtDQ3p4Ri5XMkZaNXJZRnJiMTRtIjt9', 1658638175);
 
 -- --------------------------------------------------------
 
@@ -555,6 +548,7 @@ INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, 
 -- Table structure for table `users`
 --
 -- Creation: Jun 05, 2022 at 04:47 PM
+-- Last update: Jul 24, 2022 at 04:07 AM
 --
 
 DROP TABLE IF EXISTS `users`;
@@ -593,8 +587,7 @@ TRUNCATE TABLE `users`;
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `two_factor_secret`, `two_factor_recovery_codes`, `two_factor_confirmed_at`, `role`, `remember_token`, `current_team_id`, `profile_photo_path`, `created_at`, `updated_at`) VALUES
-(1, 'Brock', 'bglatman@outlook.com', NULL, '$2y$10$wip3qx91PlXDkrj.zEjoC./wlIntgIK3Q.rAJggwQhfXRFiInmDZm', NULL, NULL, NULL, 'admin', 'NTvLHOPb8pPPDr002vvhghZyW9KSEmBsHKtsbboKSkPzD3BhlJIATBteo1sb', NULL, NULL, '2022-07-04 02:35:33', '2022-07-10 23:32:39'),
-(13, 'Breezy', 'fassfd@fdasf.com', NULL, '$2y$10$EnNzpijHahkG3JihFOIoueJRdsOFxP8tr9PhInsWw6xiVaNtaeU/q', NULL, NULL, NULL, 'user', NULL, NULL, NULL, '2022-07-20 08:26:52', '2022-07-20 08:26:52');
+(14, 'Brock', 'bglatman@outlook.com', NULL, '$2y$10$.4q2exkjoKfiiDvkbiS1ae0BJ9vC8KXljkCCzxF.W2FZ5rYFrb14m', NULL, NULL, NULL, 'admin', NULL, NULL, NULL, '2022-07-24 11:07:42', '2022-07-24 11:07:42');
 
 --
 -- Indexes for dumped tables
@@ -685,7 +678,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT for table `roms`
@@ -697,7 +690,7 @@ ALTER TABLE `roms`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- Constraints for dumped tables
@@ -714,12 +707,6 @@ ALTER TABLE `games`
 --
 ALTER TABLE `password_resets`
   ADD CONSTRAINT `password_resets_email_foreign` FOREIGN KEY (`email`) REFERENCES `users` (`email`) ON DELETE CASCADE ON UPDATE NO ACTION;
-
---
--- Constraints for table `sessions`
---
-ALTER TABLE `sessions`
-  ADD CONSTRAINT `sessions_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

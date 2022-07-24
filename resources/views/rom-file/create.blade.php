@@ -1,5 +1,4 @@
 @push('styles')
-    <link rel="stylesheet" type="text/css" href="{{ mix('assets/css/punch.css') }}"/>
     <style {!! 'type="text/css"'; !!}>
         .white-space-pre {
             white-space: pre;
@@ -15,7 +14,30 @@
     </style>
 @endpush
 @push('scripts')
-    <script type="text/javascript" src="{{mix('assets/js/pages/rom-files.create.js')}}"></script>
+    <script type="text/javascript">
+        let handleCreateRomFileForm = function () {
+            let uploadBtn = document.querySelector("button[data-name=submit-rom-file]");
+            const romFilenameField =
+                document.forms["create-rom-file-form"]["rom_filename"];
+            document.forms["create-rom-file-form"].addEventListener(
+                "submit",
+                function () {
+                    const _CRLF = "\r\n";
+                    uploadBtn.classList.add("white-space-pre");
+                    uploadBtn.disabled = true;
+                    uploadBtn.textContent =
+                        `PLEASE WAIT....${_CRLF}THIS COULD TAKE A WHILE`;
+                    romFilenameField.classList.add(
+                        "no-pointer-events",
+                        "bg-html-white-smoke"
+                    );
+                }
+            );
+        };
+    </script>
+    <script type="text/javascript">
+        handleCreateRomFileForm();
+    </script>
 @endpush
 @php
     $romFilesDirCount = count($romFilesList);
