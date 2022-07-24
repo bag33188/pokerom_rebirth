@@ -5,7 +5,7 @@ namespace App\Actions\User;
 use App\Models\User;
 use App\Policies\UserPolicy;
 
-trait AuthIdMatchesRequestedId
+trait AuthIdMatchesRequestedIDTrait
 {
     /**
      * Check if Current user's ID is equal to that of the User being authenticated.

@@ -2,7 +2,7 @@
 
 namespace App\Policies;
 
-use App\Actions\User\AuthIdMatchesRequestedId as CompareUserIdAction;
+use App\Actions\User\AuthIdMatchesRequestedIDTrait as CompareUserIdAction;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
