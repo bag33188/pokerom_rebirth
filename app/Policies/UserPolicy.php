@@ -2,7 +2,7 @@
 
 namespace App\Policies;
 
-use App\Actions\User\AuthIdMatchesRequestedIDTrait as CompareUserIdAction;
+use App\Actions\User\RestrictUserAccessTrait as CompareUserIdAction;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
@@ -10,7 +10,7 @@ class UserPolicy
 {
     use HandlesAuthorization;
     use CompareUserIdAction {
-        compare as protected compareUsers;
+        authIdMatchesRequestedId as protected compareUsers;
     }
 
     public function viewAny(User $user, User $model): bool

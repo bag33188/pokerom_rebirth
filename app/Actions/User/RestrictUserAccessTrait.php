@@ -5,7 +5,7 @@ namespace App\Actions\User;
 use App\Models\User;
 use App\Policies\UserPolicy;
 
-trait AuthIdMatchesRequestedIDTrait
+trait RestrictUserAccessTrait
 {
     /**
      * Check if Current user's ID is equal to that of the User being authenticated.
@@ -16,7 +16,7 @@ trait AuthIdMatchesRequestedIDTrait
      * @param User $requestedUser requested user object
      * @return bool
      */
-    public function compare(User $currentUser, User $requestedUser): bool
+    public function authIdMatchesRequestedId(User $currentUser, User $requestedUser): bool
     {
         $_user_key_id_ = 'id';
         return
