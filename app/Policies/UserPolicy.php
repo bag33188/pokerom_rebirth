@@ -2,14 +2,14 @@
 
 namespace App\Policies;
 
-use App\Actions\User\RestrictUserAccessTrait as CompareUserIdAction;
+use App\Actions\User\RestrictUserAccessTrait as RestrictUserAccessAction;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class UserPolicy
 {
     use HandlesAuthorization;
-    use CompareUserIdAction {
+    use RestrictUserAccessAction {
         authIdMatchesRequestedId as protected compareUsers;
     }
 
