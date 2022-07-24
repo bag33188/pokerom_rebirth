@@ -32,9 +32,9 @@ abstract class AbstractGridFSConnection extends GridFS
 
     protected function setConnectionValues(): void
     {
-        $this->databaseName = $this->gridFSDatabase->databaseName;
-        $this->bucketName = $this->gridFSDatabase->bucketName;
-        $this->chunkSize = $this->gridFSDatabase->chunkSize;
+        $this->databaseName = $this->gridFSDatabase->get_database_name();
+        $this->bucketName = $this->gridFSDatabase->get_bucket_name();
+        $this->chunkSize = $this->gridFSDatabase->get_chunk_size();
         $this->dsn = $this->gridFSDatabase->mongoURI();
     }
 

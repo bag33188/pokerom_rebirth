@@ -38,7 +38,7 @@ compile() {
 
     composer install && composer update
     npm install && npm update
-    npm run dev
+    npm run build
 
     git status
     git add . && git commit -m "update code base" && git push

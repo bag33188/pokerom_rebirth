@@ -1,21 +1,42 @@
 @push('styles')
 {{--    <link rel="stylesheet" type="text/css" href="{{ mix('assets/css/punch.css') }}"/>--}}
-{{--    <style {!! 'type="text/css"'; !!}>--}}
-{{--        .white-space-pre {--}}
-{{--            white-space: pre;--}}
-{{--        }--}}
+    <style {!! 'type="text/css"'; !!}>
+        .white-space-pre {
+            white-space: pre;
+        }
 
-{{--        .no-pointer-events {--}}
-{{--            pointer-events: none;--}}
-{{--        }--}}
+        .no-pointer-events {
+            pointer-events: none;
+        }
 
-{{--        .bg-html-white-smoke {--}}
-{{--            background-color: #F5F5F5;--}}
-{{--        }--}}
-{{--    </style>--}}
+        .bg-html-white-smoke {
+            background-color: #F5F5F5;
+        }
+    </style>
 @endpush
 @push('scripts')
-{{--    <script type="text/javascript" src="{{mix('assets/js/pages/rom-files.create.js')}}"></script>--}}
+<script>
+    let handleCreateRomFileForm = function () {
+        let uploadBtn = document.querySelector("button[data-name=submit-rom-file]");
+        const romFilenameField =
+            document.forms["create-rom-file-form"]["rom_filename"];
+        document.forms["create-rom-file-form"].addEventListener(
+            "submit",
+            function () {
+                const _CRLF = "\r\n";
+                uploadBtn.classList.add("white-space-pre");
+                uploadBtn.disabled = true;
+                uploadBtn.textContent =
+                    `PLEASE WAIT....${_CRLF}THIS COULD TAKE A WHILE`;
+                romFilenameField.classList.add(
+                    "no-pointer-events",
+                    "bg-html-white-smoke"
+                );
+            }
+        );
+    };
+    handleCreateRomFileForm();
+</script>
 @endpush
 @php
     $romFilesDirCount = count($romFilesList);
