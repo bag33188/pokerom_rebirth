@@ -30,7 +30,7 @@ storage/**/*.gba
 !storage/**/.htaccess
 !storage/**/.gitkeep
 !storage/**/*.url
-
+!.env
 
 ### Public Folder Assets (Generated) ###
 public/assets/css/**/*

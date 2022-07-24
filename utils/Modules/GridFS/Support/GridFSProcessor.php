@@ -96,7 +96,7 @@ class GridFSProcessor extends GridFS implements GridFSProcessorInterface
         }
     }
 
-    private static function fileIsTooBig(string $filename): bool
+    public static function fileIsTooBig(string $filename): bool
     {
         $seven_gibibytes = pow(2, 30) * 7;
         if (filesize($filename) >= $seven_gibibytes) {

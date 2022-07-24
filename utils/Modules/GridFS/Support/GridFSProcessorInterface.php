@@ -11,4 +11,6 @@ interface GridFSProcessorInterface
     function download(ObjectId $fileId): void;
 
     function delete(ObjectId $fileId): void;
+
+    static function fileIsTooBig(string $filename): bool;
 }
