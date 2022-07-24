@@ -3,7 +3,10 @@ const path = require("path");
 
 console.log("Generating seeds...");
 
-const __basedir__ = __dirname.replace(/([\/\\]scripts)([\/\\]helpers)/i, "");
+const __basedir__ = __dirname.replace(
+    /([\x2F\x5C]scripts)([\x2F\x5C]helpers)/i,
+    ""
+);
 
 const [dumpDir, seedFilePath] = [
     path.resolve(__basedir__, "misc", "data", "dump"),
